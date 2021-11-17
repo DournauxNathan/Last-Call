@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-
+[RequireComponent(typeof(Outline))]
 public class Highlight : MonoBehaviour
 {
     public Outline outline;
