@@ -5,12 +5,14 @@ using UnityEngine.XR;
 
 public class HandPresence : MonoBehaviour
 {
+    public static HandPresence instance;
+
     public bool showController = false;
     public InputDeviceCharacteristics controllerCharacterisitcs;
     public List<GameObject> controllerPrefabs;
     public GameObject handmodelPrefab;
 
-    private InputDevice targetDevice;
+    [HideInInspector] public InputDevice targetDevice;
     private GameObject spawnController;
     private GameObject spawnHandModel;
 
@@ -19,6 +21,7 @@ public class HandPresence : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         TryInitialise();
     }
 
@@ -27,10 +30,10 @@ public class HandPresence : MonoBehaviour
         List<InputDevice> devices = new List<InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(controllerCharacterisitcs, devices);
 
-        foreach (var item in devices)
+       /* foreach (var item in devices)
         {
             Debug.Log(item.name + item.characteristics);
-        }
+        }*/
 
         if (devices.Count > 0)
         {
