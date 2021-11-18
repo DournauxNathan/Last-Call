@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/*
+ Script to use with a physical button
+ */
+
 public class PhysicsButton : MonoBehaviour
 {
     [SerializeField] private float treshold = 0.1f;

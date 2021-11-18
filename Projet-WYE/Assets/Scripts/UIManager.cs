@@ -21,27 +21,19 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
         {
             questionData[i].currentClick = 0;
-            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listeDeQuestion[questionData[i].currentClick];
+            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
             Dico.Add(buttons[i], questionData[i]);
             //Debug.Log(buttons[i].gameObject.name + " " + questionData[i].listeDeQuestion[questionData[i].currentClick]);
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public void IncreasedClick()
     {
-
         foreach (var button in Dico)
         {
             if (EventSystem.current.currentSelectedGameObject == button.Key.gameObject)
             {
-                if (button.Value.currentClick != button.Value.listeDeQuestion.Length - 1)
+                if (button.Value.currentClick != button.Value.listQuestion.Length - 1)
                 {
                     button.Value.currentClick++;
                     for (int i = 0; i < button.Value.listIdObject.Length; i++)
@@ -57,12 +49,8 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listeDeQuestion[questionData[i].currentClick];
+            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
 
         }
     }
-
-
-
-
 }
