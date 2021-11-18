@@ -25,7 +25,7 @@ public class PhysicsButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPos = this.transform.localPosition;
+        startPos = childObject.localPosition;
         joint = GetComponentInChildren<ConfigurableJoint>();
     }
 
@@ -41,7 +41,7 @@ public class PhysicsButton : MonoBehaviour
 
     private float GetValue()
     {
-        var value = Vector3.Distance(startPos, transform.localPosition / joint.linearLimit.limit);
+        var value = Vector3.Distance(startPos, childObject.localPosition / joint.linearLimit.limit);
 
         if (Math.Abs(value) < deadZone)
         {
