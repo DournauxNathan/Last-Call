@@ -5,7 +5,8 @@ public class QuestionFormat : ScriptableObject
 {
     public string[] listeDeQuestion;
     public int currentClick = 0;
-    public GameObject[] listeLieObjet;
     public AudioClip[] voiceLine;
+    [Tooltip("x = id ; y = nombre de clic")]
+    public Vector2[] listIdObject;
     
 }
