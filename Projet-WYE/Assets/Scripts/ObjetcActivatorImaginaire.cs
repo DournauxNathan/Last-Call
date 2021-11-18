@@ -6,20 +6,20 @@ public class ObjetcActivatorImaginaire : MonoBehaviour
 {
 
     [Header("Paramètre des objets a activé")]
-    [Tooltip("Priorité de haut en bas")]
-    public GameObject[] listeobject;
-    [Tooltip("Nombre d'objet a activé")]
-    public int nbobjetactif = 0;
+    public List<GameObject> listeobject;
+
+    public Dictionary<int, List<GameObject>> listeObjetByIndex = new Dictionary<int, List<GameObject>>();
+
+    public List<int> listeIndex;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if(nbobjetactif > listeobject.Length)
+        /*if(nbobjetactif > listeobject.Count)
         {
-            nbobjetactif = listeobject.Length;
-        }
-        ActivateObjet();
+            nbobjetactif = listeobject.Count;
+        }*/
     }
 
     // Update is called once per frame
@@ -28,13 +28,25 @@ public class ObjetcActivatorImaginaire : MonoBehaviour
         
     }
 
-    void ActivateObjet()
+    public void ActivateObjet()
     {
-        for (int i = 0; i < nbobjetactif; i++)
+        for (int i = 0; i < listeIndex.Count; i++)
         {
-            if (listeobject[i].GetComponent<Highlight>() != null)
+            foreach (var index in listeObjetByIndex)
             {
-                listeobject[i].GetComponent<Highlight>().Enable();
+                if(listeIndex[i] == index.Key)
+                {
+                    listeobject.AddRange(index.Value);
+                }
+            }   
+        }
+
+
+        for (int i = 0; i < listeobject.Count; i++)
+        {
+            if (listeobject[i].GetComponent<ObjectManager>() != null)
+            {
+                listeobject[i].GetComponent<ObjectManager>().Enable();
             }
             else
             {

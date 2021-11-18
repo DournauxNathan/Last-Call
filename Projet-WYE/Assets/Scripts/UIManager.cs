@@ -10,14 +10,20 @@ public class UIManager : MonoBehaviour
     public Button[] buttons;
     Dictionary<Button, QuestionFormat> Dico = new Dictionary<Button, QuestionFormat>();
 
+    public GameObject listeAEnvoyer;
+    private ObjetcActivatorImaginaire swapImaginaire;
+
     // Start is called before the first frame update
     void Start()
     {
+        swapImaginaire = GameObject.Find("ObjetAactiver").GetComponent<ObjetcActivatorImaginaire>();
+
         for (int i = 0; i < buttons.Length; i++)
         {
+            questionData[i].currentClick = 0;
             buttons[i].GetComponentInChildren<Text>().text = questionData[i].listeDeQuestion[questionData[i].currentClick];
             Dico.Add(buttons[i], questionData[i]);
-            Debug.Log(buttons[i].gameObject.name + " " + questionData[i].listeDeQuestion[questionData[i].currentClick]);
+            //Debug.Log(buttons[i].gameObject.name + " " + questionData[i].listeDeQuestion[questionData[i].currentClick]);
         }
     }
 
@@ -30,21 +36,22 @@ public class UIManager : MonoBehaviour
 
     public void IncreasedClick()
     {
-        /*foreach (var button in buttons)
-        {
-            if (EventSystem.current.currentSelectedGameObject == button.gameObject)
-            {
-
-
-                // button.GetComponentInChildren<Text>().text = questionData[]
-            }
-        }*/
 
         foreach (var button in Dico)
         {
             if (EventSystem.current.currentSelectedGameObject == button.Key.gameObject)
             {
-                button.Value.currentClick++;
+                if (button.Value.currentClick != button.Value.listeDeQuestion.Length - 1)
+                {
+                    button.Value.currentClick++;
+                    for (int i = 0; i < button.Value.listIdObject.Length; i++)
+                    {
+                        if (button.Value.currentClick == button.Value.listIdObject[i].y)
+                        {
+                            swapImaginaire.listeIndex.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
+                        }
+                    }
+                }
             }
         }
 
