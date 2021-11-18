@@ -19,21 +19,25 @@ public class ObjectManager : MonoBehaviour
     {
         subList.Add(gameObject);
         outline.GetComponent<Outline>().enabled = false;
-        init = GameObject.Find("ObjetAactiver").GetComponent<ObjetcActivatorImaginaire>();
 
-        if(init.listeObjetByIndex.ContainsKey(id))
+        if (GameObject.Find("ObjetAactiver") != null)
         {
-            List<GameObject> tempObject;
+            init = GameObject.Find("ObjetAactiver").GetComponent<ObjetcActivatorImaginaire>();        
 
-            tempObject = init.listeObjetByIndex[id];
-            subList.AddRange(tempObject);
-            init.listeObjetByIndex.Remove(id);
-            init.listeObjetByIndex.Add(id, subList);
-            return;
-        }
-        else
-        {
-            init.listeObjetByIndex.Add(id, subList);
+            if(init.listeObjetByIndex.ContainsKey(id) )
+            {
+                List<GameObject> tempObject;
+
+                tempObject = init.listeObjetByIndex[id];
+                subList.AddRange(tempObject);
+                init.listeObjetByIndex.Remove(id);
+                init.listeObjetByIndex.Add(id, subList);
+                return;
+            }
+            else
+            {
+                init.listeObjetByIndex.Add(id, subList);
+            }
         }
     }
 

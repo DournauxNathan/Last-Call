@@ -8,7 +8,11 @@ public class PhysicsButton : MonoBehaviour
 {
     [SerializeField] private float treshold = 0.1f;
     [SerializeField] private float deadZone = 0.025f;
-    private bool isPressed;
+    public Transform childObject;
+    
+    public Unit unitToSend;
+
+    private bool isPressed = true;
     private Vector3 startPos;
     private ConfigurableJoint joint;
 
@@ -18,7 +22,7 @@ public class PhysicsButton : MonoBehaviour
     void Start()
     {
         startPos = this.transform.localPosition;
-        joint = GetComponent<ConfigurableJoint>();
+        joint = GetComponentInChildren<ConfigurableJoint>();
     }
 
     // Update is called once per frame
@@ -46,14 +50,19 @@ public class PhysicsButton : MonoBehaviour
     private void Pressed()
     {
         isPressed = true;
-        onPressed.Invoke();
-        Debug.Log("Pressed");
+        SendUnit(unitToSend);
+        //onPressed.Invoke();
     }
 
     private void Released()
     {
         isPressed = false;
         onReleased.Invoke();
-        Debug.Log("Released");
+        //Debug.Log("Released");
+    }
+
+    public void SendUnit(Unit currentUnit)
+    {
+        Debug.Log(currentUnit + " sent");
     }
 }
