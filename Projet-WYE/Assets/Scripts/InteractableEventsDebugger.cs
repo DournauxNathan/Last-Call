@@ -1,53 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class InteractableEventsDebugger : MonoBehaviour
 {
     #region First/Last Hover
     public void FirstHover()
     {
-        Debug.Log("Activate current holding object");
+        Debug.Log("First Hover");
     }
 
     public void LastHover()
     {
-        Debug.Log("Activate current holding object");
+        Debug.Log("Last Hover");
     }
     #endregion
 
     #region Hover
     public void HoverEntered()
     {
-        Debug.Log("Activate current holding object");
+        if (HandPresence.instance.targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool boolValue))
+        {
+            Debug.Log("Save current object hit");
+        }
+
+        Debug.Log("Hover Entered");
     }
 
     public void HoverExited()
     {
-        Debug.Log("Activate current holding object");
+        Debug.Log("Hover Exit");
     }
     #endregion
 
     #region Select
     public void SelectEnter()
     {
-        Debug.Log("Activate current holding object");
+        Debug.Log("Select Enter");
     }
     public void SelectExited()
     {
-        Debug.Log("Activate current holding object");
+        Debug.Log("Select Exit");
     }
     #endregion
 
     #region Activate
     public void Activated()
     {
-        Debug.Log("Activate current holding object");
+        Debug.Log("Activate");
     }
 
     public void Deactivated()
     {
-        Debug.Log("Activate current holding object");
+        Debug.Log("Deactivate");
     }
     #endregion
 }
