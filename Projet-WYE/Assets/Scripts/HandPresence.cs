@@ -77,6 +77,12 @@ public class HandPresence : MonoBehaviour
         {
             handAnimator.SetFloat("Grip", 0f);
         }
+
+        /*
+        if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonState))
+        {
+            Debug.Log("primaire "+ primaryButtonState);
+        }*/
     }
 
     // Update is called once per frame
@@ -100,6 +106,7 @@ public class HandPresence : MonoBehaviour
 
                 UpdateHandAnimation();
             }
-        }        
+        }
+
     }
 }
