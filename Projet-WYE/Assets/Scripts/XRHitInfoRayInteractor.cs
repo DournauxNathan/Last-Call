@@ -71,7 +71,7 @@ public class XRHitInfoRayInteractor : XRRayInteractor
 
             case InputHelpers.Button.GripButton:
 
-                if (HandPresence.instance.targetDevice.TryGetFeatureValue(CommonUsages.grip, out bool gripButtonState))
+                if (HandPresence.instance.targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripButtonState))
                 {
 
                 }
@@ -159,5 +159,4 @@ public class XRHitInfoRayInteractor : XRRayInteractor
             #endregion        
         }
     }
-
 }
