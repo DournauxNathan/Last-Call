@@ -18,7 +18,11 @@ public class ObjectManager : MonoBehaviour
     void Start()
     {
         subList.Add(gameObject);
-        outline = GetComponent<Outline>();
+
+        if (outline == null)
+        {
+            outline = GetComponent<Outline>();
+        }
         outline.enabled = false;
 
         if (GameObject.Find("ObjetAactiver") != null)
