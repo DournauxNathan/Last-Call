@@ -13,10 +13,15 @@ public class ObjectManager : MonoBehaviour
     public List<GameObject> subList;
     //private GameObject[] subList = new GameObject[1];
 
+    private Color baseColor;
+    public Color lockColor;
+    public bool isLocked = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        baseColor = GetComponent<Outline>().OutlineColor;
         subList.Add(gameObject);
 
         if (outline == null)
@@ -53,6 +58,23 @@ public class ObjectManager : MonoBehaviour
 
     public void Disabled()
     {
-        outline.enabled = false;
+        if (!isLocked)
+        {
+            outline.enabled = false;
+        }
+        
+    }
+
+    public void Locked()
+    {
+        isLocked = true;
+        outline.OutlineColor = lockColor;
+    }
+
+    public void UnLocked()
+    {
+        isLocked = false;
+        outline.OutlineColor = baseColor;
+        Disabled();
     }
 }
