@@ -5,55 +5,60 @@ using UnityEngine.XR;
 
 public class ListManager : MonoBehaviour
 {
+    public List<GameObject> hoveredInteractors;
+    public List<GameObject> lockedInteractors;
 
-    public List<GameObject> HoveredInteractors;
-    public List<GameObject> LockedInteractors;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int nPress;
 
     public void ClearList()
     {
-        HoveredInteractors.Clear();
+        hoveredInteractors.Clear();
     }
 
-    public void PressToSubmit()
+    public void OnPressed()
     {
-
-        if (LockedInteractors.Count == 0 && HoveredInteractors.Count>0) //Fonctionne ! -> ajoute le premier objet si liste vide != null
+        if (nPress == 1)
         {
-            LockedInteractors.Add(HoveredInteractors[0]);
-            HoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            Select();
+        }
+        else if (nPress == 2)
+        {
+            UnSelect();
         }
 
-        if(LockedInteractors.Count!=0 && HoveredInteractors.Count>0 && !LockedInteractors.Contains(HoveredInteractors[0]))
+    }
+
+    public void Select()
+    {
+        if (lockedInteractors.Count == 0 && hoveredInteractors.Count > 0) //Fonctionne ! -> ajoute le premier objet si liste vide != null
         {
-            LockedInteractors.Add(HoveredInteractors[0]);
-            HoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            lockedInteractors.Add(hoveredInteractors[0]);
+            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
         }
 
-        if(LockedInteractors.Count == 2)
+        if (lockedInteractors.Count != 0 && hoveredInteractors.Count > 0 && !lockedInteractors.Contains(hoveredInteractors[0]))
         {
-            CheckCompatibility(LockedInteractors[0], LockedInteractors[1]);
-            for (int i = 0; i < LockedInteractors.Count; i++)
+            lockedInteractors.Add(hoveredInteractors[0]);
+            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+        }
+
+        if (lockedInteractors.Count == 2)
+        {
+            CheckCompatibility(lockedInteractors[0], lockedInteractors[1]);
+            for (int i = 0; i < lockedInteractors.Count; i++)
             {
-                LockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+                lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
             }
-            LockedInteractors.Clear();
+            lockedInteractors.Clear();
         }
     }
-
-    public void PressToCancel()
+    public void UnSelect()
     {
-        for (int i = 0; i < LockedInteractors.Count; i++)
+        for (int i = 0; i < lockedInteractors.Count; i++)
         {
-            LockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+            lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
         }
-        LockedInteractors.Clear();
+        lockedInteractors.Clear();
     }
 
 
@@ -87,10 +92,5 @@ public class ListManager : MonoBehaviour
         {
             Debug.Log("No one has combinable");
         }
-    }
-
-    public void DebugController()
-    {
-        Debug.Log("Click !");
     }
 }
