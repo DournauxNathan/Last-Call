@@ -8,24 +8,21 @@ public class ListManager : MonoBehaviour
     public List<GameObject> hoveredInteractors;
     public List<GameObject> lockedInteractors;
 
-    private int nPress;
-
     public void ClearList()
     {
         hoveredInteractors.Clear();
     }
 
     public void OnPressed()
-    {
-        if (nPress == 1)
+    {        
+        if (!lockedInteractors.Contains(hoveredInteractors[0]))
         {
             Select();
         }
-        else if (nPress == 2)
+        else if (lockedInteractors.Contains(hoveredInteractors[0]))
         {
             UnSelect();
         }
-
     }
 
     public void Select()
@@ -45,6 +42,7 @@ public class ListManager : MonoBehaviour
         if (lockedInteractors.Count == 2)
         {
             CheckCompatibility(lockedInteractors[0], lockedInteractors[1]);
+
             for (int i = 0; i < lockedInteractors.Count; i++)
             {
                 lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
@@ -52,6 +50,7 @@ public class ListManager : MonoBehaviour
             lockedInteractors.Clear();
         }
     }
+
     public void UnSelect()
     {
         for (int i = 0; i < lockedInteractors.Count; i++)
@@ -74,6 +73,8 @@ public class ListManager : MonoBehaviour
             }
             else
             {
+                objet1.SetActive(false);
+                objet2.SetActive(false);
                 Debug.Log("c'est pas le meme");
             }
         }

@@ -7,21 +7,20 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ObjectManager : MonoBehaviour
 {
-    public Outline outline;
+    private Outline outline;
     public int id;
     private ObjetcActivatorImaginaire init;
     public List<GameObject> subList;
-    //private GameObject[] subList = new GameObject[1];
 
+    public Material selectOutline;
     private Color baseColor;
-    public Color lockColor;
-    public bool isLocked = false;
+    private Color selectColor;
+    private bool isLocked = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        baseColor = GetComponent<Outline>().OutlineColor;
         subList.Add(gameObject);
 
         if (outline == null)
@@ -29,6 +28,9 @@ public class ObjectManager : MonoBehaviour
             outline = GetComponent<Outline>();
         }
         outline.enabled = false;
+
+        baseColor = GetComponent<Outline>().OutlineColor;
+        selectColor = selectOutline.color;
 
         if (GameObject.Find("ObjetAactiver") != null)
         {
@@ -68,7 +70,7 @@ public class ObjectManager : MonoBehaviour
     public void Locked()
     {
         isLocked = true;
-        outline.OutlineColor = lockColor;
+        outline.OutlineColor = selectColor;
     }
 
     public void UnLocked()
