@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/*
- Script to use with a physical button
- */
-
+/// <summary>
+/// Script to use with a physical button
+/// </summary>
 public class PhysicsButton : MonoBehaviour
 {
     [SerializeField] private float treshold = 0.1f;
     [SerializeField] private float deadZone = 0.025f;
     public Transform childObject;
     
+    [Tooltip("Type of unit we want to send")]
     public Unit unitToSend;
 
     private bool isPressed = true;
@@ -39,6 +39,10 @@ public class PhysicsButton : MonoBehaviour
             Released();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     private float GetValue()
     {
         var value = Vector3.Distance(startPos, childObject.localPosition / joint.linearLimit.limit);
