@@ -69,29 +69,29 @@ public class ListManager : MonoBehaviour
         {
             if (combinable.combineWith == objet2)
             {
-                Debug.Log("c'est le meme");
+                objet1.SetActive(false);
+                objet2.SetActive(false);
             }
             else
             {
-                objet1.SetActive(false);
-                objet2.SetActive(false);
-                Debug.Log("c'est pas le meme");
+                Debug.LogWarning("Can't combine because it's the same object");
             }
         }
         else if(objet2.TryGetComponent<Combinable>(out combinable))
         {
             if (combinable.combineWith == objet1)
             {
-                Debug.Log("c'est le meme");
+                objet1.SetActive(false);
+                objet2.SetActive(false);
             }
             else
             {
-                Debug.Log("c'est pas le meme");
+                Debug.LogWarning("Can't combine because it's the same object");
             }
         }
         else
         {
-            Debug.Log("No one has combinable");
+            Debug.LogWarning("No one has the Combinable component");
         }
     }
 }
