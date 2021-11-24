@@ -36,13 +36,40 @@ public class ListManager : MonoBehaviour
 
         if(LockedInteractors.Count == 2)
         {
-            CheckCompatibility();
+            CheckCompatibility(LockedInteractors[0], LockedInteractors[1]);
             LockedInteractors.Clear();
         }
     }
 
-    public void CheckCompatibility()
+    public void CheckCompatibility(GameObject objet1,GameObject objet2)
     {
-        Debug.Log("GG");
+        Combinable combinable;
+
+        if (objet1.TryGetComponent<Combinable>(out combinable))
+        {
+            if (combinable.combineWith == objet2)
+            {
+                Debug.Log("c'est le meme");
+            }
+            else
+            {
+                Debug.Log("c'est pas le meme");
+            }
+        }
+        else if(objet2.TryGetComponent<Combinable>(out combinable))
+        {
+            if (combinable.combineWith == objet1)
+            {
+                Debug.Log("c'est le meme");
+            }
+            else
+            {
+                Debug.Log("c'est pas le meme");
+            }
+        }
+        else
+        {
+            Debug.Log("No one has combinable");
+        }
     }
 }
