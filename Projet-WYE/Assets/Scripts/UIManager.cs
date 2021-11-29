@@ -35,6 +35,11 @@ public class UIManager : MonoBehaviour
             {
                 if (button.Value.currentClick != button.Value.listQuestion.Length - 1)
                 {
+
+                    //Active unitée
+                    Debug.Log(button.Value.units[button.Value.currentClick]);
+                    UnitManager.instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
+                    
                     button.Value.currentClick++;
                     for (int i = 0; i < button.Value.listIdObject.Length; i++)
                     {
@@ -44,12 +49,20 @@ public class UIManager : MonoBehaviour
                         }
                     }
                 }
+                else if(button.Value.currentClick == button.Value.listQuestion.Length-1) 
+                {
+                    //Active unitée, boucle infinit quand click
+                    Debug.Log(button.Value.units[button.Value.currentClick]);
+                    UnitManager.instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
+                }
             }
         }
 
+        //Change le texte de tous les boutons
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
+
 
         }
     }

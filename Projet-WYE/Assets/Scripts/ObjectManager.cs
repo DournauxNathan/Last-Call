@@ -7,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ObjectManager : MonoBehaviour
 {
-    private Outline outline;
+    public Outline outline;
     public int id;
     private ObjetcActivatorImaginaire init;
     public List<GameObject> subList;
@@ -15,7 +15,7 @@ public class ObjectManager : MonoBehaviour
     public Material selectOutline;
     private Color baseColor;
     private Color selectColor;
-    private bool isLocked = false;
+    public bool isLocked = false;
 
 
     // Start is called before the first frame update

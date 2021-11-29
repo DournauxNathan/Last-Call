@@ -14,14 +14,17 @@ public class ListManager : MonoBehaviour
     }
 
     public void OnPressed()
-    {        
-        if (!lockedInteractors.Contains(hoveredInteractors[0]))
+    {
+        if(hoveredInteractors.Count != 0)
         {
-            Select();
-        }
-        else if (lockedInteractors.Contains(hoveredInteractors[0]))
-        {
-            UnSelect();
+            if (!lockedInteractors.Contains(hoveredInteractors[0]))
+            {
+                Select();
+            }
+            else if (lockedInteractors.Contains(hoveredInteractors[0]))
+            {
+                UnSelect();
+            }
         }
     }
 
