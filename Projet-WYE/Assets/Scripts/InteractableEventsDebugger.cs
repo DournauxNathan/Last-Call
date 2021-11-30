@@ -20,7 +20,7 @@ public class InteractableEventsDebugger : MonoBehaviour
     #region Hover
     public void HoverEntered()
     {
-        if (HandPresence.instance.targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool boolValue))
+        if (HandPresence.Instance.targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool boolValue))
         {
             Debug.Log("Save current object hit");
         }

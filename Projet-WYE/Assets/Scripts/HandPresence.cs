@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class HandPresence : MonoBehaviour
+public class HandPresence : Singleton<HandPresence>
 {
-    public static HandPresence instance;
-
     public bool showController = false;
     public InputDeviceCharacteristics controllerCharacterisitcs;
     public List<GameObject> controllerPrefabs;
@@ -21,7 +19,6 @@ public class HandPresence : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
         TryInitialise();
     }
 

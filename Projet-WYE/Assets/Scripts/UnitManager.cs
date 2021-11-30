@@ -12,10 +12,8 @@ public enum Unit
     All
 }
 
-public class UnitManager : MonoBehaviour
+public class UnitManager :  Singleton<UnitManager>
 {
-    public static UnitManager instance;
-
     public List<Unit> units;
 
     public List<PhysicsButton> physicsbuttons;
@@ -23,8 +21,6 @@ public class UnitManager : MonoBehaviour
     public bool unitUnlock = false;
     private void Start()
     {
-        instance = this;
-
         physicsbuttons.AddRange(GameObject.FindObjectsOfType<PhysicsButton>());
     }
 

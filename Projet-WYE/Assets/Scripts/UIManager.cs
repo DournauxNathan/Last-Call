@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
 
                     //Active unitée
                     Debug.Log(button.Value.units[button.Value.currentClick]);
-                    UnitManager.instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
+                    UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
                     
                     button.Value.currentClick++;
                     for (int i = 0; i < button.Value.listIdObject.Length; i++)
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
                 {
                     //Active unitée, boucle infinit quand click
                     Debug.Log(button.Value.units[button.Value.currentClick]);
-                    UnitManager.instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
+                    UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
                 }
             }
         }
