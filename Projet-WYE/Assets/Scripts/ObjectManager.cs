@@ -63,7 +63,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (GetComponents<SphereCollider>().Length == 2)
         {
-            //GetComponents<SphereCollider>()[1].isTrigger = newState;
+            GetComponents<SphereCollider>()[1].isTrigger = newState;
         }
         else
         {

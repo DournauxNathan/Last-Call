@@ -137,8 +137,9 @@ GameObject:
   - component: {fileID: 162948292}
   - component: {fileID: 162948291}
   - component: {fileID: 162948290}
-  - component: {fileID: 162948289}
+  - component: {fileID: 162948297}
   - component: {fileID: 162948296}
+  - component: {fileID: 162948289}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: ObjCombi
@@ -155,11 +156,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 162948288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e8380f73ee44f947864478de9601fdd, type: 3}
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combineWith: {fileID: 620775473}
-  resultOrder: Use Green and Blue
+  id: 0
+  subList: []
+  combinable:
+    combineWith: {fileID: 0}
+    resultOrder: 
+  outlineManager:
+    selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+    isLocked: 0
+    outline: {fileID: 0}
+    baseColor: {r: 0, g: 0, b: 0, a: 0}
+    selectColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &162948290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +382,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &162948297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162948288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &304284806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,6 +1246,8 @@ GameObject:
   - component: {fileID: 620775476}
   - component: {fileID: 620775475}
   - component: {fileID: 620775474}
+  - component: {fileID: 620775482}
+  - component: {fileID: 620775481}
   - component: {fileID: 620775480}
   m_Layer: 0
   m_Name: Capsule
@@ -1425,7 +1455,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &620775480
+--- !u!114 &620775480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620775473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  subList: []
+  combinable:
+    combineWith: {fileID: 0}
+    resultOrder: 
+  outlineManager:
+    selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+    isLocked: 0
+    outline: {fileID: 0}
+    baseColor: {r: 0, g: 0, b: 0, a: 0}
+    selectColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!135 &620775481
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1438,6 +1491,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &620775482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620775473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &675203583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1524,8 @@ GameObject:
   - component: {fileID: 675203584}
   - component: {fileID: 675203589}
   - component: {fileID: 675203591}
+  - component: {fileID: 675203590}
+  - component: {fileID: 675203592}
   m_Layer: 7
   m_Name: Sphere
   m_TagString: ObjCombi
@@ -1658,7 +1731,48 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!135 &675203591
+--- !u!114 &675203590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675203583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  subList: []
+  combinable:
+    combineWith: {fileID: 0}
+    resultOrder: 
+  outlineManager:
+    selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+    isLocked: 0
+    outline: {fileID: 0}
+    baseColor: {r: 0, g: 0, b: 0, a: 0}
+    selectColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &675203591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675203583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!135 &675203592
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1666,10 +1780,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675203583}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &784851555
 GameObject:
@@ -3411,6 +3525,7 @@ GameObject:
   - component: {fileID: 1600640737}
   - component: {fileID: 1600640736}
   - component: {fileID: 1600640735}
+  - component: {fileID: 1600640741}
   - component: {fileID: 1600640734}
   - component: {fileID: 1600640733}
   m_Layer: 7
@@ -3429,11 +3544,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600640732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e8380f73ee44f947864478de9601fdd, type: 3}
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combineWith: {fileID: 675203583}
-  resultOrder: Use the cube and the sphere
+  id: 0
+  subList: []
+  combinable:
+    combineWith: {fileID: 0}
+    resultOrder: 
+  outlineManager:
+    selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+    isLocked: 0
+    outline: {fileID: 0}
+    baseColor: {r: 0, g: 0, b: 0, a: 0}
+    selectColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &1600640734
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3445,7 +3569,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1600640735
 MonoBehaviour:
@@ -3645,6 +3769,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1600640741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600640732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1767698943
 GameObject:
   m_ObjectHideFlags: 0
