@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
                 {
 
                     //Active unitée
-                    Debug.Log(button.Value.units[button.Value.currentClick]);
+                    //Debug.Log(button.Value.units[button.Value.currentClick]);
                     UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
                     
                     
@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
                     {
                         if (button.Value.currentClick == button.Value.listIdObject[i].y)
                         {
-                            Debug.Log(button.Value.listIdObject[i].x);
+                            //Debug.Log(button.Value.listIdObject[i].x);
                             swapImaginaire.listeIndex.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
                         }
                     }

@@ -21,7 +21,7 @@ public class XRHitInfoRayInteractor : XRRayInteractor
         }
         else
         {
-            Debug.LogWarning("There already this object in the interactors list");
+            //Debug.LogWarning("There already this object in the interactors list");
         }
     }
 
