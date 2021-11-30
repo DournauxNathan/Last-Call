@@ -35,21 +35,47 @@ public class UIManager : MonoBehaviour
             {
                 if (button.Value.currentClick != button.Value.listQuestion.Length - 1)
                 {
-                    button.Value.currentClick++;
+
+                    //Active unitée
+                    //Debug.Log(button.Value.units[button.Value.currentClick]);
+                    UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
+                    
+                    
                     for (int i = 0; i < button.Value.listIdObject.Length; i++)
                     {
                         if (button.Value.currentClick == button.Value.listIdObject[i].y)
                         {
+                            //Debug.Log(button.Value.listIdObject[i].x);
                             swapImaginaire.listeIndex.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
                         }
                     }
+                    button.Value.currentClick++;
+                }
+                else if(button.Value.currentClick == button.Value.listQuestion.Length-1) 
+                {
+                    //Active unitée, boucle infinit quand click
+                    Debug.Log(button.Value.units[button.Value.currentClick]);
+                    UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
+
+                    for (int i = 0; i < button.Value.listIdObject.Length; i++)
+                    {
+                        if (button.Value.currentClick == button.Value.listIdObject[i].y && !swapImaginaire.listeIndex.Contains(button.Value.listIdObject[i].x))
+                        {
+                            Debug.Log(button.Value.listIdObject[i].x);
+                            swapImaginaire.listeIndex.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
+                        }
+                    }
+
+
                 }
             }
         }
 
+        //Change le texte de tous les boutons
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
+
 
         }
     }

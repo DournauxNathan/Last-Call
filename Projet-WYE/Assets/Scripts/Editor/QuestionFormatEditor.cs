@@ -9,12 +9,14 @@ public class QuestionFormatEditor : Editor
     private SerializedProperty sp_listQuestion;
     private SerializedProperty sp_voiceLine;
     private SerializedProperty sp_listIdObject;
+    private SerializedProperty sp_unit;
 
     public void OnEnable()
     {
         sp_listQuestion = serializedObject.FindProperty("listQuestion");
         sp_voiceLine = serializedObject.FindProperty("voiceLine");
         sp_listIdObject = serializedObject.FindProperty("listIdObject");
+        sp_unit = serializedObject.FindProperty("units");
     }
 
     public override void OnInspectorGUI()
@@ -27,6 +29,11 @@ public class QuestionFormatEditor : Editor
         if (sp_voiceLine == null)
         {
             (target as QuestionFormat).voiceLine = new AudioClip[0];
+        }
+
+        if(sp_unit == null)
+        {
+            (target as QuestionFormat).units = new List<Unit>();
         }
 
         for (int i = 0; i < sp_listQuestion.arraySize; i++)
@@ -49,20 +56,22 @@ public class QuestionFormatEditor : Editor
     {
         var _currentVoice = sp_voiceLine.GetArrayElementAtIndex(index);
         var _currentQuestion = sp_listQuestion.GetArrayElementAtIndex(index);
+        var _currentUnit = sp_unit.GetArrayElementAtIndex(index);
 
         EditorGUILayout.LabelField(_currentQuestion.stringValue, EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.PropertyField(_currentQuestion, new GUIContent(""));
-        EditorGUILayout.PropertyField(_currentVoice, new GUIContent(""));   
+        EditorGUILayout.PropertyField(_currentVoice, new GUIContent(""));
+        
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("IdObject");
 
-        if(GUILayout.Button("+"))
+       /* if(GUILayout.Button("+"))
         {
             CreateIDObject(index);
-        }
-
+        }*/
+        EditorGUILayout.PropertyField(_currentUnit, new GUIContent(""));
         EditorGUILayout.EndHorizontal();
         DisplayIdObject(index);
 
@@ -100,10 +109,10 @@ public class QuestionFormatEditor : Editor
                 var _temp = EditorGUILayout.IntField(_currentID.vector2IntValue.x);
                 _currentID.vector2IntValue = new Vector2Int(_temp, index);
 
-                if (GUILayout.Button("x"))
+                /*if (GUILayout.Button("x"))
                 {
                     sp_listIdObject.DeleteArrayElementAtIndex(i);
-                }
+                }*/
 
                 EditorGUILayout.EndHorizontal();
             }
@@ -115,6 +124,7 @@ public class QuestionFormatEditor : Editor
         var _newElementIndex = sp_listQuestion.arraySize;
         sp_listQuestion.InsertArrayElementAtIndex(_newElementIndex);
         sp_voiceLine.InsertArrayElementAtIndex(_newElementIndex);
+        sp_unit.InsertArrayElementAtIndex(_newElementIndex);
 
         CreateIDObject(_newElementIndex);
     }

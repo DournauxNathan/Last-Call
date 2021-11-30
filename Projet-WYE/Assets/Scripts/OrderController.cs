@@ -43,7 +43,7 @@ public class OrderController : MonoBehaviour
         }
         else
         {
-            Debug.Log("All combinaison were not found");
+            //Debug.Log("All combinaison were not found");
         }
     }
 
