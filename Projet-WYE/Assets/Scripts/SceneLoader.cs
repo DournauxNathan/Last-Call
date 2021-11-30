@@ -11,9 +11,20 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private bool isLoading = false;
 
+    public bool startTransition;
+    public string name;
+
     private void Awake()
     {
         SceneManager.sceneLoaded += SetActiveScene;
+    }
+
+    private void Update()
+    {
+        if (startTransition)
+        {
+            LoadNewScene(name);
+        }
     }
 
     private void OnDestroy()
@@ -36,7 +47,7 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadBegin?.Invoke(); // or OnLoadBegin.Invoke(); ? => See if its null of not
         yield return screenFader.StartFadeIn();
 
-       //yield return StartCoroutine(UnloadCurrent());
+        yield return StartCoroutine(UnloadCurrent());
 
         //For Testing
        yield return new WaitForSeconds(3.0f);
@@ -44,7 +55,7 @@ public class SceneLoader : Singleton<SceneLoader>
         yield return StartCoroutine(LoadNew(sceneName));
         yield return screenFader.StartFadeOut();
         OnLoadEnd?.Invoke();
-
+        startTransition = false;
         isLoading = false;
     }
 
@@ -52,7 +63,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
 
-        while (unloadOperation.isDone)
+        while (!unloadOperation.isDone)
         {
             yield return null;
         }
@@ -62,7 +73,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-        while (loadOperation.isDone)
+        while (!loadOperation.isDone)
         {
             yield return null;
         }
