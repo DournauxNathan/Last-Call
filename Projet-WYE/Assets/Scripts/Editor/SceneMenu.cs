@@ -12,7 +12,7 @@ public static class SceneMenu
     [MenuItem("Scenes/Game")]
     public static void OpenGame()
     {
-        OpenScene("Game");
+        OpenScene("Assemblage");
     }
 
     private static void OpenScene(string sceneName)
