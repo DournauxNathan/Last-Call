@@ -11,6 +11,8 @@ public class ObjetcActivatorImaginaire : MonoBehaviour
     public Dictionary<int, List<GameObject>> listeObjetByIndex = new Dictionary<int, List<GameObject>>();
 
     public List<int> listeIndex;
+    [SerializeField]
+    public bool inImaginaire = false;
 
 
     // Start is called before the first frame update
@@ -46,7 +48,7 @@ public class ObjetcActivatorImaginaire : MonoBehaviour
         {
             if (listeobject[i].GetComponent<ObjectManager>() != null)
             {
-                listeobject[i].GetComponent<ObjectManager>().Enable();
+                //listeobject[i].GetComponent<ObjectManager>().outlineManager.Enable();
             }
             else
             {
@@ -54,7 +56,9 @@ public class ObjetcActivatorImaginaire : MonoBehaviour
             }
             
         }
+        inImaginaire = true;
 
     }
+    
 
 }

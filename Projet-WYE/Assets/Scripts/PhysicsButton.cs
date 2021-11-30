@@ -20,13 +20,20 @@ public class PhysicsButton : MonoBehaviour
     private Vector3 startPos;
     private ConfigurableJoint joint;
 
+    public GameObject clicker;
+    public Material unlockColor;
+
+    public bool isActivate = false;
+
     [Space(50)] public UnityEvent onPressed, onReleased;
+ 
 
     // Start is called before the first frame update
     void Start()
     {
         startPos = childObject.localPosition;
         joint = GetComponentInChildren<ConfigurableJoint>();
+        joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
     }
 
     // Update is called once per frame
@@ -37,12 +44,14 @@ public class PhysicsButton : MonoBehaviour
 
         if (isPressed && GetValue() - treshold <= 0)
             Released();
+
+        if (isActivate)
+        {
+            joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+            clicker.GetComponent<Renderer>().material = unlockColor;
+        }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     private float GetValue()
     {
         var value = Vector3.Distance(startPos, childObject.localPosition / joint.linearLimit.limit);
@@ -57,9 +66,12 @@ public class PhysicsButton : MonoBehaviour
 
     private void Pressed()
     {
-        isPressed = true;
-        SendUnit(unitToSend);
-        //onPressed.Invoke();
+        if (isActivate)
+        {
+            isPressed = true;
+            SendUnit(unitToSend);
+            //onPressed.Invoke();
+        }
     }
 
     private void Released()
@@ -71,6 +83,6 @@ public class PhysicsButton : MonoBehaviour
 
     public void SendUnit(Unit currentUnit)
     {
-        Debug.Log(currentUnit + " sent");
+        //Debug.Log(currentUnit + " sent");
     }
 }

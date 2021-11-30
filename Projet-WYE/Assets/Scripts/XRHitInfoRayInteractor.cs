@@ -19,10 +19,9 @@ public class XRHitInfoRayInteractor : XRRayInteractor
         {
             interactors.hoveredInteractors.Add(validTargets[0].gameObject);
         }
-
         else
         {
-            Debug.LogWarning("There already this object in the interactors list");
+            //Debug.LogWarning("There already this object in the interactors list");
         }
     }
 
