@@ -21,7 +21,14 @@ public class UnitManager :  Singleton<UnitManager>
     public bool unitUnlock = false;
     private void Start()
     {
-        physicsbuttons.AddRange(GameObject.FindObjectsOfType<PhysicsButton>());
+        if (GameObject.FindObjectsOfType<PhysicsButton>() != null)
+        {
+            physicsbuttons.AddRange(GameObject.FindObjectsOfType<PhysicsButton>());
+        }
+        else
+        {
+            Debug.LogWarning("There is no Objects with the Type Physcis Button");
+        }        
     }
 
     public  void AddToUnlock(Unit unit) 

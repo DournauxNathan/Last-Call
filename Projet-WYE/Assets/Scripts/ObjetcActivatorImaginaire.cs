@@ -46,7 +46,7 @@ public class ObjetcActivatorImaginaire : MonoBehaviour
         {
             if (listeobject[i].GetComponent<ObjectManager>() != null)
             {
-                listeobject[i].GetComponent<ObjectManager>().Enable();
+                listeobject[i].GetComponent<ObjectManager>().outlineManager.Enable();
             }
             else
             {

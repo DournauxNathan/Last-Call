@@ -254,9 +254,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 489986561}
   id: 1000
   subList: []
+  outlineManager:
+    selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+    isLocked: 0
+    outline: {fileID: 0}
+    baseColor: {r: 0, g: 0, b: 0, a: 0}
+    selectColor: {r: 0, g: 0, b: 0, a: 0}
+  combinable:
+    combineWith: {fileID: 0}
+    resultOrder: 
 --- !u!114 &489986561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +283,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!135 &489986562
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489986559}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &600486621
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,9 +494,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 756665538}
   id: 1000
   subList: []
+  outlineManager:
+    selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+    isLocked: 0
+    outline: {fileID: 0}
+    baseColor: {r: 0, g: 0, b: 0, a: 0}
+    selectColor: {r: 0, g: 0, b: 0, a: 0}
+  combinable:
+    combineWith: {fileID: 0}
+    resultOrder: 
 --- !u!114 &756665538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +523,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!135 &756665539
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756665536}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &944331376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,9 +1339,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 1889918365}
   id: 1000
   subList: []
+  outlineManager:
+    selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+    isLocked: 0
+    outline: {fileID: 0}
+    baseColor: {r: 0, g: 0, b: 0, a: 0}
+    selectColor: {r: 0, g: 0, b: 0, a: 0}
+  combinable:
+    combineWith: {fileID: 0}
+    resultOrder: 
+--- !u!135 &1889918367
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889918364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1955831089
 GameObject:
   m_ObjectHideFlags: 0

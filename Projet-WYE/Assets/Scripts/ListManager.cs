@@ -33,13 +33,13 @@ public class ListManager : MonoBehaviour
         if (lockedInteractors.Count == 0 && hoveredInteractors.Count > 0) //Fonctionne ! -> ajoute le premier objet si liste vide != null
         {
             lockedInteractors.Add(hoveredInteractors[0]);
-            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            hoveredInteractors[0].GetComponent<ObjectManager>().outlineManager.Locked();
         }
 
         if (lockedInteractors.Count != 0 && hoveredInteractors.Count > 0 && !lockedInteractors.Contains(hoveredInteractors[0]))
         {
             lockedInteractors.Add(hoveredInteractors[0]);
-            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            hoveredInteractors[0].GetComponent<ObjectManager>().outlineManager.Locked();
         }
 
         if (lockedInteractors.Count == 2)
@@ -48,7 +48,7 @@ public class ListManager : MonoBehaviour
 
             for (int i = 0; i < lockedInteractors.Count; i++)
             {
-                lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+                lockedInteractors[i].GetComponent<ObjectManager>().outlineManager.UnLocked();
             }
             lockedInteractors.Clear();
         }
@@ -58,7 +58,7 @@ public class ListManager : MonoBehaviour
     {
         for (int i = 0; i < lockedInteractors.Count; i++)
         {
-            lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+            lockedInteractors[i].GetComponent<ObjectManager>().outlineManager.UnLocked();
         }
         lockedInteractors.Clear();
     }
