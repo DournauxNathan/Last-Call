@@ -162,6 +162,9 @@ MonoBehaviour:
   deadZone: 0.025
   childObject: {fileID: 7513294736423481369}
   unitToSend: 0
+  clicker: {fileID: 7513294734988321091}
+  unlockColor: {fileID: 2100000, guid: f7ab158d19222f34ba28a8e524289c45, type: 2}
+  isActivate: 0
   onPressed:
     m_PersistentCalls:
       m_Calls: []
@@ -261,7 +264,6 @@ GameObject:
   - component: {fileID: 7513294736423481372}
   - component: {fileID: 7513294736423481375}
   - component: {fileID: 7513294736423481374}
-  - component: {fileID: 7513294736423481373}
   m_Layer: 0
   m_Name: Push
   m_TagString: Untagged
@@ -325,7 +327,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 1.7000026, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 1.7000034, z: 0.000000019868216}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -409,37 +411,3 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7513294736423481373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7513294736423481368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe1788e35d705fc439ad820519fe1702, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  treshold: 0.1
-  deadZone: 0.025
-  childObject: {fileID: 0}
-  unitToSend: 0
-  onPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnitManager, Assembly-CSharp
-        m_MethodName: SendUnit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onReleased:
-    m_PersistentCalls:
-      m_Calls: []
