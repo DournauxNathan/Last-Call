@@ -35,10 +35,11 @@ public class SceneLoader : Singleton<SceneLoader>
 
         OnLoadBegin?.Invoke(); // or OnLoadBegin.Invoke(); ? => See if its null of not
         yield return screenFader.StartFadeIn();
-        yield return StartCoroutine(UnloadCurrent());
+
+       //yield return StartCoroutine(UnloadCurrent());
 
         //For Testing
-        yield return new WaitForSeconds(3.0f);
+       yield return new WaitForSeconds(3.0f);
 
         yield return StartCoroutine(LoadNew(sceneName));
         yield return screenFader.StartFadeOut();
@@ -75,6 +76,11 @@ public class SceneLoader : Singleton<SceneLoader>
     //Debug & Test
     public void LoadGame()
     {
-        SceneLoader.Instance.LoadNewScene("Game");
+        SceneLoader.Instance.LoadNewScene("Imaginary");
+    }
+
+    public Scene GetActiveScene()
+    {
+        return SceneManager.GetActiveScene();
     }
 }

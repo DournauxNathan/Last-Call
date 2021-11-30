@@ -67,8 +67,41 @@ public class ObjectManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(newState);
             GetComponent<SphereCollider>().isTrigger = newState;
+        }
+    }
+
+    public void Enable()
+    {
+        outlineManager.outline.enabled = true;
+    }
+
+    public void Disabled()
+    {
+        if (!outlineManager.isLocked)
+        {
+            outlineManager.outline.enabled = false;
+        }
+    }
+
+
+
+    public void Locked()
+    {
+        if (/*SceneLoader.Instance.GetActiveScene().name == "Imaginary"*/GameObject.FindObjectOfType<ObjetcActivatorImaginaire>().inImaginaire)
+        {
+            outlineManager.isLocked = true;
+            outlineManager.outline.OutlineColor = outlineManager.selectColor;
+        }
+    }
+
+    public void UnLocked()
+    {
+        if (/*SceneLoader.Instance.GetActiveScene().name == "Imaginary"*/GameObject.FindObjectOfType<ObjetcActivatorImaginaire>().inImaginaire)
+        {
+            outlineManager.isLocked = false;
+            outlineManager.outline.OutlineColor = outlineManager.baseColor;
+            Disabled();
         }
     }
 
@@ -101,33 +134,9 @@ public class OutlineManager
     public Material selectOutline;
     public bool isLocked = false;
 
-    [HideInInspector] public Outline outline;
+    public Outline outline;
     [HideInInspector] public Color baseColor;
     [HideInInspector] public Color selectColor;
 
-    public void Enable()
-    {
-        outline.enabled = true;
-    }
-
-    public void Disabled()
-    {
-        if (!isLocked)
-        {
-            outline.enabled = false;
-        }
-    }
-
-    public void Locked()
-    {
-        isLocked = true;
-        outline.OutlineColor = selectColor;
-    }
-
-    public void UnLocked()
-    {
-        isLocked = false;
-        outline.OutlineColor = baseColor;
-        Disabled();
-    }
+ 
 }

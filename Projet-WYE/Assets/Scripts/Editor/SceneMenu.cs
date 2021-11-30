@@ -11,7 +11,7 @@ public static class SceneMenu
 
     public static void OpenGame()
     {
-        OpenScene("Assemblage");
+        OpenScene("Imaginary");
     }
 
     private static void OpenScene(string sceneName)
