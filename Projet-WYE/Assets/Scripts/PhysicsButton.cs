@@ -7,10 +7,21 @@ using UnityEngine.Events;
 /// <summary>
 /// Script to use with a physical button
 /// </summary>
+/// 
+
+
 public class PhysicsButton : MonoBehaviour
 {
-    [SerializeField] private float treshold = 0.1f;
-    [SerializeField] private float deadZone = 0.025f;
+    public enum Mode
+    {
+        Unit,
+        Physic,
+    }
+
+    public Mode currentMode;
+
+    public float treshold = 0.1f;
+    public float deadZone = 0.025f;
     public Transform childObject;
     
     [Tooltip("Type of unit we want to send")]
@@ -25,7 +36,7 @@ public class PhysicsButton : MonoBehaviour
 
     public bool isActivate = false;
 
-    [Space(50)] public UnityEvent onPressed, onReleased;
+    public UnityEvent onPressed, onReleased;
  
 
     // Start is called before the first frame update
@@ -33,7 +44,11 @@ public class PhysicsButton : MonoBehaviour
     {
         startPos = childObject.localPosition;
         joint = GetComponentInChildren<ConfigurableJoint>();
-        joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+
+        if (currentMode == Mode.Unit)
+        {
+            joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+        }
     }
 
     // Update is called once per frame

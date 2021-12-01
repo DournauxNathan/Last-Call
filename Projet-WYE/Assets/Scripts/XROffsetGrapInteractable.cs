@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class XROffsetGrapInteractable : XRGrabInteractable
+public class XROffsetGrapInteractable : XRGrabInteractableWithAutoSetup
 {
     private Vector3 initialAttachLocalPos;
     private Quaternion initialAttachLocalRot;
 
     // Start is called before the first frame update
+
     void Start()
     {
         //Create attach point

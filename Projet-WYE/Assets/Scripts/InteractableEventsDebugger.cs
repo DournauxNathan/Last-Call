@@ -5,6 +5,8 @@ using UnityEngine.XR;
 
 public class InteractableEventsDebugger : MonoBehaviour
 {
+    public GameObject spherePrefab;
+
     #region First/Last Hover
     public void FirstHover()
     {
@@ -56,4 +58,14 @@ public class InteractableEventsDebugger : MonoBehaviour
         Debug.Log("Deactivate");
     }
     #endregion
+
+    public void Empty()
+    {
+        Instantiate(spherePrefab, transform.position, Quaternion.identity);
+    }
+
+    public void DebugInConsole()
+    {
+        Debug.Log("Pressed !");
+    }
 }

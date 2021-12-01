@@ -7,6 +7,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class XRHitInfoRayInteractor : XRRayInteractor
 {
     public ListManager interactors;
+    protected override void Awake()
+    {
+        base.Awake();
+        interactionManager = MasterManager.Instance.xRInteractionManager;
+    }
 
     public void GetHoverInteractors()
     {

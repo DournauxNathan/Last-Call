@@ -9,12 +9,14 @@ public class SceneLoader : Singleton<SceneLoader>
     public UnityEvent OnLoadEnd = new UnityEvent();
     public ScreenFader screenFader = null;
 
+    public Scene currentScene;
+
     private bool isLoading = false;
 
     public bool startTransition;
     public string nameScene;
 
-    private void Awake()
+    private void Start()
     {
         SceneManager.sceneLoaded += SetActiveScene;
     }
@@ -46,22 +48,24 @@ public class SceneLoader : Singleton<SceneLoader>
 
         OnLoadBegin?.Invoke(); // or OnLoadBegin.Invoke(); ? => See if its null of not
         //yield return screenFader.StartFadeIn();
-
-        //yield return StartCoroutine(UnloadCurrent());
-
+        if (currentScene.name != null && currentScene.name != "Persistent")
+        {
+            yield return StartCoroutine(UnloadCurrent());
+        }
+        /*
         //For Testing
-       yield return new WaitForSeconds(3.0f);
+       yield return new WaitForSeconds(3.0f);*/
 
         yield return StartCoroutine(LoadNew(sceneName));
-        yield return screenFader.StartFadeOut();
+       // yield return screenFader.StartFadeOut();
         OnLoadEnd?.Invoke();
         startTransition = false;
         isLoading = false;
     }
 
     private IEnumerator UnloadCurrent()
-    {
-        AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+    {        
+        AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
 
         while (!unloadOperation.isDone)
         {
@@ -77,11 +81,14 @@ public class SceneLoader : Singleton<SceneLoader>
         {
             yield return null;
         }
+
     }
 
     private void SetActiveScene(Scene scene, LoadSceneMode mode)
     {
         SceneManager.SetActiveScene(scene);
+        //Debug.Log(scene.name);
+        currentScene = scene;
     }
 
     //Debug & Test
