@@ -7,26 +7,15 @@ public class SceneLoader : Singleton<SceneLoader>
 {
     public UnityEvent OnLoadBegin = new  UnityEvent();
     public UnityEvent OnLoadEnd = new UnityEvent();
-    public ScreenFader screenFader = null;
+    [HideInInspector] public string nameScene;
+    public ScreenFader screenFader;
 
-    public Scene currentScene;
-
+    private Scene currentScene;
     private bool isLoading = false;
-
-    public bool startTransition;
-    public string nameScene;
 
     private void Start()
     {
         SceneManager.sceneLoaded += SetActiveScene;
-    }
-
-    private void Update()
-    {
-        if (startTransition)
-        {
-            LoadNewScene(name);
-        }
     }
 
     private void OnDestroy()
@@ -46,20 +35,19 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         isLoading = true;
 
-        OnLoadBegin?.Invoke(); // or OnLoadBegin.Invoke(); ? => See if its null of not
+        OnLoadBegin?.Invoke();
         //yield return screenFader.StartFadeIn();
+
         if (currentScene.name != null && currentScene.name != "Persistent")
         {
             yield return StartCoroutine(UnloadCurrent());
         }
-        /*
-        //For Testing
-       yield return new WaitForSeconds(3.0f);*/
 
         yield return StartCoroutine(LoadNew(sceneName));
-       // yield return screenFader.StartFadeOut();
+
+        //yield return screenFader.StartFadeOut();
         OnLoadEnd?.Invoke();
-        startTransition = false;
+
         isLoading = false;
     }
 
@@ -91,14 +79,8 @@ public class SceneLoader : Singleton<SceneLoader>
         currentScene = scene;
     }
 
-    //Debug & Test
-    public void LoadGame()
+    public void LoadScene()
     {
-        startTransition = true;
-    }
-
-    public Scene GetActiveScene()
-    {
-        return SceneManager.GetActiveScene();
+        LoadNewScene(nameScene);
     }
 }
