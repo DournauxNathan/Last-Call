@@ -12,7 +12,7 @@ public class SceneLoader : Singleton<SceneLoader>
     private bool isLoading = false;
 
     public bool startTransition;
-    public string name;
+    public string nameScene;
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         if (!isLoading)
         {
-            StartCoroutine(LoadScene(sceneName));
+            StartCoroutine(LoadScene(nameScene));
         }
     }
 

@@ -39,7 +39,7 @@ public class OrderController : MonoBehaviour
         if (currentNumberOfCombinaison == numberOfCombinaison)
         {
             isResolve = true;
-            Teleport.Instance.GoToPoint(1);
+            Teleport.Instance.GoToPoint(0);
             parentOfResponses.gameObject.SetActive(true);
         }
         else

@@ -110,7 +110,7 @@ public class ObjectManager : MonoBehaviour
         if (other.CompareTag("ObjCombi"))
         {
             this.gameObject.SetActive(false);
-            combinable.combineWith.SetActive(false);
+            combinable.combineWith[0].SetActive(false);
 
             OrderController.instance.IncreaseValue(1);
             OrderController.instance.DisplayOrderList(combinable.resultOrder);
@@ -124,8 +124,9 @@ public class ObjectManager : MonoBehaviour
 [System.Serializable]
 public class Combinable
 {
-    public GameObject combineWith = null;
+    public List<GameObject> combineWith = new List<GameObject>();
     public string resultOrder;
+    public bool isStatic;
 }
 
 [System.Serializable]
@@ -134,7 +135,7 @@ public class OutlineManager
     public Material selectOutline;
     public bool isLocked = false;
 
-    public Outline outline;
+    [HideInInspector] public Outline outline;
     [HideInInspector] public Color baseColor;
     [HideInInspector] public Color selectColor;
 
