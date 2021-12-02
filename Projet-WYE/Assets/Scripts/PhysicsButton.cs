@@ -30,7 +30,7 @@ public class PhysicsButton : MonoBehaviour
     private bool isPressed = true;
     private Vector3 startPos;
     private ConfigurableJoint joint;
-
+    public SpringJoint springJoint;
     public GameObject clicker;
     public Material unlockColor;
 
@@ -43,26 +43,29 @@ public class PhysicsButton : MonoBehaviour
     void Start()
     {
         startPos = childObject.localPosition;
-        joint = GetComponentInChildren<ConfigurableJoint>();
+        //joint = GetComponentInChildren<ConfigurableJoint>();
+        springJoint = GetComponentInChildren<SpringJoint>(); 
 
         if (currentMode == Mode.Unit)
         {
-            joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+            //joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+           // springJoint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
         }
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {/*
         if (!isPressed && GetValue() + treshold >= 1)
             Pressed();
 
         if (isPressed && GetValue() - treshold <= 0)
-            Released();
+            Released();*/
 
         if (isActivate)
         {
-            joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+           // joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+           // springJoint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
             clicker.GetComponent<Renderer>().material = unlockColor;
         }
     }

@@ -36,7 +36,7 @@ public class SceneLoader : Singleton<SceneLoader>
         isLoading = true;
 
         OnLoadBegin?.Invoke();
-        yield return screenFader.StartFadeIn();
+        //yield return screenFader.StartFadeIn();
 
         if (currentScene.name != null && currentScene.name != "Persistent")
         {
@@ -45,7 +45,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         yield return StartCoroutine(LoadNew(sceneName));
 
-        yield return screenFader.StartFadeOut();
+       //  yield return screenFader.StartFadeOut();
         OnLoadEnd?.Invoke();
 
         isLoading = false;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17905557, g: 0.21854717, b: 0.27339393, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 52291688}
   - component: {fileID: 52291686}
   - component: {fileID: 52291685}
+  - component: {fileID: 52291687}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -195,10 +196,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1057995871}
+  m_Children: []
   m_Father: {fileID: 1595094386}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &52291685
 MonoBehaviour:
@@ -322,6 +322,19 @@ MonoBehaviour:
   m_PlayHapticsOnHoverCanceled: 0
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
+--- !u!135 &52291687
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52291683}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &52291688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,8 +594,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1974623757}
-  m_RootOrder: 0
+  m_Father: {fileID: 1595094386}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &921782270
 MonoBehaviour:
@@ -981,8 +994,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 52291684}
-  m_RootOrder: 0
+  m_Father: {fileID: 1595094386}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1057995872
 MonoBehaviour:
@@ -1488,7 +1501,9 @@ Transform:
   m_Children:
   - {fileID: 2081371579}
   - {fileID: 902490849}
+  - {fileID: 1057995871}
   - {fileID: 52291684}
+  - {fileID: 921782269}
   - {fileID: 1974623757}
   m_Father: {fileID: 1355308591}
   m_RootOrder: 0
@@ -1721,6 +1736,7 @@ GameObject:
   - component: {fileID: 1974623761}
   - component: {fileID: 1974623759}
   - component: {fileID: 1974623758}
+  - component: {fileID: 1974623760}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -1738,10 +1754,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 921782269}
+  m_Children: []
   m_Father: {fileID: 1595094386}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1974623758
 MonoBehaviour:
@@ -1865,6 +1880,19 @@ MonoBehaviour:
   m_PlayHapticsOnHoverCanceled: 0
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
+--- !u!135 &1974623760
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974623756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1974623761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2050,7 +2078,7 @@ PrefabInstance:
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: screenFader
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2081371574}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
 --- !u!1 &2081371573
