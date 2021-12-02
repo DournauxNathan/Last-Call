@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class OrderController : MonoBehaviour
+public class OrderController : Singleton<OrderController>
 {
     public static OrderController instance;
 
@@ -14,15 +15,13 @@ public class OrderController : MonoBehaviour
 
     public bool isResolve = false;
 
-    public Transform parentOfResponses;
+    public Transform parentOfResponses = null;
     public GameObject prefab_btnResponse;
 
-    // Start is called before the first frame update
-    void Awake()
+    public void Setup()
     {
-        instance = this;
+        parentOfResponses = GameObject.FindGameObjectWithTag("OrderList").transform;
 
-        //parentOfResponses.gameObject.SetActive(false);
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
         numberOfCombinaison = go.Length / 2;
     }

@@ -4,12 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Script to use with a physical button
-/// </summary>
-/// 
-
-
 public class PhysicsButton : MonoBehaviour
 {
     public enum Mode
@@ -18,47 +12,43 @@ public class PhysicsButton : MonoBehaviour
         Physic,
     }
 
-    public Mode currentMode;
-
-    public float treshold = 0.1f;
-    public float deadZone = 0.025f;
-    public Transform childObject;
-    
+    //public Mode currentMode;
+        
     [Tooltip("Type of unit we want to send")]
     public Unit unitToSend;
 
     public GameObject clicker;
     public Material unlockColor;
 
+    private float startYPosition;
+    public float pressPosition;
+
     public bool isActivate = false;
 
-    public UnityEvent onPressed, onReleased;
+    public UnityEvent onPressed;
 
-    private bool isPressed = true;
     private Vector3 startPos;
     private SpringJoint springJoint;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        startPos = childObject.localPosition;
-        springJoint = GetComponentInChildren<SpringJoint>(); 
-
+        springJoint = GetComponentInChildren<SpringJoint>();
+        springJoint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+/*
         if (currentMode == Mode.Unit)
         {
-            springJoint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
-        }
+        }*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isPressed && GetValue() + treshold >= 1)
-            Pressed();
+        if (this.transform.position.y <= pressPosition)
+        {
+            OnPressed();
+        }
 
-        if (isPressed && GetValue() - treshold <= 0)
-            Released();
 
         if (isActivate)
         {
@@ -67,38 +57,14 @@ public class PhysicsButton : MonoBehaviour
         }
     }
 
-    private float GetValue()
+    public void OnPressed()
     {
-        var value = Vector3.Distance(startPos, childObject.localPosition / springJoint.minDistance);
-
-        if (Math.Abs(value) < deadZone)
-        {
-            value = 0;
-        }
-
-        return Mathf.Clamp(value, -1f, 1f);
+        Debug.Log("Pressed !");
+        onPressed?.Invoke();
     }
 
-    private void Pressed()
+    public void SendUnit()
     {
-        if (isActivate)
-        {
-            isPressed = true;
-            Debug.Log(isPressed);
-            SendUnit(unitToSend);
-            //onPressed.Invoke();
-        }
-    }
-
-    private void Released()
-    {
-        isPressed = false;
-        onReleased.Invoke();
-        Debug.Log("Released");
-    }
-
-    public void SendUnit(Unit currentUnit)
-    {
-        //Debug.Log(currentUnit + " sent");
+        Debug.Log(unitToSend + " sent");
     }
 }

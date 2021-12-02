@@ -109,16 +109,9 @@ public class ObjectManager : MonoBehaviour
     {
         if (other.CompareTag("ObjCombi"))
         {
-            this.gameObject.SetActive(false);
-            combinable.combineWith[0].SetActive(false);
-
-            OrderController.instance.IncreaseValue(1);
-            OrderController.instance.DisplayOrderList(combinable.resultOrder);
-            OrderController.instance.orders.Add(combinable.resultOrder);
+            ListManager.Instance.CheckCompatibility(this.gameObject, other.gameObject);
         }
     }
-
-
 }
 
 [System.Serializable]

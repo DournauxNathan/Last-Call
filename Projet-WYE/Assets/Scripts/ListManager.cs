@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class ListManager : MonoBehaviour
+public class ListManager : Singleton<ListManager>
 {
     public List<GameObject> hoveredInteractors;
     public List<GameObject> lockedInteractors;
@@ -157,8 +157,15 @@ public class ListManager : MonoBehaviour
 
     public void SetToOrderController(ObjectManager _objectManager)
     {
-        OrderController.instance.IncreaseValue(1);
-        OrderController.instance.DisplayOrderList(_objectManager.combinable.resultOrder);
-        OrderController.instance.orders.Add(_objectManager.combinable.resultOrder);
+       
+        
+        if (!OrderController.Instance.orders.Contains(_objectManager.combinable.resultOrder))
+        {
+            OrderController.Instance.IncreaseValue(1);
+            OrderController.Instance.orders.Add(_objectManager.combinable.resultOrder);
+            OrderController.Instance.DisplayOrderList(_objectManager.combinable.resultOrder);
+
+        }
+        
     }
 }
