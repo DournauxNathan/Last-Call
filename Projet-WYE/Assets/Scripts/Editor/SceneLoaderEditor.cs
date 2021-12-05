@@ -20,12 +20,11 @@ public class SceneLoaderEditor : Editor
         SceneLoader sceneLoader = (SceneLoader)target;
         
         EditorGUILayout.Space(10);
-        EditorGUILayout.PropertyField(sp_sceneName, new GUIContent(""));
 
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Change Scene"))
         {
-            sceneLoader.LoadScene();
+            sceneLoader.LoadNewScene("Office");
         }
         EditorGUILayout.EndHorizontal();
     }

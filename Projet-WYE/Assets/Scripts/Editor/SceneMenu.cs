@@ -9,10 +9,16 @@ public static class SceneMenu
         OpenScene("Menu");
     }
 
-    [MenuItem("Scenes/Game")]
+    [MenuItem("Scenes/Office")]
     public static void OpenGame()
     {
-        OpenScene("Assemblage");
+        OpenScene("Office");
+    }
+
+    [MenuItem("Scenes/Calls/Call1")]
+    public static void OpenCall()
+    {
+        OpenScene("Call1");
     }
 
     private static void OpenScene(string sceneName)

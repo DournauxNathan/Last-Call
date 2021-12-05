@@ -7,7 +7,7 @@ public class SceneLoader : Singleton<SceneLoader>
 {
     public UnityEvent OnLoadBegin = new  UnityEvent();
     public UnityEvent OnLoadEnd = new UnityEvent();
-    [HideInInspector] public string nameScene;
+     public string nameScene;
     public ScreenFader screenFader;
 
     private Scene currentScene;
@@ -27,7 +27,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         if (!isLoading)
         {
-            StartCoroutine(LoadScene(nameScene));
+            StartCoroutine(LoadScene(sceneName));
         }
     }
 

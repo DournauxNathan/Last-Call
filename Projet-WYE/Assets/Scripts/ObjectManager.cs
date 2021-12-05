@@ -13,7 +13,7 @@ public class ObjectManager : MonoBehaviour
     public Combinable combinable;
     public OutlineManager outlineManager;
 
-    private ObjetcActivatorImaginaire init;
+    private ObjectActivator init;
     private void Awake()
     {
         SetTriggerCollide(true);
@@ -27,21 +27,21 @@ public class ObjectManager : MonoBehaviour
 
         if (GameObject.Find("ObjetAactiver") != null)
         {
-            init = GameObject.Find("ObjetAactiver").GetComponent<ObjetcActivatorImaginaire>();        
+            init = GameObject.Find("ObjetAactiver").GetComponent<ObjectActivator>();        
 
-            if(init.listeObjetByIndex.ContainsKey(id) )
+            if(init.objectByIdList.ContainsKey(id) )
             {
                 List<GameObject> tempObject;
 
-                tempObject = init.listeObjetByIndex[id];
+                tempObject = init.objectByIdList[id];
                 subList.AddRange(tempObject);
-                init.listeObjetByIndex.Remove(id);
-                init.listeObjetByIndex.Add(id, subList);
+                init.objectByIdList.Remove(id);
+                init.objectByIdList.Add(id, subList);
                 return;
             }
             else
             {
-                init.listeObjetByIndex.Add(id, subList);
+                init.objectByIdList.Add(id, subList);
             }
         }
     }
@@ -84,11 +84,9 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-
-
     public void Locked()
     {
-        if (/*SceneLoader.Instance.GetActiveScene().name == "Imaginary"*/GameObject.FindObjectOfType<ObjetcActivatorImaginaire>().inImaginaire)
+        if (GameObject.FindObjectOfType<ObjectActivator>().inImaginaire)
         {
             outlineManager.isLocked = true;
             outlineManager.outline.OutlineColor = outlineManager.selectColor;
@@ -97,7 +95,7 @@ public class ObjectManager : MonoBehaviour
 
     public void UnLocked()
     {
-        if (/*SceneLoader.Instance.GetActiveScene().name == "Imaginary"*/GameObject.FindObjectOfType<ObjetcActivatorImaginaire>().inImaginaire)
+        if (GameObject.FindObjectOfType<ObjectActivator>().inImaginaire)
         {
             outlineManager.isLocked = false;
             outlineManager.outline.OutlineColor = outlineManager.baseColor;
@@ -110,6 +108,21 @@ public class ObjectManager : MonoBehaviour
         if (other.CompareTag("ObjCombi"))
         {
             ListManager.Instance.CheckCompatibility(this.gameObject, other.gameObject);
+        }
+
+        if (other.CompareTag("Hand"))
+        {
+            Debug.Log(other.tag + "/n" + "Disable hand collider");
+            other.GetComponent<MeshCollider>().enabled = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Hand"))
+        {
+            Debug.Log(other.tag + "/n" + "Enable hand collider");
+            other.GetComponent<MeshCollider>().enabled = true;
         }
     }
 }

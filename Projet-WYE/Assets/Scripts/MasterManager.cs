@@ -6,4 +6,6 @@ using UnityEngine;
 public class MasterManager : Singleton<MasterManager>
 {
     public XRInteractionManager xRInteractionManager;
+    public bool isInImaginary;
+    public ObjectActivator objectActivator;
 }

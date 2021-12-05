@@ -20,7 +20,10 @@ public class OrderController : Singleton<OrderController>
 
     public void Setup()
     {
-        parentOfResponses = GameObject.FindGameObjectWithTag("OrderList").transform;
+        if (!MasterManager.Instance.isInImaginary)
+        {
+            parentOfResponses = GameObject.FindGameObjectWithTag("OrderList").transform;
+        }
 
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
         numberOfCombinaison = go.Length / 2;
@@ -38,7 +41,7 @@ public class OrderController : Singleton<OrderController>
         if (currentNumberOfCombinaison == numberOfCombinaison)
         {
             isResolve = true;
-            Teleport.Instance.GoToPoint(0);
+            Setup();
             parentOfResponses.gameObject.SetActive(true);
         }
         else
