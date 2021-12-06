@@ -6,17 +6,24 @@ public static class SceneMenu
     [MenuItem("Scenes/Menu")]
     public static void OpenMenu()
     {
-        OpenScene("Imaginary");
+        OpenScene("Menu");
     }
 
+    [MenuItem("Scenes/Office")]
     public static void OpenGame()
     {
-        OpenScene("Imaginary");
+        OpenScene("Office");
+    }
+
+    [MenuItem("Scenes/Calls/Call1")]
+    public static void OpenCall()
+    {
+        OpenScene("Call1");
     }
 
     private static void OpenScene(string sceneName)
     {
-        EditorSceneManager.OpenScene("Assets/Scenes/Assemblage.unity", OpenSceneMode.Single);
+        EditorSceneManager.OpenScene("Assets/Scenes/Persistent.unity", OpenSceneMode.Single);
         EditorSceneManager.OpenScene("Assets/Scenes/" + sceneName + ".unity", OpenSceneMode.Additive);
     }
 }
