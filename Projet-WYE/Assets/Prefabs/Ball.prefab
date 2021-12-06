@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7873346340178586754}
   - component: {fileID: 3545613272377278884}
   - component: {fileID: 3075960521289104228}
-  - component: {fileID: 1427008475669814041}
+  - component: {fileID: 5713234973262109842}
   - component: {fileID: 5283171842783972953}
   - component: {fileID: 5605072899923619624}
   - component: {fileID: 4742220722071470137}
@@ -116,7 +116,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1427008475669814041
+--- !u!114 &5713234973262109842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,14 +125,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6560853682303937711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2d23555e190ec4988af1eb34b21d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d050367f5dc8c84b8eea0f279bca11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5283171842783972953}
-        m_TargetAssemblyTypeName: Highlight, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
         m_MethodName: Enable
         m_Mode: 1
         m_Arguments:
@@ -158,8 +158,8 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5283171842783972953}
-        m_TargetAssemblyTypeName: Highlight, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
         m_MethodName: Disabled
         m_Mode: 1
         m_Arguments:
@@ -172,34 +172,10 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InteractableEventsDebugger, Assembly-CSharp
-        m_MethodName: SelectEnter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InteractableEventsDebugger, Assembly-CSharp
-        m_MethodName: SelectExited
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []

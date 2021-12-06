@@ -10,7 +10,7 @@ public class ObjectActivator : MonoBehaviour
     public Dictionary<int, List<GameObject>> objectByIdList = new Dictionary<int, List<GameObject>>();
 
     public List<int> indexesList;
-    [HideInInspector] public bool inImaginaire = false;
+    public bool inImaginaire = false;
 
     public void ActivateObjet()
     {

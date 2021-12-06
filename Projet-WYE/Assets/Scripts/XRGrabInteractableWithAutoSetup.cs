@@ -10,4 +10,5 @@ public class XRGrabInteractableWithAutoSetup : XRGrabInteractable
         base.Awake();
         interactionManager = MasterManager.Instance.xRInteractionManager;
     }
+
 }
