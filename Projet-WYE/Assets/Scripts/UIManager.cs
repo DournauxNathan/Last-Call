@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour
         if (unlockImaginaryTransition)
         {
             activateButton.SetActive(true );
+            unlockImaginaryTransition = !unlockImaginaryTransition;
         }
     }
 
