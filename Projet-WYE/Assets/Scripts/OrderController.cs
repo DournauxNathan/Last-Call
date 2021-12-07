@@ -20,9 +20,20 @@ public class OrderController : Singleton<OrderController>
 
     public void Setup()
     {
+        int y = 0;
+        Debug.Log(y++);
         if (!MasterManager.Instance.isInImaginary)
         {
             parentOfResponses = GameObject.FindGameObjectWithTag("OrderList").transform;
+
+            if (orders.Count !=0)
+            {
+                for (int i = 0; i < orders.Count; i++)
+                {
+                    DisplayOrderList(orders[i]);
+                }
+            }
+
         }
 
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
@@ -40,7 +51,9 @@ public class OrderController : Singleton<OrderController>
     {
         if (currentNumberOfCombinaison == numberOfCombinaison)
         {
+            MasterManager.Instance.isInImaginary = false;
             isResolve = true;
+            SceneLoader.Instance.LoadNewScene("Office");
             Setup();
             parentOfResponses.gameObject.SetActive(true);
         }

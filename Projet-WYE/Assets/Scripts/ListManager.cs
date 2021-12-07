@@ -163,9 +163,10 @@ public class ListManager : Singleton<ListManager>
         {
             OrderController.Instance.IncreaseValue(1);
             OrderController.Instance.orders.Add(_objectManager.combinable.resultOrder);
-            OrderController.Instance.DisplayOrderList(_objectManager.combinable.resultOrder);
-
+            //OrderController.Instance.DisplayOrderList(_objectManager.combinable.resultOrder);
+            
         }
         
     }
+
 }
