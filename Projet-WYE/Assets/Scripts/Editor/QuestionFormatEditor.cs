@@ -25,8 +25,6 @@ public class QuestionFormatEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
-
         if (sp_listQuestion == null)
         {
             (target as QuestionFormat).listQuestion = new string[0];
@@ -101,18 +99,17 @@ public class QuestionFormatEditor : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("ID", EditorStyles.boldLabel);
         EditorGUILayout.LabelField("Unit To Send", EditorStyles.boldLabel);
-
         EditorGUILayout.EndHorizontal();
+
         EditorGUILayout.BeginHorizontal();
         DisplayIdObject(index);
         EditorGUILayout.PropertyField(_currentUnit, new GUIContent(""));
+        EditorGUILayout.EndHorizontal();
 
         if (GUILayout.Button("Delete"))
         {
             DeleteElement(index);
         }
-
-        EditorGUILayout.EndHorizontal();
     }
 
     private void DeleteElement(int index)
@@ -158,7 +155,9 @@ public class QuestionFormatEditor : Editor
     {
         var _newElementIndex = sp_listQuestion.arraySize;
         sp_listQuestion.InsertArrayElementAtIndex(_newElementIndex);
+        sp_listAnswers.InsertArrayElementAtIndex(_newElementIndex);
         sp_voiceLineQuestion.InsertArrayElementAtIndex(_newElementIndex);
+        sp_voiceLineAnswer.InsertArrayElementAtIndex(_newElementIndex);
         sp_unit.InsertArrayElementAtIndex(_newElementIndex);
 
         CreateIDObject(_newElementIndex);
