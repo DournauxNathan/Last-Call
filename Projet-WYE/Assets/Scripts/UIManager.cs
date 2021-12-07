@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
     public List<QuestionFormat> questionData;
-    public List<Button> buttons;
+
+    [HideInInspector] public List<Button> buttons;
     Dictionary<Button, QuestionFormat> Dico = new Dictionary<Button, QuestionFormat>();
 
-    public GameObject listToSend;
-
-    public GameObject buttonPrefab;
-    public Transform checkListTransform = null;
+    [Header("References")]
     private int buttonsCount;
     private ObjectActivator swapImaginaire;
+    [SerializeField] private Transform checkListTransform = null;
+    [SerializeField] private GameObject buttonPrefab;
 
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
@@ -41,10 +42,10 @@ public class UIManager : MonoBehaviour
             buttons.Add(b);
 
             questionData[i].currentClick = 0;
-            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
+            buttons[i].GetComponentInChildren<TMP_Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
             Dico.Add(buttons[i], questionData[i]);
             
-            //debug
+            //Debug
             //Debug.Log(buttons[i].gameObject.name + " " + questionData[i].listQuestion[questionData[i].currentClick]);
             //Debug.Log(Dico.ContainsKey(buttons[i]));
         }
@@ -66,7 +67,6 @@ public class UIManager : MonoBehaviour
             {
                 if (button.Value.currentClick != button.Value.listQuestion.Length - 1)
                 {
-
                     //Active unitée
                     //Debug.Log(button.Value.units[button.Value.currentClick]);
                     UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
@@ -76,7 +76,6 @@ public class UIManager : MonoBehaviour
                     {
                         if (button.Value.currentClick == button.Value.listIdObject[i].y)
                         {
-                            //Debug.Log(button.Value.listIdObject[i].x);
                             swapImaginaire.indexesList.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
                         }
                     }
@@ -97,7 +96,8 @@ public class UIManager : MonoBehaviour
                         }
                     }
 
-
+                    button.Key.gameObject.SetActive(false);
+                    
                 }
             }
         }
@@ -105,9 +105,7 @@ public class UIManager : MonoBehaviour
         //Change le texte de tous les boutons
         for (int i = 0; i < buttonsCount; i++)
         {
-            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
-
-
+            buttons[i].GetComponentInChildren<TMP_Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
         }
     }
 }

@@ -20,8 +20,6 @@ public class OrderController : Singleton<OrderController>
 
     public void Setup()
     {
-        int y = 0;
-        Debug.Log(y++);
         if (!MasterManager.Instance.isInImaginary)
         {
             parentOfResponses = GameObject.FindGameObjectWithTag("OrderList").transform;
@@ -33,10 +31,13 @@ public class OrderController : Singleton<OrderController>
                     DisplayOrderList(orders[i]);
                 }
             }
-
         }
 
+
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
+
+        ObjectActivator.Instance.SetActivetObject(go);
+
         numberOfCombinaison = go.Length / 2;
     }
 
