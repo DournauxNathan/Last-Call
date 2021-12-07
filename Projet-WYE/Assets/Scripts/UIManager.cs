@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     Dictionary<Button, QuestionFormat> Dico = new Dictionary<Button, QuestionFormat>();
 
     public GameObject listToSend;
+
+    public GameObject buttonPrefab;
+    public Transform checkListTransform = null;
     private int buttonsCount;
     private ObjectActivator swapImaginaire;
 
@@ -29,10 +32,21 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < buttonsCount; i++)
         {
+            var _button = Instantiate(buttonPrefab, checkListTransform.transform);
+            _button.name = "Button"+i;
+
+            Button b = _button.GetComponent<Button>();
+
+            b.onClick.AddListener(() => IncreasedClick()); //invisible in editor
+            buttons.Add(b);
+
             questionData[i].currentClick = 0;
             buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
             Dico.Add(buttons[i], questionData[i]);
-            //Debug.Log(buttons[i].gameObject.name + " " + questionData[i].listeDeQuestion[questionData[i].currentClick]);
+            
+            //debug
+            //Debug.Log(buttons[i].gameObject.name + " " + questionData[i].listQuestion[questionData[i].currentClick]);
+            //Debug.Log(Dico.ContainsKey(buttons[i]));
         }
     }
 
