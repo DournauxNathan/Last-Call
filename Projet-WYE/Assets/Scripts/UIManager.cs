@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
                     
                     for (int i = 0; i < button.Value.listIdObject.Length; i++)
                     {
-                        if (button.Value.currentClick == button.Value.listIdObject[i].y)
+                        if (button.Value.currentClick == button.Value.listIdObject[i].y && button.Value.listIdObject[i].x != 0)
                         {
                             swapImaginaire.indexesList.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
                         }
@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
 
                     for (int i = 0; i < button.Value.listIdObject.Length; i++)
                     {
-                        if (button.Value.currentClick == button.Value.listIdObject[i].y && !swapImaginaire.indexesList.Contains(button.Value.listIdObject[i].x))
+                        if (button.Value.currentClick == button.Value.listIdObject[i].y && !swapImaginaire.indexesList.Contains(button.Value.listIdObject[i].x) && button.Value.listIdObject[i].x != 0)
                         {
                             //Debug.Log(button.Value.listIdObject[i].x);
                             swapImaginaire.indexesList.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));

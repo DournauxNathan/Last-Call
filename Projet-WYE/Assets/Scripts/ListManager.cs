@@ -157,16 +157,11 @@ public class ListManager : Singleton<ListManager>
 
     public void SetToOrderController(ObjectManager _objectManager)
     {
-       
-        
         if (!OrderController.Instance.orders.Contains(_objectManager.combinable.resultOrder))
         {
             OrderController.Instance.orders.Add(_objectManager.combinable.resultOrder);
             OrderController.Instance.IncreaseValue(1);
             //OrderController.Instance.DisplayOrderList(_objectManager.combinable.resultOrder);
-
         }
-        
     }
-
 }
