@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
-using TMPro;
 
 public class InstantiableButton : MonoBehaviour
 {
@@ -44,6 +41,7 @@ public class InstantiableButton : MonoBehaviour
     public void Desactivate()
     {
         isActive = false;
+        this.gameObject.SetActive(false);
     }
 
     public void IncreaseClick()
