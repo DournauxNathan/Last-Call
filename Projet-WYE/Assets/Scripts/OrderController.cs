@@ -38,7 +38,7 @@ public class OrderController : Singleton<OrderController>
 
         ObjectActivator.Instance.SetActivetObject(go);
 
-        numberOfCombinaison = go.Length / 2;
+        //numberOfCombinaison = go.Length / 2;
     }
 
     public int IncreaseValue(int _value)
@@ -55,8 +55,7 @@ public class OrderController : Singleton<OrderController>
             MasterManager.Instance.isInImaginary = false;
             isResolve = true;
             SceneLoader.Instance.LoadNewScene("Office");
-            Setup();
-            parentOfResponses.gameObject.SetActive(true);
+            
         }
         else
         {

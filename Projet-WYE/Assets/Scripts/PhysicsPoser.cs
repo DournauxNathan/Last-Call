@@ -167,7 +167,7 @@ public class PhysicsPoser : MonoBehaviour
         // Just in case
         if (TryGetComponent(out Rigidbody rigibody))
         {
-            rigidBody.useGravity = false;
+            //rigidBody.useGravity = false;
         }
     }
 }
