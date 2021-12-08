@@ -28,13 +28,13 @@ public class PhysicsButton : MonoBehaviour
     public UnityEvent onPressed;
 
     private Vector3 startPos;
-    private SpringJoint springJoint;
+    private ConfigurableJoint joint;
 
     // Start is called before the first frame update
     void Start()
     {
-        springJoint = GetComponentInChildren<SpringJoint>();
-        springJoint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+        joint = GetComponentInChildren<ConfigurableJoint>();
+        joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
 /*
         if (currentMode == Mode.Unit)
         {
@@ -52,7 +52,7 @@ public class PhysicsButton : MonoBehaviour
 
         if (isActivate)
         {
-            springJoint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+            joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
             clicker.GetComponent<Renderer>().material = unlockColor;
         }
     }
