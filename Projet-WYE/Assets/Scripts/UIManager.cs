@@ -5,18 +5,19 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     public List<QuestionFormat> questionData;
     public List<InstantiableButton> buttons;
+    public List<InstantiableButton> buttonsOrder;
 
-    [Header("References")]
+    [Header("References - Question Section")]
     [SerializeField] private Transform checkListTransform = null;
+    [SerializeField] private Transform questionPullingStock = null;
+
+    [Header("References - Order Section")]
     [SerializeField] private Transform orderListTransform = null;
-    [SerializeField] private Transform pullingStock = null;
-
-    [SerializeField] private Transform pullingStockB = null;
-
+    [SerializeField] private Transform orderPullingStock = null;
 
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
@@ -29,14 +30,19 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < questionData.Count; i++)
         {
-            var but = FindAvailableButton(questionData[i], null);
+            var but = FindAvailableButtonForQuestion(questionData[i]);
         }
 
-        for (int i = 0; i < OrderController.Instance.orders.Count; i++)
+        if (OrderController.Instance.isResolve)
         {
-            var but = FindAvailableButton(null, OrderController.Instance.orders[i]);
+            for (int i = 0; i < OrderController.Instance.orders.Count; i++)
+            {
+                var but = UIManager.Instance.FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
+            }
         }
     }
+
+
     public void Update()
     {
         if (unlockImaginaryTransition)
@@ -45,24 +51,37 @@ public class UIManager : MonoBehaviour
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
     }
-    public InstantiableButton FindAvailableButton(QuestionFormat question, OrderFormat order)
+    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question)
     {
-        foreach (var but in buttons)
+        if (question != null)
         {
-            if(!but.isInstiantiated)
+            foreach (var but in buttons)
             {
-                if (question != null)
+                if (!but.isInstiantiated)
                 {
-                    but.Activate(checkListTransform, pullingStock, question, null);
+                    but.ActivateQuestion(checkListTransform, questionPullingStock, question);
+                    return but;
                 }
-                else if (order != null)
-                {
-                    but.Activate(orderListTransform, pullingStockB, null, order);
-                }
-
-                return but;
             }
         }
+
+        Debug.LogError("Not enough buttons");
+        return null;
+    }
+    public InstantiableButton FindAvailableButtonForOrder(OrderFormat order)
+    {
+        if (order != null)
+        {
+            foreach (var but in buttonsOrder)
+            {
+                if (!but.isInstiantiated)
+                {
+                    but.ActivateOrder(orderListTransform, orderPullingStock, order);
+                    return but;
+                }
+            }
+        }
+
         Debug.LogError("Not enough buttons");
         return null;
     }

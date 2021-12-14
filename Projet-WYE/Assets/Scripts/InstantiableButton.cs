@@ -23,12 +23,13 @@ public class InstantiableButton : MonoBehaviour
         swapImaginaire = MasterManager.Instance.objectActivator;
     }
 
-    public void Activate(Transform parent, Transform stock, QuestionFormat question, OrderFormat order)
+    public void ActivateQuestion(Transform parent, Transform stock, QuestionFormat question)
     {
         transform.SetParent(parent);
-        
+
         this.stock = stock;
-        
+        this.question = question;
+
         currentClick = 0;
         button.enabled = true;
         button.interactable = true;
@@ -37,62 +38,76 @@ public class InstantiableButton : MonoBehaviour
 
         isInstiantiated = true;
 
-        if (question != null)
-        {
-            this.question = question;
+        UpdateQuestion();
+    }
 
-            UpdateQuestion();
-        }
-        else if(question != null)
-        {
-            this.order = order;
+    public void ActivateOrder(Transform parent, Transform stock, OrderFormat order)
+    {
+        transform.SetParent(parent);
 
-            UpdateOrder();
-        }
+        this.stock = stock;
+        this.order = order; 
+
+        currentClick = 0;
+        button.enabled = true;
+        button.interactable = true;
+        img.enabled = true;
+        isActive = true;
+
+        isInstiantiated = true;
+
+        UpdateOrder();
     }
 
     public void Desactivate()
     {
         isActive = false;
         this.gameObject.SetActive(false);
+        //ReputOnStock();
     }
 
     public void IncreaseClick()
     {
-            if (currentClick < question.listQuestion.Length - 1)
+        if (currentClick < question.listQuestion.Length - 1)
+        {
+            //Active unitée
+            //Debug.Log(button.Value.units[button.Value.currentClick]);
+            UnitManager.Instance.AddToUnlock(question.units[currentClick]);
+
+
+            for (int i = 0; i < question.listIdObject.Length; i++)
             {
-                //Active unitée
-                //Debug.Log(button.Value.units[button.Value.currentClick]);
-                UnitManager.Instance.AddToUnlock(question.units[currentClick]);
-
-
-                for (int i = 0; i < question.listIdObject.Length; i++)
+                if (currentClick == question.listIdObject[i].y && question.listIdObject[i].x != 0)
                 {
-                    if (currentClick == question.listIdObject[i].y && question.listIdObject[i].x != 0)
-                    {
-                        swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
-                    }
+                    swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
                 }
-                currentClick++;
             }
-            else if (currentClick >= question.listQuestion.Length - 1)
+            currentClick++;
+        }
+        else if (currentClick >= question.listQuestion.Length - 1)
+        {
+            //Active unitée, boucle infinit quand click
+            //Debug.Log(button.Value.units[button.Value.currentClick]);
+            UnitManager.Instance.AddToUnlock(question.units[currentClick]);
+
+            for (int i = 0; i < question.listIdObject.Length; i++)
             {
-                //Active unitée, boucle infinit quand click
-                //Debug.Log(button.Value.units[button.Value.currentClick]);
-                UnitManager.Instance.AddToUnlock(question.units[currentClick]);
-
-                for (int i = 0; i < question.listIdObject.Length; i++)
+                if (currentClick == question.listIdObject[i].y && !swapImaginaire.indexesList.Contains(question.listIdObject[i].x) && question.listIdObject[i].x != 0)
                 {
-                    if (currentClick == question.listIdObject[i].y && !swapImaginaire.indexesList.Contains(question.listIdObject[i].x) && question.listIdObject[i].x != 0)
-                    {
-                        //Debug.Log(button.Value.listIdObject[i].x);
-                        swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
-                    }
+                    //Debug.Log(button.Value.listIdObject[i].x);
+                    swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
                 }
-
-                Desactivate();
             }
+
+            Desactivate();
+        }
         UpdateQuestion();
+    }
+
+    public void SendOrder()
+    {
+        //Play audio in the order format
+        Desactivate();
     }
 
     private void ReputOnStock()
@@ -116,7 +131,6 @@ public class InstantiableButton : MonoBehaviour
             button.interactable = false;
         }
     }
-
     private void UpdateOrder()
     {
         if (isActive)

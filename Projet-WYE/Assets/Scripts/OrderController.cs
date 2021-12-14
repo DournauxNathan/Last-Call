@@ -10,27 +10,10 @@ public class OrderController : Singleton<OrderController>
     public int currentNumberOfCombinaison;
     public int numberOfCombinaison;
     public List<OrderFormat> orders;
-
     public bool isResolve = false;
-
-    public Transform parentOfResponses = null;
-    public GameObject prefab_btnResponse;
 
     public void Setup()
     {
-        if (!MasterManager.Instance.isInImaginary)
-        {
-            parentOfResponses = GameObject.FindGameObjectWithTag("OrderList").transform;
-
-            if (orders.Count !=0)
-            {
-                for (int i = 0; i < orders.Count; i++)
-                {
-                    DisplayOrderList(orders[i].orderText);
-                }
-            }
-        }
-
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
 
         ObjectActivator.Instance.SetActivetObject(go);
@@ -55,11 +38,4 @@ public class OrderController : Singleton<OrderController>
             //Debug.Log("All combinaison were not found");
         }
     }
-    public void DisplayOrderList(string s)
-    {
-        var responceButton = Instantiate(prefab_btnResponse, parentOfResponses);
-
-        responceButton.GetComponentInChildren<TMP_Text>().text = s;
-    }
-
 }
