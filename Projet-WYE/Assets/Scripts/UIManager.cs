@@ -11,9 +11,11 @@ public class UIManager : MonoBehaviour
     public List<InstantiableButton> buttons;
 
     [Header("References")]
-  
     [SerializeField] private Transform checkListTransform = null;
+    [SerializeField] private Transform orderListTransform = null;
     [SerializeField] private Transform pullingStock = null;
+
+    [SerializeField] private Transform pullingStockB = null;
 
 
     [Header("Debug, Transition to Imaginaire")]
@@ -25,13 +27,16 @@ public class UIManager : MonoBehaviour
     {
         activateButton.SetActive(false);
 
-
         for (int i = 0; i < questionData.Count; i++)
         {
-            var but = FindAvailableButton(questionData[i]);
+            var but = FindAvailableButton(questionData[i], null);
+        }
+
+        for (int i = 0; i < OrderController.Instance.orders.Count; i++)
+        {
+            var but = FindAvailableButton(null, OrderController.Instance.orders[i]);
         }
     }
-
     public void Update()
     {
         if (unlockImaginaryTransition)
@@ -40,13 +45,21 @@ public class UIManager : MonoBehaviour
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
     }
-    public InstantiableButton FindAvailableButton(QuestionFormat question)
+    public InstantiableButton FindAvailableButton(QuestionFormat question, OrderFormat order)
     {
         foreach (var but in buttons)
         {
             if(!but.isInstiantiated)
             {
-                but.Activate(checkListTransform, pullingStock, question);
+                if (question != null)
+                {
+                    but.Activate(checkListTransform, pullingStock, question, null);
+                }
+                else if (order != null)
+                {
+                    but.Activate(orderListTransform, pullingStockB, null, order);
+                }
+
                 return but;
             }
         }

@@ -13,6 +13,7 @@ public class InstantiableButton : MonoBehaviour
 
     public int currentClick;
     private QuestionFormat question;
+    private OrderFormat order;
     private ObjectActivator swapImaginaire;
     private Transform stock;
     private bool isActive;
@@ -22,11 +23,10 @@ public class InstantiableButton : MonoBehaviour
         swapImaginaire = MasterManager.Instance.objectActivator;
     }
 
-    public void Activate(Transform parent, Transform stock, QuestionFormat question)
+    public void Activate(Transform parent, Transform stock, QuestionFormat question, OrderFormat order)
     {
         transform.SetParent(parent);
         
-        this.question = question;
         this.stock = stock;
         
         currentClick = 0;
@@ -36,8 +36,21 @@ public class InstantiableButton : MonoBehaviour
         isActive = true;
 
         isInstiantiated = true;
-        UpdateQuestion();
+
+        if (question != null)
+        {
+            this.question = question;
+
+            UpdateQuestion();
+        }
+        else if(question != null)
+        {
+            this.order = order;
+
+            UpdateOrder();
+        }
     }
+
     public void Desactivate()
     {
         isActive = false;
@@ -82,7 +95,6 @@ public class InstantiableButton : MonoBehaviour
         UpdateQuestion();
     }
 
-
     private void ReputOnStock()
     {
         button.enabled = false;
@@ -92,11 +104,24 @@ public class InstantiableButton : MonoBehaviour
         transform.SetParent(stock);
         isInstiantiated = false;
     }
-    private void UpdateQuestion ()
+    private void UpdateQuestion()
     {
         if(isActive)
         {
             text.text = question.listQuestion[currentClick];
+        }
+        else
+        {
+            text.text = string.Empty;
+            button.interactable = false;
+        }
+    }
+
+    private void UpdateOrder()
+    {
+        if (isActive)
+        {
+            text.text = order.orderText;
         }
         else
         {
