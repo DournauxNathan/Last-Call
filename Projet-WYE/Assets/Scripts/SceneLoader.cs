@@ -83,4 +83,22 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         LoadNewScene(nameScene);
     }
+
+    public void ReloadScene()
+    {
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadSceneAsync("Persistent", LoadSceneMode.Additive);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public Scene GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene();
+    }
+
 }
