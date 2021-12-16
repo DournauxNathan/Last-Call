@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Orders", menuName = "Order", order = 2)]
 public class OrderFormat : ScriptableObject
 {
-    public int n;
+    public int endingModifier;
     public string orderText;
+    public AudioClip[] voiceLines;
 }

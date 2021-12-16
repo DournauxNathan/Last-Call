@@ -106,6 +106,7 @@ public class InstantiableButton : MonoBehaviour
 
     public void SendOrder()
     {
+        ScenarioManager.Instance.UpdateEndingsValue(order.endingModifier);
         //Play audio in the order format
         Desactivate();
     }

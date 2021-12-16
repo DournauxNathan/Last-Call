@@ -28,12 +28,14 @@ public class UIManager : Singleton<UIManager>
     {
         activateButton.SetActive(false);
 
+        ScenarioManager.Instance.LoadScenario();
+
         for (int i = 0; i < questionData.Count; i++)
         {
             var but = FindAvailableButtonForQuestion(questionData[i]);
         }
 
-        if (OrderController.Instance.isResolve)
+        if (OrderController.Instance.isResolve || MasterManager.Instance.test)
         {
             for (int i = 0; i < OrderController.Instance.orders.Count; i++)
             {
@@ -51,6 +53,7 @@ public class UIManager : Singleton<UIManager>
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
     }
+
     public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question)
     {
         if (question != null)
@@ -68,6 +71,7 @@ public class UIManager : Singleton<UIManager>
         Debug.LogError("Not enough buttons");
         return null;
     }
+
     public InstantiableButton FindAvailableButtonForOrder(OrderFormat order)
     {
         if (order != null)
