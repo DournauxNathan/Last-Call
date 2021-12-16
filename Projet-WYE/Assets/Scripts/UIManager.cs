@@ -30,16 +30,21 @@ public class UIManager : Singleton<UIManager>
 
         ScenarioManager.Instance.LoadScenario();
 
-        for (int i = 0; i < questionData.Count; i++)
-        {
-            var but = FindAvailableButtonForQuestion(questionData[i]);
-        }
 
+        // A CHANGER QUAND SWITCH ENTRE REA ET IMA
+        if (OrderController.Instance.orders.Count == 0)
+        {
+            for (int i = 0; i < questionData.Count; i++)
+            {
+                var but = FindAvailableButtonForQuestion(questionData[i]);
+            }
+        }
+        
         if (OrderController.Instance.isResolve || MasterManager.Instance.test)
         {
             for (int i = 0; i < OrderController.Instance.orders.Count; i++)
             {
-                var but = UIManager.Instance.FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
+                var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
             }
         }
     }

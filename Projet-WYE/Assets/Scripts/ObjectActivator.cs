@@ -12,6 +12,8 @@ public class ObjectActivator : Singleton<ObjectActivator>
     public List<int> indexesList;
     public bool inImaginaire = false;
 
+    public List<GameObject> DesactivatedObject = new List<GameObject>();
+
     public void ActivateObjet()
     {
         for (int i = 0; i < indexesList.Count; i++)
@@ -47,12 +49,14 @@ public class ObjectActivator : Singleton<ObjectActivator>
 
         foreach (var item in _list)
         {
+            DesactivatedObject.Add(item);
             if (indexesList.Contains(item.GetComponent<ObjectManager>().id))
             {
 
             }
             else
             {
+                
                 item.SetActive(false);
             }
         }

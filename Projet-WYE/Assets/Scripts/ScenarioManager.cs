@@ -14,11 +14,15 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public Scenario currentScenario;
 
     [Range(-10, 10)]
-    [SerializeField] private float endingValue = 0f;
+    [SerializeField] public float endingValue = 0f;
 
     [SerializeField] private List<QuestionFormat> trappedMan;
     [SerializeField] private List<QuestionFormat> homeInvasion;
     [SerializeField] private List<QuestionFormat> domesticAbuse;
+
+    [SerializeField] public List<OrderFormat> o_trappedMan;
+    [SerializeField] public List<OrderFormat> o_homeInvasion;
+    [SerializeField] public List<OrderFormat> o_domesticAbuse;
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
