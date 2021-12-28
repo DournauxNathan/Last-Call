@@ -2,81 +2,96 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.EventSystems;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public QuestionFormat[] questionData;
-    public Button[] buttons;
-    Dictionary<Button, QuestionFormat> Dico = new Dictionary<Button, QuestionFormat>();
+    public List<QuestionFormat> questionData;
+    public List<InstantiableButton> buttons;
+    public List<InstantiableButton> buttonsOrder;
 
-    public GameObject listeAEnvoyer;
-    private ObjetcActivatorImaginaire swapImaginaire;
+    [Header("References - Question Section")]
+    [SerializeField] private Transform checkListTransform = null;
+    [SerializeField] private Transform questionPullingStock = null;
+
+    [Header("References - Order Section")]
+    [SerializeField] private Transform orderListTransform = null;
+    [SerializeField] private Transform orderPullingStock = null;
+
+    [Header("Debug, Transition to Imaginaire")]
+    [SerializeField] private GameObject activateButton;
+    [SerializeField] private bool unlockImaginaryTransition = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        swapImaginaire = GameObject.Find("ObjetAactiver").GetComponent<ObjetcActivatorImaginaire>();
+        activateButton.SetActive(false);
 
-        for (int i = 0; i < buttons.Length; i++)
+        ScenarioManager.Instance.LoadScenario();
+
+
+        // A CHANGER QUAND SWITCH ENTRE REA ET IMA
+        if (OrderController.Instance.orders.Count == 0)
         {
-            questionData[i].currentClick = 0;
-            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
-            Dico.Add(buttons[i], questionData[i]);
-            //Debug.Log(buttons[i].gameObject.name + " " + questionData[i].listeDeQuestion[questionData[i].currentClick]);
+            for (int i = 0; i < questionData.Count; i++)
+            {
+                var but = FindAvailableButtonForQuestion(questionData[i]);
+            }
+        }
+        
+        if (OrderController.Instance.isResolve || MasterManager.Instance.test)
+        {
+            for (int i = 0; i < OrderController.Instance.orders.Count; i++)
+            {
+                var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
+            }
         }
     }
 
-    public void IncreasedClick()
+
+    public void Update()
     {
-        foreach (var button in Dico)
+        if (unlockImaginaryTransition)
         {
-            if (EventSystem.current.currentSelectedGameObject == button.Key.gameObject)
+            activateButton.SetActive(true );
+            unlockImaginaryTransition = !unlockImaginaryTransition;
+        }
+    }
+
+    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question)
+    {
+        if (question != null)
+        {
+            foreach (var but in buttons)
             {
-                if (button.Value.currentClick != button.Value.listQuestion.Length - 1)
+                if (!but.isInstiantiated)
                 {
-
-                    //Active unitée
-                    //Debug.Log(button.Value.units[button.Value.currentClick]);
-                    UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
-                    
-                    
-                    for (int i = 0; i < button.Value.listIdObject.Length; i++)
-                    {
-                        if (button.Value.currentClick == button.Value.listIdObject[i].y)
-                        {
-                            //Debug.Log(button.Value.listIdObject[i].x);
-                            swapImaginaire.listeIndex.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
-                        }
-                    }
-                    button.Value.currentClick++;
-                }
-                else if(button.Value.currentClick == button.Value.listQuestion.Length-1) 
-                {
-                    //Active unitée, boucle infinit quand click
-                    //Debug.Log(button.Value.units[button.Value.currentClick]);
-                    UnitManager.Instance.AddToUnlock(button.Value.units[button.Value.currentClick]);
-
-                    for (int i = 0; i < button.Value.listIdObject.Length; i++)
-                    {
-                        if (button.Value.currentClick == button.Value.listIdObject[i].y && !swapImaginaire.listeIndex.Contains(button.Value.listIdObject[i].x))
-                        {
-                            //Debug.Log(button.Value.listIdObject[i].x);
-                            swapImaginaire.listeIndex.Add(Mathf.FloorToInt(button.Value.listIdObject[i].x));
-                        }
-                    }
-
-
+                    but.ActivateQuestion(checkListTransform, questionPullingStock, question);
+                    return but;
                 }
             }
         }
 
-        //Change le texte de tous les boutons
-        for (int i = 0; i < buttons.Length; i++)
+        Debug.LogError("Not enough buttons");
+        return null;
+    }
+
+    public InstantiableButton FindAvailableButtonForOrder(OrderFormat order)
+    {
+        if (order != null)
         {
-            buttons[i].GetComponentInChildren<Text>().text = questionData[i].listQuestion[questionData[i].currentClick];
-
-
+            foreach (var but in buttonsOrder)
+            {
+                if (!but.isInstiantiated)
+                {
+                    but.ActivateOrder(orderListTransform, orderPullingStock, order);
+                    return but;
+                }
+            }
         }
+
+        Debug.LogError("Not enough buttons");
+        return null;
     }
 }

@@ -3,55 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class OrderController : MonoBehaviour
+public class OrderController : Singleton<OrderController>
 {
-    public static OrderController instance;
-
     public int currentNumberOfCombinaison;
     public int numberOfCombinaison;
-    public List<string> orders;
-
+    public List<OrderFormat> orders;
     public bool isResolve = false;
 
-    public Transform parentOfResponses;
-    public GameObject prefab_btnResponse;
-
-    // Start is called before the first frame update
-    void Awake()
+    public void Setup()
     {
-        instance = this;
-
-        //parentOfResponses.gameObject.SetActive(false);
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
-        numberOfCombinaison = go.Length / 2;
-    }
 
+        ObjectActivator.Instance.SetActivetObject(go);
+        numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
+    }
     public int IncreaseValue(int _value)
     {        
         currentNumberOfCombinaison += _value;        
         Resolve();
         return currentNumberOfCombinaison;
     }
-
     public void Resolve()
     {
         if (currentNumberOfCombinaison == numberOfCombinaison)
         {
+            MasterManager.Instance.isInImaginary = false;
             isResolve = true;
-            Teleport.Instance.ReturnToOffice();
-            parentOfResponses.gameObject.SetActive(true);
+            SceneLoader.Instance.LoadNewScene("Office");            
         }
         else
         {
             //Debug.Log("All combinaison were not found");
         }
-    }
-
-    public void DisplayOrderList(string s)
-    {
-        var responceButton = Instantiate(prefab_btnResponse, parentOfResponses);
-
-        responceButton.GetComponentInChildren<TMP_Text>().text = s;
     }
 }

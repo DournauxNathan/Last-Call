@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class ListManager : MonoBehaviour
+public class ListManager : Singleton<ListManager>
 {
     public List<GameObject> hoveredInteractors;
     public List<GameObject> lockedInteractors;
@@ -66,71 +66,101 @@ public class ListManager : MonoBehaviour
 
     public void CheckCompatibility(GameObject objet1,GameObject objet2)
     {
-       // ObjectManager _objectManager;
-        ObjectManager _objectManager1;
-        ObjectManager _objectManager2;
+        ObjectManager _objectManager1, _objectManager2;
 
         if (objet1.TryGetComponent<ObjectManager>(out _objectManager1) && objet2.TryGetComponent<ObjectManager>(out _objectManager2))
         {
-            if (_objectManager1.combinable.combineWith == objet2)
+            //Check with 2 objects only and with the ObjectManager1
+            if (_objectManager1.combinable.combineWith.Count == 2 && _objectManager1.combinable.combineWith[0] == objet2 && _objectManager2.combinable.combineWith.Count != 0 || _objectManager1.combinable.combineWith.Count == 2 && _objectManager1.combinable.combineWith[1] == objet2 && _objectManager2.combinable.combineWith.Count != 0)
             {
-                objet1.SetActive(false);
-                objet2.SetActive(false);
+                if (_objectManager1.combinable.isStatic)
+                {
+                    objet2.SetActive(false);
 
+                    //Clear the list if a combinaison has already been find
+                    _objectManager1.combinable.combineWith.Clear();
+                }
+                else
+                {
+                    objet1.SetActive(false);
+                    objet2.SetActive(false);
+                }
 
-                OrderController.instance.IncreaseValue(1);
-                OrderController.instance.DisplayOrderList(_objectManager1.combinable.resultOrder);
-                OrderController.instance.orders.Add(_objectManager1.combinable.resultOrder);
+                SetToOrderController(_objectManager1);
             }
-            else if (_objectManager2.combinable.combineWith == objet1)
+            else if (_objectManager2.combinable.combineWith.Count == 2 && _objectManager2.combinable.combineWith[0] == objet1 && _objectManager1.combinable.combineWith.Count != 0 || _objectManager2.combinable.combineWith.Count == 2 && _objectManager2.combinable.combineWith[1] == objet1 && _objectManager1.combinable.combineWith.Count != 0)
             {
-                objet1.SetActive(false);
-                objet2.SetActive(false);
+                //Check with 2 objects only and with the ObjectManager2
+                if (_objectManager2.combinable.isStatic)
+                {
+                    objet1.SetActive(false);
 
+                    //Clear the list if a combinaison has already been find
+                    _objectManager2.combinable.combineWith.Clear();
+                }
+                else
+                {
+                    objet1.SetActive(false);
+                    objet2.SetActive(false);
+                }
 
-                OrderController.instance.IncreaseValue(1);
-                OrderController.instance.DisplayOrderList(_objectManager2.combinable.resultOrder);
-                OrderController.instance.orders.Add(_objectManager2.combinable.resultOrder);
+                SetToOrderController(_objectManager2);
             }
-            else if (_objectManager1.combinable.combineWith == null || _objectManager2.combinable.combineWith == null)
+            else if (_objectManager1.combinable.combineWith.Count == 1 && _objectManager2.combinable.combineWith.Count != 0 || _objectManager2.combinable.combineWith.Count == 1 && _objectManager1.combinable.combineWith.Count != 0)
             {
-                Debug.Log("Can't combine them");
+                //Check with 1 object only
+                if (_objectManager1.combinable.combineWith[0] == objet2)
+                {
+                    if (_objectManager1.combinable.isStatic)
+                    {
+                        objet2.SetActive(false);
+
+                        //Clear the list if a combinaison has already been find
+                        _objectManager1.combinable.combineWith.Clear();
+                    }
+                    else
+                    {
+                        objet1.SetActive(false);
+                        objet2.SetActive(false);
+                    }
+
+                    SetToOrderController(_objectManager1);
+                }
+                else if (_objectManager2.combinable.combineWith[0] == objet1)
+                {
+                    if (_objectManager2.combinable.isStatic)
+                    {
+                        objet1.SetActive(false);
+
+                        //Clear the list if a combinaison has already been find
+                        _objectManager2.combinable.combineWith.Clear();
+                    }
+                    else
+                    {
+                        objet1.SetActive(false);
+                        objet2.SetActive(false);
+                    }
+
+                    SetToOrderController(_objectManager2);
+                }
+            }            
+            else if (_objectManager1.combinable.combineWith.Count == 0 || _objectManager2.combinable.combineWith.Count == 0)
+            {
+                Debug.LogWarning("Can't combine them");
             }
         }
         else
         {
             Debug.LogWarning("No one has the Combinable component");
-        }
+        }       
+    }
 
-        /*
-        if (objet1.TryGetComponent<ObjectManager>(out _objectManager))
+    public void SetToOrderController(ObjectManager _objectManager)
+    {
+        if (!OrderController.Instance.orders.Contains(_objectManager.combinable.resultOrder))
         {
-            if (_objectManager.combinable.combineWith == objet2)
-            {
-                objet1.SetActive(false);
-                objet2.SetActive(false);
-            }
-
-            else
-            {
-                Debug.LogWarning("Can't combine because it's the same object");
-            }
+            OrderController.Instance.orders.Add(_objectManager.combinable.resultOrder);
+            OrderController.Instance.IncreaseValue(1);
         }
-        else if(objet2.TryGetComponent<ObjectManager>(out _objectManager))
-        {
-            if (_objectManager.combinable.combineWith == objet1)
-            {
-                objet1.SetActive(false);
-                objet2.SetActive(false);
-            }
-            else
-            {
-                Debug.LogWarning("Can't combine because it's the same object");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No one has the Combinable component");
-        }*/
     }
 }

@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Teleport : Singleton<Teleport>
 {
-    public GameObject rig;
-    public Transform newTpPoint;
-    public Transform returnPoint;
+    private GameObject XrRig;
+    public List<Transform> positionPoints;
 
-
-    public void EnableRig()
+    private void Start()
     {
-        rig.transform.position = newTpPoint.position;
+        XrRig = GameObject.FindGameObjectWithTag("XRRig");
     }
 
-    public void ReturnToOffice()
+    public void GoToPoint(int indexPoint)
     {
-        rig.transform.position = returnPoint.position;
+        XrRig.transform.position = positionPoints[indexPoint].position;
     }
 }

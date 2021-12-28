@@ -4,46 +4,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Script to use with a physical button
-/// </summary>
 public class PhysicsButton : MonoBehaviour
 {
-    [SerializeField] private float treshold = 0.1f;
-    [SerializeField] private float deadZone = 0.025f;
-    public Transform childObject;
-    
+    public enum Mode
+    {
+        Unit,
+        Physic,
+    }
+
+    //public Mode currentMode;
+        
     [Tooltip("Type of unit we want to send")]
     public Unit unitToSend;
-
-    private bool isPressed = true;
-    private Vector3 startPos;
-    private ConfigurableJoint joint;
 
     public GameObject clicker;
     public Material unlockColor;
 
+    private float startYPosition;
+    public float pressPosition;
+
     public bool isActivate = false;
 
-    [Space(50)] public UnityEvent onPressed, onReleased;
- 
+    public UnityEvent onPressed;
+
+    private Vector3 startPos;
+    private ConfigurableJoint joint;
 
     // Start is called before the first frame update
     void Start()
     {
-        startPos = childObject.localPosition;
         joint = GetComponentInChildren<ConfigurableJoint>();
         joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
+/*
+        if (currentMode == Mode.Unit)
+        {
+        }*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isPressed && GetValue() + treshold >= 1)
-            Pressed();
+        if (this.transform.position.y <= pressPosition)
+        {
+            OnPressed();
+        }
 
-        if (isPressed && GetValue() - treshold <= 0)
-            Released();
 
         if (isActivate)
         {
@@ -52,37 +57,14 @@ public class PhysicsButton : MonoBehaviour
         }
     }
 
-    private float GetValue()
+    public void OnPressed()
     {
-        var value = Vector3.Distance(startPos, childObject.localPosition / joint.linearLimit.limit);
-
-        if (Math.Abs(value) < deadZone)
-        {
-            value = 0;
-        }
-
-        return Mathf.Clamp(value, -1f, 1f);
+        Debug.Log("Pressed !");
+        onPressed?.Invoke();
     }
 
-    private void Pressed()
+    public void SendUnit()
     {
-        if (isActivate)
-        {
-            isPressed = true;
-            SendUnit(unitToSend);
-            //onPressed.Invoke();
-        }
-    }
-
-    private void Released()
-    {
-        isPressed = false;
-        onReleased.Invoke();
-        //Debug.Log("Released");
-    }
-
-    public void SendUnit(Unit currentUnit)
-    {
-        //Debug.Log(currentUnit + " sent");
+        Debug.Log(unitToSend + " sent");
     }
 }
