@@ -16,9 +16,21 @@ public static class SceneMenu
     }
 
     [MenuItem("Scenes/Calls/Call1")]
-    public static void OpenCall()
+    public static void OpenCall1()
     {
         OpenScene("Call1");
+    }
+
+    [MenuItem("Scenes/Calls/Call2")]
+    public static void OpenCall2()
+    {
+        OpenScene("Call2");
+    }
+
+    [MenuItem("Scenes/Calls/Call3")]
+    public static void OpenCall3()
+    {
+        OpenScene("Call3");
     }
 
     private static void OpenScene(string sceneName)

@@ -131,7 +131,7 @@ public class ObjectManager : MonoBehaviour
 public class Combinable
 {
     public List<GameObject> combineWith = new List<GameObject>();
-    public string resultOrder;
+    public OrderFormat resultOrder;
     public bool isStatic;
 }
 

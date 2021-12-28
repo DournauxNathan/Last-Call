@@ -96,4 +96,9 @@ public class SceneLoader : Singleton<SceneLoader>
         Application.Quit();
     }
 
+    public Scene GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene();
+    }
+
 }
