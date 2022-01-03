@@ -64,4 +64,9 @@ public class ScenarioManager : Singleton<ScenarioManager>
     {
         endingValue += (float)modifier;
     }
+
+    public Scenario GetCurrentScenario()
+    {
+        return currentScenario;
+    }
 }

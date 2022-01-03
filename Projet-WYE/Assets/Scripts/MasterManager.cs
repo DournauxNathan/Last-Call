@@ -9,5 +9,8 @@ public class MasterManager : Singleton<MasterManager>
     public bool isInImaginary;
     public ObjectActivator objectActivator;
 
+
+    public AudioSource mainAudioSource;
+
     public bool test;
 }
