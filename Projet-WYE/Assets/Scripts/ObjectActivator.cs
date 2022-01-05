@@ -50,9 +50,10 @@ public class ObjectActivator : Singleton<ObjectActivator>
         foreach (var item in _list)
         {
             DesactivatedObject.Add(item);
+
             if (indexesList.Contains(item.GetComponent<ObjectManager>().id))
             {
-
+                
             }
             else
             {
@@ -60,8 +61,6 @@ public class ObjectActivator : Singleton<ObjectActivator>
                 item.SetActive(false);
             }
         }
-
-
 
         /*for (int i = 0; i < objectsList.Count; i++)
         {

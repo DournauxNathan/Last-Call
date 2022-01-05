@@ -16,6 +16,8 @@ public class HandPresence : Singleton<HandPresence>
 
     private Animator handAnimator;
 
+    private Vector3 acceleration;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,16 @@ public class HandPresence : Singleton<HandPresence>
         {
             handAnimator.SetFloat("Grip", 0f);
         }
+
+        if (targetDevice.TryGetFeatureValue(CommonUsages.deviceAcceleration, out Vector3 _acceleration))
+        {
+            acceleration = _acceleration;
+        }
+    }
+
+    public Vector3 GetDeviceAccelation()
+    {
+        return acceleration;
     }
 
     // Update is called once per frame

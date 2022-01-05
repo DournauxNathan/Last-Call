@@ -33,8 +33,6 @@ public class HintManager : MonoBehaviour
 
     public void UpdateTimer()
     {
-        Debug.Log(timer > 0 && MasterManager.Instance.isInImaginary && !playHint);
-
         if (timer > 0 &&MasterManager.Instance.isInImaginary && !playHint)
         {
             timer -= Time.deltaTime;

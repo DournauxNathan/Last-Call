@@ -11,11 +11,11 @@ public class UIManager : Singleton<UIManager>
     public List<InstantiableButton> buttons;
     public List<InstantiableButton> buttonsOrder;
 
-    [Header("References - Question Section")]
+    [Header("Refs - Question Section")]
     [SerializeField] private Transform checkListTransform = null;
     [SerializeField] private Transform questionPullingStock = null;
 
-    [Header("References - Order Section")]
+    [Header("Refs - Order Section")]
     [SerializeField] private Transform orderListTransform = null;
     [SerializeField] private Transform orderPullingStock = null;
 
@@ -30,7 +30,6 @@ public class UIManager : Singleton<UIManager>
 
         ScenarioManager.Instance.LoadScenario();
 
-
         // A CHANGER QUAND SWITCH ENTRE REA ET IMA
         if (OrderController.Instance.orders.Count == 0)
         {
@@ -40,7 +39,7 @@ public class UIManager : Singleton<UIManager>
             }
         }
         
-        if (OrderController.Instance.isResolve || MasterManager.Instance.test)
+        if (OrderController.Instance.isResolve)
         {
             for (int i = 0; i < OrderController.Instance.orders.Count; i++)
             {
