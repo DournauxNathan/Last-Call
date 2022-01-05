@@ -49,7 +49,9 @@ public class ObjectManagerEditor : Editor
             case ObjectType.Useful:
                 
                 EditorGUILayout.PropertyField(sp_data);
+                EditorGUILayout.Space(2);
                 EditorGUILayout.PropertyField(sp_combi);
+                EditorGUILayout.Space(2);
                 EditorGUILayout.PropertyField(sp_subList);
 
                 break;
@@ -57,6 +59,7 @@ public class ObjectManagerEditor : Editor
             case ObjectType.Useless:
 
                 EditorGUILayout.PropertyField(sp_order);
+                EditorGUILayout.Space(2);
                 EditorGUILayout.PropertyField(sp_subList);
                 break;
 
@@ -68,9 +71,6 @@ public class ObjectManagerEditor : Editor
         EditorGUILayout.BeginFoldoutHeaderGroup(false, "Outline Properties", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(sp_outline);
         EditorGUILayout.PropertyField(sp_selectOutline);
-        EditorGUILayout.PropertyField(sp_baseColor);
-        EditorGUILayout.PropertyField(sp_selectColor);
-        EditorGUILayout.EndFoldoutHeaderGroup();
 
         serializedObject.ApplyModifiedProperties();
     }

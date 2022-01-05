@@ -37,7 +37,7 @@ public class ShakeDetector : MonoBehaviour
             timeSinceLastShake = Time.unscaledDeltaTime;
         }*/
 
-        Debug.Log(rb.velocity.sqrMagnitude >= sqrShakeDetectionTreshold);
+        //Debug.Log(rb.velocity.sqrMagnitude >= sqrShakeDetectionTreshold);
 
         //Using GO's Rigidbody Acceleration
         if (rb.velocity.sqrMagnitude >= sqrShakeDetectionTreshold
