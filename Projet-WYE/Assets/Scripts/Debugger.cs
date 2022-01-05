@@ -34,12 +34,12 @@ public class Debugger : MonoBehaviour
     public void ActivateAllObjectInImaginary()
     {
         Debug.Log("0 is pressed,\n Activate all object");
-        foreach (var item in ObjectActivator.Instance.DesactivatedObject)
+        foreach (var item in ObjectActivator.Instance.desactivatedObject)
         {
             item.gameObject.SetActive(true);
             
         }
-        OrderController.Instance.numberOfCombinaison = ObjectActivator.Instance.DesactivatedObject.Count / 2; // a chnager si methode de calcule change
+        OrderController.Instance.numberOfCombinaison = ObjectActivator.Instance.desactivatedObject.Count / 2; // a chnager si methode de calcule change
     }
 
     public void GoToImaginary()

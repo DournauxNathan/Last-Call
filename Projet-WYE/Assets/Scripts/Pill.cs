@@ -10,14 +10,16 @@ public class Pill : MonoBehaviour
     public SphereCollider sphereCollider;
 
     [HideInInspector] public bool isInstiantiated;
+    [HideInInspector] public bool hasMove = false;
 
     private Transform stock;
-    private bool isActive = false;
+    public bool isActive = false;
 
     private void Start()
     {
         
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Head"))
@@ -25,11 +27,8 @@ public class Pill : MonoBehaviour
             Eat();
         }        
     }
-    public void Activate(Transform parent, Transform stock)
+    public void Activate(Transform stock)
     {
-        transform.SetParent(parent);
-        transform.position = parent.position;
-
         this.stock = stock;
 
         this.meshRender.enabled = true;
@@ -38,14 +37,22 @@ public class Pill : MonoBehaviour
 
         isActive = true;
         isInstiantiated = true;
+    }
 
+    public void Move(Transform parent)
+    {
+        transform.SetParent(parent);
+        transform.position = parent.position;
         transform.SetParent(null);
+
+        hasMove = true;
     }
 
     public void Desactivate()
     {
         isActive = false;
     }
+
     private void ReputOnStock()
     {
         this.meshRender.enabled = false;
@@ -56,6 +63,7 @@ public class Pill : MonoBehaviour
         transform.SetParent(stock);
         isInstiantiated = false;
     }
+
     private void Eat()
     {
         ReputOnStock();

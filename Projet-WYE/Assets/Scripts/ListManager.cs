@@ -71,14 +71,15 @@ public class ListManager : Singleton<ListManager>
         if (objet1.TryGetComponent<ObjectManager>(out _objectManager1) && objet2.TryGetComponent<ObjectManager>(out _objectManager2))
         {
             //Check with 2 objects only and with the ObjectManager1
-            if (_objectManager1.combinable.combineWith.Count == 2 && _objectManager1.combinable.combineWith[0] == objet2 && _objectManager2.combinable.combineWith.Count != 0 || _objectManager1.combinable.combineWith.Count == 2 && _objectManager1.combinable.combineWith[1] == objet2 && _objectManager2.combinable.combineWith.Count != 0)
+            if (_objectManager1.combinaisons[0].combineWith.Count == 2 && _objectManager1.combinaisons[0].combineWith[0] == objet2 && _objectManager2.combinaisons[0].combineWith.Count != 0 
+                || _objectManager1.combinaisons[0].combineWith.Count == 2 && _objectManager1.combinaisons[0].combineWith[1] == objet2 && _objectManager2.combinaisons[0].combineWith.Count != 0)
             {
-                if (_objectManager1.combinable.isStatic)
+                if (_objectManager1.data.isStatic)
                 {
                     objet2.SetActive(false);
 
                     //Clear the list if a combinaison has already been find
-                    _objectManager1.combinable.combineWith.Clear();
+                    _objectManager1.combinaisons[0].combineWith.Clear();
                 }
                 else
                 {
@@ -88,15 +89,16 @@ public class ListManager : Singleton<ListManager>
 
                 SetToOrderController(_objectManager1);
             }
-            else if (_objectManager2.combinable.combineWith.Count == 2 && _objectManager2.combinable.combineWith[0] == objet1 && _objectManager1.combinable.combineWith.Count != 0 || _objectManager2.combinable.combineWith.Count == 2 && _objectManager2.combinable.combineWith[1] == objet1 && _objectManager1.combinable.combineWith.Count != 0)
+            else if (_objectManager2.combinaisons[0].combineWith.Count == 2 && _objectManager2.combinaisons[0].combineWith[0] == objet1 && _objectManager1.combinaisons[0].combineWith.Count != 0 
+                || _objectManager2.combinaisons[0].combineWith.Count == 2 && _objectManager2.combinaisons[0].combineWith[1] == objet1 && _objectManager1.combinaisons[0].combineWith.Count != 0)
             {
                 //Check with 2 objects only and with the ObjectManager2
-                if (_objectManager2.combinable.isStatic)
+                if (_objectManager2.data.isStatic)
                 {
                     objet1.SetActive(false);
 
                     //Clear the list if a combinaison has already been find
-                    _objectManager2.combinable.combineWith.Clear();
+                    _objectManager2.combinaisons[0].combineWith.Clear();
                 }
                 else
                 {
@@ -106,17 +108,18 @@ public class ListManager : Singleton<ListManager>
 
                 SetToOrderController(_objectManager2);
             }
-            else if (_objectManager1.combinable.combineWith.Count == 1 && _objectManager2.combinable.combineWith.Count != 0 || _objectManager2.combinable.combineWith.Count == 1 && _objectManager1.combinable.combineWith.Count != 0)
+            else if (_objectManager1.combinaisons[0].combineWith.Count == 1 && _objectManager2.combinaisons[0].combineWith.Count != 0 
+                || _objectManager2.combinaisons[0].combineWith.Count == 1 && _objectManager1.combinaisons[0].combineWith.Count != 0)
             {
                 //Check with 1 object only
-                if (_objectManager1.combinable.combineWith[0] == objet2)
+                if (_objectManager1.combinaisons[0].combineWith[0] == objet2)
                 {
-                    if (_objectManager1.combinable.isStatic)
+                    if (_objectManager1.data.isStatic)
                     {
                         objet2.SetActive(false);
 
                         //Clear the list if a combinaison has already been find
-                        _objectManager1.combinable.combineWith.Clear();
+                        _objectManager1.combinaisons[0].combineWith.Clear();
                     }
                     else
                     {
@@ -126,14 +129,14 @@ public class ListManager : Singleton<ListManager>
 
                     SetToOrderController(_objectManager1);
                 }
-                else if (_objectManager2.combinable.combineWith[0] == objet1)
+                else if (_objectManager2.combinaisons[0].combineWith[0] == objet1)
                 {
-                    if (_objectManager2.combinable.isStatic)
+                    if (_objectManager2.data.isStatic)
                     {
                         objet1.SetActive(false);
 
                         //Clear the list if a combinaison has already been find
-                        _objectManager2.combinable.combineWith.Clear();
+                        _objectManager2.combinaisons[0].combineWith.Clear();
                     }
                     else
                     {
@@ -144,22 +147,22 @@ public class ListManager : Singleton<ListManager>
                     SetToOrderController(_objectManager2);
                 }
             }            
-            else if (_objectManager1.combinable.combineWith.Count == 0 || _objectManager2.combinable.combineWith.Count == 0)
+            else if (_objectManager1.combinaisons[0].combineWith.Count == 0 || _objectManager2.combinaisons[0].combineWith.Count == 0)
             {
                 Debug.LogWarning("Can't combine them");
             }
         }
         else
         {
-            Debug.LogWarning("No one has the Combinable component");
+            Debug.LogWarning("No one has the combinaisons component");
         }       
     }
 
     public void SetToOrderController(ObjectManager _objectManager)
     {
-        if (!OrderController.Instance.orders.Contains(_objectManager.combinable.resultOrder))
+        if (!OrderController.Instance.orders.Contains(_objectManager.data.resultOrder))
         {
-            OrderController.Instance.orders.Add(_objectManager.combinable.resultOrder);
+            OrderController.Instance.orders.Add(_objectManager.data.resultOrder);
             OrderController.Instance.IncreaseValue(1);
         }
     }

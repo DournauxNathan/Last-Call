@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PillBox : MonoBehaviour
 {
-    public int nPill;    
+    [Tooltip("Number of pills contained in the box")]
+    public int nPill;
+    public int nPillToDisplay;
     public List<Pill> pills;
 
     [Header("Refs")]
@@ -17,16 +19,7 @@ public class PillBox : MonoBehaviour
 
     [SerializeField] private bool instantiatePills;
 
-    private void Update()
-    {
-        if (instantiatePills)
-        {
-            instantiatePills = false;
-            Shake();
-        }
-    }
-
-    public void Shake()
+    private void Start()
     {
         for (int i = 0; i < nPill; i++)
         {
@@ -40,7 +33,7 @@ public class PillBox : MonoBehaviour
         {
             if (!pill.isInstiantiated)
             {
-                pill.Activate(opening, pullingStock);
+                pill.Activate(pullingStock);
                 return pill;
             }
         }
@@ -48,8 +41,24 @@ public class PillBox : MonoBehaviour
         return null;
     }
 
-    public void UpdateBox()
+    public void Shake()
     {
+        instantiatePills = true;
 
+        foreach (var pill in pills)
+        {
+            if (instantiatePills && pill.isInstiantiated && !pill.hasMove)
+            {
+                pill.Move(opening);
+                UpdatePillNumber();
+
+                instantiatePills = false;
+            }         
+        }
+    }
+
+    public void UpdatePillNumber()
+    {
+        nPill -= nPillToDisplay;
     }
 }

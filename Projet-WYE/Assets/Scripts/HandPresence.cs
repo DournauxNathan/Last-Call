@@ -85,6 +85,7 @@ public class HandPresence : Singleton<HandPresence>
 
     public Vector3 GetDeviceAccelation()
     {
+        Debug.LogWarning("Hand are need to test this feature !");
         return acceleration;
     }
 

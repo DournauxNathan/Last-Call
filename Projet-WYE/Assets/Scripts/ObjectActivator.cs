@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectActivator : Singleton<ObjectActivator>
 {
-    [Header("Paramètre des objets a activé")]
+    [Header("Objects to activate")]
     public List<GameObject> objectsList;
 
     public Dictionary<int, List<GameObject>> objectByIdList = new Dictionary<int, List<GameObject>>();
@@ -12,7 +12,9 @@ public class ObjectActivator : Singleton<ObjectActivator>
     public List<int> indexesList;
     public bool inImaginaire = false;
 
-    public List<GameObject> DesactivatedObject = new List<GameObject>();
+    public List<GameObject> desactivatedObject = new List<GameObject>();
+
+    public ObjectManager[] uselessObjects;
 
     public void ActivateObjet()
     {
@@ -41,7 +43,23 @@ public class ObjectActivator : Singleton<ObjectActivator>
 
         inImaginaire = true;
         MasterManager.Instance.isInImaginary = inImaginaire;
+
+        if (inImaginaire)
+        {
+            ActivateUselessObject();
+        }
     }  
+
+    public void ActivateUselessObject()
+    {
+        uselessObjects = FindObjectsOfType<ObjectManager>();
+
+        foreach (var obj in uselessObjects)
+        {
+            
+        }
+
+    }
 
     public void SetActivetObject(GameObject[] _list)
     {
@@ -49,15 +67,10 @@ public class ObjectActivator : Singleton<ObjectActivator>
 
         foreach (var item in _list)
         {
-            DesactivatedObject.Add(item);
+            desactivatedObject.Add(item);
 
-            if (indexesList.Contains(item.GetComponent<ObjectManager>().id))
+            if (!indexesList.Contains(item.GetComponent<ObjectManager>().data.iD))
             {
-                
-            }
-            else
-            {
-                
                 item.SetActive(false);
             }
         }
