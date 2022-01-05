@@ -8,14 +8,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(Outline), typeof(SphereCollider))]
 public class ObjectManager : MonoBehaviour
 {
-    public ObjectType Objecttype;
+    public ObjectType objectType;
     public ObjectData data;
     public Combinaisons[] combinaisons;
     public List<GameObject> subList; //???? What is it ? Can't Remember ?
 
-    [HideInInspector] public Outline outline;
-    [HideInInspector] public Color baseColor;
-    [HideInInspector] public Color selectColor;
+    public Outline outline;
+    public Material selectOutline;
+    public Color baseColor;
+    public Color selectColor;
     
     private ObjectActivator init;
 
@@ -61,7 +62,7 @@ public class ObjectManager : MonoBehaviour
         outline.enabled = false;
 
         baseColor = GetComponent<Outline>().OutlineColor;
-        selectColor = data.selectOutline.color;
+        selectColor = selectOutline.color;
     }
 
     private void SetTriggerColliDe(bool newState)
@@ -146,13 +147,13 @@ public class ObjectData
     public int iD;
     public bool isStatic;
     public OrderFormat resultOrder;
-    public Material selectOutline;
 
     [HideInInspector] public bool isLocked = false;
 }
 
 public enum ObjectType
 {
+    None,
     Useful,
     Useless
 }

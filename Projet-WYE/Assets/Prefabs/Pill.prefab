@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6991182913023333943}
   - component: {fileID: 6991182913023333936}
   - component: {fileID: 6991182913023333944}
+  - component: {fileID: 1543681396}
   m_Layer: 2
   m_Name: Pill
   m_TagString: Pill
@@ -267,18 +268,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  subList: []
-  combinable:
-    combineWith: []
-    resultOrder: {fileID: 0}
+  objectType: 0
+  data:
+    iD: 0
     isStatic: 0
-  outlineManager:
+    resultOrder: {fileID: 0}
     selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
     isLocked: 0
-    outline: {fileID: 0}
-    baseColor: {r: 0, g: 0, b: 0, a: 0}
-    selectColor: {r: 0, g: 0, b: 0, a: 0}
+  combinaisons: []
+  subList: []
+  outline: {fileID: 6991182913023333942}
+  baseColor: {r: 0, g: 0, b: 0, a: 0}
+  selectColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &6991182913023333944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,3 +296,19 @@ MonoBehaviour:
   capsuleCollider: {fileID: 6991182913023333941}
   sphereCollider: {fileID: 6991182913023333937}
   isInstiantiated: 0
+  hasMove: 0
+  isActive: 0
+--- !u!114 &1543681396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991182913023333938}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1a29edb3f68294a8a1a8ca37658178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderR: Test
+  offset: 0.2
