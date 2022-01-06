@@ -10,7 +10,7 @@ public class ObjectManager : MonoBehaviour
 {
     public ObjectType objectType;
     public ObjectData data;
-    public Combinaisons[] combinaisons;
+    public List<Combinaisons> combinaisons;
     public List<GameObject> subList; //???? What is it ? Can't Remember ?
 
     public Outline outline;
@@ -22,9 +22,10 @@ public class ObjectManager : MonoBehaviour
 
     private void Awake()
     {
-        SetTriggerColliDe(true);
+        SetTriggerCollider(true);
         SetOutline();
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +66,7 @@ public class ObjectManager : MonoBehaviour
         selectColor = selectOutline.color;
     }
 
-    private void SetTriggerColliDe(bool newState)
+    private void SetTriggerCollider(bool newState)
     {
         if (GetComponents<SphereCollider>().Length == 2)
         {
@@ -75,14 +76,14 @@ public class ObjectManager : MonoBehaviour
         {
             GetComponent<SphereCollider>().isTrigger = newState;
         }
-    }
-    
+    }    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ObjCombi"))
         {
             ListManager.Instance.CheckCompatibility(this.gameObject, other.gameObject);
+            Debug.Log(this.gameObject.name + " | " + other.name);
         }
 
         if (other.CompareTag("Hand"))
@@ -138,7 +139,7 @@ public class ObjectManager : MonoBehaviour
 [Serializable]
 public class Combinaisons
 {
-    public List<GameObject> combineWith = new List<GameObject>();    
+    public GameObject combineWith;    
 }
 
 [Serializable]

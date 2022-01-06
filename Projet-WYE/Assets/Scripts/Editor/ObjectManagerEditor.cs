@@ -14,6 +14,7 @@ public class ObjectManagerEditor : Editor
         sp_combi,
         sp_order,
         sp_selectOutline,
+        sp_static,
         
         sp_outline,
         sp_baseColor,
@@ -29,6 +30,7 @@ public class ObjectManagerEditor : Editor
 
         sp_selectOutline = serializedObject.FindProperty("selectOutline");
         sp_order = serializedObject.FindProperty("data.resultOrder");
+        sp_static = serializedObject.FindProperty("data.isStatic");
 
         sp_outline = serializedObject.FindProperty("outline");
         sp_baseColor = serializedObject.FindProperty("baseColor");
@@ -57,7 +59,8 @@ public class ObjectManagerEditor : Editor
                 break;
 
             case ObjectType.Useless:
-
+                EditorGUILayout.PropertyField(sp_static);
+                EditorGUILayout.Space(2);
                 EditorGUILayout.PropertyField(sp_order);
                 EditorGUILayout.Space(2);
                 EditorGUILayout.PropertyField(sp_subList);

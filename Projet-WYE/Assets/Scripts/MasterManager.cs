@@ -19,18 +19,17 @@ public class MasterManager : Singleton<MasterManager>
 
     void EffectOfPills()
     {
-        if (currentPills > 0)
+        if (currentPills == 1)
         {
             //Expand the timer of the call
             /* The time is ""slow"", the events of the call arrived less faster ? */
 
-            //Active Interactor of useless objets
+            //Active  Interactor, outline of useless objets
+            objectActivator.ToggleUselessObject(true, 3);
         }
         else if (currentPills > 1)
         {
-            /*Active Interactor of useless
-             *Actvate their outline
-             */
+            objectActivator.ToggleUselessObject(true, 3);
         }
     }
 }
