@@ -16,7 +16,6 @@ public class MasterManager : Singleton<MasterManager>
     [Tooltip("Number of pills taken by the player")]
     public int currentPills = 0;
 
-
     void EffectOfPills()
     {
         if (currentPills == 1)
