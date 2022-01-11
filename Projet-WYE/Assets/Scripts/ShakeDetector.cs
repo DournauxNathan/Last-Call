@@ -28,16 +28,16 @@ public class ShakeDetector : MonoBehaviour
 
         Debug.Log(HandPresence.Instance.GetDeviceAccelation().sqrMagnitude >= sqrShakeDetectionTreshold
             && Time.unscaledDeltaTime >= timeSinceLastShake + minShakeInterval);
-        
+        */
         //Using Hand Acceleration
         if (HandPresence.Instance.GetDeviceAccelation().sqrMagnitude >= sqrShakeDetectionTreshold 
             && Time.unscaledDeltaTime >= timeSinceLastShake + minShakeInterval)
         {
             pillBox.Shake();
             timeSinceLastShake = Time.unscaledDeltaTime;
-        }*/
+        }
 
-        //Debug.Log(rb.velocity.sqrMagnitude >= sqrShakeDetectionTreshold);
+        //Debug.Log(rb.velocity.sqrMagnitude);
 
         //Using GO's Rigidbody Acceleration
         if (rb.velocity.sqrMagnitude >= sqrShakeDetectionTreshold
