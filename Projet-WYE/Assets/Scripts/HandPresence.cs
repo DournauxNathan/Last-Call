@@ -80,6 +80,7 @@ public class HandPresence : Singleton<HandPresence>
         if (targetDevice.TryGetFeatureValue(CommonUsages.deviceAcceleration, out Vector3 _acceleration))
         {
             acceleration = _acceleration;
+            Debug.Log(_acceleration);
         }
 
         if (targetDevice.TryGetFeatureValue(CommonUsages.secondary2DAxis, out Vector2 thumbstickValue))

@@ -1644,7 +1644,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_Colliders:
+  - {fileID: 258328911}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4
@@ -5879,6 +5880,10 @@ PrefabInstance:
     - target: {fileID: 8137297672460569013, guid: 5d0f6a473bcba1441ac857af2955faef, type: 3}
       propertyPath: m_Name
       value: Physic Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137297672460569015, guid: 5d0f6a473bcba1441ac857af2955faef, type: 3}
+      propertyPath: isActivate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8137297672460569015, guid: 5d0f6a473bcba1441ac857af2955faef, type: 3}
       propertyPath: unitToSend
@@ -10314,6 +10319,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e23c30e589b0a4e8ae76c56e9173bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &620553002 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6199973837699453557, guid: 03363bf476696af44a6b5a5d1229f0a5, type: 3}
+  m_PrefabInstance: {fileID: 1146707583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &629382093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6991182913023333939, guid: 0a4d2e91fee58df47a5f854c73f923cc, type: 3}
@@ -11989,7 +11999,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 686991412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2d23555e190ec4988af1eb34b21d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d050367f5dc8c84b8eea0f279bca11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -11997,7 +12007,7 @@ MonoBehaviour:
   - {fileID: 686991417}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 4294967295
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -12052,7 +12062,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.15
-  m_MovementType: 0
+  m_MovementType: 2
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -12311,7 +12321,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 689393177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2d23555e190ec4988af1eb34b21d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d050367f5dc8c84b8eea0f279bca11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -12319,7 +12329,7 @@ MonoBehaviour:
   - {fileID: 689393182}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 4294967295
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -12374,7 +12384,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.15
-  m_MovementType: 0
+  m_MovementType: 2
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -19360,6 +19370,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1146707585, guid: 03363bf476696af44a6b5a5d1229f0a5, type: 3}
+      propertyPath: m_Colliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146707585, guid: 03363bf476696af44a6b5a5d1229f0a5, type: 3}
+      propertyPath: m_Colliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 620553002}
     - target: {fileID: 54246231843074394, guid: 03363bf476696af44a6b5a5d1229f0a5, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: -0.9724237
@@ -21348,7 +21366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1236159442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2d23555e190ec4988af1eb34b21d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d050367f5dc8c84b8eea0f279bca11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -21356,7 +21374,7 @@ MonoBehaviour:
   - {fileID: 1236159447}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 4294967295
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -21411,7 +21429,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.15
-  m_MovementType: 0
+  m_MovementType: 2
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -21870,7 +21888,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1290857997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2d23555e190ec4988af1eb34b21d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d050367f5dc8c84b8eea0f279bca11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -21878,7 +21896,7 @@ MonoBehaviour:
   - {fileID: 1290858002}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 4294967295
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -21933,7 +21951,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.15
-  m_MovementType: 0
+  m_MovementType: 2
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -31433,7 +31451,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932965264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2d23555e190ec4988af1eb34b21d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d050367f5dc8c84b8eea0f279bca11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -31441,7 +31459,7 @@ MonoBehaviour:
   - {fileID: 1932965269}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 4294967295
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -31496,7 +31514,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.15
-  m_MovementType: 0
+  m_MovementType: 2
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
