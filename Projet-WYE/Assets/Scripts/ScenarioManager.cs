@@ -8,7 +8,8 @@ public class ScenarioManager : Singleton<ScenarioManager>
     {
         TrappedMan,
         HomeInvasion,
-        DomesticAbuse
+        DomesticAbuse,
+        RisingWater
     }
 
     public Scenario currentScenario;
@@ -38,6 +39,9 @@ public class ScenarioManager : Singleton<ScenarioManager>
             case 3:
                 currentScenario = Scenario.DomesticAbuse;
                 break;
+            case 4:
+                currentScenario = Scenario.RisingWater;
+                break;
         }
 
         //Pre Update the next scenario data
@@ -49,13 +53,13 @@ public class ScenarioManager : Singleton<ScenarioManager>
         switch (currentScenario)
         {
             case Scenario.TrappedMan:
-                UIManager.Instance.questionData.AddRange(trappedMan);
+                UIManager.Instance.descriptionQuestion.AddRange(trappedMan);
                 break;
             case Scenario.HomeInvasion:
-                UIManager.Instance.questionData.AddRange(homeInvasion);
+                UIManager.Instance.descriptionQuestion.AddRange(homeInvasion);
                 break;
             case Scenario.DomesticAbuse:
-                UIManager.Instance.questionData.AddRange(domesticAbuse);
+                UIManager.Instance.descriptionQuestion.AddRange(domesticAbuse);
                 break;
         }
     }

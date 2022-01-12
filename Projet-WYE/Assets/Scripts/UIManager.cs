@@ -7,36 +7,44 @@ using UnityEngine.EventSystems;
 
 public class UIManager : Singleton<UIManager>
 {
-    public List<QuestionFormat> questionData;
+    public List<QuestionFormat> protocoleQuestions;
+    public List<QuestionFormat> descriptionQuestion;
     public List<InstantiableButton> buttons;
-    public List<InstantiableButton> buttonsOrder;
 
-    [Header("Refs - Question Section")]
+    [Header("Refs - Questions Section")]
     public Transform checkListTransform = null;
-    [SerializeField] private Transform questionPullingStock = null;
+    public Transform descriptionTransform = null;
 
     [Header("Refs - Order Section")]
     [SerializeField] private Transform orderListTransform = null;
-    [SerializeField] private Transform orderPullingStock = null;
+    [Space(5)]
+    [SerializeField] private Transform pullingStock = null;
 
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
 
+    private void Awake()
+    {
+        ScenarioManager.Instance.LoadScenario();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         activateButton.SetActive(false);
 
-        ScenarioManager.Instance.LoadScenario();
-
         // A CHANGER QUAND SWITCH ENTRE REA ET IMA
         if (OrderController.Instance.orders.Count == 0)
         {
-            for (int i = 0; i < questionData.Count; i++)
+            for (int i = 0; i < protocoleQuestions.Count; i++)
             {
-                var but = FindAvailableButtonForQuestion(questionData[i]);
+                var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
+            }
+
+            for (int i = 0; i < descriptionQuestion.Count; i++)
+            {
+                var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
             }
         }
         
@@ -62,7 +70,7 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question)
+    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
     {
         if (question != null)
         {
@@ -70,7 +78,7 @@ public class UIManager : Singleton<UIManager>
             {
                 if (!but.isInstiantiated)
                 {
-                    but.ActivateQuestion(checkListTransform, questionPullingStock, question);
+                    but.ActivateQuestion(_transform, pullingStock, question);
                     return but;
                 }
             }
@@ -84,11 +92,11 @@ public class UIManager : Singleton<UIManager>
     {
         if (order != null)
         {
-            foreach (var but in buttonsOrder)
+            foreach (var but in buttons)
             {
                 if (!but.isInstiantiated)
                 {
-                    but.ActivateOrder(orderListTransform, orderPullingStock, order);
+                    but.ActivateOrder(orderListTransform, pullingStock, order);
                     return but;
                 }
             }
