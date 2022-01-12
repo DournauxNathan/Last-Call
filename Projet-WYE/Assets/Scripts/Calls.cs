@@ -12,12 +12,13 @@ public class Calls : MonoBehaviour
     public bool triggerCall = false;
     public bool hasAnsered = false;
 
-    public AudioSource phone;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        phone.Stop();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Stop();
     }
 
     // Update is called once per frame
@@ -26,21 +27,21 @@ public class Calls : MonoBehaviour
         while (triggerCall)
         {
             triggerCall = false;
-            phone.clip = ringtone;
-            phone.spatialBlend = 1f;
-            phone.loop = true;
-            phone.Play();
+            audioSource.clip = ringtone;
+            audioSource.spatialBlend = 1f;
+            audioSource.loop = true;
+            audioSource.Play();
 
         }
 
         while (hasAnsered)
         {
             hasAnsered = false;
-            phone.loop = false;
-            phone.Stop();
-            phone.clip = voicesLine;
-            phone.spatialBlend = 0.2f;
-            phone.Play();
+            audioSource.loop = false;
+            audioSource.Stop();
+            audioSource.clip = voicesLine;
+            audioSource.spatialBlend = 0.2f;
+            audioSource.Play();
         }
     }
 }

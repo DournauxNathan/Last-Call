@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Obsolete]
 public class DebugConsole : Singleton<DebugConsole>
 {
     [SerializeField]
@@ -83,7 +84,6 @@ public class DebugConsole : Singleton<DebugConsole>
         checkMax();
     }
 
-    [System.Obsolete]
     private void checkMax()
     {
         while (container.GetChildCount()>=12)

@@ -6,11 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
 {
 
-    [Header("")]
+    [Header("Put Together Mechanics")]
     [SerializeField]
-    private bool isMergeable;
+    private bool canAssemble;
     [SerializeField]
-    private GameObject mergewith;
+    private GameObject snapTo;
 
 
     protected override void Awake()
@@ -19,10 +19,16 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
         interactionManager = MasterManager.Instance.xRInteractionManager;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        GetComponent<Renderer>().enabled = false;
+    }
+
 
     public override bool CanHover(XRBaseInteractable interactable)
     {
-        if (isMergeable)
+        if (canAssemble)
         {
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
@@ -31,7 +37,7 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
 
     public override bool CanSelect(XRBaseInteractable interactable)
     {
-        if (isMergeable)
+        if (canAssemble)
         {
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
@@ -40,7 +46,7 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
 
     private bool MatchUsingGameObject(XRBaseInteractable interactable)
     {
-        return interactable.gameObject == mergewith;
+        return interactable.gameObject == snapTo;
     }
 
 }
