@@ -12,7 +12,7 @@ public class UIManager : Singleton<UIManager>
     public List<InstantiableButton> buttonsOrder;
 
     [Header("Refs - Question Section")]
-    [SerializeField] private Transform checkListTransform = null;
+    public Transform checkListTransform = null;
     [SerializeField] private Transform questionPullingStock = null;
 
     [Header("Refs - Order Section")]
@@ -22,6 +22,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,9 @@ public class UIManager : Singleton<UIManager>
                 var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
             }
         }
+
+        EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).gameObject);
+        //EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).gameObject;
     }
 
 

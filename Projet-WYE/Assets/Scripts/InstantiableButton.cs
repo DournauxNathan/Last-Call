@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InstantiableButton : MonoBehaviour
@@ -8,6 +9,8 @@ public class InstantiableButton : MonoBehaviour
     public Button button;
     public Image img;
     public TMP_Text text;
+    public Toggle toggle;
+    public Image toggleImg;
 
     [HideInInspector] public bool isInstiantiated;
 
@@ -34,6 +37,9 @@ public class InstantiableButton : MonoBehaviour
         button.enabled = true;
         button.interactable = true;
         img.enabled = true;
+        toggle.isOn = false;
+        toggle.enabled = true;
+        toggleImg.enabled = true;
         isActive = true;
 
         isInstiantiated = true;
@@ -52,6 +58,8 @@ public class InstantiableButton : MonoBehaviour
         button.enabled = true;
         button.interactable = true;
         img.enabled = true;
+        toggle.enabled = true;
+        toggleImg.enabled = true;
         isActive = true;
 
         isInstiantiated = true;
@@ -59,15 +67,10 @@ public class InstantiableButton : MonoBehaviour
         UpdateOrder();
     }
 
-    public void Desactivate()
-    {
-        isActive = false;
-        this.gameObject.SetActive(false);
-        //ReputOnStock();
-    }
-
     public void IncreaseClick()
     {
+        int currentBtn = 0;
+
         if (currentClick < question.listQuestion.Length - 1)
         {
             //Active unitée
@@ -96,11 +99,20 @@ public class InstantiableButton : MonoBehaviour
                 {
                     //Debug.Log(button.Value.listIdObject[i].x);
                     swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
+
                 }
+                currentBtn = i;
+            }
+
+            if (EventSystem.current.gameObject != UIManager.Instance.checkListTransform.GetChild(currentBtn).gameObject)
+            {
+                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(currentBtn + 1).gameObject);
             }
 
             Desactivate();
+            this.transform.SetSiblingIndex(UIManager.Instance.checkListTransform.childCount - 1);
         }
+
         UpdateQuestion();
     }
 
@@ -111,14 +123,23 @@ public class InstantiableButton : MonoBehaviour
         Desactivate();
     }
 
+    public void Desactivate()
+    {
+        //isActive = false;
+        //this.gameObject.SetActive(false);
+        ReputOnStock();
+    }
     private void ReputOnStock()
     {
-        button.enabled = false;
-        img.enabled = false;
+        //button.enabled = false;
 
-        Desactivate();
-        transform.SetParent(stock);
-        isInstiantiated = false;
+        button.interactable = true;
+        toggle.enabled = false;
+        toggle.isOn = true;
+
+
+        //transform.SetParent(stock);
+        //isInstiantiated = false;
     }
     private void UpdateQuestion()
     {

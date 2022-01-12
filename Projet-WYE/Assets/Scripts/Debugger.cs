@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Debugger : MonoBehaviour
 {
-
     private void Update()
     {
         Keyboard kb = Keyboard.current;

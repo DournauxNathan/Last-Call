@@ -10,11 +10,18 @@ public class MasterManager : Singleton<MasterManager>
     public ObjectActivator objectActivator;
     public AudioSource mainAudioSource;
 
+    public List<GameObject> rayInteractors;
+
     [Header("Metrics")]
     public bool isInImaginary;
     public bool pillsEffect;
     [Tooltip("Number of pills taken by the player")]
     public int currentPills = 0;
+
+    private void Start()
+    {
+        UpdateController();
+    }
 
     void EffectOfPills()
     {
@@ -29,6 +36,24 @@ public class MasterManager : Singleton<MasterManager>
         else if (currentPills > 1)
         {
             objectActivator.ToggleUselessObject(true, 3);
+        }
+    }
+
+    public void UpdateController()
+    {
+        if (!isInImaginary)
+        {
+            for (int i = 0; i < rayInteractors.Count; i++)
+            {
+                rayInteractors[i].SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < rayInteractors.Count; i++)
+            {
+                rayInteractors[i].SetActive(true);
+            }
         }
     }
 }
