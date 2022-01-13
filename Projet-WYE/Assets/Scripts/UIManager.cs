@@ -11,55 +11,65 @@ public class UIManager : Singleton<UIManager>
     public List<QuestionFormat> descriptionQuestion;
     public List<InstantiableButton> buttons;
 
-    [Header("Refs - Questions Section")]
+    [Header("Refs")]
     public Transform checkListTransform = null;
     public Transform descriptionTransform = null;
-
-    [Header("Refs - Order Section")]
     [SerializeField] private Transform orderListTransform = null;
     [Space(5)]
     [SerializeField] private Transform pullingStock = null;
+
+    public CanvasGroup leftScreen;
+    public CanvasGroup rightScreen;
+
+    [Header("Fade parameters")]
+    [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
+    [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
+
+    private bool fadeOut = false;
+    private bool fadeIn = false;
+
 
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
 
-    public CanvasGroup leftScreen;
-    public CanvasGroup rightScreen;
 
     // Start is called before the first frame update
     void Start()
     {
-        ScenarioManager.Instance.LoadScenario();
-
-        activateButton.SetActive(false);
-
-        // A CHANGER QUAND SWITCH ENTRE REA ET IMA
-        if (OrderController.Instance.orders.Count == 0)
+        if (SceneLoader.Instance.GetCurrentScene().name == "Office")
         {
-            for (int i = 0; i < protocoleQuestions.Count; i++)
+            ScenarioManager.Instance.LoadScenario(); 
+            
+            activateButton.SetActive(false);
+
+            // A CHANGER QUAND SWITCH ENTRE REA ET IMA
+            if (OrderController.Instance.orders.Count == 0)
             {
-                var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
+                for (int i = 0; i < protocoleQuestions.Count; i++)
+                {
+                    var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
+                }
+
+                for (int i = 0; i < descriptionQuestion.Count; i++)
+                {
+                    var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
+                }
             }
 
-            for (int i = 0; i < descriptionQuestion.Count; i++)
+            if (OrderController.Instance.isResolve)
             {
-                var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
+                for (int i = 0; i < OrderController.Instance.orders.Count; i++)
+                {
+                    var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
+                }
             }
-        }
-        
-        if (OrderController.Instance.isResolve)
-        {
-            for (int i = 0; i < OrderController.Instance.orders.Count; i++)
-            {
-                var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
-            }
-        }
 
-        EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+            EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+        }      
+
         //EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).gameObject;
     }
-
 
     public void Update()
     {
@@ -67,6 +77,34 @@ public class UIManager : Singleton<UIManager>
         {
             activateButton.SetActive(true );
             unlockImaginaryTransition = !unlockImaginaryTransition;
+        }
+
+        if (MasterManager.Instance.projectionTransition.range <= beginFadeOutAt)
+        {
+            HideUI();
+        }
+
+        if (MasterManager.Instance.projectionTransition.range == beginFadeInAt)
+        {
+            ShowUI();
+        }
+
+        if (fadeIn) //Show UI
+        {
+            if (UIManager.Instance.leftScreen != null)
+            {
+                StartFadeIn(UIManager.Instance.leftScreen);
+                StartFadeIn(UIManager.Instance.rightScreen);
+            }
+        }
+
+        if (fadeOut) //Hide UI
+        {
+            if (UIManager.Instance.leftScreen != null)
+            {
+                StartFadeOut(UIManager.Instance.leftScreen);
+                StartFadeOut(UIManager.Instance.rightScreen);
+            }
         }
     }
 
@@ -105,4 +143,42 @@ public class UIManager : Singleton<UIManager>
         Debug.LogError("Not enough buttons");
         return null;
     }
+
+
+    public void ShowUI()
+    {
+        fadeIn = true;
+    }
+
+    public void HideUI()
+    {
+        fadeOut = true;
+    }
+
+    public void StartFadeIn(CanvasGroup uiGroupToFade)
+    {
+        if (uiGroupToFade.alpha < 1)
+        {
+            uiGroupToFade.alpha += Time.deltaTime;
+
+            if (uiGroupToFade.alpha >= 1)
+            {
+                fadeIn = false;
+            }
+        }
+    }
+
+    public void StartFadeOut(CanvasGroup uiGroupToFade)
+    {
+        if (uiGroupToFade.alpha >= 0)
+        {
+            uiGroupToFade.alpha -= Time.deltaTime;
+
+            if (uiGroupToFade.alpha == 0)
+            {
+                fadeOut = false;
+            }
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ public class MasterManager : Singleton<MasterManager>
     [Header("Refs")]
     public XRInteractionManager xRInteractionManager;
     public ObjectActivator objectActivator;
+    public Projection projectionTransition;
     public AudioSource mainAudioSource;
 
     public List<GameObject> rayInteractors;

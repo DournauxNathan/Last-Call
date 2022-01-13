@@ -14,12 +14,7 @@ public class Projection : Singleton<Projection>
     [Tooltip("During of te transition in seconds")] public float time;
     [Tooltip("0: Go to the imaginary | 1: Go Back to real life")]public int transitionValue;
     [Range(0,3)] public float range = 3f;
-    [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
-    [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
-
     private Vector3 playerPos;
-    private bool fadeOut = false;
-    private bool fadeIn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -44,72 +39,7 @@ public class Projection : Singleton<Projection>
         foreach (var mat in transitionShaders)
         {
             mat.SetFloat("_Distance", range * 10f);
-        }
-        
-        if (range <= beginFadeOutAt)
-        {
-            HideUI();
-        }
-
-        if (range == beginFadeInAt)
-        {
-            ShowUI();
-        }
-
-
-        if (fadeIn) //Show UI
-        {
-            if (UIManager.Instance.leftScreen != null)
-            {
-                StartFadeIn(UIManager.Instance.leftScreen);
-                StartFadeIn(UIManager.Instance.rightScreen);
-            }
-        }
-
-        if (fadeOut) //Hide UI
-        {
-            if (UIManager.Instance.leftScreen != null)
-            {
-                StartFadeOut(UIManager.Instance.leftScreen);
-                StartFadeOut(UIManager.Instance.rightScreen);
-            }
-        }
-    }
-
-    public void ShowUI()
-    {
-        fadeIn = true;
-    }
-
-    public void HideUI()
-    {
-        fadeOut = true;
-    }
-
-    public void StartFadeIn(CanvasGroup uiGroupToFade)
-    {
-        if (uiGroupToFade.alpha < 1)
-        {
-            uiGroupToFade.alpha += Time.deltaTime;
-
-            if (uiGroupToFade.alpha >= 1)
-            {
-                fadeIn = false;
-            }
-        }
-    }
-
-    public void StartFadeOut(CanvasGroup uiGroupToFade)
-    {
-        if (uiGroupToFade.alpha >= 0)
-        {
-            uiGroupToFade.alpha -=  Time.deltaTime;
-
-            if (uiGroupToFade.alpha == 0)
-            {
-                fadeOut = false;
-            }
-        }
+        }         
     }
 
     public void DoTransition(int state)

@@ -77,7 +77,6 @@ public class InstantiableButton : MonoBehaviour
             //Debug.Log(button.Value.units[button.Value.currentClick]);
             UnitManager.Instance.AddToUnlock(question.units[currentClick]);
 
-
             for (int i = 0; i < question.listIdObject.Length; i++)
             {
                 if (currentClick == question.listIdObject[i].y && question.listIdObject[i].x != 0)
@@ -99,7 +98,6 @@ public class InstantiableButton : MonoBehaviour
                 {
                     //Debug.Log(button.Value.listIdObject[i].x);
                     swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
-
                 }
                 currentBtn = i;
             }
