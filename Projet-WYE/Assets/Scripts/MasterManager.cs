@@ -48,7 +48,7 @@ public class MasterManager : Singleton<MasterManager>
                 rayInteractors[i].SetActive(false);
             }
         }
-        else
+        else if (isInImaginary)
         {
             for (int i = 0; i < rayInteractors.Count; i++)
             {
@@ -56,4 +56,11 @@ public class MasterManager : Singleton<MasterManager>
             }
         }
     }
+
+    public void ActivateImaginary(string name)
+    {
+        objectActivator.ActivateObjet();
+        SceneLoader.Instance.LoadNewScene(name);
+    }
+
 }

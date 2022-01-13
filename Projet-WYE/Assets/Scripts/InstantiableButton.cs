@@ -104,9 +104,13 @@ public class InstantiableButton : MonoBehaviour
                 currentBtn = i;
             }
 
-            if (EventSystem.current.gameObject != UIManager.Instance.checkListTransform.GetChild(currentBtn).gameObject)
+            if (EventSystem.current.gameObject != UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject)
             {
-                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(currentBtn + 1).gameObject);
+                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject);
+            }
+            else if (EventSystem.current.gameObject == null)
+            {
+                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
             }
 
             Desactivate();
@@ -133,7 +137,7 @@ public class InstantiableButton : MonoBehaviour
     {
         //button.enabled = false;
 
-        button.interactable = true;
+        button.enabled = false;
         toggle.enabled = false;
         toggle.isOn = true;
 

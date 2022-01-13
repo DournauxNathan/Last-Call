@@ -8,13 +8,8 @@ public class OnClick : MonoBehaviour
     public void Click()
     {
         //onClick?.Invoke();
-        ActivateImaginary();
+        MasterManager.Instance.ActivateImaginary(s);
     }
 
-    public void ActivateImaginary()
-    {
-        MasterManager.Instance.objectActivator.ActivateObjet();
-        SceneLoader.Instance.LoadNewScene(s);
-    }
-
+   
 }

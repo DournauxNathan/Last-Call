@@ -24,14 +24,14 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
 
-    private void Awake()
-    {
-        ScenarioManager.Instance.LoadScenario();
-    }
+    public CanvasGroup leftScreen;
+    public CanvasGroup rightScreen;
 
     // Start is called before the first frame update
     void Start()
     {
+        ScenarioManager.Instance.LoadScenario();
+
         activateButton.SetActive(false);
 
         // A CHANGER QUAND SWITCH ENTRE REA ET IMA
@@ -56,7 +56,7 @@ public class UIManager : Singleton<UIManager>
             }
         }
 
-        EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).gameObject);
+        EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
         //EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).gameObject;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.InputSystem;
 
-public class Debugger : MonoBehaviour
+public class Debugger : Singleton<Debugger>
 {
     private void Update()
     {
@@ -33,6 +33,7 @@ public class Debugger : MonoBehaviour
     public void ActivateAllObjectInImaginary()
     {
         Debug.Log("0 is pressed,\n Activate all object");
+
         foreach (var item in ObjectActivator.Instance.desactivatedObject)
         {
             item.gameObject.SetActive(true);
@@ -47,6 +48,7 @@ public class Debugger : MonoBehaviour
         {
             SceneLoader.Instance.LoadNewScene("Office");
             Debug.Log("Office Loaded");
+
         }
 
         if (SceneLoader.Instance.GetCurrentScene().name != "Persistent" && !MasterManager.Instance.isInImaginary)
@@ -69,6 +71,8 @@ public class Debugger : MonoBehaviour
                     Debug.Log("Call3 Loaded");
                     break;
             }
+
+            Projection.Instance.startTransition = true;
         }
         else
         {

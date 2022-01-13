@@ -38,6 +38,9 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadBegin?.Invoke();
         //yield return screenFader.StartFadeIn();
 
+        Debug.LogWarning(currentScene.name);
+        Debug.LogWarning(currentScene.name != null && currentScene.name != "Persistent");
+
         if (currentScene.name != null && currentScene.name != "Persistent")
         {
             yield return StartCoroutine(UnloadCurrent());
