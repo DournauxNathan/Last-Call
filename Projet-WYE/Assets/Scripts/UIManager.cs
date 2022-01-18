@@ -181,4 +181,32 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    public void ToggleButton()
+    {
+        /*for (int i = 0; i < checkListTransform.childCount; i++)
+        {
+            checkListTransform.GetChild(i).GetComponent<Button>().interactable = !checkListTransform.GetChild(i).GetComponent<Button>().interactable;
+        }
+
+        for (int i = 0; i < descriptionTransform.childCount; i++)
+        {
+            descriptionTransform.GetChild(i).GetComponent<Button>().interactable = !descriptionTransform.GetChild(i).GetComponent<Button>().interactable;
+        }*/
+
+        foreach (var button in buttons)
+        {
+            button.gameObject.GetComponentInChildren<Button>().enabled = !button.gameObject.GetComponentInChildren<Button>().enabled;
+
+            /*if (button.gameObject.GetComponentInChildren<Button>().enabled)
+            {
+                button.gameObject.GetComponentInChildren<Button>().colors = 
+            }
+            else
+            {
+                button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
+            }*/
+        }
+
+    }
+
 }
