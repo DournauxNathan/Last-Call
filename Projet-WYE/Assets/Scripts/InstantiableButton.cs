@@ -2,9 +2,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Audio;
+using System.Collections;
 
 public class InstantiableButton : MonoBehaviour
 {
+    [SerializeField]
+    private bool test = false;
+
+    private AudioSource audioSource;
+
     [Header("Refs")]
     public Button button;
     public Image img;
@@ -24,7 +31,19 @@ public class InstantiableButton : MonoBehaviour
     private void Start()
     {
         swapImaginaire = MasterManager.Instance.objectActivator;
+        audioSource = MasterManager.Instance.mainAudioSource;
     }
+
+    private void Update()
+    {
+        if (test)
+        {
+            test = false;
+            IncreaseClick();
+            PlayQuestionAnswer();
+        }
+    }
+
 
     public void ActivateQuestion(Transform parent, Transform stock, QuestionFormat question)
     {
@@ -167,4 +186,45 @@ public class InstantiableButton : MonoBehaviour
             button.interactable = false;
         }
     }
+
+    public void PlayQuestionAnswer()
+    {
+        float _temp =0f;
+        float hardTimer = 0.5f;
+        int current;
+
+        //_temp = question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer;
+        //Debug.Log(question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer);
+        //StartCoroutine(LockOtherButton(_temp));
+        current = currentClick;
+        StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, current));
+        
+        
+
+
+
+    }
+
+    IEnumerator PlayQuestionAudio(float time, int current)
+    {   
+        Debug.Log("playing Question for :"+time+"s");
+        UIManager.Instance.ToggleButton();
+        audioSource.clip = question.voiceLineQuestion[current];
+        audioSource.Play();
+        yield return new WaitForSeconds(time );
+        StartCoroutine(PlayAnswerAudio(question.voiceLineAnswer.Length, current));
+
+    }
+
+    IEnumerator PlayAnswerAudio(float time, int current)
+    {
+        yield return new WaitForSeconds(time);
+        Debug.Log("playing Answer for :" + time + "s");
+        audioSource.clip = question.voiceLineAnswer[current];
+        audioSource.Play();
+        UIManager.Instance.ToggleButton();
+    }
+
+    
+
 }

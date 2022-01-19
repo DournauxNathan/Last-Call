@@ -36,9 +36,9 @@ public class UIManager : Singleton<UIManager>
 
     // Start is called before the first frame update
     void Start()
-    {
+    {/*
         if (SceneLoader.Instance.GetCurrentScene().name == "Office")
-        {
+        {*/
             ScenarioManager.Instance.LoadScenario(); 
             
             activateButton.SetActive(false);
@@ -66,7 +66,7 @@ public class UIManager : Singleton<UIManager>
             }
 
             EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
-        }      
+        //}      
 
         //EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).gameObject;
     }
@@ -179,6 +179,34 @@ public class UIManager : Singleton<UIManager>
                 fadeOut = false;
             }
         }
+    }
+
+    public void ToggleButton()
+    {
+        /*for (int i = 0; i < checkListTransform.childCount; i++)
+        {
+            checkListTransform.GetChild(i).GetComponent<Button>().interactable = !checkListTransform.GetChild(i).GetComponent<Button>().interactable;
+        }
+
+        for (int i = 0; i < descriptionTransform.childCount; i++)
+        {
+            descriptionTransform.GetChild(i).GetComponent<Button>().interactable = !descriptionTransform.GetChild(i).GetComponent<Button>().interactable;
+        }*/
+
+        foreach (var button in buttons)
+        {
+            button.gameObject.GetComponentInChildren<Button>().enabled = !button.gameObject.GetComponentInChildren<Button>().enabled;
+
+            /*if (button.gameObject.GetComponentInChildren<Button>().enabled)
+            {
+                button.gameObject.GetComponentInChildren<Button>().colors = 
+            }
+            else
+            {
+                button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
+            }*/
+        }
+
     }
 
 }
