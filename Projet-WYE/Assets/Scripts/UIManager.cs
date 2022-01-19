@@ -39,8 +39,11 @@ public class UIManager : Singleton<UIManager>
     {/*
         if (SceneLoader.Instance.GetCurrentScene().name == "Office")
         {*/
-            ScenarioManager.Instance.LoadScenario(); 
-            
+        
+        //ScenarioManager.Instance.LoadScenario();
+
+        if (ScenarioManager.Instance.isScenarioLoaded)
+        {
             activateButton.SetActive(false);
 
             // A CHANGER QUAND SWITCH ENTRE REA ET IMA
@@ -66,6 +69,7 @@ public class UIManager : Singleton<UIManager>
             }
 
             EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+        }
         //}      
 
         //EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).gameObject;

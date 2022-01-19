@@ -7,8 +7,7 @@ using System.Collections;
 
 public class InstantiableButton : MonoBehaviour
 {
-    [SerializeField]
-    private bool test = false;
+    public bool simulateInput = false;
 
     private AudioSource audioSource;
 
@@ -36,14 +35,18 @@ public class InstantiableButton : MonoBehaviour
 
     private void Update()
     {
-        if (test)
+        if (simulateInput)
         {
-            test = false;
+            SetSimulateInput(false);
             IncreaseClick();
             PlayQuestionAnswer();
         }
     }
 
+    public void SetSimulateInput(bool b)
+    {
+        simulateInput = b;
+    }
 
     public void ActivateQuestion(Transform parent, Transform stock, QuestionFormat question)
     {
@@ -189,29 +192,30 @@ public class InstantiableButton : MonoBehaviour
 
     public void PlayQuestionAnswer()
     {
-        float _temp =0f;
-        float hardTimer = 0.5f;
-        int current;
-
-        //_temp = question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer;
-        //Debug.Log(question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer);
-        //StartCoroutine(LockOtherButton(_temp));
-        current = currentClick;
-        StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, current));
-        
-        
-
-
-
+        StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, currentClick));
+       
+        /* 
+         * float _temp =0f
+         * float hardTimer = 0.5f
+         * int current
+         * _temp = question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer
+         * Debug.Log(question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer
+         * StartCoroutine(LockOtherButton(_temp
+         * current = currentClick;
+         */
     }
 
     IEnumerator PlayQuestionAudio(float time, int current)
     {   
-        Debug.Log("playing Question for :"+time+"s");
+        //Debug.Log("playing Question for :"+time+"s");
+                
         UIManager.Instance.ToggleButton();
+
         audioSource.clip = question.voiceLineQuestion[current];
         audioSource.Play();
+        
         yield return new WaitForSeconds(time );
+        
         StartCoroutine(PlayAnswerAudio(question.voiceLineAnswer.Length, current));
 
     }
@@ -219,9 +223,12 @@ public class InstantiableButton : MonoBehaviour
     IEnumerator PlayAnswerAudio(float time, int current)
     {
         yield return new WaitForSeconds(time);
-        Debug.Log("playing Answer for :" + time + "s");
+        
+        //Debug.Log("playing Answer for :" + time + "s");
+        
         audioSource.clip = question.voiceLineAnswer[current];
         audioSource.Play();
+        
         UIManager.Instance.ToggleButton();
     }
 

@@ -16,6 +16,7 @@ public class MasterManager : Singleton<MasterManager>
     [Header("Metrics")]
     public bool isInImaginary;
     public bool pillsEffect;
+    public bool isTutoEnded;
     [Tooltip("Number of pills taken by the player")]
     public int currentPills = 0;
 

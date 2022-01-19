@@ -17,20 +17,21 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public List<QuestionFormat> protocol;
 
     [Range(-10, 10)]
-    [SerializeField] public float endingValue = 0f;
+    public float endingValue = 0f;
 
     [SerializeField] private List<QuestionFormat> trappedMan;
     [SerializeField] private List<QuestionFormat> homeInvasion;
     [SerializeField] private List<QuestionFormat> domesticAbuse;
 
-    [SerializeField] public List<OrderFormat> o_trappedMan;
-    [SerializeField] public List<OrderFormat> o_homeInvasion;
-    [SerializeField] public List<OrderFormat> o_domesticAbuse;
+    public List<OrderFormat> o_trappedMan;
+    public List<OrderFormat> o_homeInvasion;
+    public List<OrderFormat> o_domesticAbuse;
 
-    [SerializeField] public List<ProtocolFormat> p_trappedMan;
-    [SerializeField] public List<ProtocolFormat> p_homeInvasion;
-    [SerializeField] public List<ProtocolFormat> p_domesticAbuse;
+    public List<ProtocolFormat> p_trappedMan;
+    public List<ProtocolFormat> p_homeInvasion;
+    public List<ProtocolFormat> p_domesticAbuse;
 
+    public bool isScenarioLoaded = false;
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
@@ -69,6 +70,8 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 UIManager.Instance.descriptionQuestion.AddRange(domesticAbuse);
                 break;
         }
+
+        isScenarioLoaded = true;
     }
 
     public void UpdateEndingsValue(int modifier)
