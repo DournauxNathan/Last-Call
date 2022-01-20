@@ -16,25 +16,15 @@ public class Projection : Singleton<Projection>
     [Range(0,3)] public float range = 3f;
     private Vector3 playerPos;
 
-    public float timer;
-    public float setTimer;
-    public bool changeScene;
-    public bool goToOffice;
-
     // Start is called before the first frame update
     void Start()
     {
         playerPos = player.position;
-        timer = setTimer;
 
         foreach (var mat in transitionShaders)
         {
             mat.SetVector("_PlayerPos", playerPos);
             mat.SetFloat("_Distance", 3f * 10f);
-        }
-
-        if (goToOffice)
-        {
         }
     }
 
@@ -49,21 +39,7 @@ public class Projection : Singleton<Projection>
         foreach (var mat in transitionShaders)
         {
             mat.SetFloat("_Distance", range * 10f);
-        }
-
-        if (MasterManager.Instance.isInImaginary)
-        {
-            timer -= Time.deltaTime;
-
-            if (timer <= 0)
-            {
-                goToOffice = true;
-                timer = 0;
-                changeScene = true;
-
-                DoTransition(0);
-            }
-        }
+        }         
     }
 
     public void DoTransition(int state)
@@ -74,22 +50,11 @@ public class Projection : Singleton<Projection>
 
             if (range <= 0)
             {
-                changeScene = true;
-
-                if (changeScene && goToOffice)
-                {
-                    startTransition = false;
-                    MasterManager.Instance.GoBackToScene("Office");
-                } 
-                else if (changeScene)
-                {
-                    changeScene = false;
-                    startTransition = false;
-                    MasterManager.Instance.ActivateImaginary("Call1");
-                }
-
+                startTransition = false;
                 transitionValue = 1;
+            
                 range = 0;
+                MasterManager.Instance.ActivateImaginary("Call1");
             }
         }
         else if (state == 1)
@@ -100,16 +65,9 @@ public class Projection : Singleton<Projection>
             {
                 startTransition = false;
                 transitionValue = 0;
-
-                range = 3;
-
-                goToOffice = !goToOffice;
+                range = 5;
+                
             }
         }
-    }
-
-    public void ResetTransition()
-    {
-
     }
 }
