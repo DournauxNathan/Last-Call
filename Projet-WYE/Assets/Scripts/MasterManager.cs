@@ -23,7 +23,8 @@ public class MasterManager : Singleton<MasterManager>
     private void Start()
     {
         UpdateController();
-    }
+
+        }
 
     void EffectOfPills()
     {
@@ -62,6 +63,17 @@ public class MasterManager : Singleton<MasterManager>
     public void ActivateImaginary(string name)
     {
         objectActivator.ActivateObjet();
+        SceneLoader.Instance.LoadNewScene(name);
+
+    }
+
+    public void GoBackToScene(string name)
+    {
+        isTutoEnded = true;
+        projectionTransition.startTransition = true;
+        //ScenarioManager.Instance.LoadScenario();
+
+        isInImaginary = false;
         SceneLoader.Instance.LoadNewScene(name);
     }
 

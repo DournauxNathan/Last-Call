@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000004, guid: 36c43891cd74afd4db665279e0d5aafe, type: 2}
+  m_LightingDataAsset: {fileID: 112000002, guid: 36c43891cd74afd4db665279e0d5aafe, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c701d090eac593f409f13b41b454881d, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -165,6 +165,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &90915177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90915181}
+  - component: {fileID: 90915180}
+  - component: {fileID: 90915179}
+  - component: {fileID: 90915178}
+  m_Layer: 0
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!136 &90915178
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90915177}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!23 &90915179
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90915177}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &90915180
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90915177}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &90915181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90915177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24698001, y: 0.666, z: -0.7796896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &518584337
 GameObject:
@@ -2087,6 +2183,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 800.00006, y: 575.52747}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1239436742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5173984687556180897, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+  m_PrefabInstance: {fileID: 5407915474310734205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1239436745 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+  m_PrefabInstance: {fileID: 5407915474310734205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1239436746
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239436742}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 30
+  m_CollisionDetection: 0
 --- !u!1 &1355308589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,6 +2569,7 @@ Transform:
   - {fileID: 1057995871}
   - {fileID: 921782269}
   - {fileID: 1492164773}
+  - {fileID: 1239436745}
   m_Father: {fileID: 1355308591}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2931,9 +3054,365 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1595094386}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: setTimer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: changeScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: beginFadeOutAt
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.size
+      value: 91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: a68228c24abfa2f4b8954d7b0148f799, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: f629cea4027067e4e8238e08c189654d, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b63ac751dd2bf0479a827412e7bac15, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d1fd78ae338b214896bd6f656d9afc0, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[9]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bea10de43931d44b88b48bf6147bb46, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[10]
+      value: 
+      objectReference: {fileID: 2100000, guid: 043e8dbe1403cb746bda26a1b21a407f, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[11]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9735eaecfa30324408617b2e09467a78, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[12]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b2505df377303942ae46812ea8555b4, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[13]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6829934835f53747999c2e034391a3b, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[14]
+      value: 
+      objectReference: {fileID: 2100000, guid: 043e8dbe1403cb746bda26a1b21a407f, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[15]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9735eaecfa30324408617b2e09467a78, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[16]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b2505df377303942ae46812ea8555b4, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[17]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6829934835f53747999c2e034391a3b, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[18]
+      value: 
+      objectReference: {fileID: 2100000, guid: d09305a40de24bb4aa75268e3b25971f, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[19]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a7b3b4cbc60c6440a7f5871f23d0723, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[20]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9973fd4aa47fcfd4caf9448e9f8a561e, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[21]
+      value: 
+      objectReference: {fileID: 2100000, guid: cda91e356812c6a41b100e0fa315175c, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[22]
+      value: 
+      objectReference: {fileID: 2100000, guid: 344ac01f7f42cea408be652e13185494, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[23]
+      value: 
+      objectReference: {fileID: 2100000, guid: c1d7b2b207d206f4f83b72446ea7a730, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[24]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73668f8145e52fe44b9b1cdb9aa22407, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[25]
+      value: 
+      objectReference: {fileID: 2100000, guid: d28a1e73bbbcd0943b294f6c545e2e9b, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[26]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac6fd8a495705ab439fdbb51acbb1a8c, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[27]
+      value: 
+      objectReference: {fileID: 2100000, guid: 293e90a95bc45be4a9dbd9aa979bee6e, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[28]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9278d87db327da948b01cfc2b244fefb, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[29]
+      value: 
+      objectReference: {fileID: 2100000, guid: c92a094951f93684090bbba6a9f94c21, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[30]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b6e8911e3063a14b90893a1ecbe6538, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[31]
+      value: 
+      objectReference: {fileID: 2100000, guid: f63ad12b2d588e546bc2273f029d1ec1, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[32]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e35708a23544b7429bb4689c1d6299c, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[33]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2935d1cd5472b5c48ac43c4d0d8291a9, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[34]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5233853c4ff73a34f9f0dd89949c311c, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[35]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63d4837fae94fe449a6c548ef4845292, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[36]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3db88f478f022804ca8689c8080e0f74, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[37]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9cf5f63076a8be74db834ee7d51391ca, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[38]
+      value: 
+      objectReference: {fileID: 2100000, guid: ea1881ad22ab28d459c0d1838b5bcfc4, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[39]
+      value: 
+      objectReference: {fileID: 2100000, guid: c918f79295de198419ffabc8ddc32afa, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[40]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb1044bfcabba2b4c9d273d55d71cf04, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[41]
+      value: 
+      objectReference: {fileID: 2100000, guid: d57aee4270662334698baa7b94f91cb8, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[42]
+      value: 
+      objectReference: {fileID: 2100000, guid: d57aee4270662334698baa7b94f91cb8, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[43]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36c068d857c1df84cbcddc9377ab135c, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[44]
+      value: 
+      objectReference: {fileID: 2100000, guid: 77e8c10bebe085145b1cca581f0fdba1, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[45]
+      value: 
+      objectReference: {fileID: 2100000, guid: 156bb1fc68355ed4fa2a1ba41b66fcc6, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[46]
+      value: 
+      objectReference: {fileID: 2100000, guid: 35e5ac77c5aaa30418e8e77039e34dd1, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[47]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86d2a705de50f0f418185b25c85b4247, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[48]
+      value: 
+      objectReference: {fileID: 2100000, guid: 04dce570e42034e41a7c95963b3c9fc3, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[49]
+      value: 
+      objectReference: {fileID: 2100000, guid: 876635ef7ec9cc54b94f5e23529dea24, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[50]
+      value: 
+      objectReference: {fileID: 2100000, guid: 797e1b44dcdfd06449afb4c8c6472371, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[51]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8287f9b0e03e8f94d9b683dfc292bf7e, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[52]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c70035fd66b03143861365cfac66cf1, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[53]
+      value: 
+      objectReference: {fileID: 2100000, guid: 388f1d88bf1d5f74e9902316ea317b77, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[54]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0243b9f6eb33d294aa7e9c8917a305f3, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[55]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd25abd2be763694a94feaa1a8ecc27d, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[56]
+      value: 
+      objectReference: {fileID: 2100000, guid: b79977ee136d89c4fae7713edf562355, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[57]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6076b37bacefd3c448147338d4450fd2, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[58]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f6b7141a3878a947a2b88cb05996ed9, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[59]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ae4e589b586aee499e6416e9402d13d, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[60]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6a3d5b733569b346b2d4031cc1f1b45, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[61]
+      value: 
+      objectReference: {fileID: 2100000, guid: b67282eec0365cd41a59267a9c8dfb45, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[62]
+      value: 
+      objectReference: {fileID: 2100000, guid: 46b36c3be1738954482d050818922110, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[63]
+      value: 
+      objectReference: {fileID: 2100000, guid: 374124fc5e1f0ea40979484def4c5ed2, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[64]
+      value: 
+      objectReference: {fileID: 2100000, guid: 67daf08c614b89c43b56172d33323c7a, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[65]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfdeb4a74870dd647ad5b3b897dbe322, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[66]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9cf338e1f94b21848bf91d9bf797c99b, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[67]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58b8b665fd17f57449ac7b3a534e2815, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[68]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5bc3d688a0329c48960c41e3cb159a1, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[69]
+      value: 
+      objectReference: {fileID: 2100000, guid: c7f438fe10040234aa9308901d08bf33, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[70]
+      value: 
+      objectReference: {fileID: 2100000, guid: f44bb53a796351947bf324a5d742d137, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[71]
+      value: 
+      objectReference: {fileID: 2100000, guid: e122d3dace2da014ba454498240fb373, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[72]
+      value: 
+      objectReference: {fileID: 2100000, guid: ef21db8f46433b340bc250fb57391c70, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[73]
+      value: 
+      objectReference: {fileID: 2100000, guid: 23748bb696ed23a45b636c5610143cbc, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[74]
+      value: 
+      objectReference: {fileID: 2100000, guid: 130810c2df0c2f2459b9b5891b0f8089, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[75]
+      value: 
+      objectReference: {fileID: 2100000, guid: 65eae123c35393a4a92648ab68b72dcd, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[76]
+      value: 
+      objectReference: {fileID: 2100000, guid: 123f099ba94951349b79502386b3eb21, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[77]
+      value: 
+      objectReference: {fileID: 2100000, guid: fc60e7b02a58af142b1312fe1e6684f1, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[78]
+      value: 
+      objectReference: {fileID: 2100000, guid: b159cfa6d01acd048972c55fa3ca2c70, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[79]
+      value: 
+      objectReference: {fileID: 2100000, guid: f310d973547cdc3428a7c5a4b37390d4, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[80]
+      value: 
+      objectReference: {fileID: 2100000, guid: 344ac01f7f42cea408be652e13185494, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[81]
+      value: 
+      objectReference: {fileID: 2100000, guid: c1d7b2b207d206f4f83b72446ea7a730, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[82]
+      value: 
+      objectReference: {fileID: 2100000, guid: cda91e356812c6a41b100e0fa315175c, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[83]
+      value: 
+      objectReference: {fileID: 2100000, guid: e958d9c5f63a58e48a73b346093b84c2, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[84]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73668f8145e52fe44b9b1cdb9aa22407, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[85]
+      value: 
+      objectReference: {fileID: 2100000, guid: d28a1e73bbbcd0943b294f6c545e2e9b, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[86]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac6fd8a495705ab439fdbb51acbb1a8c, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[87]
+      value: 
+      objectReference: {fileID: 2100000, guid: 293e90a95bc45be4a9dbd9aa979bee6e, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[88]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9278d87db327da948b01cfc2b244fefb, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[89]
+      value: 
+      objectReference: {fileID: 2100000, guid: c92a094951f93684090bbba6a9f94c21, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[90]
+      value: 
+      objectReference: {fileID: 2100000, guid: d92ef32394b5f474385d74b565a7bdd7, type: 2}
     - target: {fileID: 6283995595483804127, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -3479,3 +3958,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5c084caf16ac09439dcf09c47316b58, type: 3}
+--- !u!1001 &5407915474310734205
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1595094386}
+    m_Modifications:
+    - target: {fileID: 5173984687556180897, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_Name
+      value: DeskChair
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2500004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.53400004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.69206136
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7218387
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -92.413
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514234455724187931, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c79b240a83c58b4a9f0b3fb92f4e5eb, type: 3}
