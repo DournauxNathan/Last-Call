@@ -1908,6 +1908,7 @@ MonoBehaviour:
   - {fileID: 921782268}
   isInImaginary: 0
   pillsEffect: 0
+  isTutoEnded: 0
   currentPills: 0
 --- !u!4 &1103599257
 Transform:
@@ -2651,6 +2652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScenario: 0
+  protocol: []
   endingValue: 0
   trappedMan:
   - {fileID: 11400000, guid: cc4331c8c9a4be54ab1a5dfe67f2aa94, type: 2}
@@ -2681,6 +2683,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efaa4f96ef26dee4ba6608529cbbec9e, type: 2}
   o_homeInvasion: []
   o_domesticAbuse: []
+  p_trappedMan: []
+  p_homeInvasion: []
+  p_domesticAbuse: []
+  isScenarioLoaded: 0
 --- !u!114 &1696208562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2915,6 +2921,10 @@ PrefabInstance:
     - target: {fileID: 4016390893316475157, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: player
