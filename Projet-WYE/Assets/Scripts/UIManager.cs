@@ -7,48 +7,73 @@ using UnityEngine.EventSystems;
 
 public class UIManager : Singleton<UIManager>
 {
-    public List<QuestionFormat> questionData;
+    public List<QuestionFormat> protocoleQuestions;
+    public List<QuestionFormat> descriptionQuestion;
     public List<InstantiableButton> buttons;
-    public List<InstantiableButton> buttonsOrder;
 
-    [Header("References - Question Section")]
-    [SerializeField] private Transform checkListTransform = null;
-    [SerializeField] private Transform questionPullingStock = null;
-
-    [Header("References - Order Section")]
+    [Header("Refs")]
+    public Transform checkListTransform = null;
+    public Transform descriptionTransform = null;
     [SerializeField] private Transform orderListTransform = null;
-    [SerializeField] private Transform orderPullingStock = null;
+    [Space(5)]
+    [SerializeField] private Transform pullingStock = null;
+
+    public CanvasGroup leftScreen;
+    public CanvasGroup rightScreen;
+
+    [Header("Fade parameters")]
+    [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
+    [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
+
+    private bool fadeOut = false;
+    private bool fadeIn = false;
+
 
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
 
+
     // Start is called before the first frame update
     void Start()
-    {
-        activateButton.SetActive(false);
-
-        ScenarioManager.Instance.LoadScenario();
-
-
-        // A CHANGER QUAND SWITCH ENTRE REA ET IMA
-        if (OrderController.Instance.orders.Count == 0)
-        {
-            for (int i = 0; i < questionData.Count; i++)
-            {
-                var but = FindAvailableButtonForQuestion(questionData[i]);
-            }
-        }
+    {/*
+        if (SceneLoader.Instance.GetCurrentScene().name == "Office")
+        {*/
         
-        if (OrderController.Instance.isResolve || MasterManager.Instance.test)
-        {
-            for (int i = 0; i < OrderController.Instance.orders.Count; i++)
-            {
-                var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
-            }
-        }
-    }
+        //ScenarioManager.Instance.LoadScenario();
 
+        if (ScenarioManager.Instance.isScenarioLoaded)
+        {
+            activateButton.SetActive(false);
+
+            // A CHANGER QUAND SWITCH ENTRE REA ET IMA
+            if (OrderController.Instance.orders.Count == 0)
+            {
+                for (int i = 0; i < protocoleQuestions.Count; i++)
+                {
+                    var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
+                }
+
+                for (int i = 0; i < descriptionQuestion.Count; i++)
+                {
+                    var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
+                }
+            }
+
+            if (OrderController.Instance.isResolve)
+            {
+                for (int i = 0; i < OrderController.Instance.orders.Count; i++)
+                {
+                    var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
+                }
+            }
+
+            EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+        }
+        //}      
+
+        //EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).gameObject;
+    }
 
     public void Update()
     {
@@ -57,9 +82,37 @@ public class UIManager : Singleton<UIManager>
             activateButton.SetActive(true );
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
+
+        if (MasterManager.Instance.projectionTransition.range <= beginFadeOutAt)
+        {
+            HideUI();
+        }
+
+        if (MasterManager.Instance.projectionTransition.range == beginFadeInAt)
+        {
+            ShowUI();
+        }
+
+        if (fadeIn) //Show UI
+        {
+            if (UIManager.Instance.leftScreen != null)
+            {
+                StartFadeIn(UIManager.Instance.leftScreen);
+                StartFadeIn(UIManager.Instance.rightScreen);
+            }
+        }
+
+        if (fadeOut) //Hide UI
+        {
+            if (UIManager.Instance.leftScreen != null)
+            {
+                StartFadeOut(UIManager.Instance.leftScreen);
+                StartFadeOut(UIManager.Instance.rightScreen);
+            }
+        }
     }
 
-    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question)
+    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
     {
         if (question != null)
         {
@@ -67,7 +120,7 @@ public class UIManager : Singleton<UIManager>
             {
                 if (!but.isInstiantiated)
                 {
-                    but.ActivateQuestion(checkListTransform, questionPullingStock, question);
+                    but.ActivateQuestion(_transform, pullingStock, question);
                     return but;
                 }
             }
@@ -81,11 +134,11 @@ public class UIManager : Singleton<UIManager>
     {
         if (order != null)
         {
-            foreach (var but in buttonsOrder)
+            foreach (var but in buttons)
             {
                 if (!but.isInstiantiated)
                 {
-                    but.ActivateOrder(orderListTransform, orderPullingStock, order);
+                    but.ActivateOrder(orderListTransform, pullingStock, order);
                     return but;
                 }
             }
@@ -94,4 +147,70 @@ public class UIManager : Singleton<UIManager>
         Debug.LogError("Not enough buttons");
         return null;
     }
+
+
+    public void ShowUI()
+    {
+        fadeIn = true;
+    }
+
+    public void HideUI()
+    {
+        fadeOut = true;
+    }
+
+    public void StartFadeIn(CanvasGroup uiGroupToFade)
+    {
+        if (uiGroupToFade.alpha < 1)
+        {
+            uiGroupToFade.alpha += Time.deltaTime;
+
+            if (uiGroupToFade.alpha >= 1)
+            {
+                fadeIn = false;
+            }
+        }
+    }
+
+    public void StartFadeOut(CanvasGroup uiGroupToFade)
+    {
+        if (uiGroupToFade.alpha >= 0)
+        {
+            uiGroupToFade.alpha -= Time.deltaTime;
+
+            if (uiGroupToFade.alpha == 0)
+            {
+                fadeOut = false;
+            }
+        }
+    }
+
+    public void ToggleButton()
+    {
+        /*for (int i = 0; i < checkListTransform.childCount; i++)
+        {
+            checkListTransform.GetChild(i).GetComponent<Button>().interactable = !checkListTransform.GetChild(i).GetComponent<Button>().interactable;
+        }
+
+        for (int i = 0; i < descriptionTransform.childCount; i++)
+        {
+            descriptionTransform.GetChild(i).GetComponent<Button>().interactable = !descriptionTransform.GetChild(i).GetComponent<Button>().interactable;
+        }*/
+
+        foreach (var button in buttons)
+        {
+            button.gameObject.GetComponentInChildren<Button>().enabled = !button.gameObject.GetComponentInChildren<Button>().enabled;
+
+            /*if (button.gameObject.GetComponentInChildren<Button>().enabled)
+            {
+                button.gameObject.GetComponentInChildren<Button>().colors = 
+            }
+            else
+            {
+                button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
+            }*/
+        }
+
+    }
+
 }
