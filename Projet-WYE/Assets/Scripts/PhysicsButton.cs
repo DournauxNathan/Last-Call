@@ -12,7 +12,7 @@ public class PhysicsButton : MonoBehaviour
         Physic,
     }
 
-    //public Mode currentMode;
+    public Mode currentMode;
         
     [Tooltip("Type of unit we want to send")]
     public Unit unitToSend;

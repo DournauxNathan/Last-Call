@@ -23,7 +23,10 @@ public class HintManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateTimer();        
+        if (hints.Count != 0)
+        {
+            UpdateTimer();
+        }
     }
 
     public void SetTimer()
@@ -33,8 +36,6 @@ public class HintManager : MonoBehaviour
 
     public void UpdateTimer()
     {
-        Debug.Log(timer > 0 && MasterManager.Instance.isInImaginary && !playHint);
-
         if (timer > 0 &&MasterManager.Instance.isInImaginary && !playHint)
         {
             timer -= Time.deltaTime;
@@ -66,7 +67,6 @@ public class HintManager : MonoBehaviour
                         int minA = Random.Range(0, hints[0].hint_voiceLines.Count());
                         audioSource.PlayOneShot(hints[0].hint_voiceLines[minA], 1.0f);
                         playHint = false;
-                        Debug.Log("");
                     }
                     yield return null;
                     break;
@@ -77,7 +77,6 @@ public class HintManager : MonoBehaviour
                         int minB = Random.Range(0, hints[1].hint_voiceLines.Count());
                         audioSource.PlayOneShot(hints[1].hint_voiceLines[minB], 1.0f);
                         playHint = false;
-                        Debug.Log("");
                     }
                     yield return null;
                     break;

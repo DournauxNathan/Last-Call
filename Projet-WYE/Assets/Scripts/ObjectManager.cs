@@ -1,24 +1,31 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-
 
 [RequireComponent(typeof(Outline), typeof(SphereCollider))]
 public class ObjectManager : MonoBehaviour
 {
-    public int id;
+    public ObjectType objectType;
+    public ObjectData data;
+    public List<Combinaisons> combinaisons;
     public List<GameObject> subList; //???? What is it ? Can't Remember ?
 
-    public Combinable combinable;
-    public OutlineManager outlineManager;
-
+    public Outline outline;
+    public Material selectOutline;
+    public Color baseColor;
+    public Color selectColor;
+    
     private ObjectActivator init;
+
     private void Awake()
     {
-        SetTriggerCollide(true);
+        SetTriggerCollider(true);
         SetOutline();
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,37 +36,37 @@ public class ObjectManager : MonoBehaviour
         {
             init = GameObject.Find("ObjetAactiver").GetComponent<ObjectActivator>();        
 
-            if(init.objectByIdList.ContainsKey(id) )
+            if(init.objectByIdList.ContainsKey(data.iD) )
             {
                 List<GameObject> tempObject;
 
-                tempObject = init.objectByIdList[id];
+                tempObject = init.objectByIdList[data.iD];
                 subList.AddRange(tempObject);
-                init.objectByIdList.Remove(id);
-                init.objectByIdList.Add(id, subList);
+                init.objectByIdList.Remove(data.iD);
+                init.objectByIdList.Add(data.iD, subList);
                 return;
             }
             else
             {
-                init.objectByIdList.Add(id, subList);
+                init.objectByIdList.Add(data.iD, subList);
             }
         }
     }
 
     private void SetOutline()
     {
-        if (outlineManager.outline == null)
+        if (outline == null)
         {
-            outlineManager.outline = GetComponent<Outline>();
+            outline = GetComponent<Outline>();
         }
 
-        outlineManager.outline.enabled = false;
+        outline.enabled = false;
 
-        outlineManager.baseColor = GetComponent<Outline>().OutlineColor;
-        outlineManager.selectColor = outlineManager.selectOutline.color;
+        baseColor = GetComponent<Outline>().OutlineColor;
+        selectColor = selectOutline.color;
     }
 
-    private void SetTriggerCollide(bool newState)
+    private void SetTriggerCollider(bool newState)
     {
         if (GetComponents<SphereCollider>().Length == 2)
         {
@@ -69,50 +76,19 @@ public class ObjectManager : MonoBehaviour
         {
             GetComponent<SphereCollider>().isTrigger = newState;
         }
-    }
-
-    public void Enable()
-    {
-        outlineManager.outline.enabled = true;
-    }
-
-    public void Disabled()
-    {
-        if (!outlineManager.isLocked)
-        {
-            outlineManager.outline.enabled = false;
-        }
-    }
-
-    public void Locked()
-    {
-        if (GameObject.FindObjectOfType<ObjectActivator>().inImaginaire)
-        {
-            outlineManager.isLocked = true;
-            outlineManager.outline.OutlineColor = outlineManager.selectColor;
-        }
-    }
-
-    public void UnLocked()
-    {
-        if (GameObject.FindObjectOfType<ObjectActivator>().inImaginaire)
-        {
-            outlineManager.isLocked = false;
-            outlineManager.outline.OutlineColor = outlineManager.baseColor;
-            Disabled();
-        }
-    }
+    }    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ObjCombi"))
         {
             ListManager.Instance.CheckCompatibility(this.gameObject, other.gameObject);
+            Debug.Log(this.gameObject.name + " | " + other.name);
         }
 
         if (other.CompareTag("Hand"))
         {
-            Debug.Log(other.tag + "/n" + "Disable hand collider");
+            Debug.Log(other.tag + "/n" + "Disable hand colliDer");
             other.GetComponent<MeshCollider>().enabled = false;
         }
     }
@@ -121,29 +97,64 @@ public class ObjectManager : MonoBehaviour
     {
         if (other.CompareTag("Hand"))
         {
-            Debug.Log(other.tag + "/n" + "Enable hand collider");
+            Debug.Log(other.tag + "/n" + "Enable hand colliDer");
             other.GetComponent<MeshCollider>().enabled = true;
+        }
+    }
+
+
+    public void Enable()
+    {
+        outline.enabled = true;
+    }
+
+    public void Disabled()
+    {
+        if (!data.isLocked)
+        {
+            outline.enabled = false;
+        }
+    }
+
+    public void Locked()
+    {
+        if (GameObject.FindObjectOfType<ObjectActivator>().inImaginaire)
+        {
+            data.isLocked = true;
+            outline.OutlineColor = selectColor;
+        }
+    }
+
+    public void UnLocked()
+    {
+        if (MasterManager.Instance.isInImaginary)
+        {
+            data.isLocked = false;
+            outline.OutlineColor = baseColor;
+            Disabled();
         }
     }
 }
 
-[System.Serializable]
-public class Combinable
+[Serializable]
+public class Combinaisons
 {
-    public List<GameObject> combineWith = new List<GameObject>();
-    public OrderFormat resultOrder;
-    public bool isStatic;
+    public GameObject combineWith;    
 }
 
-[System.Serializable]
-public class OutlineManager
+[Serializable]
+public class ObjectData
 {
-    public Material selectOutline;
-    public bool isLocked = false;
+    public int iD;
+    public bool isStatic;
+    public OrderFormat resultOrder;
 
-    [HideInInspector] public Outline outline;
-    [HideInInspector] public Color baseColor;
-    [HideInInspector] public Color selectColor;
+    [HideInInspector] public bool isLocked = false;
+}
 
- 
+public enum ObjectType
+{
+    None,
+    Useful,
+    Useless
 }
