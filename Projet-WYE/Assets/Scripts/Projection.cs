@@ -16,6 +16,11 @@ public class Projection : Singleton<Projection>
     [Range(0,3)] public float range = 3f;
     private Vector3 playerPos;
 
+    public float timeBetweenEachTransition;
+    public float timer;
+    public bool changeScene;
+    public bool goBackInOffice;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +31,8 @@ public class Projection : Singleton<Projection>
             mat.SetVector("_PlayerPos", playerPos);
             mat.SetFloat("_Distance", 3f * 10f);
         }
+
+        timer = timeBetweenEachTransition;
     }
 
     // Update is called once per frame
@@ -34,6 +41,18 @@ public class Projection : Singleton<Projection>
         if (startTransition)
         {
             DoTransition(transitionValue);
+        }
+
+        if (MasterManager.Instance.isInImaginary)
+        {
+            timer -= Time.deltaTime;
+            goBackInOffice = true;
+
+            if (timer <= 0)
+            {
+                timer = 0;
+                DoTransition(0);
+            }
         }
 
         foreach (var mat in transitionShaders)
@@ -54,7 +73,19 @@ public class Projection : Singleton<Projection>
                 transitionValue = 1;
             
                 range = 0;
-                MasterManager.Instance.ActivateImaginary("Call1");
+
+                if (changeScene && goBackInOffice)
+                {
+                    goBackInOffice = false;
+                    MasterManager.Instance.GoBackToOffice("Office");
+                    goBackInOffice = false;
+                }
+
+                if (changeScene)
+                {
+                   
+                    MasterManager.Instance.ActivateImaginary("Call1");
+                }
             }
         }
         else if (state == 1)
@@ -65,7 +96,7 @@ public class Projection : Singleton<Projection>
             {
                 startTransition = false;
                 transitionValue = 0;
-                range = 5;
+                range = 3;
                 
             }
         }
