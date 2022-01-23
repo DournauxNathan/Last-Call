@@ -69,7 +69,7 @@ public class Projection : Singleton<Projection>
 
             if (range <= 0)
             {
-                startTransition = false;
+                startTransition = true;
                 transitionValue = 1;
             
                 range = 0;
@@ -82,8 +82,7 @@ public class Projection : Singleton<Projection>
                 }
 
                 if (changeScene)
-                {
-                   
+                {                   
                     MasterManager.Instance.ActivateImaginary("Call1");
                 }
             }
@@ -94,7 +93,7 @@ public class Projection : Singleton<Projection>
 
             if (range >= 2.5)
             {
-                startTransition = false;
+                startTransition = true;
                 transitionValue = 0;
                 range = 3;
                 

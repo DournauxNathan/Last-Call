@@ -134,7 +134,6 @@ public class InstantiableButton : MonoBehaviour
             }
 
             Desactivate();
-            this.transform.SetSiblingIndex(UIManager.Instance.checkListTransform.childCount - 1);
         }
 
         UpdateQuestion();
