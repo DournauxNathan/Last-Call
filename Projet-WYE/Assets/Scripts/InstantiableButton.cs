@@ -97,7 +97,7 @@ public class InstantiableButton : MonoBehaviour
         {
             //Active unitée
             //Debug.Log(button.Value.units[button.Value.currentClick]);
-            UnitManager.Instance.AddToUnlock(question.units[currentClick]);
+            UnitDispatcher.Instance.AddToUnlock(question.units[currentClick]);
 
             for (int i = 0; i < question.listIdObject.Length; i++)
             {
@@ -112,7 +112,7 @@ public class InstantiableButton : MonoBehaviour
         {
             //Active unitée, boucle infinit quand click
             //Debug.Log(button.Value.units[button.Value.currentClick]);
-            UnitManager.Instance.AddToUnlock(question.units[currentClick]);
+            UnitDispatcher.Instance.AddToUnlock(question.units[currentClick]);
 
             for (int i = 0; i < question.listIdObject.Length; i++)
             {

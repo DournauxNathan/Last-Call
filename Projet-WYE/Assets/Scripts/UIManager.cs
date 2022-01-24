@@ -98,15 +98,15 @@ public class UIManager : Singleton<UIManager>
         {
             if (UIManager.Instance.leftScreen != null)
             {
-                StartFadeIn(UIManager.Instance.leftScreen);
-                StartFadeIn(UIManager.Instance.rightScreen);
+                StartFadeIn(leftScreen);
+                StartFadeIn(rightScreen);
             }
         }
 
         if (fadeOut) //Hide UI
         {
-            StartFadeOut(UIManager.Instance.leftScreen);
-            StartFadeOut(UIManager.Instance.rightScreen);
+            StartFadeOut(leftScreen);
+            StartFadeOut(rightScreen);
         }
     }
 

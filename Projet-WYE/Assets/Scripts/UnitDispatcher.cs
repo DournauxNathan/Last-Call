@@ -12,7 +12,7 @@ public enum Unit
     All
 }
 
-public class UnitManager :  Singleton<UnitManager>
+public class UnitDispatcher :  Singleton<UnitDispatcher>
 {
     public List<Unit> units;
 
@@ -66,4 +66,10 @@ public class UnitManager :  Singleton<UnitManager>
             }
         }
     }
+
+    public void FreezeUI()
+    {
+
+    }
+
 }
