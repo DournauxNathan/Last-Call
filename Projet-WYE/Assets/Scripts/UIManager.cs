@@ -32,6 +32,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
+    public ParticleSystem smoke;
 
 
     // Start is called before the first frame update
@@ -68,11 +69,8 @@ public class UIManager : Singleton<UIManager>
                 }
             }
 
-            EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
         }
         //}      
-
-        //EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).gameObject;
     }
 
     public void Update()
@@ -86,29 +84,29 @@ public class UIManager : Singleton<UIManager>
         if (MasterManager.Instance.projectionTransition.range <= beginFadeOutAt)
         {
             HideUI();
+            smoke.Stop();
         }
 
         if (MasterManager.Instance.projectionTransition.range == beginFadeInAt)
         {
             ShowUI();
+
+            smoke.Play();
         }
 
         if (fadeIn) //Show UI
         {
             if (UIManager.Instance.leftScreen != null)
             {
-                StartFadeIn(UIManager.Instance.leftScreen);
-                StartFadeIn(UIManager.Instance.rightScreen);
+                StartFadeIn(leftScreen);
+                StartFadeIn(rightScreen);
             }
         }
 
         if (fadeOut) //Hide UI
         {
-            if (UIManager.Instance.leftScreen != null)
-            {
-                StartFadeOut(UIManager.Instance.leftScreen);
-                StartFadeOut(UIManager.Instance.rightScreen);
-            }
+            StartFadeOut(leftScreen);
+            StartFadeOut(rightScreen);
         }
     }
 

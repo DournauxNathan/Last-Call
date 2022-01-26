@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
+    public float speed;
+
     private void Update()
     {
-        transform.Rotate(Vector3.up, 10.0f * Time.deltaTime);
+        transform.Rotate(0, speed * Time.deltaTime,0);
     }
 }

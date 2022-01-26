@@ -65,4 +65,11 @@ public class MasterManager : Singleton<MasterManager>
         SceneLoader.Instance.LoadNewScene(name);
     }
 
+    public void GoBackToOffice(string name)
+    {
+        isTutoEnded = true;
+        isInImaginary = false;
+        SceneLoader.Instance.LoadNewScene(name);
+    }
+
 }
