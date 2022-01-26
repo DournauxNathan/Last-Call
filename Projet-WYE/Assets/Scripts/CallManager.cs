@@ -10,10 +10,9 @@ public class CallManager : Singleton<CallManager>
     [SerializeField] private bool hasCalled = false;
 
     [SerializeField] public bool enableCall = true;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        enableCall = MasterManager.Instance.startTuto;
     }
 
     // Update is called once per frame
