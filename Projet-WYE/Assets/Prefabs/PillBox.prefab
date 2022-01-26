@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 3880267605597349796}
   - component: {fileID: 177506537736693761}
   - component: {fileID: 2707320920594848971}
+  - component: {fileID: 5414566694473745203}
   - component: {fileID: 8373328905540774156}
   - component: {fileID: 7601912420357533202}
   - component: {fileID: 87865063306427693}
@@ -50,8 +51,7 @@ GameObject:
   - component: {fileID: 7475143938442058922}
   - component: {fileID: 2513701864712283629}
   - component: {fileID: 1334542088774194563}
-  - component: {fileID: 1163770457}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: PillBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +122,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5414566694473745203
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508853612338068766}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7550094449797666573, guid: a876aa2f83f0c43468959c2a7d1e082a, type: 3}
 --- !u!54 &8373328905540774156
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,10 +166,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_Colliders:
-  - {fileID: 1163770457}
+  - {fileID: 0}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -269,7 +283,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
-  addOffset: 1
+  addOffset: 0
 --- !u!114 &87865063306427693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +310,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4508853612338068766}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.04000001
@@ -321,7 +335,7 @@ MonoBehaviour:
     isLocked: 0
   combinaisons: []
   subList: []
-  outline: {fileID: 87865063306427693}
+  outline: {fileID: 0}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
   selectColor: {r: 0, g: 0, b: 0, a: 0}
@@ -369,9 +383,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  opening: {fileID: 6451961089664738130}
+  opening: {fileID: 0}
   pullingStock: {fileID: 0}
-  audioSource: {fileID: 1334542088774194563}
+  audioSource: {fileID: 0}
   shakeFX: {fileID: 0}
   instantiatePills: 0
 --- !u!114 &2513701864712283629
@@ -408,7 +422,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.21868035
+  MinDistance: 0.14807117
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -484,17 +498,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!64 &1163770457
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4508853612338068766}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7550094449797666573, guid: a876aa2f83f0c43468959c2a7d1e082a, type: 3}

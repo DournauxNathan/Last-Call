@@ -15,11 +15,12 @@ public class Calls : MonoBehaviour
     [SerializeField]private float timeToAnswer = 1f;
     private bool hasRingtone = false;
 
-    public AudioSource audioSource;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         audioSource.Stop();
     }
 
