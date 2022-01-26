@@ -46,11 +46,10 @@ public class PhysicsButton : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (!isPressed && GetValue() + threshold >= 1)
-        {
-            
+        {            
             Pressed();
         }
 
@@ -81,14 +80,14 @@ public class PhysicsButton : MonoBehaviour
     {
         isPressed = true;
         onPressed?.Invoke();
-        Debug.Log("Pressed");
+        //Debug.Log("Pressed");
     }
 
     public void Released()
     {
         isPressed = false;
         onReleased?.Invoke();
-        Debug.Log("Released");
+        //Debug.Log("Released");
     }
 
     public void SendUnit()

@@ -28,10 +28,6 @@ public class UIManager : Singleton<UIManager>
     private bool fadeOut = false;
     private bool fadeIn = false;
 
-    public List<GameObject> tabs;
-    public GameObject currentTabSelected;
-
-
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
@@ -213,12 +209,6 @@ public class UIManager : Singleton<UIManager>
             }*/
         }
 
-    }
-
-    public void SwitchTab(int i)
-    {
-        currentTabSelected.SetActive(false);
-        tabs[i].SetActive(true);
     }
 
 }
