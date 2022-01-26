@@ -10,8 +10,8 @@ public class CameraFov : MonoBehaviour
 {
     [SerializeField]
     private VolumeProfile volumeProfile;
-    [SerializeField]
-    UnityEvent changeFov;
+    [HideInInspector]
+    public UnityEvent changeFov;
 
     LensDistortion lens;
 
@@ -73,7 +73,8 @@ public class CameraFov : MonoBehaviour
         }
 
     }
-
+    
+    //Not Used
     public void ApplyEffcts(string effect)
     {
         var effectsComponents = volumeProfile.components;
@@ -131,6 +132,6 @@ public class CameraFov : MonoBehaviour
 
     void ZoomInOut()
     {
-        //ApplyEffcts(name);
+        FovZoomInOut();
     }
 }
