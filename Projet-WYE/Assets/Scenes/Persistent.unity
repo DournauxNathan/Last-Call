@@ -440,40 +440,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - button: 4
-    pressType: 1
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1505731963}
-          m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-          m_MethodName: ReloadScene
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - button: 6
-    pressType: 1
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1505731963}
-          m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-          m_MethodName: QuitGame
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &825767854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1910,6 +1876,7 @@ MonoBehaviour:
   pillsEffect: 0
   isTutoEnded: 0
   currentPills: 0
+  startTuto: 0
 --- !u!4 &1103599257
 Transform:
   m_ObjectHideFlags: 0
@@ -2196,7 +2163,7 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 1595094385}
   m_CameraGameObject: {fileID: 2081371573}
   m_RequestedTrackingOriginMode: 1
-  m_CameraYOffset: 1.25
+  m_CameraYOffset: 1.2
   m_TrackingSpace: 3
   m_TrackingOriginMode: -2147483648
 --- !u!4 &1355308591
@@ -2436,40 +2403,6 @@ MonoBehaviour:
         - m_Target: {fileID: 1689257888}
           m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
           m_MethodName: OnPressed
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - button: 4
-    pressType: 1
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1505731963}
-          m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-          m_MethodName: ReloadScene
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - button: 6
-    pressType: 1
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1505731963}
-          m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-          m_MethodName: QuitGame
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
