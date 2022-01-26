@@ -70,6 +70,8 @@ public class UIManager : Singleton<UIManager>
             }
 
         }
+
+        EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject;
         //}      
     }
 
