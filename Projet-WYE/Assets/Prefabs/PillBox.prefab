@@ -41,17 +41,14 @@ GameObject:
   - component: {fileID: 3880267605597349796}
   - component: {fileID: 177506537736693761}
   - component: {fileID: 2707320920594848971}
-  - component: {fileID: 5414566694473745203}
   - component: {fileID: 8373328905540774156}
   - component: {fileID: 7601912420357533202}
-  - component: {fileID: 87865063306427693}
-  - component: {fileID: 3224082615950819189}
-  - component: {fileID: 7673153698792435285}
   - component: {fileID: 6263521347652737989}
   - component: {fileID: 7475143938442058922}
   - component: {fileID: 2513701864712283629}
   - component: {fileID: 1334542088774194563}
-  m_Layer: 0
+  - component: {fileID: 2134987504}
+  m_Layer: 2
   m_Name: PillBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,20 +119,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5414566694473745203
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4508853612338068766}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7550094449797666573, guid: a876aa2f83f0c43468959c2a7d1e082a, type: 3}
 --- !u!54 &8373328905540774156
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -166,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_Colliders:
-  - {fileID: 0}
+  - {fileID: 2134987504}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4
@@ -283,62 +266,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
-  addOffset: 0
---- !u!114 &87865063306427693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4508853612338068766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!135 &3224082615950819189
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4508853612338068766}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.04000001
-  m_Center: {x: -0.0000000027753932, y: -0.0000000018788915, z: 0.04000001}
---- !u!114 &7673153698792435285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4508853612338068766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectType: 0
-  data:
-    iD: 0
-    isStatic: 0
-    resultOrder: {fileID: 0}
-    isLocked: 0
-  combinaisons: []
-  subList: []
-  outline: {fileID: 0}
-  selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  addOffset: 1
 --- !u!114 &6263521347652737989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +311,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  opening: {fileID: 0}
+  opening: {fileID: 6451961089664738130}
   pullingStock: {fileID: 0}
   audioSource: {fileID: 0}
   shakeFX: {fileID: 0}
@@ -422,7 +350,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.14807117
+  MinDistance: 0.21868035
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -498,3 +426,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &2134987504
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508853612338068766}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.021281758
+  m_Height: 0.08156278
+  m_Direction: 2
+  m_Center: {x: 0.00017197618, y: -0.000000011175603, z: 0.03984309}
