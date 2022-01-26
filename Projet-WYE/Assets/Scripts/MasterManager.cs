@@ -20,9 +20,20 @@ public class MasterManager : Singleton<MasterManager>
     [Tooltip("Number of pills taken by the player")]
     public int currentPills = 0;
 
+
+    public bool startTuto;
+
     private void Start()
     {
         UpdateController();
+    }
+
+    public void Update()
+    {
+        if (startTuto)
+        {
+            StartTuto();
+        }
     }
 
     void EffectOfPills()
@@ -70,6 +81,16 @@ public class MasterManager : Singleton<MasterManager>
         isTutoEnded = true;
         isInImaginary = false;
         SceneLoader.Instance.LoadNewScene(name);
+    }
+
+    public void StartTuto()
+    {
+        CallManager.Instance.enableCall = true;
+    }
+
+    public void StartCall()
+    {
+
     }
 
 }

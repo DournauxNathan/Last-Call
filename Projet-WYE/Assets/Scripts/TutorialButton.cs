@@ -11,6 +11,8 @@ public class TutorialButton : InstantiableButton
     public AudioClip audioToPlay;
     private bool isDestroyed;
 
+    [SerializeField] private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +25,7 @@ public class TutorialButton : InstantiableButton
         if (simulateInput)
         {
             SetSimulateInput(false);
-            OnClick();
-
+            OnClick(audioSource);
         }
 
         if (MasterManager.Instance.isTutoEnded && !isDestroyed)
@@ -35,7 +36,7 @@ public class TutorialButton : InstantiableButton
     }
 
 
-    public void OnClick()
+    public void OnClick(AudioSource audio)
     {
         foreach (var button in tutoButtons)
         {
@@ -43,8 +44,8 @@ public class TutorialButton : InstantiableButton
             button.gameObject.SetActive(false);
         }
 
-        MasterManager.Instance.mainAudioSource.Stop();
-        MasterManager.Instance.mainAudioSource.clip = audioToPlay;
-        MasterManager.Instance.mainAudioSource.Play();
+        audio.Stop();
+        audio.clip = audioToPlay;
+        audio.Play();
     }
 }

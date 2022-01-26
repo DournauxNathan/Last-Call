@@ -22,7 +22,6 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
     protected override void Start()
     {
         base.Start();
-        GetComponent<Renderer>().enabled = false;
     }
 
 
