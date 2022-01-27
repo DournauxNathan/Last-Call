@@ -20,13 +20,13 @@ public class Pill : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Head"))
         {
             Eat();
         }        
-    }
+    }*/
     public void Activate(Transform stock)
     {
         this.stock = stock;
@@ -64,7 +64,7 @@ public class Pill : MonoBehaviour
         isInstiantiated = false;
     }
 
-    private void Eat()
+    public void Eat()
     {
         ReputOnStock();
         MasterManager.Instance.currentPills++;
