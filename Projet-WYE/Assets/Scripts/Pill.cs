@@ -27,6 +27,7 @@ public class Pill : MonoBehaviour
             Eat();
         }        
     }*/
+
     public void Activate(Transform stock)
     {
         this.stock = stock;
@@ -53,7 +54,7 @@ public class Pill : MonoBehaviour
         isActive = false;
     }
 
-    private void ReputOnStock()
+    public void ReputOnStock()
     {
         this.meshRender.enabled = false;
         this.capsuleCollider.enabled = false;

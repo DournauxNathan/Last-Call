@@ -33,14 +33,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private bool unlockImaginaryTransition = false;
     public ParticleSystem smoke;
 
+    public GameObject startSelectbutton;
 
     // Start is called before the first frame update
     void Start()
-    {/*
-        if (SceneLoader.Instance.GetCurrentScene().name == "Office")
-        {*/
-        
-        //ScenarioManager.Instance.LoadScenario();
+    {
+        EventSystem.current.firstSelectedGameObject = startSelectbutton;
 
         if (ScenarioManager.Instance.isScenarioLoaded)
         {
@@ -67,12 +65,44 @@ public class UIManager : Singleton<UIManager>
                     var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
                 }
             }
-
         }
 
-        EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject;
-        //}      
     }
+
+    public void PullQuestion()
+    {
+        if (ScenarioManager.Instance.isScenarioLoaded)
+        {
+            ScenarioManager.Instance.isScenarioLoaded = false;
+
+            activateButton.SetActive(false);
+
+            // A CHANGER QUAND SWITCH ENTRE REA ET IMA
+            if (OrderController.Instance.orders.Count == 0)
+            {
+                for (int i = 0; i < protocoleQuestions.Count; i++)
+                {
+                    var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
+                }
+
+                for (int i = 0; i < descriptionQuestion.Count; i++)
+                {
+                    var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
+                }
+            }
+
+            if (OrderController.Instance.isResolve)
+            {
+                for (int i = 0; i < OrderController.Instance.orders.Count; i++)
+                {
+                    var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
+                }
+            }
+
+            EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+        }
+    }
+
 
     public void Update()
     {
@@ -109,6 +139,8 @@ public class UIManager : Singleton<UIManager>
             StartFadeOut(leftScreen);
             StartFadeOut(rightScreen);
         }
+
+        PullQuestion();
     }
 
     public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)

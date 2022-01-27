@@ -152,10 +152,8 @@ public class InstantiableButton : MonoBehaviour
         //this.gameObject.SetActive(false);
         ReputOnStock();
     }
-    private void ReputOnStock()
+    public virtual void ReputOnStock()
     {
-        //button.enabled = false;
-
         button.enabled = false;
         toggle.enabled = false;
         toggle.isOn = true;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MasterManager : Singleton<MasterManager>
 {
@@ -25,6 +26,10 @@ public class MasterManager : Singleton<MasterManager>
     public bool startTuto;
     public float timerTutoBegin = 30f;
 
+    public UnityEvent startCall;
+
+    public bool skipTuto;
+
     private void Start()
     {
         UpdateController();
@@ -32,7 +37,10 @@ public class MasterManager : Singleton<MasterManager>
 
     public void FixedUpdate()
     {
-        timerTutoBegin -= Time.deltaTime;
+        if (!skipTuto && !isTutoEnded)
+        {
+            timerTutoBegin -= Time.deltaTime;
+        }
 
         if (timerTutoBegin <= 0)
         {
@@ -41,9 +49,15 @@ public class MasterManager : Singleton<MasterManager>
 
         if (startTuto)
         {
+            StartTuto();
             timerTutoBegin = 0;
             startTuto = false;
-            StartTuto();
+        }
+
+        if (skipTuto)
+        {
+            skipTuto = false;
+            StartCall();
         }
 
 
@@ -103,7 +117,8 @@ public class MasterManager : Singleton<MasterManager>
 
     public void StartCall()
     {
-
+        isTutoEnded = true;
+        startCall.Invoke();
     }
 
 }

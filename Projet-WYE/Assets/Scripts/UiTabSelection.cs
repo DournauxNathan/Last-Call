@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UiTabSelection : MonoBehaviour
 {
@@ -14,11 +16,13 @@ public class UiTabSelection : MonoBehaviour
         {
             case 0:
                 tabs[1].SetActive(false);
+                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
                 tabs[2].SetActive(false);
                 break;
 
             case 1:
-                tabs[2].SetActive(false);
+                tabs[2].SetActive(false); 
+                EventSystem.current.SetSelectedGameObject(UIManager.Instance.descriptionTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
                 break;
 
             case 2:
