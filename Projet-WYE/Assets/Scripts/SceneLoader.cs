@@ -49,6 +49,11 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadEnd?.Invoke();
 
         isLoading = false;
+
+        if (MasterManager.Instance.isInImaginary)
+        {
+            Projection.Instance.startTransition = true;
+        }
     }
 
     private IEnumerator UnloadCurrent()
@@ -69,7 +74,6 @@ public class SceneLoader : Singleton<SceneLoader>
         {
             yield return null;
         }
-
     }
 
     private void SetActiveScene(Scene scene, LoadSceneMode mode)

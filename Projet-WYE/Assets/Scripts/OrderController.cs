@@ -19,12 +19,14 @@ public class OrderController : Singleton<OrderController>
         ObjectActivator.Instance.SetActivetObject(go);
         numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
     }
+
     public int IncreaseValue(int _value)
     {        
         currentNumberOfCombinaison += _value;        
         Resolve();
         return currentNumberOfCombinaison;
     }
+
     public void Resolve()
     {
         if (currentNumberOfCombinaison == numberOfCombinaison)

@@ -16,6 +16,8 @@ public class HandPresence : Singleton<HandPresence>
 
     private Animator handAnimator;
 
+    private Vector3 acceleration;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,24 @@ public class HandPresence : Singleton<HandPresence>
         {
             handAnimator.SetFloat("Grip", 0f);
         }
+
+        if (targetDevice.TryGetFeatureValue(CommonUsages.deviceAcceleration, out Vector3 _acceleration))
+        {
+            acceleration = _acceleration;
+            //Debug.Log(_acceleration);
+        }
+
+        if (targetDevice.name == "Oculus Touch Controller - Right"  && targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 thumbstickValue))
+        {
+            //Debug.Log(thumbstickValue);
+
+        }
+    }
+
+    public Vector3 GetDeviceAccelation()
+    {
+        //Debug.LogWarning("Hand are need to test this feature !");
+        return acceleration;
     }
 
     // Update is called once per frame
