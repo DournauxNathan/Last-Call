@@ -13,27 +13,40 @@ public class MasterManager : Singleton<MasterManager>
 
     public List<GameObject> rayInteractors;
 
-    [Header("Metrics")]
+    [Header("Projection and Pills Management")]
+    public bool canImagine = false;
     public bool isInImaginary;
     public bool pillsEffect;
-    public bool isTutoEnded;
     [Tooltip("Number of pills taken by the player")]
     public int currentPills = 0;
 
-
+    [Header("Tutorial Management")]
+    public bool isTutoEnded;
     public bool startTuto;
+    public float timerTutoBegin = 30f;
 
     private void Start()
     {
         UpdateController();
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
+        timerTutoBegin -= Time.deltaTime;
+
+        if (timerTutoBegin <= 0)
+        {
+            startTuto = true;
+        }
+
         if (startTuto)
         {
+            timerTutoBegin = 0;
+            startTuto = false;
             StartTuto();
         }
+
+
     }
 
     void EffectOfPills()

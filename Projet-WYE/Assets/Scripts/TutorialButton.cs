@@ -10,6 +10,7 @@ public class TutorialButton : InstantiableButton
     public List<GameObject> tutoButtons;
     public AudioClip audioToPlay;
     private bool isDestroyed;
+    private bool isPlaying;
 
     [SerializeField] private AudioSource audioSource;
 
@@ -33,8 +34,12 @@ public class TutorialButton : InstantiableButton
             isDestroyed = true;
             Destroy(gameObject);
         }
-    }
 
+        if (isPlaying && !audioSource.isPlaying)
+        {
+            MasterManager.Instance.isTutoEnded = true;
+        }
+    }
 
     public void OnClick(AudioSource audio)
     {
@@ -47,5 +52,7 @@ public class TutorialButton : InstantiableButton
         audio.Stop();
         audio.clip = audioToPlay;
         audio.Play();
+        isPlaying = true;
+
     }
 }

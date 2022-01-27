@@ -88,6 +88,11 @@ public class HandPresence : Singleton<HandPresence>
             //Debug.Log(thumbstickValue);
 
         }
+
+        if (true)
+        {
+
+        }
     }
 
     public Vector3 GetDeviceAccelation()

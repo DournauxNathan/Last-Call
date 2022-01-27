@@ -78,7 +78,7 @@ public class UIManager : Singleton<UIManager>
     {
         if (unlockImaginaryTransition)
         {
-            activateButton.SetActive(true );
+            activateButton.SetActive(true);
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
