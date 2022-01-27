@@ -3771,138 +3771,6 @@ Transform:
   m_Father: {fileID: 951948027}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &254170177
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 254170178}
-  - component: {fileID: 254170181}
-  - component: {fileID: 254170180}
-  - component: {fileID: 254170179}
-  m_Layer: 5
-  m_Name: Button For Event System
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &254170178
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254170177}
-  m_LocalRotation: {x: -1.680291e-10, y: -0.000000063213506, z: 0.00000006332992, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00046536574}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1511900108}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.4993896, y: 88.2682}
-  m_SizeDelta: {x: -128, y: 19.463331}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &254170179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254170177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 2
-    m_WrapAround: 1
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 2835231798132728936}
-    m_SelectOnRight: {fileID: 3372435424834822536}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
-    m_SelectedColor: {r: 1, g: 0.8227806, b: 0, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.019607844}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 254170180}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialButton, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &254170180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254170177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &254170181
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254170177}
-  m_CullTransparentMesh: 1
 --- !u!1 &254714539
 GameObject:
   m_ObjectHideFlags: 0
@@ -5027,7 +4895,7 @@ MonoBehaviour:
   - {fileID: 2101099415}
   - {fileID: 1203737611}
   audioToPlay: {fileID: 8300000, guid: 3d624fad9474a844290380a169559283, type: 3}
-  audioSource: {fileID: 180974008}
+  phoneAudioSource: {fileID: 180974008}
 --- !u!224 &351530881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5314,7 +5182,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24956
+  m_Name: pb_Mesh25136
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5884,7 +5752,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24654
+  m_Name: pb_Mesh24828
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16435,7 +16303,7 @@ PrefabInstance:
     - target: {fileID: 134905338237442476, guid: eac3fd339728cc144bd8d4d2263cabb9, type: 3}
       propertyPath: startSelectbutton
       value: 
-      objectReference: {fileID: 254170177}
+      objectReference: {fileID: 0}
     - target: {fileID: 134905338237442476, guid: eac3fd339728cc144bd8d4d2263cabb9, type: 3}
       propertyPath: buttons.Array.size
       value: 17
@@ -22790,7 +22658,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24698
+  m_Name: pb_Mesh24872
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23657,7 +23525,7 @@ MonoBehaviour:
   - {fileID: 2101099415}
   - {fileID: 1203737611}
   audioToPlay: {fileID: 8300000, guid: 3d624fad9474a844290380a169559283, type: 3}
-  audioSource: {fileID: 180974008}
+  phoneAudioSource: {fileID: 180974008}
 --- !u!1 &1209465183
 GameObject:
   m_ObjectHideFlags: 0
@@ -24405,7 +24273,7 @@ MonoBehaviour:
   - {fileID: 2101099415}
   - {fileID: 1203737611}
   audioToPlay: {fileID: 8300000, guid: 3d624fad9474a844290380a169559283, type: 3}
-  audioSource: {fileID: 180974008}
+  phoneAudioSource: {fileID: 180974008}
 --- !u!224 &1223979550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27047,7 +26915,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24720
+  m_Name: pb_Mesh24894
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27399,7 +27267,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24968
+  m_Name: pb_Mesh25148
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28721,7 +28589,7 @@ RectTransform:
   - {fileID: 2101099417}
   - {fileID: 1203737612}
   m_Father: {fileID: 1511900108}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -30765,7 +30633,7 @@ MonoBehaviour:
   - {fileID: 2101099415}
   - {fileID: 1203737611}
   audioToPlay: {fileID: 8300000, guid: 3d624fad9474a844290380a169559283, type: 3}
-  audioSource: {fileID: 180974008}
+  phoneAudioSource: {fileID: 180974008}
 --- !u!1 &1439061178
 GameObject:
   m_ObjectHideFlags: 0
@@ -31362,7 +31230,6 @@ RectTransform:
   m_Children:
   - {fileID: 422668866}
   - {fileID: 1419050042}
-  - {fileID: 254170178}
   - {fileID: 1424607034}
   - {fileID: 2144039570}
   m_Father: {fileID: 858076058}
@@ -32027,7 +31894,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23984
+  m_Name: pb_Mesh24138
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33971,7 +33838,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24342
+  m_Name: pb_Mesh24514
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35819,7 +35686,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24192
+  m_Name: pb_Mesh24364
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -38003,7 +37870,7 @@ MonoBehaviour:
   - {fileID: 2101099415}
   - {fileID: 1203737611}
   audioToPlay: {fileID: 8300000, guid: 3d624fad9474a844290380a169559283, type: 3}
-  audioSource: {fileID: 180974008}
+  phoneAudioSource: {fileID: 180974008}
 --- !u!224 &2101099417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38320,7 +38187,7 @@ RectTransform:
   - {fileID: 136316101}
   - {fileID: 1319601256}
   m_Father: {fileID: 1511900108}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

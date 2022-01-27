@@ -13,7 +13,7 @@ public class TutorialButton : InstantiableButton
     private bool isDestroyed;
     private bool isPlaying;
 
-    [SerializeField] private AudioSource audioSource;
+    public AudioSource phoneAudioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class TutorialButton : InstantiableButton
             }
         }
 
-        if (isPlaying && !audioSource.isPlaying)
+        if (isPlaying && !phoneAudioSource.isPlaying)
         {
             MasterManager.Instance.isTutoEnded = true;
             
@@ -57,9 +57,9 @@ public class TutorialButton : InstantiableButton
     {
         isPlaying = true;
 
-        audioSource.Stop();
-        audioSource.clip = audioToPlay;
-        audioSource.Play();
+        phoneAudioSource.Stop();
+        phoneAudioSource.clip = audioToPlay;
+        phoneAudioSource.Play();
 
         foreach (var but in tutoButtons)
         {

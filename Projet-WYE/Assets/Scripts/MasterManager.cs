@@ -22,13 +22,16 @@ public class MasterManager : Singleton<MasterManager>
     public int currentPills = 0;
 
     [Header("Tutorial Management")]
+    public bool skipTuto;
     public bool isTutoEnded;
     public bool startTuto;
     public float timerTutoBegin = 30f;
 
     public UnityEvent startCall;
 
-    public bool skipTuto;
+    [Header("Testing Input - Go in Projection")]
+    public bool useOneInput = false;
+    public bool useTwoInput = false;
 
     private void Start()
     {
@@ -59,8 +62,6 @@ public class MasterManager : Singleton<MasterManager>
             skipTuto = false;
             StartCall();
         }
-
-
     }
 
     void EffectOfPills()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class HandPresence : Singleton<HandPresence>
+public class HandController : Singleton<HandController>
 {
     public bool showController = false;
     public InputDeviceCharacteristics controllerCharacterisitcs;
@@ -83,14 +83,10 @@ public class HandPresence : Singleton<HandPresence>
             //Debug.Log(_acceleration);
         }
 
-        if (targetDevice.name == "Oculus Touch Controller - Right"  && targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 thumbstickValue))
+        if (MasterManager.Instance.useOneInput && targetDevice.name == "Oculus Touch Controller - Left"  && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool buttonValue))
         {
-            //Debug.Log(thumbstickValue);
-
-        }
-
-        if (true)
-        {
+            Debug.Log(buttonValue + " " + "Hold to go in projection");
+            Projection.Instance.startTransition = buttonValue;
 
         }
     }

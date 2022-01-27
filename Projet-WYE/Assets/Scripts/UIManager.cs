@@ -29,6 +29,7 @@ public class UIManager : Singleton<UIManager>
     private bool fadeIn = false;
 
     [Header("Debug, Transition to Imaginaire")]
+    [SerializeField] private int nQuestionAnswer;
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
     public ParticleSystem smoke;
@@ -212,6 +213,23 @@ public class UIManager : Singleton<UIManager>
             {
                 fadeOut = false;
             }
+        }
+    }
+
+    public void Ask()
+    {
+        nQuestionAnswer++;
+    } 
+
+    public bool CheckAnswer()
+    {        
+        if (nQuestionAnswer > descriptionQuestion.Count)
+        {
+            return MasterManager.Instance.canImagine = true;
+        }
+        else
+        {
+            return MasterManager.Instance.canImagine = false;
         }
     }
 
