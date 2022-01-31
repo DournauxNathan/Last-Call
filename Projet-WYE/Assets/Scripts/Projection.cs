@@ -87,8 +87,9 @@ public class Projection : Singleton<Projection>
                 }
 
                 if (changeScene)
-                {                   
-                    MasterManager.Instance.ActivateImaginary("Call1");
+                {
+                    MasterManager.Instance.useOneInput = false;
+                    MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration");
                 }
             }
         }

@@ -58,17 +58,20 @@ public class ScenarioManager : Singleton<ScenarioManager>
 
     public void LoadScenario()
     {
-        switch (currentScenario)
+        if (SceneLoader.Instance.GetCurrentScene().name != null && SceneLoader.Instance.GetCurrentScene().name != "Persistent")
         {
-            case Scenario.TrappedMan:
-                UIManager.Instance.descriptionQuestion.AddRange(trappedMan);
-                break;
-            case Scenario.HomeInvasion:
-                UIManager.Instance.descriptionQuestion.AddRange(homeInvasion);
-                break;
-            case Scenario.DomesticAbuse:
-                UIManager.Instance.descriptionQuestion.AddRange(domesticAbuse);
-                break;
+            switch (currentScenario)
+            {
+                case Scenario.TrappedMan:
+                    UIManager.Instance.descriptionQuestion.AddRange(trappedMan);
+                    break;
+                case Scenario.HomeInvasion:
+                    UIManager.Instance.descriptionQuestion.AddRange(homeInvasion);
+                    break;
+                case Scenario.DomesticAbuse:
+                    UIManager.Instance.descriptionQuestion.AddRange(domesticAbuse);
+                    break;
+            }
         }
 
         isScenarioLoaded = true;

@@ -60,7 +60,7 @@ public class MasterManager : Singleton<MasterManager>
         if (skipTuto)
         {
             skipTuto = false;
-            StartCall();
+            startCall.Invoke();
         }
     }
 
