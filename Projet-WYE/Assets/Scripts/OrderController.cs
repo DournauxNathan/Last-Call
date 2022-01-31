@@ -32,12 +32,22 @@ public class OrderController : Singleton<OrderController>
         if (currentNumberOfCombinaison == numberOfCombinaison)
         {
             MasterManager.Instance.isInImaginary = false;
-            isResolve = true;
+            SetResolve(true);
             SceneLoader.Instance.LoadNewScene("Office");            
         }
         else
         {
             //Debug.Log("All combinaison were not found");
         }
+    }
+
+    public bool SetResolve(bool _bool)
+    {
+        return isResolve = _bool;
+    }
+
+    public bool GetResolve()
+    {
+        return isResolve;
     }
 }

@@ -41,32 +41,8 @@ public class UIManager : Singleton<UIManager>
     {
         EventSystem.current.firstSelectedGameObject = startSelectbutton;
 
-        if (ScenarioManager.Instance.isScenarioLoaded)
-        {
-            activateButton.SetActive(false);
-
-            // A CHANGER QUAND SWITCH ENTRE REA ET IMA
-            if (OrderController.Instance.orders.Count == 0)
-            {
-                for (int i = 0; i < protocoleQuestions.Count; i++)
-                {
-                    var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
-                }
-
-                for (int i = 0; i < descriptionQuestion.Count; i++)
-                {
-                    var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
-                }
-            }
-
-            if (OrderController.Instance.isResolve)
-            {
-                for (int i = 0; i < OrderController.Instance.orders.Count; i++)
-                {
-                    var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
-                }
-            }
-        }
+        ScenarioManager.Instance.LoadScenario();
+        PullQuestion();
 
     }
 
@@ -92,7 +68,7 @@ public class UIManager : Singleton<UIManager>
                 }
             }
 
-            if (OrderController.Instance.isResolve)
+            if (OrderController.Instance.GetResolve())
             {
                 for (int i = 0; i < OrderController.Instance.orders.Count; i++)
                 {

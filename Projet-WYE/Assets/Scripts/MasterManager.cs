@@ -40,6 +40,8 @@ public class MasterManager : Singleton<MasterManager>
 
     public void FixedUpdate()
     {
+        UpdateController();
+
         if (!skipTuto && !isTutoEnded)
         {
             timerTutoBegin -= Time.deltaTime;
@@ -100,6 +102,7 @@ public class MasterManager : Singleton<MasterManager>
 
     public void ActivateImaginary(string name)
     {
+        UpdateController();
         objectActivator.ActivateObjet();
         SceneLoader.Instance.LoadNewScene(name);
     }

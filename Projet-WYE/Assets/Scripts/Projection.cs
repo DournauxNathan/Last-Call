@@ -82,8 +82,7 @@ public class Projection : Singleton<Projection>
                 if (changeScene && goBackInOffice)
                 {
                     goBackInOffice = false;
-                    MasterManager.Instance.GoBackToOffice("Office");
-                    goBackInOffice = false;
+                    //MasterManager.Instance.GoBackToOffice("Office");
                 }
 
                 if (changeScene)
@@ -99,7 +98,7 @@ public class Projection : Singleton<Projection>
 
             if (range >= 2.5)
             {
-                startTransition = true;
+                startTransition = false;
                 transitionValue = 0;
                 range = 3;
                 
