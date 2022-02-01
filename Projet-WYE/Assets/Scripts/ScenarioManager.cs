@@ -13,25 +13,28 @@ public class ScenarioManager : Singleton<ScenarioManager>
     }
 
     public Scenario currentScenario;
-
-    public List<QuestionFormat> protocol;
-
+    public bool isScenarioLoaded = false;
     [Range(-10, 10)]
     public float endingValue = 0f;
 
-    [SerializeField] private List<QuestionFormat> trappedMan;
-    [SerializeField] private List<QuestionFormat> homeInvasion;
-    [SerializeField] private List<QuestionFormat> domesticAbuse;
+    [Header("Questions - Protocoles ")]
+    public List<QuestionFormat> protocol;
 
+    [Header("Questions - Description")]
+    public List<QuestionFormat> trappedMan;
+    public List<QuestionFormat> homeInvasion;
+    public List<QuestionFormat> domesticAbuse;
+    public List<QuestionFormat> risingWater;
+
+    [Header("Orders")]
     public List<OrderFormat> o_trappedMan;
     public List<OrderFormat> o_homeInvasion;
     public List<OrderFormat> o_domesticAbuse;
 
+    [Header("Answers - Protocoles")]
     public List<ProtocolFormat> p_trappedMan;
     public List<ProtocolFormat> p_homeInvasion;
     public List<ProtocolFormat> p_domesticAbuse;
-
-    public bool isScenarioLoaded = false;
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
@@ -115,7 +118,6 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 break;
             case Scenario.RisingWater:
                 break;
-
         }
     }
 }

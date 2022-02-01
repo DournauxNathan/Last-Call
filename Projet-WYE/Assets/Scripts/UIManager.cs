@@ -41,9 +41,8 @@ public class UIManager : Singleton<UIManager>
     {
         EventSystem.current.firstSelectedGameObject = startSelectbutton;
 
-        ScenarioManager.Instance.LoadScenario();
+        LoadQuestions();
         PullQuestion();
-
     }
 
     public void PullQuestion()
@@ -117,8 +116,9 @@ public class UIManager : Singleton<UIManager>
             StartFadeOut(rightScreen);
         }
 
-        PullQuestion();
+        //PullQuestion();
     }
+
 
     public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
     {
@@ -137,7 +137,6 @@ public class UIManager : Singleton<UIManager>
         Debug.LogError("Not enough buttons");
         return null;
     }
-
     public InstantiableButton FindAvailableButtonForOrder(OrderFormat order)
     {
         if (order != null)
@@ -234,7 +233,29 @@ public class UIManager : Singleton<UIManager>
                 button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
             }*/
         }
-
     }
 
+    public void LoadQuestions()
+    {
+        switch (ScenarioManager.Instance.currentScenario)
+        {
+            case ScenarioManager.Scenario.TrappedMan:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.trappedMan);
+            break;
+
+            case ScenarioManager.Scenario.HomeInvasion:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.homeInvasion);
+            break;
+
+            case ScenarioManager.Scenario.DomesticAbuse:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.domesticAbuse);
+            break;
+
+            case ScenarioManager.Scenario.RisingWater:
+                    descriptionQuestion.AddRange(ScenarioManager.Instance.risingWater);
+            break;
+        }        
+
+        ScenarioManager.Instance.isScenarioLoaded = true;
+    }
 }
