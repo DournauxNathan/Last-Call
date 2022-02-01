@@ -5,10 +5,18 @@ using UnityEngine;
 public class DistanceDissolveTarget : MonoBehaviour
     // Start is called before the first frame update
  {
-      public Transform m_objectToTrack = null;
+      public List<Transform> m_objectToTrack;
 
     private Material m_materialRef = null;
     private Renderer m_renderer = null;
+
+    private void Start()
+    {
+        for (int i = 0; i < m_objectToTrack.Count; i++)
+        {
+            MaterialRef.SetVector("_Position", m_objectToTrack[i].position);
+        }
+    }
 
     public Renderer Renderer
     {
@@ -22,9 +30,7 @@ public class DistanceDissolveTarget : MonoBehaviour
     }
 
     public Material MaterialRef
-
     {
-
         get
         {
             if (m_materialRef == null)
@@ -42,12 +48,17 @@ public class DistanceDissolveTarget : MonoBehaviour
 
     private void Update()
     {
-        if(m_objectToTrack != null)
+        for (int i = 0; i < m_objectToTrack.Count; i++)
         {
-            Debug.Log(m_objectToTrack.position);
-            MaterialRef.SetVector("_Position", m_objectToTrack.position);
+            MaterialRef.SetVector("_Position", m_objectToTrack[i].position);
+        }
+
+        if (m_objectToTrack != null)
+        {
+            //Debug.Log(m_objectToTrack.position);
         }
     }
+
     private void OnDestroy()
     {
         m_renderer = null;
@@ -56,5 +67,3 @@ public class DistanceDissolveTarget : MonoBehaviour
         m_materialRef = null;
     }
 }
-
-      
