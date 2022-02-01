@@ -82,7 +82,8 @@ public class Projection : Singleton<Projection>
                 if (changeScene && goBackInOffice)
                 {
                     goBackInOffice = false;
-                    //MasterManager.Instance.GoBackToOffice("Office");
+                    startTransition = false;
+                    MasterManager.Instance.GoBackToOffice("Office");
                 }
 
                 if (changeScene)

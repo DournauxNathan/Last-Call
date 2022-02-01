@@ -43,6 +43,8 @@ public class UIManager : Singleton<UIManager>
 
         LoadQuestions();
         PullQuestion();
+
+        CheckButtons();
     }
 
     public void PullQuestion()
@@ -257,5 +259,15 @@ public class UIManager : Singleton<UIManager>
         }        
 
         ScenarioManager.Instance.isScenarioLoaded = true;
+    }
+
+    //Check si les questions ont déjà été répondu entre les transition
+    public void CheckButtons()
+    {
+
+        foreach (var button in buttons)
+        {
+            button.IsAnswered();
+        }
     }
 }

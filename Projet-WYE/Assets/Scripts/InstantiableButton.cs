@@ -106,6 +106,7 @@ public class InstantiableButton : MonoBehaviour
                     swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
                 }
             }
+            SendAnswer(currentClick); //envoi le string
             currentClick++;
         }
         else if (currentClick >= question.listQuestion.Length - 1)
@@ -131,7 +132,7 @@ public class InstantiableButton : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
             }
-
+            SendAnswer(currentClick); //envoi le string
             Desactivate();
         }
 
@@ -213,4 +214,26 @@ public class InstantiableButton : MonoBehaviour
         
         UIManager.Instance.ToggleButton();
     }
+
+    private void SendAnswer(int i)
+    {
+        SaveQuestion.Instance.AddQuestion(question.listQuestion[i]);
+    }
+
+    public void IsAnswered()
+    {
+        if (question != null)
+        {
+            for (int i = 0; i < question.listQuestion.Length; i++)
+            {
+                if (SaveQuestion.Instance.AlreadyAnswerd(question.listQuestion[i]))
+                {
+                    Debug.Log("Desactivate: " + question.listQuestion[i]);
+                    Desactivate();
+                }
+            }
+        }
+        
+    }
+
 }
