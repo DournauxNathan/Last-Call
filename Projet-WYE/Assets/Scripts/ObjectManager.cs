@@ -32,9 +32,9 @@ public class ObjectManager : MonoBehaviour
     {
         subList.Add(gameObject);   
 
-        if (GameObject.Find("ObjetAactiver") != null)
+        if (MasterManager.Instance.objectActivator != null)
         {
-            init = GameObject.Find("ObjetAactiver").GetComponent<ObjectActivator>();        
+            init = MasterManager.Instance.objectActivator;        
 
             if(init.objectByIdList.ContainsKey(data.iD) )
             {
