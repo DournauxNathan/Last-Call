@@ -105,4 +105,5 @@ public class SceneLoader : Singleton<SceneLoader>
         return SceneManager.GetActiveScene();
     }
 
+
 }

@@ -16,6 +16,7 @@ public class Projection : Singleton<Projection>
     [Range(0,3)] public float range = 3f;
     private Vector3 playerPos;
 
+    [Header("Parameters for testing the go/back mecanics")]
     public float timeBetweenEachTransition;
     public float timer;
     public bool changeScene;
@@ -24,11 +25,8 @@ public class Projection : Singleton<Projection>
     // Start is called before the first frame update
     void Start()
     {
-        playerPos = player.position;
-
         foreach (var mat in transitionShaders)
         {
-            mat.SetVector("_PlayerPos", playerPos);
             mat.SetFloat("_Distance", 3f * 10f);
         }
 
@@ -38,7 +36,14 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        if (startTransition)
+        playerPos = player.position;
+
+        foreach (var mat in transitionShaders)
+        {
+            mat.SetVector("_PlayerPos", playerPos);
+        }
+
+        if ((MasterManager.Instance.canImagine && startTransition) || startTransition)
         {
             DoTransition(transitionValue);
         }
@@ -77,13 +82,13 @@ public class Projection : Singleton<Projection>
                 if (changeScene && goBackInOffice)
                 {
                     goBackInOffice = false;
-                    MasterManager.Instance.GoBackToOffice("Office");
-                    goBackInOffice = false;
+                    //MasterManager.Instance.GoBackToOffice("Office");
                 }
 
                 if (changeScene)
-                {                   
-                    MasterManager.Instance.ActivateImaginary("Call1");
+                {
+                    MasterManager.Instance.useOneInput = false;
+                    MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration");
                 }
             }
         }
@@ -93,7 +98,7 @@ public class Projection : Singleton<Projection>
 
             if (range >= 2.5)
             {
-                startTransition = true;
+                startTransition = false;
                 transitionValue = 0;
                 range = 3;
                 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TutorialButton : InstantiableButton
@@ -10,8 +11,9 @@ public class TutorialButton : InstantiableButton
     public List<GameObject> tutoButtons;
     public AudioClip audioToPlay;
     private bool isDestroyed;
+    private bool isPlaying;
 
-    [SerializeField] private AudioSource audioSource;
+    public AudioSource phoneAudioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -25,27 +27,45 @@ public class TutorialButton : InstantiableButton
         if (simulateInput)
         {
             SetSimulateInput(false);
-            OnClick(audioSource);
+            OnClick();
         }
 
         if (MasterManager.Instance.isTutoEnded && !isDestroyed)
         {
             isDestroyed = true;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+
+            foreach (var button in tutoButtons)
+            {
+                gameObject.transform.SetAsLastSibling();
+            }
+        }
+
+        if (isPlaying && !phoneAudioSource.isPlaying)
+        {
+            MasterManager.Instance.isTutoEnded = true;
+            
+            foreach (var button in tutoButtons)
+            {
+                gameObject.SetActive(false);
+                gameObject.transform.SetAsLastSibling();
+            }
         }
     }
 
-
-    public void OnClick(AudioSource audio)
+    public void OnClick()
     {
-        foreach (var button in tutoButtons)
-        {
-            //Destroy(button);
-            button.gameObject.SetActive(false);
-        }
+        isPlaying = true;
 
-        audio.Stop();
-        audio.clip = audioToPlay;
-        audio.Play();
+        phoneAudioSource.Stop();
+        phoneAudioSource.clip = audioToPlay;
+        phoneAudioSource.Play();
+
+        foreach (var but in tutoButtons)
+        {
+            toggle.enabled = true;
+            toggle.isOn = true;
+            img.enabled = false;
+        }
     }
 }

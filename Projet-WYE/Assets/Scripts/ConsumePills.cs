@@ -2,19 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumePills : Pill
+public class ConsumePills : MonoBehaviour
 {
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
@@ -23,9 +13,8 @@ public class ConsumePills : Pill
     {
         if (other.tag == "Pill")
         {
-            Destroy(other);
-            Eat();
+            other.GetComponent<Pill>().ReputOnStock();
+            MasterManager.Instance.currentPills++;
         }
     }
-
 }

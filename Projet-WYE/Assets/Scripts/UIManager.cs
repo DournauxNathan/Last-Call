@@ -28,26 +28,29 @@ public class UIManager : Singleton<UIManager>
     private bool fadeOut = false;
     private bool fadeIn = false;
 
-    public List<GameObject> tabs;
-    public GameObject currentTabSelected;
-
-
     [Header("Debug, Transition to Imaginaire")]
+    [SerializeField] private int nQuestionAnswer;
     [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
     public ParticleSystem smoke;
 
+    public GameObject startSelectbutton;
 
     // Start is called before the first frame update
     void Start()
-    {/*
-        if (SceneLoader.Instance.GetCurrentScene().name == "Office")
-        {*/
-        
-        //ScenarioManager.Instance.LoadScenario();
+    {
+        EventSystem.current.firstSelectedGameObject = startSelectbutton;
 
+        LoadQuestions();
+        PullQuestion();
+    }
+
+    public void PullQuestion()
+    {
         if (ScenarioManager.Instance.isScenarioLoaded)
         {
+            ScenarioManager.Instance.isScenarioLoaded = false;
+
             activateButton.SetActive(false);
 
             // A CHANGER QUAND SWITCH ENTRE REA ET IMA
@@ -64,7 +67,7 @@ public class UIManager : Singleton<UIManager>
                 }
             }
 
-            if (OrderController.Instance.isResolve)
+            if (OrderController.Instance.GetResolve())
             {
                 for (int i = 0; i < OrderController.Instance.orders.Count; i++)
                 {
@@ -72,17 +75,16 @@ public class UIManager : Singleton<UIManager>
                 }
             }
 
+            EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
         }
-
-        EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject;
-        //}      
     }
+
 
     public void Update()
     {
         if (unlockImaginaryTransition)
         {
-            activateButton.SetActive(true );
+            activateButton.SetActive(true);
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
@@ -113,7 +115,10 @@ public class UIManager : Singleton<UIManager>
             StartFadeOut(leftScreen);
             StartFadeOut(rightScreen);
         }
+
+        //PullQuestion();
     }
+
 
     public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
     {
@@ -132,7 +137,6 @@ public class UIManager : Singleton<UIManager>
         Debug.LogError("Not enough buttons");
         return null;
     }
-
     public InstantiableButton FindAvailableButtonForOrder(OrderFormat order)
     {
         if (order != null)
@@ -187,6 +191,23 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    public void Ask()
+    {
+        nQuestionAnswer++;
+    } 
+
+    public bool CheckAnswer()
+    {        
+        if (nQuestionAnswer > descriptionQuestion.Count)
+        {
+            return MasterManager.Instance.canImagine = true;
+        }
+        else
+        {
+            return MasterManager.Instance.canImagine = false;
+        }
+    }
+
     public void ToggleButton()
     {
         /*for (int i = 0; i < checkListTransform.childCount; i++)
@@ -212,13 +233,29 @@ public class UIManager : Singleton<UIManager>
                 button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
             }*/
         }
-
     }
 
-    public void SwitchTab(int i)
+    public void LoadQuestions()
     {
-        currentTabSelected.SetActive(false);
-        tabs[i].SetActive(true);
-    }
+        switch (ScenarioManager.Instance.currentScenario)
+        {
+            case ScenarioManager.Scenario.TrappedMan:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.trappedMan);
+            break;
 
+            case ScenarioManager.Scenario.HomeInvasion:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.homeInvasion);
+            break;
+
+            case ScenarioManager.Scenario.DomesticAbuse:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.domesticAbuse);
+            break;
+
+            case ScenarioManager.Scenario.RisingWater:
+                    descriptionQuestion.AddRange(ScenarioManager.Instance.risingWater);
+            break;
+        }        
+
+        ScenarioManager.Instance.isScenarioLoaded = true;
+    }
 }

@@ -24,13 +24,13 @@ public class ShakeDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*Debug.Log(HandPresence.Instance.GetDeviceAccelation().sqrMagnitude);
+        /*Debug.Log(HandController.Instance.GetDeviceAccelation().sqrMagnitude);
 
-        Debug.Log(HandPresence.Instance.GetDeviceAccelation().sqrMagnitude >= sqrShakeDetectionTreshold
+        Debug.Log(HandController.Instance.GetDeviceAccelation().sqrMagnitude >= sqrShakeDetectionTreshold
             && Time.unscaledDeltaTime >= timeSinceLastShake + minShakeInterval);
         */
         //Using Hand Acceleration
-        if (HandPresence.Instance.GetDeviceAccelation().sqrMagnitude >= sqrShakeDetectionTreshold 
+        if (HandController.Instance.GetDeviceAccelation().sqrMagnitude >= sqrShakeDetectionTreshold 
             && Time.unscaledDeltaTime >= timeSinceLastShake + minShakeInterval)
         {
             pillBox.Shake();
