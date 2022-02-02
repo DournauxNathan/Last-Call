@@ -12,10 +12,10 @@ public class DistanceDissolveTarget : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < m_objectToTrack.Count; i++)
-        {
-            MaterialRef.SetVector("_Position", m_objectToTrack[i].position);
-        }
+        MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
+        MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
+        MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
+        MaterialRef.SetVector("_Position_3", m_objectToTrack[3].position);
     }
 
     public Renderer Renderer
@@ -48,10 +48,16 @@ public class DistanceDissolveTarget : MonoBehaviour
 
     private void Update()
     {
+
+        MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
+        MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
+        MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
+        MaterialRef.SetVector("_Position_3", m_objectToTrack[3].position);
+
+        /*
         for (int i = 0; i < m_objectToTrack.Count; i++)
         {
-            MaterialRef.SetVector("_Position", m_objectToTrack[i].position);
-        }
+        }*/
 
         if (m_objectToTrack != null)
         {
