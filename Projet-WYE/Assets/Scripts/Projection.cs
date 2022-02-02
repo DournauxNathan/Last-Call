@@ -24,10 +24,14 @@ public class Projection : Singleton<Projection>
 
     //Recode
 
-    public bool isTransition = true;
-    public bool sTransition = false;
+    public bool isTransition { get; set;} = true;
+    public bool sTransition { get; set; } = false;
 
     public bool hasCycle = false;
+
+    [SerializeField] private bool hasProjted;
+    [SerializeField] private bool isDisconstruc;
+
 
 
     // Start is called before the first frame update
@@ -39,6 +43,7 @@ public class Projection : Singleton<Projection>
         }
 
         timer = timeBetweenEachTransition;
+        hasProjted = false;
     }
 
     // Update is called once per frame
@@ -75,12 +80,12 @@ public class Projection : Singleton<Projection>
 
 
 
-        if (sTransition && transitionValue == 0 && isTransition)
+        if (sTransition && isTransition && !isDisconstruc)
         {
             Deconstruct();
         }
 
-        if (sTransition && transitionValue == 1 && isTransition)
+        if (sTransition && isTransition && isDisconstruc)
         {
             Construct();
         }
@@ -89,7 +94,7 @@ public class Projection : Singleton<Projection>
 
     }
 
-    public void DoTransition(int state)
+   /* public void DoTransition(int state)
     {
         if (state == 0)
         {
@@ -128,7 +133,7 @@ public class Projection : Singleton<Projection>
                 
             }
         }
-    }
+    }*/
 
     public void Deconstruct()
     {
@@ -144,15 +149,14 @@ public class Projection : Singleton<Projection>
             isTransition = false;
             startTransition = false;
             range = 0;
-
+            
         }
         else
         {
             range = 0;
-            
-            transitionValue = 1;
+            isDisconstruc = true;
             CallScene();
-            
+            ToggleProjted();
         }
 
 
@@ -172,24 +176,21 @@ public class Projection : Singleton<Projection>
             isTransition = false;
             startTransition = false;
             range = 3;
-
-
+            isDisconstruc = false;
         }
-
         else
         {
-            Debug.Log(range);
             range = 3;
 
-            
-            transitionValue = 0;
+            ToggleProjted();
+
             CallScene();
         }
     }
 
     public void CallScene()
     {
-        if (!hasCycle && transitionValue == 1)
+        if (!hasCycle && !hasProjted)
         {
             hasCycle = !false;
 
@@ -198,7 +199,7 @@ public class Projection : Singleton<Projection>
 
         }
 
-        if (!hasCycle && transitionValue == 0)
+        if (!hasCycle && hasProjted)
         {
             hasCycle = !false;
 
@@ -206,7 +207,21 @@ public class Projection : Singleton<Projection>
             
 
         }
+
+        
     }
 
+    public void ToggleProjted() 
+    {
+        if (hasProjted)
+        {
+            hasProjted = false;
+        }
+        else
+        {
+            hasProjted = true;
+        }
+    
+    }
 
 }
