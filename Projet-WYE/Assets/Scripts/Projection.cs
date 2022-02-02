@@ -24,10 +24,10 @@ public class Projection : Singleton<Projection>
 
     //Recode
 
-    public bool isTransition { get; set;} = true;
-    public bool sTransition { get; set; } = false;
+    [SerializeField] public bool isTransition /*{ get; set;}*/ = true;
+    [SerializeField] public bool sTransition /*{ get; set; } */= false;
 
-    public bool hasCycle = false;
+    private bool hasCycle = false;
 
     [SerializeField] private bool hasProjted;
     [SerializeField] private bool isDisconstruc;
