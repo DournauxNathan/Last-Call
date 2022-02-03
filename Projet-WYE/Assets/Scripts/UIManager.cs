@@ -90,13 +90,13 @@ public class UIManager : Singleton<UIManager>
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
-        if (MasterManager.Instance.projectionTransition.range <= beginFadeOutAt)
+        if (Projection.Instance.range <= beginFadeOutAt)
         {
             HideUI();
             smoke.Stop();
         }
 
-        if (MasterManager.Instance.projectionTransition.range == beginFadeInAt)
+        if (Projection.Instance.range >= beginFadeInAt)
         {
             ShowUI();
 
@@ -105,7 +105,7 @@ public class UIManager : Singleton<UIManager>
 
         if (fadeIn) //Show UI
         {
-            if (UIManager.Instance.leftScreen != null)
+            if (leftScreen != null)
             {
                 StartFadeIn(leftScreen);
                 StartFadeIn(rightScreen);

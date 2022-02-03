@@ -44,6 +44,7 @@ public class Projection : Singleton<Projection>
 
         timer = timeBetweenEachTransition;
         hasProjted = false;
+        StopCoroutine(WaitForVoid());
     }
 
     // Update is called once per frame
@@ -149,14 +150,20 @@ public class Projection : Singleton<Projection>
             isTransition = false;
             startTransition = false;
             range = 0;
-            
+
+
+
         }
         else
         {
             range = 0;
             isDisconstruc = true;
+            StartCoroutine(WaitForVoid());//coroutine
             CallScene();
             ToggleProjted();
+            
+
+
         }
 
 
@@ -183,8 +190,11 @@ public class Projection : Singleton<Projection>
             range = 3;
 
             ToggleProjted();
-
+            StartCoroutine(WaitForVoid());//coroutine
             CallScene();
+           
+
+
         }
     }
 
@@ -194,7 +204,7 @@ public class Projection : Singleton<Projection>
         {
             hasCycle = !false;
 
-            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration");
+            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusier senar 
             
 
         }
@@ -222,6 +232,15 @@ public class Projection : Singleton<Projection>
             hasProjted = true;
         }
     
+    }
+
+    IEnumerator WaitForVoid()
+    {
+
+        sTransition = false;
+        Debug.Log("Wait for Void");
+        yield return new WaitForSeconds(1f);
+        sTransition = true;
     }
 
 }
