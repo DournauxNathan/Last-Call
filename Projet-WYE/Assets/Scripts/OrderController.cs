@@ -46,6 +46,7 @@ public class OrderController : Singleton<OrderController>
         return isResolve = _bool;
     }
 
+
     public bool GetResolve()
     {
         return isResolve;

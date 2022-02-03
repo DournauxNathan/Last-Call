@@ -8,7 +8,6 @@ public class ObjectActivator : Singleton<ObjectActivator>
     public List<GameObject> objectsList;
     public List<int> indexesList;
     public List<GameObject> desactivatedObject = new List<GameObject>();
-    public bool inImaginaire = false;
 
     public Dictionary<int, List<GameObject>> objectByIdList = new Dictionary<int, List<GameObject>>();
 
@@ -39,9 +38,6 @@ public class ObjectActivator : Singleton<ObjectActivator>
                 Debug.LogError("Erreur l'objet " + i + " n'a pas le script Highlight !");
             }            
         }*/
-
-        inImaginaire = true;
-        MasterManager.Instance.isInImaginary = inImaginaire;
     }  
 
     public void ToggleUselessObject(bool enable, int _value)

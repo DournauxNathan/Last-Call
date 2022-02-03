@@ -118,7 +118,7 @@ public class ObjectManager : MonoBehaviour
 
     public void Locked()
     {
-        if (GameObject.FindObjectOfType<ObjectActivator>().inImaginaire)
+        if (MasterManager.Instance.isInImaginary)
         {
             data.isLocked = true;
             outline.OutlineColor = selectColor;
