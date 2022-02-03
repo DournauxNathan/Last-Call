@@ -22,6 +22,18 @@ public class Projection : Singleton<Projection>
     public bool changeScene;
     public bool goBackInOffice;
 
+    //Recode
+
+    [SerializeField] public bool isTransition /*{ get; set;}*/ = true;
+    [SerializeField] public bool sTransition /*{ get; set; } */= false;
+
+    private bool hasCycle = false;
+
+    [SerializeField] private bool hasProjted;
+    [SerializeField] private bool isDisconstruc;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +43,8 @@ public class Projection : Singleton<Projection>
         }
 
         timer = timeBetweenEachTransition;
+        hasProjted = false;
+        StopCoroutine(WaitForVoid());
     }
 
     // Update is called once per frame
@@ -43,7 +57,7 @@ public class Projection : Singleton<Projection>
             mat.SetVector("_PlayerPos", playerPos);
         }
 
-        if ((MasterManager.Instance.canImagine && startTransition) || startTransition)
+        /*if ((MasterManager.Instance.canImagine && startTransition) || startTransition)
         {
             DoTransition(transitionValue);
         }
@@ -58,15 +72,30 @@ public class Projection : Singleton<Projection>
                 timer = 0;
                 DoTransition(0);
             }
-        }
+        }*/
 
         foreach (var mat in transitionShaders)
         {
             mat.SetFloat("_Distance", range * 10f);
-        }         
+        }
+
+
+
+        if (sTransition && isTransition && !isDisconstruc)
+        {
+            Deconstruct();
+        }
+
+        if (sTransition && isTransition && isDisconstruc)
+        {
+            Construct();
+        }
+
+
+
     }
 
-    public void DoTransition(int state)
+   /* public void DoTransition(int state)
     {
         if (state == 0)
         {
@@ -82,7 +111,8 @@ public class Projection : Singleton<Projection>
                 if (changeScene && goBackInOffice)
                 {
                     goBackInOffice = false;
-                    //MasterManager.Instance.GoBackToOffice("Office");
+                    startTransition = false;
+                    MasterManager.Instance.GoBackToOffice("Office");
                 }
 
                 if (changeScene)
@@ -104,5 +134,113 @@ public class Projection : Singleton<Projection>
                 
             }
         }
+    }*/
+
+    public void Deconstruct()
+    {
+        if (range>0)
+        {
+            isTransition = true;
+            range -= Time.deltaTime * time;
+            Debug.Log("Deconstruct");
+        }
+        else if (hasCycle)
+        {
+            hasCycle = false;
+            isTransition = false;
+            startTransition = false;
+            range = 0;
+
+
+
+        }
+        else
+        {
+            range = 0;
+            isDisconstruc = true;
+            StartCoroutine(WaitForVoid());//coroutine
+            CallScene();
+            ToggleProjted();
+            
+
+
+        }
+
+
     }
+
+    public void Construct()
+    {
+        if (range<3)
+        {
+            isTransition = true;
+            range += Time.deltaTime * time;
+            Debug.Log("Construc");
+        }
+        else if (hasCycle)
+        {
+            hasCycle = false;
+            isTransition = false;
+            startTransition = false;
+            range = 3;
+            isDisconstruc = false;
+        }
+        else
+        {
+            range = 3;
+
+            ToggleProjted();
+            StartCoroutine(WaitForVoid());//coroutine
+            CallScene();
+           
+
+
+        }
+    }
+
+    public void CallScene()
+    {
+        if (!hasCycle && !hasProjted)
+        {
+            hasCycle = !false;
+
+            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusier senar 
+            
+
+        }
+
+        if (!hasCycle && hasProjted)
+        {
+            hasCycle = !false;
+
+            MasterManager.Instance.GoBackToOffice("Office");
+            
+
+        }
+
+        
+    }
+
+    public void ToggleProjted() 
+    {
+        if (hasProjted)
+        {
+            hasProjted = false;
+        }
+        else
+        {
+            hasProjted = true;
+        }
+    
+    }
+
+    IEnumerator WaitForVoid()
+    {
+
+        sTransition = false;
+        Debug.Log("Wait for Void");
+        yield return new WaitForSeconds(1f);
+        sTransition = true;
+    }
+
 }
