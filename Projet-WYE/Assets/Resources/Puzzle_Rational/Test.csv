@@ -1,6 +1,18 @@
-Name;Hp;Dammage;Fruit
-Henri;12;7;Fraise
-Yves;15;8;Banane
-Jeanne;18;5;Pomme
-Marine;19;4;Poire
-Paul;32;6;Kaki
+NAME;ID;MOBILITÉ;UTILISÉ AVEC;INFLUENCE;
+Casserole;0;DYNAMIQUE;Evier;0;
+Silouhette;0;DYNAMIQUE;Evier;1;
+Serviette;1;DYNAMIQUE;Evier;1;
+Evier;2;STATIQUE;Serviette;1;
+Ciseaux;3;DYNAMIQUE;Corde;1;
+Corde;6;STATIQUE;Ciseaux;1;
+Tabouret;4;STATIQUE;Casserole;0;
+Pomme;3;DYNAMIQUE;Bouton;1;
+Levier;6;STATIQUE;None;1;
+Frigo (glaçon);;STATIQUE;Ventilo;0;
+Mixeur;0;DYNAMIQUE;Evier;0;
+Frigo;0;STATIQUE;Mixeur;-1;
+Pomme;4;DYNAMIQUE;Mixeur;0;
+Bouteille;0;DYNAMIQUE;Poele;-1;
+Serviette;0;DYNAMIQUE;Poele;-1;
+Tabouret;0;STATIQUE;Corde;-1;
+Couteau;3;DYNAMIQUE;None;-1;

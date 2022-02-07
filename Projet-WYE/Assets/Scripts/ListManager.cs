@@ -74,7 +74,7 @@ public class ListManager : Singleton<ListManager>
             if (_objectManager1.combinaisons.Count == 2 && _objectManager1.combinaisons[0].combineWith == objet2 && _objectManager2.combinaisons.Count != 0 
                 || _objectManager1.combinaisons.Count == 2 && _objectManager1.combinaisons[0].combineWith == objet2 && _objectManager2.combinaisons.Count != 0)
             {
-                if (_objectManager1.data.isStatic)
+                if (_objectManager1.state == StateMobility.Static)
                 {
                     objet2.SetActive(false);
 
@@ -93,7 +93,7 @@ public class ListManager : Singleton<ListManager>
                 || _objectManager2.combinaisons.Count == 2 && _objectManager2.combinaisons[0].combineWith == objet1 && _objectManager1.combinaisons.Count != 0)
             {
                 //Check with 2 objects only and with the ObjectManager2
-                if (_objectManager2.data.isStatic)
+                if (_objectManager2.state == StateMobility.Static)
                 {
                     objet1.SetActive(false);
 
@@ -114,7 +114,7 @@ public class ListManager : Singleton<ListManager>
                 //Check with 1 object only
                 if (_objectManager1.combinaisons[0].combineWith == objet2)
                 {
-                    if (_objectManager1.data.isStatic)
+                    if (_objectManager1.state == StateMobility.Static)
                     {
                         objet2.SetActive(false);
 
@@ -131,7 +131,7 @@ public class ListManager : Singleton<ListManager>
                 }
                 else if (_objectManager2.combinaisons[0].combineWith == objet1)
                 {
-                    if (_objectManager2.data.isStatic)
+                    if (_objectManager2.state == StateMobility.Static)
                     {
                         objet1.SetActive(false);
 
@@ -160,9 +160,9 @@ public class ListManager : Singleton<ListManager>
 
     public void SetToOrderController(CombinableObject _objectManager)
     {
-        if (!OrderController.Instance.orders.Contains(_objectManager.data.resultOrder))
+        if (!OrderController.Instance.orders.Contains(_objectManager.resultOrder))
         {
-            OrderController.Instance.orders.Add(_objectManager.data.resultOrder);
+            OrderController.Instance.orders.Add(_objectManager.resultOrder);
             OrderController.Instance.IncreaseValue(1);
         }
     }

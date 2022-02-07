@@ -5,18 +5,16 @@ using UnityEngine.Events;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(Outline), typeof(SphereCollider))]
-public class CombinableObject : MonoBehaviour
+//[RequireComponent(typeof(CombinableObject), typeof(Outline), typeof(SphereCollider))]
+public class CombinableObject : CombinableObject_Data
 {
-    public CombinableObject_Data objectData;
+    public OrderFormat resultOrder;
 
+    [HideInInspector] public bool isLocked = false;
 
-    public ObjectData data;
     public List<Combinaisons> combinaisons;
-    public List<GameObject> subList; //???? What is it ? Can't Remember ?
+    //public List<GameObject> subList; //???? What is it ? Can't Remember ?
 
-    public Outline outline;
-    public Material selectOutline;
     public Color baseColor;
     public Color selectColor;
     
@@ -24,34 +22,34 @@ public class CombinableObject : MonoBehaviour
 
     private void Awake()
     {
+        
         SetTriggerCollider(true);
         SetOutline();
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
-        subList.Add(gameObject);   
+        //subList.Add(gameObject);   
 
         if (MasterManager.Instance.objectActivator != null)
         {
             init = MasterManager.Instance.objectActivator;        
 
-            if(init.objectByIdList.ContainsKey(data.iD) )
+            if(init.objectByIdList.ContainsKey(iD) )
             {
                 List<GameObject> tempObject;
 
-                tempObject = init.objectByIdList[data.iD];
-                subList.AddRange(tempObject);
-                init.objectByIdList.Remove(data.iD);
-                init.objectByIdList.Add(data.iD, subList);
+                tempObject = init.objectByIdList[iD];
+                //subList.AddRange(tempObject);
+                init.objectByIdList.Remove(iD);
+                //init.objectByIdList.Add(data.iD, subList);
                 return;
-            }
+            }/*
             else
             {
                 init.objectByIdList.Add(data.iD, subList);
-            }
+            }*/
         }
     }
 
@@ -112,7 +110,7 @@ public class CombinableObject : MonoBehaviour
 
     public void Disabled()
     {
-        if (!data.isLocked)
+        if (!isLocked)
         {
             outline.enabled = false;
         }
@@ -122,7 +120,7 @@ public class CombinableObject : MonoBehaviour
     {
         if (MasterManager.Instance.isInImaginary)
         {
-            data.isLocked = true;
+            isLocked = true;
             outline.OutlineColor = selectColor;
         }
     }
@@ -131,7 +129,7 @@ public class CombinableObject : MonoBehaviour
     {
         if (MasterManager.Instance.isInImaginary)
         {
-            data.isLocked = false;
+            isLocked = false;
             outline.OutlineColor = baseColor;
             Disabled();
         }
@@ -142,21 +140,4 @@ public class CombinableObject : MonoBehaviour
 public class Combinaisons
 {
     public GameObject combineWith;    
-}
-
-[Serializable]
-public class ObjectData
-{
-    public int iD;
-    public bool isStatic;
-    public OrderFormat resultOrder;
-
-    [HideInInspector] public bool isLocked = false;
-}
-
-public enum ObjectType
-{
-    None,
-    Useful,
-    Useless
 }

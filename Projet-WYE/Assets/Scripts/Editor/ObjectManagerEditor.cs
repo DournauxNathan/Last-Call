@@ -43,33 +43,6 @@ public class ObjectManagerEditor : Editor
 
         EditorGUILayout.PropertyField(sp_objectType);
         EditorGUILayout.Space(10);
-
-         ObjectType enumType = (ObjectType)sp_objectType.enumValueIndex;
-
-        switch (enumType)
-        {
-            case ObjectType.Useful:
-                
-                EditorGUILayout.PropertyField(sp_data);
-                EditorGUILayout.Space(2);
-                EditorGUILayout.PropertyField(sp_combi);
-                EditorGUILayout.Space(2);
-                EditorGUILayout.PropertyField(sp_subList);
-
-                break;
-
-            case ObjectType.Useless:
-                EditorGUILayout.PropertyField(sp_static);
-                EditorGUILayout.Space(2);
-                EditorGUILayout.PropertyField(sp_order);
-                EditorGUILayout.Space(2);
-                EditorGUILayout.PropertyField(sp_subList);
-                break;
-
-            case ObjectType.None:
-
-                break;
-        }
         EditorGUILayout.Space(5);
         EditorGUILayout.BeginFoldoutHeaderGroup(false, "Outline Properties", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(sp_outline);
