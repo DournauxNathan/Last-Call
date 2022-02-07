@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEditor;
 
-[CustomEditor(typeof(ObjectManager)), CanEditMultipleObjects]
+//[CustomEditor(typeof(ObjectManager)), CanEditMultipleObjects]
 public class ObjectManagerEditor : Editor
 {
     SerializedProperty

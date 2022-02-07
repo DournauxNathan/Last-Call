@@ -6,9 +6,11 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(Outline), typeof(SphereCollider))]
-public class ObjectManager : MonoBehaviour
+public class CombinableObject : MonoBehaviour
 {
-    public ObjectType objectType;
+    public CombinableObject_Data objectData;
+
+
     public ObjectData data;
     public List<Combinaisons> combinaisons;
     public List<GameObject> subList; //???? What is it ? Can't Remember ?

@@ -12,7 +12,7 @@ public class ObjectActivator : Singleton<ObjectActivator>
     public Dictionary<int, List<GameObject>> objectByIdList = new Dictionary<int, List<GameObject>>();
 
     [Header("Objects <Useless> to activate")]
-    public ObjectManager[] uselessObjects;
+    public CombinableObject[] uselessObjects;
 
     public void ActivateObjet()
     {
@@ -29,9 +29,9 @@ public class ObjectActivator : Singleton<ObjectActivator>
 
         /*for (int i = 0; i < objectsList.Count; i++)
         {
-            if (objectsList[i].GetComponent<ObjectManager>() != null)
+            if (objectsList[i].GetComponent<CombinableObject>() != null)
             {
-                //objectsList[i].GetComponent<ObjectManager>().outlineManager.Enable();
+                //objectsList[i].GetComponent<CombinableObject>().outlineManager.Enable();
             }
             else
             {
@@ -42,17 +42,17 @@ public class ObjectActivator : Singleton<ObjectActivator>
 
     public void ToggleUselessObject(bool enable, int _value)
     {
-        uselessObjects = FindObjectsOfType<ObjectManager>();
+        uselessObjects = FindObjectsOfType<CombinableObject>();
         
         if (enable)
         {
             for (int i = 0; i < _value; i++)
             {
                 //Check and Activate for Grabable object only
-                if (uselessObjects[i].objectType == ObjectType.Useless && uselessObjects[i].GetComponent<XRGrabInteractableWithAutoSetup>())
+                if (uselessObjects[i].GetComponent<XRGrabInteractableWithAutoSetup>())
                 {
                     uselessObjects[i].GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
-                    uselessObjects[i].GetComponent<ObjectManager>().enabled = true;
+                    uselessObjects[i].GetComponent<CombinableObject>().enabled = true;
                 }
                 else
                 {
@@ -60,10 +60,10 @@ public class ObjectActivator : Singleton<ObjectActivator>
                 }
 
                 //Check and Activate for Grabable object only
-                if (uselessObjects[i].objectType == ObjectType.Useless && uselessObjects[i].GetComponent<XRSimpleInteractableWithAutoSetup>())
+                if (uselessObjects[i].GetComponent<XRSimpleInteractableWithAutoSetup>())
                 {
                     uselessObjects[i].GetComponent<XRSimpleInteractableWithAutoSetup>().enabled = true;
-                    uselessObjects[i].GetComponent<ObjectManager>().enabled = true;
+                    uselessObjects[i].GetComponent<CombinableObject>().enabled = true;
                 }
                 else
                 {
@@ -76,10 +76,10 @@ public class ObjectActivator : Singleton<ObjectActivator>
             for (int i = 0; i < _value; i++)
             {
                 //Check and Activate for Grabable object only
-                if (uselessObjects[i].objectType == ObjectType.Useless && uselessObjects[i].GetComponent<XRGrabInteractableWithAutoSetup>())
+                if (uselessObjects[i].GetComponent<XRGrabInteractableWithAutoSetup>())
                 {
                     uselessObjects[i].GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
-                    uselessObjects[i].GetComponent<ObjectManager>().enabled = false;
+                    uselessObjects[i].GetComponent<CombinableObject>().enabled = false;
                 }
                 else
                 {
@@ -87,10 +87,10 @@ public class ObjectActivator : Singleton<ObjectActivator>
                 }
 
                 //Check and Activate for Grabable object only
-                if (uselessObjects[i].objectType == ObjectType.Useless && uselessObjects[i].GetComponent<XRSimpleInteractableWithAutoSetup>())
+                if ( uselessObjects[i].GetComponent<XRSimpleInteractableWithAutoSetup>())
                 {
                     uselessObjects[i].GetComponent<XRSimpleInteractableWithAutoSetup>().enabled = false;
-                    uselessObjects[i].GetComponent<ObjectManager>().enabled = false;
+                    uselessObjects[i].GetComponent<CombinableObject>().enabled = false;
                 }
                 else
                 {
@@ -108,7 +108,7 @@ public class ObjectActivator : Singleton<ObjectActivator>
         {
             desactivatedObject.Add(item);
 
-            if (!indexesList.Contains(item.GetComponent<ObjectManager>().data.iD))
+            if (!indexesList.Contains(item.GetComponent<CombinableObject>().data.iD))
             {
                 item.SetActive(false);
             }

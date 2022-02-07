@@ -33,13 +33,13 @@ public class ListManager : Singleton<ListManager>
         if (lockedInteractors.Count == 0 && hoveredInteractors.Count > 0) //Fonctionne ! -> ajoute le premier objet si liste vide != null
         {
             lockedInteractors.Add(hoveredInteractors[0]);
-            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            hoveredInteractors[0].GetComponent<CombinableObject>().Locked();
         }
 
         if (lockedInteractors.Count != 0 && hoveredInteractors.Count > 0 && !lockedInteractors.Contains(hoveredInteractors[0]))
         {
             lockedInteractors.Add(hoveredInteractors[0]);
-            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            hoveredInteractors[0].GetComponent<CombinableObject>().Locked();
         }
 
         if (lockedInteractors.Count == 2)
@@ -48,7 +48,7 @@ public class ListManager : Singleton<ListManager>
 
             for (int i = 0; i < lockedInteractors.Count; i++)
             {
-                lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+                lockedInteractors[i].GetComponent<CombinableObject>().UnLocked();
             }
             lockedInteractors.Clear();
         }
@@ -58,7 +58,7 @@ public class ListManager : Singleton<ListManager>
     {
         for (int i = 0; i < lockedInteractors.Count; i++)
         {
-            lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+            lockedInteractors[i].GetComponent<CombinableObject>().UnLocked();
         }
         lockedInteractors.Clear();
     }
@@ -66,9 +66,9 @@ public class ListManager : Singleton<ListManager>
 
     public void CheckCompatibility(GameObject objet1,GameObject objet2)
     {
-        ObjectManager _objectManager1, _objectManager2;
+        CombinableObject _objectManager1, _objectManager2;
 
-        if (objet1.TryGetComponent<ObjectManager>(out _objectManager1) && objet2.TryGetComponent<ObjectManager>(out _objectManager2))
+        if (objet1.TryGetComponent<CombinableObject>(out _objectManager1) && objet2.TryGetComponent<CombinableObject>(out _objectManager2))
         {
             //Check with 2 objects only and with the ObjectManager1
             if (_objectManager1.combinaisons.Count == 2 && _objectManager1.combinaisons[0].combineWith == objet2 && _objectManager2.combinaisons.Count != 0 
@@ -158,7 +158,7 @@ public class ListManager : Singleton<ListManager>
         }       
     }
 
-    public void SetToOrderController(ObjectManager _objectManager)
+    public void SetToOrderController(CombinableObject _objectManager)
     {
         if (!OrderController.Instance.orders.Contains(_objectManager.data.resultOrder))
         {
