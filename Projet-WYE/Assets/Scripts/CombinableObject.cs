@@ -5,27 +5,20 @@ using UnityEngine.Events;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-//[RequireComponent(typeof(CombinableObject), typeof(Outline), typeof(SphereCollider))]
+//[RequireComponent(typeof(Outline), typeof(SphereCollider))]
 public class CombinableObject : CombinableObject_Data
 {
-    [Header("Outline")]
-    private Outline outline;
 
-    public OrderFormat resultOrder;
+    //public OrderFormat resultOrder;
 
     [HideInInspector] public bool isLocked = false;
 
-    public List<Combinaisons> combinaisons;
+    //public List<Combinaisons> combinaisons;
     //public List<GameObject> subList; //???? What is it ? Can't Remember ?
-
-    private Color baseColor;
-    private Color selectColor;
-            
+                
     // Start is called before the first frame update
     void Start()
     {
-        SetTriggerCollider(true);
-
         //subList.Add(gameObject);   
 
         if (MasterManager.Instance.objectActivator != null)
@@ -45,28 +38,7 @@ public class CombinableObject : CombinableObject_Data
                 init.objectByIdList.Add(data.iD, subList);
             }*/
         }
-    }
-
-    public void SetOutline()
-    {
-        outline = GetComponent<Outline>();
-        outline.enabled = false;
-
-        baseColor = outline.OutlineColor;
-        selectColor = selectOutline.color;
-    }
-
-    private void SetTriggerCollider(bool newState)
-    {
-        if (GetComponents<SphereCollider>().Length == 2)
-        {
-            GetComponents<SphereCollider>()[1].isTrigger = newState;
-        }
-        else
-        {
-            GetComponent<SphereCollider>().isTrigger = newState;
-        }
-    }    
+    }  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -92,7 +64,38 @@ public class CombinableObject : CombinableObject_Data
         }
     }
 
-    public void EnableOutline()
+    public void ToggleOutline()
+    {
+        if (!isLocked)
+        {
+            outline.enabled = false;
+        }
+        else
+        {
+            outline.enabled = true;
+        }
+    }
+
+    public void Lock(bool b)
+    {
+        if (MasterManager.Instance.isInImaginary && b)
+        {
+            isLocked = true;
+
+            outline.OutlineColor = selectOutline.color;
+        }
+        else if (MasterManager.Instance.isInImaginary && !b)
+        {
+            isLocked = false;
+
+            outline.OutlineColor = defaultOutlineColor;
+
+            ToggleOutline();
+        }
+    }
+
+    //Old Code
+    /*public void EnableOutline()
     {
         outline.enabled = true;
     }
@@ -104,32 +107,27 @@ public class CombinableObject : CombinableObject_Data
             outline.enabled = false;
         }
     }
+    */
 
-    public void Locked()
-    {
-        if (MasterManager.Instance.isInImaginary)
-        {
-            isLocked = true;
+    /* public void Locked()
+     {
+         if (MasterManager.Instance.isInImaginary)
+         {
+             isLocked = true;
 
-            outline.OutlineColor = selectColor;
-        }
-    }
+             outline.OutlineColor = selectOutline.color;
+         }
+     }
 
-    public void UnLocked()
-    {
-        if (MasterManager.Instance.isInImaginary)
-        {
-            isLocked = false;
+     public void UnLocked()
+     {
+         if (MasterManager.Instance.isInImaginary)
+         {
+             isLocked = false;
 
-            outline.OutlineColor = baseColor;
+             outline.OutlineColor = defaultOutlineColor;
 
-            DisabledOutline();
-        }
-    }
-}
-
-[Serializable]
-public class Combinaisons
-{
-    public GameObject combineWith;    
+             ToggleOutline();
+         }
+     }*/
 }

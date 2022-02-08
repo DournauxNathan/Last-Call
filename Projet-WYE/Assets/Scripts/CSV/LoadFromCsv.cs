@@ -71,8 +71,6 @@ public class LoadFromCsv
         newPrefab.AddComponent<MeshCollider>();
 
         newPrefab.AddComponent<CombinableObject>();
-        newPrefab.GetComponent<CombinableObject>().Init(entry);
-
 
         if (entry[2].Contains("DYNAMIQUE"))
         {
@@ -85,7 +83,8 @@ public class LoadFromCsv
 
         newPrefab.AddComponent<SphereCollider>();
         newPrefab.AddComponent<Outline>();
-        newPrefab.GetComponent<CombinableObject>().SetOutline();
+        newPrefab.GetComponent<CombinableObject>().Init(entry);
+
     }
 
     [MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]

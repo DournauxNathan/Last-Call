@@ -9,16 +9,19 @@ public class CombinableObject_Data : MonoBehaviour
     [Header("Data")]
     public int iD;
     public StateMobility state;
-    public string combineWith;
+    public List<string> combineWith = new List<string>(); /*A changer par un outil qui vient lit ses combinaisons ????*/
     public int influence;
 
-    public Material selectOutline;
-
     [Header("Refs")]
-    public MeshFilter m_MeshFilter;
-    public MeshRenderer m_MeshRenderer;
-    public MeshCollider m_MeshCollider;
-    public SphereCollider m_Spherecollider;
+    private MeshFilter m_MeshFilter;
+    private MeshRenderer m_MeshRenderer;
+    private MeshCollider m_MeshCollider;
+    private SphereCollider m_Spherecollider;
+
+    [Header("Outline Properties")]
+    public Outline outline;
+    public Material selectOutline;
+    public Color defaultOutlineColor;
 
     public void Init(string[] entry)
     {
@@ -35,21 +38,39 @@ public class CombinableObject_Data : MonoBehaviour
             state = StateMobility.Dynamic;
         }
 
-        combineWith = entry[3];
+        combineWith.Add(entry[3]);
 
         influence = int.Parse(entry[4]);
-
+        
+        #region Get Components
         m_MeshFilter = GetComponent<MeshFilter>();
         m_MeshRenderer = GetComponent<MeshRenderer>();
         m_MeshCollider = GetComponent<MeshCollider>();
         m_Spherecollider = GetComponent<SphereCollider>();
+        outline = GetComponent<Outline>();
+        #endregion
 
+        #region Load From Resources
         m_MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
         m_MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
-        
         selectOutline = Resources.Load<Material>("Materials/Select Outline");
+        #endregion
 
+        #region Set Outline
+        outline.enabled = false;
+        defaultOutlineColor = outline.OutlineColor;
+        #endregion
 
+        #region Set Sphere Collider
+        if (GetComponents<SphereCollider>().Length == 2)
+        {
+            GetComponents<SphereCollider>()[1].isTrigger = true;
+        }
+        else
+        {
+            GetComponent<SphereCollider>().isTrigger = true;
+        }
+        #endregion
     }
 }
 
