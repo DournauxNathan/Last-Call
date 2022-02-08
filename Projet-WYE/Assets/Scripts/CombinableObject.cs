@@ -8,6 +8,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 //[RequireComponent(typeof(CombinableObject), typeof(Outline), typeof(SphereCollider))]
 public class CombinableObject : CombinableObject_Data
 {
+    [Header("Outline")]
+    private Outline outline;
+
     public OrderFormat resultOrder;
 
     [HideInInspector] public bool isLocked = false;
@@ -15,34 +18,25 @@ public class CombinableObject : CombinableObject_Data
     public List<Combinaisons> combinaisons;
     //public List<GameObject> subList; //???? What is it ? Can't Remember ?
 
-    public Color baseColor;
-    public Color selectColor;
-    
-    private ObjectActivator init;
-
-    private void Awake()
-    {
-        
-        SetTriggerCollider(true);
-        SetOutline();
-    }
-
+    private Color baseColor;
+    private Color selectColor;
+            
     // Start is called before the first frame update
     void Start()
     {
+        SetTriggerCollider(true);
+
         //subList.Add(gameObject);   
 
         if (MasterManager.Instance.objectActivator != null)
         {
-            init = MasterManager.Instance.objectActivator;        
-
-            if(init.objectByIdList.ContainsKey(iD) )
+            if(MasterManager.Instance.objectActivator.objectByIdList.ContainsKey(iD) )
             {
                 List<GameObject> tempObject;
 
-                tempObject = init.objectByIdList[iD];
+                tempObject = MasterManager.Instance.objectActivator.objectByIdList[iD];
                 //subList.AddRange(tempObject);
-                init.objectByIdList.Remove(iD);
+                MasterManager.Instance.objectActivator.objectByIdList.Remove(iD);
                 //init.objectByIdList.Add(data.iD, subList);
                 return;
             }/*
@@ -53,16 +47,12 @@ public class CombinableObject : CombinableObject_Data
         }
     }
 
-    private void SetOutline()
+    public void SetOutline()
     {
-        if (outline == null)
-        {
-            outline = GetComponent<Outline>();
-        }
-
+        outline = GetComponent<Outline>();
         outline.enabled = false;
 
-        baseColor = GetComponent<Outline>().OutlineColor;
+        baseColor = outline.OutlineColor;
         selectColor = selectOutline.color;
     }
 
@@ -102,13 +92,12 @@ public class CombinableObject : CombinableObject_Data
         }
     }
 
-
-    public void Enable()
+    public void EnableOutline()
     {
         outline.enabled = true;
     }
 
-    public void Disabled()
+    public void DisabledOutline()
     {
         if (!isLocked)
         {
@@ -121,6 +110,7 @@ public class CombinableObject : CombinableObject_Data
         if (MasterManager.Instance.isInImaginary)
         {
             isLocked = true;
+
             outline.OutlineColor = selectColor;
         }
     }
@@ -130,8 +120,10 @@ public class CombinableObject : CombinableObject_Data
         if (MasterManager.Instance.isInImaginary)
         {
             isLocked = false;
+
             outline.OutlineColor = baseColor;
-            Disabled();
+
+            DisabledOutline();
         }
     }
 }

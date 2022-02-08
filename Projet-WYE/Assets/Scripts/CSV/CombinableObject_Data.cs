@@ -12,13 +12,18 @@ public class CombinableObject_Data : MonoBehaviour
     public string combineWith;
     public int influence;
 
-    [Header("Outline")]
-    public Outline outline;
     public Material selectOutline;
+
+    [Header("Refs")]
+    public MeshFilter m_MeshFilter;
+    public MeshRenderer m_MeshRenderer;
+    public MeshCollider m_MeshCollider;
+    public SphereCollider m_Spherecollider;
 
     public void Init(string[] entry)
     {
         this.name = entry[0];
+
         iD = int.Parse(entry[1]);
 
         if (entry[2].Contains("STATIQUE"))
@@ -31,9 +36,20 @@ public class CombinableObject_Data : MonoBehaviour
         }
 
         combineWith = entry[3];
+
         influence = int.Parse(entry[4]);
 
+        m_MeshFilter = GetComponent<MeshFilter>();
+        m_MeshRenderer = GetComponent<MeshRenderer>();
+        m_MeshCollider = GetComponent<MeshCollider>();
+        m_Spherecollider = GetComponent<SphereCollider>();
+
+        m_MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
+        m_MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
+        
         selectOutline = Resources.Load<Material>("Materials/Select Outline");
+
+
     }
 }
 

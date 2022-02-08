@@ -68,6 +68,7 @@ public class LoadFromCsv
 
         newPrefab.AddComponent<MeshFilter>();
         newPrefab.AddComponent<MeshRenderer>();
+        newPrefab.AddComponent<MeshCollider>();
 
         newPrefab.AddComponent<CombinableObject>();
         newPrefab.GetComponent<CombinableObject>().Init(entry);
@@ -84,6 +85,7 @@ public class LoadFromCsv
 
         newPrefab.AddComponent<SphereCollider>();
         newPrefab.AddComponent<Outline>();
+        newPrefab.GetComponent<CombinableObject>().SetOutline();
     }
 
     [MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
