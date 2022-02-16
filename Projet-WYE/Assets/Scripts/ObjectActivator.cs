@@ -108,7 +108,7 @@ public class ObjectActivator : Singleton<ObjectActivator>
         {
             desactivatedObject.Add(item);
 
-            if (!indexesList.Contains(item.GetComponent<CombinableObject>().data.iD))
+            if (!indexesList.Contains(item.GetComponent<CombinableObject>().iD))
             {
                 item.SetActive(false);
             }

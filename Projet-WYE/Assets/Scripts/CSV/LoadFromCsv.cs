@@ -6,8 +6,8 @@ using System.Linq;
 
 public class LoadFromCsv 
 {
-    [MenuItem("Puzzles/ScriptableObjects/Generate")]
-    public static void LoadCSVToSO()
+    [MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
+    public static void LoadCSVToScriptableObjects()
     {
         var csvText = Resources.Load<TextAsset>("Puzzle_Rational/Test").text;
 
@@ -19,17 +19,16 @@ public class LoadFromCsv
 
         foreach (var i in lines)
         {
-            completeExcelFile.Add(i.Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));
+            completeExcelFile.Add(i.Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));           
         }
 
         foreach (var item in completeExcelFile.Skip(1))
         {
             CreateScriptable(item);
         }
-
     }
 
-    [MenuItem("Puzzles/Prefab/Generate")]
+    [MenuItem("Rational/Puzzles/Prefab/Generate")]
     public static void LoadCSVToPrefab()
     {
         var csvText = Resources.Load<TextAsset>("Puzzle_Rational/Test").text;
@@ -65,10 +64,30 @@ public class LoadFromCsv
 
     static void CreatePrefab(string[] entry)
     {
-        GameObject newPrefab = new GameObject(entry[0], typeof(CombinableObject));
+        GameObject newPrefab = new GameObject(entry[0]);
+
+        newPrefab.AddComponent<MeshFilter>();
+        newPrefab.AddComponent<MeshRenderer>();
+        newPrefab.AddComponent<MeshCollider>();
+
+        newPrefab.AddComponent<CombinableObject>();
+
+        if (entry[2].Contains("DYNAMIQUE"))
+        {
+            newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+        }
+        else if (entry[2].Contains("STATIQUE"))
+        {
+            newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
+        }
+
+        newPrefab.AddComponent<SphereCollider>();
+        newPrefab.AddComponent<Outline>();
+        newPrefab.GetComponent<CombinableObject>().Init(entry);
+
     }
 
-    [MenuItem("Puzzles/Prefab/Save Current Selection")]
+    [MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
     static void SaveCurrentSelectionIntoPrefabAsset()
     {
         if (Selection.gameObjects != null && !EditorUtility.IsPersistent(Selection.activeGameObject))
@@ -90,5 +109,9 @@ public class LoadFromCsv
         }
     }
 
-
+    [MenuItem("Rational/Excel/Generate ScriptableObject")]
+    public static void LoadCSV()
+    {
+        
+    }
 }
