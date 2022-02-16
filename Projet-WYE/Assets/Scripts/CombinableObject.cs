@@ -15,7 +15,7 @@ public class CombinableObject : CombinableObject_Data
 
     //public List<Combinaisons> combinaisons;
     //public List<GameObject> subList; //???? What is it ? Can't Remember ?
-                
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class CombinableObject : CombinableObject_Data
 
         if (MasterManager.Instance.objectActivator != null)
         {
-            if(MasterManager.Instance.objectActivator.objectByIdList.ContainsKey(iD) )
+            if (MasterManager.Instance.objectActivator.objectByIdList.ContainsKey(iD))
             {
                 List<GameObject> tempObject;
 
@@ -38,7 +38,7 @@ public class CombinableObject : CombinableObject_Data
                 init.objectByIdList.Add(data.iD, subList);
             }*/
         }
-    }  
+    }
 
     private void OnTriggerEnter(Collider other)
     {

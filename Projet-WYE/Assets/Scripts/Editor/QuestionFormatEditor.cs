@@ -68,8 +68,8 @@ public class QuestionFormatEditor : Editor
         {
             CreateElement();
         }
-
         serializedObject.ApplyModifiedProperties();
+
     }
 
     private void DisplayArrayElement(int index)

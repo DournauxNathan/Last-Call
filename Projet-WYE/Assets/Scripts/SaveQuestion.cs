@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SaveQuestion : Singleton<SaveQuestion>
 {
-
     public List<string> AnsweredQuestions;
 
+    public int sequenceUnit;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class SaveQuestion : Singleton<SaveQuestion>
 
     public void SetUp()
     {
+        sequenceUnit = UnitDispatcher.Instance.sequence;
         AnsweredQuestions.Clear();
     }
 

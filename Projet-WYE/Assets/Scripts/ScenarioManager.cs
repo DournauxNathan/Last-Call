@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Scenario
+{
+    TrappedMan,
+    HomeInvasion,
+    DomesticAbuse,
+    RisingWater
+}
+
 public class ScenarioManager : Singleton<ScenarioManager>
 {
-    public enum Scenario
-    {
-        TrappedMan,
-        HomeInvasion,
-        DomesticAbuse,
-        RisingWater
-    }
-
     public Scenario currentScenario;
+
     public bool isScenarioLoaded = false;
     [Range(-10, 10)]
     public float endingValue = 0f;
