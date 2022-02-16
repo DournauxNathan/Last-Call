@@ -10,7 +10,6 @@ public class CombinableObject : MonoBehaviour
 {
     public CombinableObject_Data objectData;
 
-
     public ObjectData data;
     public List<Combinaisons> combinaisons;
     public List<GameObject> subList; //???? What is it ? Can't Remember ?

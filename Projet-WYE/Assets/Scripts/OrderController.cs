@@ -41,14 +41,7 @@ public class OrderController : Singleton<OrderController>
         }
     }
 
-    public bool SetResolve(bool _bool)
-    {
-        return isResolve = _bool;
-    }
+    public bool SetResolve(bool _bool) { return isResolve = _bool; }
 
-
-    public bool GetResolve()
-    {
-        return isResolve;
-    }
+    public bool GetResolve() { return isResolve; }
 }
