@@ -55,17 +55,17 @@ public class Debugger : Singleton<Debugger>
         {
             switch (ScenarioManager.Instance.currentScenario)
             {
-                case ScenarioManager.Scenario.TrappedMan:
+                case Scenario.TrappedMan:
                     MasterManager.Instance.objectActivator.ActivateObjet();
                     SceneLoader.Instance.LoadNewScene("Call1");
                     Debug.Log("Call1 Loaded");
                     break;
-                case ScenarioManager.Scenario.HomeInvasion:
+                case Scenario.HomeInvasion:
                     MasterManager.Instance.objectActivator.ActivateObjet();
                     SceneLoader.Instance.LoadNewScene("Call2");
                     Debug.Log("Call2 Loaded");
                     break;
-                case ScenarioManager.Scenario.DomesticAbuse:
+                case Scenario.DomesticAbuse:
                     MasterManager.Instance.objectActivator.ActivateObjet();
                     SceneLoader.Instance.LoadNewScene("Call3");
                     Debug.Log("Call3 Loaded");
@@ -87,7 +87,7 @@ public class Debugger : Singleton<Debugger>
         {
             switch (ScenarioManager.Instance.currentScenario)
             {
-                case ScenarioManager.Scenario.TrappedMan:
+                case Scenario.TrappedMan:
 
                     OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_trappedMan);
 
@@ -96,13 +96,13 @@ public class Debugger : Singleton<Debugger>
                     SceneLoader.Instance.LoadNewScene("Office");
 
                     break;
-                case ScenarioManager.Scenario.HomeInvasion:
+                case Scenario.HomeInvasion:
                     OrderController.Instance.isResolve = true;
                     OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_homeInvasion);
                     MasterManager.Instance.isInImaginary = false;
                     SceneLoader.Instance.LoadNewScene("Office");
                     break;
-                case ScenarioManager.Scenario.DomesticAbuse:
+                case Scenario.DomesticAbuse:
                     OrderController.Instance.isResolve = true;
                     OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_domesticAbuse);
                     MasterManager.Instance.isInImaginary = false;

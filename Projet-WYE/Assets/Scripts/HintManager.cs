@@ -61,7 +61,7 @@ public class HintManager : MonoBehaviour
         {
             switch (ScenarioManager.Instance.GetCurrentScenario())
             {
-                case ScenarioManager.Scenario.TrappedMan:
+                case Scenario.TrappedMan:
                     if (playHint)
                     {
                         int minA = Random.Range(0, hints[0].hint_voiceLines.Count());
@@ -71,7 +71,7 @@ public class HintManager : MonoBehaviour
                     yield return null;
                     break;
 
-                case ScenarioManager.Scenario.HomeInvasion:
+                case Scenario.HomeInvasion:
                     if (playHint)
                     {
                         int minB = Random.Range(0, hints[1].hint_voiceLines.Count());
@@ -81,7 +81,7 @@ public class HintManager : MonoBehaviour
                     yield return null;
                     break;
 
-                case ScenarioManager.Scenario.DomesticAbuse:
+                case Scenario.DomesticAbuse:
                     if (playHint)
                     {
                         int minC = Random.Range(0, hints[1].hint_voiceLines.Count());

@@ -35,6 +35,7 @@ public class MasterManager : Singleton<MasterManager>
     public bool useOneInput = false;
     public bool useTwoInput = false;
 
+
     private void Start()
     {
         UpdateController();

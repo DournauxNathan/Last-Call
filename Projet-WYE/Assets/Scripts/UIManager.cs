@@ -241,19 +241,19 @@ public class UIManager : Singleton<UIManager>
     {
         switch (ScenarioManager.Instance.currentScenario)
         {
-            case ScenarioManager.Scenario.TrappedMan:
+            case Scenario.TrappedMan:
                 descriptionQuestion.AddRange(ScenarioManager.Instance.trappedMan);
             break;
 
-            case ScenarioManager.Scenario.HomeInvasion:
+            case Scenario.HomeInvasion:
                 descriptionQuestion.AddRange(ScenarioManager.Instance.homeInvasion);
             break;
 
-            case ScenarioManager.Scenario.DomesticAbuse:
+            case Scenario.DomesticAbuse:
                 descriptionQuestion.AddRange(ScenarioManager.Instance.domesticAbuse);
             break;
 
-            case ScenarioManager.Scenario.RisingWater:
+            case Scenario.RisingWater:
                     descriptionQuestion.AddRange(ScenarioManager.Instance.risingWater);
             break;
         }        
