@@ -52,7 +52,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         if (MasterManager.Instance.isInImaginary)
         {
-            Projection.Instance.startTransition = true;
+            Projection.Instance.isTransition = true;
         }
     }
 

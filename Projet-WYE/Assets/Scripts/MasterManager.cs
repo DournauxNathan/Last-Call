@@ -11,16 +11,17 @@ public class MasterManager : Singleton<MasterManager>
     public ObjectActivator objectActivator;
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
-
+    
+    [Header("Hands")]
     public List<GameObject> baseInteractors;
     public List<GameObject> rayInteractors;
 
-    [Header("Projection and Pills Management")]
-    public bool canImagine = false;
+    [Header("Projection")]
+     public bool canImagine = false;
     public bool isInImaginary;
-    public bool pillsEffect;
+    [HideInInspector] public bool pillsEffect;
     [Tooltip("Number of pills taken by the player")]
-    public int currentPills = 0;
+    [HideInInspector] public int currentPills = 0;
 
     [Header("Tutorial Management")]
     public bool skipTuto;

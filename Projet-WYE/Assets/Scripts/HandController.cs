@@ -87,15 +87,11 @@ public class HandController : Singleton<HandController>
         {
             if (buttonValue == true)
             {
-                Projection.Instance.startTransition = buttonValue;
-                
-                Projection.Instance.transitionValue = 0;
+                Projection.Instance.isTransition = buttonValue;                
             }
             else if (buttonValue == false)
             {
-                Projection.Instance.transitionValue = 1;
 
-                Projection.Instance.startTransition = true;
             }
         }
     }

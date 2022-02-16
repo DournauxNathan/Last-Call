@@ -72,7 +72,7 @@ public class Debugger : Singleton<Debugger>
                     break;
             }
 
-            Projection.Instance.startTransition = true;
+            Projection.Instance.isTransition = true;
         }
         else
         {

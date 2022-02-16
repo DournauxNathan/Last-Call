@@ -90,13 +90,13 @@ public class UIManager : Singleton<UIManager>
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
-        if (Projection.Instance.range <= beginFadeOutAt)
+        if (Projection.Instance.transitionValue <= beginFadeOutAt)
         {
             HideUI();
             smoke.Stop();
         }
 
-        if (Projection.Instance.range >= beginFadeInAt)
+        if (Projection.Instance.transitionValue >= beginFadeInAt)
         {
             ShowUI();
 
