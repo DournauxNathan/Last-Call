@@ -85,14 +85,12 @@ public class HandController : Singleton<HandController>
 
         if (MasterManager.Instance.useOneInput && targetDevice.name == "Oculus Touch Controller - Left"  && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool buttonValue))
         {
-            if (buttonValue == true)
+            Projection.Instance.isTransition = buttonValue;
+            
+            if (!buttonValue)
             {
-                Projection.Instance.isTransition = buttonValue;                
-            }
-            else if (buttonValue == false)
-            {
-
-            }
+                Projection.Instance.ResetTransition();
+            }            
         }
     }
 

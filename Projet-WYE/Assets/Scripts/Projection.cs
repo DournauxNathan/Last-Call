@@ -7,43 +7,41 @@ public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
     public Transform player;
-    [Space(5)]public List<Material> transitionShaders;
+
+    [Space(5)] 
+    public List<Material> transitionShaders;
+    [Space(5)]
 
     public bool isTransition;
-
-    [Header("Projection Properties")]
-    [SerializeField] private bool pauseBetweenTransition = true;
-    [Tooltip("During of te transition in seconds")] 
-    public float time;
-    [Range(0,3)] 
+    [Range(0, 3)]
     public float transitionValue = 3f;
 
-    [Header("Parameters for testing the go/back mecanics")]
-    public float timeBetweenEachTransition;
-    
-    private float timer;
+    [Header("Projection Properties")]
+    [Tooltip("During of the transition in seconds")]
+    public float time;
+    [SerializeField] private bool pauseBetweenTransition = true;
+    [Tooltip("Time of the break between the Transition effect")]
+    public float timeBetweenTransition;
+    [Space(5)]
     public bool changeScene;
     public bool goBackInOffice;
 
     [Header("Cycle Properties")]
-    private bool hasCycle = false;
+    public bool hasCycle = false;
 
     private bool hasProjted;
     private bool isDisconstruc;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
-        //transitionShaders = Resources.LoadAll("Resources")
+        //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat")
         
         foreach (var mat in transitionShaders)
         {
             mat.SetFloat("_Distance", 3f * 10f);
         }
 
-        timer = timeBetweenEachTransition;
         hasProjted = false;
         StopCoroutine(WaitForVoid());
     }
@@ -72,9 +70,23 @@ public class Projection : Singleton<Projection>
         }
     }
 
+    public void ResetTransition()
+    {
+        if (transitionValue < 3)
+        {
+            isTransition = false;
+            transitionValue += Time.deltaTime * time;
+
+            if (transitionValue > 3)
+            {
+                transitionValue = 3;
+            }
+        }
+    }
+
     public void Deconstruct()
     {
-        if (transitionValue>0)
+        if (transitionValue > 0)
         {
             isTransition = true;
             transitionValue -= Time.deltaTime * time;
@@ -97,7 +109,7 @@ public class Projection : Singleton<Projection>
 
     public void Construct()
     {
-        if (transitionValue<3)
+        if (transitionValue < 3)
         {
             isTransition = true;
             transitionValue += Time.deltaTime * time;
@@ -151,7 +163,7 @@ public class Projection : Singleton<Projection>
     IEnumerator WaitForVoid()
     {
         pauseBetweenTransition = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeBetweenTransition);
         pauseBetweenTransition = true;
     }
 
