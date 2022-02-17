@@ -123,6 +123,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &14245267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14245268}
+  m_Layer: 0
+  m_Name: B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &14245268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14245267}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9379594, y: 1.0090619, z: -0.27924258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &26325018
 GameObject:
   m_ObjectHideFlags: 0
@@ -6425,6 +6455,36 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!1 &1963222383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963222384}
+  m_Layer: 0
+  m_Name: A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963222384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963222383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9379594, y: 1.0090619, z: -0.27924258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003939440
 GameObject:
   m_ObjectHideFlags: 0
@@ -7152,6 +7212,14 @@ PrefabInstance:
       value: OrdersManager
       objectReference: {fileID: 0}
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
+      propertyPath: a
+      value: 
+      objectReference: {fileID: 1963222383}
+    - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
+      propertyPath: b
+      value: 
+      objectReference: {fileID: 14245267}
+    - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: orders.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -7183,6 +7251,10 @@ PrefabInstance:
       propertyPath: orders.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: efaa4f96ef26dee4ba6608529cbbec9e, type: 2}
+    - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
+      propertyPath: combinaisons.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: currentNumberOfCombinaison
       value: 0
