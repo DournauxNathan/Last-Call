@@ -75,7 +75,8 @@ public class PhysicsButton : MonoBehaviour
 
     public void Pressed()
     {
-        onPressed?.Invoke();
+        IncreaseNumberOfPress();
+        SendUnit();
     }
 
     public void IncreaseNumberOfPress()
