@@ -87,7 +87,7 @@ public class ListManager : Singleton<ListManager>
                     objet2.SetActive(false);
                 }
 
-                SetToOrderController(_objectManager1.gameObject, objet2);
+                SetToOrderController(_objectManager1, _objectManager2);
             }
             else if (_objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0 
                 || _objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0)
@@ -106,7 +106,7 @@ public class ListManager : Singleton<ListManager>
                     objet2.SetActive(false);
                 }
 
-                SetToOrderController(_objectManager2.gameObject, objet1);
+                SetToOrderController(_objectManager2, _objectManager1);
             }
             else if (_objectManager1.combineWith.Count == 1 && _objectManager2.combineWith.Count != 0 
                 || _objectManager2.combineWith.Count == 1 && _objectManager1.combineWith.Count != 0)
@@ -127,7 +127,7 @@ public class ListManager : Singleton<ListManager>
                         objet2.SetActive(false);
                     }
 
-                    SetToOrderController(_objectManager1.gameObject, objet2);
+                    SetToOrderController(_objectManager1, _objectManager2);
                 }
                 else if (_objectManager2.combineWith[0] == objet1.name)
                 {
@@ -144,7 +144,7 @@ public class ListManager : Singleton<ListManager>
                         objet2.SetActive(false);
                     }
 
-                    SetToOrderController(_objectManager2.gameObject, objet1);
+                    SetToOrderController(_objectManager2, _objectManager1);
                 }
             }            
             else if (_objectManager1.combineWith.Count == 0 || _objectManager2.combineWith.Count == 0)
@@ -158,7 +158,7 @@ public class ListManager : Singleton<ListManager>
         }       
     }
 
-    public void SetToOrderController(GameObject _objectManagerA, GameObject _objectManagerB)
+    public void SetToOrderController(CombinableObject _objectManagerA, CombinableObject _objectManagerB)
     {
         OrderController.Instance.AddCombinaison(_objectManagerA, _objectManagerB);
         OrderController.Instance.IncreaseValue(1);

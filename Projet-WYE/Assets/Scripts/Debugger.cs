@@ -89,7 +89,7 @@ public class Debugger : Singleton<Debugger>
             {
                 case Scenario.TrappedMan:
 
-                    OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_trappedMan);
+                    //OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_trappedMan);
 
                     MasterManager.Instance.isInImaginary = false;
                     OrderController.Instance.isResolve = true; 
@@ -98,13 +98,13 @@ public class Debugger : Singleton<Debugger>
                     break;
                 case Scenario.HomeInvasion:
                     OrderController.Instance.isResolve = true;
-                    OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_homeInvasion);
+                    //OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_homeInvasion);
                     MasterManager.Instance.isInImaginary = false;
                     SceneLoader.Instance.LoadNewScene("Office");
                     break;
                 case Scenario.DomesticAbuse:
                     OrderController.Instance.isResolve = true;
-                    OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_domesticAbuse);
+                    //OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_domesticAbuse);
                     MasterManager.Instance.isInImaginary = false;
                     SceneLoader.Instance.LoadNewScene("Office");
                     break;
@@ -125,10 +125,11 @@ public class Debugger : Singleton<Debugger>
         {
             item.Desactivate();
         }
-        foreach (var order in OrderController.Instance.orders)
+
+        foreach (var order in OrderController.Instance.ordersStrings)
         {
 
-            ScenarioManager.Instance.endingValue += order.endingModifier;
+            ScenarioManager.Instance.endingValue += order.influence ;
         }
         Debug.Log("endingValue= " + ScenarioManager.Instance.endingValue +"\n Call next Phases");
     }

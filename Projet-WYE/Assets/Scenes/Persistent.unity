@@ -132,6 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 14245268}
+  - component: {fileID: 14245269}
+  - component: {fileID: 14245270}
   m_Layer: 0
   m_Name: B
   m_TagString: Untagged
@@ -153,6 +155,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &14245269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14245267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: 1
+  outline: {fileID: 14245270}
+  selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
+--- !u!114 &14245270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14245267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &26325018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3659,8 +3700,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1103599257}
   - component: {fileID: 1103599256}
-  - component: {fileID: 1103599258}
   - component: {fileID: 1103599259}
+  - component: {fileID: 1103599258}
   m_Layer: 0
   m_Name: MasterManager
   m_TagString: Untagged
@@ -3680,6 +3721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPhase: 0
   xRInteractionManager: {fileID: 639667784}
   objectActivator: {fileID: 892444371}
   projectionTransition: {fileID: 2049690321}
@@ -3691,7 +3733,7 @@ MonoBehaviour:
   - {fileID: 1057995870}
   - {fileID: 921782268}
   canImagine: 0
-  isInImaginary: 1
+  isInImaginary: 0
   pillsEffect: 0
   currentPills: 0
   skipTuto: 1
@@ -6464,6 +6506,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1963222384}
+  - component: {fileID: 1963222385}
+  - component: {fileID: 1963222386}
   m_Layer: 0
   m_Name: A
   m_TagString: Untagged
@@ -6485,6 +6529,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1963222385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963222383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: -1
+  outline: {fileID: 1963222386}
+  selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
+--- !u!114 &1963222386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963222383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2003939440
 GameObject:
   m_ObjectHideFlags: 0
@@ -7214,11 +7297,15 @@ PrefabInstance:
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: a
       value: 
-      objectReference: {fileID: 1963222383}
+      objectReference: {fileID: 1963222385}
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: b
       value: 
-      objectReference: {fileID: 14245267}
+      objectReference: {fileID: 14245269}
+    - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
+      propertyPath: isResolve
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: orders.Array.size
       value: 0
@@ -7234,7 +7321,7 @@ PrefabInstance:
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: orders.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 56fdda501b76ae24e89420b6edc04702, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: orders.Array.data[1]
       value: 
@@ -7256,8 +7343,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
+      propertyPath: ordersStrings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
       propertyPath: currentNumberOfCombinaison
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723959285190485887, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}
+      propertyPath: ordersStrings.Array.data[0].order
+      value: Usldmozndzdzedf
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac42fdfadfc140a4ba021ec9fdefd7a9, type: 3}

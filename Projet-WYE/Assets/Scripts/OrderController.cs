@@ -10,22 +10,22 @@ public class OrderController : Singleton<OrderController>
 {
     public int currentNumberOfCombinaison;
     public int numberOfCombinaison;
-    public List<OrderFormat> orders;
+    //public List<OrderFormat> orders;
     public bool isResolve = false;
 
     [Header("New Section Code")]
-    public GameObject a;
-    public GameObject b;
-    public bool switchObject;
+    public CombinableObject a;
+    public CombinableObject b;
 
     public List<Combinaison> combinaisons;
-    public List<string> ordersStrings;
+    public List<Order> ordersStrings;
 
     private void Update()
     {        
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             AddCombinaison(a, b);
+            IncreaseValue(1);
         }
     }
 
@@ -50,6 +50,7 @@ public class OrderController : Singleton<OrderController>
         {
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
+            MasterManager.Instance.currentPhase = Phases.Phase_3;
             SceneLoader.Instance.LoadNewScene("Office");            
         }
         else
@@ -58,26 +59,32 @@ public class OrderController : Singleton<OrderController>
         }
     }
 
-    public void AddCombinaison(GameObject a, GameObject b)
+    public void AddCombinaison(CombinableObject a, CombinableObject b)
     {
-        Combinaison lastCombi = new Combinaison {
-            currentCombinaison = a.name + "+ " + b.name,
-            objetA = a.name,
-            objetB = b.name,
+        Combinaison newCombi = new Combinaison {
+            currentCombinaison = a.gameObject.name + "+ " + b.gameObject.name,
+            objetA = a.gameObject.name,
+            objetB = b.gameObject.name,
+            value = a.influence + b.influence,
         };
 
-        combinaisons.Add(lastCombi);
+        combinaisons.Add(newCombi);
 
-        AddOrder(lastCombi.objetA, lastCombi.objetB);
+        AddOrder(newCombi.objetA, newCombi.objetB, newCombi.value);
     }
 
-    public void AddOrder(string a, string b)
+    public void AddOrder(string a, string b, int value)
     {
-       ordersStrings.Add("Use " + a + " with " + b + " to " + " make a thing");
+        Order newOrder = new Order {
+            order = "Use " + a + " with " + b + " to " + " make a thing",
+            influence = value,
+        };
+
+        ordersStrings.Add(newOrder);
     }
-
+    
     public bool SetResolve(bool _bool) { return isResolve = _bool; }
-
+    
     public bool GetResolve() { return isResolve; }
 }
 
@@ -87,4 +94,13 @@ public class Combinaison
     [HideInInspector] public string currentCombinaison;
     public string objetA;
     public string objetB;
+    public int value;
+}
+
+[System.Serializable]
+public class Order
+{
+    public string order;
+    public int influence;
+    public AudioClip[] voiceLines;
 }
