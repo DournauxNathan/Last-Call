@@ -71,8 +71,8 @@ public class ListManager : Singleton<ListManager>
         if (objet1.TryGetComponent<CombinableObject>(out _objectManager1) && objet2.TryGetComponent<CombinableObject>(out _objectManager2))
         {
             //Check with 2 objects only and with the ObjectManager1
-            if (_objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.ToString() && _objectManager2.combineWith.Count != 0 
-                || _objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.ToString() && _objectManager2.combineWith.Count != 0)
+            if (_objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.name.ToString() && _objectManager2.combineWith.Count != 0 
+                || _objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.name.ToString() && _objectManager2.combineWith.Count != 0)
             {
                 if (_objectManager1.state == StateMobility.Static)
                 {
@@ -87,10 +87,10 @@ public class ListManager : Singleton<ListManager>
                     objet2.SetActive(false);
                 }
 
-                SetToOrderController(_objectManager1);
+                SetToOrderController(_objectManager1, _objectManager2);
             }
-            else if (_objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.ToString() && _objectManager1.combineWith.Count != 0 
-                || _objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.ToString() && _objectManager1.combineWith.Count != 0)
+            else if (_objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0 
+                || _objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0)
             {
                 //Check with 2 objects only and with the ObjectManager2
                 if (_objectManager2.state == StateMobility.Static)
@@ -106,7 +106,7 @@ public class ListManager : Singleton<ListManager>
                     objet2.SetActive(false);
                 }
 
-                SetToOrderController(_objectManager2);
+                SetToOrderController(_objectManager2, _objectManager1);
             }
             else if (_objectManager1.combineWith.Count == 1 && _objectManager2.combineWith.Count != 0 
                 || _objectManager2.combineWith.Count == 1 && _objectManager1.combineWith.Count != 0)
@@ -127,9 +127,9 @@ public class ListManager : Singleton<ListManager>
                         objet2.SetActive(false);
                     }
 
-                    SetToOrderController(_objectManager1);
+                    SetToOrderController(_objectManager1, _objectManager2);
                 }
-                else if (_objectManager2.combineWith[0] == objet1.ToString())
+                else if (_objectManager2.combineWith[0] == objet1.name)
                 {
                     if (_objectManager2.state == StateMobility.Static)
                     {
@@ -144,7 +144,7 @@ public class ListManager : Singleton<ListManager>
                         objet2.SetActive(false);
                     }
 
-                    SetToOrderController(_objectManager2);
+                    SetToOrderController(_objectManager2, _objectManager1);
                 }
             }            
             else if (_objectManager1.combineWith.Count == 0 || _objectManager2.combineWith.Count == 0)
@@ -158,8 +158,11 @@ public class ListManager : Singleton<ListManager>
         }       
     }
 
-    public void SetToOrderController(CombinableObject _objectManager)
-    {        
+    public void SetToOrderController(CombinableObject _objectManagerA, CombinableObject _objectManagerB)
+    {
+        OrderController.Instance.AddCombinaison(_objectManagerA, _objectManagerB);
+        OrderController.Instance.IncreaseValue(1);
+        
         /*
         if (!OrderController.Instance.orders.Contains(_objectManager.resultOrder))
         {

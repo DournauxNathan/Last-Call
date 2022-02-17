@@ -75,6 +75,7 @@ public class PhysicsButton : MonoBehaviour
 
     public void Pressed()
     {
+        IncreaseNumberOfPress();
         SendUnit();
     }
 

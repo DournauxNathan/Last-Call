@@ -4,8 +4,18 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum Phases
+{
+    Phase_1,
+    Phase_2,
+    Phase_3,
+    Phase_4
+}
+
 public class MasterManager : Singleton<MasterManager>
 {
+    public Phases currentPhase;
+
     [Header("Refs")]
     public XRInteractionManager xRInteractionManager;
     public ObjectActivator objectActivator;
@@ -43,6 +53,23 @@ public class MasterManager : Singleton<MasterManager>
 
     public void FixedUpdate()
     {
+        if (currentPhase == Phases.Phase_3)
+        {
+            /*for (int i = 0; i < UIManager.Instance.checkListTransform.childCount; i++)
+            {
+                UIManager.Instance.checkListTransform.GetChild(i).GetComponent<InstantiableButton>().button.enabled = false;
+            }
+
+            for (int i = 0; i < UIManager.Instance.descriptionTransform.childCount; i++)
+            {
+                UIManager.Instance.descriptionTransform.GetChild(i).GetComponent<InstantiableButton>().button.enabled = false;
+            }*/
+
+            UnitDispatcher.Instance.sequence = 4;
+            UiTabSelection.Instance.SwitchSequence(UnitDispatcher.Instance.sequence);
+        }
+
+
         UpdateController();
 
         if (!skipTuto && !isTutoEnded)
@@ -89,10 +116,10 @@ public class MasterManager : Singleton<MasterManager>
     {
         if (!isInImaginary)
         {
-           /* for (int i = 0; i < rayInteractors.Count; i++)
+            for (int i = 0; i < rayInteractors.Count; i++)
             {
                 baseInteractors[i].SetActive(true);
-            }*/
+            }
 
             for (int i = 0; i < rayInteractors.Count; i++)
             {
@@ -101,10 +128,10 @@ public class MasterManager : Singleton<MasterManager>
         }
         else if (isInImaginary)
         {
-           /* for (int i = 0; i < baseInteractors.Count; i++)
+            for (int i = 0; i < baseInteractors.Count; i++)
             {
                 baseInteractors[i].SetActive(false);
-            }*/
+            }
 
             for (int i = 0; i < rayInteractors.Count; i++)
             {

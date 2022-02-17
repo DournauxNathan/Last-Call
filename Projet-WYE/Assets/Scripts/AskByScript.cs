@@ -33,11 +33,11 @@ public class AskByScript : MonoBehaviour
 
         if (giveOrder && atIndex[2] > -1)
         {
-            //DoAtIndex(atIndex[2], UIManager.Instance.);
+            DoAtIndex(atIndex[2], UIManager.Instance.orderListTransform, giveOrder);
         }
         else if (giveOrder)
         {
-            //DoForAll(UIManager.Instance.);
+            DoForAll(UIManager.Instance.orderListTransform, giveOrder);
         }
     }
     public void DoAtIndex(int index,Transform _transform, bool _bool)

@@ -22,7 +22,7 @@ public class InstantiableButton : MonoBehaviour
 
     public int currentClick;
     private QuestionFormat question;
-    private OrderFormat order;
+    private Order order;
     private ObjectActivator swapImaginaire;
     private Transform stock;
     private bool isActive;
@@ -69,7 +69,7 @@ public class InstantiableButton : MonoBehaviour
         UpdateQuestion();
     }
 
-    public void ActivateOrder(Transform parent, Transform stock, OrderFormat order)
+    public void ActivateOrder(Transform parent, Transform stock, Order order)
     {
         transform.SetParent(parent);
 
@@ -141,7 +141,7 @@ public class InstantiableButton : MonoBehaviour
 
     public void SendOrder()
     {
-        ScenarioManager.Instance.UpdateEndingsValue(order.endingModifier);
+        ScenarioManager.Instance.UpdateEndingsValue(order.influence);
         //Play audio in the order format
         Desactivate();
     }
@@ -178,7 +178,7 @@ public class InstantiableButton : MonoBehaviour
     {
         if (isActive)
         {
-            text.text = order.orderText;
+            text.text = order.order;
         }
         else
         {

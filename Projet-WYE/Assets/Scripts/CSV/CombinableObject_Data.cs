@@ -5,11 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class CombinableObject_Data : MonoBehaviour
 {
-    private new string name;
+    [HideInInspector] public new string name;
     [Header("Data")]
     public int iD;
     public StateMobility state;
-    public List<string> combineWith = new List<string>(); /*A changer par un outil qui vient lit ses combinaisons ????*/
+    public List<string> combineWith = new List<string>(); /*A changer par un outil qui vient lire ses combinaisons ????*/
     public int influence;
 
     [Header("Refs")]
@@ -50,16 +50,8 @@ public class CombinableObject_Data : MonoBehaviour
         outline = GetComponent<Outline>();
         #endregion
 
-        #region Load From Resources
-        m_MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
-        m_MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
-        selectOutline = Resources.Load<Material>("Materials/Select Outline");
-        #endregion
-
-        #region Set Outline
-        outline.enabled = false;
-        defaultOutlineColor = outline.OutlineColor;
-        #endregion
+        LoadFromRessources();
+        SetOutline();
 
         #region Set Sphere Collider
         if (GetComponents<SphereCollider>().Length == 2)
@@ -71,6 +63,19 @@ public class CombinableObject_Data : MonoBehaviour
             GetComponent<SphereCollider>().isTrigger = true;
         }
         #endregion
+    }
+
+    public void LoadFromRessources()
+    {
+        m_MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
+        m_MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
+        selectOutline = Resources.Load<Material>("Materials/Select Outline");
+    }
+
+    public void SetOutline()
+    {
+        outline.enabled = false;
+        defaultOutlineColor = outline.OutlineColor;
     }
 }
 

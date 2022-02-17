@@ -238,8 +238,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.2784314, g: 0.3882353, b: 1, a: 1}
-  m_Intensity: 7.9
-  m_Range: 4.21
+  m_Intensity: 3.08
+  m_Range: 2.83
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -296,7 +296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64108637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.805, y: 1.801, z: 1.033}
+  m_LocalPosition: {x: -1.805, y: 1.337, z: 1.033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7467,7 +7467,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24194
+  m_Name: pb_Mesh62588
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7639,6 +7639,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7504917587931430868, guid: 016e412a6fea3e54a90e6f2d3da9a602, type: 3}
+--- !u!114 &420226403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 74938284484995599, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+  m_PrefabInstance: {fileID: 74938284484995595}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!64 &464590178
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8195,7 +8206,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24350
+  m_Name: pb_Mesh62784
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8439,25 +8450,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 2
-    isStatic: 1
-    resultOrder: {fileID: 11400000, guid: 56fdda501b76ae24e89420b6edc04702, type: 2}
-    isLocked: 0
-  combinaisons:
-  - combineWith: {fileID: 74938284484995596}
-  - combineWith: {fileID: 4606763114330930485}
-  - combineWith: {fileID: 803914400731780808}
-  subList: []
+  name: 
+  iD: 2
+  state: 0
+  combineWith: []
+  influence: 0
   outline: {fileID: 724522578}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &724522577
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8466,8 +8467,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8968851240696205933}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5189403
   m_Center: {x: -0.030405685, y: 0.0075493176, z: 0.1774816}
@@ -8531,24 +8532,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 724522576}
-        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
-        m_MethodName: Enable
-        m_Mode: 1
+        m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
+        m_MethodName: ToggleOutline
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 724522576}
-        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
-        m_MethodName: Disabled
-        m_Mode: 1
+        m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
+        m_MethodName: ToggleOutline
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8783,23 +8784,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 3
-    isStatic: 1
-    resultOrder: {fileID: 11400000, guid: a8ea204f433ffbe4593ae512d97a7cff, type: 2}
-    isLocked: 0
-  combinaisons:
-  - combineWith: {fileID: 1218224532}
-  subList: []
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: 0
   outline: {fileID: 830243283}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &830243282
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8991,6 +8984,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1417523641096012869, guid: 016e412a6fea3e54a90e6f2d3da9a602, type: 3}
+--- !u!114 &980369144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4606763114330930488, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+  m_PrefabInstance: {fileID: 4606763114330930484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &983517419
 GameObject:
   m_ObjectHideFlags: 0
@@ -9383,24 +9387,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 2
-    isStatic: 0
-    resultOrder: {fileID: 11400000, guid: 56fdda501b76ae24e89420b6edc04702, type: 2}
-    isLocked: 0
-  combinaisons:
-  - combineWith: {fileID: 0}
-  - combineWith: {fileID: 8968851240696205933}
-  subList: []
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: 0
   outline: {fileID: 1122972696}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &1122972695
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9747,23 +9742,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 3
-    isStatic: 0
-    resultOrder: {fileID: 11400000, guid: a8ea204f433ffbe4593ae512d97a7cff, type: 2}
-    isLocked: 0
-  combinaisons:
-  - combineWith: {fileID: 830243278}
-  subList: []
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: 0
   outline: {fileID: 1218224537}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &1218224536
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15925,10 +15912,50 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1405032649, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032649, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032649, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleOutline
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032649, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleOutline
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032649, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032649, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032649, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032650, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: iD
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1405032650, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
       propertyPath: outline
       value: 
       objectReference: {fileID: 2137130890}
+    - target: {fileID: 1405032650, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: combineWith.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405032650, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: combineWith.Array.data[0]
+      value: Rope
+      objectReference: {fileID: 0}
     - target: {fileID: 1405032650, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
       propertyPath: combinaisons.Array.data[0].combineWith
       value: 
@@ -16002,11 +16029,34 @@ PrefabInstance:
       value: Scissor
       objectReference: {fileID: 0}
     - target: {fileID: 6241081202691591857, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241081202691591857, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8dcba39e2e8ee384482570fa787c9ec8, type: 2}
+    - target: {fileID: 6241081202691591857, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
       propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58b8b665fd17f57449ac7b3a534e2815, type: 2}
+    - target: {fileID: 6241081202691591857, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+      propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 58b8b665fd17f57449ac7b3a534e2815, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
+--- !u!114 &1419880646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 803914400731780812, guid: 793f05ff54890394cb12014628c30170, type: 3}
+  m_PrefabInstance: {fileID: 2979514224911002308}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!64 &1421482819
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16064,8 +16114,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.2784314, g: 0.3882353, b: 1, a: 1}
-  m_Intensity: 7.9
-  m_Range: 4.21
+  m_Intensity: 3.08
+  m_Range: 3.76
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -16122,7 +16172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427750359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.624, y: 1.844, z: -0.687}
+  m_LocalPosition: {x: 1.624, y: 1.38, z: -0.687}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16557,8 +16607,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.2784314, g: 0.3882353, b: 1, a: 1}
-  m_Intensity: 7.9
-  m_Range: 4.21
+  m_Intensity: 3.08
+  m_Range: 2.83
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -16615,7 +16665,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732984643}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.805, y: 1.801, z: -0.257}
+  m_LocalPosition: {x: -1.805, y: 1.337, z: -0.257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16647,22 +16697,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 0
-    isStatic: 1
-    resultOrder: {fileID: 11400000, guid: c1362f8f91bd1a9469a3913e23706125, type: 2}
-    isLocked: 0
-  combinaisons: []
-  subList: []
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: 0
   outline: {fileID: 1770033757}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &1770033755
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -16893,7 +16936,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24362
+  m_Name: pb_Mesh62796
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17137,17 +17180,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2452070933520256593, guid: 016e412a6fea3e54a90e6f2d3da9a602, type: 3}
---- !u!1 &2137130889 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5592408856767721316, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
-  m_PrefabInstance: {fileID: 1405032645}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2137130890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1405032652, guid: 47f5a79aee4cd4c4f8bb4ea003e50989, type: 3}
   m_PrefabInstance: {fileID: 1405032645}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137130889}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -17304,10 +17342,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 420226403}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 420226403}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleOutline
+      objectReference: {fileID: 0}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleOutline
+      objectReference: {fileID: 0}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 74938284484995597, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 74938284484995599, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
       propertyPath: combinaisons.Array.data[0].combineWith
       value: 
       objectReference: {fileID: 8968851240696205933}
+    - target: {fileID: 74938284484995600, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2657512129192981245, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
       propertyPath: m_Name
       value: Skillet
@@ -17358,11 +17436,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
---- !u!1 &74938284484995596 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2657512129192981245, guid: c54324ff031d3d64ea67180cb67ab765, type: 3}
-  m_PrefabInstance: {fileID: 74938284484995595}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &78144035449431858
 GameObject:
   m_ObjectHideFlags: 0
@@ -18144,22 +18217,6 @@ Transform:
   m_Father: {fileID: 4590409760639176988}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &803914400731780808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2481852304965991436, guid: 793f05ff54890394cb12014628c30170, type: 3}
-  m_PrefabInstance: {fileID: 2979514224911002308}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &803914400731780810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 803914400731780812, guid: 793f05ff54890394cb12014628c30170, type: 3}
-  m_PrefabInstance: {fileID: 2979514224911002308}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803914400731780808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!33 &807798486330300286
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18241,24 +18298,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 919132148083366537}
-        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
-        m_MethodName: Enable
-        m_Mode: 1
+        m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
+        m_MethodName: ToggleOutline
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 919132148083366537}
-        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
-        m_MethodName: Disabled
-        m_Mode: 1
+        m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
+        m_MethodName: ToggleOutline
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18318,23 +18375,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 3
-    isStatic: 1
-    resultOrder: {fileID: 11400000, guid: a8ea204f433ffbe4593ae512d97a7cff, type: 2}
-    isLocked: 0
-  combinaisons:
-  - combineWith: {fileID: 2137130889}
-  subList: []
+  name: 
+  iD: 5
+  state: 0
+  combineWith:
+  - Scissor
+  influence: 0
   outline: {fileID: 919132148083366539}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &919132148083366538
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20024,23 +20074,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 2
-    isStatic: 1
-    resultOrder: {fileID: 11400000, guid: 56fdda501b76ae24e89420b6edc04702, type: 2}
-    isLocked: 0
-  combinaisons:
-  - combineWith: {fileID: 1122972691}
-  subList: []
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: 0
   outline: {fileID: 2977402320248723883}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &2977402320248723882
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20100,24 +20142,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2977402320248723881}
-        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
-        m_MethodName: Enable
-        m_Mode: 1
+        m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
+        m_MethodName: ToggleOutline
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2977402320248723881}
-        m_TargetAssemblyTypeName: ObjectManager, Assembly-CSharp
-        m_MethodName: Disabled
-        m_Mode: 1
+        m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
+        m_MethodName: ToggleOutline
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -20172,21 +20214,57 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 803914400731780809, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 803914400731780810}
+      objectReference: {fileID: 1419880646}
     - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 803914400731780810}
+      objectReference: {fileID: 1419880646}
     - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Disabled
+      value: ToggleOutline
       objectReference: {fileID: 0}
     - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Enable
+      value: ToggleOutline
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780811, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780812, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: iD
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780812, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: combineWith.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 803914400731780812, guid: 793f05ff54890394cb12014628c30170, type: 3}
+      propertyPath: combineWith.Array.data[0]
+      value: Lavabo_evier
       objectReference: {fileID: 0}
     - target: {fileID: 803914400731780812, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: combinaisons.Array.data[0].combineWith
@@ -20202,15 +20280,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2970861902727161526, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.332
+      value: -3.53
       objectReference: {fileID: 0}
     - target: {fileID: 2970861902727161526, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.902
+      value: 1.267
       objectReference: {fileID: 0}
     - target: {fileID: 2970861902727161526, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.747
+      value: 0.523
       objectReference: {fileID: 0}
     - target: {fileID: 2970861902727161526, guid: 793f05ff54890394cb12014628c30170, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20908,7 +20986,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 92d5266febc63f44994fd6b994bca724, type: 2}
+  - {fileID: 2100000, guid: d4922589261c0af4c840b82672004f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21647,6 +21725,7 @@ GameObject:
   - component: {fileID: 5801381811871688923}
   - component: {fileID: 5648651992850520680}
   - component: {fileID: 8307676968523890367}
+  - component: {fileID: 4328719753073793601}
   m_Layer: 0
   m_Name: Structure_meuble
   m_TagString: Untagged
@@ -21654,6 +21733,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!64 &4328719753073793601
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328719753073793600}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2590795334796885151, guid: 016e412a6fea3e54a90e6f2d3da9a602, type: 3}
 --- !u!1 &4334115314983350666
 GameObject:
   m_ObjectHideFlags: 0
@@ -22087,17 +22180,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pan
       objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 980369144}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 980369144}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleOutline
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleOutline
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CombinableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930486, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930488, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: combineWith.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606763114330930488, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
+      propertyPath: combineWith.Array.data[0]
+      value: Lavabo_evier
+      objectReference: {fileID: 0}
     - target: {fileID: 4606763114330930488, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
       propertyPath: combinaisons.Array.data[0].combineWith
       value: 
       objectReference: {fileID: 8968851240696205933}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
---- !u!1 &4606763114330930485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4058378994034640064, guid: 528587cf06b44be49b76bd6ec152c924, type: 3}
-  m_PrefabInstance: {fileID: 4606763114330930484}
-  m_PrefabAsset: {fileID: 0}
 --- !u!33 &4631462583714510114
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -23036,7 +23168,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bbc4c774d455f854fb87da89f1aa5a00, type: 2}
+  - {fileID: 2100000, guid: d4922589261c0af4c840b82672004f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24756,23 +24888,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c241d8e5069b04eb5ff8a866303f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectData:
-    Name: 
-    Hp: 0
-    Dammage: 0
-    Fruit: 
-  data:
-    iD: 1
-    isStatic: 0
-    resultOrder: {fileID: 11400000, guid: cfdee7c44715c4640859909447e8b50f, type: 2}
-    isLocked: 0
-  combinaisons:
-  - combineWith: {fileID: 8968851240696205933}
-  subList: []
+  name: 
+  iD: 0
+  state: 0
+  combineWith: []
+  influence: 0
   outline: {fileID: 7245836190658957618}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
-  baseColor: {r: 0, g: 0, b: 0, a: 0}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  isLocked: 0
 --- !u!135 &7245836190658957621
 SphereCollider:
   m_ObjectHideFlags: 0
