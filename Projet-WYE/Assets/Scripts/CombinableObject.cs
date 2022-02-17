@@ -8,10 +8,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 //[RequireComponent(typeof(Outline), typeof(SphereCollider))]
 public class CombinableObject : CombinableObject_Data
 {
-
     //public OrderFormat resultOrder;
 
-    [HideInInspector] public bool isLocked = false;
+    public bool isLocked = false;
 
     //public List<Combinaisons> combinaisons;
     //public List<GameObject> subList; //???? What is it ? Can't Remember ?
@@ -19,6 +18,8 @@ public class CombinableObject : CombinableObject_Data
     // Start is called before the first frame update
     void Start()
     {
+        SetOutline();
+
         //subList.Add(gameObject);   
 
         if (MasterManager.Instance.objectActivator != null)
@@ -64,11 +65,11 @@ public class CombinableObject : CombinableObject_Data
         }
     }
 
-    public void ToggleOutline()
+    public void ToggleOutline(bool b)
     {
         if (!isLocked)
         {
-            outline.enabled = false;
+            outline.enabled = b;
         }
         else
         {
@@ -90,7 +91,7 @@ public class CombinableObject : CombinableObject_Data
 
             outline.OutlineColor = defaultOutlineColor;
 
-            ToggleOutline();
+            ToggleOutline(b);
         }
     }
 

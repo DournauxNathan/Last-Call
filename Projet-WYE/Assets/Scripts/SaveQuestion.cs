@@ -22,7 +22,7 @@ public class SaveQuestion : Singleton<SaveQuestion>
 
     public void SetUp()
     {
-        sequenceUnit = UnitDispatcher.Instance.sequence;
+        //sequenceUnit = UnitDispatcher.Instance.sequence;
         AnsweredQuestions.Clear();
     }
 
@@ -34,7 +34,7 @@ public class SaveQuestion : Singleton<SaveQuestion>
         }
     }
 
-    public void AddQuestion(List<string> _questions)
+    public void AddQuestions(List<string> _questions)
     {
         foreach (var q in _questions)
         {
