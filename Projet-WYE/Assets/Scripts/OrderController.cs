@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,22 @@ public class OrderController : Singleton<OrderController>
     public int numberOfCombinaison;
     public List<OrderFormat> orders;
     public bool isResolve = false;
+
+    [Header("New Section Code")]
+    public GameObject a;
+    public GameObject b;
+    public bool switchObject;
+
+    public List<Combinaison> combinaisons;
+    public List<string> ordersStrings;
+
+    private void Update()
+    {        
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            AddCombinaison(a, b);
+        }
+    }
 
     public void Setup()
     {
@@ -41,7 +58,33 @@ public class OrderController : Singleton<OrderController>
         }
     }
 
+    public void AddCombinaison(GameObject a, GameObject b)
+    {
+        Combinaison lastCombi = new Combinaison {
+            currentCombinaison = a.name + "+ " + b.name,
+            objetA = a.name,
+            objetB = b.name,
+        };
+
+        combinaisons.Add(lastCombi);
+
+        AddOrder(lastCombi.objetA, lastCombi.objetB);
+    }
+
+    public void AddOrder(string a, string b)
+    {
+       ordersStrings.Add("Use " + a + " with " + b + " to " + " make a thing");
+    }
+
     public bool SetResolve(bool _bool) { return isResolve = _bool; }
 
     public bool GetResolve() { return isResolve; }
+}
+
+[System.Serializable]
+public class Combinaison
+{
+    [HideInInspector] public string currentCombinaison;
+    public string objetA;
+    public string objetB;
 }

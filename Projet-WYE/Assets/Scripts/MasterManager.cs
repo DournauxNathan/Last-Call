@@ -89,10 +89,10 @@ public class MasterManager : Singleton<MasterManager>
     {
         if (!isInImaginary)
         {
-           /* for (int i = 0; i < rayInteractors.Count; i++)
+            for (int i = 0; i < rayInteractors.Count; i++)
             {
                 baseInteractors[i].SetActive(true);
-            }*/
+            }
 
             for (int i = 0; i < rayInteractors.Count; i++)
             {
@@ -101,10 +101,10 @@ public class MasterManager : Singleton<MasterManager>
         }
         else if (isInImaginary)
         {
-           /* for (int i = 0; i < baseInteractors.Count; i++)
+            for (int i = 0; i < baseInteractors.Count; i++)
             {
                 baseInteractors[i].SetActive(false);
-            }*/
+            }
 
             for (int i = 0; i < rayInteractors.Count; i++)
             {

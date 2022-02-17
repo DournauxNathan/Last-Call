@@ -9,7 +9,7 @@ public class CombinableObject_Data : MonoBehaviour
     [Header("Data")]
     public int iD;
     public StateMobility state;
-    public List<string> combineWith = new List<string>(); /*A changer par un outil qui vient lit ses combinaisons ????*/
+    public List<string> combineWith = new List<string>(); /*A changer par un outil qui vient lire ses combinaisons ????*/
     public int influence;
 
     [Header("Refs")]
