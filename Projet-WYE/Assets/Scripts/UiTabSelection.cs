@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UiTabSelection : MonoBehaviour
+public class UiTabSelection : Singleton<UiTabSelection>
 {
     public List<GameObject> tabs;
+
+    public List<GameObject> unitDispatcherFeedbacks;
 
     public void SwitchTab(int i)
     {
@@ -30,6 +32,39 @@ public class UiTabSelection : MonoBehaviour
                 tabs[1].SetActive(false);
                 break;
         }
+    }
 
+    public void SwitchSequence(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                unitDispatcherFeedbacks[0].SetActive(true);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 2:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(true);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 3:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(true);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 4:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(true);
+                break;
+        }
     }
 }

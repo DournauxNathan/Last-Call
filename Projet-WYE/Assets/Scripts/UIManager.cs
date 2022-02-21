@@ -9,16 +9,20 @@ public class UIManager : Singleton<UIManager>
 {
     public List<QuestionFormat> protocoleQuestions;
     public List<QuestionFormat> descriptionQuestion;
-    public List<InstantiableButton> buttons;
 
-    [Header("Refs")]
+    [Header("Refs - Phase 1")]
+    public List<InstantiableButton> buttons;
     public Transform checkListTransform = null;
     public Transform descriptionTransform = null;
-    [SerializeField] private Transform orderListTransform = null;
     [Space(5)]
     [SerializeField] private Transform pullingStock = null;
-
     public CanvasGroup leftScreen;
+
+    [Header("Refs - Phase 2")]
+    public List<InstantiableButton> _buttons;
+    public Transform orderListTransform = null;
+    [Space(5)]
+    [SerializeField] private Transform pullingStockB = null;
     public CanvasGroup rightScreen;
 
     [Header("Fade parameters")]
@@ -43,6 +47,8 @@ public class UIManager : Singleton<UIManager>
 
         LoadQuestions();
         PullQuestion();
+
+        CheckButtons();
     }
 
     public void PullQuestion()
@@ -53,29 +59,30 @@ public class UIManager : Singleton<UIManager>
 
             activateButton.SetActive(false);
 
-            // A CHANGER QUAND SWITCH ENTRE REA ET IMA
-            if (OrderController.Instance.orders.Count == 0)
+            for (int i = 0; i < protocoleQuestions.Count; i++)
             {
-                for (int i = 0; i < protocoleQuestions.Count; i++)
-                {
-                    var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
-                }
-
-                for (int i = 0; i < descriptionQuestion.Count; i++)
-                {
-                    var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
-                }
+                var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
             }
 
-            if (OrderController.Instance.GetResolve())
+            for (int i = 0; i < descriptionQuestion.Count; i++)
             {
-                for (int i = 0; i < OrderController.Instance.orders.Count; i++)
-                {
-                    var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
-                }
+                var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
             }
 
             EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+        }
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            if (OrderController.Instance.GetResolve())
+            {
+                for (int i = 0; i < OrderController.Instance.ordersStrings.Count; i++)
+                {
+                    var but = FindAvailableButtonForOrder(OrderController.Instance.ordersStrings[i]);
+                }
+            }
+
+            //EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
         }
     }
 
@@ -88,13 +95,13 @@ public class UIManager : Singleton<UIManager>
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
-        if (MasterManager.Instance.projectionTransition.range <= beginFadeOutAt)
+        if (Projection.Instance.transitionValue <= beginFadeOutAt)
         {
             HideUI();
             smoke.Stop();
         }
 
-        if (MasterManager.Instance.projectionTransition.range == beginFadeInAt)
+        if (Projection.Instance.transitionValue >= beginFadeInAt)
         {
             ShowUI();
 
@@ -103,22 +110,24 @@ public class UIManager : Singleton<UIManager>
 
         if (fadeIn) //Show UI
         {
-            if (UIManager.Instance.leftScreen != null)
+            if (leftScreen != null)
             {
                 StartFadeIn(leftScreen);
-                StartFadeIn(rightScreen);
+
+                if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+                {
+                    StartFadeIn(rightScreen);
+                }
             }
         }
 
         if (fadeOut) //Hide UI
         {
             StartFadeOut(leftScreen);
-            StartFadeOut(rightScreen);
         }
 
         //PullQuestion();
     }
-
 
     public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
     {
@@ -137,15 +146,15 @@ public class UIManager : Singleton<UIManager>
         Debug.LogError("Not enough buttons");
         return null;
     }
-    public InstantiableButton FindAvailableButtonForOrder(OrderFormat order)
+    public InstantiableButton FindAvailableButtonForOrder(Order order)
     {
         if (order != null)
         {
-            foreach (var but in buttons)
+            foreach (var but in _buttons)
             {
                 if (!but.isInstiantiated)
                 {
-                    but.ActivateOrder(orderListTransform, pullingStock, order);
+                    but.ActivateOrder(orderListTransform, pullingStockB, order);
                     return but;
                 }
             }
@@ -239,23 +248,33 @@ public class UIManager : Singleton<UIManager>
     {
         switch (ScenarioManager.Instance.currentScenario)
         {
-            case ScenarioManager.Scenario.TrappedMan:
+            case Scenario.TrappedMan:
                 descriptionQuestion.AddRange(ScenarioManager.Instance.trappedMan);
             break;
 
-            case ScenarioManager.Scenario.HomeInvasion:
+            case Scenario.HomeInvasion:
                 descriptionQuestion.AddRange(ScenarioManager.Instance.homeInvasion);
             break;
 
-            case ScenarioManager.Scenario.DomesticAbuse:
+            case Scenario.DomesticAbuse:
                 descriptionQuestion.AddRange(ScenarioManager.Instance.domesticAbuse);
             break;
 
-            case ScenarioManager.Scenario.RisingWater:
+            case Scenario.RisingWater:
                     descriptionQuestion.AddRange(ScenarioManager.Instance.risingWater);
             break;
         }        
 
         ScenarioManager.Instance.isScenarioLoaded = true;
+    }
+
+    //Check si les questions ont déjà été répondu entre les transition
+    public void CheckButtons()
+    {
+
+        foreach (var button in buttons)
+        {
+            button.IsAnswered();
+        }
     }
 }

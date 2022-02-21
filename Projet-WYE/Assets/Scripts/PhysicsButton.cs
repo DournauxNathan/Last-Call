@@ -6,14 +6,6 @@ using UnityEngine.Events;
 
 public class PhysicsButton : MonoBehaviour
 {
-    public enum Mode
-    {
-        Unit,
-        Physic,
-    }
-
-    public Mode currentMode;
-
     [Header("")]
     [Tooltip("Type of unit we want to send")]
     public Unit unitToSend;
@@ -34,33 +26,38 @@ public class PhysicsButton : MonoBehaviour
     public GameObject clicker;
     public ConfigurableJoint joint;
     public Material unlockColor;
+    public Material lockColor;
+
+    public int nPress = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         startPosition = push.transform.localPosition;
-        /*
-        if (currentMode == Mode.Unit)
-        {
-        }*/
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if (!isPressed && GetValue() + threshold >= 1)
+        if (!isPressed && GetValue() + threshold >= 1 && isActivate)
         {            
             Pressed();
         }
 
-        if (isPressed && GetValue() - threshold <= 0)
+        if (isPressed && GetValue() - threshold <= 0 && isActivate)
         {
             Released();
         }
 
         if (isActivate)
         {
+            push.GetComponent<BoxCollider>().enabled = true;
             clicker.GetComponent<Renderer>().material = unlockColor;
+        }
+        else
+        {
+            push.GetComponent<BoxCollider>().enabled = false;
+            clicker.GetComponent<Renderer>().material = lockColor;
         }
     }
 
@@ -78,20 +75,40 @@ public class PhysicsButton : MonoBehaviour
 
     public void Pressed()
     {
-        isPressed = true;
-        onPressed?.Invoke();
-        //Debug.Log("Pressed");
+        IncreaseNumberOfPress();
+        SendUnit();
+    }
+
+    public void IncreaseNumberOfPress()
+    {
+        nPress++;
+
+        if (nPress == 1)
+        {
+            UnitDispatcher.Instance.UpdateUI();
+        }
+        else if (nPress == 2)
+        {
+            UnitDispatcher.Instance.NextSequence();
+            UnitDispatcher.Instance.UpdateUI();
+            nPress = 2;
+        }
     }
 
     public void Released()
     {
         isPressed = false;
         onReleased?.Invoke();
-        //Debug.Log("Released");
+        Debug.Log(unitToSend);
     }
 
     public void SendUnit()
     {
-        Debug.Log(unitToSend + " sent");
+        if (!UnitDispatcher.Instance.unitsSend.Contains(unitToSend))
+        {
+            UnitDispatcher.Instance.unitsSend.Add(unitToSend);
+        }   
+
+        //SaveQuestion.Instance.savedDataFrom[0].unitSended.Add(unitToSend);
     }
 }

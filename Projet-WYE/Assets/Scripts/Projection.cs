@@ -7,102 +7,164 @@ public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
     public Transform player;
-    [Space(5)]public List<Material> transitionShaders;
 
-    [Header("Parameters")]
-    public bool startTransition;
-    [Tooltip("During of te transition in seconds")] public float time;
-    [Tooltip("0: Go to the imaginary | 1: Go Back to real life")]public int transitionValue;
-    [Range(0,3)] public float range = 3f;
-    private Vector3 playerPos;
+    [Space(5)] 
+    public List<Material> transitionShaders;
+    [Space(5)]
 
-    [Header("Parameters for testing the go/back mecanics")]
-    public float timeBetweenEachTransition;
-    public float timer;
+    public bool isTransition;
+    [Range(0, 3)]
+    public float transitionValue = 3f;
+
+    [Header("Projection Properties")]
+    [Tooltip("During of the transition in seconds")]
+    public float time;
+    [SerializeField] private bool pauseBetweenTransition = true;
+    [Tooltip("Time of the break between the Transition effect")]
+    public float timeBetweenTransition;
+    [Space(5)]
     public bool changeScene;
     public bool goBackInOffice;
+
+    [Header("Cycle Properties")]
+    public bool hasCycle = false;
+
+    private bool hasProjted;
+    private bool isDisconstruc;
 
     // Start is called before the first frame update
     void Start()
     {
+        //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat")
+        
         foreach (var mat in transitionShaders)
         {
             mat.SetFloat("_Distance", 3f * 10f);
         }
 
-        timer = timeBetweenEachTransition;
+        hasProjted = false;
+        StopCoroutine(WaitForVoid());
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPos = player.position;
-
         foreach (var mat in transitionShaders)
         {
-            mat.SetVector("_PlayerPos", playerPos);
-        }
-
-        if ((MasterManager.Instance.canImagine && startTransition) || startTransition)
-        {
-            DoTransition(transitionValue);
-        }
-
-        if (MasterManager.Instance.isInImaginary)
-        {
-            timer -= Time.deltaTime;
-            goBackInOffice = true;
-
-            if (timer <= 0)
-            {
-                timer = 0;
-                DoTransition(0);
-            }
+            mat.SetVector("_PlayerPos", player.position);
         }
 
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Distance", range * 10f);
-        }         
+            mat.SetFloat("_Distance", transitionValue * 10f);
+        }
+
+        if (pauseBetweenTransition && isTransition && !isDisconstruc)
+        {
+            Deconstruct();
+        }
+
+        if (pauseBetweenTransition && isTransition && isDisconstruc)
+        {
+            Construct();
+        }
     }
 
-    public void DoTransition(int state)
+    public void ResetTransition()
     {
-        if (state == 0)
+        if (transitionValue < 3)
         {
-            range -= time * Time.deltaTime;
+            isTransition = false;
+            transitionValue += Time.deltaTime * time;
 
-            if (range <= 0)
+            if (transitionValue > 3)
             {
-                startTransition = true;
-                transitionValue = 1;
-            
-                range = 0;
-
-                if (changeScene && goBackInOffice)
-                {
-                    goBackInOffice = false;
-                    //MasterManager.Instance.GoBackToOffice("Office");
-                }
-
-                if (changeScene)
-                {
-                    MasterManager.Instance.useOneInput = false;
-                    MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration");
-                }
-            }
-        }
-        else if (state == 1)
-        {
-            range += time *Time.deltaTime;
-
-            if (range >= 2.5)
-            {
-                startTransition = false;
-                transitionValue = 0;
-                range = 3;
-                
+                transitionValue = 3;
             }
         }
     }
+
+    public void Deconstruct()
+    {
+        if (transitionValue > 0)
+        {
+            isTransition = true;
+            transitionValue -= Time.deltaTime * time;
+        }
+        else if (hasCycle)
+        {
+            hasCycle = false;
+            isTransition = false;
+            transitionValue = 0;
+        }
+        else
+        {
+            transitionValue = 0;
+            isDisconstruc = true;
+            StartCoroutine(WaitForVoid());//coroutine
+            CallScene();
+            ToggleProjection();
+        }
+    }
+
+    public void Construct()
+    {
+        if (transitionValue < 3)
+        {
+            isTransition = true;
+            transitionValue += Time.deltaTime * time;
+        }
+        else if (hasCycle)
+        {
+            hasCycle = false;
+            isTransition = false;
+            transitionValue = 3;
+            isDisconstruc = false;
+        }
+        else
+        {
+            transitionValue = 3;
+
+            ToggleProjection();
+            StartCoroutine(WaitForVoid());//coroutine
+            CallScene();
+        }
+    }
+
+    public void CallScene()
+    {
+        if (!hasCycle && !hasProjted)
+        {
+            hasCycle = !false;
+
+            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusier senar 
+        }
+
+        if (!hasCycle && hasProjted)
+        {
+            hasCycle = !false;
+
+            MasterManager.Instance.GoBackToOffice("Office");
+        }
+    }
+
+    public void ToggleProjection() 
+    {
+        if (hasProjted)
+        {
+            hasProjted = false;
+        }
+        else
+        {
+            hasProjted = true;
+        }
+    }
+
+    IEnumerator WaitForVoid()
+    {
+        pauseBetweenTransition = false;
+        yield return new WaitForSeconds(timeBetweenTransition);
+        pauseBetweenTransition = true;
+    }
+
 }

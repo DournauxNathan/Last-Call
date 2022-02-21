@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8137297672460569015}
   - component: {fileID: 1309901508}
   - component: {fileID: 1309901509}
+  - component: {fileID: 6670544208798884417}
   m_Layer: 0
   m_Name: Physic Button
   m_TagString: Untagged
@@ -97,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1788e35d705fc439ad820519fe1702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMode: 0
   unitToSend: 0
   isActivate: 0
   threshold: 0.1
@@ -112,6 +112,8 @@ MonoBehaviour:
   clicker: {fileID: 8562293345333781635}
   joint: {fileID: 8137297673787813983}
   unlockColor: {fileID: 2100000, guid: 6b91844c30837ca4d99c1629415af84e, type: 2}
+  lockColor: {fileID: 0}
+  nPress: 0
 --- !u!54 &1309901508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,6 +144,46 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6670544208798884417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137297672460569013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b534a4eefba52d4ab66efe96c699691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitToSend: 0
+  isActivate: 0
+  threshold: 0.1
+  deadZone: 0.25
+  onPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UiTabSelection, Assembly-CSharp
+        m_MethodName: SwitchTab
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  push: {fileID: 0}
+  clicker: {fileID: 0}
+  joint: {fileID: 0}
+  unlockColor: {fileID: 0}
+  lockColor: {fileID: 0}
+  nPress: 0
 --- !u!1 &8137297673787813978
 GameObject:
   m_ObjectHideFlags: 0
