@@ -107,6 +107,7 @@ public class InstantiableButton : MonoBehaviour
                 }
             }
             SendAnswer(currentClick); //envoi le string
+            SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length); //A TEST
             currentClick++;
         }
         else if (currentClick >= question.listQuestion.Length - 1)
@@ -133,6 +134,7 @@ public class InstantiableButton : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
             }
             SendAnswer(currentClick); //envoi le string
+            SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length);
             Desactivate();
         }
 
