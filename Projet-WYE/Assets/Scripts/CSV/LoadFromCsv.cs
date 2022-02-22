@@ -6,6 +6,7 @@ using System.Linq;
 
 public class LoadFromCsv 
 {
+    #if UNITY_EDITOR
     [MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
     public static void LoadCSVToScriptableObjects()
     {
@@ -50,6 +51,7 @@ public class LoadFromCsv
         }
 
     }
+    #endif
     private static void CreateScriptable(string[] entry)
     {
         /*var newScriptableObject = ScriptableObject.CreateInstance<CombinableObject_Data>();
@@ -86,7 +88,7 @@ public class LoadFromCsv
         newPrefab.GetComponent<CombinableObject>().Init(entry);
 
     }
-
+    #if UNITY_EDITOR
     [MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
     static void SaveCurrentSelectionIntoPrefabAsset()
     {
@@ -114,4 +116,5 @@ public class LoadFromCsv
     {
         
     }
+    #endif
 }

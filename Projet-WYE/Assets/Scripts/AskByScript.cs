@@ -58,7 +58,7 @@ public class AskByScript : MonoBehaviour
         }
     }
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(AskByScript))]
 public class AskByScriptEditor : Editor
 {
@@ -72,7 +72,6 @@ public class AskByScriptEditor : Editor
         sp_boolc = serializedObject.FindProperty("giveOrder");
         sp_atIndex = serializedObject.FindProperty("atIndex");
     }
-
     public override void OnInspectorGUI()
     {
         script = target as AskByScript;
@@ -108,4 +107,6 @@ public class AskByScriptEditor : Editor
         
         serializedObject.ApplyModifiedProperties();
     }
+
 }
+#endif
