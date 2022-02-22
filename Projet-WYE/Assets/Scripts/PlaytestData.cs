@@ -16,9 +16,10 @@ public class PlaytestData : Singleton<PlaytestData>
         string localPath = "Assets/Playtests/" + betaTesteurs.player + ".json";
 
         // Make sure the file name is unique, in case an existing Prefab has the same name.
-        localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
-
-        System.IO.File.WriteAllText(localPath, player);
+        //localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+        //localPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        localPath = @"D:\TestJson\"; //Debug.Log(localPath);
+        System.IO.File.WriteAllText(localPath + betaTesteurs.player +".json", player);
     }
 
     public string ConvertTime()
@@ -38,12 +39,11 @@ public class PlaytestData : Singleton<PlaytestData>
         betaTesteurs.data.bugsReport[betaTesteurs.data.bugsReport.Length - 1].atPhase = MasterManager.Instance.currentPhase;
     }
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(PlaytestData))]
 public class PlaytestEditor : Editor
 {
     PlaytestData script;
-    
     public override void OnInspectorGUI()
     {
         script = target as PlaytestData;
@@ -56,8 +56,9 @@ public class PlaytestEditor : Editor
             script.SaveIntoJson();
         }
     }
+    
 }
-
+#endif
 [System.Serializable]
 public class DataFromScenario
 {
