@@ -11,6 +11,7 @@ public class DissolvingObject : MonoBehaviour
     public float dissolveRate = 0.02f;
     public float refreshRate = 0.05f;
     public VisualEffect VFXGraph;
+    public ParticleSystem Particle;
     public float Delay = 0.02f;
 
     private Material[] dissolveMaterials;
@@ -21,6 +22,15 @@ public class DissolvingObject : MonoBehaviour
         {
            VFXGraph.Stop();
            VFXGraph.gameObject.SetActive(false);
+        }
+
+        if (MeshRenderer != null)
+            dissolveMaterials = MeshRenderer.materials;
+
+        if (Particle != null)
+        {
+            Particle.Stop();
+            Particle.gameObject.SetActive(false);
         }
 
         if (MeshRenderer != null)
@@ -42,6 +52,11 @@ public class DissolvingObject : MonoBehaviour
         {
             VFXGraph.gameObject.SetActive(true);
             VFXGraph.Play();
+        }
+        if (Particle != null)
+        {
+            Particle.gameObject.SetActive(true);
+            Particle.Play();
         }
 
         float counter = 0;

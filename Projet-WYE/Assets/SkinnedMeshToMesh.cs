@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class SkinnedMeshToMesh : MonoBehaviour
 {
     public VisualEffect VFXGraph;
+    public ParticleSystem Particle;
     public float refreshRate;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class SkinnedMeshToMesh : MonoBehaviour
             yield return new WaitForSeconds(refreshRate);
         }
     }
+
+   
     // Update is called once per frame
     void Update()
     {
