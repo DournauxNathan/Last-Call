@@ -11,6 +11,8 @@ public class PlaytestData : Singleton<PlaytestData>
            
     public void SaveIntoJson()
     {
+        betaTesteurs.data.timeOfTheCall = ConvertTime(); 
+
         string player = JsonUtility.ToJson(betaTesteurs);
 
         string localPath = "Assets/Playtests/" + betaTesteurs.player + ".json";
@@ -63,8 +65,8 @@ public class DataFromScenario
 {
     public Scenario scenario;
 
-    public string timeOfTheCall = PlaytestData.Instance.ConvertTime();
-     public float timerCall; 
+    public string timeOfTheCall;
+    public float timerCall; 
 
     public List<string> answeredQuestions;
     public List<Unit> unitSended;
@@ -72,6 +74,7 @@ public class DataFromScenario
     public int numberOfCombinaisonsMade;
 
     public Bug[] bugsReport;
+
 }
 
 [System.Serializable]
