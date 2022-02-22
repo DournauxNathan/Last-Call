@@ -45,8 +45,11 @@ public class UIManager : Singleton<UIManager>
     {
         EventSystem.current.firstSelectedGameObject = startSelectbutton;
 
-        LoadQuestions();
-        PullQuestion();
+        if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
+        {            
+            LoadQuestions();
+            PullQuestion();
+        }
 
         CheckButtons();
     }
@@ -54,7 +57,8 @@ public class UIManager : Singleton<UIManager>
     public void PullQuestion()
     {
         if (ScenarioManager.Instance.isScenarioLoaded)
-        {
+        {            
+
             ScenarioManager.Instance.isScenarioLoaded = false;
 
             activateButton.SetActive(false);
@@ -69,7 +73,10 @@ public class UIManager : Singleton<UIManager>
                 var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
             }
 
-            EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+            if (MasterManager.Instance.currentPhase != Phases.Phase_3)
+            {
+                EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(2).GetComponentInChildren<Button>().gameObject);
+            }
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3)
@@ -82,7 +89,7 @@ public class UIManager : Singleton<UIManager>
                 }
             }
 
-            //EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+            EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(2).GetComponentInChildren<Button>().gameObject);
         }
     }
 
@@ -125,8 +132,6 @@ public class UIManager : Singleton<UIManager>
         {
             StartFadeOut(leftScreen);
         }
-
-        //PullQuestion();
     }
 
     public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
@@ -271,7 +276,6 @@ public class UIManager : Singleton<UIManager>
     //Check si les questions ont déjà été répondu entre les transition
     public void CheckButtons()
     {
-
         foreach (var button in buttons)
         {
             button.IsAnswered();

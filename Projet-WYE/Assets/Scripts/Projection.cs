@@ -29,7 +29,7 @@ public class Projection : Singleton<Projection>
     [Header("Cycle Properties")]
     public bool hasCycle = false;
 
-    private bool hasProjted;
+    public bool hasProjted;
     private bool isDisconstruc;
 
     // Start is called before the first frame update
@@ -137,12 +137,17 @@ public class Projection : Singleton<Projection>
         {
             hasCycle = !false;
 
+            MasterManager.Instance.isInImaginary = true;
             MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusier senar 
         }
 
         if (!hasCycle && hasProjted)
         {
             hasCycle = !false;
+
+            //MasterManager.Instance.isInImaginary = false;
+                        
+            MasterManager.Instance.currentPhase = Phases.Phase_3;
 
             MasterManager.Instance.GoBackToOffice("Office");
         }

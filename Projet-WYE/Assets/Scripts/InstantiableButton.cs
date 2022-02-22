@@ -125,14 +125,20 @@ public class InstantiableButton : MonoBehaviour
                 currentBtn = i;
             }
 
-            if (EventSystem.current.gameObject != UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject)
+            if (button.interactable)
             {
-                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject);
+                if (UiTabSelection.Instance.indexTab == 0)
+                {
+                    EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject);
+                }
+                else if (UiTabSelection.Instance.indexTab == 1)
+                {
+                    EventSystem.current.SetSelectedGameObject(UIManager.Instance.descriptionTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject);
+                }
             }
-            else if (EventSystem.current.gameObject == null)
-            {
-                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
-            }
+            
+            
+
             SendAnswer(currentClick); //envoi le string
             SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length);
             Desactivate();
