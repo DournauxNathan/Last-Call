@@ -11,14 +11,17 @@ public class PlaytestData : Singleton<PlaytestData>
            
     public void SaveIntoJson()
     {
+        betaTesteurs.data.timeOfTheCall = ConvertTime(); 
+
         string player = JsonUtility.ToJson(betaTesteurs);
 
         string localPath = "Assets/Playtests/" + betaTesteurs.player + ".json";
 
         // Make sure the file name is unique, in case an existing Prefab has the same name.
-        localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
-
-        System.IO.File.WriteAllText(localPath, player);
+        //localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+        //localPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        localPath = @"D:\TestJson\"; //Debug.Log(localPath);
+        System.IO.File.WriteAllText(localPath + betaTesteurs.player +".json", player);
     }
 
     public string ConvertTime()
@@ -38,12 +41,11 @@ public class PlaytestData : Singleton<PlaytestData>
         betaTesteurs.data.bugsReport[betaTesteurs.data.bugsReport.Length - 1].atPhase = MasterManager.Instance.currentPhase;
     }
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(PlaytestData))]
 public class PlaytestEditor : Editor
 {
     PlaytestData script;
-    
     public override void OnInspectorGUI()
     {
         script = target as PlaytestData;
@@ -56,15 +58,16 @@ public class PlaytestEditor : Editor
             script.SaveIntoJson();
         }
     }
+    
 }
-
+#endif
 [System.Serializable]
 public class DataFromScenario
 {
     public Scenario scenario;
 
-    public string timeOfTheCall = PlaytestData.Instance.ConvertTime();
-     public float timerCall; 
+    public string timeOfTheCall;
+    public float timerCall; 
 
     public List<string> answeredQuestions;
     public List<Unit> unitSended;
@@ -72,6 +75,7 @@ public class DataFromScenario
     public int numberOfCombinaisonsMade;
 
     public Bug[] bugsReport;
+
 }
 
 [System.Serializable]

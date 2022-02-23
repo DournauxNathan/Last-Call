@@ -63,9 +63,9 @@ public class TutorialButton : InstantiableButton
 
         foreach (var but in tutoButtons)
         {
-            toggle.enabled = true;
+            button.enabled = false;
+            toggle.enabled = false;
             toggle.isOn = true;
-            img.enabled = false;
         }
     }
 }

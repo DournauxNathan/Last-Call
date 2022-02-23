@@ -15,47 +15,50 @@ public class AskByScript : MonoBehaviour
     {
         if (askProtocolQuestion && atIndex[0] > -1)
         {
-            DoAtIndex(atIndex[0], UIManager.Instance.checkListTransform, askProtocolQuestion);
+            DoAtIndex(atIndex[0], UIManager.Instance.checkListTransform);
+            askProtocolQuestion = false;
         } 
         else if (askProtocolQuestion)
         {
-            DoForAll(UIManager.Instance.checkListTransform, askProtocolQuestion);
+            DoForAll(UIManager.Instance.checkListTransform);
         }
 
         if (askDescriptionQuestion && atIndex[1] > -1)
         {
-            DoAtIndex(atIndex[1], UIManager.Instance.descriptionTransform, askDescriptionQuestion);
+            DoAtIndex(atIndex[1], UIManager.Instance.descriptionTransform);
+            askDescriptionQuestion = false;
         }
         else if(askDescriptionQuestion)
         {
-            DoForAll(UIManager.Instance.descriptionTransform, askDescriptionQuestion);
+            DoForAll(UIManager.Instance.descriptionTransform);
+            //askDescriptionQuestion = false;
         }
 
         if (giveOrder && atIndex[2] > -1)
         {
-            DoAtIndex(atIndex[2], UIManager.Instance.orderListTransform, giveOrder);
+            DoAtIndex(atIndex[2], UIManager.Instance.orderListTransform);
+            giveOrder = false;
         }
         else if (giveOrder)
         {
-            DoForAll(UIManager.Instance.orderListTransform, giveOrder);
+            DoForAll(UIManager.Instance.orderListTransform);
+            //giveOrder = false;
         }
     }
-    public void DoAtIndex(int index,Transform _transform, bool _bool)
+    public void DoAtIndex(int index,Transform _transform)
     {
         _transform.GetChild(index).GetComponent<InstantiableButton>().simulateInput = true;
-        _bool = false;
 
     }
-    public void DoForAll(Transform _transform, bool _bool)
+    public void DoForAll(Transform _transform)
     {
         for (int i = 0; i < _transform.childCount; i++)
         {
             _transform.GetChild(i).GetComponent<InstantiableButton>().simulateInput = true;
-            _bool = _transform.GetChild(i).GetComponent<InstantiableButton>().simulateInput;
         }
     }
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(AskByScript))]
 public class AskByScriptEditor : Editor
 {
@@ -69,7 +72,6 @@ public class AskByScriptEditor : Editor
         sp_boolc = serializedObject.FindProperty("giveOrder");
         sp_atIndex = serializedObject.FindProperty("atIndex");
     }
-
     public override void OnInspectorGUI()
     {
         script = target as AskByScript;
@@ -80,7 +82,7 @@ public class AskByScriptEditor : Editor
         
         if (GUILayout.Button("All"))
         {
-            script.DoForAll(UIManager.Instance.checkListTransform, script.askProtocolQuestion);
+            script.DoForAll(UIManager.Instance.checkListTransform);
         }
         EditorGUILayout.EndHorizontal();
 
@@ -89,7 +91,7 @@ public class AskByScriptEditor : Editor
         EditorGUILayout.PropertyField(sp_atIndex.GetArrayElementAtIndex(1), new GUIContent(""));
         if (GUILayout.Button("All"))
         {
-            script.DoForAll(UIManager.Instance.descriptionTransform, script.askDescriptionQuestion);
+            script.DoForAll(UIManager.Instance.descriptionTransform);
         }
         EditorGUILayout.EndHorizontal();
 
@@ -99,10 +101,12 @@ public class AskByScriptEditor : Editor
         
         if (GUILayout.Button("All"))
         {
-            //script.DoForAll(UIManager.Instance., script.giveOrder);
+            script.DoForAll(UIManager.Instance.orderListTransform);
         }
         EditorGUILayout.EndHorizontal();
         
         serializedObject.ApplyModifiedProperties();
     }
+
 }
+#endif

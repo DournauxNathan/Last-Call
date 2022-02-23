@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class UiTabSelection : Singleton<UiTabSelection>
 {
     public List<GameObject> tabs;
+    public int indexTab = 0;
 
     public List<GameObject> unitDispatcherFeedbacks;
 
@@ -32,6 +33,11 @@ public class UiTabSelection : Singleton<UiTabSelection>
                 tabs[1].SetActive(false);
                 break;
         }
+    }
+
+    public void UpdateIndex(int i)
+    {
+        indexTab = i;
     }
 
     public void SwitchSequence(int i)

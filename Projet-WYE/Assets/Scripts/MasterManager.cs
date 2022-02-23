@@ -38,6 +38,7 @@ public class MasterManager : Singleton<MasterManager>
     public bool isTutoEnded;
     public bool startTuto;
     public float timerTutoBegin = 30f;
+    private bool b = true;
 
     public UnityEvent startCall;
 
@@ -47,11 +48,6 @@ public class MasterManager : Singleton<MasterManager>
 
 
     private void Start()
-    {
-        UpdateController();
-    }
-
-    public void FixedUpdate()
     {
         if (currentPhase == Phases.Phase_3)
         {
@@ -69,7 +65,11 @@ public class MasterManager : Singleton<MasterManager>
             UiTabSelection.Instance.SwitchSequence(UnitDispatcher.Instance.sequence);
         }
 
+        UpdateController();
+    }
 
+    public void FixedUpdate()
+    {
         UpdateController();
 
         if (!skipTuto && !isTutoEnded)
@@ -89,10 +89,15 @@ public class MasterManager : Singleton<MasterManager>
             startTuto = false;
         }
 
-        if (skipTuto)
+        if (skipTuto || isTutoEnded)
         {
             skipTuto = false;
-            startCall.Invoke();
+
+            if (b)
+            {
+                b = false;
+                startCall.Invoke();
+            }
         }
     }
 
@@ -162,7 +167,7 @@ public class MasterManager : Singleton<MasterManager>
     public void StartCall()
     {
         isTutoEnded = true;
-        startCall.Invoke();
+        UIManager.Instance.PullQuestion();
     }
 
 }

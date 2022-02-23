@@ -50,8 +50,10 @@ public class OrderController : Singleton<OrderController>
         {
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
-            MasterManager.Instance.currentPhase = Phases.Phase_3;
-            SceneLoader.Instance.LoadNewScene("Office");            
+
+            Projection.Instance.isTransition = true;
+            Projection.Instance.hasProjted = true;
+            Projection.Instance.Deconstruct();
         }
         else
         {
