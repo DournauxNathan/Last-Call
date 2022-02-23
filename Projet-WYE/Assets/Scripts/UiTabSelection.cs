@@ -18,19 +18,26 @@ public class UiTabSelection : Singleton<UiTabSelection>
         switch (i)
         {
             case 0:
+                Debug.Log("A");
+                //tabs[0].SetActive(true);
                 tabs[1].SetActive(false);
-                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
                 tabs[2].SetActive(false);
+
+                //UIManager.Instance.UpdateEventSystem(UIManager.Instance.checkListTransform);
+
                 break;
 
             case 1:
-                tabs[2].SetActive(false); 
-                EventSystem.current.SetSelectedGameObject(UIManager.Instance.descriptionTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+                Debug.Log("B");
+                tabs[1].SetActive(true);
+                tabs[2].SetActive(false);
+                //UIManager.Instance.UpdateEventSystem(UIManager.Instance.descriptionTransform);
                 break;
 
             case 2:
                 tabs[0].SetActive(false);
                 tabs[1].SetActive(false);
+                tabs[2].SetActive(true);
                 break;
         }
     }
