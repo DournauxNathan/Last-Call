@@ -110,4 +110,9 @@ public class PhysicsButton : MonoBehaviour
 
         //SaveQuestion.Instance.savedDataFrom[0].unitSended.Add(unitToSend);
     }
+
+    public void ChangeSceneButtun()
+    {
+        SceneLoader.Instance.LoadNewScene("Office");
+    }
 }

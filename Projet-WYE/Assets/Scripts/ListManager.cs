@@ -70,19 +70,33 @@ public class ListManager : Singleton<ListManager>
 
         if (objet1.TryGetComponent<CombinableObject>(out _objectManager1) && objet2.TryGetComponent<CombinableObject>(out _objectManager2))
         {
+            Debug.Log("A" + _objectManager1.name + " | " + _objectManager2.name);
+
             //Check with 2 objects only and with the ObjectManager1
-            if (_objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.name.ToString() && _objectManager2.combineWith.Count != 0 
-                || _objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.name.ToString() && _objectManager2.combineWith.Count != 0)
+            if (_objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.name.ToString()  
+                || _objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[1] == objet2.name.ToString())
             {
+                Debug.Log("B" + _objectManager1.name + " | " + _objectManager2.name);
                 if (_objectManager1.state == StateMobility.Static)
                 {
+                    Debug.Log("C Static" + _objectManager1.name + " | " + _objectManager2.name);
                     objet2.SetActive(false);
 
                     //Clear the list if a combinaison has already been find
                     _objectManager1.combineWith.Clear();
                 }
+                else if (_objectManager2.state == StateMobility.Static)
+                {
+                    Debug.Log("Cbis Static" + _objectManager1.name + " | " + _objectManager2.name);
+                    objet1.SetActive(false);
+
+                    //Clear the list if a combinaison has already been find
+                    _objectManager1.combineWith.Clear();
+                }
+
                 else
                 {
+                    Debug.Log("Suppr1");
                     objet1.SetActive(false);
                     objet2.SetActive(false);
                 }
@@ -92,9 +106,20 @@ public class ListManager : Singleton<ListManager>
             else if (_objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0 
                 || _objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0)
             {
-                //Check with 2 objects only and with the ObjectManager2
-                if (_objectManager2.state == StateMobility.Static)
+                Debug.Log("D" + _objectManager1.name + " | " + _objectManager2.name);
+                if (_objectManager1.state == StateMobility.Static)
                 {
+                    Debug.Log("C Static" + _objectManager1.name + " | " + _objectManager2.name);
+                    objet2.SetActive(false);
+
+                    //Clear the list if a combinaison has already been find
+                    _objectManager1.combineWith.Clear();
+                }
+                
+                //Check with 2 objects only and with the ObjectManager2
+                else if (_objectManager2.state == StateMobility.Static)
+                {
+                    Debug.Log("E Static" + _objectManager1.name + " | " + _objectManager2.name);
                     objet1.SetActive(false);
 
                     //Clear the list if a combinaison has already been find
@@ -102,6 +127,7 @@ public class ListManager : Singleton<ListManager>
                 }
                 else
                 {
+                    Debug.Log("Suppr2");
                     objet1.SetActive(false);
                     objet2.SetActive(false);
                 }
@@ -123,13 +149,14 @@ public class ListManager : Singleton<ListManager>
                     }
                     else
                     {
+                        Debug.Log("Suppr3");
                         objet1.SetActive(false);
                         objet2.SetActive(false);
                     }
 
                     SetToOrderController(_objectManager1, _objectManager2);
                 }
-                else if (_objectManager2.combineWith[0] == objet1.name)
+                else if (_objectManager2.combineWith[0] == _objectManager1.name)
                 {
                     if (_objectManager2.state == StateMobility.Static)
                     {
@@ -140,6 +167,7 @@ public class ListManager : Singleton<ListManager>
                     }
                     else
                     {
+                        Debug.Log("Suppr4");
                         objet1.SetActive(false);
                         objet2.SetActive(false);
                     }
@@ -161,6 +189,7 @@ public class ListManager : Singleton<ListManager>
     public void SetToOrderController(CombinableObject _objectManagerA, CombinableObject _objectManagerB)
     {
         OrderController.Instance.AddCombinaison(_objectManagerA, _objectManagerB);
+        PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
         OrderController.Instance.IncreaseValue(1);
         
         /*

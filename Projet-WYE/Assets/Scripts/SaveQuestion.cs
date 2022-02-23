@@ -31,6 +31,7 @@ public class SaveQuestion : Singleton<SaveQuestion>
         if (!AnsweredQuestions.Contains(_question))
         {
             AnsweredQuestions.Add(_question);
+            PlaytestData.Instance.betaTesteurs.data.answeredQuestions.Add(_question);
         }
     }
 
