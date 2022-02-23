@@ -78,6 +78,12 @@ public class PhysicsButton : MonoBehaviour
         isPressed = true;
         onPressed?.Invoke();
     }
+    
+    public void Released()
+    {
+        isPressed = false;
+        onReleased?.Invoke();
+    }
 
     public void IncreaseNumberOfPress()
     {
@@ -93,12 +99,6 @@ public class PhysicsButton : MonoBehaviour
             UnitDispatcher.Instance.UpdateUI();
             nPress = 2;
         }
-    }
-
-    public void Released()
-    {
-        isPressed = false;
-        onReleased?.Invoke();
     }
 
     public void SendUnit()
