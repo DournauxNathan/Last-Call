@@ -20,6 +20,8 @@ public class OrderController : Singleton<OrderController>
     public List<Combinaison> combinaisons;
     public List<Order> ordersStrings;
 
+    public TMP_Text text;
+
     private void Update()
     {        
         if (Keyboard.current.enterKey.wasPressedThisFrame)
@@ -70,7 +72,10 @@ public class OrderController : Singleton<OrderController>
             value = a.influence + b.influence,
         };
 
+        text.text = newCombi.currentCombinaison;
+
         combinaisons.Add(newCombi);
+        PlaytestData.Instance.betaTesteurs.data.combinaisonsMade.Add(newCombi);
 
         AddOrder(newCombi.objetA, newCombi.objetB, newCombi.value);
     }
