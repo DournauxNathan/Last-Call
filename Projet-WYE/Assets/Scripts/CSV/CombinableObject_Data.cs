@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class CombinableObject_Data : MonoBehaviour
 {
-    [HideInInspector] public new string name;
+    public new string name;
     [Header("Data")]
     public int iD;
     public StateMobility state;

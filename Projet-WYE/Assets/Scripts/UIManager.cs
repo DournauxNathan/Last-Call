@@ -43,7 +43,7 @@ public class UIManager : Singleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
-        EventSystem.current.firstSelectedGameObject = startSelectbutton;
+        EventSystem.current.SetSelectedGameObject(startSelectbutton.GetComponentInChildren<Button>().gameObject);
 
         if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
         {            
@@ -58,7 +58,6 @@ public class UIManager : Singleton<UIManager>
     {
         if (ScenarioManager.Instance.isScenarioLoaded)
         {            
-
             ScenarioManager.Instance.isScenarioLoaded = false;
 
             activateButton.SetActive(false);
@@ -73,10 +72,7 @@ public class UIManager : Singleton<UIManager>
                 var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
             }
 
-            if (MasterManager.Instance.currentPhase != Phases.Phase_3)
-            {
-                EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(2).GetComponentInChildren<Button>().gameObject);
-            }
+            StartCoroutine(ExecuteAfterTime(.2f));
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3)
@@ -89,10 +85,52 @@ public class UIManager : Singleton<UIManager>
                 }
             }
 
-            EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(2).GetComponentInChildren<Button>().gameObject);
+            UpdateEventSystem(orderListTransform);
         }
     }
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        UpdateEventSystem(checkListTransform);
+    }
 
+    public void UpdateEventSystem(Transform transform)
+    {
+        if (transform.name == checkListTransform.name)
+        {
+            for (int i = 0; i < checkListTransform.childCount; i++)
+            {
+                if (checkListTransform.GetChild(i).GetComponentInChildren<Button>().interactable)
+                {
+                    EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
+                }
+            }
+        }
+
+        if (transform.name == descriptionTransform.name)
+        {
+            Debug.Log(transform.name);
+
+            for (int i = 0; i < descriptionTransform.childCount; i++)
+            {
+                if (descriptionTransform.GetChild(i).GetComponentInChildren<Button>().interactable)
+                {
+                    EventSystem.current.SetSelectedGameObject(descriptionTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
+                }
+            }
+        }
+
+        if (transform.name == orderListTransform.name)
+        {
+            for (int i = 0; i < orderListTransform.childCount; i++)
+            {
+                if (orderListTransform.GetChild(i).GetComponentInChildren<Button>().interactable)
+                {
+                    EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
+                }
+            }
+        }
+    }
 
     public void Update()
     {

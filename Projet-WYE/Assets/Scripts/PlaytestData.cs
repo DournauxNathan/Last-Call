@@ -76,6 +76,8 @@ public class DataFromScenario
 
     public Bug[] bugsReport;
 
+    public List<Combinaison> combinaisonsMade;
+
 }
 
 [System.Serializable]
