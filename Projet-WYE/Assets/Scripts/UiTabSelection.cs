@@ -23,7 +23,7 @@ public class UiTabSelection : Singleton<UiTabSelection>
                 tabs[1].SetActive(false);
                 tabs[2].SetActive(false);
 
-                //UIManager.Instance.UpdateEventSystem(UIManager.Instance.checkListTransform);
+                UIManager.Instance.UpdateEventSystem(UIManager.Instance.checkListTransform);
 
                 break;
 
@@ -31,7 +31,8 @@ public class UiTabSelection : Singleton<UiTabSelection>
                 Debug.Log("B");
                 tabs[1].SetActive(true);
                 tabs[2].SetActive(false);
-                //UIManager.Instance.UpdateEventSystem(UIManager.Instance.descriptionTransform);
+
+                UIManager.Instance.UpdateEventSystem(UIManager.Instance.descriptionTransform);
                 break;
 
             case 2:

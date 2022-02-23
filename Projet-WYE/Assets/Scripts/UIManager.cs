@@ -72,7 +72,7 @@ public class UIManager : Singleton<UIManager>
                 var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
             }
 
-            UpdateEventSystem(checkListTransform);
+            StartCoroutine(ExecuteAfterTime(.2f));
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3)
@@ -88,6 +88,11 @@ public class UIManager : Singleton<UIManager>
             UpdateEventSystem(orderListTransform);
         }
     }
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        UpdateEventSystem(checkListTransform);
+    }
 
     public void UpdateEventSystem(Transform transform)
     {
@@ -98,7 +103,6 @@ public class UIManager : Singleton<UIManager>
                 if (checkListTransform.GetChild(i).GetComponentInChildren<Button>().interactable)
                 {
                     EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
-                    Debug.Log(EventSystem.current);
                 }
             }
         }
