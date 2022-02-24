@@ -27,6 +27,9 @@ public class PhysicsButton : MonoBehaviour
     public Collider[] CollidersToIgnore;
     public UnityEvent onPressed, onReleased;
 
+    [SerializeField] private Material activateColor;
+    [SerializeField] private Material desactivateColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,16 @@ public class PhysicsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isActivate)
+        {
+            buttonTop.GetComponent<Renderer>().material = activateColor;
+        }
+        else
+        {
+            buttonTop.GetComponent<Renderer>().material = desactivateColor;
+        }
+
+
         buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
         buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
         if (buttonTop.localPosition.y >= 0)

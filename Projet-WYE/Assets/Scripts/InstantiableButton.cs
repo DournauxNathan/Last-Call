@@ -27,6 +27,8 @@ public class InstantiableButton : MonoBehaviour
     private Transform stock;
     private bool isActive;
 
+    private Transform parentTransform;
+
     private void Start()
     {
         swapImaginaire = MasterManager.Instance.objectActivator;
@@ -54,6 +56,7 @@ public class InstantiableButton : MonoBehaviour
 
         this.stock = stock;
         this.question = question;
+        this.parentTransform = parent;
 
         currentClick = 0;
         button.enabled = true;
@@ -125,23 +128,12 @@ public class InstantiableButton : MonoBehaviour
                 currentBtn = i;
             }
 
-            if (button.interactable)
-            {
-                if (UiTabSelection.Instance.indexTab == 0)
-                {
-                    EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject);
-                }
-                else if (UiTabSelection.Instance.indexTab == 1)
-                {
-                    EventSystem.current.SetSelectedGameObject(UIManager.Instance.descriptionTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject);
-                }
-            }
-            
-            
-
             SendAnswer(currentClick); //envoi le string
             SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length);
+            
             Desactivate();
+
+            UIManager.Instance.UpdateEventSystem(parentTransform);
         }
 
         UpdateQuestion();
