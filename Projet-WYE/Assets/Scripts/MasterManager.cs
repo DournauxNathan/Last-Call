@@ -21,6 +21,7 @@ public class MasterManager : Singleton<MasterManager>
     public ObjectActivator objectActivator;
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
+    public Transform player;
     
     [Header("Hands")]
     public List<GameObject> baseInteractors;

@@ -1,19 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Teleport : Singleton<Teleport>
 {
-    private GameObject XrRig;
-    public List<Transform> positionPoints;
+    public Transform position;
 
     private void Start()
     {
-        XrRig = GameObject.FindGameObjectWithTag("XRRig");
+        position = this.transform;
     }
 
-    public void GoToPoint(int indexPoint)
+    internal void TeleportTo()
     {
-        XrRig.transform.position = positionPoints[indexPoint].position;
+        MasterManager.Instance.player.transform.position = position.position;
     }
 }
