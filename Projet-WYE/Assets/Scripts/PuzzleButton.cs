@@ -6,8 +6,9 @@ public class PuzzleButton : PhysicsButton
 {
     public void Press()
     {
-        //push.GetComponent<BoxCollider>().enabled = false;
-        
+        buttonTop.GetComponent<BoxCollider>().enabled = false;
+        isActivate = false;
+
         OrderController.Instance.IncreaseValue(1);
     }
 }   

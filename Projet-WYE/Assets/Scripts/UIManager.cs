@@ -77,13 +77,13 @@ public class UIManager : Singleton<UIManager>
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            if (OrderController.Instance.GetResolve())
-            {
+            /*if (OrderController.Instance.GetResolve())
+            {*/
                 for (int i = 0; i < OrderController.Instance.ordersStrings.Count; i++)
                 {
                     var but = FindAvailableButtonForOrder(OrderController.Instance.ordersStrings[i]);
                 }
-            }
+            //}
 
             UpdateEventSystem(orderListTransform);
         }
