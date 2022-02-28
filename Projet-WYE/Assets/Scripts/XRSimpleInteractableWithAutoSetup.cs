@@ -10,6 +10,10 @@ public class XRSimpleInteractableWithAutoSetup : XRSimpleInteractable
     {
         base.Awake();
         interactionManager = MasterManager.Instance.xRInteractionManager;
-        colliders[0] = GetComponent<MeshCollider>();
+        
+        if (GetComponent<MeshCollider>() != null)
+        {
+            colliders[0] = GetComponent<MeshCollider>();
+        }
     }
 }

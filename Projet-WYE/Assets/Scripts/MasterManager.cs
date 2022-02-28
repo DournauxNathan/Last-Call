@@ -118,6 +118,18 @@ public class MasterManager : Singleton<MasterManager>
         }
     }
 
+    #region Dev Menu 
+    public void SetIsInImaginary(bool b)
+    {
+        isInImaginary = b;
+    }
+
+    public void SetIsTutoSkip(bool b)
+    {
+        isTutoEnded = b;
+    }
+    #endregion
+
     public void UpdateController()
     {
         if (!isInImaginary)

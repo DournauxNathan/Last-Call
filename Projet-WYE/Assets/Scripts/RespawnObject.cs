@@ -10,8 +10,6 @@ public class RespawnObject : MonoBehaviour
     [SerializeField]
     private string colliderR;
     [SerializeField]
-    private string colliderB;
-    [SerializeField]
     private float offset = 0.2f;
 
     // Start is called before the first frame update
@@ -23,12 +21,12 @@ public class RespawnObject : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {   
-        if (other.CompareTag(colliderR) || other.CompareTag(colliderB))
+    {
+        if (other.CompareTag(colliderR) || other.CompareTag("Trash"))
         {
             rb.velocity = Vector3.zero;
             gameObject.transform.eulerAngles = q_rotaion;
-            gameObject.transform.position = v3_Original + new Vector3(0,offset,0);            
+            gameObject.transform.position = v3_Original + new Vector3(0,offset,0);
         }
     }
 }

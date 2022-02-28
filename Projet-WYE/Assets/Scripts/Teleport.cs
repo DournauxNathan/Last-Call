@@ -5,15 +5,26 @@ using UnityEngine;
 
 public class Teleport : Singleton<Teleport>
 {
-    public Transform position;
+    private Transform position;
+    public bool teleport;
 
     private void Start()
     {
         position = this.transform;
     }
 
+    private void Update()
+    {
+        if (teleport)
+        {
+            TeleportTo();
+            teleport = !teleport;
+        }
+    }
+
     internal void TeleportTo()
     {
-        MasterManager.Instance.player.transform.position = position.position;
+        MasterManager.Instance.player.GetComponent<VignetteApplier>().FadeIn();
+           MasterManager.Instance.player.transform.position = position.position;
     }
 }
