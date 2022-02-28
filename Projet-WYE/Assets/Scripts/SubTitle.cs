@@ -58,8 +58,8 @@ public class SubTitle : Singleton<SubTitle>
     public void DisplaySub(string question, float questionLength, string answer,float answerLength) 
     {
         isQuestion = true;
-        ClearText(); Debug.Log("Clear");
-        main_Text.text = question; Debug.Log("question");
+        ClearText(); //Debug.Log("Clear");
+        main_Text.text = question; //Debug.Log("question");
         StartCoroutine(DisplaySubTitle(questionLength,answerLength,answer)); 
     }
 

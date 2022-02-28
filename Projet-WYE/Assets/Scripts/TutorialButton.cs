@@ -37,7 +37,7 @@ public class TutorialButton : InstantiableButton
 
             foreach (var button in tutoButtons)
             {
-                gameObject.transform.SetAsLastSibling();
+                transform.SetParent(transform.parent.parent);
             }
         }
 

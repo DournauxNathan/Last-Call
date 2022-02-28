@@ -72,18 +72,18 @@ public class UIManager : Singleton<UIManager>
                 var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
             }
 
-            StartCoroutine(ExecuteAfterTime(.2f));
+            StartCoroutine(ExecuteAfterTime(.5f));
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            if (OrderController.Instance.GetResolve())
-            {
+            /*if (OrderController.Instance.GetResolve())
+            {*/
                 for (int i = 0; i < OrderController.Instance.ordersStrings.Count; i++)
                 {
                     var but = FindAvailableButtonForOrder(OrderController.Instance.ordersStrings[i]);
                 }
-            }
+            //}
 
             UpdateEventSystem(orderListTransform);
         }
@@ -91,16 +91,18 @@ public class UIManager : Singleton<UIManager>
     IEnumerator ExecuteAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        UpdateEventSystem(checkListTransform);
+        
+        EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+        //UpdateEventSystem(checkListTransform);
     }
 
     public void UpdateEventSystem(Transform transform)
     {
         if (transform.name == checkListTransform.name)
         {
-            for (int i = 0; i < checkListTransform.childCount; i++)
+            for (int i = checkListTransform.childCount - 1; i >= 0; i--)
             {
-                if (checkListTransform.GetChild(i).GetComponentInChildren<Button>().interactable)
+                if (checkListTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
                 {
                     EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
                 }
@@ -109,11 +111,9 @@ public class UIManager : Singleton<UIManager>
 
         if (transform.name == descriptionTransform.name)
         {
-            Debug.Log(transform.name);
-
-            for (int i = 0; i < descriptionTransform.childCount; i++)
+            for (int i = descriptionTransform.childCount - 1; i >= 0; i--)
             {
-                if (descriptionTransform.GetChild(i).GetComponentInChildren<Button>().interactable)
+                if (descriptionTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
                 {
                     EventSystem.current.SetSelectedGameObject(descriptionTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
                 }
@@ -122,9 +122,9 @@ public class UIManager : Singleton<UIManager>
 
         if (transform.name == orderListTransform.name)
         {
-            for (int i = 0; i < orderListTransform.childCount; i++)
+            for (int i = orderListTransform.childCount - 1; i >= 0; i--)
             {
-                if (orderListTransform.GetChild(i).GetComponentInChildren<Button>().interactable)
+                if (orderListTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
                 {
                     EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
                 }

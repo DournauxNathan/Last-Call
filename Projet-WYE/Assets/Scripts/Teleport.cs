@@ -1,19 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Teleport : Singleton<Teleport>
 {
-    private GameObject XrRig;
-    public List<Transform> positionPoints;
+    private Transform position;
+    public bool teleport;
 
     private void Start()
     {
-        XrRig = GameObject.FindGameObjectWithTag("XRRig");
+        position = this.transform;
     }
 
-    public void GoToPoint(int indexPoint)
+    private void Update()
     {
-        XrRig.transform.position = positionPoints[indexPoint].position;
+        if (teleport)
+        {
+            TeleportTo();
+            teleport = !teleport;
+        }
+    }
+
+    internal void TeleportTo()
+    {
+        MasterManager.Instance.player.GetComponent<VignetteApplier>().FadeIn();
+           MasterManager.Instance.player.transform.position = position.position;
     }
 }

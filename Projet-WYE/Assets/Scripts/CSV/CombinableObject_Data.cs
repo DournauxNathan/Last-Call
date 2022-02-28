@@ -52,17 +52,7 @@ public class CombinableObject_Data : MonoBehaviour
 
         LoadFromRessources();
         SetOutline();
-
-        #region Set Sphere Collider
-        if (GetComponents<SphereCollider>().Length == 2)
-        {
-            GetComponents<SphereCollider>()[1].isTrigger = true;
-        }
-        else
-        {
-            GetComponent<SphereCollider>().isTrigger = true;
-        }
-        #endregion
+        SetCollider();
     }
 
     public void LoadFromRessources()
@@ -76,6 +66,18 @@ public class CombinableObject_Data : MonoBehaviour
     {
         outline.enabled = false;
         defaultOutlineColor = outline.OutlineColor;
+    }
+
+    public void SetCollider()
+    {
+        if (GetComponents<SphereCollider>().Length == 2)
+        {
+            GetComponents<SphereCollider>()[1].isTrigger = true;
+        }
+        else
+        {
+            GetComponent<SphereCollider>().isTrigger = true;
+        }
     }
 }
 
