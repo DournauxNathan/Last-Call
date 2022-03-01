@@ -16,5 +16,9 @@ public class ConsumePills : MonoBehaviour
             other.GetComponent<Pill>().ReputOnStock();
             MasterManager.Instance.currentPills++;
         }
+        else if (other.tag == "Bonbon")
+        {
+            Destroy(other);
+        }
     }
 }
