@@ -111,6 +111,7 @@ public class InstantiableButton : MonoBehaviour
             }
             SendAnswer(currentClick); //envoi le string
             SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length); //A TEST
+            //Metre le son ici
             currentClick++;
         }
         else if (currentClick >= question.listQuestion.Length - 1)
@@ -132,7 +133,7 @@ public class InstantiableButton : MonoBehaviour
             SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length);
             
             Desactivate();
-
+            // metre le son ici
             UIManager.Instance.UpdateEventSystem(parentTransform);
         }
 
