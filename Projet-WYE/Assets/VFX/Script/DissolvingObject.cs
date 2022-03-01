@@ -12,6 +12,8 @@ public class DissolvingObject : MonoBehaviour
     public float refreshRate = 0.05f;
     public VisualEffect VFXGraph;
     public ParticleSystem Particle;
+    public ParticleSystem Particle2;
+
     public float Delay = 0.02f;
 
     private Material[] dissolveMaterials;
@@ -32,7 +34,11 @@ public class DissolvingObject : MonoBehaviour
             Particle.Stop();
             Particle.gameObject.SetActive(false);
         }
-
+        if (Particle2 != null)
+        {
+            Particle2.Stop();
+            Particle2.gameObject.SetActive(false);
+        }
         if (MeshRenderer != null)
             dissolveMaterials = MeshRenderer.materials;
     }
@@ -58,6 +64,11 @@ public class DissolvingObject : MonoBehaviour
             Particle.gameObject.SetActive(true);
             Particle.Play();
         }
+        if (Particle2 != null)
+        {
+            Particle2.gameObject.SetActive(true);
+            Particle2.Play();
+        }
 
         float counter = 0;
 
@@ -76,7 +87,7 @@ public class DissolvingObject : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 1);
+        //Destroy(gameObject, 1);
     }
 }
 
