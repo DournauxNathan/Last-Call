@@ -7,6 +7,8 @@ public class SkinnedMeshToMesh : MonoBehaviour
 {
     public VisualEffect VFXGraph;
     public ParticleSystem Particle;
+    public ParticleSystem Particle2;
+
     public float refreshRate;
     // Start is called before the first frame update
     void Start()
