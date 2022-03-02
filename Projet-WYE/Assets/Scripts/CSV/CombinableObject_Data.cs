@@ -14,15 +14,29 @@ public class CombinableObject_Data : MonoBehaviour
 
     [Header("Refs")]
     private MeshFilter m_MeshFilter;
+    public MeshFilter MeshFilter { get => m_MeshFilter; set => m_MeshFilter = value; }
+
     private MeshRenderer m_MeshRenderer;
+    public MeshRenderer MeshRenderer { get => m_MeshRenderer; set => m_MeshRenderer = value; }
     private MeshCollider m_MeshCollider;
+    public MeshCollider MeshCollider { get => m_MeshCollider; set => m_MeshCollider = value; }
     private SphereCollider m_Spherecollider;
+    public SphereCollider SphereCollider { get => m_Spherecollider; set => m_Spherecollider = value; }
 
     [Header("Outline Properties")]
     public Outline outline;
     public Material selectOutline;
     public Color defaultOutlineColor;
 
+
+    public void GetComponent()
+    {
+        MeshFilter = GetComponent<MeshFilter>();
+        MeshRenderer = GetComponent<MeshRenderer>();
+        MeshCollider = GetComponent<MeshCollider>();
+        SphereCollider = GetComponent<SphereCollider>();
+        outline = GetComponent<Outline>();
+    }
     public void Init(string[] entry)
     {
         this.name = entry[0];
@@ -43,11 +57,7 @@ public class CombinableObject_Data : MonoBehaviour
         influence = int.Parse(entry[4]);
         
         #region Get Components
-        m_MeshFilter = GetComponent<MeshFilter>();
-        m_MeshRenderer = GetComponent<MeshRenderer>();
-        m_MeshCollider = GetComponent<MeshCollider>();
-        m_Spherecollider = GetComponent<SphereCollider>();
-        outline = GetComponent<Outline>();
+    
         #endregion
 
         LoadFromRessources();
@@ -57,8 +67,8 @@ public class CombinableObject_Data : MonoBehaviour
 
     public void LoadFromRessources()
     {
-        m_MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
-        m_MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
+        MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
+        MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
         selectOutline = Resources.Load<Material>("Materials/Select Outline");
     }
 
