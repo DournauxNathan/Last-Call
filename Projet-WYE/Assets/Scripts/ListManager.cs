@@ -17,7 +17,7 @@ public class ListManager : Singleton<ListManager>
     {
         if(hoveredInteractors.Count != 0)
         {
-            if (hoveredInteractors[0].name == "TeleportPoint" && hoveredInteractors[1].name == "TeleportPoint")
+            if (hoveredInteractors[0].TryGetComponent<Teleport>(out Teleport teleport))
             {
                 hoveredInteractors[0].GetComponent<Teleport>().TeleportTo();
             }
