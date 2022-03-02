@@ -17,9 +17,13 @@ public class ListManager : Singleton<ListManager>
     {
         if(hoveredInteractors.Count != 0)
         {
-            if (hoveredInteractors[0].TryGetComponent<Teleport>(out Teleport teleport))
+            if (hoveredInteractors[0].GetComponentInParent<Teleport>())
             {
-                hoveredInteractors[0].GetComponent<Teleport>().TeleportTo();
+                hoveredInteractors[0].GetComponentInParent<Teleport>().TeleportTo();
+            }
+            else
+            {
+                Debug.LogWarning("No Teleport script");
             }
 
             if (!lockedInteractors.Contains(hoveredInteractors[0]))
