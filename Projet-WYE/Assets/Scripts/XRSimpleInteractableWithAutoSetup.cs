@@ -15,5 +15,7 @@ public class XRSimpleInteractableWithAutoSetup : XRSimpleInteractable
         {
             colliders[0] = GetComponent<MeshCollider>();
         }
+
+        //Debug.Log(gameObject.name + " " + hoverEntered.GetPersistentEventCount());
     }
 }

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Events;
+using UnityEngine.Events;
 using UnityEditor;
 using System.Linq;
 
 public class LoadFromCsv 
 {
     #if UNITY_EDITOR
-    [MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
+    //[MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
     public static void LoadCSVToScriptableObjects()
     {
         var csvText = Resources.Load<TextAsset>("Puzzle_Rational/Test").text;
@@ -66,27 +68,87 @@ public class LoadFromCsv
 
     static void CreatePrefab(string[] entry)
     {
-        GameObject newPrefab = new GameObject(entry[0]);
+        GameObject newPrefab = GameObject.Find(entry[0]);
+        if(newPrefab == null)
+        {
+            newPrefab =  new GameObject(entry[0]);
+        }
 
-        newPrefab.AddComponent<MeshFilter>();
-        newPrefab.AddComponent<MeshRenderer>();
-        newPrefab.AddComponent<MeshCollider>();
+        var co = newPrefab.GetComponent<CombinableObject>();
 
-        newPrefab.AddComponent<CombinableObject>();
+        if (co == null)
+        {
+            co = newPrefab.AddComponent<CombinableObject>();
+        }
+        co.GetComponent();
+
+
+        if(!co.MeshFilter)
+        {
+            co.MeshFilter = newPrefab.AddComponent<MeshFilter>();
+        }
+        if (!co.MeshRenderer)
+        {
+            co.MeshRenderer = newPrefab.AddComponent<MeshRenderer>();
+        }
+        if (!co.MeshCollider)
+        {
+            co.MeshCollider = newPrefab.AddComponent<MeshCollider>();
+        }
+        if (!co.SphereCollider)
+        {
+            co.SphereCollider = newPrefab.AddComponent<SphereCollider>();
+        }
+        if (!co.outline)
+        {
+            co.outline = newPrefab.AddComponent<Outline>();
+        }
+        
 
         if (entry[2].Contains("DYNAMIQUE"))
         {
-            newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+            XRGrabInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRGrabInteractableWithAutoSetup>();
+            if (xrInteractable == null)
+            {
+                xrInteractable= newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+            }
+            var mustImplementToogleOutline = true;
+            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+            {
+                if(xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                {
+                    mustImplementToogleOutline = false;
+                }
+            }
+            if(mustImplementToogleOutline)
+            {
+                UnityAction<bool> action = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action,true);
+            }
         }
         else if (entry[2].Contains("STATIQUE"))
         {
-            newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
+            XRSimpleInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRSimpleInteractableWithAutoSetup>();
+            if (xrInteractable == null)
+            {
+                xrInteractable = newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
+            }
+            var mustImplementToogleOutline = true;
+            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+            {
+                if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                {
+                    mustImplementToogleOutline = false;
+                }
+            }
+            if (mustImplementToogleOutline)
+            {
+                UnityAction<bool> action = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action, true);
+            }
         }
 
-        newPrefab.AddComponent<SphereCollider>();
-        newPrefab.AddComponent<Outline>();
-        newPrefab.GetComponent<CombinableObject>().Init(entry);
-
+        co.Init(entry);
     }
     #if UNITY_EDITOR
     [MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
@@ -111,7 +173,7 @@ public class LoadFromCsv
         }
     }
 
-    [MenuItem("Rational/Excel/Generate ScriptableObject")]
+    //[MenuItem("Rational/Excel/Generate ScriptableObject")]
     public static void LoadCSV()
     {
         

@@ -8,19 +8,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 //[RequireComponent(typeof(Outline), typeof(SphereCollider))]
 public class CombinableObject : CombinableObject_Data
 {
-    //public OrderFormat resultOrder;
-
     public bool isLocked = false;
-
-    //public List<Combinaisons> combinaisons;
-    //public List<GameObject> subList; //???? What is it ? Can't Remember ?
 
     // Start is called before the first frame update
     void Start()
     {
         SetOutline();
-
-        //subList.Add(gameObject);   
 
         if (MasterManager.Instance.objectActivator != null)
         {
@@ -29,15 +22,9 @@ public class CombinableObject : CombinableObject_Data
                 List<GameObject> tempObject;
 
                 tempObject = MasterManager.Instance.objectActivator.objectByIdList[iD];
-                //subList.AddRange(tempObject);
                 MasterManager.Instance.objectActivator.objectByIdList.Remove(iD);
-                //init.objectByIdList.Add(data.iD, subList);
                 return;
-            }/*
-            else
-            {
-                init.objectByIdList.Add(data.iD, subList);
-            }*/
+            }
         }
     }
 
@@ -94,41 +81,4 @@ public class CombinableObject : CombinableObject_Data
             ToggleOutline(b);
         }
     }
-
-    //Old Code
-    /*public void EnableOutline()
-    {
-        outline.enabled = true;
-    }
-
-    public void DisabledOutline()
-    {
-        if (!isLocked)
-        {
-            outline.enabled = false;
-        }
-    }
-    */
-
-    /* public void Locked()
-     {
-         if (MasterManager.Instance.isInImaginary)
-         {
-             isLocked = true;
-
-             outline.OutlineColor = selectOutline.color;
-         }
-     }
-
-     public void UnLocked()
-     {
-         if (MasterManager.Instance.isInImaginary)
-         {
-             isLocked = false;
-
-             outline.OutlineColor = defaultOutlineColor;
-
-             ToggleOutline();
-         }
-     }*/
 }
