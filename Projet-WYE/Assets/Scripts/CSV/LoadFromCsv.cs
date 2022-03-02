@@ -9,7 +9,7 @@ using System.Linq;
 public class LoadFromCsv 
 {
     #if UNITY_EDITOR
-    [MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
+    //[MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
     public static void LoadCSVToScriptableObjects()
     {
         var csvText = Resources.Load<TextAsset>("Puzzle_Rational/Test").text;
@@ -73,7 +73,9 @@ public class LoadFromCsv
         {
             newPrefab =  new GameObject(entry[0]);
         }
+
         var co = newPrefab.GetComponent<CombinableObject>();
+
         if (co == null)
         {
             co = newPrefab.AddComponent<CombinableObject>();
@@ -171,7 +173,7 @@ public class LoadFromCsv
         }
     }
 
-    [MenuItem("Rational/Excel/Generate ScriptableObject")]
+    //[MenuItem("Rational/Excel/Generate ScriptableObject")]
     public static void LoadCSV()
     {
         

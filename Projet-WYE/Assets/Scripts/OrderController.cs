@@ -52,7 +52,7 @@ public class OrderController : Singleton<OrderController>
         {
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
-
+            
             Projection.Instance.isTransition = true;
             Projection.Instance.hasProjted = true;
             Projection.Instance.Deconstruct();
@@ -69,7 +69,7 @@ public class OrderController : Singleton<OrderController>
             currentCombinaison = a.gameObject.name + "+ " + b.gameObject.name,
             objetA = a.gameObject.name,
             objetB = b.gameObject.name,
-            value = a.influence + b.influence,
+            value = 0/*a.influence + b.influence*/,
         };
 
         text.text = newCombi.currentCombinaison;

@@ -9,8 +9,7 @@ public class CombinableObject_Data : MonoBehaviour
     [Header("Data")]
     public int iD;
     public StateMobility state;
-    public List<string> combineWith = new List<string>(); /*A changer par un outil qui vient lire ses combinaisons ????*/
-    public int influence;
+    public List<CombineWith> useWith = new List<CombineWith>(); 
 
     [Header("Refs")]
     private MeshFilter m_MeshFilter;
@@ -52,9 +51,8 @@ public class CombinableObject_Data : MonoBehaviour
             state = StateMobility.Dynamic;
         }
 
-        combineWith.Add(entry[3]);
+        
 
-        influence = int.Parse(entry[4]);
         
         #region Get Components
     
@@ -89,6 +87,13 @@ public class CombinableObject_Data : MonoBehaviour
             GetComponent<SphereCollider>().isTrigger = true;
         }
     }
+}
+
+[System.Serializable]
+public class CombineWith
+{
+    public string objectName;
+    public int influence;
 }
 
 public enum StateMobility
