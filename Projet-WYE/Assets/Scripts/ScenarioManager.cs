@@ -74,7 +74,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
                     UIManager.Instance.descriptionQuestion.AddRange(domesticAbuse);
                     break;
         }
-        
+        LoadProtocolAnswer();Debug.Log("Load: " + currentScenario.ToString()); // 
         isScenarioLoaded = true;
     }
 

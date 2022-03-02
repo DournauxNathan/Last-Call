@@ -214,6 +214,7 @@ public class InstantiableButton : MonoBehaviour
         audioSource.Play();
         
         UIManager.Instance.ToggleButton();
+        // remettre l'ui ici
     }
 
     private void SendAnswer(int i)
