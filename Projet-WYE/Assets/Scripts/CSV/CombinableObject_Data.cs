@@ -37,10 +37,11 @@ public class CombinableObject_Data : MonoBehaviour
         SphereCollider = GetComponent<SphereCollider>();
         outline = GetComponent<Outline>();
     }
+
     public void Init(string[] entry)
     {
         this.name = entry[0];
-
+        /*
         iD = int.Parse(entry[1]);
 
         if (entry[2].Contains("STATIQUE"))
@@ -53,7 +54,7 @@ public class CombinableObject_Data : MonoBehaviour
         }
 
         nCombinaison = int.Parse(entry[3]);
-
+        
         for (int i = 0; i < nCombinaison; i++)
         {
             useWith = new List<CombineWith>(nCombinaison);
@@ -61,16 +62,9 @@ public class CombinableObject_Data : MonoBehaviour
             useWith[i].influence = int.Parse(entry[i]);
         }
 
-
-
-
-        #region Get Components
-
-        #endregion
-
         LoadFromRessources();
         SetOutline();
-        SetCollider();
+        SetCollider();*/
     }
 
     public void LoadFromRessources()
