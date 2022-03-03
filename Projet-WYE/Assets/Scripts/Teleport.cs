@@ -1,19 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Teleport : Singleton<Teleport>
 {
-    private GameObject XrRig;
-    public List<Transform> positionPoints;
+    private Transform position;
+    [SerializeField] private bool teleport;
+    [SerializeField] private bool isActive;
+
+    [SerializeField] private CapsuleCollider m_Collider;
 
     private void Start()
     {
-        XrRig = GameObject.FindGameObjectWithTag("XRRig");
+        position = this.transform;
+        GetComponentInChildren<Renderer>().enabled = isActive;
+        
+        if (!isActive)
+        {
+            MasterManager.Instance.player.transform.position = position.position;
+        }
+    }
+    private void Update()
+    {
+        if (MasterManager.Instance.player.transform.position != position.position)
+        {
+            m_Collider.isTrigger = false;
+            GetComponentInChildren<Renderer>().enabled = true;
+        }
     }
 
-    public void GoToPoint(int indexPoint)
+    public void TeleportTo()
     {
-        XrRig.transform.position = positionPoints[indexPoint].position;
+        MasterManager.Instance.player.GetComponent<VignetteApplier>().FadeIn();
+        MasterManager.Instance.player.transform.position = position.position;
+        
+        m_Collider.isTrigger = true;
+        GetComponentInChildren<Renderer>().enabled = false;
     }
 }

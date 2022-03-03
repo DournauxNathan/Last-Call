@@ -21,6 +21,7 @@ public class MasterManager : Singleton<MasterManager>
     public ObjectActivator objectActivator;
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
+    public Transform player;
     
     [Header("Hands")]
     public List<GameObject> baseInteractors;
@@ -116,6 +117,18 @@ public class MasterManager : Singleton<MasterManager>
             objectActivator.ToggleUselessObject(true, 3);
         }
     }
+
+    #region Dev Menu 
+    public void SetIsInImaginary(bool b)
+    {
+        isInImaginary = b;
+    }
+
+    public void SetIsTutoSkip(bool b)
+    {
+        isTutoEnded = b;
+    }
+    #endregion
 
     public void UpdateController()
     {

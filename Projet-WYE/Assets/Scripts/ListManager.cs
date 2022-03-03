@@ -17,6 +17,15 @@ public class ListManager : Singleton<ListManager>
     {
         if(hoveredInteractors.Count != 0)
         {
+            if (hoveredInteractors[0].GetComponentInParent<Teleport>())
+            {
+                hoveredInteractors[0].GetComponentInParent<Teleport>().TeleportTo();
+            }
+            else
+            {
+                Debug.LogWarning("No Teleport script");
+            }
+
             if (!lockedInteractors.Contains(hoveredInteractors[0]))
             {
                 Select();
@@ -66,8 +75,8 @@ public class ListManager : Singleton<ListManager>
 
     public void CheckCompatibility(GameObject objet1,GameObject objet2)
     {
-        CombinableObject _objectManager1, _objectManager2;
-
+        //CombinableObject _objectManager1, _objectManager2;
+/*
         if (objet1.TryGetComponent<CombinableObject>(out _objectManager1) && objet2.TryGetComponent<CombinableObject>(out _objectManager2))
         {
             Debug.Log("A" + _objectManager1.name + " | " + _objectManager2.name);
@@ -183,7 +192,7 @@ public class ListManager : Singleton<ListManager>
         else
         {
             Debug.LogWarning("No one has the combinaisons component");
-        }       
+        }       */
     }
 
     public void SetToOrderController(CombinableObject _objectManagerA, CombinableObject _objectManagerB)
