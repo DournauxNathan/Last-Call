@@ -41,9 +41,12 @@ public class CombinableObject_Data : MonoBehaviour
     public void Init(string[] entry)
     {
         this.name = entry[0];
-        /*
+        Debug.Log(entry[0] + " | " + " | " + entry[1] + " | " + entry[2] + " | " + entry[3] + " | " + entry[4] + " | " + entry[5] + " | " + entry[6] + " | " + entry[7] + " | " + entry[8] + " | " + entry[9] + " | " + entry[10] + " | " + entry[11]);
+        
+        Debug.Log(entry[2]);
+        
         iD = int.Parse(entry[1]);
-
+        
         if (entry[2].Contains("STATIQUE"))
         {
             state = StateMobility.Static;
@@ -52,19 +55,19 @@ public class CombinableObject_Data : MonoBehaviour
         {
             state = StateMobility.Dynamic;
         }
-
-        nCombinaison = int.Parse(entry[3]);
         
+        nCombinaison = int.Parse(entry[3]);
+        /*
         for (int i = 0; i < nCombinaison; i++)
         {
             useWith = new List<CombineWith>(nCombinaison);
             useWith[i].objectName = entry[i];
             useWith[i].influence = int.Parse(entry[i]);
-        }
+        }*/
 
         LoadFromRessources();
         SetOutline();
-        SetCollider();*/
+        SetCollider();
     }
 
     public void LoadFromRessources()

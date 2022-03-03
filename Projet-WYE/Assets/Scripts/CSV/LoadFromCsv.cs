@@ -76,7 +76,6 @@ public class LoadFromCsv
 
     static void CreatePrefab(string[] entry)
     {
-
         GameObject newPrefab = new GameObject(entry[0]);
         
         if (newPrefab == null)
