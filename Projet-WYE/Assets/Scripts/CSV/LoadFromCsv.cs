@@ -39,7 +39,7 @@ public class LoadFromCsv
 
         for (int i = 0; i < nFiles; i++)
         {
-            //var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" +).text;
+            //var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1").text;
         }
 
         var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" + 1).text;
@@ -202,5 +202,11 @@ public class LoadFromCsv
 public class LoadCSV : ScriptableObject
 {
     public TextAsset sc1, sc2, sc3;
-    public void Init() { }
+
+    public void Init()
+    {
+        sc1 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1");
+        sc2 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#2");
+        sc3 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#3");
+    }
 }
