@@ -34,7 +34,15 @@ public class LoadFromCsv
     [MenuItem("Rational/Puzzles/Prefab/Generate")]
     public static void LoadCSVToPrefab()
     {
-        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/Test").text;
+        Object[] files = Resources.LoadAll("Puzzle_Rational");
+        int nFiles = files.Length;
+
+        for (int i = 0; i < nFiles; i++)
+        {
+            //var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" +).text;
+        }
+
+        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" + 1).text;
 
         string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
         char[] cellSeparator = new char[] { ';' };
@@ -122,8 +130,10 @@ public class LoadFromCsv
             }
             if(mustImplementToogleOutline)
             {
-                UnityAction<bool> action = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action,true);
+                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
             }
         }
         else if (entry[2].Contains("STATIQUE"))
@@ -143,8 +153,10 @@ public class LoadFromCsv
             }
             if (mustImplementToogleOutline)
             {
-                UnityAction<bool> action = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action, true);
+                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
             }
         }
 
@@ -173,10 +185,22 @@ public class LoadFromCsv
         }
     }
 
-    //[MenuItem("Rational/Excel/Generate ScriptableObject")]
+    [MenuItem("Rational/Excel/Generate ScriptableObject")]
     public static void LoadCSV()
     {
+        var newScriptableObject = ScriptableObject.CreateInstance<LoadCSV>();
         
+        // Set the path as within the Assets folder,
+        // and name it as the ScriptableObject's name with the .Asset format
+        string localPath = "Assets/Scripts/CSV/" + newScriptableObject + ".asset";
+
+        AssetDatabase.CreateAsset(newScriptableObject, localPath);
     }
-    #endif
+#endif
+}
+
+public class LoadCSV : ScriptableObject
+{
+    public TextAsset sc1, sc2, sc3;
+    public void Init() { }
 }

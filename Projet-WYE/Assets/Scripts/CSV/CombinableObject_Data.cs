@@ -9,6 +9,7 @@ public class CombinableObject_Data : MonoBehaviour
     [Header("Data")]
     public int iD;
     public StateMobility state;
+    private int nCombinaison;
     public List<CombineWith> useWith = new List<CombineWith>(); 
 
     [Header("Refs")]
@@ -51,11 +52,20 @@ public class CombinableObject_Data : MonoBehaviour
             state = StateMobility.Dynamic;
         }
 
-        
+        nCombinaison = int.Parse(entry[3]);
 
-        
+        for (int i = 0; i < nCombinaison; i++)
+        {
+            useWith = new List<CombineWith>(nCombinaison);
+            useWith[i].objectName = entry[i];
+            useWith[i].influence = int.Parse(entry[i]);
+        }
+
+
+
+
         #region Get Components
-    
+
         #endregion
 
         LoadFromRessources();
