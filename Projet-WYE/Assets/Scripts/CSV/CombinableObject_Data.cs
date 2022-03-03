@@ -9,26 +9,44 @@ public class CombinableObject_Data : MonoBehaviour
     [Header("Data")]
     public int iD;
     public StateMobility state;
-    public List<string> combineWith = new List<string>(); /*A changer par un outil qui vient lire ses combinaisons ????*/
-    public int influence;
+    private int nCombinaison;
+    public List<CombineWith> useWith = new List<CombineWith>(); 
 
     [Header("Refs")]
     private MeshFilter m_MeshFilter;
+    public MeshFilter MeshFilter { get => m_MeshFilter; set => m_MeshFilter = value; }
+
     private MeshRenderer m_MeshRenderer;
+    public MeshRenderer MeshRenderer { get => m_MeshRenderer; set => m_MeshRenderer = value; }
     private MeshCollider m_MeshCollider;
+    public MeshCollider MeshCollider { get => m_MeshCollider; set => m_MeshCollider = value; }
     private SphereCollider m_Spherecollider;
+    public SphereCollider SphereCollider { get => m_Spherecollider; set => m_Spherecollider = value; }
 
     [Header("Outline Properties")]
     public Outline outline;
     public Material selectOutline;
     public Color defaultOutlineColor;
 
+
+    public void GetComponent()
+    {
+        MeshFilter = GetComponent<MeshFilter>();
+        MeshRenderer = GetComponent<MeshRenderer>();
+        MeshCollider = GetComponent<MeshCollider>();
+        SphereCollider = GetComponent<SphereCollider>();
+        outline = GetComponent<Outline>();
+    }
+
     public void Init(string[] entry)
     {
         this.name = entry[0];
-
+        Debug.Log(entry[0] + " | " + " | " + entry[1] + " | " + entry[2] + " | " + entry[3] + " | " + entry[4] + " | " + entry[5] + " | " + entry[6] + " | " + entry[7] + " | " + entry[8] + " | " + entry[9] + " | " + entry[10] + " | " + entry[11]);
+        
+        Debug.Log(entry[2]);
+        
         iD = int.Parse(entry[1]);
-
+        
         if (entry[2].Contains("STATIQUE"))
         {
             state = StateMobility.Static;
@@ -37,18 +55,15 @@ public class CombinableObject_Data : MonoBehaviour
         {
             state = StateMobility.Dynamic;
         }
-
-        combineWith.Add(entry[3]);
-
-        influence = int.Parse(entry[4]);
         
-        #region Get Components
-        m_MeshFilter = GetComponent<MeshFilter>();
-        m_MeshRenderer = GetComponent<MeshRenderer>();
-        m_MeshCollider = GetComponent<MeshCollider>();
-        m_Spherecollider = GetComponent<SphereCollider>();
-        outline = GetComponent<Outline>();
-        #endregion
+        nCombinaison = int.Parse(entry[3]);
+        /*
+        for (int i = 0; i < nCombinaison; i++)
+        {
+            useWith = new List<CombineWith>(nCombinaison);
+            useWith[i].objectName = entry[i];
+            useWith[i].influence = int.Parse(entry[i]);
+        }*/
 
         LoadFromRessources();
         SetOutline();
@@ -57,8 +72,8 @@ public class CombinableObject_Data : MonoBehaviour
 
     public void LoadFromRessources()
     {
-        m_MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
-        m_MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
+        MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
+        MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
         selectOutline = Resources.Load<Material>("Materials/Select Outline");
     }
 
@@ -79,6 +94,13 @@ public class CombinableObject_Data : MonoBehaviour
             GetComponent<SphereCollider>().isTrigger = true;
         }
     }
+}
+
+[System.Serializable]
+public class CombineWith
+{
+    public string objectName;
+    public int influence;
 }
 
 public enum StateMobility

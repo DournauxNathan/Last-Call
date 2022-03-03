@@ -14,7 +14,12 @@ public class XRInput : MonoBehaviour
     private void Update()
     {
         foreach (var binding in bindings)
-            binding.Update(controller.inputDevice);
+        {
+            if (binding != null)
+            {
+                binding.Update(controller.inputDevice);
+            }
+        }
     }
 }
 

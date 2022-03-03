@@ -36,7 +36,7 @@ public class SubTitle : Singleton<SubTitle>
     {
         yield return new WaitForSeconds(time);
         ClearText();
-        main_Text.text = text;
+        main_Text.text = text; //Debug.Log(text);   String empty
         if (isQuestion)
         {
             StartCoroutine(DisplaySubTitle(time2));
@@ -59,7 +59,7 @@ public class SubTitle : Singleton<SubTitle>
     {
         isQuestion = true;
         ClearText(); //Debug.Log("Clear");
-        main_Text.text = question; //Debug.Log("question");
+        main_Text.text = question; //Debug.Log(question);
         StartCoroutine(DisplaySubTitle(questionLength,answerLength,answer)); 
     }
 

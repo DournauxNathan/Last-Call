@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Events;
+using UnityEngine.Events;
 using UnityEditor;
 using System.Linq;
 
 public class LoadFromCsv 
 {
     #if UNITY_EDITOR
-    [MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
+    //[MenuItem("Rational/Puzzles/ScriptableObjects/Generate")]
     public static void LoadCSVToScriptableObjects()
     {
         var csvText = Resources.Load<TextAsset>("Puzzle_Rational/Test").text;
@@ -29,10 +31,18 @@ public class LoadFromCsv
         }
     }
 
-    [MenuItem("Rational/Puzzles/Prefab/Generate")]
+    [MenuItem("Rational/Generate")]
     public static void LoadCSVToPrefab()
     {
-        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/Test").text;
+        Object[] files = Resources.LoadAll("Puzzle_Rational");
+        int nFiles = files.Length;
+
+        for (int i = 0; i < nFiles; i++)
+        {
+            //var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1").text;
+        }
+
+        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" + 1).text;
 
         string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
         char[] cellSeparator = new char[] { ';' };
@@ -67,29 +77,97 @@ public class LoadFromCsv
     static void CreatePrefab(string[] entry)
     {
         GameObject newPrefab = new GameObject(entry[0]);
+        
+        if (newPrefab == null)
+        {
+            newPrefab =  new GameObject(entry[0]);
+        }
 
-        newPrefab.AddComponent<MeshFilter>();
-        newPrefab.AddComponent<MeshRenderer>();
-        newPrefab.AddComponent<MeshCollider>();
+        var co = newPrefab.GetComponent<CombinableObject>();
 
-        newPrefab.AddComponent<CombinableObject>();
+        if (co == null)
+        {
+            co = newPrefab.AddComponent<CombinableObject>();
+        }
+        co.GetComponent();
+
+        if(!co.MeshFilter)
+        {
+            co.MeshFilter = newPrefab.AddComponent<MeshFilter>();
+        }
+        if (!co.MeshRenderer)
+        {
+            co.MeshRenderer = newPrefab.AddComponent<MeshRenderer>();
+        }
+        if (!co.MeshCollider)
+        {
+            co.MeshCollider = newPrefab.AddComponent<MeshCollider>();
+        }
+        if (!co.SphereCollider)
+        {
+            co.SphereCollider = newPrefab.AddComponent<SphereCollider>();
+        }
+        if (!co.outline)
+        {
+            co.outline = newPrefab.AddComponent<Outline>();
+        }
 
         if (entry[2].Contains("DYNAMIQUE"))
         {
-            newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+
+            XRGrabInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRGrabInteractableWithAutoSetup>();
+
+            if (xrInteractable == null)
+            {
+                xrInteractable= newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+            }
+
+            var mustImplementToogleOutline = true;
+
+            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+            {
+                if(xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                {
+                    mustImplementToogleOutline = false;
+                }
+            }
+
+            if(mustImplementToogleOutline)
+            {
+                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
+            }
         }
         else if (entry[2].Contains("STATIQUE"))
         {
-            newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
+            XRSimpleInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRSimpleInteractableWithAutoSetup>();
+            if (xrInteractable == null)
+            {
+                xrInteractable = newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
+            }
+            var mustImplementToogleOutline = true;
+            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+            {
+                if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                {
+                    mustImplementToogleOutline = false;
+                }
+            }
+            if (mustImplementToogleOutline)
+            {
+                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
+            }
         }
 
-        newPrefab.AddComponent<SphereCollider>();
-        newPrefab.AddComponent<Outline>();
-        newPrefab.GetComponent<CombinableObject>().Init(entry);
-
+        co.Init(entry);
     }
     #if UNITY_EDITOR
-    [MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
+    //[MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
     static void SaveCurrentSelectionIntoPrefabAsset()
     {
         if (Selection.gameObjects != null && !EditorUtility.IsPersistent(Selection.activeGameObject))
@@ -111,10 +189,28 @@ public class LoadFromCsv
         }
     }
 
-    [MenuItem("Rational/Excel/Generate ScriptableObject")]
+    //[MenuItem("Rational/Excel/Generate ScriptableObject")]
     public static void LoadCSV()
     {
+        var newScriptableObject = ScriptableObject.CreateInstance<LoadCSV>();
         
+        // Set the path as within the Assets folder,
+        // and name it as the ScriptableObject's name with the .Asset format
+        string localPath = "Assets/Scripts/CSV/" + newScriptableObject + ".asset";
+
+        AssetDatabase.CreateAsset(newScriptableObject, localPath);
     }
-    #endif
+#endif
+}
+
+public class LoadCSV : ScriptableObject
+{
+    public TextAsset sc1, sc2, sc3;
+
+    public void Init()
+    {
+        sc1 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1");
+        sc2 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#2");
+        sc3 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#3");
+    }
 }
