@@ -76,95 +76,100 @@ public class LoadFromCsv
 
     static void CreatePrefab(string[] entry)
     {
-        GameObject newPrefab = new GameObject(entry[0]);
-        
-        if (newPrefab == null)
+        if (entry[0].Contains("true"))
         {
-            newPrefab =  new GameObject(entry[0]);
-        }
+            GameObject newPrefab = GameObject.Find(entry[1]);
 
-        var co = newPrefab.GetComponent<CombinableObject>();
-
-        if (co == null)
-        {
-            co = newPrefab.AddComponent<CombinableObject>();
-        }
-        co.GetComponent();
-
-        if(!co.MeshFilter)
-        {
-            co.MeshFilter = newPrefab.AddComponent<MeshFilter>();
-        }
-        if (!co.MeshRenderer)
-        {
-            co.MeshRenderer = newPrefab.AddComponent<MeshRenderer>();
-        }
-        if (!co.MeshCollider)
-        {
-            co.MeshCollider = newPrefab.AddComponent<MeshCollider>();
-        }
-        if (!co.SphereCollider)
-        {
-            co.SphereCollider = newPrefab.AddComponent<SphereCollider>();
-        }
-        if (!co.outline)
-        {
-            co.outline = newPrefab.AddComponent<Outline>();
-        }
-
-        if (entry[2].Contains("DYNAMIQUE"))
-        {
-
-            XRGrabInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRGrabInteractableWithAutoSetup>();
-
-            if (xrInteractable == null)
+            if (newPrefab == null)
             {
-                xrInteractable= newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+                newPrefab = new GameObject(entry[1]);
             }
 
-            var mustImplementToogleOutline = true;
+            var co = newPrefab.GetComponent<CombinableObject>();
+            
+            System.Array.Clear(co.useWith, 0, co.useWith.Length);
 
-            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+            if (co == null)
             {
-                if(xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                co = newPrefab.AddComponent<CombinableObject>();
+            }
+            co.GetComponent();
+
+            if (!co.MeshFilter)
+            {
+                co.MeshFilter = newPrefab.AddComponent<MeshFilter>();
+            }
+            if (!co.MeshRenderer)
+            {
+                co.MeshRenderer = newPrefab.AddComponent<MeshRenderer>();
+            }
+            if (!co.MeshCollider)
+            {
+                co.MeshCollider = newPrefab.AddComponent<MeshCollider>();
+            }
+            if (!co.SphereCollider)
+            {
+                co.SphereCollider = newPrefab.AddComponent<SphereCollider>();
+            }
+            if (!co.outline)
+            {
+                co.outline = newPrefab.AddComponent<Outline>();
+            }
+
+            if (entry[3].Contains("DYNAMIQUE"))
+            {
+
+                XRGrabInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRGrabInteractableWithAutoSetup>();
+
+                if (xrInteractable == null)
                 {
-                    mustImplementToogleOutline = false;
+                    xrInteractable = newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+                }
+
+                var mustImplementToogleOutline = true;
+
+                for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+                {
+                    if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                    {
+                        mustImplementToogleOutline = false;
+                    }
+                }
+
+                if (mustImplementToogleOutline)
+                {
+                    UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                    UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
+                }
+            }
+            else if (entry[3].Contains("STATIQUE"))
+            {
+                XRSimpleInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRSimpleInteractableWithAutoSetup>();
+                if (xrInteractable == null)
+                {
+                    xrInteractable = newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
+                }
+                var mustImplementToogleOutline = true;
+                for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+                {
+                    if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                    {
+                        mustImplementToogleOutline = false;
+                    }
+                }
+                if (mustImplementToogleOutline)
+                {
+                    UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                    UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
                 }
             }
 
-            if(mustImplementToogleOutline)
-            {
-                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
-                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
-            }
+            co.Init(entry);
         }
-        else if (entry[2].Contains("STATIQUE"))
-        {
-            XRSimpleInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRSimpleInteractableWithAutoSetup>();
-            if (xrInteractable == null)
-            {
-                xrInteractable = newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
-            }
-            var mustImplementToogleOutline = true;
-            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
-            {
-                if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
-                {
-                    mustImplementToogleOutline = false;
-                }
-            }
-            if (mustImplementToogleOutline)
-            {
-                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
-                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
-            }
-        }
-
-        co.Init(entry);
     }
     #if UNITY_EDITOR
     //[MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
