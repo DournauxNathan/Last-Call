@@ -16,27 +16,31 @@ public class CombinableObject_Data : MonoBehaviour
 
     [Header("Refs")]
     private MeshFilter m_MeshFilter;
-    public MeshFilter MeshFilter { get => m_MeshFilter; set => m_MeshFilter = value; }
+    public MeshFilter meshFilter { get => m_MeshFilter; set => m_MeshFilter = value; }
 
     private MeshRenderer m_MeshRenderer;
-    public MeshRenderer MeshRenderer { get => m_MeshRenderer; set => m_MeshRenderer = value; }
+    public MeshRenderer meshRenderer { get => m_MeshRenderer; set => m_MeshRenderer = value; }
+    
     private MeshCollider m_MeshCollider;
-    public MeshCollider MeshCollider { get => m_MeshCollider; set => m_MeshCollider = value; }
+    public MeshCollider meshCollider { get => m_MeshCollider; set => m_MeshCollider = value; }
+    
     private SphereCollider m_Spherecollider;
-    public SphereCollider SphereCollider { get => m_Spherecollider; set => m_Spherecollider = value; }
+    public SphereCollider sphereCollider { get => m_Spherecollider; set => m_Spherecollider = value; }
+    
+    private DissolveEffect m_DissolveEffect;
+    public DissolveEffect dissolveEffect { get => m_DissolveEffect; set => m_DissolveEffect = value; }
 
     [Header("Outline Properties")]
     public Outline outline;
     public Material selectOutline;
     public Color defaultOutlineColor;
 
-
     public void GetComponent()
     {
-        MeshFilter = GetComponent<MeshFilter>();
-        MeshRenderer = GetComponent<MeshRenderer>();
-        MeshCollider = GetComponent<MeshCollider>();
-        SphereCollider = GetComponent<SphereCollider>();
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshCollider = GetComponent<MeshCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
         outline = GetComponent<Outline>();
     }
 
@@ -135,8 +139,8 @@ public class CombinableObject_Data : MonoBehaviour
 
     public void LoadFromRessources()
     {
-        MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
-        MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
+        meshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
+        meshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
         selectOutline = Resources.Load<Material>("Materials/Select Outline");
     }
 

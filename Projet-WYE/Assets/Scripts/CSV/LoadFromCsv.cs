@@ -87,7 +87,7 @@ public class LoadFromCsv
 
             var co = newPrefab.GetComponent<CombinableObject>();
             
-            System.Array.Clear(co.useWith, 0, co.useWith.Length);
+            //System.Array.Clear(co.useWith, 0, co.useWith.Length);
 
             if (co == null)
             {
@@ -95,25 +95,30 @@ public class LoadFromCsv
             }
             co.GetComponent();
 
-            if (!co.MeshFilter)
+            if (!co.meshFilter)
             {
-                co.MeshFilter = newPrefab.AddComponent<MeshFilter>();
+                co.meshFilter = newPrefab.AddComponent<MeshFilter>();
             }
-            if (!co.MeshRenderer)
+            if (!co.meshRenderer)
             {
-                co.MeshRenderer = newPrefab.AddComponent<MeshRenderer>();
+                co.meshRenderer = newPrefab.AddComponent<MeshRenderer>();
             }
-            if (!co.MeshCollider)
+            if (!co.meshCollider)
             {
-                co.MeshCollider = newPrefab.AddComponent<MeshCollider>();
+                co.meshCollider = newPrefab.AddComponent<MeshCollider>();
             }
-            if (!co.SphereCollider)
+            if (!co.sphereCollider)
             {
-                co.SphereCollider = newPrefab.AddComponent<SphereCollider>();
+                co.sphereCollider = newPrefab.AddComponent<SphereCollider>();
             }
             if (!co.outline)
             {
                 co.outline = newPrefab.AddComponent<Outline>();
+            }
+            if (!co.dissolveEffect)
+            {
+                co.dissolveEffect = newPrefab.AddComponent<DissolveEffect>();
+                co.dissolveEffect.Init();
             }
 
             if (entry[3].Contains("DYNAMIQUE"))
