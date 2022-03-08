@@ -39,7 +39,7 @@ public class Projection : Singleton<Projection>
         
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Distance", 3f * 10f);
+            mat.SetFloat("_Dissolve", 3f * 10f);
         }
 
         hasProjted = false;
@@ -56,7 +56,7 @@ public class Projection : Singleton<Projection>
 
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Distance", transitionValue * 10f);
+            mat.SetFloat("_Dissolve", transitionValue * 10f);
         }
 
         if (pauseBetweenTransition && isTransition && !isDisconstruc)
