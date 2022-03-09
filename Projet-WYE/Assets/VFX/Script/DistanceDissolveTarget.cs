@@ -6,10 +6,11 @@ public class DistanceDissolveTarget : Singleton<DistanceDissolveTarget>
 { 
     public List<Transform> m_objectToTrack;
 
-    private Material m_materialRef = null;
+    public Material m_materialRef = null;
 
     private void Start()
     {        
+/*
         if (m_objectToTrack.Count <= 3 && m_objectToTrack[2].gameObject != null)
         {
             MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
@@ -27,7 +28,7 @@ public class DistanceDissolveTarget : Singleton<DistanceDissolveTarget>
         if (Projection.Instance.setWallWithOutline)
         {
             SetObjectToTrack();
-        }
+        }*/
     }
 
     public void SetObjectToTrack()
