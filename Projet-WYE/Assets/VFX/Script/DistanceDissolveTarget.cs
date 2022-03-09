@@ -9,14 +9,14 @@ public class DistanceDissolveTarget : Singleton<DistanceDissolveTarget>
     private Material m_materialRef = null;
 
     private void Start()
-    {
-        if (m_objectToTrack.Count <= 3)
+    {        
+        if (m_objectToTrack.Count <= 3 && m_objectToTrack[3].gameObject != null)
         {
             MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
             MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
             MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
         }
-        else if (m_objectToTrack.Count == 3)
+        else if (m_objectToTrack.Count == 4 && m_objectToTrack[4].gameObject != null)
         {
             MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
             MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
