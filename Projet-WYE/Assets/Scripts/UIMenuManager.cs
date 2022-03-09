@@ -6,18 +6,31 @@ using UnityEngine.EventSystems;
 
 public class UIMenuManager : MonoBehaviour
 {
+   [SerializeField] private bool firstSetUp = false;
+
+    //MainParam
     [SerializeField] private Transform mainMenu;
     [SerializeField] private Transform wheel; [SerializeField] private Transform wheelParameters;
     [SerializeField] private List<Transform> wheelList; [SerializeField] private List<Transform> wheelParmetersList;
     [Space(20)] [SerializeField] private Transform currentSelected;
     [SerializeField] private Transform oldSelected;
 
+    /*//Quality Param
+    public enum Quality
+    {
+        Low,Medium,High
+    }
+    [Space(15)]
+    [SerializeField] private Transform qualityButton;
+    public Quality qualityChosen = Quality.Medium;*/
 
     // Start is called before the first frame update
     void Start()
     {
-        SetUp();
+        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         
+        SetUp();
+        EventSystem.current.SetSelectedGameObject(wheelList[2].gameObject);
     }
 
     // Update is called once per frame
@@ -47,15 +60,17 @@ public class UIMenuManager : MonoBehaviour
             }
             wheelParmetersList[2].gameObject.SetActive(true);
         }
-        CurrentSelected();
+        if (!firstSetUp)
+        {
+            firstSetUp = true;
+            IsThereASave("SaveLastCall.json");
+            //qualityButton.GetComponentInChildren<Text>().text = "Graphics: " + qualityChosen;
+        }
     }
 
     private void OnWheelUpdate()
     {
         UpdateWheel(DirectionWheel());
-        
-
-
     }
 
     private void CurrentSelected()
@@ -83,7 +98,7 @@ public class UIMenuManager : MonoBehaviour
 
     private void AffParam(string name)
     {
-        name += "Param"; //Debug.Log(name);
+        name += "Param"; 
         Transform toenable = null;
 
         foreach (var param in wheelParmetersList)
@@ -128,9 +143,43 @@ public class UIMenuManager : MonoBehaviour
         {
             Debug.LogError(index + " is not supported");
         }
-    
-    
-    
     }
 
+    private void IsThereASave(string path)
+    {
+        if (FileHandler.IsAFileExist(path))
+        {
+            Debug.Log("File found");
+            EventSystem.current.SetSelectedGameObject(wheelList[3].gameObject);
+            UpdateWheel(-1);
+            CurrentSelected();
+            AffParam("Load");
+           
+        }
+        
+    }
+
+    /*private void ChangeQualityText()
+    {
+        qualityButton.GetComponentInChildren<Text>().text = "Graphics: " + qualityChosen;
+    }
+
+    public void ChangeQualityButton()
+    {
+        if (qualityChosen == Quality.Low)
+        {
+            qualityChosen = Quality.Medium;
+            ChangeQualityText();
+        }
+        else if (qualityChosen == Quality.Medium)
+        {
+            qualityChosen = Quality.High;
+            ChangeQualityText();
+        }
+        else if (qualityChosen == Quality.High)
+        {
+            qualityChosen = Quality.Low;
+            ChangeQualityText();
+        }
+    }*/
 }
