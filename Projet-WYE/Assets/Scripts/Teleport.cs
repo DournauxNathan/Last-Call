@@ -23,7 +23,7 @@ public class Teleport : Singleton<Teleport>
     }
     private void Update()
     {
-        if (MasterManager.Instance.player.transform.position != position.position)
+        if (MasterManager.Instance.player.transform.position != position.position && MasterManager.Instance.player.transform != null)
         {
             m_Collider.isTrigger = false;
             GetComponentInChildren<Renderer>().enabled = true;

@@ -10,11 +10,15 @@ public class Projection : Singleton<Projection>
 
     [Space(5)] 
     public List<Material> transitionShaders;
+    public List<Material> wallShader;
     [Space(5)]
 
     public bool isTransition;
     [Range(0, 3)]
     public float transitionValue = 3f;
+    [Range(0, 3)]
+    public float wallTransition = 3f;
+    public bool setWallWithOutline = false;
 
     [Header("Projection Properties")]
     [Tooltip("During of the transition in seconds")]
@@ -42,6 +46,11 @@ public class Projection : Singleton<Projection>
             mat.SetFloat("_Dissolve", 3f * 10f);
         }
 
+        foreach (var mat in wallShader)
+        {
+           // mat.SetFloat("_Dissolve", 3f * 10f);
+        }
+
         hasProjted = false;
         StopCoroutine(WaitForVoid());
     }
@@ -52,12 +61,15 @@ public class Projection : Singleton<Projection>
         foreach (var mat in transitionShaders)
         {
             mat.SetVector("_PlayerPos", player.position);
-        }
-
-        foreach (var mat in transitionShaders)
-        {
+        
             mat.SetFloat("_Dissolve", transitionValue * 10f);
         }
+
+        foreach (var mat in wallShader)
+        {
+            //mat.SetFloat("_Dissolve", transitionValue * 10f);
+        }
+
 
         if (pauseBetweenTransition && isTransition && !isDisconstruc)
         {
@@ -67,6 +79,14 @@ public class Projection : Singleton<Projection>
         if (pauseBetweenTransition && isTransition && isDisconstruc)
         {
             Construct();
+        }
+
+        if (transitionValue >= 2.5)
+        {
+            foreach (var mat in wallShader)
+            {
+                DistanceDissolveTarget.Instance.SetObjectToTrack();
+            }
         }
     }
 
