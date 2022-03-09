@@ -10,13 +10,13 @@ public class DistanceDissolveTarget : Singleton<DistanceDissolveTarget>
 
     private void Start()
     {        
-        if (m_objectToTrack.Count <= 3 && m_objectToTrack[3].gameObject != null)
+        if (m_objectToTrack.Count <= 3 && m_objectToTrack[2].gameObject != null)
         {
             MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
             MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
             MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
         }
-        else if (m_objectToTrack.Count == 4 && m_objectToTrack[4].gameObject != null)
+        else if (m_objectToTrack.Count == 4 && m_objectToTrack[3].gameObject != null)
         {
             MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
             MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
@@ -32,10 +32,23 @@ public class DistanceDissolveTarget : Singleton<DistanceDissolveTarget>
 
     public void SetObjectToTrack()
     {
-        MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
-        MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
-        MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
-        MaterialRef.SetVector("_Position_3", m_objectToTrack[3].position);
+        if (m_objectToTrack.Count <= 3 && m_objectToTrack[2].gameObject != null)
+        {
+            MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
+            MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
+            MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
+        }
+        else if (m_objectToTrack.Count == 4 && m_objectToTrack[3].gameObject != null)
+        {
+            MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
+            MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
+            MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
+            MaterialRef.SetVector("_Position_3", m_objectToTrack[3].position);
+        }
+        else if (m_objectToTrack.Count == 4 && m_objectToTrack[3].gameObject == null)
+        {
+            Debug.LogWarning("Object reference is missing, There is no transform in one element of  m_objectToTrack");
+        }
     }
 
     public Material MaterialRef
@@ -53,18 +66,9 @@ public class DistanceDissolveTarget : Singleton<DistanceDissolveTarget>
 
     private void Update()
     {
-        if (m_objectToTrack.Count <= 3)
+        if (Projection.Instance.setWallWithOutline)
         {
-            MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
-            MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
-            MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
-        }
-        else if (m_objectToTrack.Count == 3)
-        {
-            MaterialRef.SetVector("_Position", m_objectToTrack[0].position);
-            MaterialRef.SetVector("_Position_1", m_objectToTrack[1].position);
-            MaterialRef.SetVector("_Position_2", m_objectToTrack[2].position);
-            MaterialRef.SetVector("_Position_3", m_objectToTrack[3].position);
+            SetObjectToTrack();
         }
     }
 }

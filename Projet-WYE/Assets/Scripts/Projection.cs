@@ -16,9 +16,10 @@ public class Projection : Singleton<Projection>
     public bool isTransition;
     [Range(0, 3)]
     public float transitionValue = 3f;
-    [Range(0, 3)]
+    [Range(0, 8)]
     public float wallTransition = 3f;
     public bool setWallWithOutline = false;
+    public bool switchMode;
 
     [Header("Projection Properties")]
     [Tooltip("During of the transition in seconds")]
@@ -48,7 +49,7 @@ public class Projection : Singleton<Projection>
 
         foreach (var mat in wallShader)
         {
-           // mat.SetFloat("_Dissolve", 3f * 10f);
+           mat.SetFloat("_Dissolve", 3f * 10f);
         }
 
         hasProjted = false;
@@ -67,7 +68,8 @@ public class Projection : Singleton<Projection>
 
         foreach (var mat in wallShader)
         {
-            //mat.SetFloat("_Dissolve", transitionValue * 10f);
+            mat.SetFloat("_Dissolve", wallTransition * 10f);
+            
         }
 
 
