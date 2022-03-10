@@ -6,18 +6,7 @@ using UnityEngine.Events;
 using UnityEditor;
 using System.Linq;
 [System.Serializable]
-public struct Element
-{
-    public string line, column, element;
 
-    public Element(string line, string column, string element)
-    {
-        this.line = line;
-        this.column = column;
-        this.element = element;
-    }
-
-}
 public class LoadFromCsv 
 {
     #if UNITY_EDITOR
@@ -188,6 +177,7 @@ public class LoadFromCsv
             co.Init(entry);
         }
     }
+    
     #if UNITY_EDITOR
     //[MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
     static void SaveCurrentSelectionIntoPrefabAsset()
@@ -210,7 +200,20 @@ public class LoadFromCsv
             Debug.LogWarning("Selection is null");
         }
     }
-    
+
+    public struct Element
+    {
+        public string line, column, element;
+/*
+        public Element(string line*//*, string column, string element*//*)
+        {
+            this.line = line;*//*
+            this.column = column;
+            this.element = element;*//*
+        }*/
+
+    }
+
     [MenuItem("Rational/Excel")]
     public static void LoadCSV()
     {
@@ -219,45 +222,66 @@ public class LoadFromCsv
         string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
         char[] cellSeparator = new char[] { ',' };
 
-        List<Element> completeExcelFile = new List<Element>();
-
         var lines = csvText.Split(lineSeparators, System.StringSplitOptions.RemoveEmptyEntries);
-        
+        //List<Element> completeExcelFile = new List<Element>();
+
+        List<string[]> a = new List<string[]>();
+
         string[][] sheet = new string[lines.Length][];
+
+
+        foreach (var i in lines)
+        {
+            a.Add(i.Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));//Nombre de character dans tout la ligne
+            //Debug.Log(i);
+        }
+
+        foreach (var item in a)
+        {
+            Debug.Log(item[]); 
+        }
+
+        for (int i = 0; i < a.Count; i++)
+        {
+            //sheet[i][0] = a;
+        }
 
         for (int i = 1; i < lines.Length; i++)
         {
-            //Debug.Log(lines[i] + ", number of character: "+ lines[i].Length); // Contenu de la ligne + le nombre de character
             //sheet[i] = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);//Nombre de character dans tout la ligne
 
             //Debug.Log(lines[i] + ", number of character: "+ lines[i].Length); /*Contenu de la ligne + le nombre de character*/
+
+            //var cell = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);
+
+            //Debug.Log(lines[i]); //Contenu de la ligne
+            //Debug.Log(lines[i].Length); // Le nombre de character
+
             //Debug.Log(lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));
 
-            var cell = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);
+            //Objectif séparer le contenue de la ligne
             
-            foreach (var y in lines)
-            {
-                Debug.Log(y);
-            }
-
+            
+            
             //Debug.Log(lines[i] + ", number of character: " + lines[i].Length);
         }
 
-        for (var i = 0; i < sheet.GetLength(0); i++)
-        {
-            for (var j = 0; j < sheet.GetLength(1); j++)
-            {
-                /*
-                Debug.Log(sheet[0][j]);
-                Debug.Log(sheet[i][0]);*/
 
-                completeExcelFile.Add(new Element(sheet[0][j], sheet[i][0], sheet[i][j]));
-            }
-        }
+        /*  for (var i = 0; i < sheet.Length; i++)
+          {
+              Debug.Log(sheet[i][]); 
+              *//*for (var j = 0; j < sheet[i].Length; j++)
+              {
+                  *//*
+                  Debug.Log(sheet[0][j]);
+
+                  //completeExcelFile.Add(new Element(sheet[0][j], sheet[i][0], sheet[i][j]));
+              }*//*
+          }*/
 
         //Debug.Log(completeExcelFile.Count);
 
-        OrderController.Instance.outcomes = completeExcelFile;
+        //OrderController.Instance.outcomes = completeExcelFile;
 
     }
 
