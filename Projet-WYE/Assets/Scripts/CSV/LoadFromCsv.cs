@@ -5,7 +5,19 @@ using UnityEditor.Events;
 using UnityEngine.Events;
 using UnityEditor;
 using System.Linq;
+[System.Serializable]
+public struct Element
+{
+    public string line, column, element;
 
+    public Element(string line, string column, string element)
+    {
+        this.line = line;
+        this.column = column;
+        this.element = element;
+    }
+
+}
 public class LoadFromCsv 
 {
     #if UNITY_EDITOR
@@ -198,17 +210,67 @@ public class LoadFromCsv
             Debug.LogWarning("Selection is null");
         }
     }
-
-    //[MenuItem("Rational/Excel/Generate ScriptableObject")]
+    
+    [MenuItem("Rational/Excel")]
     public static void LoadCSV()
     {
-        var newScriptableObject = ScriptableObject.CreateInstance<LoadCSV>();
-        
-        // Set the path as within the Assets folder,
-        // and name it as the ScriptableObject's name with the .Asset format
-        string localPath = "Assets/Scripts/CSV/" + newScriptableObject + ".asset";
+        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1_Outcome").text;
 
-        AssetDatabase.CreateAsset(newScriptableObject, localPath);
+        string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
+        char[] cellSeparator = new char[] { ',' };
+
+        List<Element> completeExcelFile = new List<Element>();
+
+        var lines = csvText.Split(lineSeparators, System.StringSplitOptions.RemoveEmptyEntries);
+        
+        string[][] sheet = new string[lines.Length][];
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            //Debug.Log(lines[i] + ", number of character: "+ lines[i].Length); // Contenu de la ligne + le nombre de character
+            //sheet[i] = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);//Nombre de character dans tout la ligne
+
+            //Debug.Log(lines[i] + ", number of character: "+ lines[i].Length); /*Contenu de la ligne + le nombre de character*/
+            //Debug.Log(lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));
+
+            var cell = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);
+            
+            foreach (var y in lines)
+            {
+                Debug.Log(y);
+            }
+
+            //Debug.Log(lines[i] + ", number of character: " + lines[i].Length);
+        }
+
+        for (var i = 0; i < sheet.GetLength(0); i++)
+        {
+            for (var j = 0; j < sheet.GetLength(1); j++)
+            {
+                /*
+                Debug.Log(sheet[0][j]);
+                Debug.Log(sheet[i][0]);*/
+
+                completeExcelFile.Add(new Element(sheet[0][j], sheet[i][0], sheet[i][j]));
+            }
+        }
+
+        //Debug.Log(completeExcelFile.Count);
+
+        OrderController.Instance.outcomes = completeExcelFile;
+
+    }
+
+    static void DebugEntry(string[] entry)
+    {
+        for (int i = 1; i < 16; i++)
+        {
+            if (entry[i].Contains("Null"))
+            {
+                Debug.Log(entry[0] + ", " + entry[i]);
+            }
+        }
+        
     }
 #endif
 }
@@ -224,3 +286,7 @@ public class LoadCSV : ScriptableObject
         sc3 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#3");
     }
 }
+
+
+
+
