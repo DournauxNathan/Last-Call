@@ -170,8 +170,7 @@ MonoBehaviour:
   name: 
   iD: 0
   state: 0
-  combineWith: []
-  influence: 1
+  useWith: []
   outline: {fileID: 14245270}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
   defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
@@ -11214,8 +11213,7 @@ MonoBehaviour:
   name: 
   iD: 0
   state: 0
-  combineWith: []
-  influence: -1
+  useWith: []
   outline: {fileID: 1963222386}
   selectOutline: {fileID: 2100000, guid: ab109925e5014364c81d99d752d1ca95, type: 2}
   defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
@@ -11437,12 +11435,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: wallTransition
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: startTransition
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: wallShader.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: wallShader.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b021dff78aaccb429af088a6e0acb2d, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: wallShader.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fdc138f928a5242479a54300913ce24e, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: transitionShaders.Array.size
-      value: 78
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: transitionShaders.Array.data[0]
@@ -11754,6 +11768,22 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d4922589261c0af4c840b82672004f73, type: 2}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: transitionShaders.Array.data[77]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f85167949663344eaf9a797191773ad, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[78]
+      value: 
+      objectReference: {fileID: 2100000, guid: fdc138f928a5242479a54300913ce24e, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[79]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b021dff78aaccb429af088a6e0acb2d, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[80]
+      value: 
+      objectReference: {fileID: 2100000, guid: fdc138f928a5242479a54300913ce24e, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: transitionShaders.Array.data[81]
       value: 
       objectReference: {fileID: 2100000, guid: 6f85167949663344eaf9a797191773ad, type: 2}
     - target: {fileID: 6283995595483804127, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}

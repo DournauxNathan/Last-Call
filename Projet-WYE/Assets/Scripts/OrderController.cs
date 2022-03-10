@@ -22,6 +22,8 @@ public class OrderController : Singleton<OrderController>
 
     public TMP_Text text;
 
+    public List<Element> outcomes;
+
     private void Update()
     {        
         if (Keyboard.current.enterKey.wasPressedThisFrame)
@@ -70,7 +72,7 @@ public class OrderController : Singleton<OrderController>
             objetA = a.gameObject.name,
             objetB = b.gameObject.name,
             value = 0/*a.influence + b.influence*/,
-        };
+        }; 
 
         text.text = newCombi.currentCombinaison;
 

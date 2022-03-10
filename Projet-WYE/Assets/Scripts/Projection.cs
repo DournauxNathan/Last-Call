@@ -10,11 +10,16 @@ public class Projection : Singleton<Projection>
 
     [Space(5)] 
     public List<Material> transitionShaders;
+    public List<Material> wallShader;
     [Space(5)]
 
     public bool isTransition;
-    [Range(0, 3)]
+    [Range(0, 8)]
     public float transitionValue = 3f;
+    [Range(0, 8)]
+    public float wallTransition;
+    public bool setWallWithOutline = false;
+    public bool switchMode;
 
     [Header("Projection Properties")]
     [Tooltip("During of the transition in seconds")]
@@ -39,7 +44,12 @@ public class Projection : Singleton<Projection>
         
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Distance", 3f * 10f);
+            mat.SetFloat("_Dissolve", 8f * 10f);
+        }
+
+        foreach (var mat in wallShader)
+        {
+           //mat.SetFloat("_Dissolve", 8f);
         }
 
         hasProjted = false;
@@ -52,12 +62,16 @@ public class Projection : Singleton<Projection>
         foreach (var mat in transitionShaders)
         {
             mat.SetVector("_PlayerPos", player.position);
+        
+            mat.SetFloat("_Dissolve", transitionValue );
         }
 
-        foreach (var mat in transitionShaders)
+        foreach (var mat in wallShader)
         {
-            mat.SetFloat("_Distance", transitionValue * 10f);
+           // mat.SetFloat("_Dissolve", wallTransition);
+            
         }
+
 
         if (pauseBetweenTransition && isTransition && !isDisconstruc)
         {
@@ -67,6 +81,14 @@ public class Projection : Singleton<Projection>
         if (pauseBetweenTransition && isTransition && isDisconstruc)
         {
             Construct();
+        }
+
+        if (transitionValue >= 2.5)
+        {
+            foreach (var mat in wallShader)
+            {
+                //DistanceDissolveTarget.Instance.SetObjectToTrack();
+            }
         }
     }
 
