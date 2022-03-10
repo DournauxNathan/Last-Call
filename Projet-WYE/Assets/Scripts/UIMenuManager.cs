@@ -159,6 +159,23 @@ public class UIMenuManager : MonoBehaviour
         
     }
 
+    public void Play()
+    {
+        Debug.Log("Play code here");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Credit()
+    {
+        Debug.Log("Credit code here");
+    }
+
+
+
     /*private void ChangeQualityText()
     {
         qualityButton.GetComponentInChildren<Text>().text = "Graphics: " + qualityChosen;
