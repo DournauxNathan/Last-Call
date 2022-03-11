@@ -238,7 +238,7 @@ public class LoadFromCsv
 
         foreach (var item in a)
         {
-            Debug.Log(item[]); 
+            //Debug.Log(item[]); 
         }
 
         for (int i = 0; i < a.Count; i++)
