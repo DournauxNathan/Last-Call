@@ -154,13 +154,13 @@ public class ListManager : Singleton<ListManager>
                     if (_objectManager1.state == StateMobility.Static)
                     {
                         objet2.SetActive(false);
+                        _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
 
                         //Clear the list if a combinaison has already been find
                         //_objectManager1.combineWith.Clear();
                     }
                     else
                     {
-                        //Debug.Log("Suppr3");
                         _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
                         _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
                     }
@@ -173,6 +173,7 @@ public class ListManager : Singleton<ListManager>
                     {
                         objet1.SetActive(false);
 
+                        _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
                         //Clear the list if a combinaison has already been find
                         //_objectManager2.combineWith.Clear();
                     }
