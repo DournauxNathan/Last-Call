@@ -37,6 +37,12 @@ public class UiPauseManager : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    public void PauseDisplay()
+    {
+        this.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstSelectedGO);
+    }
+
     public void BackToMainMenu()
     {
         MainPause.gameObject.SetActive(true);
