@@ -5,7 +5,7 @@ using UnityEngine.VFX;
 using UnityEngine.InputSystem;
 using UnityEditor;
 
-public class DissolveEffect : MonoBehaviour
+public class DissolveEffect : Singleton<DissolveEffect>
 {
     [Header("Refs")]
     private GameObject particlePrefab;
@@ -49,7 +49,7 @@ public class DissolveEffect : MonoBehaviour
         }
     }
 
-    IEnumerator Dissolve()
+    public IEnumerator Dissolve()
     {
         if (particles != null)
         {
