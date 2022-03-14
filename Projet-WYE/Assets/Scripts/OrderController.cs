@@ -22,7 +22,7 @@ public class OrderController : Singleton<OrderController>
 
     public TMP_Text text;
 
-    public List<Element> outcomes;
+    public List<string[]> outcomes;
 
     private void Update()
     {        
