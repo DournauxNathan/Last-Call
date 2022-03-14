@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_UnitDispatcher_Boite
-  m_Shader: {fileID: -6465566751694194690, guid: 67a0e24ed805b634592c9090769c227b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 8c262c007d3e03047a0514f20558349b, type: 3}
   m_ShaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP _PARALLAXMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,6 +64,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 08966449e8863384c90a86305c1e0f56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Metallic:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 2800000, guid: e78dc0d085e5ee84fb7b06df147bc399, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -102,6 +106,7 @@ Material:
     - Vector1_fa5d1a461e164c3a8fb1aae630b86d4a: 0
     - Vector1_fca3f7ea915845bbb71414e5824b4e06: 0
     - _AlphaClip: 0
+    - _BakeIntensity: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -110,6 +115,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve: 12
+    - _DissolveScale: 10.5
     - _Distance: 30
     - _DstBlend: 0
     - _EnvironmentReflections: 1
@@ -118,7 +125,8 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Parallax: 0.005
+    - _OutlineWidth: 0.005
+    - _Parallax: 0.008
     - _Parallax_1: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -132,7 +140,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PlayerPos: {r: 0.095, g: 1.2, b: 0.126, a: 0}
+    - _PlayerPos: {r: -0.202, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

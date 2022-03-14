@@ -5,65 +5,132 @@ using UnityEngine;
 [System.Serializable]
 public class CombinableObject_Data : MonoBehaviour
 {
+    private bool generate;
+
     public new string name;
     [Header("Data")]
     public int iD;
     public StateMobility state;
     private int nCombinaison;
-    public List<CombineWith> useWith = new List<CombineWith>(); 
+    public CombineWith[] useWith; 
 
     [Header("Refs")]
     private MeshFilter m_MeshFilter;
-    public MeshFilter MeshFilter { get => m_MeshFilter; set => m_MeshFilter = value; }
+    public MeshFilter meshFilter { get => m_MeshFilter; set => m_MeshFilter = value; }
 
     private MeshRenderer m_MeshRenderer;
-    public MeshRenderer MeshRenderer { get => m_MeshRenderer; set => m_MeshRenderer = value; }
+    public MeshRenderer meshRenderer { get => m_MeshRenderer; set => m_MeshRenderer = value; }
+    
     private MeshCollider m_MeshCollider;
-    public MeshCollider MeshCollider { get => m_MeshCollider; set => m_MeshCollider = value; }
+    public MeshCollider meshCollider { get => m_MeshCollider; set => m_MeshCollider = value; }
+    
     private SphereCollider m_Spherecollider;
-    public SphereCollider SphereCollider { get => m_Spherecollider; set => m_Spherecollider = value; }
+    public SphereCollider sphereCollider { get => m_Spherecollider; set => m_Spherecollider = value; }
+    
+    private DissolveEffect m_DissolveEffect;
+    public DissolveEffect dissolveEffect { get => m_DissolveEffect; set => m_DissolveEffect = value; }
 
     [Header("Outline Properties")]
     public Outline outline;
     public Material selectOutline;
     public Color defaultOutlineColor;
 
-
     public void GetComponent()
     {
-        MeshFilter = GetComponent<MeshFilter>();
-        MeshRenderer = GetComponent<MeshRenderer>();
-        MeshCollider = GetComponent<MeshCollider>();
-        SphereCollider = GetComponent<SphereCollider>();
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshCollider = GetComponent<MeshCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
         outline = GetComponent<Outline>();
     }
 
     public void Init(string[] entry)
     {
-        this.name = entry[0];
-        Debug.Log(entry[0] + " | " + " | " + entry[1] + " | " + entry[2] + " | " + entry[3] + " | " + entry[4] + " | " + entry[5] + " | " + entry[6] + " | " + entry[7] + " | " + entry[8] + " | " + entry[9] + " | " + entry[10] + " | " + entry[11]);
-        
-        Debug.Log(entry[2]);
-        
-        iD = int.Parse(entry[1]);
-        
-        if (entry[2].Contains("STATIQUE"))
+        this.name = entry[1];
+
+        iD = int.Parse(entry[2]);
+
+        if (entry[3].Contains("STATIQUE"))
         {
             state = StateMobility.Static;
         }
-        else if (entry[2].Contains("DYNAMIQUE"))
+        else if (entry[3].Contains("DYNAMIQUE"))
         {
             state = StateMobility.Dynamic;
         }
-        
-        nCombinaison = int.Parse(entry[3]);
-        /*
-        for (int i = 0; i < nCombinaison; i++)
+
+        nCombinaison = int.Parse(entry[4]);
+
+        useWith = new CombineWith[nCombinaison];
+
+        if (nCombinaison == 1)
         {
-            useWith = new List<CombineWith>(nCombinaison);
-            useWith[i].objectName = entry[i];
-            useWith[i].influence = int.Parse(entry[i]);
-        }*/
+            useWith[0] = new CombineWith
+            {
+                objectName = entry[5],
+                influence = int.Parse(entry[6])
+            };
+        }
+        else if (nCombinaison == 2)
+        {
+            useWith[0] = new CombineWith
+            {
+                objectName = entry[5],
+                influence = int.Parse(entry[6])
+            };
+
+            useWith[1] = new CombineWith
+            {
+                objectName = entry[7],
+                influence = int.Parse(entry[8])
+            };
+        }
+        else if (nCombinaison == 3)
+        {
+            useWith[0] = new CombineWith
+            {
+                objectName = entry[5],
+                influence = int.Parse(entry[6])
+            };
+
+            useWith[1] = new CombineWith
+            {
+                objectName = entry[7],
+                influence = int.Parse(entry[8])
+            };
+
+            useWith[2] = new CombineWith
+            {
+                objectName = entry[9],
+                influence = int.Parse(entry[10])
+            };
+        }
+        else
+        {
+            useWith[0] = new CombineWith
+            {
+                objectName = entry[5],
+                influence = int.Parse(entry[6])
+            };
+
+            useWith[1] = new CombineWith
+            {
+                objectName = entry[7],
+                influence = int.Parse(entry[8])
+            };
+
+            useWith[2] = new CombineWith
+            {
+                objectName = entry[9],
+                influence = int.Parse(entry[10])
+            };
+
+            useWith[3] = new CombineWith
+            {
+                objectName = entry[11],
+                influence = int.Parse(entry[12])
+            };
+        }
 
         LoadFromRessources();
         SetOutline();
@@ -72,8 +139,8 @@ public class CombinableObject_Data : MonoBehaviour
 
     public void LoadFromRessources()
     {
-        MeshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
-        MeshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
+        meshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
+        meshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
         selectOutline = Resources.Load<Material>("Materials/Select Outline");
     }
 

@@ -5,6 +5,7 @@ using UnityEditor.Events;
 using UnityEngine.Events;
 using UnityEditor;
 using System.Linq;
+[System.Serializable]
 
 public class LoadFromCsv 
 {
@@ -76,96 +77,107 @@ public class LoadFromCsv
 
     static void CreatePrefab(string[] entry)
     {
-        GameObject newPrefab = new GameObject(entry[0]);
-        
-        if (newPrefab == null)
+        if (entry[0].Contains("true"))
         {
-            newPrefab =  new GameObject(entry[0]);
-        }
+            GameObject newPrefab = GameObject.Find(entry[1]);
 
-        var co = newPrefab.GetComponent<CombinableObject>();
-
-        if (co == null)
-        {
-            co = newPrefab.AddComponent<CombinableObject>();
-        }
-        co.GetComponent();
-
-        if(!co.MeshFilter)
-        {
-            co.MeshFilter = newPrefab.AddComponent<MeshFilter>();
-        }
-        if (!co.MeshRenderer)
-        {
-            co.MeshRenderer = newPrefab.AddComponent<MeshRenderer>();
-        }
-        if (!co.MeshCollider)
-        {
-            co.MeshCollider = newPrefab.AddComponent<MeshCollider>();
-        }
-        if (!co.SphereCollider)
-        {
-            co.SphereCollider = newPrefab.AddComponent<SphereCollider>();
-        }
-        if (!co.outline)
-        {
-            co.outline = newPrefab.AddComponent<Outline>();
-        }
-
-        if (entry[2].Contains("DYNAMIQUE"))
-        {
-
-            XRGrabInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRGrabInteractableWithAutoSetup>();
-
-            if (xrInteractable == null)
+            if (newPrefab == null)
             {
-                xrInteractable= newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+                newPrefab = new GameObject(entry[1]);
             }
 
-            var mustImplementToogleOutline = true;
+            var co = newPrefab.GetComponent<CombinableObject>();
+            
+            //System.Array.Clear(co.useWith, 0, co.useWith.Length);
 
-            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+            if (co == null)
             {
-                if(xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                co = newPrefab.AddComponent<CombinableObject>();
+            }
+            co.GetComponent();
+
+            if (!co.meshFilter)
+            {
+                co.meshFilter = newPrefab.AddComponent<MeshFilter>();
+            }
+            if (!co.meshRenderer)
+            {
+                co.meshRenderer = newPrefab.AddComponent<MeshRenderer>();
+            }
+            if (!co.meshCollider)
+            {
+                co.meshCollider = newPrefab.AddComponent<MeshCollider>();
+            }
+            if (!co.sphereCollider)
+            {
+                co.sphereCollider = newPrefab.AddComponent<SphereCollider>();
+            }
+            if (!co.outline)
+            {
+                co.outline = newPrefab.AddComponent<Outline>();
+            }
+            if (!co.dissolveEffect)
+            {
+                co.dissolveEffect = newPrefab.AddComponent<DissolveEffect>();
+                co.dissolveEffect.Init();
+            }
+
+            if (entry[3].Contains("DYNAMIQUE"))
+            {
+
+                XRGrabInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRGrabInteractableWithAutoSetup>();
+
+                if (xrInteractable == null)
                 {
-                    mustImplementToogleOutline = false;
+                    xrInteractable = newPrefab.AddComponent<XRGrabInteractableWithAutoSetup>();
+                }
+
+                var mustImplementToogleOutline = true;
+
+                for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+                {
+                    if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                    {
+                        mustImplementToogleOutline = false;
+                    }
+                }
+
+                if (mustImplementToogleOutline)
+                {
+                    UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                    UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
+                }
+            }
+            else if (entry[3].Contains("STATIQUE"))
+            {
+                XRSimpleInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRSimpleInteractableWithAutoSetup>();
+                if (xrInteractable == null)
+                {
+                    xrInteractable = newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
+                }
+                var mustImplementToogleOutline = true;
+                for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
+                {
+                    if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
+                    {
+                        mustImplementToogleOutline = false;
+                    }
+                }
+                if (mustImplementToogleOutline)
+                {
+                    UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+                    UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
                 }
             }
 
-            if(mustImplementToogleOutline)
-            {
-                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
-                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
-            }
+            co.Init(entry);
         }
-        else if (entry[2].Contains("STATIQUE"))
-        {
-            XRSimpleInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRSimpleInteractableWithAutoSetup>();
-            if (xrInteractable == null)
-            {
-                xrInteractable = newPrefab.AddComponent<XRSimpleInteractableWithAutoSetup>();
-            }
-            var mustImplementToogleOutline = true;
-            for (int i = 0; i < xrInteractable.hoverEntered.GetPersistentEventCount(); i++)
-            {
-                if (xrInteractable.hoverEntered.GetPersistentMethodName(i) == "ToggleOutline")
-                {
-                    mustImplementToogleOutline = false;
-                }
-            }
-            if (mustImplementToogleOutline)
-            {
-                UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
-                UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
-            }
-        }
-
-        co.Init(entry);
     }
+    
     #if UNITY_EDITOR
     //[MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
     static void SaveCurrentSelectionIntoPrefabAsset()
@@ -189,16 +201,100 @@ public class LoadFromCsv
         }
     }
 
-    //[MenuItem("Rational/Excel/Generate ScriptableObject")]
+    public struct Element
+    {
+        public string line, column, element;
+/*
+        public Element(string line*//*, string column, string element*//*)
+        {
+            this.line = line;*//*
+            this.column = column;
+            this.element = element;*//*
+        }*/
+
+    }
+
+    [MenuItem("Rational/Excel")]
     public static void LoadCSV()
     {
-        var newScriptableObject = ScriptableObject.CreateInstance<LoadCSV>();
-        
-        // Set the path as within the Assets folder,
-        // and name it as the ScriptableObject's name with the .Asset format
-        string localPath = "Assets/Scripts/CSV/" + newScriptableObject + ".asset";
+        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1_Outcome").text;
 
-        AssetDatabase.CreateAsset(newScriptableObject, localPath);
+        string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
+        char[] cellSeparator = new char[] { ',' };
+
+        var lines = csvText.Split(lineSeparators, System.StringSplitOptions.RemoveEmptyEntries);
+        //List<Element> completeExcelFile = new List<Element>();
+
+        List<string[]> a = new List<string[]>();
+
+        string[][] sheet = new string[lines.Length][];
+
+
+        foreach (var i in lines)
+        {
+            a.Add(i.Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));//Nombre de character dans tout la ligne
+            //Debug.Log(i);
+        }
+
+        foreach (var item in a)
+        {
+            //Debug.Log(item[]); 
+        }
+
+        for (int i = 0; i < a.Count; i++)
+        {
+            //sheet[i][0] = a;
+        }
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            //sheet[i] = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);//Nombre de character dans tout la ligne
+
+            //Debug.Log(lines[i] + ", number of character: "+ lines[i].Length); /*Contenu de la ligne + le nombre de character*/
+
+            //var cell = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);
+
+            //Debug.Log(lines[i]); //Contenu de la ligne
+            //Debug.Log(lines[i].Length); // Le nombre de character
+
+            //Debug.Log(lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));
+
+            //Objectif séparer le contenue de la ligne
+            
+            
+            
+            //Debug.Log(lines[i] + ", number of character: " + lines[i].Length);
+        }
+
+
+        /*  for (var i = 0; i < sheet.Length; i++)
+          {
+              Debug.Log(sheet[i][]); 
+              *//*for (var j = 0; j < sheet[i].Length; j++)
+              {
+                  *//*
+                  Debug.Log(sheet[0][j]);
+
+                  //completeExcelFile.Add(new Element(sheet[0][j], sheet[i][0], sheet[i][j]));
+              }*//*
+          }*/
+
+        //Debug.Log(completeExcelFile.Count);
+
+        //OrderController.Instance.outcomes = completeExcelFile;
+
+    }
+
+    static void DebugEntry(string[] entry)
+    {
+        for (int i = 1; i < 16; i++)
+        {
+            if (entry[i].Contains("Null"))
+            {
+                Debug.Log(entry[0] + ", " + entry[i]);
+            }
+        }
+        
     }
 #endif
 }
@@ -214,3 +310,7 @@ public class LoadCSV : ScriptableObject
         sc3 = Resources.Load<TextAsset>("Puzzle_Rational/SC_#3");
     }
 }
+
+
+
+
