@@ -14,7 +14,7 @@ public class Projection : Singleton<Projection>
     [Space(5)]
 
     public bool isTransition;
-    [Range(0, 8)]
+    [Range(0, 12)]
     public float transitionValue = 3f;
     [Range(0, 8)]
     public float wallTransition;
