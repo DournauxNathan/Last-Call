@@ -36,7 +36,7 @@ public class UIMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform)
+        if (currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform && EventSystem.current.currentSelectedGameObject != null)
         {
             oldSelected = currentSelected;
             OnWheelUpdate();
@@ -75,6 +75,10 @@ public class UIMenuManager : MonoBehaviour
 
     private void CurrentSelected()
     {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(oldSelected.gameObject);
+        }
         currentSelected = EventSystem.current.currentSelectedGameObject.transform;
     }
 
@@ -161,7 +165,8 @@ public class UIMenuManager : MonoBehaviour
 
     public void Play()
     {
-        Debug.Log("Play code here");
+        //Debug.Log("Play code here");
+        SceneLoader.Instance.LoadNewScene("Office");
     }
 
     public void Quit()
