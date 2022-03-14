@@ -92,6 +92,11 @@ public class HandController : Singleton<HandController>
                 Projection.Instance.ResetTransition();
             }            
         }
+
+        if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool buttonValueMenu))
+        {
+            UiPauseManager.Instance.PauseDisplay();
+        }
     }
 
     public Vector3 GetDeviceAccelation()

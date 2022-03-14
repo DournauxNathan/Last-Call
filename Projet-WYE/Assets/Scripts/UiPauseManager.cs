@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class UiPauseManager : MonoBehaviour
+public class UiPauseManager : Singleton<UiPauseManager>
 {
     [SerializeField] private GameObject firstSelectedGO;
     [SerializeField] private Transform MainPause;
@@ -18,7 +18,7 @@ public class UiPauseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetUp();
+        UnPause();
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class UiPauseManager : MonoBehaviour
     public void PauseDisplay()
     {
         this.gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstSelectedGO);
+        SetUp();
     }
 
     public void BackToMainMenu()
@@ -69,8 +69,8 @@ public class UiPauseManager : MonoBehaviour
     }
 
     public void GoBackToMainAppart() {
-        Debug.Log("Go BAck To Main Menu Code Here");
-    
+        //Debug.Log("Go BAck To Main Menu Code Here");
+        SceneLoader.Instance.LoadNewScene("Appartment");
     }
 
 }
