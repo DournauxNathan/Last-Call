@@ -95,7 +95,10 @@ public class HandController : Singleton<HandController>
 
         if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool buttonValueMenu))
         {
-            UiPauseManager.Instance.PauseDisplay();
+            if (buttonValueMenu)
+            {
+                UiPauseManager.Instance.PauseDisplay(); Debug.Log("ButtonStart Pressed");
+            }
         }
     }
 
