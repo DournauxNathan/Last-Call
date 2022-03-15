@@ -68,8 +68,9 @@ public class UiPauseManager : Singleton<UiPauseManager>
     }
 
     public void GoBackToMainAppart() {
-        SceneLoader.Instance.LoadNewScene("Appartment");
         UnPause();
+        SceneLoader.Instance.LoadNewScene("Appartment");
+        
     }
 
     public void DisplayPathText()

@@ -171,6 +171,7 @@ public class UIMenuManager : MonoBehaviour
     public void Play()
     {
         SceneLoader.Instance.LoadNewScene("Office");
+        MasterManager.Instance.currentPhase = Phases.Phase_1;
         StartGame.Invoke();
     }
 
