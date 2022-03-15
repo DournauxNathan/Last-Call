@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class UIMenuManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class UIMenuManager : MonoBehaviour
     [Space(20)] [SerializeField] private Transform currentSelected;
     [SerializeField] private Transform oldSelected;
 
+    [Space(10)] public UnityEvent StartGame;
+
     /*//Quality Param
     public enum Quality
     {
@@ -24,10 +27,9 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private Transform qualityButton;
     public Quality qualityChosen = Quality.Medium;*/
 
-    // Start is called before the first frame update
     void Start()
     {
-        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        //EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         
         SetUp();
         EventSystem.current.SetSelectedGameObject(wheelList[2].gameObject);
@@ -36,6 +38,9 @@ public class UIMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        StartGame.AddListener(EventCall);
+
         if (currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform && EventSystem.current.currentSelectedGameObject != null)
         {
             oldSelected = currentSelected;
@@ -165,8 +170,8 @@ public class UIMenuManager : MonoBehaviour
 
     public void Play()
     {
-        //Debug.Log("Play code here");
         SceneLoader.Instance.LoadNewScene("Office");
+        StartGame.Invoke();
     }
 
     public void Quit()
@@ -179,7 +184,10 @@ public class UIMenuManager : MonoBehaviour
         Debug.Log("Credit code here");
     }
 
-
+    private void EventCall()
+    {
+        ScenarioManager.Instance.LoadScenario();
+    }
 
     /*private void ChangeQualityText()
     {

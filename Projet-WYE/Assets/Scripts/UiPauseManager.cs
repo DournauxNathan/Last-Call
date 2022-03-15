@@ -18,20 +18,11 @@ public class UiPauseManager : Singleton<UiPauseManager>
     [Space(10)]
     [SerializeField] private TMP_Text _text;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         UnPause();
         _text.text = "";
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SetUp()
     {
         EventSystem.current.SetSelectedGameObject(firstSelectedGO);
@@ -40,7 +31,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     public void UnPause()
     {
-        MainPause.gameObject.SetActive(true);
+        MainPause.gameObject.SetActive(false);
         OnPauseExit.Invoke();
     }
 
@@ -77,7 +68,6 @@ public class UiPauseManager : Singleton<UiPauseManager>
     }
 
     public void GoBackToMainAppart() {
-        //Debug.Log("Go BAck To Main Menu Code Here");
         SceneLoader.Instance.LoadNewScene("Appartment");
     }
 
