@@ -31,15 +31,27 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     public void UnPause()
     {
+        //Disable everything
         MainPause.gameObject.SetActive(false);
+        foreach (var sub in SubMenus)
+        {
+            sub.gameObject.SetActive(false);
+        }
         OnPauseExit.Invoke();
     }
 
     public void PauseDisplay()
     {
-        DisplayTarget(MainPause.gameObject);
-        SetUp();
-        OnPauseEnter.Invoke();
+        if (CheckPauseIsActive())
+        {
+            UnPause();
+        }
+        else
+        {
+            DisplayTarget(MainPause.gameObject);
+            SetUp();
+            OnPauseEnter.Invoke();
+        }
     }
 
     public void BackToMainMenu()
@@ -78,4 +90,23 @@ public class UiPauseManager : Singleton<UiPauseManager>
         _text.text = "File Saved to : " + FileHandler.GetPath("SaveLastCall.json");
     }
     
+    private bool CheckPauseIsActive()
+    {
+        if (MainPause.gameObject.activeSelf)
+        {
+            return true;
+        }
+        else
+        {
+            foreach (var sub in SubMenus)
+            {
+                if (sub.gameObject.activeSelf)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
