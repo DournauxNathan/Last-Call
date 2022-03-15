@@ -34,12 +34,12 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     public void UnPause()
     {
-        this.gameObject.SetActive(false);
+        MainPause.gameObject.SetActive(true);
     }
 
     public void PauseDisplay()
     {
-        this.gameObject.SetActive(true);
+        DisplayTarget(MainPause.gameObject);
         SetUp();
     }
 
