@@ -187,7 +187,7 @@ public class UIMenuManager : MonoBehaviour
 
     private void EventCall()
     {
-        ScenarioManager.Instance.LoadScenario();
+        //ScenarioManager.Instance.LoadScenario(); Bug
     }
 
     /*private void ChangeQualityText()
