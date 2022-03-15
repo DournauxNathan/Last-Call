@@ -71,31 +71,24 @@ public class ListManager : Singleton<ListManager>
 
         if (objet1.TryGetComponent<CombinableObject>(out _objectManager1) && objet2.TryGetComponent<CombinableObject>(out _objectManager2))
         {
-            //Debug.Log("A" + _objectManager1.name + " | " + _objectManager2.name);
-
             //Check with 2 objects only and with the ObjectManager1
             if (_objectManager1.useWith.Length == 2 && _objectManager1.useWith[0].objectName == objet2.name.ToString()  
                 || _objectManager1.useWith.Length == 2 && _objectManager1.useWith[1].objectName == objet2.name.ToString())
             {
-                //Debug.Log("B" + _objectManager1.name + " | " + _objectManager2.name);
-
                 if (_objectManager1.state == StateMobility.Static)
                 {
-                    //Debug.Log("C Static" + _objectManager1.name + " | " + _objectManager2.name);
+                    //_objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
 
-                    _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
-
-                    //objet2.SetActive(false);
+                    objet2.SetActive(false);
 
                     //Clear the list if a combinaison has already been find
                     //_objectManager1.combineWith.Clear();
                 }
                 else if (_objectManager2.state == StateMobility.Static)
                 {
-                    //Debug.Log("Cbis Static" + _objectManager1.name + " | " + _objectManager2.name);
-                    //objet1.SetActive(false);
+                    objet1.SetActive(false);
 
-                    _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                    //_objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
 
                     //Clear the list if a combinaison has already been find
                     //_objectManager1.combineWith.Clear();
@@ -103,25 +96,24 @@ public class ListManager : Singleton<ListManager>
 
                 else
                 {
-                    //Debug.Log("Suppr1");
+                    //_objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                    //_objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
 
-                    _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
-                    _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                    objet1.SetActive(false);
+                    objet2.SetActive(false);
                 }
 
                 SetToOrderController(_objectManager1, _objectManager2);
             }
             else if (_objectManager2.useWith.Length == 2 && _objectManager2.useWith[0].objectName == objet1.name.ToString() && _objectManager1.useWith.Length!= 0 
                 || _objectManager2.useWith.Length == 2 && _objectManager2.useWith[0].objectName == objet1.name.ToString() && _objectManager1.useWith.Length != 0)
-            {
-                Debug.Log("D" + _objectManager1.name + " | " + _objectManager2.name);
+            {                
                 if (_objectManager1.state == StateMobility.Static)
                 {
-                    Debug.Log("C Static" + _objectManager1.name + " | " + _objectManager2.name);
-                    //objet2.SetActive(false);
+                    objet2.SetActive(false);
 
 
-                    _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                    //_objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
 
                     //Clear the list if a combinaison has already been find
                     // _objectManager1.combineWith.Clear();
@@ -130,9 +122,8 @@ public class ListManager : Singleton<ListManager>
                 //Check with 2 objects only and with the ObjectManager2
                 else if (_objectManager2.state == StateMobility.Static)
                 {
-                    Debug.Log("E Static" + _objectManager1.name + " | " + _objectManager2.name);
-                    //objet1.SetActive(false);
-                    _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                    objet1.SetActive(false);
+                    //_objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
 
                     //Clear the list if a combinaison has already been find
                     //_objectManager2.combineWith.Clear();
@@ -141,8 +132,12 @@ public class ListManager : Singleton<ListManager>
                 {
                     //Debug.Log("Suppr2");
 
-                    _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
-                    _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                    //_objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                    //_objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+
+
+                    objet1.SetActive(false);
+                    objet2.SetActive(false);
                 }
 
                 SetToOrderController(_objectManager2, _objectManager1);
@@ -155,16 +150,19 @@ public class ListManager : Singleton<ListManager>
                 {
                     if (_objectManager1.state == StateMobility.Static)
                     {
-                        //objet2.SetActive(false);
-                        _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                        objet2.SetActive(false);
+                        //_objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
 
                         //Clear the list if a combinaison has already been find
                         //_objectManager1.combineWith.Clear();
                     }
                     else
                     {
-                        _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
-                        _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                        //_objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                        //_objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+
+                        objet1.SetActive(false);
+                        objet2.SetActive(false);
                     }
 
                     SetToOrderController(_objectManager1, _objectManager2);
@@ -175,17 +173,17 @@ public class ListManager : Singleton<ListManager>
                     {
                         objet1.SetActive(false);
 
-                        _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                        //_objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
                         //Clear the list if a combinaison has already been find
                         //_objectManager2.combineWith.Clear();
                     }
                     else
                     {
                         //Debug.Log("Suppr4");
-                        _objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
-                        _objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
-                        /*objet1.SetActive(false);
-                        objet2.SetActive(false);*/
+                        //_objectManager1.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                        //_objectManager2.dissolveEffect.StartCoroutine(DissolveEffect.Instance.Dissolve());
+                        objet1.SetActive(false);
+                        objet2.SetActive(false);
                     }
 
                     SetToOrderController(_objectManager2, _objectManager1);
