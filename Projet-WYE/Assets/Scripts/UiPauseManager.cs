@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class UiPauseManager : Singleton<UiPauseManager>
 {
@@ -14,11 +15,15 @@ public class UiPauseManager : Singleton<UiPauseManager>
     public UnityEvent OnPauseEnter;
     public UnityEvent OnPauseExit;
 
+    [Space(10)]
+    [SerializeField] private TMP_Text _text;
+
 
     // Start is called before the first frame update
     void Start()
     {
         UnPause();
+        _text.text = "";
     }
 
     // Update is called once per frame
@@ -30,17 +35,20 @@ public class UiPauseManager : Singleton<UiPauseManager>
     private void SetUp()
     {
         EventSystem.current.SetSelectedGameObject(firstSelectedGO);
+        _text.text = "";
     }
 
     public void UnPause()
     {
         MainPause.gameObject.SetActive(true);
+        OnPauseExit.Invoke();
     }
 
     public void PauseDisplay()
     {
         DisplayTarget(MainPause.gameObject);
         SetUp();
+        OnPauseEnter.Invoke();
     }
 
     public void BackToMainMenu()
@@ -73,4 +81,9 @@ public class UiPauseManager : Singleton<UiPauseManager>
         SceneLoader.Instance.LoadNewScene("Appartment");
     }
 
+    public void DisplayPathText()
+    {
+        _text.text = "File Saved to : " + FileHandler.GetPath("SaveLastCall.json");
+    }
+    
 }
