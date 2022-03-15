@@ -77,6 +77,10 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 yield return new WaitForSeconds(refreshRate);
             }
         }
+        else
+        {
+            Debug.LogWarning("List is empty");
+        }
     }
 }
 
