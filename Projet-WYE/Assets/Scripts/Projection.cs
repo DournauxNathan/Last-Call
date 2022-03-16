@@ -14,7 +14,7 @@ public class Projection : Singleton<Projection>
     [Space(5)]
 
     public bool isTransition;
-    [Range(0, 12)]
+    [Range(0, 15)]
     public float transitionValue = 3f;
     [Range(0, 8)]
     public float wallTransition;
@@ -92,14 +92,14 @@ public class Projection : Singleton<Projection>
 
     public void ResetTransition()
     {
-        if (transitionValue < 3)
+        if (transitionValue < 15)
         {
             isTransition = false;
             transitionValue += Time.deltaTime * time;
 
-            if (transitionValue > 3)
+            if (transitionValue > 15)
             {
-                transitionValue = 3;
+                transitionValue = 15;
             }
         }
     }

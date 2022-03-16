@@ -18,6 +18,8 @@ public class HandController : Singleton<HandController>
 
     private Vector3 acceleration;
     public int indexTab = 0;
+    bool lButton, rButton;
+
 
     // Start is called before the first frame update
     void Start()
@@ -84,29 +86,37 @@ public class HandController : Singleton<HandController>
             //Debug.Log(_acceleration);
         }
 
-        if (MasterManager.Instance.useOneInput && targetDevice.name == "Oculus Touch Controller - Left"  && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool buttonValue))
+        #region Secondary Button
+        if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out lButton)
+            || targetDevice.name == "Oculus Touch Controller - Right" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out rButton))
         {
-            Projection.Instance.isTransition = buttonValue;
-            
-            if (!buttonValue)
+            if (lButton || rButton)
+            {
+                Projection.Instance.isTransition = true;
+            }
+            else
             {
                 Projection.Instance.ResetTransition();
             }            
         }
+        #endregion
 
+
+        #region Joystick Button
         if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool _rClick))
         {
             if (_rClick)
             {
-                indexTab++;
-                Debug.Log(indexTab);
+                _rClick = false;
+            indexTab++;
 
                 if (indexTab >= 3)
                 {
                     indexTab = 0;
                 }
 
-                Debug.Log(indexTab);
+                UiTabSelection.Instance.UpdateIndex(indexTab);
+                UiTabSelection.Instance.SwitchTab(indexTab);
             }
         }
 
@@ -114,6 +124,7 @@ public class HandController : Singleton<HandController>
         {
             if (_lClick)
             {
+                _lClick = false;
                 indexTab++;
 
                 if (indexTab >= 3)
@@ -123,7 +134,11 @@ public class HandController : Singleton<HandController>
                     Debug.Log(indexTab);
                 }
             }
+
+            UiTabSelection.Instance.UpdateIndex(indexTab);
+            UiTabSelection.Instance.SwitchTab(indexTab);
         }
+        #endregion
     }
 
     public Vector3 GetDeviceAccelation()
@@ -133,7 +148,7 @@ public class HandController : Singleton<HandController>
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!targetDevice.isValid)
         {
