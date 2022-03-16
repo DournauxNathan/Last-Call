@@ -24,15 +24,6 @@ public class OrderController : Singleton<OrderController>
 
     public List<string[]> outcomes;
 
-    private void Update()
-    {        
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            AddCombinaison(a, b);
-            IncreaseValue(1);
-        }
-    }
-
     public void Setup()
     {
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
@@ -65,27 +56,28 @@ public class OrderController : Singleton<OrderController>
         }
     }
 
-    public void AddCombinaison(CombinableObject a, CombinableObject b)
+    public void AddCombinaison(CombinableObject a, CombinableObject b, int _value, string _outcome)
     {
         Combinaison newCombi = new Combinaison {
-            currentCombinaison = a.gameObject.name + "+ " + b.gameObject.name,
-            objetA = a.gameObject.name,
-            objetB = b.gameObject.name,
-            value = 0/*a.influence + b.influence*/,
+            currentCombinaison = a.name+ "+ " + b.name,
+            objetA = a.name,
+            objetB = b.name,
+            value = _value,
         }; 
 
         text.text = newCombi.currentCombinaison;
 
         combinaisons.Add(newCombi);
+
         PlaytestData.Instance.betaTesteurs.data.combinaisonsMade.Add(newCombi);
 
-        AddOrder(newCombi.objetA, newCombi.objetB, newCombi.value);
+        AddOrder(newCombi.value, _outcome);
     }
 
-    public void AddOrder(string a, string b, int value)
+    public void AddOrder(int value, string outcome)
     {
         Order newOrder = new Order {
-            order = "Use " + a + " with " + b + " to " + " make a thing",
+            order = outcome,
             influence = value,
         };
 

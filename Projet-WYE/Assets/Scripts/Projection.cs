@@ -68,10 +68,8 @@ public class Projection : Singleton<Projection>
 
         foreach (var mat in wallShader)
         {
-           // mat.SetFloat("_Dissolve", wallTransition);
-            
+           // mat.SetFloat("_Dissolve", wallTransition);            
         }
-
 
         if (pauseBetweenTransition && isTransition && !isDisconstruc)
         {
@@ -160,7 +158,7 @@ public class Projection : Singleton<Projection>
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
-            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusier senar 
+            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
         }
 
         if (!hasCycle && hasProjted)

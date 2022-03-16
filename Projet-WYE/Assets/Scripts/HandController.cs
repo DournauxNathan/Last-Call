@@ -17,6 +17,7 @@ public class HandController : Singleton<HandController>
     private Animator handAnimator;
 
     private Vector3 acceleration;
+    public int indexTab = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +92,37 @@ public class HandController : Singleton<HandController>
             {
                 Projection.Instance.ResetTransition();
             }            
+        }
+
+        if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool _rClick))
+        {
+            if (_rClick)
+            {
+                indexTab++;
+                Debug.Log(indexTab);
+
+                if (indexTab >= 3)
+                {
+                    indexTab = 0;
+                }
+
+                Debug.Log(indexTab);
+            }
+        }
+
+        if (targetDevice.TryGetFeatureValue(CommonUsages.secondary2DAxisClick, out bool _lClick))
+        {
+            if (_lClick)
+            {
+                indexTab++;
+
+                if (indexTab >= 3)
+                {
+                    indexTab = 0;
+
+                    Debug.Log(indexTab);
+                }
+            }
         }
     }
 
