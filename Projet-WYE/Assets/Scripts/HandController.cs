@@ -18,7 +18,8 @@ public class HandController : Singleton<HandController>
 
     private Vector3 acceleration;
     public int indexTab = 0;
-    bool lButton, rButton;
+
+    bool _secondaryButton = false;
 
 
     // Start is called before the first frame update
@@ -63,7 +64,6 @@ public class HandController : Singleton<HandController>
         if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) /*&& triggerValue > 0.1f*/)
         {
             handAnimator.SetFloat("Trigger", triggerValue);
-            //Debug.Log("Trigger pressed: " + triggerValue);
         }
         else
         {
@@ -73,7 +73,6 @@ public class HandController : Singleton<HandController>
         if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue) /*&& gripValue > 0.1f*/)
         {
             handAnimator.SetFloat("Grip", gripValue);
-            //Debug.Log("Primary touchpad: " + primary2DAxisValue);
         }
         else
         {
@@ -87,20 +86,20 @@ public class HandController : Singleton<HandController>
         }
 
         #region Secondary Button
-        if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out lButton)
-            || targetDevice.name == "Oculus Touch Controller - Right" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out rButton))
+        if ((targetDevice.name == "Oculus Touch Controller - Right" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton)) 
+            && (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButton)))
         {
-            if (lButton || rButton)
+            if (_secondaryButton || secondaryButton)
             {
                 Projection.Instance.isTransition = true;
             }
             else
             {
+                Projection.Instance.isTransition = false;
                 Projection.Instance.ResetTransition();
             }            
         }
         #endregion
-
 
         #region Joystick Button
         if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool _rClick))
@@ -108,7 +107,7 @@ public class HandController : Singleton<HandController>
             if (_rClick)
             {
                 _rClick = false;
-            indexTab++;
+                indexTab++;
 
                 if (indexTab >= 3)
                 {
