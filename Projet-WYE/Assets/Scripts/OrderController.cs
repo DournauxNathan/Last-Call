@@ -13,13 +13,10 @@ public class OrderController : Singleton<OrderController>
     //public List<OrderFormat> orders;
     public bool isResolve = false;
 
-    [Header("New Section Code")]
-    public CombinableObject a;
-    public CombinableObject b;
-
     public List<Combinaison> combinaisons;
     public List<Order> ordersStrings;
 
+    [Header("Dev Menu Text")]
     public TMP_Text text;
 
     public List<string[]> outcomes;

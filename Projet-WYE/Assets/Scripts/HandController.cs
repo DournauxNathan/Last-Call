@@ -139,9 +139,6 @@ public class HandController : Singleton<HandController>
         }
         #endregion
 
-
-
-
         if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool buttonValueMenu))
         {
             if (buttonValueMenu && MasterManager.Instance.currentPhase != Phases.Phase_0 && MasterManager.Instance.currentPhase != Phases.Phase_4)
