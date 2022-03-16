@@ -12,7 +12,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
     public ParticleSystem particles;
 
     [Header("Properties")]
-    public float dissolveRate = 0.02f;
+    public float dissolveRate = 0.8f;
     public float refreshRate = 0.05f;
     public float delay = 0.02f;
     public bool startEffect = false;
@@ -61,13 +61,15 @@ public class DissolveEffect : Singleton<DissolveEffect>
             Debug.LogWarning("There is no particles, Object reference is missing in Inspector");
         }
 
-        float counter = 0;
+        float counter = 30;
 
         if (dissolveMaterials.Length > 0)
         {
-            while (dissolveMaterials[0].GetFloat("_Dissolve") < 1)
+            while (dissolveMaterials[0].GetFloat("_Dissolve") > 1)
             {
-                counter += dissolveRate;
+                Debug.Log("hey");
+
+                counter -= Time.deltaTime * dissolveRate;
 
                 for (int i = 0; i < dissolveMaterials.Length; i++)
                 {
