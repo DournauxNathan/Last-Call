@@ -146,9 +146,14 @@ public class HandController : Singleton<HandController>
         {
             if (buttonValueMenu && MasterManager.Instance.currentPhase != Phases.Phase_0 && MasterManager.Instance.currentPhase != Phases.Phase_4)
             {
-                UiPauseManager.Instance.PauseDisplay(); Debug.Log("ButtonStart Pressed");
+                //UiPauseManager.Instance.PauseDisplay(); Debug.Log("ButtonStart Pressed");
             }
         }
+
+        /*hebfbjefefbkebrf
+         erjbfkelbrfmef
+        erlfbjekbfjekf
+        ebfljeklbfk*/
     }
 
     public Vector3 GetDeviceAccelation()
