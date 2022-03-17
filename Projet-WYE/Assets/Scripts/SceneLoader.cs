@@ -44,7 +44,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         if (currentScene.name != string.Empty && currentScene.name != "Persistent")
         {
-            //yield return StartCoroutine(UnloadCurrent());
+            yield return StartCoroutine(UnloadCurrent());
         }
 
         yield return StartCoroutine(LoadNew(sceneName));

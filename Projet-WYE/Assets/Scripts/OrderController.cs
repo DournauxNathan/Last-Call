@@ -26,7 +26,7 @@ public class OrderController : Singleton<OrderController>
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
 
         ObjectActivator.Instance.SetActivetObject(go);
-        numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
+        //numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
     }
 
     public int IncreaseValue(int _value)

@@ -42,6 +42,7 @@ public class CombinableObject_Data : MonoBehaviour
         meshCollider = GetComponent<MeshCollider>();
         sphereCollider = GetComponent<SphereCollider>();
         outline = GetComponent<Outline>();
+        dissolveEffect = GetComponent<DissolveEffect>();
     }
 
     public void Init(string[] entry)
