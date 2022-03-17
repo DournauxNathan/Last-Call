@@ -103,16 +103,7 @@ public class ListManager : Singleton<ListManager>
     public void SetToOrderController(CombinableObject objectA, CombinableObject objectB, int value, string _outcome)
     {
         OrderController.Instance.AddCombinaison(objectA, objectB, value, _outcome);
-        
-
         PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
-        //OrderController.Instance.IncreaseValue(1);
-        
-        /*
-        if (!OrderController.Instance.orders.Contains(_objectManager.resultOrder))
-        {
-            OrderController.Instance.orders.Add(_objectManager.resultOrder);
-            OrderController.Instance.IncreaseValue(1);
-        }*/
+        OrderController.Instance.IncreaseValue(1);
     }
 }

@@ -165,7 +165,7 @@ public class Projection : Singleton<Projection>
         {
             hasCycle = !false;
 
-            //MasterManager.Instance.isInImaginary = false;
+            MasterManager.Instance.isInImaginary = false;
                         
             MasterManager.Instance.currentPhase = Phases.Phase_3;
 

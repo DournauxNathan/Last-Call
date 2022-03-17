@@ -34,7 +34,6 @@ public class UIManager : Singleton<UIManager>
 
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private int nQuestionAnswer;
-    [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
     public ParticleSystem smoke;
 
@@ -59,8 +58,6 @@ public class UIManager : Singleton<UIManager>
         if (ScenarioManager.Instance.isScenarioLoaded)
         {            
             ScenarioManager.Instance.isScenarioLoaded = false;
-
-            activateButton.SetActive(false);
 
             for (int i = 0; i < protocoleQuestions.Count; i++)
             {
@@ -136,7 +133,6 @@ public class UIManager : Singleton<UIManager>
     {
         if (unlockImaginaryTransition)
         {
-            activateButton.SetActive(true);
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
