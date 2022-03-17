@@ -10,11 +10,15 @@ public class SceneLoader : Singleton<SceneLoader>
      public string nameScene;
     public ScreenFader screenFader;
 
-    private Scene currentScene;
+    public Scene currentScene;
+    public string cScene;
     private bool isLoading = false;
 
     private void Start()
     {
+        /*currentScene = SceneManager.GetSceneAt(1);
+
+        cScene = currentScene.name;*/
         SceneManager.sceneLoaded += SetActiveScene;
     }
 
@@ -38,7 +42,7 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadBegin?.Invoke();
         //yield return screenFader.StartFadeIn();
 
-        if (currentScene.name != null && currentScene.name != "Persistent")
+        if (currentScene.name != string.Empty && currentScene.name != "Persistent")
         {
             yield return StartCoroutine(UnloadCurrent());
         }
@@ -49,6 +53,12 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadEnd?.Invoke();
 
         isLoading = false;
+
+        if (MasterManager.Instance.isInImaginary)
+        {
+            Projection.Instance.isTransition = true;
+        }
+
     }
 
     private IEnumerator UnloadCurrent()
@@ -70,6 +80,7 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return null;
         }
 
+        //cScene = currentScene.name;
     }
 
     private void SetActiveScene(Scene scene, LoadSceneMode mode)
@@ -100,5 +111,6 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         return SceneManager.GetActiveScene();
     }
+
 
 }

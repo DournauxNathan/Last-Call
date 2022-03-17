@@ -68,8 +68,8 @@ public class QuestionFormatEditor : Editor
         {
             CreateElement();
         }
-
         serializedObject.ApplyModifiedProperties();
+
     }
 
     private void DisplayArrayElement(int index)
@@ -78,7 +78,7 @@ public class QuestionFormatEditor : Editor
         var _currentQuestion = sp_listQuestion.GetArrayElementAtIndex(index);
 
         var _currentVoiceQuestion = sp_voiceLineQuestion.GetArrayElementAtIndex(index);
-        var _currentVoiceAnswer = sp_voiceLineQuestion.GetArrayElementAtIndex(index);
+        var _currentVoiceAnswer = sp_voiceLineAnswer.GetArrayElementAtIndex(index);
 
         var _currentUnit = sp_unit.GetArrayElementAtIndex(index);
 
