@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(ObjectManager))]
 
 public class RespawnObject : MonoBehaviour
 {
@@ -22,12 +21,12 @@ public class RespawnObject : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {   
-        if (other.CompareTag(colliderR))
+    {
+        if (other.CompareTag(colliderR) || other.CompareTag("Trash"))
         {
             rb.velocity = Vector3.zero;
             gameObject.transform.eulerAngles = q_rotaion;
-            gameObject.transform.position = v3_Original + new Vector3(0,offset,0);            
+            gameObject.transform.position = v3_Original + new Vector3(0,offset,0);
         }
     }
 }

@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 134905338237442477}
   - component: {fileID: 134905338237442476}
+  - component: {fileID: 1254344131}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &134905338237442477
 Transform:
@@ -43,20 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b22e2da3d6a8c4eb83d9415cff7bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionData:
-  - {fileID: 11400000, guid: 0e1dd738bb547d64893493ab6d7e4ce9, type: 2}
+  protocoleQuestions:
+  - {fileID: 11400000, guid: dc2950f50f965fb47a10afddb87302fb, type: 2}
   - {fileID: 11400000, guid: 3478ad2dd65905346bba8d365d25ae73, type: 2}
   - {fileID: 11400000, guid: 8789dcf1df1c8aa4dac7b31cb20593a5, type: 2}
   - {fileID: 11400000, guid: df499d27329fdd046a25d948cfd5e872, type: 2}
   - {fileID: 11400000, guid: 2dd2c7492e490104f8e2859046305ee2, type: 2}
   - {fileID: 11400000, guid: 22131034a59c7ba42b7a9cdec659f0b0, type: 2}
-  - {fileID: 11400000, guid: dc2950f50f965fb47a10afddb87302fb, type: 2}
-  - {fileID: 11400000, guid: cc4331c8c9a4be54ab1a5dfe67f2aa94, type: 2}
-  - {fileID: 11400000, guid: 974390d5f79cf6842b7c0b4a1b69d440, type: 2}
-  - {fileID: 11400000, guid: 1fbad7b02fffe5f4eb1d29fd203db5b8, type: 2}
-  - {fileID: 11400000, guid: 4dd0c27b73c3dd04c8035aee535e4d0f, type: 2}
-  - {fileID: 11400000, guid: f7427e53f8a75d3488768a6200c92896, type: 2}
-  - {fileID: 11400000, guid: b8c5155ca77f78a4c8c5c976610357fd, type: 2}
+  - {fileID: 11400000, guid: 0e1dd738bb547d64893493ab6d7e4ce9, type: 2}
+  descriptionQuestion: []
   buttons:
   - {fileID: 0}
   - {fileID: 0}
@@ -73,23 +69,34 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  buttonsOrder:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   checkListTransform: {fileID: 0}
-  questionPullingStock: {fileID: 0}
+  descriptionTransform: {fileID: 0}
   orderListTransform: {fileID: 0}
-  orderPullingStock: {fileID: 0}
+  pullingStock: {fileID: 0}
+  leftScreen: {fileID: 0}
+  rightScreen: {fileID: 0}
+  beginFadeOutAt: 1.25
+  beginFadeInAt: 3
+  nQuestionAnswer: 0
   activateButton: {fileID: 0}
-  unlockImaginaryTransition: 1
+  unlockImaginaryTransition: 0
+  smoke: {fileID: 0}
+  startSelectbutton: {fileID: 0}
+--- !u!114 &1254344131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134905338237442475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85ca1f1bbdd4834bb5464072672f0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
