@@ -75,35 +75,22 @@ public class ListManager : Singleton<ListManager>
             {
                 if (combinaison.objectName == combiObj2.name && combiObj1.state == StateMobility.Static)
                 {
-                    Debug.Log("A");
                     combiObj2.dissolveEffect.startEffect = true;
-                    //combiObj2.gameObject.SetActive(false);
 
-                    Debug.Log("B");
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
-                    Debug.Log("C");
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj2.state == StateMobility.Static)
                 {
-                    Debug.Log("A");
-                    //combiObj1.gameObject.SetActive(false);
                     combiObj1.dissolveEffect.startEffect = true;
 
-                    Debug.Log("B");
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
-                    Debug.Log("C");
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj1.state != StateMobility.Static)
                 {
-                    Debug.Log("A");
                     combiObj1.dissolveEffect.startEffect = true;
                     combiObj2.dissolveEffect.startEffect = true;
-                    Debug.Log("B");
-                    //combiObj1.gameObject.SetActive(false);
-                    //combiObj2.gameObject.SetActive(false);
 
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
-                    Debug.Log("C");
                 }
             }
         }
