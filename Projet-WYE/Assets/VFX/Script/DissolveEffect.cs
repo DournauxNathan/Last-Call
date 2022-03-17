@@ -51,15 +51,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
     public IEnumerator Dissolve()
     {
-        if (particles != null)
-        {
-            particles.gameObject.SetActive(true);
-            particles.Play();
-        }
-        else
-        {
-            Debug.LogWarning("There is no particles, Object reference is missing in Inspector");
-        }
+        
 
         float counter = 30;
 
@@ -67,7 +59,6 @@ public class DissolveEffect : Singleton<DissolveEffect>
         {
             while (dissolveMaterials[0].GetFloat("_Dissolve") > 1)
             {
-                Debug.Log("hey");
 
                 counter -= Time.deltaTime * dissolveRate;
 
@@ -83,6 +74,29 @@ public class DissolveEffect : Singleton<DissolveEffect>
         {
             Debug.LogWarning("List is empty");
         }
+
+        if (particles != null)
+        {
+            particles.gameObject.SetActive(true);
+            particles.Play();
+
+            Debug.Log("hey");
+        }
+        else
+        {
+            Debug.LogWarning("There is no particles, Object reference is missing in Inspector");
+        }
+
+        if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
+        {
+            for (int i = 0; i < dissolveMaterials.Length; i++)
+            {
+                dissolveMaterials[i].SetFloat("_Dissolve", 0f);
+                gameObject.SetActive(false);
+            }
+        }
+
+        //gameObject.SetActive(false);
     }
 }
 
