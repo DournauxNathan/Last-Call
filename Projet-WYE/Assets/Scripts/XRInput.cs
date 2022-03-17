@@ -11,7 +11,7 @@ public class XRInput : MonoBehaviour
     [SerializeField] XRBinding[] bindings;
 #pragma warning restore 0649
 
-    private void Update()
+    private void FixedUpdate()
     {
         foreach (var binding in bindings)
         {

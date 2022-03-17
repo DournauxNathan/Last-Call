@@ -68,7 +68,9 @@ public class CombinableObject_Data : MonoBehaviour
             useWith[0] = new CombineWith
             {
                 objectName = entry[5],
-                influence = int.Parse(entry[6])
+                influence = int.Parse(entry[6]),
+                outcome = entry[7]
+                
             };
         }
         else if (nCombinaison == 2)
@@ -76,13 +78,15 @@ public class CombinableObject_Data : MonoBehaviour
             useWith[0] = new CombineWith
             {
                 objectName = entry[5],
-                influence = int.Parse(entry[6])
+                influence = int.Parse(entry[6]),
+                outcome = entry[7]
             };
 
             useWith[1] = new CombineWith
             {
-                objectName = entry[7],
-                influence = int.Parse(entry[8])
+                objectName = entry[8],
+                influence = int.Parse(entry[9]),
+                outcome = entry[10]
             };
         }
         else if (nCombinaison == 3)
@@ -90,19 +94,22 @@ public class CombinableObject_Data : MonoBehaviour
             useWith[0] = new CombineWith
             {
                 objectName = entry[5],
-                influence = int.Parse(entry[6])
+                influence = int.Parse(entry[6]),
+                outcome = entry[7]
             };
 
             useWith[1] = new CombineWith
             {
-                objectName = entry[7],
-                influence = int.Parse(entry[8])
+                objectName = entry[8],
+                influence = int.Parse(entry[9]),
+                outcome = entry[10]
             };
 
             useWith[2] = new CombineWith
             {
-                objectName = entry[9],
-                influence = int.Parse(entry[10])
+                objectName = entry[11],
+                influence = int.Parse(entry[12]),
+                outcome = entry[13]
             };
         }
         else
@@ -110,25 +117,29 @@ public class CombinableObject_Data : MonoBehaviour
             useWith[0] = new CombineWith
             {
                 objectName = entry[5],
-                influence = int.Parse(entry[6])
+                influence = int.Parse(entry[6]),
+                outcome = entry[7]
             };
 
             useWith[1] = new CombineWith
             {
-                objectName = entry[7],
-                influence = int.Parse(entry[8])
+                objectName = entry[8],
+                influence = int.Parse(entry[9]),
+                outcome = entry[10]
             };
 
             useWith[2] = new CombineWith
             {
-                objectName = entry[9],
-                influence = int.Parse(entry[10])
+                objectName = entry[11],
+                influence = int.Parse(entry[12]),
+                outcome = entry[13]
             };
 
             useWith[3] = new CombineWith
             {
-                objectName = entry[11],
-                influence = int.Parse(entry[12])
+                objectName = entry[14],
+                influence = int.Parse(entry[15]),
+                outcome = entry[16]
             };
         }
 
@@ -168,6 +179,7 @@ public class CombineWith
 {
     public string objectName;
     public int influence;
+    public string outcome;
 }
 
 public enum StateMobility
