@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum Scenario
 {
@@ -37,6 +38,9 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public List<ProtocolFormat> p_homeInvasion;
     public List<ProtocolFormat> p_domesticAbuse;
 
+    [Space(20)] public UnityEvent OnScenarioLoad;
+
+
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
         //For Test and Debug
@@ -62,6 +66,8 @@ public class ScenarioManager : Singleton<ScenarioManager>
 
     public void LoadScenario()
     {
+        OnScenarioLoad.Invoke();
+
         switch (currentScenario)
         {
                 case Scenario.TrappedMan:

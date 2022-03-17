@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public enum Phases
 {
+    Phase_0,
     Phase_1,
     Phase_2,
     Phase_3,

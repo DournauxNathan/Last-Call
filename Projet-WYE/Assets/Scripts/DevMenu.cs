@@ -32,6 +32,8 @@ public class DevMenu : MonoBehaviour
     {
         ToggleMenu();
         SendJson();
+        GoToAppartment();
+        GoToOffice();
     }
 
     private void ToggleMenu()
@@ -98,5 +100,19 @@ public class DevMenu : MonoBehaviour
         }
     }
 
+    private void GoToAppartment()
+    {
+        if (Keyboard.current[Key.F1].wasPressedThisFrame && isEnable)
+        {
+            SceneLoader.Instance.LoadNewScene("Appartment");
+        }
+    }
 
+    private void GoToOffice()
+    {
+        if (Keyboard.current[Key.F2].wasPressedThisFrame && isEnable)
+        {
+            SceneLoader.Instance.LoadNewScene("Office");
+        }
+    }
 }

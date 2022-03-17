@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class UiPauseManager : MonoBehaviour
+public class UiPauseManager : Singleton<UiPauseManager>
 {
     [SerializeField] private GameObject firstSelectedGO;
     [SerializeField] private Transform MainPause;
@@ -14,27 +15,43 @@ public class UiPauseManager : MonoBehaviour
     public UnityEvent OnPauseEnter;
     public UnityEvent OnPauseExit;
 
+    [Space(10)]
+    [SerializeField] private TMP_Text _text;
 
-    // Start is called before the first frame update
     void Start()
     {
-        SetUp();
+        UnPause();
+        _text.text = "";
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SetUp()
     {
         EventSystem.current.SetSelectedGameObject(firstSelectedGO);
+        _text.text = "";
     }
 
     public void UnPause()
     {
-        this.gameObject.SetActive(false);
+        //Disable everything
+        MainPause.gameObject.SetActive(false);
+        foreach (var sub in SubMenus)
+        {
+            sub.gameObject.SetActive(false);
+        }
+        OnPauseExit.Invoke();
+    }
+
+    public void PauseDisplay()
+    {
+        if (CheckPauseIsActive())
+        {
+            UnPause();
+        }
+        else
+        {
+            DisplayTarget(MainPause.gameObject);
+            SetUp();
+            OnPauseEnter.Invoke();
+        }
     }
 
     public void BackToMainMenu()
@@ -63,8 +80,33 @@ public class UiPauseManager : MonoBehaviour
     }
 
     public void GoBackToMainAppart() {
-        Debug.Log("Go BAck To Main Menu Code Here");
+        UnPause();
+        SceneLoader.Instance.LoadNewScene("Appartment");
+        
+    }
+
+    public void DisplayPathText()
+    {
+        _text.text = "File Saved to : " + FileHandler.GetPath("SaveLastCall.json");
+    }
     
+    private bool CheckPauseIsActive()
+    {
+        if (MainPause.gameObject.activeSelf)
+        {
+            return true;
+        }
+        else
+        {
+            foreach (var sub in SubMenus)
+            {
+                if (sub.gameObject.activeSelf)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

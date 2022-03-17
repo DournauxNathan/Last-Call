@@ -16,6 +16,7 @@ public class  InputHandler : MonoBehaviour
         MasterManager.Instance.isTutoEnded = entries[0].inGame;
         ScenarioManager.Instance.currentScenario = (Scenario)Enum.Parse(typeof(Scenario), entries[0].scenarioName,true);
         ScenarioManager.Instance.endingValue = entries[0].endingValue;
+        MasterManager.Instance.currentPhase = (Phases)Enum.Parse(typeof(Phases), entries[0].currentPhase, true);
         SaveQuestion.Instance.AnsweredQuestions.AddRange(entries[0].questionAnsered);
         
     }
@@ -29,11 +30,11 @@ public class  InputHandler : MonoBehaviour
         entries.Clear();
         if (SaveQuestion.Instance.AnsweredQuestions.Count !=0)
         {
-            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue, SaveQuestion.Instance.AnsweredQuestions));
+            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue,MasterManager.Instance.currentPhase ,SaveQuestion.Instance.AnsweredQuestions));
         }
         else
         {
-            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue, _string));
+            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue, MasterManager.Instance.currentPhase , _string));
         }
         
 

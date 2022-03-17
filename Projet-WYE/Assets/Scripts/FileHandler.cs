@@ -28,7 +28,7 @@ public static class FileHandler
 
     }
 
-    private static string GetPath(string filename)
+    public static string GetPath(string filename)
     {
         return Application.persistentDataPath+"/"+filename;
     }
