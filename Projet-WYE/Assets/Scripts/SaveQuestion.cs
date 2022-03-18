@@ -22,7 +22,7 @@ public class SaveQuestion : Singleton<SaveQuestion>
 
     public void SetUp()
     {
-        Debug.LogWarning("Cleared SaveQuestion");       
+        //sequenceUnit = UnitDispatcher.Instance.sequence;
         AnsweredQuestions.Clear();
     }
 
