@@ -93,12 +93,12 @@ public class HandController : Singleton<HandController>
 
             if (_secondaryButton /*|| secondaryButton*/)
             {
-                Projection.Instance.isTransition = true;
+                //Projection.Instance.isTransition = true;
             }
             else
             {
-                Projection.Instance.isTransition = false;
-                Projection.Instance.ResetTransition();
+                //Projection.Instance.isTransition = false;
+                //Projection.Instance.ResetTransition();
             }            
         }   
         #endregion

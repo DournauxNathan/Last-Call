@@ -15,7 +15,7 @@ public class Projection : Singleton<Projection>
 
     public bool isTransition;
     [Range(0, 15)]
-    public float transitionValue = 3f;
+    public float transitionValue = 15f;
     [Range(0, 8)]
     public float wallTransition;
     public bool setWallWithOutline = false;
@@ -44,7 +44,7 @@ public class Projection : Singleton<Projection>
         
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Dissolve", 8f * 10f);
+            mat.SetFloat("_Dissolve", 15f);
         }
 
         foreach (var mat in wallShader)
@@ -129,7 +129,7 @@ public class Projection : Singleton<Projection>
 
     public void Construct()
     {
-        if (transitionValue < 3)
+        if (transitionValue < 15)
         {
             isTransition = true;
             transitionValue += Time.deltaTime * time;
@@ -138,12 +138,12 @@ public class Projection : Singleton<Projection>
         {
             hasCycle = false;
             isTransition = false;
-            transitionValue = 3;
+            transitionValue = 15;
             isDisconstruc = false;
         }
         else
         {
-            transitionValue = 3;
+            transitionValue = 15;
 
             ToggleProjection();
             StartCoroutine(WaitForVoid());//coroutine
@@ -158,6 +158,7 @@ public class Projection : Singleton<Projection>
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
+            Debug.Log("Call Gameplay_Combination_Iteration");
             MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
         }
 
@@ -169,6 +170,7 @@ public class Projection : Singleton<Projection>
                         
             MasterManager.Instance.currentPhase = Phases.Phase_3;
 
+            Debug.Log("Call Office");
             MasterManager.Instance.GoBackToOffice("Office");
         }
     }

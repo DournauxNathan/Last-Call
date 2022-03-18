@@ -32,8 +32,6 @@ public class Lever : MonoBehaviour
         }
     }
 
-
-
     public void Pulled()
     {
         Debug.Log("test leveier");
