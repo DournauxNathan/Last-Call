@@ -17,6 +17,10 @@ public class HandController : Singleton<HandController>
     private Animator handAnimator;
 
     private Vector3 acceleration;
+    public int indexTab = 0;
+
+    bool _secondaryButton = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +64,6 @@ public class HandController : Singleton<HandController>
         if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) /*&& triggerValue > 0.1f*/)
         {
             handAnimator.SetFloat("Trigger", triggerValue);
-            //Debug.Log("Trigger pressed: " + triggerValue);
         }
         else
         {
@@ -70,7 +73,6 @@ public class HandController : Singleton<HandController>
         if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue) /*&& gripValue > 0.1f*/)
         {
             handAnimator.SetFloat("Grip", gripValue);
-            //Debug.Log("Primary touchpad: " + primary2DAxisValue);
         }
         else
         {
@@ -83,15 +85,62 @@ public class HandController : Singleton<HandController>
             //Debug.Log(_acceleration);
         }
 
-        if (MasterManager.Instance.useOneInput && targetDevice.name == "Oculus Touch Controller - Left"  && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool buttonValue))
+        #region Secondary Button
+        if ((targetDevice.name == "Oculus Touch Controller - Right" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton)) 
+           /* && (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButton))*/)
         {
-            Projection.Instance.isTransition = buttonValue;
-            
-            if (!buttonValue)
+            Debug.Log(_secondaryButton);
+            //Debug.Log(secondaryButton);
+
+            if (_secondaryButton/* || secondaryButton*/)
             {
+                Projection.Instance.isTransition = true;
+            }
+            else
+            {
+                Projection.Instance.isTransition = false;
                 Projection.Instance.ResetTransition();
             }            
+        }   
+        #endregion
+
+        #region Joystick Button
+        if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool _rClick))
+        {
+            if (_rClick)
+            {
+                _rClick = false;
+                indexTab++;
+
+                if (indexTab >= 3)
+                {
+                    indexTab = 0;
+                }
+
+                UiTabSelection.Instance.UpdateIndex(indexTab);
+                UiTabSelection.Instance.SwitchTab(indexTab);
+            }
         }
+
+        if (targetDevice.TryGetFeatureValue(CommonUsages.secondary2DAxisClick, out bool _lClick))
+        {
+            if (_lClick)
+            {
+                _lClick = false;
+                indexTab++;
+
+                if (indexTab >= 3)
+                {
+                    indexTab = 0;
+
+                    Debug.Log(indexTab);
+                }
+            }
+
+            UiTabSelection.Instance.UpdateIndex(indexTab);
+            UiTabSelection.Instance.SwitchTab(indexTab);
+        }
+        #endregion
 
         if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool buttonValueMenu))
         {
@@ -109,7 +158,7 @@ public class HandController : Singleton<HandController>
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!targetDevice.isValid)
         {

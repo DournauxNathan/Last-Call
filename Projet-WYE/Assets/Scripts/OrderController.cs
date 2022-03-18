@@ -13,32 +13,20 @@ public class OrderController : Singleton<OrderController>
     //public List<OrderFormat> orders;
     public bool isResolve = false;
 
-    [Header("New Section Code")]
-    public CombinableObject a;
-    public CombinableObject b;
-
     public List<Combinaison> combinaisons;
     public List<Order> ordersStrings;
 
+    [Header("Dev Menu Text")]
     public TMP_Text text;
 
     public List<string[]> outcomes;
-
-    private void Update()
-    {        
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            AddCombinaison(a, b);
-            IncreaseValue(1);
-        }
-    }
 
     public void Setup()
     {
         GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
 
         ObjectActivator.Instance.SetActivetObject(go);
-        numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
+        //numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
     }
 
     public int IncreaseValue(int _value)
@@ -65,27 +53,28 @@ public class OrderController : Singleton<OrderController>
         }
     }
 
-    public void AddCombinaison(CombinableObject a, CombinableObject b)
+    public void AddCombinaison(CombinableObject a, CombinableObject b, int _value, string _outcome)
     {
         Combinaison newCombi = new Combinaison {
-            currentCombinaison = a.gameObject.name + "+ " + b.gameObject.name,
-            objetA = a.gameObject.name,
-            objetB = b.gameObject.name,
-            value = 0/*a.influence + b.influence*/,
+            currentCombinaison = a.name+ "+ " + b.name,
+            objetA = a.name,
+            objetB = b.name,
+            value = _value,
         }; 
 
         text.text = newCombi.currentCombinaison;
 
         combinaisons.Add(newCombi);
+
         PlaytestData.Instance.betaTesteurs.data.combinaisonsMade.Add(newCombi);
 
-        AddOrder(newCombi.objetA, newCombi.objetB, newCombi.value);
+        AddOrder(newCombi.value, _outcome);
     }
 
-    public void AddOrder(string a, string b, int value)
+    public void AddOrder(int value, string outcome)
     {
         Order newOrder = new Order {
-            order = "Use " + a + " with " + b + " to " + " make a thing",
+            order = outcome,
             influence = value,
         };
 
