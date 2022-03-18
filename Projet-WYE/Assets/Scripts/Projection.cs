@@ -63,7 +63,7 @@ public class Projection : Singleton<Projection>
         {
             mat.SetVector("_PlayerPos", player.position);
         
-            mat.SetFloat("_Dissolve", transitionValue );
+            mat.SetFloat("_Dissolve", transitionValue);
         }
 
         foreach (var mat in wallShader)

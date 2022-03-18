@@ -87,12 +87,11 @@ public class HandController : Singleton<HandController>
 
         #region Secondary Button
         if ((targetDevice.name == "Oculus Touch Controller - Right" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton)) 
-           /* && (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButton))*/)
+           /*&& (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButton))*/)
         {
-            Debug.Log(_secondaryButton);
             //Debug.Log(secondaryButton);
 
-            if (_secondaryButton/* || secondaryButton*/)
+            if (_secondaryButton /*|| secondaryButton*/)
             {
                 Projection.Instance.isTransition = true;
             }
