@@ -12,12 +12,6 @@ public class HeadPhoneManager : MonoBehaviour
     public bool testBoolEquip;
     public bool equipBool;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -50,10 +44,5 @@ public class HeadPhoneManager : MonoBehaviour
         {
             Debug.Log("Fin de journée");
         }
-
-
     }
-
-
-
 }

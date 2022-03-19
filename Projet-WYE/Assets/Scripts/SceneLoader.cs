@@ -39,9 +39,10 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadBegin?.Invoke();
         //yield return screenFader.StartFadeIn();
 
-        if (currentScene.name != null && currentScene.name != "Persistent")
-        {
-            Debug.Log("hey");
+        Debug.Log(currentScene.name != string.Empty && currentScene.name != "Persistent");
+
+        if (currentScene.name != "Null" && currentScene.name != "Persistent")
+        {            
             yield return StartCoroutine(UnloadCurrent());
         }
 
@@ -55,6 +56,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator UnloadCurrent()
     {
+        Debug.Log(currentScene.name);
         AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
 
         while (!unloadOperation.isDone)
@@ -66,6 +68,8 @@ public class SceneLoader : Singleton<SceneLoader>
     private IEnumerator LoadNew(string sceneName)
     {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        currentScene = SceneManager.GetSceneAt(1);
+        Debug.Log(currentScene.name);
 
         while (!loadOperation.isDone)
         {
