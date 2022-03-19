@@ -39,7 +39,7 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadBegin?.Invoke();
         //yield return screenFader.StartFadeIn();
 
-        Debug.Log(currentScene.name != string.Empty && currentScene.name != "Persistent");
+        //Debug.Log(currentScene.name != string.Empty && currentScene.name != "Persistent");
 
         if (currentScene.name != "Null" && currentScene.name != "Persistent")
         {            
@@ -56,7 +56,6 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator UnloadCurrent()
     {
-        Debug.Log(currentScene.name);
         AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
 
         while (!unloadOperation.isDone)
@@ -69,7 +68,6 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         currentScene = SceneManager.GetSceneAt(1);
-        Debug.Log(currentScene.name);
 
         while (!loadOperation.isDone)
         {
