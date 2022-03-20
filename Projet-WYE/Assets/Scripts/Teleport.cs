@@ -14,7 +14,11 @@ public class Teleport : Singleton<Teleport>
     private void Start()
     {
         position = this.transform;
-        GetComponentInChildren<Renderer>().enabled = isActive;
+        
+        if (GetComponentInChildren<Renderer>() != null)
+        {
+            GetComponentInChildren<Renderer>().enabled = isActive;
+        }
         
         if (!isActive)
         {

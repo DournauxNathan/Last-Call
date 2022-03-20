@@ -24,9 +24,10 @@ public class HeadPhoneManager : MonoBehaviour
 
     public void AutoEquipHeadPhone()
     {
-        if (isOnHead&&headPhone !=null)
+        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            isOnHead = false;
+            Debug.Log("Put headset");
+            isOnHead = true;
             headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f,offset,0f); // Fonctionne /!\ pas très propre
         }
     }
@@ -39,10 +40,16 @@ public class HeadPhoneManager : MonoBehaviour
         if (isOnHead)
         {
             Debug.Log("Start Call Here !");
-        }
-        else if (!isOnHead /* &&  autre condition  */)
+        }/*
+        else if (isOnHead)
         {
-            Debug.Log("Fin de journée");
+
+        }*/
+
+        if (!isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            MasterManager.Instance.ActivateImaginary("Appartment_Day1");
         }
+
     }
 }

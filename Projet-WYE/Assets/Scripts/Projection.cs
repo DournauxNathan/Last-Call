@@ -158,7 +158,7 @@ public class Projection : Singleton<Projection>
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
-            Debug.Log("Call Gameplay_Combination_Iteration");
+            //Debug.Log("Call Gameplay_Combination_Iteration");
             MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
         }
 
@@ -170,7 +170,7 @@ public class Projection : Singleton<Projection>
                         
             MasterManager.Instance.currentPhase = Phases.Phase_3;
 
-            Debug.Log("Call Office");
+            //Debug.Log("Call Office");
             MasterManager.Instance.GoBackToOffice("Office");
         }
     }
