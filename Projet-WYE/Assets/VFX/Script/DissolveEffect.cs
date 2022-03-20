@@ -21,8 +21,9 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
     public void Init()
     {
+#if UNITY_EDITOR
         particlePrefab = PrefabUtility.InstantiatePrefab(Resources.Load("Prefabs/VFX Start")) as GameObject;
-
+#endif
         particlePrefab.transform.SetParent(this.transform);
 
         particles = particlePrefab.GetComponent<ParticleSystem>();

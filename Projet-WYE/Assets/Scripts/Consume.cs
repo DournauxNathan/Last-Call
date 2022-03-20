@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumePills : MonoBehaviour
+public class Consume : MonoBehaviour
 {
     private void Update()
     {
@@ -18,7 +18,7 @@ public class ConsumePills : MonoBehaviour
         }
         else if (other.tag == "Bonbon")
         {
-            Destroy(other);
+            other.gameObject.SetActive(false);
         }
     }
 }

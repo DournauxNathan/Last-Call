@@ -86,19 +86,16 @@ public class HandController : Singleton<HandController>
         }
 
         #region Secondary Button
-        if ((targetDevice.name == "Oculus Touch Controller - Right" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton)) 
-           /*&& (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButton))*/)
+        if (targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton))
         {
-            //Debug.Log(secondaryButton);
-
-            if (_secondaryButton /*|| secondaryButton*/)
+            if (_secondaryButton )
             {
-                //Projection.Instance.isTransition = true;
+                Projection.Instance.isTransition = true;
             }
             else
             {
-                //Projection.Instance.isTransition = false;
-                //Projection.Instance.ResetTransition();
+                Projection.Instance.isTransition = false;
+                Projection.Instance.ResetTransition();
             }            
         }   
         #endregion
