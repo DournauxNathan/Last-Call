@@ -26,7 +26,11 @@ public class Teleport : Singleton<Teleport>
         if (MasterManager.Instance.player.transform.position != position.position && MasterManager.Instance.player.transform != null)
         {
             m_Collider.isTrigger = false;
-            GetComponentInChildren<Renderer>().enabled = true;
+            
+            if (GetComponentInChildren<Renderer>() != null)
+            {
+                GetComponentInChildren<Renderer>().enabled = true;
+            }
         }
     }
 
@@ -36,6 +40,10 @@ public class Teleport : Singleton<Teleport>
         MasterManager.Instance.player.transform.position = position.position;
         
         m_Collider.isTrigger = true;
-        GetComponentInChildren<Renderer>().enabled = false;
+
+        if (GetComponentInChildren<Renderer>() != null)
+        {
+            GetComponentInChildren<Renderer>().enabled = false;
+        }
     }
 }
