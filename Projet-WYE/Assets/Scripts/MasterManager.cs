@@ -74,7 +74,7 @@ public class MasterManager : Singleton<MasterManager>
     {
         UpdateController();
 
-        if (!skipTuto && !isTutoEnded)
+        if (!skipTuto && !isTutoEnded && b)
         {
             timerTutoBegin -= Time.deltaTime;
         }

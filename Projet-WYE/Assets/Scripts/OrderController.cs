@@ -23,9 +23,9 @@ public class OrderController : Singleton<OrderController>
 
     public void Setup()
     {
-        GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
+        //GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
 
-        ObjectActivator.Instance.SetActivetObject(go);
+        //ObjectActivator.Instance.SetActivetObject(go);
         //numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
     }
 
@@ -38,7 +38,7 @@ public class OrderController : Singleton<OrderController>
 
     public void Resolve()
     {
-        if (currentNumberOfCombinaison == numberOfCombinaison)
+        if (currentNumberOfCombinaison == numberOfCombinaison || GetResolve())
         {
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);

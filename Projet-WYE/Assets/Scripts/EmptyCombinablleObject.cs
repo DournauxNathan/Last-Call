@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+
+#if UNITY_EDITOR
 using UnityEditor.Events;
+#endif
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
 public class EmptyCombinablleObject : CombinableObject_Data
 {
     public void GenerateComponentsForCombinableObjects()
@@ -64,6 +68,7 @@ public class EmptyCombinablleObject : CombinableObject_Data
 
                 UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
                 UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
+
             }
         }
         else if (state == StateMobility.Static)
@@ -90,11 +95,9 @@ public class EmptyCombinablleObject : CombinableObject_Data
                 UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
             }
         }
-
     }
 }
 
-#if UNITY_EDITOR
 [CanEditMultipleObjects]
 [CustomEditor(typeof(EmptyCombinablleObject))]
 public class GenerateComponentsEditor : Editor
