@@ -23,6 +23,7 @@ public class MasterManager : Singleton<MasterManager>
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
     public Transform player;
+    public HeadPhoneManager headsetManager;
     
     [Header("Hands")]
     public List<GameObject> baseInteractors;

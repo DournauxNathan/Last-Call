@@ -1578,7 +1578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d186374a64397b94492945c610419016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headPhone: {fileID: 0}
+  headPhone: {fileID: 729685177}
   isOnHead: 0
   socket: {fileID: 1617292113}
   offset: 0.1
@@ -2618,6 +2618,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715281033}
   m_CullTransparentMesh: 1
+--- !u!1001 &729685176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2587405679115102857, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6069302
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6069303
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.47299996
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7937
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.361
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.45163837
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.45163837
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5440798
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5440798
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720926693433807334, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 259.392
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100725036192910172, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+      propertyPath: m_Name
+      value: HeadPhone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+--- !u!114 &729685177 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 31274545393558401, guid: 0a09b38cc711871448c2c835a0d502d5, type: 3}
+  m_PrefabInstance: {fileID: 729685176}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a5ed3e8244bf9448318c543404d37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &737898320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5978,6 +6058,7 @@ MonoBehaviour:
   projectionTransition: {fileID: 2049690321}
   mainAudioSource: {fileID: 2081371580}
   player: {fileID: 1355308591}
+  headsetManager: {fileID: 543341186}
   baseInteractors:
   - {fileID: 825767850}
   - {fileID: 1492164772}

@@ -25,6 +25,7 @@ public class SceneLoaderEditor : Editor
         if (GUILayout.Button("Change Scene"))
         {
             sceneLoader.LoadNewScene("Office");
+            
         }
         EditorGUILayout.EndHorizontal();
     }

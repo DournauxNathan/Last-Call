@@ -12,13 +12,31 @@ public class HeadPhoneManager : MonoBehaviour
     public bool testBoolEquip;
     public bool equipBool;
 
+    private void Awake()
+    {
+        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            AutoEquipHeadPhone();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (equipBool) // a enlever uniquement un test;
+       /* if (equipBool) // a enlever uniquement un test;
         {
             equipBool = false;
             headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f);
+        }*/
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_2 || MasterManager.Instance.isInImaginary)
+        {
+            headPhone.GetComponent<Renderer>().enabled = false;
+        }
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_1 || MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            headPhone.GetComponent<Renderer>().enabled = true; 
+
         }
     }
 
@@ -39,7 +57,7 @@ public class HeadPhoneManager : MonoBehaviour
 
         if (isOnHead)
         {
-            Debug.Log("Start Call Here !");
+            //SceneLoader.Instance.MoveGO(headPhone.gameObject);
         }/*
         else if (isOnHead)
         {

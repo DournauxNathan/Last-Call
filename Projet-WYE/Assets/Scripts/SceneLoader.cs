@@ -46,6 +46,11 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return StartCoroutine(UnloadCurrent());
         }
 
+        if (sceneName == "Office")
+        {
+            MasterManager.Instance.currentPhase = Phases.Phase_1;
+        }
+
         yield return StartCoroutine(LoadNew(sceneName));
 
         //  yield return screenFader.StartFadeOut();
@@ -103,6 +108,11 @@ public class SceneLoader : Singleton<SceneLoader>
     public Scene GetCurrentScene()
     {
         return SceneManager.GetActiveScene();
+    }
+
+    public void MoveGO(GameObject go)
+    {
+        SceneManager.MoveGameObjectToScene(go, SceneManager.GetSceneAt(0));
     }
 
 }
