@@ -58,6 +58,13 @@ public class HeadPhone : MonoBehaviour
 
     }
 
+    public void DisableHeadset()
+    {
+
+        GetComponent<Renderer>().enabled = false;
+        GetComponentInChildren<CapsuleCollider>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
 
 
 }

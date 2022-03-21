@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadPhoneManager : MonoBehaviour
+public class HeadPhoneManager : Singleton<HeadPhoneManager>
 {
     public HeadPhone headPhone;
     public bool isOnHead;
@@ -49,6 +50,7 @@ public class HeadPhoneManager : MonoBehaviour
             headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f,offset,0f); // Fonctionne /!\ pas très propre
         }
     }
+
 
     public void HeadPhoneEquip()
     {
