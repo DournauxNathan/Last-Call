@@ -49,6 +49,7 @@ public class MasterManager : Singleton<MasterManager>
     public bool useOneInput = false;
     public bool useTwoInput = false;
 
+    public GameObject xrRig;
 
     private void Start()
     {
