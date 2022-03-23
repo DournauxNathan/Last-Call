@@ -9,6 +9,7 @@ public class XRInput : MonoBehaviour
 #pragma warning disable 0649
     [SerializeField] XRController controller;
     [SerializeField] XRBinding[] bindings;
+
 #pragma warning restore 0649
 
     private void FixedUpdate()
@@ -61,7 +62,8 @@ public enum XRButton
     Secondary,
     SecondaryTouch,
     Primary2DAxisClick,
-    Primary2DAxisTouch
+    Primary2DAxisTouch,
+    MenuButton
 }
 
 public enum PressType
@@ -85,7 +87,9 @@ public static class XRStatics
             case XRButton.SecondaryTouch: return CommonUsages.secondaryTouch;
             case XRButton.Primary2DAxisClick: return CommonUsages.primary2DAxisClick;
             case XRButton.Primary2DAxisTouch: return CommonUsages.primary2DAxisTouch;
+            case XRButton.MenuButton: return CommonUsages.menuButton;
             default: Debug.LogError("button " + button + " not found"); return CommonUsages.triggerButton;
         }
     }
 }
+

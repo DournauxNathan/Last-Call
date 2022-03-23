@@ -19,7 +19,7 @@ public class HandController : Singleton<HandController>
     private Vector3 acceleration;
     public int indexTab = 0;
 
-    bool _secondaryButton = false;
+    //bool _secondaryButton = false;
 
 
     // Start is called before the first frame update
@@ -84,7 +84,7 @@ public class HandController : Singleton<HandController>
             acceleration = _acceleration;
             //Debug.Log(_acceleration);
         }
-
+/*
         #region Secondary Button
         if (targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton))
         {
@@ -137,14 +137,15 @@ public class HandController : Singleton<HandController>
             UiTabSelection.Instance.SwitchTab(indexTab);
         }
         #endregion
-
+        
         if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool buttonValueMenu))
         {
             if (buttonValueMenu && MasterManager.Instance.currentPhase != Phases.Phase_0 && MasterManager.Instance.currentPhase != Phases.Phase_4)
-            {
-                UiPauseManager.Instance.PauseDisplay(); Debug.Log("ButtonStart Pressed");
+            { UiPauseManager.Instance.PauseDisplay(); Debug.Log("ButtonStart Pressed");
+               
             }
         }
+        */
     }
 
     public Vector3 GetDeviceAccelation()
