@@ -19,6 +19,7 @@ public class MasterManager : Singleton<MasterManager>
 
     [Header("Refs")]
     public XRInteractionManager xRInteractionManager;
+    public GameObject EventSystem;
     public ObjectActivator objectActivator;
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
@@ -99,7 +100,7 @@ public class MasterManager : Singleton<MasterManager>
             if (b)
             {
                 b = false;
-                startCall.Invoke();
+                startCall?.Invoke();
             }
         }
     }
