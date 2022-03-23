@@ -100,6 +100,7 @@ public class PhysicsButton : MonoBehaviour
 
     void Pressed()
     {
+        Debug.Log("0");
         prevPressedState = isPressed;
         pressedSound.pitch = 1;
         pressedSound.Play();
@@ -108,6 +109,7 @@ public class PhysicsButton : MonoBehaviour
 
     void Released()
     {
+        Debug.Log("1");
         prevPressedState = isPressed;
         releasedSound.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
         releasedSound.Play();

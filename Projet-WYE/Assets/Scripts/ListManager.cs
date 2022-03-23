@@ -15,25 +15,17 @@ public class ListManager : Singleton<ListManager>
 
     public void OnPressed()
     {
-        if(hoveredInteractors.Count != 0)
+        if(hoveredInteractors.Count != 0 && hoveredInteractors[0].GetComponentInParent<Teleport>())
         {
-            if (hoveredInteractors[0].GetComponentInParent<Teleport>())
-            {
-                hoveredInteractors[0].GetComponentInParent<Teleport>().TeleportTo();
-            }
-            else
-            {
-                Debug.LogWarning("No Teleport script");
-            }
-
-            if (!lockedInteractors.Contains(hoveredInteractors[0]))
-            {
-                Select();
-            }
-            else if (lockedInteractors.Contains(hoveredInteractors[0]))
-            {
-                UnSelect();
-            }
+            hoveredInteractors[0].GetComponentInParent<Teleport>().TeleportTo();
+        }
+        else if (hoveredInteractors.Count != 0 && !lockedInteractors.Contains(hoveredInteractors[0]))
+        {
+            Select();
+        }
+        else if (hoveredInteractors.Count != 0 && lockedInteractors.Contains(hoveredInteractors[0]))
+        {
+            UnSelect();
         }
     }
 
@@ -75,137 +67,43 @@ public class ListManager : Singleton<ListManager>
 
     public void CheckCompatibility(GameObject objet1,GameObject objet2)
     {
-        //CombinableObject _objectManager1, _objectManager2;
-/*
-        if (objet1.TryGetComponent<CombinableObject>(out _objectManager1) && objet2.TryGetComponent<CombinableObject>(out _objectManager2))
+        CombinableObject combiObj1, combiObj2;
+
+        if (objet1.TryGetComponent<CombinableObject>(out combiObj1) && objet2.TryGetComponent<CombinableObject>(out combiObj2))
         {
-            Debug.Log("A" + _objectManager1.name + " | " + _objectManager2.name);
-
-            //Check with 2 objects only and with the ObjectManager1
-            if (_objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[0] == objet2.name.ToString()  
-                || _objectManager1.combineWith.Count == 2 && _objectManager1.combineWith[1] == objet2.name.ToString())
+            foreach (CombineWith combinaison in combiObj1.useWith)
             {
-                Debug.Log("B" + _objectManager1.name + " | " + _objectManager2.name);
-                if (_objectManager1.state == StateMobility.Static)
+                if (combinaison.objectName == combiObj2.name && combiObj1.state == StateMobility.Static)
                 {
-                    Debug.Log("C Static" + _objectManager1.name + " | " + _objectManager2.name);
-                    objet2.SetActive(false);
+                    combiObj2.dissolveEffect.startEffect = true;
 
-                    //Clear the list if a combinaison has already been find
-                    _objectManager1.combineWith.Clear();
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
                 }
-                else if (_objectManager2.state == StateMobility.Static)
+                else if (combinaison.objectName == combiObj2.name && combiObj2.state == StateMobility.Static)
                 {
-                    Debug.Log("Cbis Static" + _objectManager1.name + " | " + _objectManager2.name);
-                    objet1.SetActive(false);
+                    combiObj1.dissolveEffect.startEffect = true;
 
-                    //Clear the list if a combinaison has already been find
-                    _objectManager1.combineWith.Clear();
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
                 }
-
-                else
+                else if (combinaison.objectName == combiObj2.name && combiObj1.state != StateMobility.Static)
                 {
-                    Debug.Log("Suppr1");
-                    objet1.SetActive(false);
-                    objet2.SetActive(false);
+                    combiObj1.dissolveEffect.startEffect = true;
+                    combiObj2.dissolveEffect.startEffect = true;
+
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
                 }
-
-                SetToOrderController(_objectManager1, _objectManager2);
-            }
-            else if (_objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0 
-                || _objectManager2.combineWith.Count == 2 && _objectManager2.combineWith[0] == objet1.name.ToString() && _objectManager1.combineWith.Count != 0)
-            {
-                Debug.Log("D" + _objectManager1.name + " | " + _objectManager2.name);
-                if (_objectManager1.state == StateMobility.Static)
-                {
-                    Debug.Log("C Static" + _objectManager1.name + " | " + _objectManager2.name);
-                    objet2.SetActive(false);
-
-                    //Clear the list if a combinaison has already been find
-                    _objectManager1.combineWith.Clear();
-                }
-                
-                //Check with 2 objects only and with the ObjectManager2
-                else if (_objectManager2.state == StateMobility.Static)
-                {
-                    Debug.Log("E Static" + _objectManager1.name + " | " + _objectManager2.name);
-                    objet1.SetActive(false);
-
-                    //Clear the list if a combinaison has already been find
-                    _objectManager2.combineWith.Clear();
-                }
-                else
-                {
-                    Debug.Log("Suppr2");
-                    objet1.SetActive(false);
-                    objet2.SetActive(false);
-                }
-
-                SetToOrderController(_objectManager2, _objectManager1);
-            }
-            else if (_objectManager1.combineWith.Count == 1 && _objectManager2.combineWith.Count != 0 
-                || _objectManager2.combineWith.Count == 1 && _objectManager1.combineWith.Count != 0)
-            {
-                //Check with 1 object only
-                if (_objectManager1.combineWith[0] == objet2.ToString())
-                {
-                    if (_objectManager1.state == StateMobility.Static)
-                    {
-                        objet2.SetActive(false);
-
-                        //Clear the list if a combinaison has already been find
-                        _objectManager1.combineWith.Clear();
-                    }
-                    else
-                    {
-                        Debug.Log("Suppr3");
-                        objet1.SetActive(false);
-                        objet2.SetActive(false);
-                    }
-
-                    SetToOrderController(_objectManager1, _objectManager2);
-                }
-                else if (_objectManager2.combineWith[0] == _objectManager1.name)
-                {
-                    if (_objectManager2.state == StateMobility.Static)
-                    {
-                        objet1.SetActive(false);
-
-                        //Clear the list if a combinaison has already been find
-                        _objectManager2.combineWith.Clear();
-                    }
-                    else
-                    {
-                        Debug.Log("Suppr4");
-                        objet1.SetActive(false);
-                        objet2.SetActive(false);
-                    }
-
-                    SetToOrderController(_objectManager2, _objectManager1);
-                }
-            }            
-            else if (_objectManager1.combineWith.Count == 0 || _objectManager2.combineWith.Count == 0)
-            {
-                Debug.LogWarning("Can't combine them");
             }
         }
         else
         {
             Debug.LogWarning("No one has the combinaisons component");
-        }       */
+        }       
     }
 
-    public void SetToOrderController(CombinableObject _objectManagerA, CombinableObject _objectManagerB)
+    public void SetToOrderController(CombinableObject objectA, CombinableObject objectB, int value, string _outcome)
     {
-        OrderController.Instance.AddCombinaison(_objectManagerA, _objectManagerB);
+        OrderController.Instance.AddCombinaison(objectA, objectB, value, _outcome);
         PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
         OrderController.Instance.IncreaseValue(1);
-        
-        /*
-        if (!OrderController.Instance.orders.Contains(_objectManager.resultOrder))
-        {
-            OrderController.Instance.orders.Add(_objectManager.resultOrder);
-            OrderController.Instance.IncreaseValue(1);
-        }*/
     }
 }

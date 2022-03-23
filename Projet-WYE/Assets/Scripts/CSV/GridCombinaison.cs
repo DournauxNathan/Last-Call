@@ -38,7 +38,7 @@ public class GridCombinaison : MonoBehaviour
         }
     }
 }
-
+#if UNITY_EDITOR
 //[CustomEditor(typeof(GridCombinaison)), CanEditMultipleObjects]
 public class LevelEditor : Editor
 {
@@ -140,3 +140,4 @@ public class LevelEditor : Editor
         }
     }
 }
+#endif

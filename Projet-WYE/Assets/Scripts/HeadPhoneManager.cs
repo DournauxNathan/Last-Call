@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadPhoneManager : MonoBehaviour
+public class HeadPhoneManager : Singleton<HeadPhoneManager>
 {
     public HeadPhone headPhone;
     public bool isOnHead;
@@ -12,30 +13,44 @@ public class HeadPhoneManager : MonoBehaviour
     public bool testBoolEquip;
     public bool equipBool;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
+        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            AutoEquipHeadPhone();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (equipBool) // a enlever uniquement un test;
+       /* if (equipBool) // a enlever uniquement un test;
         {
             equipBool = false;
             headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f);
+        }*/
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_2 || MasterManager.Instance.isInImaginary)
+        {
+            headPhone.GetComponent<Renderer>().enabled = false;
+        }
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_1 || MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            headPhone.GetComponent<Renderer>().enabled = true; 
+
         }
     }
 
     public void AutoEquipHeadPhone()
     {
-        if (isOnHead&&headPhone !=null)
+        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            isOnHead = false;
+            Debug.Log("Put headset");
+            isOnHead = true;
             headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f,offset,0f); // Fonctionne /!\ pas très propre
         }
     }
+
 
     public void HeadPhoneEquip()
     {
@@ -44,16 +59,17 @@ public class HeadPhoneManager : MonoBehaviour
 
         if (isOnHead)
         {
-            Debug.Log("Start Call Here !");
-        }
-        else if (!isOnHead /* &&  autre condition  */)
+            //SceneLoader.Instance.MoveGO(headPhone.gameObject);
+        }/*
+        else if (isOnHead)
         {
-            Debug.Log("Fin de journée");
-        }
 
+        }*/
+
+        if (!isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            MasterManager.Instance.ActivateImaginary("Appartment_Day1");
+        }
 
     }
-
-
-
 }

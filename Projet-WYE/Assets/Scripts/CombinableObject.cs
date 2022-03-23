@@ -13,6 +13,7 @@ public class CombinableObject : CombinableObject_Data
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent();
         SetOutline();
 
         if (MasterManager.Instance.objectActivator != null)

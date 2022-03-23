@@ -34,7 +34,6 @@ public class UIManager : Singleton<UIManager>
 
     [Header("Debug, Transition to Imaginaire")]
     [SerializeField] private int nQuestionAnswer;
-    [SerializeField] private GameObject activateButton;
     [SerializeField] private bool unlockImaginaryTransition = false;
     public ParticleSystem smoke;
 
@@ -43,6 +42,15 @@ public class UIManager : Singleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneLoader.Instance.GetCurrentScene().name == "Office" && OrderController.Instance.currentNumberOfCombinaison <= 0)
+        {
+            MasterManager.Instance.currentPhase = Phases.Phase_1;
+        }
+        else
+        {
+            MasterManager.Instance.currentPhase = Phases.Phase_3;
+        }
+
         EventSystem.current.SetSelectedGameObject(startSelectbutton.GetComponentInChildren<Button>().gameObject);
 
         if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
@@ -59,8 +67,6 @@ public class UIManager : Singleton<UIManager>
         if (ScenarioManager.Instance.isScenarioLoaded)
         {            
             ScenarioManager.Instance.isScenarioLoaded = false;
-
-            activateButton.SetActive(false);
 
             for (int i = 0; i < protocoleQuestions.Count; i++)
             {
@@ -136,7 +142,6 @@ public class UIManager : Singleton<UIManager>
     {
         if (unlockImaginaryTransition)
         {
-            activateButton.SetActive(true);
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
