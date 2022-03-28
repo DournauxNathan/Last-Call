@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor.Events;
+#endif
 using UnityEngine.Events;
 using UnityEditor;
 using System.Linq;
@@ -62,7 +64,6 @@ public class LoadFromCsv
         }
 
     }
-    #endif
     private static void CreateScriptable(string[] entry)
     {
         /*var newScriptableObject = ScriptableObject.CreateInstance<CombinableObject_Data>();
@@ -177,8 +178,9 @@ public class LoadFromCsv
             co.Init(entry);
         }
     }
-    
-    #if UNITY_EDITOR
+#endif
+
+#if UNITY_EDITOR
     //[MenuItem("Rational/Puzzles/Prefab/Save Current Selection")]
     static void SaveCurrentSelectionIntoPrefabAsset()
     {

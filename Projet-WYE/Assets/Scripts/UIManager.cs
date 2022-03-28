@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -42,6 +43,15 @@ public class UIManager : Singleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneLoader.Instance.GetCurrentScene().name == "Office" && OrderController.Instance.currentNumberOfCombinaison <= 0)
+        {
+            MasterManager.Instance.currentPhase = Phases.Phase_1;
+        }
+        else
+        {
+            MasterManager.Instance.currentPhase = Phases.Phase_3;
+        }
+
         EventSystem.current.SetSelectedGameObject(startSelectbutton.GetComponentInChildren<Button>().gameObject);
 
         if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
@@ -185,6 +195,8 @@ public class UIManager : Singleton<UIManager>
         Debug.LogError("Not enough buttons");
         return null;
     }
+
+
     public InstantiableButton FindAvailableButtonForOrder(Order order)
     {
         if (order != null)

@@ -21,8 +21,9 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
     public void Init()
     {
+#if UNITY_EDITOR
         particlePrefab = PrefabUtility.InstantiatePrefab(Resources.Load("Prefabs/VFX Start")) as GameObject;
-
+#endif
         particlePrefab.transform.SetParent(this.transform);
 
         particles = particlePrefab.GetComponent<ParticleSystem>();
@@ -51,30 +52,6 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
     public IEnumerator Dissolve()
     {
-        
-
-        float counter = 30;
-
-        if (dissolveMaterials.Length > 0)
-        {
-            while (dissolveMaterials[0].GetFloat("_Dissolve") > 1)
-            {
-
-                counter -= Time.deltaTime * dissolveRate;
-
-                for (int i = 0; i < dissolveMaterials.Length; i++)
-                {
-                    dissolveMaterials[i].SetFloat("_Dissolve", counter);
-                } 
-
-                yield return new WaitForSeconds(refreshRate);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("List is empty");
-        }
-
         if (particles != null)
         {
             particles.gameObject.SetActive(true);
@@ -87,14 +64,36 @@ public class DissolveEffect : Singleton<DissolveEffect>
             Debug.LogWarning("There is no particles, Object reference is missing in Inspector");
         }
 
-        if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
+        float counter = 50;
+
+        if (dissolveMaterials.Length > 0)
         {
-            for (int i = 0; i < dissolveMaterials.Length; i++)
+            while (dissolveMaterials[0].GetFloat("_Dissolve") > 1)
             {
-                dissolveMaterials[i].SetFloat("_Dissolve", 0f);
-                gameObject.SetActive(false);
+                counter -= Time.deltaTime * dissolveRate;
+
+                for (int i = 0; i < dissolveMaterials.Length; i++)
+                {
+                    dissolveMaterials[i].SetFloat("_Dissolve", counter);
+                }
+
+                if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
+                {
+                    for (int i = 0; i < dissolveMaterials.Length; i++)
+                    {
+                        GetComponent<Renderer>().enabled = false;
+                        GetComponent<CombinableObject>().enabled = false;
+                    }
+                }
+
+                yield return new WaitForSeconds(refreshRate);
             }
         }
+        else
+        {
+            Debug.LogWarning("List is empty");
+        }
+
 
         //gameObject.SetActive(false);
     }

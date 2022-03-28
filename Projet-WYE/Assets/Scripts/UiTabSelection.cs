@@ -8,8 +8,17 @@ public class UiTabSelection : Singleton<UiTabSelection>
 {
     public List<GameObject> tabs;
     public int indexTab = 0;
-
+    public bool switchTab;
     public List<GameObject> unitDispatcherFeedbacks;
+
+    private void Update()
+    {
+        if (switchTab)
+        {
+            switchTab = false;
+            SwitchTab(indexTab);
+        }
+    }
 
     public void SwitchTab(int i)
     {
@@ -18,7 +27,6 @@ public class UiTabSelection : Singleton<UiTabSelection>
         switch (i)
         {
             case 0:
-                Debug.Log("A");
                 //tabs[0].SetActive(true);
                 tabs[1].SetActive(false);
                 tabs[2].SetActive(false);
@@ -28,7 +36,6 @@ public class UiTabSelection : Singleton<UiTabSelection>
                 break;
 
             case 1:
-                Debug.Log("B");
                 tabs[1].SetActive(true);
                 tabs[2].SetActive(false);
 

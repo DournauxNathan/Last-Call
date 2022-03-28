@@ -19,10 +19,12 @@ public class MasterManager : Singleton<MasterManager>
 
     [Header("Refs")]
     public XRInteractionManager xRInteractionManager;
+    public GameObject EventSystem;
     public ObjectActivator objectActivator;
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
     public Transform player;
+    public HeadPhoneManager headsetManager;
     
     [Header("Hands")]
     public List<GameObject> baseInteractors;
@@ -74,7 +76,7 @@ public class MasterManager : Singleton<MasterManager>
     {
         UpdateController();
 
-        if (!skipTuto && !isTutoEnded)
+        if (!skipTuto && !isTutoEnded && b)
         {
             timerTutoBegin -= Time.deltaTime;
         }
@@ -98,7 +100,7 @@ public class MasterManager : Singleton<MasterManager>
             if (b)
             {
                 b = false;
-                startCall.Invoke();
+                startCall?.Invoke();
             }
         }
     }
