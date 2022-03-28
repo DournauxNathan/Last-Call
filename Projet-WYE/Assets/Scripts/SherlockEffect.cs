@@ -11,6 +11,9 @@ public class SherlockEffect : MonoBehaviour
     //Set it to whatever value you think is best
     public float distanceFromCamera;
 
+    public Transform calculatedTransform;
+
+
     void Start()
     {
         cameraTransform = MasterManager.Instance.xrRig.transform.GetChild(0).GetChild(0);
@@ -22,5 +25,7 @@ public class SherlockEffect : MonoBehaviour
         Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
         transform.position = Vector3.Lerp(transform.position, resultingPosition, Time.deltaTime * time);
         transform.rotation = cameraTransform.rotation;
+
+        calculatedTransform = transform;
     }
 }

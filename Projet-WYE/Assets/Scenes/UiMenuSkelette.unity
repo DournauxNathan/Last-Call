@@ -352,6 +352,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   time: 5
   distanceFromCamera: 0
+  calculatedTransform: {fileID: 0}
 --- !u!4 &293159551
 Transform:
   m_ObjectHideFlags: 0
@@ -668,6 +669,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   time: 5
   distanceFromCamera: 0.75
+  calculatedTransform: {fileID: 0}
 --- !u!114 &1621953473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1083,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   time: 5
   distanceFromCamera: 0.75
+  calculatedTransform: {fileID: 0}
 --- !u!114 &1742191766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,6 +1156,7 @@ GameObject:
   - component: {fileID: 1892485997}
   - component: {fileID: 1892486002}
   - component: {fileID: 1892486001}
+  - component: {fileID: 1892485998}
   m_Layer: 2
   m_Name: Grab Me ! 01
   m_TagString: Untagged
@@ -1179,6 +1183,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1892485998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892485996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2f3e8ec1011d040868501c931b743a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timer: 0
+  _time: 2
+  _distance: 0.06
+  _delayBetweenShakes: 0.0003
 --- !u!114 &1892486001
 MonoBehaviour:
   m_ObjectHideFlags: 0
