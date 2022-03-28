@@ -13,7 +13,7 @@ public class SherlockEffect : MonoBehaviour
 
     void Start()
     {
-        cameraTransform = MasterManager.Instance.xrRig.transform.GetChild(0).GetChild(1);
+        cameraTransform = MasterManager.Instance.xrRig.transform.GetChild(0).GetChild(0);
     }
 
 
