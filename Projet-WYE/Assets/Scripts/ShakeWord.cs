@@ -3,69 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.Animations;
 
 public class ShakeWord : MonoBehaviour
 {
-    [Header("info")]
-    private Vector3 _startPos;
-    [SerializeField]private float _timer;
-    private Vector3 _randomPos;
-    
-
-    private bool isGrabed = false;
-
-    [Header("Settings")]
-    [Range(0f, 2f)] public float _time = 0.2f;
-    [Range(0f, 2f)] public float _distance = 0.1f;
-    [Range(0f, 0.1f)] public float _delayBetweenShakes = 0f;
-
-	private void Awake()
-	{
-		_startPos = transform.parent.localPosition;
-	}
-
+    [Header("Param")]
+    [Range(0f, 2f)] public float delayBeforAnim = 0f;
+    private bool isStarted;
+    [SerializeField] Animator m_animator;
+    private float _time;
     private void Start()
     {
-		Begin();
+        _time = delayBeforAnim;
+        m_animator = GetComponent<Animator>();
     }
 
-    private void OnValidate()
-	{
-		if (_delayBetweenShakes > _time)
-			_delayBetweenShakes = _time;
-	}
+    private void Update()
+    {
 
-	public void Begin()
-	{
-		StopAllCoroutines();
-		StartCoroutine(Shake());
-	}
+        if (_time>0)
+        {
+            _time -= Time.deltaTime;
+        }
 
-	private IEnumerator Shake()
-	{
-		_timer = 0f;
+        else if (!isStarted && _time<=0)
+        {
+            isStarted = true;
+            m_animator.SetBool("Bool",true);
+        }
 
-		while (_timer <= _time)
-		{
-			_timer += Time.deltaTime;
-
-			_randomPos = transform.parent.localPosition + (Random.insideUnitSphere * _distance);
-			_randomPos.z = _startPos.z;
-
-			transform.position = _randomPos;
-
-			if (_delayBetweenShakes > 0f)
-			{
-				yield return new WaitForSeconds(_delayBetweenShakes);
-			}
-			else
-			{
-				yield return null;
-			}
-		}
-
-		transform.position = new Vector3(transform.parent.localPosition.x, transform.parent.localPosition.y,_startPos.z);
-	}
-
+    }
 
 }
