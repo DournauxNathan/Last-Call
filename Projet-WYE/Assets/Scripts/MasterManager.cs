@@ -18,6 +18,7 @@ public class MasterManager : Singleton<MasterManager>
     public Phases currentPhase;
 
     [Header("Refs")]
+    public Transform cameraA;
     public XRInteractionManager xRInteractionManager;
     public GameObject EventSystem;
     public ObjectActivator objectActivator;
