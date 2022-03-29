@@ -15,7 +15,7 @@ public class ShakeWord : MonoBehaviour
     private void Start()
     {
         _time = delayBeforAnim;
-        m_animator = GetComponent<Animator>();
+        //m_animator = GetComponent<Animator>();
     }
 
     private void Update()

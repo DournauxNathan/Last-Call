@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4535552731435713965}
   - component: {fileID: 4535552731435713970}
   - component: {fileID: 4535552731435713969}
-  - component: {fileID: 4535552731435713966}
   - component: {fileID: 4535552731435713967}
   m_Layer: 2
   m_Name: SherlockText
@@ -136,20 +135,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &4535552731435713966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535552731435713964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f2f3e8ec1011d040868501c931b743a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayBeforAnim: 0.09
-  m_animator: {fileID: 0}
 --- !u!95 &4535552731435713967
 Animator:
   serializedVersion: 3
@@ -184,6 +169,7 @@ GameObject:
   - component: {fileID: 4535552731702052103}
   - component: {fileID: 4535552731702052102}
   - component: {fileID: 4535552731702052101}
+  - component: {fileID: 7440043146325880445}
   m_Layer: 2
   m_Name: CanvasSherlock
   m_TagString: Untagged
@@ -198,7 +184,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4535552731702052223}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.00806927, y: 0.00806927, z: 0.00806927}
   m_Children:
@@ -254,7 +240,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4535552731702052097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,3 +395,17 @@ MonoBehaviour:
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
   addOffset: 0
+--- !u!114 &7440043146325880445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535552731702052223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2f3e8ec1011d040868501c931b743a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforAnim: 0.09
+  m_animator: {fileID: 4535552731435713967}
