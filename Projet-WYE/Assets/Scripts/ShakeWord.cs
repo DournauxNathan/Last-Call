@@ -9,6 +9,7 @@ public class ShakeWord : MonoBehaviour
 {
     [Header("Param")]
     [Range(0f, 2f)] public float delayBeforAnim = 0f;
+    [Range(0f, 2f)] public float animationSpeed = 1f;
     private bool isStarted;
     [SerializeField] Animator m_animator;
     private float _time;
@@ -20,6 +21,10 @@ public class ShakeWord : MonoBehaviour
 
     private void Update()
     {
+        if (m_animator.speed != animationSpeed)
+        {
+            m_animator.speed = animationSpeed;
+        }
 
         if (_time>0)
         {
