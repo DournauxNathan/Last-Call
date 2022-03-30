@@ -39,7 +39,7 @@ public class ShakeWord : MonoBehaviour
         _defaultColorOutline = _text.outlineColor;
         _defaultColor = _text.color;
         //m_animator = GetComponent<Animator>();
-        IsSelected(); Validate();
+        //IsSelected(); Validate();
     }
 
     private void Update()
