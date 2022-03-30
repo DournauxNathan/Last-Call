@@ -13,7 +13,6 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     public GameObject textPrefab;
 
     [Header("Debug")]
-    [SerializeField] private int toInstantiateTest;
     [SerializeField] private bool hascreatedText = false;
     [SerializeField] private bool clearBool = false;
     [SerializeField] private string testString;
@@ -77,7 +76,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         for (int i = 0; i < _containers.childCount; i++)
         {
             Destroy(_containers.GetChild(i).gameObject);
-            //Debug.Log("Cleared Child(" + i + "):" + _containers.GetChild(i).GetComponent<TMP_Text>().text);
+            Debug.Log("Cleared Child(" + i + "):" + _containers.GetChild(i).GetComponent<TMP_Text>().text);
         }
         clearBool = false;
     }
