@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InspectionInWorld : MonoBehaviour
+public class InspectionInWorld : Singleton<InspectionInWorld>
 {
     [Header("Param")]
     public Transform _containers;
@@ -17,14 +17,12 @@ public class InspectionInWorld : MonoBehaviour
     [SerializeField] private bool hascreatedText = false;
     [SerializeField] private string testString;
 
-    
-
     // Start is called before the first frame update
     void Start()
     {
-        Debuggg();
+
         _listString = new List<string>(); //INIT
-        
+
     }
 
     // Update is called once per frame
@@ -34,32 +32,25 @@ public class InspectionInWorld : MonoBehaviour
         {
             CreateNewText(testString);
             CreateNewText(_listString);
+
         }
     }
 
-    private void Debuggg()
-    {
-        if (toInstantiateTest != 0)
-        {
-            for (int i = 0; i < toInstantiateTest; i++)
-            {
-                Instantiate(textPrefab, _containers);
-            }
-        }
-    }
 
-    private void CreateNewText(string _text)
+
+    public void CreateNewText(string _text)
     {
+        hascreatedText = false;
         if (_text != string.Empty)
         {
-            hascreatedText = false;
+            
             Instantiate(textPrefab, _containers);
             int _nbchilds = _containers.childCount;
             _containers.GetChild(_nbchilds - 1).GetComponent<TMP_Text>().text = _text;
         }
     }
 
-    private void CreateNewText(List<string> _listText)
+    public void CreateNewText(List<string> _listText)
     {
         hascreatedText = false;
         foreach (var text in _listText)
@@ -70,8 +61,9 @@ public class InspectionInWorld : MonoBehaviour
                 int _nbchilds = _containers.childCount;
                 _containers.GetChild(_nbchilds - 1).GetComponent<TMP_Text>().text = text;
             }
-            
+
         }
     }
 
+    
 }
