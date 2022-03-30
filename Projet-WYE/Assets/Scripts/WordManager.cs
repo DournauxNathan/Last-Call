@@ -21,7 +21,7 @@ public class WordManager : Singleton<WordManager>
                 //Find any available Canvas Word 
                 var item = FindAvailableItem();
                 //if true, Activate Canvas Word and Set his text with the current propo
-                item.Activate(transform, pullingStock, answer.keywords[i].proposition);
+                item.Activate(transform, pullingStock, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition);
             }
         }
     }
@@ -38,11 +38,4 @@ public class WordManager : Singleton<WordManager>
         }
         return null;
     }
-
-    public void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, spawner.radius);
-    }
-
 }
