@@ -685,7 +685,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforAnim: 0.09
   animationSpeed: 1
+  outlineColor:
+    serializedVersion: 2
+    rgba: 0
+  outlineWidth: 0.182
+  validateColor:
+    serializedVersion: 2
+    rgba: 0
+  decaySpeed: 5
+  OnValidateWord:
+    m_PersistentCalls:
+      m_Calls: []
   m_animator: {fileID: 254421111}
+  decayValue: 255
 --- !u!114 &139874212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,6 +1412,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &551066993 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+  m_PrefabInstance: {fileID: 1214443729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2f3e8ec1011d040868501c931b743a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &625156773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1576,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforAnim: 0.09
   animationSpeed: 1
+  outlineColor:
+    serializedVersion: 2
+    rgba: 0
+  outlineWidth: 0.182
+  validateColor:
+    serializedVersion: 2
+    rgba: 0
+  decaySpeed: 5
+  OnValidateWord:
+    m_PersistentCalls:
+      m_Calls: []
   m_animator: {fileID: 73055119}
+  decayValue: 255
 --- !u!114 &668701930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,7 +1844,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforAnim: 0.09
   animationSpeed: 1
+  outlineColor:
+    serializedVersion: 2
+    rgba: 0
+  outlineWidth: 0.182
+  validateColor:
+    serializedVersion: 2
+    rgba: 0
+  decaySpeed: 5
+  OnValidateWord:
+    m_PersistentCalls:
+      m_Calls: []
   m_animator: {fileID: 229923569}
+  decayValue: 255
 --- !u!114 &776074834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2219,7 +2266,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforAnim: 0.09
   animationSpeed: 1
+  outlineColor:
+    serializedVersion: 2
+    rgba: 0
+  outlineWidth: 0.182
+  validateColor:
+    serializedVersion: 2
+    rgba: 0
+  decaySpeed: 5
+  OnValidateWord:
+    m_PersistentCalls:
+      m_Calls: []
   m_animator: {fileID: 45459328}
+  decayValue: 255
 --- !u!114 &1197988917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2513,6 +2572,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasSherlock (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: decaySpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: decayValue
+      value: 255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: OnValidateWord.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: OnValidateWord.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: OnValidateWord.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 551066993}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: OnValidateWord.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: OnValidateWord.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Debuggg
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: OnValidateWord.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShakeWord, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440043146325880445, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
+      propertyPath: OnValidateWord.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42baaaabf1c9f274895aadf8eb161132, type: 3}
 --- !u!224 &1214443730 stripped
@@ -2607,7 +2702,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforAnim: 0.09
   animationSpeed: 1
+  outlineColor:
+    serializedVersion: 2
+    rgba: 0
+  outlineWidth: 0.182
+  validateColor:
+    serializedVersion: 2
+    rgba: 0
+  decaySpeed: 5
+  OnValidateWord:
+    m_PersistentCalls:
+      m_Calls: []
   m_animator: {fileID: 291069992}
+  decayValue: 255
 --- !u!114 &1768143297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2863,7 +2970,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforAnim: 0.09
   animationSpeed: 1
+  outlineColor:
+    serializedVersion: 2
+    rgba: 0
+  outlineWidth: 0.182
+  validateColor:
+    serializedVersion: 2
+    rgba: 0
+  decaySpeed: 5
+  OnValidateWord:
+    m_PersistentCalls:
+      m_Calls: []
   m_animator: {fileID: 1174004448}
+  decayValue: 255
 --- !u!114 &2011072204
 MonoBehaviour:
   m_ObjectHideFlags: 0
