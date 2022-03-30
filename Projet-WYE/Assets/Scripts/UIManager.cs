@@ -56,7 +56,6 @@ public class UIManager : Singleton<UIManager>
 
         if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
         {            
-            LoadQuestions();
             PullQuestion();
         }
 
@@ -293,30 +292,6 @@ public class UIManager : Singleton<UIManager>
                 button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
             }*/
         }
-    }
-
-    public void LoadQuestions()
-    {
-        switch (ScenarioManager.Instance.currentScenario)
-        {
-            case Scenario.TrappedMan:
-                descriptionQuestion.AddRange(ScenarioManager.Instance.trappedMan);
-            break;
-
-            case Scenario.HomeInvasion:
-                descriptionQuestion.AddRange(ScenarioManager.Instance.homeInvasion);
-            break;
-
-            case Scenario.DomesticAbuse:
-                descriptionQuestion.AddRange(ScenarioManager.Instance.domesticAbuse);
-            break;
-
-            case Scenario.RisingWater:
-                    descriptionQuestion.AddRange(ScenarioManager.Instance.risingWater);
-            break;
-        }        
-
-        ScenarioManager.Instance.isScenarioLoaded = true;
     }
 
     //Check si les questions ont déjà été répondu entre les transition
