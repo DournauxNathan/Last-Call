@@ -15,6 +15,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     [Header("Debug")]
     [SerializeField] private int toInstantiateTest;
     [SerializeField] private bool hascreatedText = false;
+    [SerializeField] private bool clearBool = false;
     [SerializeField] private string testString;
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     {
 
         _listString = new List<string>(); //INIT
+
 
     }
 
@@ -33,6 +35,11 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
             CreateNewText(testString);
             CreateNewText(_listString);
 
+        }
+
+        if (clearBool)
+        {
+            ClearAllText();
         }
     }
 
@@ -63,6 +70,16 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
             }
 
         }
+    }
+
+    public void ClearAllText()
+    {
+        for (int i = 0; i < _containers.childCount; i++)
+        {
+            Destroy(_containers.GetChild(i).gameObject);
+            //Debug.Log("Cleared Child(" + i + "):" + _containers.GetChild(i).GetComponent<TMP_Text>().text);
+        }
+        clearBool = false;
     }
 
     
