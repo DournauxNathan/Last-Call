@@ -9,6 +9,9 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     [Header("Param")]
     public Transform _containers;
     public List<string> _listString;
+    [Range(0.1f, 1f)] float minRand;
+    [Range(0.1f, 1f)] float maxRand;
+    public List<Vector2> placeHolders;
 
     [Header("Prefabs")]
     public GameObject textPrefab;
