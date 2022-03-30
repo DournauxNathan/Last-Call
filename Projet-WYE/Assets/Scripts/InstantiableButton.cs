@@ -22,13 +22,19 @@ public class InstantiableButton : MonoBehaviour
 
     public int currentClick;
     private QuestionFormat question;
-    private OrderFormat order;
+    private Order order;
     private ObjectActivator swapImaginaire;
     private Transform stock;
+    private Transform parentTransform;
     private bool isActive;
+
+    private Color defaultColor;
+
 
     private void Start()
     {
+        defaultColor = img.color;
+
         swapImaginaire = MasterManager.Instance.objectActivator;
         audioSource = MasterManager.Instance.mainAudioSource;
     }
@@ -54,6 +60,7 @@ public class InstantiableButton : MonoBehaviour
 
         this.stock = stock;
         this.question = question;
+        this.parentTransform = parent;        
 
         currentClick = 0;
         button.enabled = true;
@@ -69,7 +76,7 @@ public class InstantiableButton : MonoBehaviour
         UpdateQuestion();
     }
 
-    public void ActivateOrder(Transform parent, Transform stock, OrderFormat order)
+    public void ActivateOrder(Transform parent, Transform stock, Order order)
     {
         transform.SetParent(parent);
 
@@ -96,44 +103,42 @@ public class InstantiableButton : MonoBehaviour
         if (currentClick < question.listQuestion.Length - 1)
         {
             //Active unitée
-            //Debug.Log(button.Value.units[button.Value.currentClick]);
             UnitDispatcher.Instance.AddToUnlock(question.units[currentClick]);
 
             for (int i = 0; i < question.listIdObject.Length; i++)
             {
                 if (currentClick == question.listIdObject[i].y && question.listIdObject[i].x != 0)
                 {
+                    UIManager.Instance.Ask();
                     swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
                 }
             }
+
+            SendAnswer(currentClick); //envoi le string
+            SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length); //A TEST
+
+            StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, currentClick));
             currentClick++;
         }
         else if (currentClick >= question.listQuestion.Length - 1)
         {
             //Active unitée, boucle infinit quand click
-            //Debug.Log(button.Value.units[button.Value.currentClick]);
             UnitDispatcher.Instance.AddToUnlock(question.units[currentClick]);
 
             for (int i = 0; i < question.listIdObject.Length; i++)
             {
                 if (currentClick == question.listIdObject[i].y && !swapImaginaire.indexesList.Contains(question.listIdObject[i].x) && question.listIdObject[i].x != 0)
                 {
-                    //Debug.Log(button.Value.listIdObject[i].x);
+                    UIManager.Instance.Ask();
                     swapImaginaire.indexesList.Add(Mathf.FloorToInt(question.listIdObject[i].x));
                 }
                 currentBtn = i;
             }
 
-            if (EventSystem.current.gameObject != UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject)
-            {
-                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(currentBtn).GetComponentInChildren<Button>().gameObject);
-            }
-            else if (EventSystem.current.gameObject == null)
-            {
-                EventSystem.current.SetSelectedGameObject(UIManager.Instance.checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
-            }
-
-            Desactivate();
+            SendAnswer(currentClick); //envoi le string
+            SubTitle.Instance.DisplaySub(question.listQuestion[currentClick], question.voiceLineQuestion.Length, question.listAnswers[currentClick], question.voiceLineAnswer.Length);
+                        
+            StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, currentClick));
         }
 
         UpdateQuestion();
@@ -141,7 +146,7 @@ public class InstantiableButton : MonoBehaviour
 
     public void SendOrder()
     {
-        ScenarioManager.Instance.UpdateEndingsValue(order.endingModifier);
+        ScenarioManager.Instance.UpdateEndingsValue(order.influence);
         //Play audio in the order format
         Desactivate();
     }
@@ -152,10 +157,8 @@ public class InstantiableButton : MonoBehaviour
         //this.gameObject.SetActive(false);
         ReputOnStock();
     }
-    private void ReputOnStock()
+    public virtual void ReputOnStock()
     {
-        //button.enabled = false;
-
         button.enabled = false;
         toggle.enabled = false;
         toggle.isOn = true;
@@ -180,7 +183,7 @@ public class InstantiableButton : MonoBehaviour
     {
         if (isActive)
         {
-            text.text = order.orderText;
+            text.text = order.order;
         }
         else
         {
@@ -192,45 +195,71 @@ public class InstantiableButton : MonoBehaviour
     public void PlayQuestionAnswer()
     {
         StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, currentClick));
-       
-        /* 
-         * float _temp =0f
-         * float hardTimer = 0.5f
-         * int current
-         * _temp = question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer
-         * Debug.Log(question.voiceLineQuestion.Length + question.voiceLineAnswer.Length + hardTimer
-         * StartCoroutine(LockOtherButton(_temp
-         * current = currentClick;
-         */
     }
 
     IEnumerator PlayQuestionAudio(float time, int current)
-    {   
-        //Debug.Log("playing Question for :"+time+"s");
-                
-        UIManager.Instance.ToggleButton();
+    {                   
+        //UIManager.Instance.ToggleButton();
 
         audioSource.clip = question.voiceLineQuestion[current];
         audioSource.Play();
-        
-        yield return new WaitForSeconds(time );
+
+        MasterManager.Instance.EventSystem.GetComponent<BaseInputModule>().enabled = false;
+
+        foreach (InstantiableButton but in UIManager.Instance.buttons)
+        {
+            if (but.isActiveAndEnabled)
+            {
+                but.img.color = Color.grey;
+            }
+        }
+
+        yield return new WaitForSeconds(time);
         
         StartCoroutine(PlayAnswerAudio(question.voiceLineAnswer.Length, current));
-
     }
 
     IEnumerator PlayAnswerAudio(float time, int current)
-    {
+    {  
         yield return new WaitForSeconds(time);
-        
-        //Debug.Log("playing Answer for :" + time + "s");
         
         audioSource.clip = question.voiceLineAnswer[current];
         audioSource.Play();
-        
-        UIManager.Instance.ToggleButton();
+
+        Desactivate();
+
+        MasterManager.Instance.EventSystem.GetComponent<BaseInputModule>().enabled = true;
+
+        foreach (InstantiableButton but in UIManager.Instance.buttons)
+        {
+            if (but.isActiveAndEnabled)
+            {
+                but.img.color = defaultColor;
+            }
+        }
+
+        UIManager.Instance.UpdateEventSystem(parentTransform);
     }
 
-    
+    private void SendAnswer(int i)
+    {
+        SaveQuestion.Instance.AddQuestion(question.listQuestion[i]);
+    }
+
+    public void IsAnswered()
+    {
+        if (question != null)
+        {
+            for (int i = 0; i < question.listQuestion.Length; i++)
+            {
+                if (SaveQuestion.Instance.AlreadyAnswerd(question.listQuestion[i]))
+                {
+                    Debug.Log("Desactivate: " + question.listQuestion[i]);
+                    Desactivate();
+                }
+            }
+        }
+        
+    }
 
 }

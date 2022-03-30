@@ -6,65 +6,144 @@ using UnityEngine.Events;
 
 public class PhysicsButton : MonoBehaviour
 {
-    public enum Mode
-    {
-        Unit,
-        Physic,
-    }
-
-    public Mode currentMode;
-        
+    [Header("")]
     [Tooltip("Type of unit we want to send")]
     public Unit unitToSend;
+    public int nPress = 0;
+    public bool isActivate;
 
-    public GameObject clicker;
-    public Material unlockColor;
+    [Header("Physics Properties")]
+    public Rigidbody buttonTopRigid;
+    public Transform buttonTop;
+    public Transform buttonLowerLimit;
+    public Transform buttonUpperLimit;
+    public float threshHold;
+    public float force = 10;
+    private float upperLowerDiff;
+    public bool isPressed;
+    private bool prevPressedState;
+    public AudioSource pressedSound;
+    public AudioSource releasedSound;
+    public Collider[] CollidersToIgnore;
+    public UnityEvent onPressed, onReleased;
 
-    private float startYPosition;
-    public float pressPosition;
-
-    public bool isActivate = false;
-
-    public UnityEvent onPressed;
-
-    private Vector3 startPos;
-    private ConfigurableJoint joint;
+    [SerializeField] private Material activateColor;
+    [SerializeField] private Material desactivateColor;
 
     // Start is called before the first frame update
     void Start()
     {
-        joint = GetComponentInChildren<ConfigurableJoint>();
-        joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
-/*
-        if (currentMode == Mode.Unit)
+        Collider localCollider = GetComponent<Collider>();
+        if (localCollider != null)
         {
-        }*/
+            Physics.IgnoreCollision(localCollider, buttonTop.GetComponentInChildren<Collider>());
+
+            foreach (Collider singleCollider in CollidersToIgnore)
+            {
+                Physics.IgnoreCollision(localCollider, singleCollider);
+            }
+        }
+
+        if (transform.eulerAngles != Vector3.zero)
+        {
+            Vector3 savedAngle = transform.eulerAngles;
+            transform.eulerAngles = Vector3.zero;
+            upperLowerDiff = buttonUpperLimit.position.y - buttonLowerLimit.position.y;
+            transform.eulerAngles = savedAngle;
+        }
+        else
+            upperLowerDiff = buttonUpperLimit.position.y - buttonLowerLimit.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.position.y <= pressPosition)
-        {
-            OnPressed();
-        }
-
-
         if (isActivate)
         {
-            joint.gameObject.GetComponent<BoxCollider>().enabled = isActivate;
-            clicker.GetComponent<Renderer>().material = unlockColor;
+            buttonTop.GetComponent<Renderer>().material = activateColor;
         }
+        else
+        {
+            buttonTop.GetComponent<Renderer>().material = desactivateColor;
+        }
+
+
+        buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
+        buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
+        if (buttonTop.localPosition.y >= 0)
+            buttonTop.transform.position = new Vector3(buttonUpperLimit.position.x, buttonUpperLimit.position.y, buttonUpperLimit.position.z);
+        else
+            buttonTopRigid.AddForce(buttonTop.transform.up * force * Time.deltaTime);
+
+        if (buttonTop.localPosition.y <= buttonLowerLimit.localPosition.y)
+            buttonTop.transform.position = new Vector3(buttonLowerLimit.position.x, buttonLowerLimit.position.y, buttonLowerLimit.position.z);
+
+
+        if (Vector3.Distance(buttonTop.position, buttonLowerLimit.position) < upperLowerDiff * threshHold)
+            isPressed = true;
+        else
+            isPressed = false;
+
+        if (isPressed && prevPressedState != isPressed)
+            Pressed();
+        if (!isPressed && prevPressedState != isPressed)
+            Released();
     }
 
-    public void OnPressed()
+    // void FixedUpdate(){
+    //     Vector3 localVelocity = transform.InverseTransformDirection(buttonTop.GetComponent<Rigidbody>().velocity);
+    //     Rigidbody rb = buttonTop.GetComponent<Rigidbody>();
+    //     localVelocity.x = 0;
+    //     localVelocity.z = 0;
+    //     rb.velocity = transform.TransformDirection(localVelocity);
+    // }
+
+    void Pressed()
     {
-        Debug.Log("Pressed !");
-        onPressed?.Invoke();
+        Debug.Log("0");
+        prevPressedState = isPressed;
+        pressedSound.pitch = 1;
+        pressedSound.Play();
+        onPressed.Invoke();
+    }
+
+    void Released()
+    {
+        Debug.Log("1");
+        prevPressedState = isPressed;
+        releasedSound.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
+        releasedSound.Play();
+        onReleased.Invoke();
+    }
+
+    public void IncreaseNumberOfPress()
+    {
+        nPress++;
+
+        if (nPress == 1)
+        {
+            UnitDispatcher.Instance.UpdateUI();
+        }
+        else if (nPress == 2)
+        {
+            UnitDispatcher.Instance.NextSequence();
+            UnitDispatcher.Instance.UpdateUI();
+            nPress = 2;
+        }
     }
 
     public void SendUnit()
     {
-        Debug.Log(unitToSend + " sent");
+        if (!UnitDispatcher.Instance.unitsSend.Contains(unitToSend))
+        {
+            UnitDispatcher.Instance.unitsSend.Add(unitToSend);
+        }   
+
+        PlaytestData.Instance.betaTesteurs.data.unitSended.Add(unitToSend);
+    }
+
+    public void ChangeSceneButtun()
+    {
+        SceneLoader.Instance.LoadNewScene("Office");
     }
 }

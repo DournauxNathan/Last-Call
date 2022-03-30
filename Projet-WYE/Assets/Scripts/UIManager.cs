@@ -4,21 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class UIManager : Singleton<UIManager>
 {
     public List<QuestionFormat> protocoleQuestions;
     public List<QuestionFormat> descriptionQuestion;
-    public List<InstantiableButton> buttons;
 
-    [Header("Refs")]
+    [Header("Refs - Phase 1")]
+    public List<InstantiableButton> buttons;
     public Transform checkListTransform = null;
     public Transform descriptionTransform = null;
-    [SerializeField] private Transform orderListTransform = null;
     [Space(5)]
     [SerializeField] private Transform pullingStock = null;
-
     public CanvasGroup leftScreen;
+
+    [Header("Refs - Phase 2")]
+    public List<InstantiableButton> _buttons;
+    public Transform orderListTransform = null;
+    [Space(5)]
+    [SerializeField] private Transform pullingStockB = null;
     public CanvasGroup rightScreen;
 
     [Header("Fade parameters")]
@@ -28,71 +33,126 @@ public class UIManager : Singleton<UIManager>
     private bool fadeOut = false;
     private bool fadeIn = false;
 
-    public List<GameObject> tabs;
-    public GameObject currentTabSelected;
-
-
     [Header("Debug, Transition to Imaginaire")]
-    [SerializeField] private GameObject activateButton;
+    [SerializeField] private int nQuestionAnswer;
     [SerializeField] private bool unlockImaginaryTransition = false;
     public ParticleSystem smoke;
 
+    public GameObject startSelectbutton;
 
     // Start is called before the first frame update
     void Start()
-    {/*
-        if (SceneLoader.Instance.GetCurrentScene().name == "Office")
-        {*/
-        
-        //ScenarioManager.Instance.LoadScenario();
-
-        if (ScenarioManager.Instance.isScenarioLoaded)
+    {
+        if (SceneLoader.Instance.GetCurrentScene().name == "Office" && OrderController.Instance.currentNumberOfCombinaison <= 0)
         {
-            activateButton.SetActive(false);
-
-            // A CHANGER QUAND SWITCH ENTRE REA ET IMA
-            if (OrderController.Instance.orders.Count == 0)
-            {
-                for (int i = 0; i < protocoleQuestions.Count; i++)
-                {
-                    var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
-                }
-
-                for (int i = 0; i < descriptionQuestion.Count; i++)
-                {
-                    var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
-                }
-            }
-
-            if (OrderController.Instance.isResolve)
-            {
-                for (int i = 0; i < OrderController.Instance.orders.Count; i++)
-                {
-                    var but = FindAvailableButtonForOrder(OrderController.Instance.orders[i]);
-                }
-            }
-
+            MasterManager.Instance.currentPhase = Phases.Phase_1;
+        }
+        else
+        {
+            MasterManager.Instance.currentPhase = Phases.Phase_3;
         }
 
-        EventSystem.current.firstSelectedGameObject = checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject;
-        //}      
+        EventSystem.current.SetSelectedGameObject(startSelectbutton.GetComponentInChildren<Button>().gameObject);
+
+        if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
+        {            
+            LoadQuestions();
+            PullQuestion();
+        }
+
+        CheckButtons();
+    }
+
+    public void PullQuestion()
+    {
+        if (ScenarioManager.Instance.isScenarioLoaded)
+        {            
+            ScenarioManager.Instance.isScenarioLoaded = false;
+
+            for (int i = 0; i < protocoleQuestions.Count; i++)
+            {
+                var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
+            }
+
+            for (int i = 0; i < descriptionQuestion.Count; i++)
+            {
+                var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
+            }
+
+            StartCoroutine(ExecuteAfterTime(.5f));
+        }
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            /*if (OrderController.Instance.GetResolve())
+            {*/
+                for (int i = 0; i < OrderController.Instance.ordersStrings.Count; i++)
+                {
+                    var but = FindAvailableButtonForOrder(OrderController.Instance.ordersStrings[i]);
+                }
+            //}
+
+            UpdateEventSystem(orderListTransform);
+        }
+    }
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        
+        EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
+        //UpdateEventSystem(checkListTransform);
+    }
+
+    public void UpdateEventSystem(Transform transform)
+    {
+        if (transform.name == checkListTransform.name)
+        {
+            for (int i = checkListTransform.childCount - 1; i >= 0; i--)
+            {
+                if (checkListTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
+                {
+                    EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
+                }
+            }
+        }
+
+        if (transform.name == descriptionTransform.name)
+        {
+            for (int i = descriptionTransform.childCount - 1; i >= 0; i--)
+            {
+                if (descriptionTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
+                {
+                    EventSystem.current.SetSelectedGameObject(descriptionTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
+                }
+            }
+        }
+
+        if (transform.name == orderListTransform.name)
+        {
+            for (int i = orderListTransform.childCount - 1; i >= 0; i--)
+            {
+                if (orderListTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
+                {
+                    EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
+                }
+            }
+        }
     }
 
     public void Update()
     {
         if (unlockImaginaryTransition)
         {
-            activateButton.SetActive(true );
             unlockImaginaryTransition = !unlockImaginaryTransition;
         }
 
-        if (MasterManager.Instance.projectionTransition.range <= beginFadeOutAt)
+        if (Projection.Instance.transitionValue <= beginFadeOutAt)
         {
             HideUI();
             smoke.Stop();
         }
 
-        if (MasterManager.Instance.projectionTransition.range == beginFadeInAt)
+        if (Projection.Instance.transitionValue >= beginFadeInAt)
         {
             ShowUI();
 
@@ -101,17 +161,20 @@ public class UIManager : Singleton<UIManager>
 
         if (fadeIn) //Show UI
         {
-            if (UIManager.Instance.leftScreen != null)
+            if (leftScreen != null)
             {
                 StartFadeIn(leftScreen);
-                StartFadeIn(rightScreen);
+
+                if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+                {
+                    StartFadeIn(rightScreen);
+                }
             }
         }
 
         if (fadeOut) //Hide UI
         {
             StartFadeOut(leftScreen);
-            StartFadeOut(rightScreen);
         }
     }
 
@@ -133,15 +196,16 @@ public class UIManager : Singleton<UIManager>
         return null;
     }
 
-    public InstantiableButton FindAvailableButtonForOrder(OrderFormat order)
+
+    public InstantiableButton FindAvailableButtonForOrder(Order order)
     {
         if (order != null)
         {
-            foreach (var but in buttons)
+            foreach (var but in _buttons)
             {
                 if (!but.isInstiantiated)
                 {
-                    but.ActivateOrder(orderListTransform, pullingStock, order);
+                    but.ActivateOrder(orderListTransform, pullingStockB, order);
                     return but;
                 }
             }
@@ -187,6 +251,23 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    public void Ask()
+    {
+        nQuestionAnswer++;
+    } 
+
+    public bool CheckAnswer()
+    {        
+        if (nQuestionAnswer > descriptionQuestion.Count)
+        {
+            return MasterManager.Instance.canImagine = true;
+        }
+        else
+        {
+            return MasterManager.Instance.canImagine = false;
+        }
+    }
+
     public void ToggleButton()
     {
         /*for (int i = 0; i < checkListTransform.childCount; i++)
@@ -212,13 +293,38 @@ public class UIManager : Singleton<UIManager>
                 button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
             }*/
         }
-
     }
 
-    public void SwitchTab(int i)
+    public void LoadQuestions()
     {
-        currentTabSelected.SetActive(false);
-        tabs[i].SetActive(true);
+        switch (ScenarioManager.Instance.currentScenario)
+        {
+            case Scenario.TrappedMan:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.trappedMan);
+            break;
+
+            case Scenario.HomeInvasion:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.homeInvasion);
+            break;
+
+            case Scenario.DomesticAbuse:
+                descriptionQuestion.AddRange(ScenarioManager.Instance.domesticAbuse);
+            break;
+
+            case Scenario.RisingWater:
+                    descriptionQuestion.AddRange(ScenarioManager.Instance.risingWater);
+            break;
+        }        
+
+        ScenarioManager.Instance.isScenarioLoaded = true;
     }
 
+    //Check si les questions ont déjà été répondu entre les transition
+    public void CheckButtons()
+    {
+        foreach (var button in buttons)
+        {
+            button.IsAnswered();
+        }
+    }
 }

@@ -15,16 +15,17 @@ public class ListManager : Singleton<ListManager>
 
     public void OnPressed()
     {
-        if(hoveredInteractors.Count != 0)
+        if(hoveredInteractors.Count != 0 && hoveredInteractors[0].GetComponentInParent<Teleport>())
         {
-            if (!lockedInteractors.Contains(hoveredInteractors[0]))
-            {
-                Select();
-            }
-            else if (lockedInteractors.Contains(hoveredInteractors[0]))
-            {
-                UnSelect();
-            }
+            hoveredInteractors[0].GetComponentInParent<Teleport>().TeleportTo();
+        }
+        else if (hoveredInteractors.Count != 0 && !lockedInteractors.Contains(hoveredInteractors[0]))
+        {
+            Select();
+        }
+        else if (hoveredInteractors.Count != 0 && lockedInteractors.Contains(hoveredInteractors[0]))
+        {
+            UnSelect();
         }
     }
 
@@ -33,13 +34,13 @@ public class ListManager : Singleton<ListManager>
         if (lockedInteractors.Count == 0 && hoveredInteractors.Count > 0) //Fonctionne ! -> ajoute le premier objet si liste vide != null
         {
             lockedInteractors.Add(hoveredInteractors[0]);
-            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            hoveredInteractors[0].GetComponent<CombinableObject>().Lock(true);
         }
 
         if (lockedInteractors.Count != 0 && hoveredInteractors.Count > 0 && !lockedInteractors.Contains(hoveredInteractors[0]))
         {
             lockedInteractors.Add(hoveredInteractors[0]);
-            hoveredInteractors[0].GetComponent<ObjectManager>().Locked();
+            hoveredInteractors[0].GetComponent<CombinableObject>().Lock(true);
         }
 
         if (lockedInteractors.Count == 2)
@@ -48,7 +49,7 @@ public class ListManager : Singleton<ListManager>
 
             for (int i = 0; i < lockedInteractors.Count; i++)
             {
-                lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+                lockedInteractors[i].GetComponent<CombinableObject>().Lock(false);
             }
             lockedInteractors.Clear();
         }
@@ -58,7 +59,7 @@ public class ListManager : Singleton<ListManager>
     {
         for (int i = 0; i < lockedInteractors.Count; i++)
         {
-            lockedInteractors[i].GetComponent<ObjectManager>().UnLocked();
+            lockedInteractors[i].GetComponent<CombinableObject>().Lock(false);
         }
         lockedInteractors.Clear();
     }
@@ -66,90 +67,31 @@ public class ListManager : Singleton<ListManager>
 
     public void CheckCompatibility(GameObject objet1,GameObject objet2)
     {
-        ObjectManager _objectManager1, _objectManager2;
+        CombinableObject combiObj1, combiObj2;
 
-        if (objet1.TryGetComponent<ObjectManager>(out _objectManager1) && objet2.TryGetComponent<ObjectManager>(out _objectManager2))
+        if (objet1.TryGetComponent<CombinableObject>(out combiObj1) && objet2.TryGetComponent<CombinableObject>(out combiObj2))
         {
-            //Check with 2 objects only and with the ObjectManager1
-            if (_objectManager1.combinaisons.Count == 2 && _objectManager1.combinaisons[0].combineWith == objet2 && _objectManager2.combinaisons.Count != 0 
-                || _objectManager1.combinaisons.Count == 2 && _objectManager1.combinaisons[0].combineWith == objet2 && _objectManager2.combinaisons.Count != 0)
+            foreach (CombineWith combinaison in combiObj1.useWith)
             {
-                if (_objectManager1.data.isStatic)
+                if (combinaison.objectName == combiObj2.name && combiObj1.state == StateMobility.Static)
                 {
-                    objet2.SetActive(false);
+                    combiObj2.dissolveEffect.startEffect = true;
 
-                    //Clear the list if a combinaison has already been find
-                    _objectManager1.combinaisons.Clear();
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
                 }
-                else
+                else if (combinaison.objectName == combiObj2.name && combiObj2.state == StateMobility.Static)
                 {
-                    objet1.SetActive(false);
-                    objet2.SetActive(false);
-                }
+                    combiObj1.dissolveEffect.startEffect = true;
 
-                SetToOrderController(_objectManager1);
-            }
-            else if (_objectManager2.combinaisons.Count == 2 && _objectManager2.combinaisons[0].combineWith == objet1 && _objectManager1.combinaisons.Count != 0 
-                || _objectManager2.combinaisons.Count == 2 && _objectManager2.combinaisons[0].combineWith == objet1 && _objectManager1.combinaisons.Count != 0)
-            {
-                //Check with 2 objects only and with the ObjectManager2
-                if (_objectManager2.data.isStatic)
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
+                }
+                else if (combinaison.objectName == combiObj2.name && combiObj1.state != StateMobility.Static)
                 {
-                    objet1.SetActive(false);
+                    combiObj1.dissolveEffect.startEffect = true;
+                    combiObj2.dissolveEffect.startEffect = true;
 
-                    //Clear the list if a combinaison has already been find
-                    _objectManager2.combinaisons.Clear();
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
                 }
-                else
-                {
-                    objet1.SetActive(false);
-                    objet2.SetActive(false);
-                }
-
-                SetToOrderController(_objectManager2);
-            }
-            else if (_objectManager1.combinaisons.Count == 1 && _objectManager2.combinaisons.Count != 0 
-                || _objectManager2.combinaisons.Count == 1 && _objectManager1.combinaisons.Count != 0)
-            {
-                //Check with 1 object only
-                if (_objectManager1.combinaisons[0].combineWith == objet2)
-                {
-                    if (_objectManager1.data.isStatic)
-                    {
-                        objet2.SetActive(false);
-
-                        //Clear the list if a combinaison has already been find
-                        _objectManager1.combinaisons.Clear();
-                    }
-                    else
-                    {
-                        objet1.SetActive(false);
-                        objet2.SetActive(false);
-                    }
-
-                    SetToOrderController(_objectManager1);
-                }
-                else if (_objectManager2.combinaisons[0].combineWith == objet1)
-                {
-                    if (_objectManager2.data.isStatic)
-                    {
-                        objet1.SetActive(false);
-
-                        //Clear the list if a combinaison has already been find
-                        _objectManager2.combinaisons.Clear();
-                    }
-                    else
-                    {
-                        objet1.SetActive(false);
-                        objet2.SetActive(false);
-                    }
-
-                    SetToOrderController(_objectManager2);
-                }
-            }            
-            else if (_objectManager1.combinaisons.Count == 0 || _objectManager2.combinaisons.Count == 0)
-            {
-                Debug.LogWarning("Can't combine them");
             }
         }
         else
@@ -158,12 +100,10 @@ public class ListManager : Singleton<ListManager>
         }       
     }
 
-    public void SetToOrderController(ObjectManager _objectManager)
+    public void SetToOrderController(CombinableObject objectA, CombinableObject objectB, int value, string _outcome)
     {
-        if (!OrderController.Instance.orders.Contains(_objectManager.data.resultOrder))
-        {
-            OrderController.Instance.orders.Add(_objectManager.data.resultOrder);
-            OrderController.Instance.IncreaseValue(1);
-        }
+        OrderController.Instance.AddCombinaison(objectA, objectB, value, _outcome);
+        PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
+        OrderController.Instance.IncreaseValue(1);
     }
 }

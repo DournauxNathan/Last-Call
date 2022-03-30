@@ -20,9 +20,9 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
 
     public bool unitUnlock = false;
 
-    private void Start()
-    {   
-    }
+    public List<Unit> unitsSend;
+
+    public int sequence;
 
     public  void AddToUnlock(Unit unit) 
     {
@@ -67,9 +67,61 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
         }
     }
 
-    public void FreezeUI()
+    public void UpdateUI()
     {
+        if (sequence == 1)
+        {
+            for (int i = 0; i < UIManager.Instance.checkListTransform.childCount; i++)
+            {
+                UIManager.Instance.checkListTransform.GetChild(i).GetComponent<InstantiableButton>().button.enabled = false;
+            }
 
+            UiTabSelection.Instance.SwitchSequence(1);
+            
+            foreach (var button in physicsbuttons)
+            {
+                button.isActivate = false;
+            }
+
+            StartCoroutine(SequenceManager(5f));
+        }
+        else if (sequence == 3)
+        {
+            UiTabSelection.Instance.SwitchSequence(sequence);
+            StartCoroutine(SequenceManager(10f));
+        }
     }
 
+    public void NextSequence()
+    {
+        sequence++;
+    }
+
+    IEnumerator SequenceManager(float time)
+    {        
+        yield return new WaitForSeconds(time);
+        NextSequence();
+
+        if (sequence == 2)
+        {
+            foreach (var button in physicsbuttons)
+            {
+                button.isActivate = true;
+            }
+        }
+        else
+        {
+            foreach (var button in physicsbuttons)
+            {
+                button.isActivate = false;
+            }
+        }
+
+        UiTabSelection.Instance.SwitchSequence(sequence);
+    }
+
+    public void LoadUnitSequence()
+    {
+        UiTabSelection.Instance.SwitchSequence(SaveQuestion.Instance.sequenceUnit);
+    }
 }

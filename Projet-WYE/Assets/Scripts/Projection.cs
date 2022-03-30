@@ -7,97 +7,191 @@ public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
     public Transform player;
-    [Space(5)]public List<Material> transitionShaders;
 
-    [Header("Parameters")]
-    public bool startTransition;
-    [Tooltip("During of te transition in seconds")] public float time;
-    [Tooltip("0: Go to the imaginary | 1: Go Back to real life")]public int transitionValue;
-    [Range(0,3)] public float range = 3f;
-    private Vector3 playerPos;
+    [Space(5)] 
+    public List<Material> transitionShaders;
+    public List<Material> wallShader;
+    [Space(5)]
 
-    public float timeBetweenEachTransition;
-    public float timer;
+    public bool isTransition;
+    [Range(0, 15)]
+    public float transitionValue = 15f;
+    [Range(0, 8)]
+    public float wallTransition;
+    public bool setWallWithOutline = false;
+    public bool switchMode;
+
+    [Header("Projection Properties")]
+    [Tooltip("During of the transition in seconds")]
+    public float time;
+    [SerializeField] private bool pauseBetweenTransition = true;
+    [Tooltip("Time of the break between the Transition effect")]
+    public float timeBetweenTransition;
+    [Space(5)]
     public bool changeScene;
     public bool goBackInOffice;
+
+    [Header("Cycle Properties")]
+    public bool hasCycle = false;
+
+    public bool hasProjted;
+    private bool isDisconstruc;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerPos = player.position;
-
+        //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat")
+        
         foreach (var mat in transitionShaders)
         {
-            mat.SetVector("_PlayerPos", playerPos);
-            mat.SetFloat("_Distance", 3f * 10f);
+            mat.SetFloat("_Dissolve", 15f);
         }
 
-        timer = timeBetweenEachTransition;
+        foreach (var mat in wallShader)
+        {
+           //mat.SetFloat("_Dissolve", 8f);
+        }
+
+        hasProjted = false;
+        StopCoroutine(WaitForVoid());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (startTransition)
-        {
-            DoTransition(transitionValue);
-        }
-
-        if (MasterManager.Instance.isInImaginary)
-        {
-            timer -= Time.deltaTime;
-            goBackInOffice = true;
-
-            if (timer <= 0)
-            {
-                timer = 0;
-                DoTransition(0);
-            }
-        }
-
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Distance", range * 10f);
-        }         
+            mat.SetVector("_PlayerPos", player.position);
+        
+            mat.SetFloat("_Dissolve", transitionValue);
+        }
+
+        foreach (var mat in wallShader)
+        {
+           // mat.SetFloat("_Dissolve", wallTransition);            
+        }
+
+        if (pauseBetweenTransition && isTransition && !isDisconstruc)
+        {
+            Deconstruct();
+        }
+
+        if (pauseBetweenTransition && isTransition && isDisconstruc)
+        {
+            Construct();
+        }
+
+        if (transitionValue >= 2.5)
+        {
+            foreach (var mat in wallShader)
+            {
+                //DistanceDissolveTarget.Instance.SetObjectToTrack();
+            }
+        }
     }
 
-    public void DoTransition(int state)
+    public void ResetTransition()
     {
-        if (state == 0)
+        if (transitionValue < 15)
         {
-            range -= time * Time.deltaTime;
+            isTransition = false;
+            transitionValue += Time.deltaTime * time;
 
-            if (range <= 0)
+            if (transitionValue > 15)
             {
-                startTransition = true;
-                transitionValue = 1;
-            
-                range = 0;
-
-                if (changeScene && goBackInOffice)
-                {
-                    goBackInOffice = false;
-                    MasterManager.Instance.GoBackToOffice("Office");
-                    goBackInOffice = false;
-                }
-
-                if (changeScene)
-                {                   
-                    MasterManager.Instance.ActivateImaginary("Call1");
-                }
-            }
-        }
-        else if (state == 1)
-        {
-            range += time *Time.deltaTime;
-
-            if (range >= 2.5)
-            {
-                startTransition = true;
-                transitionValue = 0;
-                range = 3;
-                
+                transitionValue = 15;
             }
         }
     }
+
+    public void Deconstruct()
+    {
+        if (transitionValue > 0)
+        {
+            isTransition = true;
+            transitionValue -= Time.deltaTime * time;
+        }
+        else if (hasCycle)
+        {
+            hasCycle = false;
+            isTransition = false;
+            transitionValue = 0;
+        }
+        else
+        {
+            transitionValue = 0;
+            isDisconstruc = true;
+            StartCoroutine(WaitForVoid());//coroutine
+            CallScene();
+            ToggleProjection();
+        }
+    }
+
+    public void Construct()
+    {
+        if (transitionValue < 15)
+        {
+            isTransition = true;
+            transitionValue += Time.deltaTime * time;
+        }
+        else if (hasCycle)
+        {
+            hasCycle = false;
+            isTransition = false;
+            transitionValue = 15;
+            isDisconstruc = false;
+        }
+        else
+        {
+            transitionValue = 15;
+
+            ToggleProjection();
+            StartCoroutine(WaitForVoid());//coroutine
+            CallScene();
+        }
+    }
+
+    public void CallScene()
+    {
+        if (!hasCycle && !hasProjted)
+        {
+            hasCycle = !false;
+
+            MasterManager.Instance.isInImaginary = true;
+            //Debug.Log("Call Gameplay_Combination_Iteration");
+            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+        }
+
+        if (!hasCycle && hasProjted)
+        {
+            hasCycle = !false;
+
+            MasterManager.Instance.isInImaginary = false;
+                        
+            MasterManager.Instance.currentPhase = Phases.Phase_3;
+
+            //Debug.Log("Call Office");
+            MasterManager.Instance.GoBackToOffice("Office");
+        }
+    }
+
+    public void ToggleProjection() 
+    {
+        if (hasProjted)
+        {
+            hasProjted = false;
+        }
+        else
+        {
+            hasProjted = true;
+        }
+    }
+
+    IEnumerator WaitForVoid()
+    {
+        pauseBetweenTransition = false;
+        yield return new WaitForSeconds(timeBetweenTransition);
+        pauseBetweenTransition = true;
+    }
+
 }

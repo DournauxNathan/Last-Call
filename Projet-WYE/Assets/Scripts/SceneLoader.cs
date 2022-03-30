@@ -10,7 +10,8 @@ public class SceneLoader : Singleton<SceneLoader>
      public string nameScene;
     public ScreenFader screenFader;
 
-    private Scene currentScene;
+    public Scene currentScene;
+    public string cScene;
     private bool isLoading = false;
 
     private void Start()
@@ -38,26 +39,29 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadBegin?.Invoke();
         //yield return screenFader.StartFadeIn();
 
-        if (currentScene.name != null && currentScene.name != "Persistent")
-        {
+        //Debug.Log(currentScene.name != string.Empty && currentScene.name != "Persistent");
+
+        if (currentScene.name != "Null" && currentScene.name != "Persistent")
+        {            
             yield return StartCoroutine(UnloadCurrent());
+        }
+
+        if (sceneName == "Appartment_Day1")
+        {
+            HeadPhoneManager.Instance.headPhone.DisableHeadset();
+            //MasterManager.Instance.currentPhase = Phases.Phase_1;
         }
 
         yield return StartCoroutine(LoadNew(sceneName));
 
-       //  yield return screenFader.StartFadeOut();
+        //  yield return screenFader.StartFadeOut();
         OnLoadEnd?.Invoke();
 
         isLoading = false;
-
-        if (MasterManager.Instance.isInImaginary)
-        {
-            Projection.Instance.startTransition = true;
-        }
     }
 
     private IEnumerator UnloadCurrent()
-    {        
+    {
         AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
 
         while (!unloadOperation.isDone)
@@ -69,11 +73,13 @@ public class SceneLoader : Singleton<SceneLoader>
     private IEnumerator LoadNew(string sceneName)
     {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        currentScene = SceneManager.GetSceneAt(1);
 
         while (!loadOperation.isDone)
         {
             yield return null;
         }
+
     }
 
     private void SetActiveScene(Scene scene, LoadSceneMode mode)
@@ -90,7 +96,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     public void ReloadScene()
     {
-        Scene scene = SceneManager.GetActiveScene(); 
+        Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
         SceneManager.LoadSceneAsync("Persistent", LoadSceneMode.Additive);
     }
@@ -103,6 +109,11 @@ public class SceneLoader : Singleton<SceneLoader>
     public Scene GetCurrentScene()
     {
         return SceneManager.GetActiveScene();
+    }
+
+    public void MoveGO(GameObject go)
+    {
+        SceneManager.MoveGameObjectToScene(go, SceneManager.GetSceneAt(0));
     }
 
 }

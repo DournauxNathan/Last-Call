@@ -11,6 +11,8 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
     private bool canAssemble;
     [SerializeField]
     private GameObject snapTo;
+    [SerializeField] private bool tagCombi;
+    [SerializeField] private string tagAssemble;
 
 
     protected override void Awake()
@@ -31,6 +33,10 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
         {
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
+        else if (tagCombi)
+        {
+            return base.CanSelect(interactable) && MatchUsingTags(interactable);
+        }
         return base.CanSelect(interactable);
     }
 
@@ -40,12 +46,21 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
         {
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
+        else if (tagCombi)
+        {
+            return base.CanSelect(interactable) && MatchUsingTags(interactable);
+        }
         return base.CanSelect(interactable);
     }
 
     private bool MatchUsingGameObject(XRBaseInteractable interactable)
     {
         return interactable.gameObject == snapTo;
+    }
+
+    private bool MatchUsingTags(XRBaseInteractable interactable)
+    {
+        return interactable.gameObject.tag == tagAssemble;
     }
 
 }

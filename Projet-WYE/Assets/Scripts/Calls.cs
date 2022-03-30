@@ -67,7 +67,11 @@ public class Calls : MonoBehaviour
 
     public void HasDetatch()
     {
-        hasDetatch = true;
+        if (!MasterManager.Instance.isTutoEnded)
+        {
+           hasDetatch = true;
+        }
+       
     }
 
 }

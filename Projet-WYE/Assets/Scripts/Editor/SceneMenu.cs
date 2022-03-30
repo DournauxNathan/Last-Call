@@ -33,6 +33,12 @@ public static class SceneMenu
         OpenScene("Call3");
     }
 
+    [MenuItem("Scenes/Gameplay/Iteration#1")]
+    public static void Gameplay()
+    {
+        OpenScene("Gameplay_Combination_Iteration");
+    }
+
     private static void OpenScene(string sceneName)
     {
         EditorSceneManager.OpenScene("Assets/Scenes/Persistent.unity", OpenSceneMode.Single);
