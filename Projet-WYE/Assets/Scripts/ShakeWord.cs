@@ -79,6 +79,7 @@ public class ShakeWord : MonoBehaviour
         {
             isDecaying = false;
             OnValidateWord.Invoke();
+            gameObject.SetActive(false); // desactive
         }
         
     }
