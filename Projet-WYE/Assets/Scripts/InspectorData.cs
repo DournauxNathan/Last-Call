@@ -8,9 +8,25 @@ public class InspectorData : MonoBehaviour
     [Header("Data")]
     public List<string> _dataList;
 
+    [SerializeField] private bool testBool = false;
+    [SerializeField] private bool hasGenerate = false;
     void Start()
     {
         inspection = InspectionInWorld.Instance;
+    }
+
+    private void Update()
+    {
+        if (testBool && !hasGenerate)
+        {
+            testBool = false; hasGenerate = true;
+            InSelected();
+        }
+        else if (testBool && hasGenerate)
+        {
+            testBool = false; hasGenerate = !true;
+            DeSelected();
+        }
     }
 
     public void InSelected()
