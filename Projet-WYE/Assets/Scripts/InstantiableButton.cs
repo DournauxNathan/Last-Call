@@ -21,7 +21,6 @@ public class InstantiableButton : MonoBehaviour
     [HideInInspector] public bool isInstiantiated;
 
     public int currentClick;
-    private QuestionFormat question;
     private Order order;
     private ObjectActivator swapImaginaire;
     private Transform stock;
@@ -54,7 +53,7 @@ public class InstantiableButton : MonoBehaviour
         simulateInput = b;
     }
 
-    public void ActivateQuestion(Transform parent, Transform stock, QuestionFormat question)
+/*    public void ActivateQuestion(Transform parent, Transform stock, QuestionFormat question)
     {
         transform.SetParent(parent);
 
@@ -74,7 +73,7 @@ public class InstantiableButton : MonoBehaviour
         isInstiantiated = true;
 
         UpdateQuestion();
-    }
+    }*/
 
     public void ActivateOrder(Transform parent, Transform stock, Order order)
     {
@@ -98,7 +97,7 @@ public class InstantiableButton : MonoBehaviour
 
     public void IncreaseClick()
     {
-        int currentBtn = 0;
+        /*int currentBtn = 0;
 
         if (currentClick < question.listQuestion.Length - 1)
         {
@@ -141,7 +140,7 @@ public class InstantiableButton : MonoBehaviour
             StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, currentClick));
         }
 
-        UpdateQuestion();
+        UpdateQuestion();*/
     }
 
     public void SendOrder()
@@ -171,7 +170,7 @@ public class InstantiableButton : MonoBehaviour
     {
         if(isActive)
         {
-            text.text = question.listQuestion[currentClick];
+            //text.text = question.listQuestion[currentClick];
         }
         else
         {
@@ -194,14 +193,14 @@ public class InstantiableButton : MonoBehaviour
 
     public void PlayQuestionAnswer()
     {
-        StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, currentClick));
+        //StartCoroutine(PlayQuestionAudio(question.voiceLineQuestion.Length, currentClick));
     }
 
     IEnumerator PlayQuestionAudio(float time, int current)
     {                   
         //UIManager.Instance.ToggleButton();
 
-        audioSource.clip = question.voiceLineQuestion[current];
+        //audioSource.clip = question.voiceLineQuestion[current];
         audioSource.Play();
 
         MasterManager.Instance.EventSystem.GetComponent<BaseInputModule>().enabled = false;
@@ -216,14 +215,14 @@ public class InstantiableButton : MonoBehaviour
 
         yield return new WaitForSeconds(time);
         
-        StartCoroutine(PlayAnswerAudio(question.voiceLineAnswer.Length, current));
+        //StartCoroutine(PlayAnswerAudio(question.voiceLineAnswer.Length, current));
     }
 
     IEnumerator PlayAnswerAudio(float time, int current)
     {  
         yield return new WaitForSeconds(time);
         
-        audioSource.clip = question.voiceLineAnswer[current];
+        //audioSource.clip = question.voiceLineAnswer[current];
         audioSource.Play();
 
         Desactivate();
@@ -243,12 +242,12 @@ public class InstantiableButton : MonoBehaviour
 
     private void SendAnswer(int i)
     {
-        SaveQuestion.Instance.AddQuestion(question.listQuestion[i]);
+        //SaveQuestion.Instance.AddQuestion(question.listQuestion[i]);
     }
 
     public void IsAnswered()
     {
-        if (question != null)
+        /*if (question != null)
         {
             for (int i = 0; i < question.listQuestion.Length; i++)
             {
@@ -258,7 +257,7 @@ public class InstantiableButton : MonoBehaviour
                     Desactivate();
                 }
             }
-        }
+        }*/
         
     }
 
