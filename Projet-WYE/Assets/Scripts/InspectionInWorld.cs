@@ -97,6 +97,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         }
     }
 
+
     public void ClearAllText()
     {
         clearBool = false;

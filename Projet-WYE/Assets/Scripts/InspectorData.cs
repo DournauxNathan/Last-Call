@@ -34,7 +34,7 @@ public class InspectorData : MonoBehaviour
 
     public void InSelected()
     {
-        if (!security)
+        if (!security && inspection._containers.childCount == 0)
         {
             inspection.CreateNewText(_dataList);
             security = true;
@@ -43,8 +43,9 @@ public class InspectorData : MonoBehaviour
 
     public void DeSelected()
     {
-        if (security)
+        if (security && inspection._containers.childCount != 0)
         {
+            security = false;
             inspection.ClearAllText();
         }
     }
