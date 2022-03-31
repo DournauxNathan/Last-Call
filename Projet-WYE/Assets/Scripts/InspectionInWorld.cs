@@ -56,7 +56,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
             
             Instantiate(textPrefab, _containers);
             int _nbchilds = _containers.childCount;
-            _containers.GetChild(_nbchilds - 1).GetComponent<TMP_Text>().text = _text;
+            _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = _text;
         }
     }
 
@@ -69,7 +69,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
             {
                 Instantiate(textPrefab, _containers);
                 int _nbchilds = _containers.childCount;
-                _containers.GetChild(_nbchilds - 1).GetComponent<TMP_Text>().text = text;
+                _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = text;
             }
 
         }
@@ -80,7 +80,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         for (int i = 0; i < _containers.childCount; i++)
         {
             Destroy(_containers.GetChild(i).gameObject);
-            Debug.Log("Cleared Child(" + i + "):" + _containers.GetChild(i).GetComponent<TMP_Text>().text);
+            Debug.Log("Cleared Child(" + i + "):" + _containers.GetChild(i).GetComponentInChildren<TMP_Text>().text);
         }
         clearBool = false;
     }
