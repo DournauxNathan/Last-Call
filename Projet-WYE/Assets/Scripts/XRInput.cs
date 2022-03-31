@@ -9,6 +9,7 @@ public class XRInput : MonoBehaviour
 #pragma warning disable 0649
     [SerializeField] XRController controller;
     [SerializeField] XRBinding[] bindings;
+
 #pragma warning restore 0649
 
     private void FixedUpdate()
@@ -93,3 +94,4 @@ public static class XRStatics
         }
     }
 }
+
