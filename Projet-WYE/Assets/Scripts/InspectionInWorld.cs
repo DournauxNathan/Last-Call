@@ -11,7 +11,6 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     public List<string> _listString;
     [Range(0.1f, 1f)] public float minRand = 0.1f;
     [Range(0.1f, 1f)] public float maxRand = 1f;
-    public List<Vector2> placeHolders;
 
     [Header("Prefabs")]
     public GameObject textPrefab;
@@ -20,14 +19,14 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     [SerializeField] private bool hascreatedText = false;
     [SerializeField] private bool clearBool = false;
     [SerializeField] private string testString;
+    [SerializeField] private List<Animator> animators;
 
     // Start is called before the first frame update
     void Start()
     {
 
         _listString = new List<string>(); //INIT
-
-
+        animators = new List<Animator>(); //INIT
     }
 
     // Update is called once per frame
@@ -44,6 +43,21 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         {
             ClearAllText();
         }
+
+
+        if (animators.Count != 0 && animators[0].GetCurrentAnimatorStateInfo(0).IsName("InspectionDisapeared"))
+        {
+            //Debug.Log("Test Anime");
+            for (int i = 0; i < _containers.childCount; i++)
+            {
+                Destroy(_containers.GetChild(i).gameObject);
+                Debug.Log("Cleared Child(" + i + "):" + _containers.GetChild(i).GetComponentInChildren<TMP_Text>().text);
+
+            }
+            animators.Clear();
+
+        }
+
     }
 
 
@@ -54,9 +68,13 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         if (_text != string.Empty)
         {
             
+
             Instantiate(textPrefab, _containers);
             int _nbchilds = _containers.childCount;
             _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = _text;
+            var _tanim = _containers.GetChild(_nbchilds - 1).GetComponentInChildren<Animator>();
+            _tanim.speed = Random.Range(minRand, maxRand);
+            animators.Add(_tanim);
         }
     }
 
@@ -70,6 +88,10 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
                 Instantiate(textPrefab, _containers);
                 int _nbchilds = _containers.childCount;
                 _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = text;
+                var _tanim = _containers.GetChild(_nbchilds - 1).GetComponentInChildren<Animator>();
+                _tanim.speed = Random.Range(minRand, maxRand);
+                animators.Add(_tanim);
+
             }
 
         }
@@ -77,12 +99,11 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
 
     public void ClearAllText()
     {
-        for (int i = 0; i < _containers.childCount; i++)
-        {
-            Destroy(_containers.GetChild(i).gameObject);
-            Debug.Log("Cleared Child(" + i + "):" + _containers.GetChild(i).GetComponentInChildren<TMP_Text>().text);
-        }
         clearBool = false;
+        foreach (var animator in animators)
+        {
+            animator.SetTrigger("Disapeared");
+        }
     }
 
     
