@@ -44,7 +44,7 @@ public class Projection : Singleton<Projection>
         
         foreach (var mat in transitionShaders)
         {
-            //mat.SetFloat("_Dissolve", 0f);
+            mat.SetFloat("_Dissolve", 15f);
         }
 
         foreach (var mat in wallShader)

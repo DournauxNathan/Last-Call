@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class DevMenu : MonoBehaviour
 {
-    [SerializeField] private Transform f3Menu;
-    [SerializeField] private Transform f5Menu;
+    [SerializeField] private Transform mainMenu;
     [SerializeField] private bool isInDevMode = true;
     [SerializeField] private bool isEnable = false;
     [SerializeField] private bool isConfirming = false;
@@ -24,8 +23,7 @@ public class DevMenu : MonoBehaviour
     {
         if (!isEnable)
         {
-            f3Menu.gameObject.SetActive(false);
-            f5Menu.gameObject.SetActive(false);
+            mainMenu.gameObject.SetActive(false);
         }
     }
 
@@ -34,6 +32,8 @@ public class DevMenu : MonoBehaviour
     {
         ToggleMenu();
         SendJson();
+        GoToAppartment();
+        GoToOffice();
     }
 
     private void ToggleMenu()
@@ -42,28 +42,14 @@ public class DevMenu : MonoBehaviour
         {
             if (isEnable)
             {
-                f3Menu.gameObject.SetActive(false);
+                mainMenu.gameObject.SetActive(false);
                 isEnable = false;
             }
             else
             {
-                f3Menu.gameObject.SetActive(true);
+                mainMenu.gameObject.SetActive(true);
                 _InputField.text = playtestData.betaTesteurs.player;
                 Invoke("SelectField", 0.1f);// test
-                isEnable = true;
-            }
-        }
-
-        if (Keyboard.current[Key.F5].wasPressedThisFrame && isInDevMode)
-        {
-            if (isEnable)
-            {
-                f5Menu.gameObject.SetActive(false);
-                isEnable = false;
-            }
-            else
-            {
-                f5Menu.gameObject.SetActive(true);
                 isEnable = true;
             }
         }
@@ -114,4 +100,19 @@ public class DevMenu : MonoBehaviour
         }
     }
 
+    private void GoToAppartment()
+    {
+        if (Keyboard.current[Key.F1].wasPressedThisFrame && isEnable)
+        {
+            SceneLoader.Instance.LoadNewScene("Appartment");
+        }
+    }
+
+    private void GoToOffice()
+    {
+        if (Keyboard.current[Key.F2].wasPressedThisFrame && isEnable)
+        {
+            SceneLoader.Instance.LoadNewScene("Office");
+        }
+    }
 }

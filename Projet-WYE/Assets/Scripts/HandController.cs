@@ -88,11 +88,11 @@ public class HandController : Singleton<HandController>
         #region Secondary Button
         if (targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton))
         {
-            if (_secondaryButton && Projection.Instance != null)
+            if (_secondaryButton )
             {
                 Projection.Instance.isTransition = true;
             }
-            else if (!_secondaryButton && Projection.Instance != null)
+            else
             {
                 Projection.Instance.isTransition = false;
                 Projection.Instance.ResetTransition();

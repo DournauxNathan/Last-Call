@@ -81,7 +81,7 @@ public class HintManager : MonoBehaviour
                     yield return null;
                     break;
 
-                case Scenario.RisingWater:
+                case Scenario.DomesticAbuse:
                     if (playHint)
                     {
                         int minC = Random.Range(0, hints[1].hint_voiceLines.Count());
