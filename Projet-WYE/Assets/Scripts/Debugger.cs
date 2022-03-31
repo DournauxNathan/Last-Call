@@ -65,7 +65,7 @@ public class Debugger : Singleton<Debugger>
                     SceneLoader.Instance.LoadNewScene("Call2");
                     Debug.Log("Call2 Loaded");
                     break;
-                case Scenario.DomesticAbuse:
+                case Scenario.RisingWater:
                     MasterManager.Instance.objectActivator.ActivateObjet();
                     SceneLoader.Instance.LoadNewScene("Call3");
                     Debug.Log("Call3 Loaded");
@@ -102,7 +102,7 @@ public class Debugger : Singleton<Debugger>
                     MasterManager.Instance.isInImaginary = false;
                     SceneLoader.Instance.LoadNewScene("Office");
                     break;
-                case Scenario.DomesticAbuse:
+                case Scenario.RisingWater:
                     OrderController.Instance.isResolve = true;
                     //OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_domesticAbuse);
                     MasterManager.Instance.isInImaginary = false;
