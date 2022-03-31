@@ -11,6 +11,8 @@ public class InspectorData : MonoBehaviour
 
     [SerializeField] private bool testBool = false;
     [SerializeField] private bool hasGenerate = false;
+
+    [SerializeField] private bool security = false;
     void Start()
     {
         inspection = InspectionInWorld.Instance;
@@ -32,11 +34,18 @@ public class InspectorData : MonoBehaviour
 
     public void InSelected()
     {
-        inspection.CreateNewText(_dataList);
+        if (!security)
+        {
+            inspection.CreateNewText(_dataList);
+            security = true;
+        }
     }
 
     public void DeSelected()
     {
-        inspection.ClearAllText();
+        if (security)
+        {
+            inspection.ClearAllText();
+        }
     }
 }
