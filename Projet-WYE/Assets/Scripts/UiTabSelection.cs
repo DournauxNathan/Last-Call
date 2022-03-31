@@ -8,8 +8,17 @@ public class UiTabSelection : Singleton<UiTabSelection>
 {
     public List<GameObject> tabs;
     public int indexTab = 0;
-
+    public bool switchTab;
     public List<GameObject> unitDispatcherFeedbacks;
+
+    private void Update()
+    {
+        if (switchTab)
+        {
+            switchTab = false;
+            SwitchTab(indexTab);
+        }
+    }
 
     public void SwitchTab(int i)
     {
