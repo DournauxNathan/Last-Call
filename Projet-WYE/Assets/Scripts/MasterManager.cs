@@ -18,6 +18,7 @@ public class MasterManager : Singleton<MasterManager>
     public Phases currentPhase;
 
     [Header("Refs")]
+    public Transform cameraA;
     public XRInteractionManager xRInteractionManager;
     public GameObject EventSystem;
     public ObjectActivator objectActivator;
@@ -50,6 +51,7 @@ public class MasterManager : Singleton<MasterManager>
     public bool useOneInput = false;
     public bool useTwoInput = false;
 
+    public GameObject xrRig;
 
     private void Start()
     {
@@ -186,4 +188,26 @@ public class MasterManager : Singleton<MasterManager>
         UIManager.Instance.PullQuestion();
     }
 
+
+    public void SetPhase(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                currentPhase = Phases.Phase_0;
+                break;
+            case 1:
+                currentPhase = Phases.Phase_1;
+                break;
+            case 2:
+                currentPhase = Phases.Phase_2;
+                break;
+            case 3:
+                currentPhase = Phases.Phase_3;
+                break;
+            case 4:
+                currentPhase = Phases.Phase_4;
+                break;
+        }
+    }
 }
