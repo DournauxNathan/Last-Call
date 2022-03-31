@@ -18,11 +18,11 @@ public class ScenarioManager : Singleton<ScenarioManager>
     [Range(-10, 10)]
     public float endingValue = 0f;
 
-    [Header("Questions - Description")]
+    /*[Header("Questions - Description")]
     public List<QuestionFormat> trappedMan;
     public List<QuestionFormat> homeInvasion;
     public List<QuestionFormat> domesticAbuse;
-    public List<QuestionFormat> risingWater;
+    public List<QuestionFormat> risingWater;*/
 
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)

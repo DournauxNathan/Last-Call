@@ -8,15 +8,12 @@ using System;
 
 public class UIManager : Singleton<UIManager>
 {
-    public List<QuestionFormat> protocoleQuestions;
-    public List<QuestionFormat> descriptionQuestion;
-
     [Header("Refs - Phase 1")]
     public List<InstantiableButton> buttons;
     public Transform checkListTransform = null;
     public Transform descriptionTransform = null;
     [Space(5)]
-    [SerializeField] private Transform pullingStock = null;
+    //[SerializeField] private Transform pullingStock = null;
     public CanvasGroup leftScreen;
 
     [Header("Refs - Phase 2")]
@@ -66,18 +63,6 @@ public class UIManager : Singleton<UIManager>
     {
         if (ScenarioManager.Instance.isScenarioLoaded)
         {            
-            ScenarioManager.Instance.isScenarioLoaded = false;
-
-            for (int i = 0; i < protocoleQuestions.Count; i++)
-            {
-                var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
-            }
-
-            for (int i = 0; i < descriptionQuestion.Count; i++)
-            {
-                var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
-            }
-
             StartCoroutine(ExecuteAfterTime(.5f));
         }
 
@@ -177,7 +162,7 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
+    /*public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
     {
         if (question != null)
         {
@@ -193,7 +178,7 @@ public class UIManager : Singleton<UIManager>
 
         Debug.LogError("Not enough buttons");
         return null;
-    }
+    }*/
 
 
     public InstantiableButton FindAvailableButtonForOrder(Order order)
@@ -253,10 +238,10 @@ public class UIManager : Singleton<UIManager>
     public void Ask()
     {
         nQuestionAnswer++;
-    } 
+    }
 
-    public bool CheckAnswer()
-    {        
+    /*public bool CheckAnswer()
+    {
         if (nQuestionAnswer > descriptionQuestion.Count)
         {
             return MasterManager.Instance.canImagine = true;
@@ -265,7 +250,7 @@ public class UIManager : Singleton<UIManager>
         {
             return MasterManager.Instance.canImagine = false;
         }
-    }
+    }*/
 
     public void ToggleButton()
     {
