@@ -53,6 +53,7 @@ public class MasterManager : Singleton<MasterManager>
 
     public GameObject xrRig;
 
+
     private void Start()
     {
         if (currentPhase == Phases.Phase_3)
@@ -187,7 +188,6 @@ public class MasterManager : Singleton<MasterManager>
         isTutoEnded = true;
         UIManager.Instance.PullQuestion();
     }
-
 
     public void SetPhase(int i)
     {

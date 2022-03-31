@@ -46,6 +46,7 @@ public class XRBinding
             case PressType.Continuous: active = isPressed; break;
             case PressType.Begin: active = isPressed && !wasPressed; break;
             case PressType.End: active = !isPressed && wasPressed; break;
+            case PressType.ContinuousEnd: active = !isPressed; break;
         }
 
         if (active) OnActive.Invoke();
@@ -70,7 +71,8 @@ public enum PressType
 {
     Begin,
     End,
-    Continuous
+    Continuous,
+    ContinuousEnd
 }
 
 public static class XRStatics

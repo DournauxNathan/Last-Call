@@ -14,13 +14,6 @@ public class WordManager : Singleton<WordManager>
     public List<WordData> canvasWithWordData;
     public List<Reveal> canvasWithQuestionData;
 
-    private void Start()
-    {
-        MasterManager.Instance.currentPhase = Phases.Phase_2;
-        MasterManager.Instance.isInImaginary = true;
-        
-    }
-
     public void PullWord()
     {
         if (MasterManager.Instance.currentPhase == Phases.Phase_1)
