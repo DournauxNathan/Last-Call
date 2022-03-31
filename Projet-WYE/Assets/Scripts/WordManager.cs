@@ -6,10 +6,14 @@ public class WordManager : Singleton<WordManager>
 {
     public SphereCollider spawner;
     public Transform getTransfrom;
-    public Transform pullingStock;
+    public Transform stockA, stockB;
+
     public List<Answer> answers;
+    public List<Question> questions;
+
     public List<WordData> canvasWithWordData;
-        
+    public List<Reveal> canvasWithQuestionData;
+
     public void PullWord()
     {
         //Get all answer
@@ -19,19 +23,44 @@ public class WordManager : Singleton<WordManager>
             for (int i = 0; i < answer.keywords.Length; i++)
             {
                 //Find any available Canvas Word 
-                var item = FindAvailableItem();
+                var item = FindAvailableWordData();
                 //if true, Activate Canvas Word and Set his text with the current propo
-                item.Activate(transform, pullingStock, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition);
+                item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition);
+            }
+        }
+
+        foreach (Question question in questions)
+        {
+            //Get the keywords in the answer
+            for (int i = 0; i < question.question.Count; i++)
+            {
+                //Find any available Canvas Word 
+                var item = FindAvailableReveal();
+                //if true, Activate Canvas Word and Set his text with the current propo
+                item.Activate(transform, stockA, question, question.question[i].text, i);
             }
         }
     }
 
-    public WordData FindAvailableItem()
+    public WordData FindAvailableWordData()
     {
         //Get all WprdData
         foreach (var item in canvasWithWordData)
         {
             if(!item.IsActive)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public Reveal FindAvailableReveal()
+    {
+        //Get all Reveal
+        foreach (var item in canvasWithQuestionData)
+        {
+            if (!item.IsActive)
             {
                 return item;
             }

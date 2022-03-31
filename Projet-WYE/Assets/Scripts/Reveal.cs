@@ -1,16 +1,71 @@
-﻿//Shady
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-[ExecuteInEditMode]
 public class Reveal : MonoBehaviour
 {
-    [SerializeField] Material Mat;
-    [SerializeField] Light SpotLight;
-	
-	void Update ()
+    public TMP_Text text;
+
+    public float amount = 0;
+
+    private Transform parentTransform;
+    private Transform pullingStock;
+    private bool isCorrectAnswer;
+
+    private Question question;
+    public int atIndex;
+
+    private bool isActive;
+    public bool IsActive => isActive;
+
+    public void Activate(Transform parent, Transform stock, Question _question, string i, int _index)
     {
-        Mat.SetVector("MyLightPosition",  SpotLight.transform.position);
-        Mat.SetVector("MyLightDirection", -SpotLight.transform.forward );
-        Mat.SetFloat ("MyLightAngle", SpotLight.spotAngle         );
-    }//Update() end
-}//class end
+        this.parentTransform = parent;
+        transform.SetParent(parent);
+
+        this.question = _question;
+        this.atIndex = _index;
+
+        this.pullingStock = stock;
+        isActive = true;
+
+        UpdateText(i);
+    }
+
+    private void UpdateText(string i)
+    {
+        if (isActive)
+        {
+            text.text = i;
+        }
+    }
+
+    public void SubmitAnswer()
+    {
+        StartCoroutine(Show());
+    }
+
+    public IEnumerator Show()
+    {
+        while (true)
+        {
+            amount += Time.deltaTime;
+
+            foreach (var item in question.question[atIndex].linkObjects)
+            {
+                item.SetFloat("_Dissolve", amount);
+            }
+
+            if (amount >= 15f)
+            {
+                amount = 15f;
+
+                StopCoroutine(Show());
+            }
+
+            yield return null;
+        }
+    }
+}
