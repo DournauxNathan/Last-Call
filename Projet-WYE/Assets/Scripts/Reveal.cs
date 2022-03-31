@@ -20,6 +20,19 @@ public class Reveal : MonoBehaviour
     private bool isActive;
     public bool IsActive => isActive;
 
+    private QuestionData currentQuestion => question.question[atIndex];
+
+    public bool simulateInput;
+
+    private void Update()
+    {
+        if (simulateInput)
+        {
+            simulateInput = !simulateInput;
+            SubmitAnswer();
+        }
+    }
+
     public void Activate(Transform parent, Transform stock, Question _question, string i, int _index)
     {
         this.parentTransform = parent;

@@ -5,24 +5,15 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "Question", menuName = "Question", order = 1)]
 public class Question : ScriptableObject
 {
-    public List<Data> question;
-
-    public IEnumerator Show()
-    {
-        while (true)
-        {
-            
-        }
-    }    
+    public List<QuestionData> question;
 }
 
 [System.Serializable]
-public class Data
+public class QuestionData
 {
     public string reference;
     [Space(5)]
     public string text;
     public List<Material> linkObjects;
     public AudioClip voices;
-
 }

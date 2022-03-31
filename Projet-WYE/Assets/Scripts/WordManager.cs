@@ -14,30 +14,43 @@ public class WordManager : Singleton<WordManager>
     public List<WordData> canvasWithWordData;
     public List<Reveal> canvasWithQuestionData;
 
+    private void Start()
+    {
+        MasterManager.Instance.currentPhase = Phases.Phase_2;
+        MasterManager.Instance.isInImaginary = true;
+        
+    }
+
     public void PullWord()
     {
-        //Get all answer
-        foreach (Answer answer in answers)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            //Get the keywords in the answer
-            for (int i = 0; i < answer.keywords.Length; i++)
+            //Get all answer
+            foreach (Answer answer in answers)
             {
-                //Find any available Canvas Word 
-                var item = FindAvailableWordData();
-                //if true, Activate Canvas Word and Set his text with the current propo
-                item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition);
+                //Get the keywords in the answer
+                for (int i = 0; i < answer.keywords.Length; i++)
+                {
+                    //Find any available Canvas Word 
+                    var item = FindAvailableWordData();
+                    //if true, Activate Canvas Word and Set his text with the current propo
+                    item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition);
+                }
             }
         }
 
-        foreach (Question question in questions)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_2 && MasterManager.Instance.isInImaginary)
         {
-            //Get the keywords in the answer
-            for (int i = 0; i < question.question.Count; i++)
+            foreach (Question question in questions)
             {
-                //Find any available Canvas Word 
-                var item = FindAvailableReveal();
-                //if true, Activate Canvas Word and Set his text with the current propo
-                item.Activate(transform, stockA, question, question.question[i].text, i);
+                //Get the keywords in the answer
+                for (int i = 0; i < question.question.Count; i++)
+                {
+                    //Find any available Canvas Word 
+                    var item = FindAvailableReveal();
+                    //if true, Activate Canvas Word and Set his text with the current propo
+                    item.Activate(transform, stockA, question, question.question[i].text, i);
+                }
             }
         }
     }
