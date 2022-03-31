@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class AutoRotateCam : MonoBehaviour
 {
-    [SerializeField] private GameObject xrRig;
+    private Transform xrRig;
 
     // Start is called before the first frame update
     void Start()
     {
-        xrRig = MasterManager.Instance.xrRig;
+        xrRig = MasterManager.Instance.player;
 
         if (xrRig != null)
         {
-            xrRig.transform.LookAt(this.transform);
+            xrRig.LookAt(this.transform);
             xrRig.transform.rotation = new Quaternion(0, xrRig.transform.rotation.y,0,xrRig.transform.rotation.w); 
         }
         else

@@ -15,12 +15,12 @@ public class HandController : Singleton<HandController>
     private GameObject spawnController;
     private GameObject spawnHandModel;
 
-    private Animator handAnimator;
+    public Animator handAnimator;
 
     private Vector3 acceleration;
     public int indexTab = 0;
 
-    bool _secondaryButton = false;
+    //bool _secondaryButton = false;
 
 
     // Start is called before the first frame update
@@ -85,7 +85,7 @@ public class HandController : Singleton<HandController>
             acceleration = _acceleration;
             //Debug.Log(_acceleration);
         }
-
+/*
         #region Secondary Button
         if (targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton))
         {
@@ -98,47 +98,10 @@ public class HandController : Singleton<HandController>
                 Projection.Instance.isTransition = false;
                 Projection.Instance.ResetTransition();
             }            
-        }   
-        #endregion
-
-        #region Joystick Button
-        if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool _rClick))
-        {
-            if (_rClick)
-            {
-                _rClick = false;
-                indexTab++;
-
-                if (indexTab >= 3)
-                {
-                    indexTab = 0;
-                }
-
-                UiTabSelection.Instance.UpdateIndex(indexTab);
-                UiTabSelection.Instance.SwitchTab(indexTab);
-            }
-        }
-
-        if (targetDevice.TryGetFeatureValue(CommonUsages.secondary2DAxisClick, out bool _lClick))
-        {
-            if (_lClick)
-            {
-                _lClick = false;
-                indexTab++;
-
-                if (indexTab >= 3)
-                {
-                    indexTab = 0;
-
-                    Debug.Log(indexTab);
-                }
-            }
-
-            UiTabSelection.Instance.UpdateIndex(indexTab);
-            UiTabSelection.Instance.SwitchTab(indexTab);
         }
         #endregion
 
+        #region Menu Button
         if (targetDevice.name == "Oculus Touch Controller - Left" && targetDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool buttonValueMenu))
         {
             if (buttonValueMenu && MasterManager.Instance.currentPhase != Phases.Phase_0 && MasterManager.Instance.currentPhase != Phases.Phase_4)
@@ -146,6 +109,7 @@ public class HandController : Singleton<HandController>
                 UiPauseManager.Instance.PauseDisplay(); Debug.Log("ButtonStart Pressed");
             }
         }
+        #endregion*/
     }
 
     public Vector3 GetDeviceAccelation()

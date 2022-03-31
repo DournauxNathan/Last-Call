@@ -45,6 +45,7 @@ public class XRBinding
             case PressType.Continuous: active = isPressed; break;
             case PressType.Begin: active = isPressed && !wasPressed; break;
             case PressType.End: active = !isPressed && wasPressed; break;
+            case PressType.ContinuousEnd: active = !isPressed; break;
         }
 
         if (active) OnActive.Invoke();
@@ -61,14 +62,16 @@ public enum XRButton
     Secondary,
     SecondaryTouch,
     Primary2DAxisClick,
-    Primary2DAxisTouch
+    Primary2DAxisTouch,
+    MenuButton
 }
 
 public enum PressType
 {
     Begin,
     End,
-    Continuous
+    Continuous,
+    ContinuousEnd
 }
 
 public static class XRStatics
@@ -85,6 +88,7 @@ public static class XRStatics
             case XRButton.SecondaryTouch: return CommonUsages.secondaryTouch;
             case XRButton.Primary2DAxisClick: return CommonUsages.primary2DAxisClick;
             case XRButton.Primary2DAxisTouch: return CommonUsages.primary2DAxisTouch;
+            case XRButton.MenuButton: return CommonUsages.menuButton;
             default: Debug.LogError("button " + button + " not found"); return CommonUsages.triggerButton;
         }
     }
