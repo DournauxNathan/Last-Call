@@ -11,9 +11,7 @@ public class Question : ScriptableObject
 [System.Serializable]
 public class QuestionData
 {
-    public string reference;
-    [Space(5)]
     public string text;
-    public List<Material> linkObjects;
     public AudioClip voices;
+    public List<Material> linkObjects;
 }

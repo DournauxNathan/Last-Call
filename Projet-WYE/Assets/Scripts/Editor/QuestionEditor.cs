@@ -1,25 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 #if UNITY_EDITOR
 [CanEditMultipleObjects]
-[CustomEditor(typeof(Question))]
+[CustomEditor(typeof(Question), true)]
 public class QuestionEditor : Editor
 {
-    SerializedProperty 
-        sp_question, 
-        sp_reference;
-
-    int i = 0;
-
-
+    SerializedProperty
+        sp_question; 
+        
     public void OnEnable()
     {
         sp_question = serializedObject.FindProperty("question");
-        sp_reference = sp_question.FindPropertyRelative("reference");
-
     }
 
     public override void OnInspectorGUI()
@@ -32,10 +26,7 @@ public class QuestionEditor : Editor
         if (GUILayout.Button("Add Question"))
         {
             CreateElement();
-            i++;
         }
-
-        EditorGUILayout.Space(5);
 
         serializedObject.ApplyModifiedProperties();
     }
@@ -43,16 +34,29 @@ public class QuestionEditor : Editor
     public void DisplayArrayElement(int index)
     {
         var _currentQuestion = sp_question.GetArrayElementAtIndex(index);
+        var _currentText = sp_question.GetArrayElementAtIndex(index).FindPropertyRelative("text");
+        var _currentVoice = sp_question.GetArrayElementAtIndex(index).FindPropertyRelative("voices");
+        var _materials = sp_question.GetArrayElementAtIndex(index).FindPropertyRelative("linkObjects");
+
+        EditorGUILayout.Space(10);
+
+        //EditorGUILayout.LabelField(new GUIContent(""), GUI.skin.horizontalSlider);
+        EditorGUILayout.LabelField(new GUIContent("QMP_" + index), EditorStyles.boldLabel);
 
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.PropertyField(_currentQuestion, new GUIContent("QMP_"+i));
+        EditorGUILayout.PropertyField(_currentText, new GUIContent(""));
+        EditorGUILayout.PropertyField(_currentVoice, new GUIContent(""));
         EditorGUILayout.EndHorizontal();
 
+        EditorGUILayout.PropertyField(_materials, new GUIContent("Object"));
 
-        if (GUILayout.Button("Delete"))
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Delete",  GUILayout.Width(350), GUILayout.Height(20)))
         {
             DeleteElement(index);
-        }
+        }   
+        EditorGUILayout.EndHorizontal();
     }   
 
     public void CreateElement()
