@@ -9,6 +9,7 @@ public class DevMenu : MonoBehaviour
 {
     [SerializeField] private Transform f3Menu;
     [SerializeField] private Transform f5Menu;
+    [SerializeField] private Transform XRf5Menu;
     [SerializeField] private bool isInDevMode = true;
     [SerializeField] private bool isEnable = false;
     [SerializeField] private bool isConfirming = false;
@@ -26,6 +27,7 @@ public class DevMenu : MonoBehaviour
         {
             f3Menu.gameObject.SetActive(false);
             f5Menu.gameObject.SetActive(false);
+            XRf5Menu.gameObject.SetActive(false);
         }
     }
 
@@ -68,6 +70,20 @@ public class DevMenu : MonoBehaviour
             }
         }
     }
+
+    public void OpenF5Menu()
+    {
+        if (isEnable)
+        {
+            XRf5Menu.gameObject.SetActive(false);
+            isEnable = false;
+        }
+        else
+        {
+            XRf5Menu.gameObject.SetActive(true);
+            isEnable = true;
+        }
+    }   
 
     private void SelectField()
     {

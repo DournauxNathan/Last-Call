@@ -15,6 +15,9 @@ public class WordData : MonoBehaviour
     private bool isActive;
     public bool IsActive => isActive;
 
+    private float x, y, z;
+    Vector3 pos;
+
     public void Activate(Transform parent, Transform stock, bool isCorrect, string i)
     {
         this.isCorrectAnswer = isCorrect;
@@ -25,6 +28,17 @@ public class WordData : MonoBehaviour
         isActive = true;
         
         UpdateText(i);
+
+        GetComponent<RectTransform>().localPosition = GetRandomPosition();
+    }
+
+    public Vector3 GetRandomPosition()
+    {
+        x = Random.Range(-.1f, .1f);
+        y = Random.Range(-0.24f, .24f);
+        z = Random.Range(-0.15f, .15f);
+        
+        return pos = new Vector3(x, y, z);
     }
 
     private void UpdateText(string i)
@@ -33,6 +47,13 @@ public class WordData : MonoBehaviour
         {
             text.text = i;
         }
+    }
+
+    public void Deactivate()
+    {
+        text.text = string.Empty;
+        isActive = false;
+        transform.SetParent(pullingStock);
     }
 
     public void SubmitAnswer()

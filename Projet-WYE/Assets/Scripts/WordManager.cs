@@ -14,6 +14,16 @@ public class WordManager : Singleton<WordManager>
     public List<WordData> canvasWithWordData;
     public List<Reveal> canvasWithQuestionData;
 
+    public bool isProtocolComplete;
+
+    private void Update()
+    {
+        if (isProtocolComplete && MasterManager.Instance.currentPhase == Phases.Phase_1)
+        {
+            ProtocolComplete();
+        }
+    }
+
     public void PullWord()
     {
         if (MasterManager.Instance.currentPhase == Phases.Phase_1)
@@ -45,6 +55,14 @@ public class WordManager : Singleton<WordManager>
                     item.Activate(transform, stockA, question, question.question[i].text, i);
                 }
             }
+        }
+    }
+
+    public void ProtocolComplete()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<WordData>().Deactivate();
         }
     }
 

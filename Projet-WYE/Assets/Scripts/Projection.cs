@@ -76,11 +76,11 @@ public class Projection : Singleton<Projection>
             Deconstruct();
         }
 
-        if (pauseBetweenTransition && isTransition && isDisconstruc)
+       /* if (pauseBetweenTransition && isTransition && isDisconstruc)
         {
             Construct();
         }
-
+*/
         if (transitionValue >= 2.5)
         {
             foreach (var mat in wallShader)

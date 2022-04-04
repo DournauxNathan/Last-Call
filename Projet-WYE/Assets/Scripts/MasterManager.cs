@@ -166,9 +166,11 @@ public class MasterManager : Singleton<MasterManager>
 
     public void ActivateImaginary(string name)
     {
-        UpdateController();
-        objectActivator.ActivateObjet();
+        SetPhase(2);
+        //objectActivator.ActivateObjet();
         SceneLoader.Instance.LoadNewScene(name);
+        UpdateController();
+        WordManager.Instance.PullWord();
     }
 
     public void GoBackToOffice(string name)

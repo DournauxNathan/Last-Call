@@ -1,6 +1,8 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HeadPhone : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class HeadPhone : MonoBehaviour
     private HeadPhoneManager manager;
 
     public bool isOnHead;
+    public UnityEvent onHead;
 
     public bool b = true;
 
