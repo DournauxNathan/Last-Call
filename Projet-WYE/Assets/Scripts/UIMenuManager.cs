@@ -32,7 +32,7 @@ public class UIMenuManager : MonoBehaviour
         //EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         
         SetUp();
-        EventSystem.current.SetSelectedGameObject(wheelList[2].gameObject);
+        EventSystem.current.SetSelectedGameObject(wheelList[2].GetChild(0).gameObject);
     }
 
     // Update is called once per frame
@@ -41,11 +41,18 @@ public class UIMenuManager : MonoBehaviour
 
         StartGame.AddListener(EventCall);
 
-        if (currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform && EventSystem.current.currentSelectedGameObject != null)
+        if (EventSystem.current.currentSelectedGameObject != null && currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform)
         {
             oldSelected = currentSelected;
             OnWheelUpdate();
         }
+
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(wheelList[2].GetChild(0).gameObject);
+        }
+
+
         CurrentSelected();
     }
 
@@ -80,21 +87,21 @@ public class UIMenuManager : MonoBehaviour
 
     private void CurrentSelected()
     {
-        if (EventSystem.current.currentSelectedGameObject == null)
+        /*if (EventSystem.current.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(oldSelected.gameObject);
-        }
+        }*/
         currentSelected = EventSystem.current.currentSelectedGameObject.transform;
     }
 
     private int DirectionWheel()
     {
 
-        if (EventSystem.current.currentSelectedGameObject.gameObject.transform == wheelList[1])
+        if (EventSystem.current.currentSelectedGameObject.gameObject.transform == wheelList[1].GetChild(0))
         {
             return 1;
         }
-        else if(EventSystem.current.currentSelectedGameObject.gameObject.transform == wheelList[3])
+        else if(EventSystem.current.currentSelectedGameObject.gameObject.transform == wheelList[3].GetChild(0))
         {
             return -1;
         }
@@ -138,7 +145,7 @@ public class UIMenuManager : MonoBehaviour
         {
             wheelList[4].SetSiblingIndex(0);
             SetUp();
-            AffParam(EventSystem.current.currentSelectedGameObject.gameObject.name);
+            AffParam(EventSystem.current.currentSelectedGameObject.name);
             
 
         }
@@ -146,7 +153,7 @@ public class UIMenuManager : MonoBehaviour
         {
             wheelList[0].SetSiblingIndex(4);
             SetUp();
-            AffParam(EventSystem.current.currentSelectedGameObject.gameObject.name);
+            AffParam(EventSystem.current.currentSelectedGameObject.name);
         }
         else
         {
