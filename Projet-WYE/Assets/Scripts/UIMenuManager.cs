@@ -11,18 +11,21 @@ public class UIMenuManager : MonoBehaviour
    [SerializeField] private bool firstSetUp = false;
 
     //MainParam
+    [Header("Param")]
+    [Range(0.1f,1f)]public float animSpeed = 0.3f;
+    [Header("Debug")]
     [SerializeField] private Transform mainMenu;
-    [SerializeField] private Transform wheel; [SerializeField] private Transform wheelParameters;
-    [SerializeField] private List<Transform> wheelList; [SerializeField] private List<Transform> wheelParmetersList;
-    [Space(20)] [SerializeField] private Transform currentSelected;
+    [SerializeField] private Transform wheel;[SerializeField] private Transform wheelParameters;
+    [SerializeField]private List<Transform> wheelList;
+    [SerializeField] private List<Transform> wheelParmetersList;
+    [SerializeField] private Transform currentSelected;
     [SerializeField] private Transform oldSelected;
+    [SerializeField] private List<Vector3> pos;
 
-
-
-    private List<Animator> animators;
-    [SerializeField]private bool isMoving = false;
-
+    [Header("Events")]
     [Space(10)] public UnityEvent StartGame;
+
+
 
     /*//Quality Param
     public enum Quality
@@ -36,13 +39,12 @@ public class UIMenuManager : MonoBehaviour
     void Start()
     {
         //EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-
         wheelList = new List<Transform>();
-        animators = new List<Animator>();
-
-
         SetUp();
         EventSystem.current.SetSelectedGameObject(wheelList[2].GetChild(0).gameObject);
+
+
+
     }
 
     // Update is called once per frame
@@ -65,34 +67,16 @@ public class UIMenuManager : MonoBehaviour
 
         CurrentSelected();
 
-        if (animators[0].GetCurrentAnimatorStateInfo(0).IsName("Gauche") && !isMoving)
-        {
-            isMoving = true;
-            Debug.Log("gauche"); 
-            wheelList[4].SetSiblingIndex(0);
-            SetUp();
-            AffParam(EventSystem.current.currentSelectedGameObject.name);
-        }
-
-        if (animators[0].GetCurrentAnimatorStateInfo(0).IsName("Droite") && !isMoving)
-        {
-            isMoving = true;
-            Debug.Log("droite");
-            wheelList[0].SetSiblingIndex(4);
-            SetUp();
-            AffParam(EventSystem.current.currentSelectedGameObject.name);
-        }
 
     }
 
     private void SetUp() 
     {
         wheelList.Clear();
-        animators.Clear();
         for (int i = 0; i < wheel.childCount; i++)
         {
             wheelList.Add(wheel.GetChild(i));
-            animators.Add(wheel.GetChild(i).GetComponentInChildren<Animator>());
+            pos.Add(wheel.GetChild(i).position); Debug.Log(wheel.GetChild(i).name);
         }
         if (wheelParmetersList.Count == 0)
         {
@@ -169,8 +153,6 @@ public class UIMenuManager : MonoBehaviour
 
     private void UpdateWheel(int index) 
     {
-        AllAnimator("Selected", false);
-        isMoving = false;
 
         if (index == 0)
         {
@@ -178,16 +160,17 @@ public class UIMenuManager : MonoBehaviour
         }
         else if (index == 1)
         {
-            animators[1].SetBool("Selected", true);
-            AllAnimator("Gauche");
+            wheelList[4].SetSiblingIndex(0); Droite();
+            SetUp();
+            AffParam(EventSystem.current.currentSelectedGameObject.name);
             
 
         }
         else if (index == -1)
         {
-            animators[3].SetBool("Selected", true);
-            AllAnimator("Droite");
-            
+            wheelList[0].SetSiblingIndex(4); Gauche();
+            SetUp();
+            AffParam(EventSystem.current.currentSelectedGameObject.name);
         }
         else
         {
@@ -201,22 +184,14 @@ public class UIMenuManager : MonoBehaviour
         {
             Debug.Log("File found");
             wheelList[0].SetSiblingIndex(4);
-            //EventSystem.current.SetSelectedGameObject(wheelList[2].gameObject);
-            //UpdateWheel(-1);
-            //CurrentSelected();
             AffParam("Load");
             wheelList.Clear();
-            animators.Clear();
             for (int i = 0; i < wheel.childCount; i++)
             {
                 wheelList.Add(wheel.GetChild(i));
-                animators.Add(wheel.GetChild(i).GetComponentInChildren<Animator>());
             }
 
         }
-        Debug.Log(animators[2].ToString());
-        animators[2].SetTrigger("DefaultSelected");
-        animators[2].SetBool("Selected", true);
 
     }
 
@@ -242,21 +217,36 @@ public class UIMenuManager : MonoBehaviour
         //ScenarioManager.Instance.LoadScenario(); Bug
     }
 
-    private void AllAnimator(string name)
+    private void Gauche()
     {
-        foreach (var animator in animators)
+        for (int i = 0; i < wheelList.Count; i++)
         {
-            animator.SetTrigger(name);
+            if (i!=0)
+            {
+                LeanTween.move(wheelList[i].gameObject, pos[i - 1],animSpeed);
+            }
+            else if (i==0)
+            {
+                LeanTween.move(wheelList[i].gameObject, pos[4], animSpeed);
+            }
         }
     }
 
-    private void AllAnimator(string name, bool boolean)
+    private void Droite()
     {
-        foreach (var animator in animators)
+        for (int i = 0; i < wheelList.Count; i++)
         {
-            animator.SetBool(name, boolean);
+            if (i != 4)
+            {
+                LeanTween.move(wheelList[i].gameObject, pos[i + 1], animSpeed);
+            }
+            else if (i == 4)
+            {
+                LeanTween.move(wheelList[i].gameObject, pos[0], animSpeed);
+            }
         }
     }
+
 
 
     /*private void ChangeQualityText()
