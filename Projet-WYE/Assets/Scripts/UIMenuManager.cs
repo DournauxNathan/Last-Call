@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using UnityEngine.Animations;
 
 public class UIMenuManager : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private List<Transform> wheelList; [SerializeField] private List<Transform> wheelParmetersList;
     [Space(20)] [SerializeField] private Transform currentSelected;
     [SerializeField] private Transform oldSelected;
+
+
+
+    private List<Animator> animators;
+    [SerializeField]private bool isMoving = false;
 
     [Space(10)] public UnityEvent StartGame;
 
@@ -30,7 +36,11 @@ public class UIMenuManager : MonoBehaviour
     void Start()
     {
         //EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        
+
+        wheelList = new List<Transform>();
+        animators = new List<Animator>();
+
+
         SetUp();
         EventSystem.current.SetSelectedGameObject(wheelList[2].GetChild(0).gameObject);
     }
@@ -54,14 +64,35 @@ public class UIMenuManager : MonoBehaviour
 
 
         CurrentSelected();
+
+        if (animators[0].GetCurrentAnimatorStateInfo(0).IsName("Gauche") && !isMoving)
+        {
+            isMoving = true;
+            Debug.Log("gauche"); 
+            wheelList[4].SetSiblingIndex(0);
+            SetUp();
+            AffParam(EventSystem.current.currentSelectedGameObject.name);
+        }
+
+        if (animators[0].GetCurrentAnimatorStateInfo(0).IsName("Droite") && !isMoving)
+        {
+            isMoving = true;
+            Debug.Log("droite");
+            wheelList[0].SetSiblingIndex(4);
+            SetUp();
+            AffParam(EventSystem.current.currentSelectedGameObject.name);
+        }
+
     }
 
     private void SetUp() 
     {
         wheelList.Clear();
+        animators.Clear();
         for (int i = 0; i < wheel.childCount; i++)
         {
             wheelList.Add(wheel.GetChild(i));
+            animators.Add(wheel.GetChild(i).GetComponentInChildren<Animator>());
         }
         if (wheelParmetersList.Count == 0)
         {
@@ -76,6 +107,7 @@ public class UIMenuManager : MonoBehaviour
         {
             firstSetUp = true;
             IsThereASave("SaveLastCall.json");
+
             //qualityButton.GetComponentInChildren<Text>().text = "Graphics: " + qualityChosen;
         }
     }
@@ -137,23 +169,25 @@ public class UIMenuManager : MonoBehaviour
 
     private void UpdateWheel(int index) 
     {
+        AllAnimator("Selected", false);
+        isMoving = false;
+
         if (index == 0)
         {
             //do nothing
         }
         else if (index == 1)
         {
-            wheelList[4].SetSiblingIndex(0);
-            SetUp();
-            AffParam(EventSystem.current.currentSelectedGameObject.name);
+            animators[1].SetBool("Selected", true);
+            AllAnimator("Gauche");
             
 
         }
         else if (index == -1)
         {
-            wheelList[0].SetSiblingIndex(4);
-            SetUp();
-            AffParam(EventSystem.current.currentSelectedGameObject.name);
+            animators[3].SetBool("Selected", true);
+            AllAnimator("Droite");
+            
         }
         else
         {
@@ -166,13 +200,24 @@ public class UIMenuManager : MonoBehaviour
         if (FileHandler.IsAFileExist(path))
         {
             Debug.Log("File found");
-            EventSystem.current.SetSelectedGameObject(wheelList[3].gameObject);
-            UpdateWheel(-1);
-            CurrentSelected();
+            wheelList[0].SetSiblingIndex(4);
+            //EventSystem.current.SetSelectedGameObject(wheelList[2].gameObject);
+            //UpdateWheel(-1);
+            //CurrentSelected();
             AffParam("Load");
-           
+            wheelList.Clear();
+            animators.Clear();
+            for (int i = 0; i < wheel.childCount; i++)
+            {
+                wheelList.Add(wheel.GetChild(i));
+                animators.Add(wheel.GetChild(i).GetComponentInChildren<Animator>());
+            }
+
         }
-        
+        Debug.Log(animators[2].ToString());
+        animators[2].SetTrigger("DefaultSelected");
+        animators[2].SetBool("Selected", true);
+
     }
 
     public void Play()
@@ -196,6 +241,23 @@ public class UIMenuManager : MonoBehaviour
     {
         //ScenarioManager.Instance.LoadScenario(); Bug
     }
+
+    private void AllAnimator(string name)
+    {
+        foreach (var animator in animators)
+        {
+            animator.SetTrigger(name);
+        }
+    }
+
+    private void AllAnimator(string name, bool boolean)
+    {
+        foreach (var animator in animators)
+        {
+            animator.SetBool(name, boolean);
+        }
+    }
+
 
     /*private void ChangeQualityText()
     {
