@@ -12,28 +12,28 @@ public static class SceneMenu
     [MenuItem("Scenes/Office")]
     public static void OpenOffice()
     {
-        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/Office.unity");
+        //EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/Office.unity");
         OpenScene("Office");
     }
 
     [MenuItem("Scenes/Calls/#1 Trapped Man")]
     public static void OpenCall1()
     {
-        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/Gameplay_Combination_Iteration.unity");
+        //EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/Gameplay_Combination_Iteration.unity");
         OpenScene("Gameplay_Combination_Iteration");
     }
 
     [MenuItem("Scenes/Calls/#2 Home Invasion")]
     public static void OpenCall2()
     {
-        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/HomeInvasion.unity");
+        //EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/HomeInvasion.unity");
         OpenScene("HomeInvasion");
     }
 
     [MenuItem("Scenes/Calls/#3 Rising Water")]
     public static void OpenCall3()
     {
-        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/RisingWater.unity");
+        //EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/RisingWater.unity");
         OpenScene("RisingWater");
     }
 

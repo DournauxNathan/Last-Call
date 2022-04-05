@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public enum Phases
 {
@@ -77,6 +78,17 @@ public class MasterManager : Singleton<MasterManager>
 
     public void FixedUpdate()
     {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            SceneLoader.Instance.LoadNewScene("Office");
+        }
+
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            WordManager.Instance.isProtocolComplete = true;
+        }
+
+
         UpdateController();
 
         if (!skipTuto && !isTutoEnded && b)

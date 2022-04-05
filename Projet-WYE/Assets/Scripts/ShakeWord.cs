@@ -9,6 +9,9 @@ using UnityEngine.Events;
 
 public class ShakeWord : MonoBehaviour
 {
+    [Header("Refs")]
+    public CanvasGroup alpha;
+
     [Header("Param")]
     [Range(0f, 2f)] public float delayBeforAnim = 0f;
     [Range(0f, 2f)] public float animationSpeed = 1f;
@@ -34,6 +37,7 @@ public class ShakeWord : MonoBehaviour
 
     private void Start()
     {
+        alpha = GetComponent<CanvasGroup>();
         _time = delayBeforAnim;
         _text = GetComponentInChildren<TMP_Text>();
         _defaultColorOutline = _text.outlineColor;
@@ -69,19 +73,26 @@ public class ShakeWord : MonoBehaviour
 
     private void TextDecay()
     {
-        if (isDecaying && decayValue!=0)
+        if (isDecaying)
         {
-            decayValue -= decaySpeed;
-            validateColor.a = decayValue;
-            _text.color = validateColor;
-        }
-        else if (isDecaying && decayValue == 0)
+            StartFadeOut(alpha);
+        }        
+    }
+
+    public void StartFadeOut(CanvasGroup uiGroupToFade)
+    {
+        if (uiGroupToFade.alpha >= 0)
         {
-            isDecaying = false;
-            OnValidateWord.Invoke();
-            gameObject.SetActive(false); // desactive
+            uiGroupToFade.alpha -= Time.deltaTime;
+
+            if (uiGroupToFade.alpha == 0)
+            {
+                isDecaying = false;
+                OnValidateWord.Invoke();
+                GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
+                GetComponent<BoxCollider>().enabled = false;
+            }
         }
-        
     }
 
 
