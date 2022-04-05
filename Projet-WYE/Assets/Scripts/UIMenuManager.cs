@@ -13,7 +13,8 @@ public class UIMenuManager : MonoBehaviour
     //MainParam
     [Header("Param")]
     [Range(0.1f,1f)]public float animSpeed = 0.3f;
-    
+    [Range(0.1f,1f)]public float newSize = 0.3f;
+
     [Header("Debug")]
     [HideInInspector][SerializeField] private Transform mainMenu;
     [HideInInspector] [SerializeField] private Transform wheel;
@@ -27,7 +28,7 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private bool readyToDeletG = false;
     [SerializeField] private bool readyToDeletD = false;
     [SerializeField] private EventSystem eventSystem;
-
+    [SerializeField] private float baseSize;
     [Header("Events")]
     [Space(10)] public UnityEvent StartGame;
 
@@ -44,6 +45,8 @@ public class UIMenuManager : MonoBehaviour
 
     void Start()
     {
+        //Base Size when the list is created
+        baseSize = 1;
         //EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         wheelList = new List<Transform>();
         SetUp();
@@ -51,7 +54,7 @@ public class UIMenuManager : MonoBehaviour
 
         StartGame.AddListener(EventCall);
         eventSystem = EventSystem.current;
-
+        
     }
 
     // Update is called once per frame
@@ -109,6 +112,7 @@ public class UIMenuManager : MonoBehaviour
         {
             wheelList.Add(wheel.GetChild(i));
         }
+        
         if (wheelParmetersList.Count == 0)
         {
             for (int i = 0; i < wheelParameters.childCount; i++)
@@ -225,6 +229,7 @@ public class UIMenuManager : MonoBehaviour
             wheelList[0].SetSiblingIndex(4);
             AffParam("Load");
             Gauche();
+            Grandir(wheelList[3]);
             wheelList.Clear();
             for (int i = 0; i < wheel.childCount; i++)
             {
@@ -232,7 +237,10 @@ public class UIMenuManager : MonoBehaviour
             }
 
         }
-
+        else
+        {
+            Grandir(wheelList[2]);
+        }
     }
 
     public void Play()
@@ -259,6 +267,8 @@ public class UIMenuManager : MonoBehaviour
 
     private void Gauche()
     {
+        ScaleDown(wheelList);
+        Grandir(wheelList[3]);
         for (int i = 0; i < wheelList.Count; i++)
         {
             if (i!=0)
@@ -278,6 +288,8 @@ public class UIMenuManager : MonoBehaviour
 
     private void Droite()
     {
+        ScaleDown(wheelList);
+        Grandir(wheelList[1]);
         for (int i = 0; i < wheelList.Count; i++)
         {
             
@@ -307,7 +319,22 @@ public class UIMenuManager : MonoBehaviour
 
     }
 
+    private void Grandir(Transform target)
+    {
+        var _gTarget = target.gameObject;
+        var calculatedSize = baseSize + newSize;
+        Debug.Log(calculatedSize+" "+baseSize+" "+newSize);
+        
+        LeanTween.scale(_gTarget, new Vector2(calculatedSize, calculatedSize), animSpeed);
+    }
 
+    private void ScaleDown(List<Transform> transforms)
+    {
+        foreach (var transform in transforms)
+        {
+            LeanTween.scale(transform.gameObject, new Vector2(baseSize, baseSize), animSpeed);
+        }
+    }
 
 
     /*private void ChangeQualityText()
