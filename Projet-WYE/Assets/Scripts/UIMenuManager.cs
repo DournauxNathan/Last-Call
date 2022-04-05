@@ -26,6 +26,7 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private List<Vector3> posF;
     [SerializeField] private bool readyToDeletG = false;
     [SerializeField] private bool readyToDeletD = false;
+    [SerializeField] private EventSystem eventSystem;
 
     [Header("Events")]
     [Space(10)] public UnityEvent StartGame;
@@ -48,7 +49,8 @@ public class UIMenuManager : MonoBehaviour
         SetUp();
         EventSystem.current.SetSelectedGameObject(wheelList[2].GetChild(0).gameObject);
 
-
+        StartGame.AddListener(EventCall);
+        eventSystem = EventSystem.current;
 
     }
 
@@ -56,15 +58,24 @@ public class UIMenuManager : MonoBehaviour
     void Update()
     {
 
-        StartGame.AddListener(EventCall);
+        if (/*oldSelected !=null &&*/ LeanTween.isTweening(wheelList[0].gameObject))
+        {
+            //EventSystem.current.SetSelectedGameObject(oldSelected.gameObject);
+            //eventSystem.enabled = false;
+            //Debug.Log("coucou");
+        }
 
-        if (EventSystem.current.currentSelectedGameObject != null && currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform)
+        if (EventSystem.current.currentSelectedGameObject != null && currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform && !LeanTween.isTweening(wheelList[0].gameObject))
         {
             CurrentSelected();
             oldSelected = currentSelected;
             OnWheelUpdate();
+            /*eventSystem.enabled = true;
+            eventSystem.UpdateModules();*/
+
         }
 
+        //avoid error
         if (EventSystem.current.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(wheelList[2].GetChild(0).gameObject);
