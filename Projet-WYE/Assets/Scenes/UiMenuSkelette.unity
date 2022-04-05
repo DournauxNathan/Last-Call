@@ -5911,6 +5911,7 @@ GameObject:
   - component: {fileID: 6984745518270724804}
   - component: {fileID: 897534607}
   - component: {fileID: 897534606}
+  - component: {fileID: 6984745518270724806}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -5918,6 +5919,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6984745518270724806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6984745518270724805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!114 &6984745518364285456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6274,6 +6288,9 @@ MonoBehaviour:
   currentSelected: {fileID: 0}
   oldSelected: {fileID: 0}
   pos: []
+  posF: []
+  readyToDeletG: 0
+  readyToDeletD: 0
   StartGame:
     m_PersistentCalls:
       m_Calls: []

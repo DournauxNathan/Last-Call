@@ -13,14 +13,19 @@ public class UIMenuManager : MonoBehaviour
     //MainParam
     [Header("Param")]
     [Range(0.1f,1f)]public float animSpeed = 0.3f;
+    
     [Header("Debug")]
-    [SerializeField] private Transform mainMenu;
-    [SerializeField] private Transform wheel;[SerializeField] private Transform wheelParameters;
+    [HideInInspector][SerializeField] private Transform mainMenu;
+    [HideInInspector] [SerializeField] private Transform wheel;
+    [HideInInspector] [SerializeField] private Transform wheelParameters;
     [SerializeField]private List<Transform> wheelList;
     [SerializeField] private List<Transform> wheelParmetersList;
     [SerializeField] private Transform currentSelected;
     [SerializeField] private Transform oldSelected;
     [SerializeField] private List<Vector3> pos;
+    [SerializeField] private List<Vector3> posF;
+    [SerializeField] private bool readyToDeletG = false;
+    [SerializeField] private bool readyToDeletD = false;
 
     [Header("Events")]
     [Space(10)] public UnityEvent StartGame;
@@ -55,6 +60,7 @@ public class UIMenuManager : MonoBehaviour
 
         if (EventSystem.current.currentSelectedGameObject != null && currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform)
         {
+            CurrentSelected();
             oldSelected = currentSelected;
             OnWheelUpdate();
         }
@@ -65,18 +71,30 @@ public class UIMenuManager : MonoBehaviour
         }
 
 
-        CurrentSelected();
 
+        if (wheelList.Count !=5 && readyToDeletG && !LeanTween.isTweening(wheelList[5].gameObject))
+        {
+            readyToDeletG = false; //Debug.Log("Gauche Delet");
+            Destroy(wheelList[4].gameObject);
+            wheelList.RemoveAt(4);
+        }
+
+        if (wheelList.Count != 5 && readyToDeletD && !LeanTween.isTweening(wheelList[5].gameObject))
+        {
+            readyToDeletD = false; //Debug.Log("Droite Delet");
+            Destroy(wheelList[5].gameObject);
+            wheelList.RemoveAt(5);
+        }
 
     }
 
     private void SetUp() 
     {
+
         wheelList.Clear();
         for (int i = 0; i < wheel.childCount; i++)
         {
             wheelList.Add(wheel.GetChild(i));
-            pos.Add(wheel.GetChild(i).position); Debug.Log(wheel.GetChild(i).name);
         }
         if (wheelParmetersList.Count == 0)
         {
@@ -90,6 +108,12 @@ public class UIMenuManager : MonoBehaviour
         if (!firstSetUp)
         {
             firstSetUp = true;
+            for (int i = 0; i < wheel.childCount; i++)
+            {
+                pos.Add(wheel.GetChild(i).position); //Debug.Log(wheel.GetChild(i).name);
+            }
+            CalculFPos();
+
             IsThereASave("SaveLastCall.json");
 
             //qualityButton.GetComponentInChildren<Text>().text = "Graphics: " + qualityChosen;
@@ -160,7 +184,8 @@ public class UIMenuManager : MonoBehaviour
         }
         else if (index == 1)
         {
-            wheelList[4].SetSiblingIndex(0); Droite();
+            Droite();
+            wheelList[5].SetSiblingIndex(0);  
             SetUp();
             AffParam(EventSystem.current.currentSelectedGameObject.name);
             
@@ -168,7 +193,8 @@ public class UIMenuManager : MonoBehaviour
         }
         else if (index == -1)
         {
-            wheelList[0].SetSiblingIndex(4); Gauche();
+            wheelList[0].SetSiblingIndex(4); 
+            Gauche();
             SetUp();
             AffParam(EventSystem.current.currentSelectedGameObject.name);
         }
@@ -185,6 +211,7 @@ public class UIMenuManager : MonoBehaviour
             Debug.Log("File found");
             wheelList[0].SetSiblingIndex(4);
             AffParam("Load");
+            Gauche();
             wheelList.Clear();
             for (int i = 0; i < wheel.childCount; i++)
             {
@@ -227,7 +254,11 @@ public class UIMenuManager : MonoBehaviour
             }
             else if (i==0)
             {
-                LeanTween.move(wheelList[i].gameObject, pos[4], animSpeed);
+                readyToDeletG = true;
+                wheelList.Add(Instantiate(wheelList[i].gameObject, wheel).transform);
+                wheelList[5].position = posF[1];
+                LeanTween.move(wheelList[i].gameObject, posF[0], animSpeed);
+                LeanTween.move(wheelList[5].gameObject, pos[4], animSpeed);
             }
         }
     }
@@ -236,16 +267,33 @@ public class UIMenuManager : MonoBehaviour
     {
         for (int i = 0; i < wheelList.Count; i++)
         {
-            if (i != 4)
+            
+            if (i != 4 && i !=5)
             {
                 LeanTween.move(wheelList[i].gameObject, pos[i + 1], animSpeed);
             }
             else if (i == 4)
             {
-                LeanTween.move(wheelList[i].gameObject, pos[0], animSpeed);
+                readyToDeletD = true;
+                wheelList.Add(Instantiate(wheelList[i].gameObject, wheel).transform); //5
+                wheelList[5].position = posF[0];
+                LeanTween.move(wheelList[i].gameObject, posF[1], animSpeed);
+                LeanTween.move(wheelList[5].gameObject, pos[0], animSpeed);
             }
         }
     }
+
+    private void CalculFPos()
+    {
+        posF = new List<Vector3>();
+
+        float ecartType = pos[1].x - pos[0].x;
+
+        posF.Add(new Vector3(pos[0].x - ecartType, pos[0].y, pos[0].z));
+        posF.Add (new Vector3(pos[4].x + ecartType, pos[0].y, pos[0].z));
+
+    }
+
 
 
 
