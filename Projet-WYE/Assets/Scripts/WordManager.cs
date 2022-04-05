@@ -47,12 +47,12 @@ public class WordManager : Singleton<WordManager>
             foreach (Question question in questions)
             {
                 //Get the keywords in the answer
-                for (int i = 0; i < question.question.Count; i++)
+                for (int i = 0; i < question.questions.Count; i++)
                 {
                     //Find any available Canvas Word 
                     var item = FindAvailableReveal();
                     //if true, Activate Canvas Word and Set his text with the current propo
-                    item.Activate(transform, stockA, question, question.question[i].text, i);
+                    item.Activate(transform, stockA, question, question.questions[i].question, i);
                 }
             }
         }

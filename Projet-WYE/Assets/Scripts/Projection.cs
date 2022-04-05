@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
@@ -44,7 +45,7 @@ public class Projection : Singleton<Projection>
         
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Dissolve", 15f);
+            mat.SetFloat("_Dissolve", transitionValue);
         }
 
         foreach (var mat in wallShader)
@@ -61,9 +62,9 @@ public class Projection : Singleton<Projection>
     {
         foreach (var mat in transitionShaders)
         {
-            mat.SetVector("_PlayerPos", player.position);
+            //mat.SetVector("_PlayerPos", player.position);
         
-            mat.SetFloat("_Dissolve", transitionValue);
+            //mat.SetFloat("_Dissolve", transitionValue);
         }
 
         foreach (var mat in wallShader)

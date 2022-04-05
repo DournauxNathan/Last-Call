@@ -26,7 +26,6 @@ public class ShakeWord : MonoBehaviour
     private bool isStarted;
     [Header("Debug")]
     [SerializeField] Animator m_animator;
-    [SerializeField] private byte decayValue = 255;
     private bool isDecaying = false;
     private float _time;
     private TMP_Text _text;
