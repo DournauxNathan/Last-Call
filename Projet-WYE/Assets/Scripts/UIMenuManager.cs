@@ -58,11 +58,14 @@ public class UIMenuManager : MonoBehaviour
     void Update()
     {
 
-        if (/*oldSelected !=null &&*/ LeanTween.isTweening(wheelList[0].gameObject))
+        if (LeanTween.isTweening(wheelList[0].gameObject))
         {
-            //EventSystem.current.SetSelectedGameObject(oldSelected.gameObject);
-            //eventSystem.enabled = false;
-            //Debug.Log("coucou");
+            eventSystem.gameObject.GetComponent<BaseInputModule>().enabled = false;
+        }
+        else if(!LeanTween.isTweening(wheelList[0].gameObject))
+        {
+            eventSystem.gameObject.GetComponent<BaseInputModule>().enabled = true;
+
         }
 
         if (EventSystem.current.currentSelectedGameObject != null && currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform && !LeanTween.isTweening(wheelList[0].gameObject))
@@ -70,8 +73,7 @@ public class UIMenuManager : MonoBehaviour
             CurrentSelected();
             oldSelected = currentSelected;
             OnWheelUpdate();
-            /*eventSystem.enabled = true;
-            eventSystem.UpdateModules();*/
+
 
         }
 
