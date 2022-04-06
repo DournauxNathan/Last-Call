@@ -44,6 +44,19 @@ public class WordData : MonoBehaviour
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
+    public void Activate(Transform parent, Transform stock,string i)
+    {
+        this.parentTransform = parent;
+        transform.SetParent(parent);
+
+        this.pullingStock = stock;
+        isActive = true;
+
+        UpdateText(i);
+
+        GetComponent<RectTransform>().localPosition = GetRandomPosition();
+    }
+
     public Vector3 GetRandomPosition()
     {
         x = Random.Range(-.1f, .1f);

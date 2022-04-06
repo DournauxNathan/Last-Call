@@ -56,6 +56,20 @@ public class WordManager : Singleton<WordManager>
                 }
             }
         }
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
+        {
+            foreach (Order currentOrder in OrderController.Instance.ordersStrings)
+            {
+
+                //Find any available Canvas Word 
+                var item = FindAvailableWordData();
+                //if true, Activate Canvas Word and Set his text with the current propo
+                item.Activate(transform, stockA, currentOrder.order);
+            }
+        }
+
+
     }
 
     public void ProtocolComplete()
