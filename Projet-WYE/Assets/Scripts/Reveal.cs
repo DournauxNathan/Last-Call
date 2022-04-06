@@ -32,7 +32,8 @@ public class Reveal : MonoBehaviour
         if (simulateInput)
         {
             simulateInput = !simulateInput;
-            SubmitAnswer();
+
+            GetComponent<ShakeWord>().Validate();
         }
     }
 
@@ -72,7 +73,6 @@ public class Reveal : MonoBehaviour
     public void SubmitAnswer()
     {
         StartCoroutine(Show());
-        Debug.Log("");
     }
 
     public IEnumerator Show()
@@ -91,7 +91,6 @@ public class Reveal : MonoBehaviour
                 amount = 15f;
 
                 StopCoroutine(Show());
-                gameObject.SetActive(false);
             }
 
             yield return null;

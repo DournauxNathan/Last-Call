@@ -17,6 +17,18 @@ public class WordData : MonoBehaviour
 
     private float x, y, z;
     Vector3 pos;
+    public bool simulateInput;
+
+    private void Update()
+    {
+        if (simulateInput)
+        {
+            simulateInput = !simulateInput;
+
+            GetComponent<ShakeWord>().Validate();
+        }
+    }
+
 
     public void Activate(Transform parent, Transform stock, bool isCorrect, string i)
     {
