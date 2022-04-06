@@ -21,6 +21,16 @@ public class  InputHandler : MonoBehaviour
         
     }
 
+    public string LoadSaveData()
+    {
+        entries = FileHandler.ReadFromJSON<InputEntry>(filename);
+        string output = "";
+        output = /*"Scénario en cours : " + entries[0].scenarioName.ToString() +*/ 
+        "\n Jour : ";
+
+        return output;
+    }
+
 
     public void AddSave()
     {

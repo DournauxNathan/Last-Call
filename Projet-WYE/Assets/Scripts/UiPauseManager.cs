@@ -8,35 +8,53 @@ using TMPro;
 
 public class UiPauseManager : Singleton<UiPauseManager>
 {
-    [SerializeField] private GameObject firstSelectedGO;
-    [SerializeField] private Transform MainPause;
+    [Header("Debug")]
+    [SerializeField] private GameObject defaultSelected;
+    [SerializeField] private Transform pauseBase;
     [SerializeField] private List<Transform> SubMenus;
-    [Space(10)]
+    [SerializeField] private TMP_Text _text;
+    [SerializeField] private GameObject current;
+    [SerializeField]private bool isOn = false;
+    [Header("Events")]
     public UnityEvent OnPauseEnter;
     public UnityEvent OnPauseExit;
 
-    [Space(10)]
-    [SerializeField] private TMP_Text _text;
 
     void Start()
     {
-        UnPause();
+        //UnPause();
+        BackToMainMenu();
         _text.text = "";
     }
     private void SetUp()
     {
-        EventSystem.current.SetSelectedGameObject(firstSelectedGO);
+        EventSystem.current.SetSelectedGameObject(defaultSelected);
         _text.text = "";
     }
+
+    private void Update()
+    {
+        if (current == null  && isOn|| EventSystem.current.currentSelectedGameObject != null && current != EventSystem.current.currentSelectedGameObject && isOn)
+        {
+            current = EventSystem.current.currentSelectedGameObject;
+        }
+
+        if (EventSystem.current.currentSelectedGameObject == null && isOn)
+        {
+            EventSystem.current.SetSelectedGameObject(current);
+        }
+    }
+
 
     public void UnPause()
     {
         //Disable everything
-        MainPause.gameObject.SetActive(false);
+        pauseBase.gameObject.SetActive(false);
         foreach (var sub in SubMenus)
         {
             sub.gameObject.SetActive(false);
         }
+        isOn = false;
         OnPauseExit.Invoke();
     }
 
@@ -45,33 +63,48 @@ public class UiPauseManager : Singleton<UiPauseManager>
         if (CheckPauseIsActive())
         {
             UnPause();
+            isOn = false;
         }
         else
         {
-            DisplayTarget(MainPause.gameObject);
+            DisplayTarget(pauseBase.gameObject);
             SetUp();
+            isOn = true;
             OnPauseEnter.Invoke();
         }
     }
 
     public void BackToMainMenu()
     {
-        MainPause.gameObject.SetActive(true);
+        pauseBase.gameObject.SetActive(true);
         foreach (var sub in SubMenus)
         {
             sub.gameObject.SetActive(false);
         }
-        EventSystem.current.SetSelectedGameObject(firstSelectedGO);
+        EventSystem.current.SetSelectedGameObject(defaultSelected);
     }
 
     public void DisplayTarget(GameObject target)
     {
-        MainPause.gameObject.SetActive(false);
+        pauseBase.gameObject.SetActive(false);
         foreach (var sub in SubMenus)
         {
             sub.gameObject.SetActive(false);
         }
         target.SetActive(true);
+        if (target.name == "Option")
+        {
+            EventSystem.current.SetSelectedGameObject(target.transform.GetChild(2).GetChild(0).GetChild(0).gameObject);
+        }
+        if (target.name == "SaveConfirm")
+        {
+            EventSystem.current.SetSelectedGameObject(target.transform.GetChild(2).gameObject);
+        }
+        if (target.name == "MenuConfirm")
+        {
+            EventSystem.current.SetSelectedGameObject(target.transform.GetChild(2).gameObject);
+        }
+
     }
 
     public void SelectTraget(GameObject target)
@@ -92,7 +125,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
     
     private bool CheckPauseIsActive()
     {
-        if (MainPause.gameObject.activeSelf)
+        if (pauseBase.gameObject.activeSelf)
         {
             return true;
         }
