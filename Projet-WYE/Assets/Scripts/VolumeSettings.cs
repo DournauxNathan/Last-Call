@@ -8,10 +8,13 @@ using UnityEngine.Audio;
 public class VolumeSettings : MonoBehaviour
 {
     [SerializeField] AudioMixer mixer;
+    [SerializeField] private List<Slider> sliders;
+    [SerializeField] private GameObject prefab;
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider voicesSlider;
+    
 
     const string MIXER_MASTER = "MasterVolume";
     const string MIXER_MUSIC = "MusicVolume";
@@ -20,6 +23,8 @@ public class VolumeSettings : MonoBehaviour
 
     private void Awake()
     {
+        sliders.AddRange(new List<Slider>(){ masterSlider, musicSlider, sfxSlider, voicesSlider });
+
         masterSlider.onValueChanged.AddListener(SetMasterVolume);
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);

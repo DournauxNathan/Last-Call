@@ -29,6 +29,10 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private bool readyToDeletD = false;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private float baseSize;
+    private Button settingButton;
+    [SerializeField]private Sprite baseOptionImage;
+    [SerializeField]private Sprite selectedOptionImage;
+
     [Header("Events")]
     [Space(10)] public UnityEvent StartGame;
 
@@ -65,7 +69,7 @@ public class UIMenuManager : MonoBehaviour
         {
             eventSystem.gameObject.GetComponent<BaseInputModule>().enabled = false;
         }
-        else if(!LeanTween.isTweening(wheelList[0].gameObject))
+        else if(!LeanTween.isTweening(wheelList[0].gameObject)) //utile ?
         {
             eventSystem.gameObject.GetComponent<BaseInputModule>().enabled = true;
 
@@ -86,7 +90,28 @@ public class UIMenuManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(wheelList[2].GetChild(0).gameObject);
         }
 
+        if (EventSystem.current.currentSelectedGameObject.name == "Slider")
+        {
+            if (settingButton == null)
+            {
+                foreach (var parent in wheelList)
+                {
+                    if (parent.GetChild(0).name == "Options")
+                    {
+                        settingButton = parent.GetChild(0).GetComponent<Button>();
+                        //baseOptionImage = settingButton.image;
+                        //selectedOptionImage = settingButton.spriteState.highlightedSprite;
+                    }
+                }
 
+                settingButton.image.sprite = selectedOptionImage;
+            }
+        }
+        else if (settingButton != null)
+        {
+            settingButton.image.sprite = baseOptionImage;
+            settingButton = null;
+        }
 
         if (wheelList.Count !=5 && readyToDeletG && !LeanTween.isTweening(wheelList[5].gameObject))
         {
@@ -323,7 +348,6 @@ public class UIMenuManager : MonoBehaviour
     {
         var _gTarget = target.gameObject;
         var calculatedSize = baseSize + newSize;
-        Debug.Log(calculatedSize+" "+baseSize+" "+newSize);
         
         LeanTween.scale(_gTarget, new Vector2(calculatedSize, calculatedSize), animSpeed);
     }
@@ -335,6 +359,7 @@ public class UIMenuManager : MonoBehaviour
             LeanTween.scale(transform.gameObject, new Vector2(baseSize, baseSize), animSpeed);
         }
     }
+
 
 
     /*private void ChangeQualityText()
