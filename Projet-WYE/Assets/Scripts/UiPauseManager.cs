@@ -100,6 +100,10 @@ public class UiPauseManager : Singleton<UiPauseManager>
         {
             EventSystem.current.SetSelectedGameObject(target.transform.GetChild(2).gameObject);
         }
+        if (target.name == "MenuConfirm")
+        {
+            EventSystem.current.SetSelectedGameObject(target.transform.GetChild(2).gameObject);
+        }
 
     }
 
