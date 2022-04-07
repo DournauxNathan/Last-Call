@@ -20,7 +20,10 @@ public class Reveal : MonoBehaviour
     private bool isActive;
     public bool IsActive => isActive;
 
-    private QuestionData currentQuestion => question.question[atIndex];
+    private float x, y, z;
+    Vector3 pos;
+
+    private QuestionData currentQuestion => question.questions[atIndex];
 
     public bool simulateInput;
 
@@ -29,7 +32,8 @@ public class Reveal : MonoBehaviour
         if (simulateInput)
         {
             simulateInput = !simulateInput;
-            SubmitAnswer();
+
+            GetComponent<ShakeWord>().Validate();
         }
     }
 
@@ -45,6 +49,17 @@ public class Reveal : MonoBehaviour
         isActive = true;
 
         UpdateText(i);
+
+        GetComponent<RectTransform>().localPosition = GetRandomPosition();
+    }
+
+    public Vector3 GetRandomPosition()
+    {
+        x = Random.Range(-.1f, .1f);
+        y = Random.Range(-0.02f, -0.15f);
+        z = Random.Range(-0.06f,- 0.23f);
+
+        return pos = new Vector3(x, y, z);
     }
 
     private void UpdateText(string i)
@@ -64,18 +79,18 @@ public class Reveal : MonoBehaviour
     {
         while (true)
         {
-            amount += Time.deltaTime;
+            amount += Time.deltaTime * Projection.Instance.time;
 
-            foreach (var item in question.question[atIndex].linkObjects)
+            foreach (var item in question.questions[atIndex].linkObjects)
             {
                 item.SetFloat("_Dissolve", amount);
             }
 
-            if (amount >= 15f)
+            if (amount > 30f)
             {
-                amount = 15f;
+                amount = 30f;
+                yield return null;
 
-                StopCoroutine(Show());
             }
 
             yield return null;

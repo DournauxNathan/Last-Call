@@ -6,7 +6,7 @@ using UnityEngine;
 public class Teleport : Singleton<Teleport>
 {
     private Transform position;
-    [SerializeField] private bool teleport;
+    public bool teleportAtStart;
     [SerializeField] private bool isActive;
 
     [SerializeField] private CapsuleCollider m_Collider;
@@ -20,7 +20,7 @@ public class Teleport : Singleton<Teleport>
             GetComponentInChildren<Renderer>().enabled = isActive;
         }
         
-        if (!isActive)
+        if (teleportAtStart)
         {
             MasterManager.Instance.player.transform.position = position.position;
         }

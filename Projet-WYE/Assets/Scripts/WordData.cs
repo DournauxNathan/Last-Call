@@ -17,6 +17,17 @@ public class WordData : MonoBehaviour
 
     private float x, y, z;
     Vector3 pos;
+    public bool simulateInput;
+
+    private void Update()
+    {
+        if (simulateInput)
+        {
+            simulateInput = !simulateInput;
+
+            GetComponent<ShakeWord>().Validate();
+        }
+    }
 
     public void Activate(Transform parent, Transform stock, bool isCorrect, string i)
     {
@@ -27,6 +38,20 @@ public class WordData : MonoBehaviour
         this.pullingStock = stock;
         isActive = true;
         
+        UpdateText(i);
+
+        GetComponent<RectTransform>().localPosition = GetRandomPosition();
+        GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
+    }
+
+    public void Activate(Transform parent, Transform stock,string i)
+    {
+        this.parentTransform = parent;
+        transform.SetParent(parent);
+
+        this.pullingStock = stock;
+        isActive = true;
+
         UpdateText(i);
 
         GetComponent<RectTransform>().localPosition = GetRandomPosition();

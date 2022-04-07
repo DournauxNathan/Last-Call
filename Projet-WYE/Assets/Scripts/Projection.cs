@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
@@ -10,12 +11,11 @@ public class Projection : Singleton<Projection>
 
     [Space(5)] 
     public List<Material> transitionShaders;
-    public List<Material> wallShader;
     [Space(5)]
-
+    public bool enableTransition;
     public bool isTransition;
-    [Range(0, 15)]
-    public float transitionValue = 15f;
+    [Range(0, 30)]
+    public float transitionValue = 30f;
     [Range(0, 8)]
     public float wallTransition;
     public bool setWallWithOutline = false;
@@ -37,6 +37,7 @@ public class Projection : Singleton<Projection>
     public bool hasProjted;
     private bool isDisconstruc;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +45,9 @@ public class Projection : Singleton<Projection>
         
         foreach (var mat in transitionShaders)
         {
-            mat.SetFloat("_Dissolve", 15f);
-        }
+            mat.SetVector("_PlayerPos", player.position);
 
-        foreach (var mat in wallShader)
-        {
-           //mat.SetFloat("_Dissolve", 8f);
+            mat.SetFloat("_Dissolve", transitionValue);
         }
 
         hasProjted = false;
@@ -59,16 +57,14 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        foreach (var mat in transitionShaders)
+        if (enableTransition)
         {
-            mat.SetVector("_PlayerPos", player.position);
-        
-            mat.SetFloat("_Dissolve", transitionValue);
-        }
+            foreach (var mat in transitionShaders)
+            {
+                mat.SetVector("_PlayerPos", player.position);
 
-        foreach (var mat in wallShader)
-        {
-           // mat.SetFloat("_Dissolve", wallTransition);            
+                mat.SetFloat("_Dissolve", transitionValue);
+            }
         }
 
         if (pauseBetweenTransition && isTransition && !isDisconstruc)
@@ -76,18 +72,18 @@ public class Projection : Singleton<Projection>
             Deconstruct();
         }
 
-       /* if (pauseBetweenTransition && isTransition && isDisconstruc)
-        {
-            Construct();
-        }
-*/
-        if (transitionValue >= 2.5)
-        {
-            foreach (var mat in wallShader)
-            {
-                //DistanceDissolveTarget.Instance.SetObjectToTrack();
-            }
-        }
+        /* if (pauseBetweenTransition && isTransition && isDisconstruc)
+         {
+             Construct();
+         }
+
+         if (transitionValue >= 2.5)
+         {
+             foreach (var mat in wallShader)
+             {
+                 //DistanceDissolveTarget.Instance.SetObjectToTrack();
+             }
+         }*/
     }
 
     public void ResetTransition()

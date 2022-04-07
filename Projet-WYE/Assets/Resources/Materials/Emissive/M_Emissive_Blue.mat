@@ -8,31 +8,24 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Emissive_Blue
-  m_Shader: {fileID: -6465566751694194690, guid: 8c262c007d3e03047a0514f20558349b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_2987e82f7f22413cb2c2e49dfbd48b4a:
+    - Texture2D_acb8778421a34422a286876c506fb33e:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_76eefe1d4e694d1491b61257300efe07:
-        m_Texture: {fileID: 2800000, guid: 784c03d51b3375e44afeb7a9f12c90a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 784c03d51b3375e44afeb7a9f12c90a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -51,19 +44,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DissolveTexture:
-        m_Texture: {fileID: 2800000, guid: e76741653d1c38f4d8ef0663b11589a4, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 784c03d51b3375e44afeb7a9f12c90a5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Metallic:
+    - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -71,15 +56,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 784c03d51b3375e44afeb7a9f12c90a5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Parallax:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -104,12 +81,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1b939e2cd5f54af88e792f6ad45a13d6: 1
-    - Vector1_95745bd1ebdb45cbac06fe698ff5bb39: 0
-    - Vector1_d791e3532f404e3f9fec5caaaf63d045: 0.5
-    - Vector1_f0d249be31074f82bde35b53a4098231: 0
-    - Vector1_fa5d1a461e164c3a8fb1aae630b86d4a: 0
-    - Vector1_fca3f7ea915845bbb71414e5824b4e06: 0
     - _AlphaClip: 0
     - _BakeIntensity: 0
     - _Blend: 0
@@ -120,9 +91,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dissolve: 15
-    - _DissolveScale: 10.5
-    - _Distance: 30
+    - _Dissolve: 0
+    - _DissolveScale: 25
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -130,9 +100,8 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.005
-    - _Parallax: 0
-    - _Parallax_1: 0
+    - _OutlineWidth: 0.79
+    - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -143,12 +112,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_78f1fe6007084d4992ef3ea0a1735a93: {r: 0, g: 0.36130688, b: 1, a: 0}
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0.31434116, b: 0.9622642, a: 0.9843137}
-    - _PlayerPos: {r: 0.095, g: 1, b: 0.126, a: 0}
+    - _ColorA: {r: 0.20679957, g: 0.41098183, b: 0.6981132, a: 0}
+    - _ColorB: {r: 1, g: 0, b: 0, a: 0}
+    - _DissolveColor: {r: 0.8490566, g: 0.492613, b: 0.492613, a: 0}
+    - _EmissionColor: {r: 0.47843137, g: 0.47843137, b: 0.47843137, a: 0}
+    - _PlayerPos: {r: -0.394, g: 1, b: -0.25, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6628871648958348766

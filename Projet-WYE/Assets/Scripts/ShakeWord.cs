@@ -12,28 +12,29 @@ public class ShakeWord : MonoBehaviour
     [Header("Refs")]
     public CanvasGroup alpha;
 
-    [Header("Param")]
+    [Header("Params")]
     [Range(0f, 2f)] public float delayBeforAnim = 0f;
     [Range(0f, 2f)] public float animationSpeed = 1f;
-    public Color32 outlineColor;
+    public Color outlineColor;
     [Range(0f, 1f)] public float outlineWidth = 0.135f;
-    public Color32 validateColor;
-    [Range(1, 5)] public byte decaySpeed = 1;
-    [Header("Events")]
-    public UnityEvent OnValidateWord;
+    public Color validateColor;
+
+    public UnityEvent submitWord;
 
 
     private bool isStarted;
+
     [Header("Debug")]
     [SerializeField] Animator m_animator;
-    [SerializeField] private byte decayValue = 255;
-    private bool isDecaying = false;
+    [SerializeField] private bool isDecaying = false;
+    
+
+    private Color _defaultColorOutline;
+    private Color _defaultColor;
+
     private float _time;
     private TMP_Text _text;
-    private Color32 _defaultColorOutline;
-    private Color32 _defaultColor;
 
-    
 
     private void Start()
     {
@@ -75,6 +76,7 @@ public class ShakeWord : MonoBehaviour
     {
         if (isDecaying)
         {
+            Debug.Log("");
             StartFadeOut(alpha);
         }        
     }
@@ -88,7 +90,7 @@ public class ShakeWord : MonoBehaviour
             if (uiGroupToFade.alpha == 0)
             {
                 isDecaying = false;
-                OnValidateWord.Invoke();
+                submitWord.Invoke();
                 GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
                 GetComponent<BoxCollider>().enabled = false;
             }
@@ -115,6 +117,7 @@ public class ShakeWord : MonoBehaviour
         m_animator.SetBool("Bool", false);
         _text.color = validateColor;
         isDecaying = true;
+        StartFadeOut(alpha);
     }
 
     public void Debuggg()
