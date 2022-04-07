@@ -61,15 +61,15 @@ public class UIManager : Singleton<UIManager>
 
     public void PullQuestion()
     {
-        if (ScenarioManager.Instance.isScenarioLoaded)
+       /* if (ScenarioManager.Instance.isScenarioLoaded)
         {            
             StartCoroutine(ExecuteAfterTime(.5f));
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            /*if (OrderController.Instance.GetResolve())
-            {*/
+            *//*if (OrderController.Instance.GetResolve())
+            {*//*
                 for (int i = 0; i < OrderController.Instance.ordersStrings.Count; i++)
                 {
                     var but = FindAvailableButtonForOrder(OrderController.Instance.ordersStrings[i]);
@@ -77,7 +77,7 @@ public class UIManager : Singleton<UIManager>
             //}
 
             UpdateEventSystem(orderListTransform);
-        }
+        }*/
     }
     IEnumerator ExecuteAfterTime(float time)
     {
@@ -89,7 +89,7 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateEventSystem(Transform transform)
     {
-        if (transform.name == checkListTransform.name)
+        /*if (transform.name == checkListTransform.name)
         {
             for (int i = checkListTransform.childCount - 1; i >= 0; i--)
             {
@@ -120,7 +120,7 @@ public class UIManager : Singleton<UIManager>
                     EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
                 }
             }
-        }
+        }*/
     }
 
     public void Update()
@@ -178,7 +178,7 @@ public class UIManager : Singleton<UIManager>
 
         Debug.LogError("Not enough buttons");
         return null;
-    }*/
+    }
 
 
     public InstantiableButton FindAvailableButtonForOrder(Order order)
@@ -197,7 +197,7 @@ public class UIManager : Singleton<UIManager>
 
         Debug.LogError("Not enough buttons");
         return null;
-    }
+    }*/
 
     public void ShowUI()
     {

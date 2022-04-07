@@ -181,6 +181,7 @@ public class CombineWith
     public string objectName;
     public int influence;
     public string outcome;
+    public bool isLethal;
 }
 
 public enum StateMobility

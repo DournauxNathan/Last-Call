@@ -187,6 +187,7 @@ public class MasterManager : Singleton<MasterManager>
 
     public void GoBackToOffice(string name)
     {
+        SetPhase(3);
         isTutoEnded = true;
         isInImaginary = false;
         SceneLoader.Instance.LoadNewScene(name);

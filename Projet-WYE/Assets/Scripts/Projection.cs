@@ -9,8 +9,7 @@ public class Projection : Singleton<Projection>
     [Header("Refs")]
     public Transform player;
 
-    [Space(5)] 
-    public List<Material> transitionShaders;
+    public List<ObjectIn> objectsToDissolve;
     [Space(5)]
     public bool enableTransition;
     public bool isTransition;
@@ -43,11 +42,14 @@ public class Projection : Singleton<Projection>
     {
         //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat")
         
-        foreach (var mat in transitionShaders)
+        foreach (var item in objectsToDissolve)
         {
-            mat.SetVector("_PlayerPos", player.position);
+            for (int i = 0; i < item.objects.Count; i++)
+            {
+                item.objects[i].SetVector("_PlayerPos", player.position);
 
-            mat.SetFloat("_Dissolve", transitionValue);
+                item.objects[i].SetFloat("_Dissolve", transitionValue);
+            }
         }
 
         hasProjted = false;
@@ -59,11 +61,12 @@ public class Projection : Singleton<Projection>
     {
         if (enableTransition)
         {
-            foreach (var mat in transitionShaders)
+            foreach (var item in objectsToDissolve)
             {
-                mat.SetVector("_PlayerPos", player.position);
-
-                mat.SetFloat("_Dissolve", transitionValue);
+                for (int i = 0; i < item.objects.Count; i++)
+                {
+                    item.objects[i].SetFloat("_Dissolve", transitionValue);
+                }
             }
         }
 
@@ -188,6 +191,20 @@ public class Projection : Singleton<Projection>
         pauseBetweenTransition = false;
         yield return new WaitForSeconds(timeBetweenTransition);
         pauseBetweenTransition = true;
+    }
+
+
+    public enum Location
+    {
+        Office,
+        Imaginary
+    }
+
+    [System.Serializable]
+    public class ObjectIn
+    {
+        public Location location;
+        public List<Material> objects;
     }
 
 }

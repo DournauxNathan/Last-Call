@@ -77,20 +77,20 @@ public class ListManager : Singleton<ListManager>
                 {
                     combiObj2.dissolveEffect.startEffect = true;
 
-                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj2.state == StateMobility.Static)
                 {
                     combiObj1.dissolveEffect.startEffect = true;
 
-                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj1.state != StateMobility.Static)
                 {
                     combiObj1.dissolveEffect.startEffect = true;
                     combiObj2.dissolveEffect.startEffect = true;
 
-                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome);
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
             }
         }
@@ -100,9 +100,9 @@ public class ListManager : Singleton<ListManager>
         }       
     }
 
-    public void SetToOrderController(CombinableObject objectA, CombinableObject objectB, int value, string _outcome)
+    public void SetToOrderController(CombinableObject objectA, CombinableObject objectB, int value, string _outcome, bool _lethality)
     {
-        OrderController.Instance.AddCombinaison(objectA, objectB, value, _outcome);
+        OrderController.Instance.AddCombinaison(objectA, objectB, value, _outcome, _lethality);
         PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
         OrderController.Instance.IncreaseValue(1);
     }

@@ -39,7 +39,6 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     {
         if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            Debug.Log("Put headset");
             isOnHead = true;
             headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f,offset,0f); // Fonctionne /!\ pas très propre
         }
@@ -58,7 +57,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (!isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            StartCoroutine(OffHead());
+            //StartCoroutine(OffHead());
         }
 
     }
