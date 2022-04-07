@@ -22,7 +22,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     void Start()
     {
-        //UnPause();
+        UnPause();
         BackToMainMenu();
         _text.text = "";
     }

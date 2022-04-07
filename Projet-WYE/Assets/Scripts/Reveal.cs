@@ -79,18 +79,18 @@ public class Reveal : MonoBehaviour
     {
         while (true)
         {
-            amount += Time.deltaTime;
+            amount += Time.deltaTime * Projection.Instance.time;
 
             foreach (var item in question.questions[atIndex].linkObjects)
             {
                 item.SetFloat("_Dissolve", amount);
             }
 
-            if (amount >= 15f)
+            if (amount > 30f)
             {
-                amount = 15f;
+                amount = 30f;
+                yield return null;
 
-                StopCoroutine(Show());
             }
 
             yield return null;
