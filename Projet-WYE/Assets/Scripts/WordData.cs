@@ -29,7 +29,6 @@ public class WordData : MonoBehaviour
         }
     }
 
-
     public void Activate(Transform parent, Transform stock, bool isCorrect, string i)
     {
         this.isCorrectAnswer = isCorrect;
@@ -42,6 +41,7 @@ public class WordData : MonoBehaviour
         UpdateText(i);
 
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
+        GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
     }
 
     public void Activate(Transform parent, Transform stock,string i)
