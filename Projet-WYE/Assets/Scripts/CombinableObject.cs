@@ -13,7 +13,6 @@ public class CombinableObject : CombinableObject_Data
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
         GetComponent();
         SetOutline();
 
@@ -34,7 +33,7 @@ public class CombinableObject : CombinableObject_Data
     {
         if (GetComponent<Renderer>().material.GetFloat("_Dissolve") > 0)
         {
-            GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
+
         }
     }
 
