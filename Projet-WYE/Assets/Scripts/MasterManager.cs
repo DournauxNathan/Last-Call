@@ -19,19 +19,8 @@ public class MasterManager : Singleton<MasterManager>
     public Phases currentPhase;
 
     [Header("Refs")]
-    public Transform cameraA;
-    public XRInteractionManager xRInteractionManager;
-    public GameObject EventSystem;
-    public ObjectActivator objectActivator;
-    public Projection projectionTransition;
-    public AudioSource mainAudioSource;
-    public Transform player;
-    public HeadPhoneManager headsetManager;
+    public References references;
     
-    [Header("Hands")]
-    public List<GameObject> baseInteractors;
-    public List<GameObject> rayInteractors;
-
     [Header("Projection")]
      public bool canImagine = false;
     public bool isInImaginary;
@@ -51,9 +40,6 @@ public class MasterManager : Singleton<MasterManager>
     [Header("Testing Input - Go in Projection")]
     public bool useOneInput = false;
     public bool useTwoInput = false;
-
-    public GameObject xrRig;
-
 
     private void Start()
     {
@@ -120,22 +106,6 @@ public class MasterManager : Singleton<MasterManager>
         }
     }
 
-    void EffectOfPills()
-    {
-        if (currentPills == 1)
-        {
-            //Expand the timer of the call
-            /* The time is ""slow"", the events of the call arrived less faster ? */
-
-            //Active  Interactor, outline of useless objets
-            objectActivator.ToggleUselessObject(true, 3);
-        }
-        else if (currentPills > 1)
-        {
-            objectActivator.ToggleUselessObject(true, 3);
-        }
-    }
-
     #region Dev Menu 
     public void SetIsInImaginary(bool b)
     {
@@ -152,26 +122,26 @@ public class MasterManager : Singleton<MasterManager>
     {
         if (!isInImaginary)
         {
-            for (int i = 0; i < rayInteractors.Count; i++)
+            for (int i = 0; i < references.rayInteractors.Count; i++)
             {
-                baseInteractors[i].SetActive(true);
+                references.baseInteractors[i].SetActive(true);
             }
 
-            for (int i = 0; i < rayInteractors.Count; i++)
+            for (int i = 0; i < references.rayInteractors.Count; i++)
             {
-                rayInteractors[i].SetActive(false);
+                references.rayInteractors[i].SetActive(false);
             }
         }
         else if (isInImaginary)
         {
-            for (int i = 0; i < baseInteractors.Count; i++)
+            for (int i = 0; i < references.baseInteractors.Count; i++)
             {
-                baseInteractors[i].SetActive(false);
+                references.baseInteractors[i].SetActive(false);
             }
 
-            for (int i = 0; i < rayInteractors.Count; i++)
+            for (int i = 0; i < references.rayInteractors.Count; i++)
             {
-                rayInteractors[i].SetActive(true);
+                references.rayInteractors[i].SetActive(true);
             }
         }
     }
@@ -179,7 +149,6 @@ public class MasterManager : Singleton<MasterManager>
     public void ActivateImaginary(string name)
     {
         SetPhase(2);
-        //objectActivator.ActivateObjet();
         SceneLoader.Instance.LoadNewScene(name);
         UpdateController();
         WordManager.Instance.PullWord();
@@ -225,4 +194,31 @@ public class MasterManager : Singleton<MasterManager>
                 break;
         }
     }
+}
+
+[System.Serializable]
+public class References
+{
+    [Header("XR")]
+    public XRInteractionManager xRInteractionManager;
+    public GameObject _RRig;
+    public List<GameObject> baseInteractors;
+    public List<GameObject> rayInteractors;
+
+
+    [Header("Player")]
+    public Transform mainCamera;
+    public Transform player;
+    public Projection projectionTransition;
+    public AudioSource mainAudioSource;
+
+    [Header("Puzzle Manager")]
+    public ListManager _listManager;
+    public OrderController _orderController;
+
+    [Header("UI & Event system")]
+    public GameObject EventSystem;
+
+    [Header("Others")]
+    public HeadPhoneManager headsetManager;
 }

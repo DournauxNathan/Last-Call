@@ -9,18 +9,18 @@ using System;
 public class UIManager : Singleton<UIManager>
 {
     [Header("Refs - Phase 1")]
-    public List<InstantiableButton> buttons;
+    /*public List<InstantiableButton> buttons;
     public Transform checkListTransform = null;
     public Transform descriptionTransform = null;
     [Space(5)]
-    //[SerializeField] private Transform pullingStock = null;
+    //[SerializeField] private Transform pullingStock = null;*/
     public CanvasGroup leftScreen;
 
     [Header("Refs - Phase 2")]
-    public List<InstantiableButton> _buttons;
+    /*public List<InstantiableButton> _buttons;
     public Transform orderListTransform = null;
     [Space(5)]
-    [SerializeField] private Transform pullingStockB = null;
+    [SerializeField] private Transform pullingStockB = null;*/
     public CanvasGroup rightScreen;
 
     [Header("Fade parameters")]
@@ -52,11 +52,11 @@ public class UIManager : Singleton<UIManager>
         //EventSystem.current.SetSelectedGameObject(startSelectbutton.GetComponentInChildren<Button>().gameObject);
 
         if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
-        {            
+        {
             PullQuestion();
         }
 
-        CheckButtons();
+        //CheckButtons();
     }
 
     public void PullQuestion()
@@ -251,10 +251,10 @@ public class UIManager : Singleton<UIManager>
             return MasterManager.Instance.canImagine = false;
         }
     }*/
-
+     /*
     public void ToggleButton()
     {
-        /*for (int i = 0; i < checkListTransform.childCount; i++)
+        for (int i = 0; i < checkListTransform.childCount; i++)
         {
             checkListTransform.GetChild(i).GetComponent<Button>().interactable = !checkListTransform.GetChild(i).GetComponent<Button>().interactable;
         }
@@ -262,29 +262,29 @@ public class UIManager : Singleton<UIManager>
         for (int i = 0; i < descriptionTransform.childCount; i++)
         {
             descriptionTransform.GetChild(i).GetComponent<Button>().interactable = !descriptionTransform.GetChild(i).GetComponent<Button>().interactable;
-        }*/
+        }
 
         foreach (var button in buttons)
         {
             button.gameObject.GetComponentInChildren<Button>().enabled = !button.gameObject.GetComponentInChildren<Button>().enabled;
 
-            /*if (button.gameObject.GetComponentInChildren<Button>().enabled)
+            if (button.gameObject.GetComponentInChildren<Button>().enabled)
             {
                 button.gameObject.GetComponentInChildren<Button>().colors = 
             }
             else
             {
                 button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
-            }*/
+            }
         }
     }
 
-    //Check si les questions ont déjà été répondu entre les transition
+   //Check si les questions ont déjà été répondu entre les transition
     public void CheckButtons()
     {
         foreach (var button in buttons)
         {
             button.IsAnswered();
         }
-    }
+    }*/
 }

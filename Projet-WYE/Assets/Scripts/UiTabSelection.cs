@@ -16,11 +16,11 @@ public class UiTabSelection : Singleton<UiTabSelection>
         if (switchTab)
         {
             switchTab = false;
-            SwitchTab(indexTab);
+            //SwitchTab(indexTab);
         }
     }
 
-    public void SwitchTab(int i)
+    /*public void SwitchTab(int i)
     {
         tabs[i].SetActive(true);
 
@@ -48,7 +48,7 @@ public class UiTabSelection : Singleton<UiTabSelection>
                 tabs[2].SetActive(true);
                 break;
         }
-    }
+    }*/
 
     public void UpdateIndex(int i)
     {

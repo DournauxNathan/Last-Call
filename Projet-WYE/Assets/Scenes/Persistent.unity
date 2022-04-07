@@ -8453,8 +8453,8 @@ MonoBehaviour:
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 921782272}
-          m_TargetAssemblyTypeName: XRHitInfoRayInteractor, Assembly-CSharp
+        - m_Target: {fileID: 2001627878}
+          m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
           m_MethodName: ClearList
           m_Mode: 1
           m_Arguments:
@@ -10293,8 +10293,8 @@ MonoBehaviour:
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1057995872}
-          m_TargetAssemblyTypeName: XRHitInfoRayInteractor, Assembly-CSharp
+        - m_Target: {fileID: 2001627878}
+          m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
           m_MethodName: ClearList
           m_Mode: 1
           m_Arguments:
@@ -10974,23 +10974,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase: 1
-  cameraA: {fileID: 2081371579}
-  xRInteractionManager: {fileID: 639667784}
-  EventSystem: {fileID: 2131089504}
-  objectActivator: {fileID: 0}
-  projectionTransition: {fileID: 2049690321}
-  mainAudioSource: {fileID: 2081371580}
-  player: {fileID: 1355308591}
-  headsetManager: {fileID: 543341186}
-  baseInteractors:
-  - {fileID: 825767850}
-  - {fileID: 1492164772}
-  rayInteractors:
-  - {fileID: 1057995870}
-  - {fileID: 921782268}
+  currentPhase: 2
+  references:
+    xRInteractionManager: {fileID: 0}
+    _RRig: {fileID: 0}
+    baseInteractors: []
+    rayInteractors: []
+    mainCamera: {fileID: 0}
+    player: {fileID: 0}
+    projectionTransition: {fileID: 0}
+    mainAudioSource: {fileID: 0}
+    _listManager: {fileID: 0}
+    _orderController: {fileID: 0}
+    EventSystem: {fileID: 0}
+    headsetManager: {fileID: 0}
   canImagine: 0
-  isInImaginary: 0
+  isInImaginary: 1
   pillsEffect: 0
   currentPills: 0
   skipTuto: 1
@@ -11026,7 +11025,6 @@ MonoBehaviour:
         m_CallState: 2
   useOneInput: 1
   useTwoInput: 0
-  xrRig: {fileID: 1355308589}
 --- !u!4 &1103599257
 Transform:
   m_ObjectHideFlags: 0
@@ -18014,7 +18012,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1696208561
 MonoBehaviour:
@@ -22933,8 +22931,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2001627880}
-  - component: {fileID: 2001627879}
   - component: {fileID: 2001627878}
+  - component: {fileID: 2001627879}
   m_Layer: 0
   m_Name: Puzzle Manager
   m_TagString: Untagged
@@ -22986,7 +22984,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003939440
 GameObject:
@@ -23349,7 +23347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: transitionValue
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: enableTransition
@@ -24651,17 +24649,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036448361}
   m_CullTransparentMesh: 1
---- !u!114 &2049690321 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
-  m_PrefabInstance: {fileID: 2031585019}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57bbcdbba1cf45240a0695fb03f939e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2061748193
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class HeadPhone : MonoBehaviour
     {
         if (MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            manager = MasterManager.Instance.headsetManager;
+            manager = MasterManager.Instance.references.headsetManager;
             manager.GetComponent<HeadPhoneManager>();
             manager.headPhone = GetHeadPhoneRef();
 

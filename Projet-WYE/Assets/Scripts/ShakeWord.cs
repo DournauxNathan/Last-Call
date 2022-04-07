@@ -76,7 +76,6 @@ public class ShakeWord : MonoBehaviour
     {
         if (isDecaying)
         {
-            Debug.Log("");
             StartFadeOut(alpha);
         }        
     }

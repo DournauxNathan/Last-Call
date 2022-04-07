@@ -10,7 +10,7 @@ public class AutoRotateCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        xrRig = MasterManager.Instance.player;
+        xrRig = MasterManager.Instance.references.player;
 
         if (xrRig != null)
         {

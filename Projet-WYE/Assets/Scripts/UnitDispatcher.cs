@@ -71,10 +71,10 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
     {
         if (sequence == 1)
         {
-            for (int i = 0; i < UIManager.Instance.checkListTransform.childCount; i++)
+            /*for (int i = 0; i < UIManager.Instance.checkListTransform.childCount; i++)
             {
                 UIManager.Instance.checkListTransform.GetChild(i).GetComponent<InstantiableButton>().button.enabled = false;
-            }
+            }*/
 
             UiTabSelection.Instance.SwitchSequence(1);
             

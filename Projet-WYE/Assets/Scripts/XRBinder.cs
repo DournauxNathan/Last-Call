@@ -7,7 +7,6 @@ public class XRBinder : MonoBehaviour
     public void OnSecondary()
     {
         Projection.Instance.isTransition = true;
-        
     }
 
     public void OnSecondaryEnd()
@@ -28,7 +27,7 @@ public class XRBinder : MonoBehaviour
             }
 
             UiTabSelection.Instance.UpdateIndex(i);
-            UiTabSelection.Instance.SwitchTab(i);
+            //UiTabSelection.Instance.SwitchTab(i);
         }
     }
 

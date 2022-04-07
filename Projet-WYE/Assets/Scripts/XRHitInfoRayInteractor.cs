@@ -10,7 +10,7 @@ public class XRHitInfoRayInteractor : XRRayInteractor
     protected override void Awake()
     {
         base.Awake();
-        interactionManager = MasterManager.Instance.xRInteractionManager;
+        interactionManager = MasterManager.Instance.references.xRInteractionManager;
     }
 
     public void GetHoverInteractors()
@@ -30,8 +30,4 @@ public class XRHitInfoRayInteractor : XRRayInteractor
         }
     }
 
-    public void ClearList()
-    {
-        interactors.ClearList();
-    }
 }

@@ -17,7 +17,7 @@ public class HintManager : MonoBehaviour
 
     private void Start()
     {
-        audioSource = MasterManager.Instance.mainAudioSource;
+        audioSource = MasterManager.Instance.references.mainAudioSource;
         SetTimer();
     }
 
