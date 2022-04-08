@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class fille : MonoBehaviour
 {
+    public float _Time;
     public Sprite[] animatedImages;
     public Image animatedImageObj;
 
     // Update is called once per frame
     void Update()
     {
-        animatedImageObj.sprite = animatedImages[(int)(Time.time * 10) / animatedImages.Length];
+        animatedImageObj.sprite = animatedImages[(int)(Time.time * _Time) / animatedImages.Length];
     }
 }
