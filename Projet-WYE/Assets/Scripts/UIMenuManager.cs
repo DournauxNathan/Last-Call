@@ -67,13 +67,13 @@ public class UIMenuManager : MonoBehaviour
 
         if (LeanTween.isTweening(wheelList[0].gameObject))
         {
-            eventSystem.gameObject.GetComponent<BaseInputModule>().enabled = false;
+            MasterManager.Instance.references.eventSystem.GetComponent<BaseInputModule>().enabled = false;
         }
         else if(!LeanTween.isTweening(wheelList[0].gameObject)) //utile ?
         {
-            eventSystem.gameObject.GetComponent<BaseInputModule>().enabled = true;
+            MasterManager.Instance.references.eventSystem.GetComponent<BaseInputModule>().enabled = true;
 
-        }
+        }   
 
         if (EventSystem.current.currentSelectedGameObject != null && currentSelected != EventSystem.current.currentSelectedGameObject.gameObject.transform && !LeanTween.isTweening(wheelList[0].gameObject))
         {

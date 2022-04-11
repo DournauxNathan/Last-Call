@@ -217,7 +217,7 @@ public class References
     public OrderController _orderController;
 
     [Header("UI & Event system")]
-    public GameObject EventSystem;
+    public GameObject eventSystem;
 
     [Header("Others")]
     public HeadPhoneManager headsetManager;
