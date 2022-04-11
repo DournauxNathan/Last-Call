@@ -69,6 +69,11 @@ public class MasterManager : Singleton<MasterManager>
             SceneLoader.Instance.LoadNewScene("Office");
         }
 
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            Application.Quit();
+        }
+
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             WordManager.Instance.isProtocolComplete = true;
