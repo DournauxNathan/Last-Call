@@ -271,8 +271,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 91.6035, y: 44.81407, z: 10.226079}
-  m_Center: {x: 0.054070067, y: 1.5340092, z: -0.52472156}
+  m_Size: {x: 72.45, y: 8.37, z: 0}
+  m_Center: {x: 0.054070067, y: -1.39, z: -0.52472156}
 --- !u!54 &3763269040617925738
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -353,17 +353,17 @@ MonoBehaviour:
   m_Activated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3763269040617925733}
-        m_TargetAssemblyTypeName: ShakeWord, Assembly-CSharp
-        m_MethodName: Validate
-        m_Mode: 1
+      - m_Target: {fileID: 2903435520008644887}
+        m_TargetAssemblyTypeName: WordData, Assembly-CSharp
+        m_MethodName: SimulateInput
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
@@ -448,19 +448,14 @@ MonoBehaviour:
   alpha: {fileID: 406259463}
   delayBeforAnim: 0.09
   animationSpeed: 0.1
-  outlineColor:
-    serializedVersion: 2
-    rgba: 2519048191
+  outlineColor: {r: 0, g: 0, b: 0, a: 0}
   outlineWidth: 0.135
-  validateColor:
-    serializedVersion: 2
-    rgba: 4281663250
-  decaySpeed: 1
-  OnValidateWord:
+  validateColor: {r: 0, g: 0, b: 0, a: 0}
+  submitWord:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2903435520008644887}
-        m_TargetAssemblyTypeName: Reveal, Assembly-CSharp
+        m_TargetAssemblyTypeName: WordData, Assembly-CSharp
         m_MethodName: SubmitAnswer
         m_Mode: 1
         m_Arguments:
@@ -472,7 +467,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_animator: {fileID: 3763269039591053563}
-  decayValue: 255
+  isDecaying: 0
 --- !u!114 &2903435520008644887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 3763269039591053562}
+  simulateInput: 0
 --- !u!225 &406259463
 CanvasGroup:
   m_ObjectHideFlags: 0

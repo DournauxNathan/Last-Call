@@ -25,7 +25,7 @@ public class WordData : MonoBehaviour
         {
             simulateInput = !simulateInput;
 
-            GetComponent<ShakeWord>().Validate();
+            GetComponent<ShakeWord>().isDecaying = true;
         }
     }
 
@@ -91,6 +91,11 @@ public class WordData : MonoBehaviour
         {
             Debug.Log("Give penalty");
         }
+    }
+
+    public void SimulateInput(bool value)
+    {
+        simulateInput = true;
     }
 
 }

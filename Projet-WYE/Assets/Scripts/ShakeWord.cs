@@ -26,7 +26,7 @@ public class ShakeWord : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] Animator m_animator;
-    [SerializeField] private bool isDecaying = false;
+    public bool isDecaying = false;
     
 
     private Color _defaultColorOutline;
@@ -90,6 +90,7 @@ public class ShakeWord : MonoBehaviour
             {
                 isDecaying = false;
                 submitWord.Invoke();
+
                 GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
                 GetComponent<BoxCollider>().enabled = false;
             }

@@ -33,7 +33,7 @@ public class Reveal : MonoBehaviour
         {
             simulateInput = !simulateInput;
 
-            GetComponent<ShakeWord>().Validate();
+            GetComponent<ShakeWord>().isDecaying = true;
         }
     }
 
@@ -89,11 +89,17 @@ public class Reveal : MonoBehaviour
             if (amount > 30f)
             {
                 amount = 30f;
-                yield return null;
 
+                yield return null;
             }
 
             yield return null;
         }
     }
+
+    public void SimulateInput(bool value)
+    {
+        simulateInput = true;
+    }
+
 }
