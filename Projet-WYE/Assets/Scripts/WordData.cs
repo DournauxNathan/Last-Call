@@ -86,7 +86,6 @@ public class WordData : MonoBehaviour
         if (isCorrectAnswer)
         {
             Debug.Log("Register Answer");
-            Debug.Log(text.text);
         }
         else
         {
