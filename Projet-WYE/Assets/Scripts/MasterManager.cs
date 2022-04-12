@@ -155,15 +155,12 @@ public class MasterManager : Singleton<MasterManager>
     {
         SetPhase(2);
         SceneLoader.Instance.LoadNewScene(name);
-        UpdateController();
-        WordManager.Instance.PullWord();
+        SetupPhase(2);
     }
 
     public void GoBackToOffice(string name)
     {
         SetPhase(3);
-        isTutoEnded = true;
-        isInImaginary = false;
         SceneLoader.Instance.LoadNewScene(name);
     }
 
@@ -175,7 +172,6 @@ public class MasterManager : Singleton<MasterManager>
     public void StartCall()
     {
         isTutoEnded = true;
-        UIManager.Instance.PullQuestion();
     }
 
     public void SetPhase(int i)
@@ -198,6 +194,35 @@ public class MasterManager : Singleton<MasterManager>
                 currentPhase = Phases.Phase_4;
                 break;
         }
+
+        SetupPhase(i);
+    }
+
+    public void SetupPhase(int i)
+    {
+        switch (i)
+        {
+            case 0:
+              
+                break;
+
+            case 1:
+                UpdateController();
+                WordManager.Instance.PullWord();
+                break;
+
+            case 2:
+                Projection.Instance.enableTransition = false;
+                break;
+
+            case 3:
+                isTutoEnded = true;
+                isInImaginary = false;
+                break;
+
+            case 4:
+                break;
+        }
     }
 }
 
@@ -209,7 +234,6 @@ public class References
     public GameObject _RRig;
     public List<GameObject> baseInteractors;
     public List<GameObject> rayInteractors;
-
 
     [Header("Player")]
     public Transform mainCamera;

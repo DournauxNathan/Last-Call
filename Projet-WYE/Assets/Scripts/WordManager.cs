@@ -56,6 +56,10 @@ public class WordManager : Singleton<WordManager>
                 }
             }
         }
+        else
+        {
+            Debug.LogWarning("Is in imaginary is " + MasterManager.Instance.isInImaginary);
+        }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
         {
@@ -68,8 +72,10 @@ public class WordManager : Singleton<WordManager>
                 item.Activate(transform, stockA, currentOrder.order);
             }
         }
-
-
+        else
+        {
+            Debug.LogWarning("Is in imaginary is " + MasterManager.Instance.isInImaginary);
+        }
     }
 
     public void ProtocolComplete()

@@ -8636,8 +8636,8 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 921782272}
-        m_TargetAssemblyTypeName: XRHitInfoRayInteractor, Assembly-CSharp
+      - m_Target: {fileID: 2001627878}
+        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
         m_MethodName: ClearList
         m_Mode: 1
         m_Arguments:
@@ -8751,7 +8751,7 @@ MonoBehaviour:
   m_RotateSpeed: 180
   m_TranslateSpeed: 1
   m_AnchorRotateReferenceFrame: {fileID: 0}
-  interactors: {fileID: 0}
+  interactors: {fileID: 2001627878}
 --- !u!114 &921782273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8804,7 +8804,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2001627878}
           m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
-          m_MethodName: ClearList
+          m_MethodName: OnPressed
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10312,8 +10312,8 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1057995872}
-        m_TargetAssemblyTypeName: XRHitInfoRayInteractor, Assembly-CSharp
+      - m_Target: {fileID: 2001627878}
+        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
         m_MethodName: ClearList
         m_Mode: 1
         m_Arguments:
@@ -10427,7 +10427,7 @@ MonoBehaviour:
   m_RotateSpeed: 180
   m_TranslateSpeed: 1
   m_AnchorRotateReferenceFrame: {fileID: 0}
-  interactors: {fileID: 0}
+  interactors: {fileID: 2001627878}
 --- !u!114 &1057995873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10687,7 +10687,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2001627878}
           m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
-          m_MethodName: ClearList
+          m_MethodName: OnPressed
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -11249,7 +11249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase: 1
+  currentPhase: 3
   references:
     xRInteractionManager: {fileID: 639667784}
     _RRig: {fileID: 1355308589}
@@ -23624,7 +23624,19 @@ MonoBehaviour:
   numberOfCombinaison: 4
   isResolve: 0
   combinaisons: []
-  ordersStrings: []
+  ordersStrings:
+  - order: Take icecube in the frigde and throw them in the fan
+    influence: -1
+    isLethal: 0
+    voiceLines: []
+  - order: Wet the tea towel and apply it on your burn
+    influence: 0
+    isLethal: 0
+    voiceLines: []
+  - order: Fill the pan with water and sink your head in it
+    influence: 1
+    isLethal: 0
+    voiceLines: []
   text: {fileID: 715281035}
 --- !u!4 &2001627880
 Transform:

@@ -36,11 +36,15 @@ public class Projection : Singleton<Projection>
     public bool hasProjted;
     private bool isDisconstruc;
 
+    [Header("Fade parameters")]
+    [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
+    [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat")
+        //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat");
         
         foreach (var item in objectsToDissolve)
         {
@@ -74,6 +78,18 @@ public class Projection : Singleton<Projection>
         {
             Deconstruct();
         }
+
+
+        if (transitionValue <= beginFadeOutAt)
+        {
+            UIManager.Instance.Fade(Fadetype.Out);
+        }
+
+        if (transitionValue >= beginFadeInAt)
+        {
+            UIManager.Instance.Fade(Fadetype.In);
+        }
+
 
         /* if (pauseBetweenTransition && isTransition && isDisconstruc)
          {
@@ -120,7 +136,7 @@ public class Projection : Singleton<Projection>
         {
             transitionValue = 0;
             isDisconstruc = true;
-            StartCoroutine(WaitForVoid());//coroutine
+            StartCoroutine(WaitForVoid());
             CallScene();
             ToggleProjection();
         }
@@ -149,6 +165,10 @@ public class Projection : Singleton<Projection>
             CallScene();
         }
     }
+
+
+    
+
 
     public void CallScene()
     {
@@ -192,7 +212,6 @@ public class Projection : Singleton<Projection>
         yield return new WaitForSeconds(timeBetweenTransition);
         pauseBetweenTransition = true;
     }
-
 
     public enum Location
     {
