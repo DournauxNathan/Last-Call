@@ -6,15 +6,56 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 
+[ExecuteInEditMode]
 public class UIManager : Singleton<UIManager>
 {
     [Header("Screens Canvas")]
     public CanvasGroup[] _canvasGroup;
+
+    [Header("Emergency Reports Form")]
+    public Form currentForm;
+    private FormData _formData;
         
     public ParticleSystem smoke;
 
-    private bool fadeOut = false;
-    private bool fadeIn = false;
+    public void UpdateForm(FormData _answerType, string data)
+    {
+        switch (_answerType)
+        {
+            case FormData.name:
+                currentForm.nameField.text = data.ToString();
+                break;
+
+            case FormData.age:
+                currentForm.ageField.text = data.ToString();
+                break;
+
+            case FormData.adress:
+                currentForm.adressField.text = data.ToString();
+                break;
+
+            case FormData.situation:
+                currentForm.situationField.text += data.ToString();
+                break;
+
+            case FormData.unit:
+                currentForm.unitField.text += data.ToString();
+                break;
+        }
+
+        if (currentForm.nameField.text != string.Empty && currentForm.ageField.text != string.Empty
+            && currentForm.adressField.text != string.Empty && currentForm.situationField.text != string.Empty
+            && currentForm.unitField.text != string.Empty)
+        {
+            SetFormToComplete();
+        }
+    }
+
+    public void SetFormToComplete()
+    {
+        currentForm.isComplete = true;
+        currentForm.stamp.enabled = true;
+    }
 
     public void Fade(Fadetype type)
     {
@@ -30,7 +71,6 @@ public class UIManager : Singleton<UIManager>
                         if (canvas.alpha >= 1)
                         {
                             smoke.Play();
-                            fadeIn = false;
                         }
                     }
                 }
@@ -39,20 +79,20 @@ public class UIManager : Singleton<UIManager>
             case Fadetype.Out:
                 foreach (CanvasGroup canvas in _canvasGroup)
                 {
-                    if (canvas.alpha < 1)
+                    if (canvas.alpha > 0)
                     {
-                        canvas.alpha += Time.deltaTime;
+                        canvas.alpha -= Time.deltaTime;
 
-                        if (canvas.alpha >= 1)
+                        if (canvas.alpha <= 0)
                         {
                             smoke.Play();
-                            fadeIn = false;
                         }
                     }
                 }
                 break;
         }
     }
+
 }
 
 public enum Fadetype

@@ -37,7 +37,7 @@ public class WordManager : Singleton<WordManager>
                     //Find any available Canvas Word 
                     var item = FindAvailableWordData();
                     //if true, Activate Canvas Word and Set his text with the current propo
-                    item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition);
+                    item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition, answer);
                 }
             }
         }
@@ -56,10 +56,6 @@ public class WordManager : Singleton<WordManager>
                 }
             }
         }
-        else
-        {
-            Debug.LogWarning("Is in imaginary is " + MasterManager.Instance.isInImaginary);
-        }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
         {
@@ -71,10 +67,6 @@ public class WordManager : Singleton<WordManager>
                 //if true, Activate Canvas Word and Set his text with the current propo
                 item.Activate(transform, stockA, currentOrder.order);
             }
-        }
-        else
-        {
-            Debug.LogWarning("Is in imaginary is " + MasterManager.Instance.isInImaginary);
         }
     }
 

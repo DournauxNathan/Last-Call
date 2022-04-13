@@ -83,6 +83,7 @@ public class Projection : Singleton<Projection>
         if (transitionValue <= beginFadeOutAt)
         {
             UIManager.Instance.Fade(Fadetype.Out);
+            
         }
 
         if (transitionValue >= beginFadeInAt)

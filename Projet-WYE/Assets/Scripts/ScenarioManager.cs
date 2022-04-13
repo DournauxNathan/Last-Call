@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public enum Scenario
 {
@@ -12,18 +14,11 @@ public enum Scenario
 public class ScenarioManager : Singleton<ScenarioManager>
 {
     public Scenario currentScenario;
-    public List<ScenrioData> scenarios;
+    public List<ScenarioData> scenarios;
 
     public bool isScenarioLoaded = false;
     [Range(-10, 10)]
     public float endingValue = 0f;
-
-    /*[Header("Questions - Description")]
-    public List<QuestionFormat> trappedMan;
-    public List<QuestionFormat> homeInvasion;
-    public List<QuestionFormat> domesticAbuse;
-    public List<QuestionFormat> risingWater;*/
-
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
@@ -49,18 +44,26 @@ public class ScenarioManager : Singleton<ScenarioManager>
     {
         switch (currentScenario)
         {
-                case Scenario.TrappedMan:
+            case Scenario.TrappedMan:
                 WordManager.Instance.answers.AddRange(scenarios[0].answers);
                 WordManager.Instance.questions.AddRange(scenarios[0].questions);
-                break;
-                case Scenario.HomeInvasion:
+
+                UIManager.Instance.UpdateForm(FormData.name, scenarios[0].callerName);
+            break;
+
+            case Scenario.HomeInvasion:
                 WordManager.Instance.answers.AddRange(scenarios[1].answers);
                 WordManager.Instance.questions.AddRange(scenarios[2].questions);
-                break;
-                case Scenario.RisingWater:
+
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerName);
+            break;
+
+            case Scenario.RisingWater:
                 WordManager.Instance.answers.AddRange(scenarios[2].answers);
                 WordManager.Instance.questions.AddRange(scenarios[2].questions);
-                break;
+
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerName);
+            break;
         }
 
         //Debug.Log("Load: " + currentScenario.ToString());
@@ -80,9 +83,23 @@ public class ScenarioManager : Singleton<ScenarioManager>
 }
 
 [System.Serializable]
-public class ScenrioData
+public class Form
 {
-    public Scenario scenario;
-    public List<Answer> answers;
-    public List<Question> questions;
+    public TMP_Text nameField;
+    public TMP_Text ageField;
+    public TMP_Text adressField;
+    public TMP_Text situationField;
+    public TMP_Text unitField;
+    public Image stamp;
+
+    public bool isComplete;
+}
+
+public enum FormData
+{
+    name,
+    age,
+    adress,
+    situation,  
+    unit,
 }

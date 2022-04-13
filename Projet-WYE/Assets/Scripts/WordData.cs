@@ -11,6 +11,7 @@ public class WordData : MonoBehaviour
     private Transform parentTransform;
     private Transform pullingStock;
     private bool isCorrectAnswer;
+    private Answer answer;
 
     private bool isActive;
     public bool IsActive => isActive;
@@ -29,8 +30,10 @@ public class WordData : MonoBehaviour
         }
     }
 
-    public void Activate(Transform parent, Transform stock, bool isCorrect, string i)
+    public void Activate(Transform parent, Transform stock, bool isCorrect, string i, Answer _answer)
     {
+        this.answer = _answer;
+
         this.isCorrectAnswer = isCorrect;
         this.parentTransform = parent;
         transform.SetParent(parent);
@@ -85,10 +88,12 @@ public class WordData : MonoBehaviour
     {
         if (isCorrectAnswer)
         {
-            Debug.Log("Register Answer");
+            UIManager.Instance.UpdateForm(answer.type, text.text);
         }
         else
         {
+            UIManager.Instance.UpdateForm(answer.type, text.text);
+
             Debug.Log("Give penalty");
         }
     }
