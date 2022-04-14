@@ -42,7 +42,10 @@ public class UIManager : Singleton<UIManager>
                 break;
 
             case FormData.unit:
-                currentForm.unitField.text += data.ToString();
+                if (!currentForm.unitField.text.Contains(data.ToString()))
+                {
+                    currentForm.unitField.text += " " + data.ToString();
+                }
                 break;
         }
 
@@ -93,11 +96,17 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
     }
-
     public void UpdateUnitManager(int i)
     {
         switch (i)
         {
+            case 0:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
             case 1:
                 unitDispatcherFeedbacks[0].SetActive(true);
                 unitDispatcherFeedbacks[1].SetActive(false);

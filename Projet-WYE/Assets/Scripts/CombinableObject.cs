@@ -17,14 +17,6 @@ public class CombinableObject : CombinableObject_Data
         SetOutline();
     }
 
-    private void LateUpdate()
-    {
-        if (GetComponent<Renderer>().material.GetFloat("_Dissolve") > 0)
-        {
-
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ObjCombi"))

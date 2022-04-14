@@ -6,9 +6,18 @@ using System.Collections.Generic;
 public class ScenarioData : ScriptableObject
 {
     public Scenario scenario;
-
-    public string callerName;
-
+    public List<Unit> units;
     public List<Answer> answers;
     public List<Question> questions;
+
+    public Caller callerInformations;
+}
+
+[System.Serializable]
+public struct Caller
+{
+    public string name;
+    public string age;
+
+    public string newsPapersData;
 }

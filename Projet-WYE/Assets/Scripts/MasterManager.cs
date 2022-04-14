@@ -24,9 +24,6 @@ public class MasterManager : Singleton<MasterManager>
     [Header("Projection")]
      public bool canImagine = false;
     public bool isInImaginary;
-    [HideInInspector] public bool pillsEffect;
-    [Tooltip("Number of pills taken by the player")]
-    [HideInInspector] public int currentPills = 0;
 
     [Header("Tutorial Management")]
     public bool skipTuto;
@@ -43,7 +40,7 @@ public class MasterManager : Singleton<MasterManager>
 
     private void Start()
     {
-        UpdateController();
+        InitializeLevel();
     }
 
     public void FixedUpdate()
@@ -158,6 +155,38 @@ public class MasterManager : Singleton<MasterManager>
         isTutoEnded = true;
     }
 
+    public void InitializeLevel()
+    {
+        UpdateController();
+        SetPhase(currentPhase);
+    }
+
+    public void SetPhase(Phases phase)
+    {
+        switch (currentPhase)
+        {
+            case Phases.Phase_0:
+                SetPhase(0);
+                break;
+
+            case Phases.Phase_1:
+                SetPhase(1);
+                break;
+
+            case Phases.Phase_2:
+                SetPhase(2);
+                break;
+
+            case Phases.Phase_3:
+                SetPhase(3);
+                break;
+
+            case Phases.Phase_4:
+                SetPhase(4);
+                break;
+        }
+    }
+
     public void SetPhase(int i)
     {
         switch (i)
@@ -192,6 +221,7 @@ public class MasterManager : Singleton<MasterManager>
 
             case 1:
                 UpdateController();
+                UIManager.Instance.UpdateUnitManager(0);
                 WordManager.Instance.PullWord();
                 break;
 

@@ -48,21 +48,21 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 WordManager.Instance.answers.AddRange(scenarios[0].answers);
                 WordManager.Instance.questions.AddRange(scenarios[0].questions);
 
-                UIManager.Instance.UpdateForm(FormData.name, scenarios[0].callerName);
+                UIManager.Instance.UpdateForm(FormData.name, scenarios[0].callerInformations.name);
             break;
 
             case Scenario.HomeInvasion:
                 WordManager.Instance.answers.AddRange(scenarios[1].answers);
                 WordManager.Instance.questions.AddRange(scenarios[2].questions);
 
-                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerName);
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
             break;
 
             case Scenario.RisingWater:
                 WordManager.Instance.answers.AddRange(scenarios[2].answers);
                 WordManager.Instance.questions.AddRange(scenarios[2].questions);
 
-                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerName);
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
             break;
         }
 

@@ -13,6 +13,7 @@ public class PhysicsButton : MonoBehaviour
     public Transform buttonUpperLimit;
     private Renderer _meshRenderer;
     private Vector3 savedPosition;
+    private string savedUnit;
 
     [Header("Parameters")]
     public float threshHold;
@@ -36,6 +37,7 @@ public class PhysicsButton : MonoBehaviour
     [Header("State Color")]
     public bool isActivate;
     [SerializeField] private Material activateColor;
+    [SerializeField] private Material unavailableColor;
     [SerializeField] private Material desactivateColor;
 
     [Header("Debug")]
@@ -46,6 +48,10 @@ public class PhysicsButton : MonoBehaviour
     void Start()
     {
         _meshRenderer = buttonTop.GetComponent<Renderer>();
+        _audioSource = GetComponent<AudioSource>();
+        
+        UnitManager.Instance.physicsbuttons.Add(this);
+
         ChangeStateColor(isActivate);
 
         Collider localCollider = GetComponent<Collider>();
@@ -74,61 +80,61 @@ public class PhysicsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
-        buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
-        if (buttonTop.localPosition.y >= 0)
-            buttonTop.transform.position = new Vector3(buttonUpperLimit.position.x, buttonUpperLimit.position.y, buttonUpperLimit.position.z);
-        else
-            buttonTopRigid.AddForce(buttonTop.transform.up * force * Time.deltaTime);
-
-        if (buttonTop.localPosition.y <= buttonLowerLimit.localPosition.y)
-            buttonTop.transform.position = new Vector3(buttonLowerLimit.position.x, buttonLowerLimit.position.y, buttonLowerLimit.position.z);
-
-
-        if (Vector3.Distance(buttonTop.position, buttonLowerLimit.position) < upperLowerDiff * threshHold)
-            isPressed = true;
-        else
-            isPressed = false;
-
-        #region Press Events / Methods
-        //Using Events method (multiple reference)
-        if (isPressed && prevPressedState != isPressed && useEvents)
+        //If the current button is activate
+        if (isActivate)
         {
-            NumberOfPress(IncreasePressDetection(1));
-            
-            onPressed?.Invoke();
+            buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
+            buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
+            if (buttonTop.localPosition.y >= 0)
+                buttonTop.transform.position = new Vector3(buttonUpperLimit.position.x, buttonUpperLimit.position.y, buttonUpperLimit.position.z);
+            else
+                buttonTopRigid.AddForce(buttonTop.transform.up * force * Time.deltaTime);
 
-            if (debugMethod)
-                Debug.LogWarning("Using events invoke");
+            if (buttonTop.localPosition.y <= buttonLowerLimit.localPosition.y)
+                buttonTop.transform.position = new Vector3(buttonLowerLimit.position.x, buttonLowerLimit.position.y, buttonLowerLimit.position.z);
+
+
+            if (Vector3.Distance(buttonTop.position, buttonLowerLimit.position) < upperLowerDiff * threshHold)
+                isPressed = true;
+            else
+                isPressed = false;
+
+            #region Press Events / Methods
+            //Using Events method (multiple reference)
+            if (isPressed && prevPressedState != isPressed && useEvents)
+            {
+                onPressed?.Invoke();
+
+                if (debugMethod)
+                    Debug.LogWarning("Using events invoke");
+            }
+            else if (isPressed && prevPressedState != isPressed)
+            {
+                Pressed();
+
+                if (debugMethod)
+                    Debug.LogWarning("Using direct method");
+            }
+            #endregion
+
+            /*#region Release Events / Methods
+            //Using method in script (direct reference)
+            if (!isPressed && prevPressedState != isPressed)
+            {
+                onReleased?.Invoke();
+
+                if (debugMethod)
+                    Debug.LogWarning("Using events invoke");
+            }
+            else if (!isPressed && prevPressedState != isPressed)
+            {
+                Released();
+
+                if (debugMethod)
+                    Debug.LogWarning("Using direct method");
+            }
+            #endregion*/
         }
-        else if (isPressed && prevPressedState != isPressed)
-        {
-            NumberOfPress(IncreasePressDetection(1));
-
-            Pressed();
-
-            if (debugMethod)
-                Debug.LogWarning("Using direct method");
-        }
-        #endregion
-
-        #region Release Events / Methods
-        //Using method in script (direct reference)
-        if (!isPressed && prevPressedState != isPressed)
-        {
-            onReleased?.Invoke();
-
-            if (debugMethod)
-                Debug.LogWarning("Using events invoke");
-        }
-        else if (!isPressed && prevPressedState != isPressed)
-        {
-            Released();
-
-            if (debugMethod)
-                Debug.LogWarning("Using direct method");
-        }
-        #endregion
     }
 
     public void Pressed()
@@ -150,10 +156,12 @@ public class PhysicsButton : MonoBehaviour
         if (state)
         {
             _meshRenderer.material = activateColor;
+            buttonTop.GetComponent<Collider>().enabled = true;
         }
         else
         {
             _meshRenderer.material = desactivateColor;
+            buttonTop.GetComponent<Collider>().enabled = false;
         }
     }
 
@@ -162,22 +170,26 @@ public class PhysicsButton : MonoBehaviour
         switch (value)
         {
             case 1:
-                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.EM))
+                if (!UnitManager.Instance.unitsSend.Contains(Unit.EMS))
                 {
-                    UnitDispatcher.Instance.unitsSend.Add(Unit.EM);
-                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.EM);
+                    savedUnit = "Emergency Medical Services";
+
+                    UnitManager.Instance.unitsSend.Add(Unit.EMS);
+                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.EMS);
 
                 }
                 else
                 {
-                    Debug.LogWarning(Unit.EM + "have alreadu been register");
+                    Debug.LogWarning(Unit.EMS + "have alreadu been register");
                 }
                 break;
 
             case 2:
-                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.Police))
+                if (!UnitManager.Instance.unitsSend.Contains(Unit.Police))
                 {
-                    UnitDispatcher.Instance.unitsSend.Add(Unit.Police);
+                    savedUnit = "Police";
+
+                    UnitManager.Instance.unitsSend.Add(Unit.Police);
                     PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.Police);
                 }
                 else
@@ -187,9 +199,11 @@ public class PhysicsButton : MonoBehaviour
                 break;
 
             case 3:
-                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.FireDepartment))
+                if (!UnitManager.Instance.unitsSend.Contains(Unit.FireDepartment))
                 {
-                    UnitDispatcher.Instance.unitsSend.Add(Unit.FireDepartment);
+                    savedUnit = "Fire Department";
+
+                    UnitManager.Instance.unitsSend.Add(Unit.FireDepartment);
                     PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.FireDepartment);
                 }
                 else
@@ -199,11 +213,12 @@ public class PhysicsButton : MonoBehaviour
                 break;
 
             case 4:
-                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.SWAT))
+                if (!UnitManager.Instance.unitsSend.Contains(Unit.SWAT))
                 {
-                    UnitDispatcher.Instance.unitsSend.Add(Unit.SWAT);
-                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.SWAT);
+                    savedUnit = "S.W.A.T";
 
+                    UnitManager.Instance.unitsSend.Add(Unit.SWAT);
+                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.SWAT);
                 }
                 else
                 {
@@ -218,21 +233,29 @@ public class PhysicsButton : MonoBehaviour
         buttonTop.position = buttonUpperLimit.position;
     }
 
-    public int IncreasePressDetection(int value)
+    public void IncreasePressDetection(int value)
     {
-        return nPress += value;
+        nPress += value;
+        NumberOfPress(nPress);
     }
 
     public void NumberOfPress(int value)
     {
         if (value == 1)
         {
-            UnitDispatcher.Instance.UpdateUI();
+            UnitManager.Instance.UpdateUI();
+
+            nPress = 1;
         }
-        else if (value == 2)
+        else if (value > 2)
         {
-            UnitDispatcher.Instance.NextSequence();
-            UnitDispatcher.Instance.UpdateUI();
+            _meshRenderer.material = unavailableColor;
+
+            UnitManager.Instance.NextSequence();
+            UnitManager.Instance.UpdateUI();
+
+            UIManager.Instance.UpdateForm(FormData.unit, savedUnit);
+
             nPress = 2;
         }
     }

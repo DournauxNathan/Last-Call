@@ -4345,7 +4345,7 @@ MonoBehaviour:
   isOnHead: 0
   socket: {fileID: 1617292113}
   offset: 0.1
-  equip: 1
+  equip: 0
 --- !u!4 &543341187
 Transform:
   m_ObjectHideFlags: 0
@@ -11249,7 +11249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase: 0
+  currentPhase: 1
   references:
     xRInteractionManager: {fileID: 639667784}
     _RRig: {fileID: 1355308589}
@@ -11269,8 +11269,6 @@ MonoBehaviour:
     headsetManager: {fileID: 543341186}
   canImagine: 0
   isInImaginary: 0
-  pillsEffect: 0
-  currentPills: 0
   skipTuto: 1
   isTutoEnded: 1
   startTuto: 0
@@ -18836,6 +18834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1696208560}
   - component: {fileID: 1696208561}
+  - component: {fileID: 1696208563}
   - component: {fileID: 1696208562}
   m_Layer: 0
   m_Name: ScenarioManager
@@ -18891,6 +18890,20 @@ MonoBehaviour:
   setTimer: 5
   timeBetweenHint: 25
   timer: 0
+--- !u!114 &1696208563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696208559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6ebbbae3f5b154493d91769ff0e530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsbuttons: []
+  unitsSend: 
 --- !u!1 &1707579178
 GameObject:
   m_ObjectHideFlags: 0

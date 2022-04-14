@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Samples/XR Interaction Toolkit/1.0.0-pre.8/Default Input Actions/XRI Default Input Actions.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Packages/XR Interaction Toolkit/1.0.0-pre.8/Default Input Actions/XRI Default Input Actions.inputactions'
 
 using System;
 using System.Collections;

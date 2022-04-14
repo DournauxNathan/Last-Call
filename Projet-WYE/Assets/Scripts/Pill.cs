@@ -68,6 +68,6 @@ public class Pill : MonoBehaviour
     public void Eat()
     {
         ReputOnStock();
-        MasterManager.Instance.currentPills++;
+        //MasterManager.Instance.currentPills++;
     }
 }

@@ -6,26 +6,20 @@ using UnityEngine;
 public enum Unit
 {
     None = 0,
-    EM = 1,
+    EMS = 1,
     Police = 2,
     FireDepartment = 3,
     SWAT = 4,
     All = 5
 }
 
-public class UnitDispatcher :  Singleton<UnitDispatcher>
+public class UnitManager :  Singleton<UnitManager>
 {
-    [HideInInspector] public  Unit unitEnum;
-
-    public List<Unit> units;
-
     public List<PhysicsButton> physicsbuttons;
-
-    public bool unitUnlock = false;
 
     public List<Unit> unitsSend;
 
-    public int sequence;
+    private int sequence;
 
     public void UpdateUI()
     {
@@ -35,7 +29,7 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
             
             foreach (var button in physicsbuttons)
             {
-                button.isActivate = false;
+                button.ChangeStateColor(false);
             }
 
             StartCoroutine(SequenceManager(5f));
@@ -62,14 +56,7 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
         {
             foreach (var button in physicsbuttons)
             {
-                button.isActivate = true;
-            }
-        }
-        else
-        {
-            foreach (var button in physicsbuttons)
-            {
-                button.isActivate = false;
+                button.ChangeStateColor(true);
             }
         }
 
