@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum Unit
 {
-    None,
-    Police,
-    SWAT,
-    FireDepartment,
-    FAS,
-    All
+    None = 0,
+    EM = 1,
+    Police = 2,
+    FireDepartment = 3,
+    SWAT = 4,
+    All = 5
 }
 
 public class UnitDispatcher :  Singleton<UnitDispatcher>
 {
+    [HideInInspector] public  Unit unitEnum;
+
     public List<Unit> units;
 
     public List<PhysicsButton> physicsbuttons;
@@ -24,59 +27,11 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
 
     public int sequence;
 
-    public  void AddToUnlock(Unit unit) 
-    {
-        List<Unit> tempUnit = new List<Unit>();
-        tempUnit.Add(Unit.FAS);
-        tempUnit.Add(Unit.FireDepartment);
-        tempUnit.Add(Unit.SWAT);
-        tempUnit.Add(Unit.Police);
-
-        if (unit != Unit.None && !units.Contains(unit))
-        {
-            units.Add(unit);
-        }
-
-        if (unit == Unit.All)
-        {
-            units.Clear();
-            units.AddRange(tempUnit);
-            
-        }
-        UnlockPhysicsButton(unit);
-    }
-
-    public void UnlockPhysicsButton(Unit unit)
-    {
-        if(unit == Unit.All)
-        {
-            foreach (var button in physicsbuttons)
-            {
-                button.isActivate = true;
-            }
-        }
-        else 
-        {
-            foreach (var button in physicsbuttons)
-            {
-                if (button.unitToSend == unit)
-                {
-                    button.isActivate = true;
-                }
-            }
-        }
-    }
-
     public void UpdateUI()
     {
         if (sequence == 1)
         {
-            /*for (int i = 0; i < UIManager.Instance.checkListTransform.childCount; i++)
-            {
-                UIManager.Instance.checkListTransform.GetChild(i).GetComponent<InstantiableButton>().button.enabled = false;
-            }*/
-
-            UiTabSelection.Instance.SwitchSequence(1);
+            UIManager.Instance.UpdateUnitManager(1);
             
             foreach (var button in physicsbuttons)
             {
@@ -87,7 +42,8 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
         }
         else if (sequence == 3)
         {
-            UiTabSelection.Instance.SwitchSequence(sequence);
+            UIManager.Instance.UpdateUnitManager(sequence);
+
             StartCoroutine(SequenceManager(10f));
         }
     }
@@ -117,11 +73,11 @@ public class UnitDispatcher :  Singleton<UnitDispatcher>
             }
         }
 
-        UiTabSelection.Instance.SwitchSequence(sequence);
+        UIManager.Instance.UpdateUnitManager(sequence);
     }
 
     public void LoadUnitSequence()
     {
-        UiTabSelection.Instance.SwitchSequence(SaveQuestion.Instance.sequenceUnit);
+        UIManager.Instance.UpdateUnitManager(SaveQuestion.Instance.sequenceUnit);
     }
 }

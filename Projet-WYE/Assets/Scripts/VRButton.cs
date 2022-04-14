@@ -23,8 +23,9 @@ public class VRButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isPressed)
+        if (!isPressed && other.CompareTag("Hands"))
         {
+            Debug.Log("Pres");
             button.transform.localPosition = new Vector3(0, 0.003f, 0);
             presser = other.gameObject;
 

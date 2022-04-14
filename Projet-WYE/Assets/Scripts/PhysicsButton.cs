@@ -6,33 +6,48 @@ using UnityEngine.Events;
 
 public class PhysicsButton : MonoBehaviour
 {
-    [Header("")]
-    [Tooltip("Type of unit we want to send")]
-    public Unit unitToSend;
-    public int nPress = 0;
-    public bool isActivate;
-
-    [Header("Physics Properties")]
+    [Header("References")]
     public Rigidbody buttonTopRigid;
     public Transform buttonTop;
     public Transform buttonLowerLimit;
     public Transform buttonUpperLimit;
+    private Renderer _meshRenderer;
+    private Vector3 savedPosition;
+
+    [Header("Parameters")]
     public float threshHold;
     public float force = 10;
     private float upperLowerDiff;
-    public bool isPressed;
     private bool prevPressedState;
-    public AudioSource pressedSound;
-    public AudioSource releasedSound;
     public Collider[] CollidersToIgnore;
-    public UnityEvent onPressed, onReleased;
+    [Space(2)]
+    public bool isPressed;
+    public int nPress = 0;
 
+    [Header("SFX")]
+    public AudioClip pressedSound;
+    public AudioClip releasedSound;
+    private AudioSource _audioSource;
+
+    [Header("Events")]
+    public UnityEvent onPressed;
+    public UnityEvent onReleased;
+
+    [Header("State Color")]
+    public bool isActivate;
     [SerializeField] private Material activateColor;
     [SerializeField] private Material desactivateColor;
+
+    [Header("Debug")]
+    public bool useEvents;
+    public bool debugMethod = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        _meshRenderer = buttonTop.GetComponent<Renderer>();
+        ChangeStateColor(isActivate);
+
         Collider localCollider = GetComponent<Collider>();
         if (localCollider != null)
         {
@@ -46,6 +61,7 @@ public class PhysicsButton : MonoBehaviour
 
         if (transform.eulerAngles != Vector3.zero)
         {
+            savedPosition = transform.position;
             Vector3 savedAngle = transform.eulerAngles;
             transform.eulerAngles = Vector3.zero;
             upperLowerDiff = buttonUpperLimit.position.y - buttonLowerLimit.position.y;
@@ -58,16 +74,6 @@ public class PhysicsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActivate)
-        {
-            buttonTop.GetComponent<Renderer>().material = activateColor;
-        }
-        else
-        {
-            buttonTop.GetComponent<Renderer>().material = desactivateColor;
-        }
-
-
         buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
         buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
         if (buttonTop.localPosition.y >= 0)
@@ -84,62 +90,151 @@ public class PhysicsButton : MonoBehaviour
         else
             isPressed = false;
 
-        if (isPressed && prevPressedState != isPressed)
+        #region Press Events / Methods
+        //Using Events method (multiple reference)
+        if (isPressed && prevPressedState != isPressed && useEvents)
+        {
+            NumberOfPress(IncreasePressDetection(1));
+            
+            onPressed?.Invoke();
+
+            if (debugMethod)
+                Debug.LogWarning("Using events invoke");
+        }
+        else if (isPressed && prevPressedState != isPressed)
+        {
+            NumberOfPress(IncreasePressDetection(1));
+
             Pressed();
+
+            if (debugMethod)
+                Debug.LogWarning("Using direct method");
+        }
+        #endregion
+
+        #region Release Events / Methods
+        //Using method in script (direct reference)
         if (!isPressed && prevPressedState != isPressed)
+        {
+            onReleased?.Invoke();
+
+            if (debugMethod)
+                Debug.LogWarning("Using events invoke");
+        }
+        else if (!isPressed && prevPressedState != isPressed)
+        {
             Released();
+
+            if (debugMethod)
+                Debug.LogWarning("Using direct method");
+        }
+        #endregion
     }
 
-    // void FixedUpdate(){
-    //     Vector3 localVelocity = transform.InverseTransformDirection(buttonTop.GetComponent<Rigidbody>().velocity);
-    //     Rigidbody rb = buttonTop.GetComponent<Rigidbody>();
-    //     localVelocity.x = 0;
-    //     localVelocity.z = 0;
-    //     rb.velocity = transform.TransformDirection(localVelocity);
-    // }
-
-    void Pressed()
+    public void Pressed()
     {
-        Debug.Log("0");
         prevPressedState = isPressed;
-        pressedSound.pitch = 1;
-        pressedSound.Play();
-        onPressed.Invoke();
+        _audioSource.pitch = 1;
+        _audioSource.PlayOneShot(pressedSound);
     }
 
-    void Released()
+    public void Released()
     {
-        Debug.Log("1");
         prevPressedState = isPressed;
-        releasedSound.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
-        releasedSound.Play();
-        onReleased.Invoke();
+        _audioSource.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
+        _audioSource.PlayOneShot(releasedSound);
     }
 
-    public void IncreaseNumberOfPress()
+    public void ChangeStateColor(bool state)
     {
-        nPress++;
+        if (state)
+        {
+            _meshRenderer.material = activateColor;
+        }
+        else
+        {
+            _meshRenderer.material = desactivateColor;
+        }
+    }
 
-        if (nPress == 1)
+    public void RegisterUnit(int value)
+    {
+        switch (value)
+        {
+            case 1:
+                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.EM))
+                {
+                    UnitDispatcher.Instance.unitsSend.Add(Unit.EM);
+                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.EM);
+
+                }
+                else
+                {
+                    Debug.LogWarning(Unit.EM + "have alreadu been register");
+                }
+                break;
+
+            case 2:
+                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.Police))
+                {
+                    UnitDispatcher.Instance.unitsSend.Add(Unit.Police);
+                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.Police);
+                }
+                else
+                {
+                    Debug.LogWarning(Unit.Police + "have alreadu been register");
+                }
+                break;
+
+            case 3:
+                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.FireDepartment))
+                {
+                    UnitDispatcher.Instance.unitsSend.Add(Unit.FireDepartment);
+                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.FireDepartment);
+                }
+                else
+                {
+                    Debug.LogWarning(Unit.FireDepartment + "have alreadu been register");
+                }
+                break;
+
+            case 4:
+                if (!UnitDispatcher.Instance.unitsSend.Contains(Unit.SWAT))
+                {
+                    UnitDispatcher.Instance.unitsSend.Add(Unit.SWAT);
+                    PlaytestData.Instance.betaTesteurs.data.unitSended.Add(Unit.SWAT);
+
+                }
+                else
+                {
+                    Debug.LogWarning(Unit.SWAT + "have alreadu been register");
+                }
+                break;
+        }
+    }
+
+    public void UnStockButton()
+    {
+        buttonTop.position = buttonUpperLimit.position;
+    }
+
+    public int IncreasePressDetection(int value)
+    {
+        return nPress += value;
+    }
+
+    public void NumberOfPress(int value)
+    {
+        if (value == 1)
         {
             UnitDispatcher.Instance.UpdateUI();
         }
-        else if (nPress == 2)
+        else if (value == 2)
         {
             UnitDispatcher.Instance.NextSequence();
             UnitDispatcher.Instance.UpdateUI();
             nPress = 2;
         }
-    }
-
-    public void SendUnit()
-    {
-        if (!UnitDispatcher.Instance.unitsSend.Contains(unitToSend))
-        {
-            UnitDispatcher.Instance.unitsSend.Add(unitToSend);
-        }   
-
-        PlaytestData.Instance.betaTesteurs.data.unitSended.Add(unitToSend);
     }
 
     public void ChangeSceneButtun()

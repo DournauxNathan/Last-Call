@@ -17,18 +17,7 @@ public class XRBinder : MonoBehaviour
 
     public void OnAxisClick()
     {
-        if (MasterManager.Instance.currentPhase == Phases.Phase_1 && MasterManager.Instance.currentPhase == Phases.Phase_3)
-        {
-            int i = UiTabSelection.Instance.indexTab++;
 
-            if (i >= 3)
-            {
-                UiTabSelection.Instance.indexTab = 0;
-            }
-
-            UiTabSelection.Instance.UpdateIndex(i);
-            //UiTabSelection.Instance.SwitchTab(i);
-        }
     }
 
     public void OnMenuButton()

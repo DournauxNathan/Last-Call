@@ -43,22 +43,6 @@ public class MasterManager : Singleton<MasterManager>
 
     private void Start()
     {
-        if (currentPhase == Phases.Phase_3)
-        {
-            /*for (int i = 0; i < UIManager.Instance.checkListTransform.childCount; i++)
-            {
-                UIManager.Instance.checkListTransform.GetChild(i).GetComponent<InstantiableButton>().button.enabled = false;
-            }
-
-            for (int i = 0; i < UIManager.Instance.descriptionTransform.childCount; i++)
-            {
-                UIManager.Instance.descriptionTransform.GetChild(i).GetComponent<InstantiableButton>().button.enabled = false;
-            }*/
-
-            UnitDispatcher.Instance.sequence = 4;
-            UiTabSelection.Instance.SwitchSequence(UnitDispatcher.Instance.sequence);
-        }
-
         UpdateController();
     }
 
@@ -218,6 +202,7 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 isTutoEnded = true;
                 isInImaginary = false;
+                UIManager.Instance.UpdateUnitManager(4);
                 break;
 
             case 4:

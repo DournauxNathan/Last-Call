@@ -15,7 +15,10 @@ public class UIManager : Singleton<UIManager>
     [Header("Emergency Reports Form")]
     public Form currentForm;
     private FormData _formData;
-        
+
+    [Header("Unit Manager Feedbacks")]
+    public List<GameObject> unitDispatcherFeedbacks;
+
     public ParticleSystem smoke;
 
     public void UpdateForm(FormData _answerType, string data)
@@ -50,13 +53,11 @@ public class UIManager : Singleton<UIManager>
             SetFormToComplete();
         }
     }
-
     public void SetFormToComplete()
     {
         currentForm.isComplete = true;
         currentForm.stamp.enabled = true;
     }
-
     public void Fade(Fadetype type)
     {
         switch (type)
@@ -93,6 +94,39 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    public void UpdateUnitManager(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                unitDispatcherFeedbacks[0].SetActive(true);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 2:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(true);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 3:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(true);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 4:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(true);
+                break;
+        }
+    }
 }
 
 public enum Fadetype
