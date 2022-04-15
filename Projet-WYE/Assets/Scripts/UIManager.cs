@@ -19,6 +19,13 @@ public class UIManager : Singleton<UIManager>
     [Header("Unit Manager Feedbacks")]
     public List<GameObject> unitDispatcherFeedbacks;
 
+    [Header("Text Writing Effect")]
+    [SerializeField] float delayBeforeStart = 0f;
+    [SerializeField] float timeBtwChars = 0.1f;
+    [SerializeField] string leadingChar = "";
+    [SerializeField] bool leadingCharBeforeDelay = false;
+
+
     public ParticleSystem smoke;
 
     public void UpdateForm(FormData _answerType, string data)
@@ -26,25 +33,25 @@ public class UIManager : Singleton<UIManager>
         switch (_answerType)
         {
             case FormData.name:
-                currentForm.nameField.text = data.ToString();
+                StartCoroutine(TypeWriterTMP(currentForm.nameField, data.ToString()));
                 break;
 
             case FormData.age:
-                currentForm.ageField.text = data.ToString();
+                StartCoroutine(TypeWriterTMP(currentForm.ageField, data.ToString()));
                 break;
 
             case FormData.adress:
-                currentForm.adressField.text = data.ToString();
+                StartCoroutine(TypeWriterTMP(currentForm.adressField, data.ToString()));
                 break;
 
             case FormData.situation:
-                currentForm.situationField.text += data.ToString();
+                StartCoroutine(TypeWriterTMP(currentForm.situationField, data.ToString()));
                 break;
 
             case FormData.unit:
                 if (!currentForm.unitField.text.Contains(data.ToString()))
                 {
-                    currentForm.unitField.text += " " + data.ToString();
+                    StartCoroutine(TypeWriterTMP(currentForm.unitField, data.ToString()));
                 }
                 break;
         }
@@ -155,6 +162,31 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
     }
+
+
+    IEnumerator TypeWriterTMP(TMP_Text _tmpProText, string _writer)
+    {
+        _tmpProText.text += leadingCharBeforeDelay ? leadingChar : " ";
+
+        yield return new WaitForSeconds(delayBeforeStart);
+
+        foreach (char c in _writer)
+        {
+            if (_tmpProText.text.Length > 0)
+            {
+                _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
+            }
+            _tmpProText.text += c;
+            _tmpProText.text += leadingChar;
+            yield return new WaitForSeconds(timeBtwChars);
+        }
+
+        if (leadingChar != "")
+        {
+            _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
+        }
+    }
+
 }
 
 public enum Fadetype
