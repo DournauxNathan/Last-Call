@@ -16,6 +16,7 @@ public class Calls : MonoBehaviour
     private bool hasRingtone = false;
 
     public AudioSource audioSource;
+    public AudioSource fixedAudioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -60,9 +61,23 @@ public class Calls : MonoBehaviour
 
             audioSource.loop = false;
             audioSource.Stop();
-        }
+        }        
+    }
+    public void SwapAudioSource()
+    {
+        hasAnsered = false;
+        audioSource.loop = false;
+        audioSource.Stop();
 
-        
+        audioSource.enabled = false;
+        fixedAudioSource.clip = voicesLine;
+        fixedAudioSource.Play();
+
+    }
+
+    public void SwapAudioSource(AudioSource a, AudioSource b)
+    {
+        b = a;
     }
 
     public void HasDetatch()
