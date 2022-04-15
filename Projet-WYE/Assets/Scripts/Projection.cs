@@ -83,12 +83,21 @@ public class Projection : Singleton<Projection>
         if (transitionValue <= beginFadeOutAt)
         {
             UIManager.Instance.Fade(Fadetype.Out);
-            
+
+            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
+            {
+                UIManager.Instance.Fade(Fadetype.Out, UnitManager.Instance.physicsbuttons[i].icon);
+            }
         }
 
         if (transitionValue >= beginFadeInAt)
         {
             UIManager.Instance.Fade(Fadetype.In);
+
+            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
+            {
+                UIManager.Instance.Fade(Fadetype.In, UnitManager.Instance.physicsbuttons[i].icon);
+            }
         }
 
 

@@ -96,6 +96,25 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
     }
+    public void Fade(Fadetype type, CanvasGroup _canvas)
+    {
+        switch (type)
+        {
+            case Fadetype.In:
+                if (_canvas.alpha < 1)
+                {
+                    _canvas.alpha += Time.deltaTime;
+                }
+                break;
+
+            case Fadetype.Out:
+                if (_canvas.alpha > 0)
+                {
+                    _canvas.alpha -= Time.deltaTime;
+                }
+                break;
+        }
+    }
     public void UpdateUnitManager(int i)
     {
         switch (i)

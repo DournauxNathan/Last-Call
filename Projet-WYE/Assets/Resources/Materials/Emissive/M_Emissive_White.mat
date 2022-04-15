@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Emissive_White
-  m_Shader: {fileID: -6465566751694194690, guid: 8c262c007d3e03047a0514f20558349b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a69c98796c748664ea8b5d02547022a9, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -60,7 +60,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: ffdadf7ec78c15c43a21ec9d786c1a02, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainBump:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -99,7 +103,15 @@ Material:
         m_Texture: {fileID: 2800000, guid: dd2f4f6513f6c4543bddd3b2ee7b057d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SmoothnessMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_e3c757fc6aa9436dbd326c3d17f0c359_Out_0:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -128,11 +140,12 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorMask: 15
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dissolve: 0
+    - _Dissolve: 1.9
     - _DissolveScale: 10.5
     - _Distance: 30
     - _DstBlend: 0
@@ -141,31 +154,40 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 1
+    - _MetallicFactor: 0
     - _OcclusionStrength: 1
     - _OutlineWidth: 0.005
     - _Parallax: 0.008
     - _Parallax_1: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Shininess: 0.23
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _Surface: 0
+    - _UseUIAlphaClip: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - Color_1ecdc688644c42f19667280ef6d3da05: {r: 1, g: 1, b: 1, a: 0}
     - Color_78f1fe6007084d4992ef3ea0a1735a93: {r: 20.831373, g: 23.968628, b: 3.2627451, a: 0.8666667}
     - Color_ef7fd1b9f7974456bd71d013c03db6e8: {r: 0.30331075, g: 0.5510743, b: 0.9056604, a: 0}
-    - _BaseColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorA: {r: 0, g: 0, b: 0, a: 0}
     - _ColorB: {r: 0, g: 0, b: 0, a: 0}
     - _DissolveColor: {r: 1, g: 1, b: 1, a: 0}
-    - _EmissionColor: {r: 2, g: 2, b: 2, a: 1}
+    - _EmissionColor: {r: 3.5648696, g: 3.5648696, b: 3.5648696, a: 1}
     - _PlayerPos: {r: -0.394, g: 1, b: -0.25, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Specular: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6628871648958348766
 MonoBehaviour:

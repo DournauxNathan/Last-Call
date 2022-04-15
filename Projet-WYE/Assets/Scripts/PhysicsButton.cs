@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PhysicsButton : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PhysicsButton : MonoBehaviour
     public Transform buttonTop;
     public Transform buttonLowerLimit;
     public Transform buttonUpperLimit;
+    public CanvasGroup icon;
     private Renderer _meshRenderer;
     private Vector3 savedPosition;
     private string savedUnit;
@@ -80,77 +82,71 @@ public class PhysicsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //If the current button is activate
-        if (isActivate)
+        buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
+        buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
+        if (buttonTop.localPosition.y >= 0)
+            buttonTop.transform.position = new Vector3(buttonUpperLimit.position.x, buttonUpperLimit.position.y, buttonUpperLimit.position.z);
+        else
+            buttonTopRigid.AddForce(buttonTop.transform.up * force * Time.deltaTime);
+
+        if (buttonTop.localPosition.y <= buttonLowerLimit.localPosition.y)
+            buttonTop.transform.position = new Vector3(buttonLowerLimit.position.x, buttonLowerLimit.position.y, buttonLowerLimit.position.z);
+
+        if (Vector3.Distance(buttonTop.position, buttonLowerLimit.position) <= upperLowerDiff * threshHold)
+            isPressed = true;
+        else
+            isPressed = false;
+
+        #region Press Events / Methods
+        //Using Events method (multiple reference)
+        if (isPressed && prevPressedState != isPressed && useEvents)
         {
-            buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
-            buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
-            if (buttonTop.localPosition.y >= 0)
-                buttonTop.transform.position = new Vector3(buttonUpperLimit.position.x, buttonUpperLimit.position.y, buttonUpperLimit.position.z);
-            else
-                buttonTopRigid.AddForce(buttonTop.transform.up * force * Time.deltaTime);
+            onPressed?.Invoke();
 
-            if (buttonTop.localPosition.y <= buttonLowerLimit.localPosition.y)
-                buttonTop.transform.position = new Vector3(buttonLowerLimit.position.x, buttonLowerLimit.position.y, buttonLowerLimit.position.z);
-
-
-            if (Vector3.Distance(buttonTop.position, buttonLowerLimit.position) < upperLowerDiff * threshHold)
-                isPressed = true;
-            else
-                isPressed = false;
-
-            #region Press Events / Methods
-            //Using Events method (multiple reference)
-            if (isPressed && prevPressedState != isPressed && useEvents)
-            {
-                onPressed?.Invoke();
-
-                if (debugMethod)
-                    Debug.LogWarning("Using events invoke");
-            }
-            else if (isPressed && prevPressedState != isPressed)
-            {
-                Pressed();
-
-                if (debugMethod)
-                    Debug.LogWarning("Using direct method");
-            }
-            #endregion
-
-            /*#region Release Events / Methods
-            //Using method in script (direct reference)
-            if (!isPressed && prevPressedState != isPressed)
-            {
-                onReleased?.Invoke();
-
-                if (debugMethod)
-                    Debug.LogWarning("Using events invoke");
-            }
-            else if (!isPressed && prevPressedState != isPressed)
-            {
-                Released();
-
-                if (debugMethod)
-                    Debug.LogWarning("Using direct method");
-            }
-            #endregion*/
+            if (debugMethod)
+                Debug.LogWarning("Using events invoke");
         }
-    }
+        else if (isPressed && prevPressedState != isPressed)
+        {
+            Pressed();
 
+            if (debugMethod)
+                Debug.LogWarning("Using direct method");
+        }
+        #endregion
+
+        #region Release Events / Methods
+        /*
+        //Using method in script (direct reference)
+        if (!isPressed && prevPressedState != isPressed)
+        {
+            onReleased?.Invoke();
+
+            if (debugMethod)
+                Debug.LogWarning("Using events invoke");
+        }
+        else if (!isPressed && prevPressedState != isPressed)
+        {
+            Released();
+
+            if (debugMethod)
+                Debug.LogWarning("Using direct method");
+        }*/
+        #endregion
+    }
+    
     public void Pressed()
     {
         prevPressedState = isPressed;
         _audioSource.pitch = 1;
         _audioSource.PlayOneShot(pressedSound);
     }
-
     public void Released()
     {
         prevPressedState = isPressed;
         _audioSource.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
         _audioSource.PlayOneShot(releasedSound);
     }
-
     public void ChangeStateColor(bool state)
     {
         if (state)
@@ -164,7 +160,6 @@ public class PhysicsButton : MonoBehaviour
             buttonTop.GetComponent<Collider>().enabled = false;
         }
     }
-
     public void RegisterUnit(int value)
     {
         switch (value)
@@ -227,18 +222,15 @@ public class PhysicsButton : MonoBehaviour
                 break;
         }
     }
-
     public void UnStockButton()
     {
         buttonTop.position = buttonUpperLimit.position;
     }
-
     public void IncreasePressDetection(int value)
     {
         nPress += value;
         NumberOfPress(nPress);
     }
-
     public void NumberOfPress(int value)
     {
         if (value == 1)
