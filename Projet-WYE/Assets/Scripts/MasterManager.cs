@@ -47,7 +47,7 @@ public class MasterManager : Singleton<MasterManager>
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            SceneLoader.Instance.LoadNewScene("Office");
+            SceneLoader.Instance.LoadNewScene(SceneLoader.Instance.nameScene);
         }
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -132,17 +132,10 @@ public class MasterManager : Singleton<MasterManager>
         }
     }
 
-    public void ActivateImaginary(string name)
+    public void ChangeSceneByName(int value, string name)
     {
-        SetPhase(2);
         SceneLoader.Instance.LoadNewScene(name);
-        SetupPhase(2);
-    }
-
-    public void GoBackToOffice(string name)
-    {
-        SetPhase(3);
-        SceneLoader.Instance.LoadNewScene(name);
+        SetPhase(value);
     }
 
     public void StartTuto()
@@ -221,17 +214,26 @@ public class MasterManager : Singleton<MasterManager>
 
             case 1:
                 UpdateController();
-                UIManager.Instance.UpdateUnitManager(0);
                 WordManager.Instance.PullWord();
                 break;
 
             case 2:
+                MasterManager.Instance.isInImaginary = true;
+                UpdateController();
+                WordManager.Instance.PullWord();
+
+                Projection.Instance.SetTransitionValue(0);
                 Projection.Instance.enableTransition = false;
                 break;
 
             case 3:
+                Projection.Instance.SetTransitionValue(30);
+
                 isTutoEnded = true;
                 isInImaginary = false;
+                Projection.Instance.revealScene = true;
+
+                WordManager.Instance.PullWord();
                 UIManager.Instance.UpdateUnitManager(4);
                 break;
 

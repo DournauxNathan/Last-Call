@@ -56,8 +56,6 @@ public class DissolveEffect : Singleton<DissolveEffect>
         {
             particles.gameObject.SetActive(true);
             particles.Play();
-
-            Debug.Log("hey");
         }
         else
         {

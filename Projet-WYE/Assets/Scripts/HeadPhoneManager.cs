@@ -79,6 +79,6 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     {
         yield return new WaitForSeconds(3f);
 
-        MasterManager.Instance.ActivateImaginary("Appartment_Day1");
+        MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day1");
     }
 }

@@ -43,9 +43,7 @@ public class OrderController : Singleton<OrderController>
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
             
-            Projection.Instance.isTransition = true;
-            Projection.Instance.hasProjted = true;
-            Projection.Instance.Deconstruct();
+            Projection.Instance.enableTransition = true;
         }
         else
         {

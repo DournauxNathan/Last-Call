@@ -90,6 +90,8 @@ public class Reveal : MonoBehaviour
             {
                 amount = 30f;
 
+                StopAllCoroutines();
+
                 yield return null;
             }
 

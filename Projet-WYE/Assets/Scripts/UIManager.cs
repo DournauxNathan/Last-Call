@@ -162,7 +162,6 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-
     IEnumerator TypeWriterTMP(TMP_Text _tmpProText, string _writer)
     {
         _tmpProText.text += leadingCharBeforeDelay ? leadingChar : " ";

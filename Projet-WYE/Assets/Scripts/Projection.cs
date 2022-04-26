@@ -39,6 +39,7 @@ public class Projection : Singleton<Projection>
     [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
     [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
 
+    public bool revealScene;
 
     // Start is called before the first frame update
     void Start()
@@ -68,18 +69,23 @@ public class Projection : Singleton<Projection>
             {
                 for (int i = 0; i < item.objects.Count; i++)
                 {
-                    item.objects[i].SetFloat("_Dissolve", transitionValue);
+                    item.objects[i].SetFloat("_Dissolve", transitionValue);                    
                 }
             }
         }
+        
 
-        if (pauseBetweenTransition && isTransition && !isDisconstruc)
+        if (pauseBetweenTransition && isTransition)
         {
             Deconstruct();
         }
 
+        if (revealScene && !isTransition && enableTransition)
+        {
+            RevealScene();
+        }
 
-        if (transitionValue <= beginFadeOutAt)
+        if (transitionValue <= beginFadeOutAt && UIManager.Instance != null)
         {
             UIManager.Instance.Fade(Fadetype.Out);
 
@@ -99,7 +105,6 @@ public class Projection : Singleton<Projection>
             }
         }
 
-
         /* if (pauseBetweenTransition && isTransition && isDisconstruc)
          {
              Construct();
@@ -112,6 +117,17 @@ public class Projection : Singleton<Projection>
                  //DistanceDissolveTarget.Instance.SetObjectToTrack();
              }
          }*/
+    }
+
+    public void SetTransitionValue(int value)
+    {
+        foreach (var item in objectsToDissolve)
+        {
+            for (int i = 0; i < item.objects.Count; i++)
+            {
+                item.objects[i].SetFloat("_Dissolve", value);
+            }
+        }
     }
 
     public void ResetTransition()
@@ -151,11 +167,18 @@ public class Projection : Singleton<Projection>
         }
     }
 
+    public void RevealScene()
+    {
+        if (transitionValue < 30)
+        {
+            transitionValue += Time.deltaTime * time;
+        }
+    }
+
     public void Construct()
     {
         if (transitionValue < 15)
         {
-            isTransition = true;
             transitionValue += Time.deltaTime * time;
         }
         else if (hasCycle)
@@ -173,21 +196,17 @@ public class Projection : Singleton<Projection>
             StartCoroutine(WaitForVoid());//coroutine
             CallScene();
         }
-    }
-
-
-    
-
+    }   
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted)
+        if (!hasCycle && !hasProjted && !revealScene)
         {
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
-            //Debug.Log("Call Gameplay_Combination_Iteration");
-            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+
+            MasterManager.Instance.ChangeSceneByName(2,"Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
         }
 
         if (!hasCycle && hasProjted)
@@ -196,10 +215,8 @@ public class Projection : Singleton<Projection>
 
             MasterManager.Instance.isInImaginary = false;
                         
-            MasterManager.Instance.currentPhase = Phases.Phase_3;
-
-            //Debug.Log("Call Office");
-            MasterManager.Instance.GoBackToOffice("Office");
+            Debug.Log("Call Office");
+            MasterManager.Instance.ChangeSceneByName(3 ,"Office");
         }
     }
 
@@ -234,5 +251,4 @@ public class Projection : Singleton<Projection>
         public Location location;
         public List<Material> objects;
     }
-
 }
