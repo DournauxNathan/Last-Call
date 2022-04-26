@@ -6,6 +6,7 @@ using TMPro;
 
 public enum Scenario
 {
+    None,
     TrappedMan,
     HomeInvasion,
     RisingWater

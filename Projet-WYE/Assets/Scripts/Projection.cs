@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
@@ -90,7 +89,7 @@ public class Projection : Singleton<Projection>
             }
         }
 
-        if (transitionValue >= beginFadeInAt)
+        if (transitionValue >= beginFadeInAt && UIManager.Instance != null)
         {
             UIManager.Instance.Fade(Fadetype.In);
 

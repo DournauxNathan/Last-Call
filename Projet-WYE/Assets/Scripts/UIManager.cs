@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 
-[ExecuteInEditMode]
 public class UIManager : Singleton<UIManager>
 {
     [Header("Screens Canvas")]
