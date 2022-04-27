@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
     public Transform player;
 
-    [Space(5)] 
-    public List<Material> transitionShaders;
-    public List<Material> wallShader;
+    public List<ObjectIn> objectsToDissolve;
     [Space(5)]
-
+    public bool enableTransition;
     public bool isTransition;
-    [Range(0, 15)]
-    public float transitionValue = 15f;
+    [Range(0, 30)]
+    public float transitionValue = 30f;
     [Range(0, 8)]
     public float wallTransition;
     public bool setWallWithOutline = false;
@@ -37,19 +36,25 @@ public class Projection : Singleton<Projection>
     public bool hasProjted;
     private bool isDisconstruc;
 
+    [Header("Fade parameters")]
+    [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
+    [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
+
+    public bool revealScene;
+
     // Start is called before the first frame update
     void Start()
     {
-        //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat")
+        //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat");
         
-        foreach (var mat in transitionShaders)
+        foreach (var item in objectsToDissolve)
         {
-            mat.SetFloat("_Dissolve", 15f);
-        }
+            for (int i = 0; i < item.objects.Count; i++)
+            {
+                item.objects[i].SetVector("_PlayerPos", player.position);
 
-        foreach (var mat in wallShader)
-        {
-           //mat.SetFloat("_Dissolve", 8f);
+                item.objects[i].SetFloat("_Dissolve", transitionValue);
+            }
         }
 
         hasProjted = false;
@@ -59,33 +64,68 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        foreach (var mat in transitionShaders)
+        if (enableTransition)
         {
-            mat.SetVector("_PlayerPos", player.position);
-        
-            mat.SetFloat("_Dissolve", transitionValue);
-        }
+            foreach (var item in objectsToDissolve)
+            {
+                for (int i = 0; i < item.objects.Count; i++)
+                {
+                    item.objects[i].SetFloat("_Dissolve", transitionValue);                    
+                }
+            }
+        }        
 
-        foreach (var mat in wallShader)
-        {
-           // mat.SetFloat("_Dissolve", wallTransition);            
-        }
-
-        if (pauseBetweenTransition && isTransition && !isDisconstruc)
+        if (pauseBetweenTransition && isTransition)
         {
             Deconstruct();
         }
 
-        if (pauseBetweenTransition && isTransition && isDisconstruc)
+        if (revealScene && !isTransition && enableTransition)
         {
-            Construct();
+            RevealScene();
         }
 
-        if (transitionValue >= 2.5)
+        if (transitionValue <= beginFadeOutAt && UIManager.Instance != null)
         {
-            foreach (var mat in wallShader)
+            UIManager.Instance.Fade(Fadetype.Out);
+
+            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
             {
-                //DistanceDissolveTarget.Instance.SetObjectToTrack();
+                UIManager.Instance.Fade(Fadetype.Out, UnitManager.Instance.physicsbuttons[i].icon);
+            }
+        }
+
+        if (transitionValue >= beginFadeInAt && UIManager.Instance != null)
+        {
+            UIManager.Instance.Fade(Fadetype.In);
+
+            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
+            {
+                UIManager.Instance.Fade(Fadetype.In, UnitManager.Instance.physicsbuttons[i].icon);
+            }
+        }
+
+        /* if (pauseBetweenTransition && isTransition && isDisconstruc)
+         {
+             Construct();
+         }
+
+         if (transitionValue >= 2.5)
+         {
+             foreach (var mat in wallShader)
+             {
+                 //DistanceDissolveTarget.Instance.SetObjectToTrack();
+             }
+         }*/
+    }
+
+    public void SetTransitionValue(int value)
+    {
+        foreach (var item in objectsToDissolve)
+        {
+            for (int i = 0; i < item.objects.Count; i++)
+            {
+                item.objects[i].SetFloat("_Dissolve", value);
             }
         }
     }
@@ -121,9 +161,17 @@ public class Projection : Singleton<Projection>
         {
             transitionValue = 0;
             isDisconstruc = true;
-            StartCoroutine(WaitForVoid());//coroutine
+            StartCoroutine(WaitForVoid());
             CallScene();
             ToggleProjection();
+        }
+    }
+
+    public void RevealScene()
+    {
+        if (transitionValue < 30)
+        {
+            transitionValue += Time.deltaTime * time;
         }
     }
 
@@ -131,7 +179,6 @@ public class Projection : Singleton<Projection>
     {
         if (transitionValue < 15)
         {
-            isTransition = true;
             transitionValue += Time.deltaTime * time;
         }
         else if (hasCycle)
@@ -149,17 +196,17 @@ public class Projection : Singleton<Projection>
             StartCoroutine(WaitForVoid());//coroutine
             CallScene();
         }
-    }
+    }   
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted)
+        if (!hasCycle && !hasProjted && !revealScene)
         {
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
-            //Debug.Log("Call Gameplay_Combination_Iteration");
-            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+
+            MasterManager.Instance.ChangeSceneByName(2,"Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
         }
 
         if (!hasCycle && hasProjted)
@@ -168,10 +215,7 @@ public class Projection : Singleton<Projection>
 
             MasterManager.Instance.isInImaginary = false;
                         
-            MasterManager.Instance.currentPhase = Phases.Phase_3;
-
-            //Debug.Log("Call Office");
-            MasterManager.Instance.GoBackToOffice("Office");
+            MasterManager.Instance.ChangeSceneByName(3 ,"Office");
         }
     }
 
@@ -194,4 +238,16 @@ public class Projection : Singleton<Projection>
         pauseBetweenTransition = true;
     }
 
+    public enum Location
+    {
+        Office,
+        Imaginary
+    }
+
+    [System.Serializable]
+    public class ObjectIn
+    {
+        public Location location;
+        public List<Material> objects;
+    }
 }

@@ -4,324 +4,191 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class UIManager : Singleton<UIManager>
 {
-    public List<QuestionFormat> protocoleQuestions;
-    public List<QuestionFormat> descriptionQuestion;
+    [Header("Screens Canvas")]
+    public CanvasGroup[] _canvasGroup;
 
-    [Header("Refs - Phase 1")]
-    public List<InstantiableButton> buttons;
-    public Transform checkListTransform = null;
-    public Transform descriptionTransform = null;
-    [Space(5)]
-    [SerializeField] private Transform pullingStock = null;
-    public CanvasGroup leftScreen;
+    [Header("Emergency Reports Form")]
+    public Form currentForm;
+    private FormData _formData;
 
-    [Header("Refs - Phase 2")]
-    public List<InstantiableButton> _buttons;
-    public Transform orderListTransform = null;
-    [Space(5)]
-    [SerializeField] private Transform pullingStockB = null;
-    public CanvasGroup rightScreen;
+    [Header("Unit Manager Feedbacks")]
+    public List<GameObject> unitDispatcherFeedbacks;
 
-    [Header("Fade parameters")]
-    [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
-    [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
+    [Header("Text Writing Effect")]
+    [SerializeField] float delayBeforeStart = 0f;
+    [SerializeField] float timeBtwChars = 0.1f;
+    [SerializeField] string leadingChar = "";
+    [SerializeField] bool leadingCharBeforeDelay = false;
 
-    private bool fadeOut = false;
-    private bool fadeIn = false;
 
-    [Header("Debug, Transition to Imaginaire")]
-    [SerializeField] private int nQuestionAnswer;
-    [SerializeField] private bool unlockImaginaryTransition = false;
     public ParticleSystem smoke;
 
-    public GameObject startSelectbutton;
-
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateForm(FormData _answerType, string data)
     {
-        if (SceneLoader.Instance.GetCurrentScene().name == "Office" && OrderController.Instance.currentNumberOfCombinaison <= 0)
+        switch (_answerType)
         {
-            MasterManager.Instance.currentPhase = Phases.Phase_1;
-        }
-        else
-        {
-            MasterManager.Instance.currentPhase = Phases.Phase_3;
-        }
+            case FormData.name:
+                StartCoroutine(TypeWriterTMP(currentForm.nameField, data.ToString()));
+                break;
 
-        EventSystem.current.SetSelectedGameObject(startSelectbutton.GetComponentInChildren<Button>().gameObject);
+            case FormData.age:
+                StartCoroutine(TypeWriterTMP(currentForm.ageField, data.ToString()));
+                break;
 
-        if (MasterManager.Instance.isTutoEnded || MasterManager.Instance.skipTuto)
-        {            
-            LoadQuestions();
-            PullQuestion();
-        }
+            case FormData.adress:
+                StartCoroutine(TypeWriterTMP(currentForm.adressField, data.ToString()));
+                break;
 
-        CheckButtons();
-    }
+            case FormData.situation:
+                StartCoroutine(TypeWriterTMP(currentForm.situationField, data.ToString()));
+                break;
 
-    public void PullQuestion()
-    {
-        if (ScenarioManager.Instance.isScenarioLoaded)
-        {            
-            ScenarioManager.Instance.isScenarioLoaded = false;
-
-            for (int i = 0; i < protocoleQuestions.Count; i++)
-            {
-                var but = FindAvailableButtonForQuestion(protocoleQuestions[i], checkListTransform);
-            }
-
-            for (int i = 0; i < descriptionQuestion.Count; i++)
-            {
-                var but = FindAvailableButtonForQuestion(descriptionQuestion[i], descriptionTransform);
-            }
-
-            StartCoroutine(ExecuteAfterTime(.5f));
-        }
-
-        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
-        {
-            /*if (OrderController.Instance.GetResolve())
-            {*/
-                for (int i = 0; i < OrderController.Instance.ordersStrings.Count; i++)
+            case FormData.unit:
+                if (!currentForm.unitField.text.Contains(data.ToString()))
                 {
-                    var but = FindAvailableButtonForOrder(OrderController.Instance.ordersStrings[i]);
+                    StartCoroutine(TypeWriterTMP(currentForm.unitField, data.ToString()));
                 }
-            //}
+                break;
+        }
 
-            UpdateEventSystem(orderListTransform);
+        if (currentForm.nameField.text != string.Empty && currentForm.ageField.text != string.Empty
+            && currentForm.adressField.text != string.Empty && currentForm.situationField.text != string.Empty
+            && currentForm.unitField.text != string.Empty)
+        {
+            SetFormToComplete();
         }
     }
-    IEnumerator ExecuteAfterTime(float time)
+    public void SetFormToComplete()
     {
-        yield return new WaitForSeconds(time);
-        
-        EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(0).GetComponentInChildren<Button>().gameObject);
-        //UpdateEventSystem(checkListTransform);
+        currentForm.isComplete = true;
+        currentForm.stamp.enabled = true;
     }
-
-    public void UpdateEventSystem(Transform transform)
+    public void Fade(Fadetype type)
     {
-        if (transform.name == checkListTransform.name)
+        switch (type)
         {
-            for (int i = checkListTransform.childCount - 1; i >= 0; i--)
-            {
-                if (checkListTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
+            case Fadetype.In:
+                foreach (CanvasGroup canvas in _canvasGroup)
                 {
-                    EventSystem.current.SetSelectedGameObject(checkListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
-                }
-            }
-        }
+                    if (canvas.alpha < 1)
+                    {
+                        canvas.alpha += Time.deltaTime;
 
-        if (transform.name == descriptionTransform.name)
-        {
-            for (int i = descriptionTransform.childCount - 1; i >= 0; i--)
-            {
-                if (descriptionTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
+                        if (canvas.alpha >= 1)
+                        {
+                            smoke.Play();
+                        }
+                    }
+                }
+                break;
+
+            case Fadetype.Out:
+                foreach (CanvasGroup canvas in _canvasGroup)
                 {
-                    EventSystem.current.SetSelectedGameObject(descriptionTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
-                }
-            }
-        }
+                    if (canvas.alpha > 0)
+                    {
+                        canvas.alpha -= Time.deltaTime;
 
-        if (transform.name == orderListTransform.name)
+                        if (canvas.alpha <= 0)
+                        {
+                            smoke.Play();
+                        }
+                    }
+                }
+                break;
+        }
+    }
+    public void Fade(Fadetype type, CanvasGroup _canvas)
+    {
+        switch (type)
         {
-            for (int i = orderListTransform.childCount - 1; i >= 0; i--)
-            {
-                if (orderListTransform.GetChild(i).GetComponentInChildren<Button>().enabled)
+            case Fadetype.In:
+                if (_canvas.alpha < 1)
                 {
-                    EventSystem.current.SetSelectedGameObject(orderListTransform.GetChild(i).GetComponentInChildren<Button>().gameObject);
+                    _canvas.alpha += Time.deltaTime;
                 }
-            }
-        }
-    }
+                break;
 
-    public void Update()
-    {
-        if (unlockImaginaryTransition)
-        {
-            unlockImaginaryTransition = !unlockImaginaryTransition;
-        }
-
-        if (Projection.Instance.transitionValue <= beginFadeOutAt)
-        {
-            HideUI();
-            smoke.Stop();
-        }
-
-        if (Projection.Instance.transitionValue >= beginFadeInAt)
-        {
-            ShowUI();
-
-            smoke.Play();
-        }
-
-        if (fadeIn) //Show UI
-        {
-            if (leftScreen != null)
-            {
-                StartFadeIn(leftScreen);
-
-                if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+            case Fadetype.Out:
+                if (_canvas.alpha > 0)
                 {
-                    StartFadeIn(rightScreen);
+                    _canvas.alpha -= Time.deltaTime;
                 }
-            }
+                break;
         }
-
-        if (fadeOut) //Hide UI
+    }
+    public void UpdateUnitManager(int i)
+    {
+        switch (i)
         {
-            StartFadeOut(leftScreen);
+            case 0:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 1:
+                unitDispatcherFeedbacks[0].SetActive(true);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 2:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(true);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 3:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(true);
+                unitDispatcherFeedbacks[3].SetActive(false);
+                break;
+
+            case 4:
+                unitDispatcherFeedbacks[0].SetActive(false);
+                unitDispatcherFeedbacks[1].SetActive(false);
+                unitDispatcherFeedbacks[2].SetActive(false);
+                unitDispatcherFeedbacks[3].SetActive(true);
+                break;
         }
     }
 
-    public InstantiableButton FindAvailableButtonForQuestion(QuestionFormat question, Transform _transform)
+    IEnumerator TypeWriterTMP(TMP_Text _tmpProText, string _writer)
     {
-        if (question != null)
+        _tmpProText.text += leadingCharBeforeDelay ? leadingChar : " ";
+
+        yield return new WaitForSeconds(delayBeforeStart);
+
+        foreach (char c in _writer)
         {
-            foreach (var but in buttons)
+            if (_tmpProText.text.Length > 0)
             {
-                if (!but.isInstiantiated)
-                {
-                    but.ActivateQuestion(_transform, pullingStock, question);
-                    return but;
-                }
+                _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
             }
+            _tmpProText.text += c;
+            _tmpProText.text += leadingChar;
+            yield return new WaitForSeconds(timeBtwChars);
         }
 
-        Debug.LogError("Not enough buttons");
-        return null;
-    }
-    public InstantiableButton FindAvailableButtonForOrder(Order order)
-    {
-        if (order != null)
+        if (leadingChar != "")
         {
-            foreach (var but in _buttons)
-            {
-                if (!but.isInstiantiated)
-                {
-                    but.ActivateOrder(orderListTransform, pullingStockB, order);
-                    return but;
-                }
-            }
-        }
-
-        Debug.LogError("Not enough buttons");
-        return null;
-    }
-
-    public void ShowUI()
-    {
-        fadeIn = true;
-    }
-
-    public void HideUI()
-    {
-        fadeOut = true;
-    }
-
-    public void StartFadeIn(CanvasGroup uiGroupToFade)
-    {
-        if (uiGroupToFade.alpha < 1)
-        {
-            uiGroupToFade.alpha += Time.deltaTime;
-
-            if (uiGroupToFade.alpha >= 1)
-            {
-                fadeIn = false;
-            }
+            _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
         }
     }
 
-    public void StartFadeOut(CanvasGroup uiGroupToFade)
-    {
-        if (uiGroupToFade.alpha >= 0)
-        {
-            uiGroupToFade.alpha -= Time.deltaTime;
+}
 
-            if (uiGroupToFade.alpha == 0)
-            {
-                fadeOut = false;
-            }
-        }
-    }
-
-    public void Ask()
-    {
-        nQuestionAnswer++;
-    } 
-
-    public bool CheckAnswer()
-    {        
-        if (nQuestionAnswer > descriptionQuestion.Count)
-        {
-            return MasterManager.Instance.canImagine = true;
-        }
-        else
-        {
-            return MasterManager.Instance.canImagine = false;
-        }
-    }
-
-    public void ToggleButton()
-    {
-        /*for (int i = 0; i < checkListTransform.childCount; i++)
-        {
-            checkListTransform.GetChild(i).GetComponent<Button>().interactable = !checkListTransform.GetChild(i).GetComponent<Button>().interactable;
-        }
-
-        for (int i = 0; i < descriptionTransform.childCount; i++)
-        {
-            descriptionTransform.GetChild(i).GetComponent<Button>().interactable = !descriptionTransform.GetChild(i).GetComponent<Button>().interactable;
-        }*/
-
-        foreach (var button in buttons)
-        {
-            button.gameObject.GetComponentInChildren<Button>().enabled = !button.gameObject.GetComponentInChildren<Button>().enabled;
-
-            /*if (button.gameObject.GetComponentInChildren<Button>().enabled)
-            {
-                button.gameObject.GetComponentInChildren<Button>().colors = 
-            }
-            else
-            {
-                button.gameObject.GetComponentInChildren<Button>().colors = ColorBlock.defaultColorBlock;
-            }*/
-        }
-    }
-
-    public void LoadQuestions()
-    {
-        switch (ScenarioManager.Instance.currentScenario)
-        {
-            case Scenario.TrappedMan:
-                descriptionQuestion.AddRange(ScenarioManager.Instance.trappedMan);
-            break;
-
-            case Scenario.HomeInvasion:
-                descriptionQuestion.AddRange(ScenarioManager.Instance.homeInvasion);
-            break;
-
-            case Scenario.DomesticAbuse:
-                descriptionQuestion.AddRange(ScenarioManager.Instance.domesticAbuse);
-            break;
-
-            case Scenario.RisingWater:
-                    descriptionQuestion.AddRange(ScenarioManager.Instance.risingWater);
-            break;
-        }        
-
-        ScenarioManager.Instance.isScenarioLoaded = true;
-    }
-
-    //Check si les questions ont déjà été répondu entre les transition
-    public void CheckButtons()
-    {
-        foreach (var button in buttons)
-        {
-            button.IsAnswered();
-        }
-    }
+public enum Fadetype
+{
+    In,
+    Out
 }

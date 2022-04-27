@@ -8,7 +8,7 @@ public class OnClick : MonoBehaviour
     public void Click()
     {
         //onClick?.Invoke();
-        MasterManager.Instance.ActivateImaginary(s);
+        MasterManager.Instance.ChangeSceneByName(1,s);
     }
 
    

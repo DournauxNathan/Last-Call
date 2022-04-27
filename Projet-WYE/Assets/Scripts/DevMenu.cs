@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class DevMenu : MonoBehaviour
 {
-    [SerializeField] private Transform mainMenu;
+    [SerializeField] private Transform f3Menu;
+    [SerializeField] private Transform f5Menu;
+    [SerializeField] private Transform XRf5Menu;
     [SerializeField] private bool isInDevMode = true;
     [SerializeField] private bool isEnable = false;
     [SerializeField] private bool isConfirming = false;
@@ -23,7 +25,9 @@ public class DevMenu : MonoBehaviour
     {
         if (!isEnable)
         {
-            mainMenu.gameObject.SetActive(false);
+            f3Menu.gameObject.SetActive(false);
+            f5Menu.gameObject.SetActive(false);
+            XRf5Menu.gameObject.SetActive(false);
         }
     }
 
@@ -32,8 +36,6 @@ public class DevMenu : MonoBehaviour
     {
         ToggleMenu();
         SendJson();
-        GoToAppartment();
-        GoToOffice();
     }
 
     private void ToggleMenu()
@@ -42,18 +44,46 @@ public class DevMenu : MonoBehaviour
         {
             if (isEnable)
             {
-                mainMenu.gameObject.SetActive(false);
+                f3Menu.gameObject.SetActive(false);
                 isEnable = false;
             }
             else
             {
-                mainMenu.gameObject.SetActive(true);
+                f3Menu.gameObject.SetActive(true);
                 _InputField.text = playtestData.betaTesteurs.player;
                 Invoke("SelectField", 0.1f);// test
                 isEnable = true;
             }
         }
+
+        if (Keyboard.current[Key.F5].wasPressedThisFrame && isInDevMode)
+        {
+            if (isEnable)
+            {
+                f5Menu.gameObject.SetActive(false);
+                isEnable = false;
+            }
+            else
+            {
+                f5Menu.gameObject.SetActive(true);
+                isEnable = true;
+            }
+        }
     }
+
+    public void OpenF5Menu()
+    {
+        if (isEnable)
+        {
+            XRf5Menu.gameObject.SetActive(false);
+            isEnable = false;
+        }
+        else
+        {
+            XRf5Menu.gameObject.SetActive(true);
+            isEnable = true;
+        }
+    }   
 
     private void SelectField()
     {
@@ -100,19 +130,4 @@ public class DevMenu : MonoBehaviour
         }
     }
 
-    private void GoToAppartment()
-    {
-        if (Keyboard.current[Key.F1].wasPressedThisFrame && isEnable)
-        {
-            SceneLoader.Instance.LoadNewScene("Appartment");
-        }
-    }
-
-    private void GoToOffice()
-    {
-        if (Keyboard.current[Key.F2].wasPressedThisFrame && isEnable)
-        {
-            SceneLoader.Instance.LoadNewScene("Office");
-        }
-    }
 }

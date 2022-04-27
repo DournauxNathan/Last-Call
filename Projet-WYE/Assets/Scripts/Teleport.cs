@@ -6,7 +6,7 @@ using UnityEngine;
 public class Teleport : Singleton<Teleport>
 {
     private Transform position;
-    [SerializeField] private bool teleport;
+    public bool teleportAtStart;
     [SerializeField] private bool isActive;
 
     [SerializeField] private CapsuleCollider m_Collider;
@@ -20,14 +20,14 @@ public class Teleport : Singleton<Teleport>
             GetComponentInChildren<Renderer>().enabled = isActive;
         }
         
-        if (!isActive)
+        if (teleportAtStart)
         {
-            MasterManager.Instance.player.transform.position = position.position;
+            MasterManager.Instance.references.player.transform.position = position.position;
         }
     }
     private void Update()
     {
-        if (MasterManager.Instance.player.transform.position != position.position && MasterManager.Instance.player.transform != null)
+        if (MasterManager.Instance.references.player.transform.position != position.position && MasterManager.Instance.references.player.transform != null)
         {
             m_Collider.isTrigger = false;
             
@@ -40,8 +40,8 @@ public class Teleport : Singleton<Teleport>
 
     public void TeleportTo()
     {
-        MasterManager.Instance.player.GetComponent<VignetteApplier>().FadeIn();
-        MasterManager.Instance.player.transform.position = position.position;
+        MasterManager.Instance.references.player.GetComponent<VignetteApplier>().FadeIn();
+        MasterManager.Instance.references.player.transform.position = position.position;
         
         m_Collider.isTrigger = true;
 

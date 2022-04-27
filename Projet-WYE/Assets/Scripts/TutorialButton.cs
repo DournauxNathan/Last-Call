@@ -14,7 +14,7 @@ public class TutorialButton : InstantiableButton
     private bool isPlaying;
 
     public AudioSource phoneAudioSource;
-
+/*
     // Start is called before the first frame update
     void Start()
     {
@@ -67,5 +67,5 @@ public class TutorialButton : InstantiableButton
             toggle.enabled = false;
             toggle.isOn = true;
         }
-    }
+    }*/
 }

@@ -15,18 +15,6 @@ public class CombinableObject : CombinableObject_Data
     {
         GetComponent();
         SetOutline();
-
-        if (MasterManager.Instance.objectActivator != null)
-        {
-            if (MasterManager.Instance.objectActivator.objectByIdList.ContainsKey(iD))
-            {
-                List<GameObject> tempObject;
-
-                tempObject = MasterManager.Instance.objectActivator.objectByIdList[iD];
-                MasterManager.Instance.objectActivator.objectByIdList.Remove(iD);
-                return;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)

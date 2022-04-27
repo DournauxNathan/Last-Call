@@ -42,10 +42,11 @@ public class OrderController : Singleton<OrderController>
         {
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
-            
-            Projection.Instance.isTransition = true;
-            Projection.Instance.hasProjted = true;
-            Projection.Instance.Deconstruct();
+
+            if (MasterManager.Instance.currentPhase == Phases.Phase_2)
+            {
+                MasterManager.Instance.SetPhase(3);
+            }
         }
         else
         {
@@ -53,13 +54,14 @@ public class OrderController : Singleton<OrderController>
         }
     }
 
-    public void AddCombinaison(CombinableObject a, CombinableObject b, int _value, string _outcome)
+    public void AddCombinaison(CombinableObject a, CombinableObject b, int _value, string _outcome, bool _lethality)
     {
         Combinaison newCombi = new Combinaison {
             currentCombinaison = a.name+ "+ " + b.name,
             objetA = a.name,
             objetB = b.name,
             value = _value,
+            isLethal = _lethality
         }; 
 
         text.text = newCombi.currentCombinaison;
@@ -68,14 +70,15 @@ public class OrderController : Singleton<OrderController>
 
         PlaytestData.Instance.betaTesteurs.data.combinaisonsMade.Add(newCombi);
 
-        AddOrder(newCombi.value, _outcome);
+        AddOrder(newCombi.value, _outcome, newCombi.isLethal);
     }
 
-    public void AddOrder(int value, string outcome)
+    public void AddOrder(int value, string outcome, bool lethality)
     {
         Order newOrder = new Order {
             order = outcome,
             influence = value,
+            isLethal = lethality
         };
 
         ordersStrings.Add(newOrder);
@@ -93,6 +96,7 @@ public class Combinaison
     public string objetA;
     public string objetB;
     public int value;
+    public bool isLethal;
 }
 
 [System.Serializable]
@@ -100,5 +104,6 @@ public class Order
 {
     public string order;
     public int influence;
+    public bool isLethal;
     public AudioClip[] voiceLines;
 }

@@ -9,6 +9,6 @@ public class XRDirectInteractorWithAutoSetup : XRDirectInteractor
     protected override void Awake()
     {
         base.Awake();
-        interactionManager = MasterManager.Instance.xRInteractionManager;
+        interactionManager = MasterManager.Instance.references.xRInteractionManager;
     }
 }

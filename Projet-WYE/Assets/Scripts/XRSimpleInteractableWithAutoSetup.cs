@@ -9,7 +9,7 @@ public class XRSimpleInteractableWithAutoSetup : XRSimpleInteractable
     protected override void Awake()
     {
         base.Awake();
-        interactionManager = MasterManager.Instance.xRInteractionManager;
+        interactionManager = MasterManager.Instance.references.xRInteractionManager;
         
         if (GetComponent<MeshCollider>() != null)
         {

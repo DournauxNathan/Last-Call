@@ -7,7 +7,6 @@ public class Pill : MonoBehaviour
     [Header("Refs")]
     public Renderer meshRender;
     public CapsuleCollider capsuleCollider;
-    public SphereCollider sphereCollider;
 
     [HideInInspector] public bool isInstiantiated;
     [HideInInspector] public bool hasMove = false;
@@ -34,7 +33,6 @@ public class Pill : MonoBehaviour
 
         this.meshRender.enabled = true;
         this.capsuleCollider.enabled = true;
-        this.sphereCollider.enabled = true;
 
         isActive = true;
         isInstiantiated = true;
@@ -58,7 +56,6 @@ public class Pill : MonoBehaviour
     {
         this.meshRender.enabled = false;
         this.capsuleCollider.enabled = false;
-        this.sphereCollider.enabled = false;
 
         Desactivate();
         transform.SetParent(stock);
@@ -68,6 +65,6 @@ public class Pill : MonoBehaviour
     public void Eat()
     {
         ReputOnStock();
-        MasterManager.Instance.currentPills++;
+        //MasterManager.Instance.currentPills++;
     }
 }

@@ -1,41 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public enum Scenario
 {
+    None,
     TrappedMan,
     HomeInvasion,
-    DomesticAbuse,
     RisingWater
 }
 
 public class ScenarioManager : Singleton<ScenarioManager>
 {
     public Scenario currentScenario;
+    public List<ScenarioData> scenarios;
 
     public bool isScenarioLoaded = false;
     [Range(-10, 10)]
     public float endingValue = 0f;
-
-    [Header("Questions - Protocoles ")]
-    public List<QuestionFormat> protocol;
-
-    [Header("Questions - Description")]
-    public List<QuestionFormat> trappedMan;
-    public List<QuestionFormat> homeInvasion;
-    public List<QuestionFormat> domesticAbuse;
-    public List<QuestionFormat> risingWater;
-
-    [Header("Orders")]
-    public List<OrderFormat> o_trappedMan;
-    public List<OrderFormat> o_homeInvasion;
-    public List<OrderFormat> o_domesticAbuse;
-
-    [Header("Answers - Protocoles")]
-    public List<ProtocolFormat> p_trappedMan;
-    public List<ProtocolFormat> p_homeInvasion;
-    public List<ProtocolFormat> p_domesticAbuse;
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
@@ -49,9 +33,6 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 currentScenario = Scenario.HomeInvasion;
                 break;
             case 3:
-                currentScenario = Scenario.DomesticAbuse;
-                break;
-            case 4:
                 currentScenario = Scenario.RisingWater;
                 break;
         }
@@ -64,18 +45,49 @@ public class ScenarioManager : Singleton<ScenarioManager>
     {
         switch (currentScenario)
         {
-                case Scenario.TrappedMan:
-                    UIManager.Instance.descriptionQuestion.AddRange(trappedMan);
-                    break;
-                case Scenario.HomeInvasion:
-                    UIManager.Instance.descriptionQuestion.AddRange(homeInvasion);
-                    break;
-                case Scenario.DomesticAbuse:
-                    UIManager.Instance.descriptionQuestion.AddRange(domesticAbuse);
-                    break;
+            case Scenario.TrappedMan:
+                WordManager.Instance.answers.AddRange(scenarios[0].answers);
+                WordManager.Instance.questions.AddRange(scenarios[0].questions);
+
+            break;
+
+            case Scenario.HomeInvasion:
+                WordManager.Instance.answers.AddRange(scenarios[1].answers);
+                WordManager.Instance.questions.AddRange(scenarios[2].questions);
+
+            break;
+
+            case Scenario.RisingWater:
+                WordManager.Instance.answers.AddRange(scenarios[2].answers);
+                WordManager.Instance.questions.AddRange(scenarios[2].questions);
+
+            break;
         }
-        //LoadProtocolAnswer();Debug.Log("Load: " + currentScenario.ToString()); // 
+
+        //Debug.Log("Load: " + currentScenario.ToString());
         isScenarioLoaded = true;
+    }
+
+    public void StartScenario()
+    {
+        switch (currentScenario)
+        {
+            case Scenario.TrappedMan:
+
+                UIManager.Instance.UpdateForm(FormData.name, scenarios[0].callerInformations.name);
+                break;
+
+            case Scenario.HomeInvasion:
+
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
+                break;
+
+            case Scenario.RisingWater:
+
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
+                break;
+        }
+
     }
 
     public void UpdateEndingsValue(int modifier)
@@ -88,34 +100,26 @@ public class ScenarioManager : Singleton<ScenarioManager>
         return currentScenario;
     }
 
-    private void LoadProtocolAnswer()
-    {
-        switch (currentScenario)
-        {
-            case Scenario.TrappedMan:
-                for (int i = 0; i < protocol.Count; i++)
-                {
-                    protocol[i].listAnswers[0] = p_trappedMan[i].protocolAnswer;
-                    protocol[i].voiceLineAnswer[0] = p_trappedMan[i].protocolAnswerAudio;
-                }
+}
 
-                break;
-            case Scenario.HomeInvasion:
-                for (int i = 0; i < protocol.Count; i++)
-                {
-                    protocol[i].listAnswers[0] = p_homeInvasion[i].protocolAnswer;
-                    protocol[i].voiceLineAnswer[0] = p_homeInvasion[i].protocolAnswerAudio;
-                }
-                break;
-            case Scenario.DomesticAbuse:
-                for (int i = 0; i < protocol.Count; i++)
-                {
-                    protocol[i].listAnswers[0] = p_domesticAbuse[i].protocolAnswer;
-                    protocol[i].voiceLineAnswer[0] = p_domesticAbuse[i].protocolAnswerAudio;
-                }
-                break;
-            case Scenario.RisingWater:
-                break;
-        }
-    }
+[System.Serializable]
+public class Form
+{
+    public TMP_Text nameField;
+    public TMP_Text ageField;
+    public TMP_Text adressField;
+    public TMP_Text situationField;
+    public TMP_Text unitField;
+    public Image stamp;
+
+    public bool isComplete;
+}
+
+public enum FormData
+{
+    name,
+    age,
+    adress,
+    situation,  
+    unit,
 }

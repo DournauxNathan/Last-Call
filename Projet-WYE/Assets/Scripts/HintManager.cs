@@ -17,7 +17,7 @@ public class HintManager : MonoBehaviour
 
     private void Start()
     {
-        audioSource = MasterManager.Instance.mainAudioSource;
+        audioSource = MasterManager.Instance.references.mainAudioSource;
         SetTimer();
     }
 
@@ -81,7 +81,7 @@ public class HintManager : MonoBehaviour
                     yield return null;
                     break;
 
-                case Scenario.DomesticAbuse:
+                case Scenario.RisingWater:
                     if (playHint)
                     {
                         int minC = Random.Range(0, hints[1].hint_voiceLines.Count());

@@ -1,6 +1,8 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HeadPhone : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class HeadPhone : MonoBehaviour
     private HeadPhoneManager manager;
 
     public bool isOnHead;
+    public UnityEvent onHead;
 
     public bool b = true;
 
@@ -36,7 +39,7 @@ public class HeadPhone : MonoBehaviour
     {
         if (MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            manager = MasterManager.Instance.headsetManager;
+            manager = MasterManager.Instance.references.headsetManager;
             manager.GetComponent<HeadPhoneManager>();
             manager.headPhone = GetHeadPhoneRef();
 

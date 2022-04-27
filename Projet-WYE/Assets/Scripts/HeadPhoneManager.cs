@@ -10,8 +10,8 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     [SerializeField]public XRSocketInteractorWithAutoSetup socket;
     [SerializeField]private float offset= .3f;
     [Space(5)]
-    public bool testBoolEquip;
-    public bool equipBool;
+    
+    public bool equip;
 
     private void Awake()
     {
@@ -24,12 +24,6 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     // Update is called once per frame
     void Update()
     {
-       /* if (equipBool) // a enlever uniquement un test;
-        {
-            equipBool = false;
-            headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f);
-        }*/
-
         if (MasterManager.Instance.currentPhase == Phases.Phase_2 || MasterManager.Instance.isInImaginary)
         {
             headPhone.GetComponent<Renderer>().enabled = false;
@@ -39,16 +33,28 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
             headPhone.GetComponent<Renderer>().enabled = true; 
 
         }
+
+        if (equip)
+        {
+            equip = !equip;
+            EquipHeadPhone();
+        }
     }
 
     public void AutoEquipHeadPhone()
     {
         if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            Debug.Log("Put headset");
             isOnHead = true;
             headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f,offset,0f); // Fonctionne /!\ pas très propre
         }
+    }
+
+    public void EquipHeadPhone()
+    {
+        isOnHead = true;
+        headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas très propre
+        headPhone.onHead?.Invoke();
     }
 
 
@@ -57,19 +63,22 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         isOnHead = !isOnHead;
         headPhone.isOnHead = isOnHead;
 
-        if (isOnHead)
+        if (isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            //SceneLoader.Instance.MoveGO(headPhone.gameObject);
-        }/*
-        else if (isOnHead)
-        {
-
-        }*/
+            headPhone.onHead?.Invoke();
+        }
 
         if (!isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            MasterManager.Instance.ActivateImaginary("Appartment_Day1");
+            //StartCoroutine(OffHead());
         }
 
+    }
+
+    public IEnumerator OffHead()
+    {
+        yield return new WaitForSeconds(3f);
+
+        MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day1");
     }
 }

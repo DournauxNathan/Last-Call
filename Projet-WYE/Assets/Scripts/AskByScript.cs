@@ -15,46 +15,60 @@ public class AskByScript : MonoBehaviour
     {
         if (askProtocolQuestion && atIndex[0] > -1)
         {
-            DoAtIndex(atIndex[0], UIManager.Instance.checkListTransform);
+            DoAtIndex(atIndex[0], WordManager.Instance.transform);
             askProtocolQuestion = false;
         } 
         else if (askProtocolQuestion)
         {
-            DoForAll(UIManager.Instance.checkListTransform);
+            DoForAll(WordManager.Instance.transform);
         }
 
         if (askDescriptionQuestion && atIndex[1] > -1)
         {
-            DoAtIndex(atIndex[1], UIManager.Instance.descriptionTransform);
+            DoAtIndex(atIndex[1], WordManager.Instance.transform);
             askDescriptionQuestion = false;
         }
         else if(askDescriptionQuestion)
         {
-            DoForAll(UIManager.Instance.descriptionTransform);
+            DoForAll(WordManager.Instance.transform);
             //askDescriptionQuestion = false;
         }
 
         if (giveOrder && atIndex[2] > -1)
         {
-            DoAtIndex(atIndex[2], UIManager.Instance.orderListTransform);
+            DoAtIndex(atIndex[2], WordManager.Instance.transform);
             giveOrder = false;
         }
         else if (giveOrder)
         {
-            DoForAll(UIManager.Instance.orderListTransform);
+            DoForAll(WordManager.Instance.transform);
             //giveOrder = false;
         }
     }
     public void DoAtIndex(int index,Transform _transform)
     {
-        _transform.GetChild(index).GetComponent<InstantiableButton>().simulateInput = true;
+        if (_transform.GetChild(index).TryGetComponent<WordData>(out WordData _data))
+        {
+            _transform.GetChild(index).GetComponent<WordData>().simulateInput = true;
+        }
+        else if (_transform.GetChild(index).TryGetComponent<Reveal>(out Reveal _reveal))
+        { 
+            _transform.GetChild(index).GetComponent<Reveal>().simulateInput = true;
+        }
 
     }
     public void DoForAll(Transform _transform)
     {
         for (int i = 0; i < _transform.childCount; i++)
         {
-            _transform.GetChild(i).GetComponent<InstantiableButton>().simulateInput = true;
+            if (_transform.GetChild(i).TryGetComponent<WordData>(out WordData _data))
+            {
+                _transform.GetChild(i).GetComponent<WordData>().simulateInput = true;
+            }
+            else if (_transform.GetChild(i).TryGetComponent<Reveal>(out Reveal _reveal))
+            {
+                _transform.GetChild(i).GetComponent<Reveal>().simulateInput = true;
+            }
         }
     }
 }
@@ -82,7 +96,7 @@ public class AskByScriptEditor : Editor
         
         if (GUILayout.Button("All"))
         {
-            script.DoForAll(UIManager.Instance.checkListTransform);
+            script.DoForAll(WordManager.Instance.transform);
         }
         EditorGUILayout.EndHorizontal();
 
@@ -91,7 +105,7 @@ public class AskByScriptEditor : Editor
         EditorGUILayout.PropertyField(sp_atIndex.GetArrayElementAtIndex(1), new GUIContent(""));
         if (GUILayout.Button("All"))
         {
-            script.DoForAll(UIManager.Instance.descriptionTransform);
+            script.DoForAll(WordManager.Instance.transform);
         }
         EditorGUILayout.EndHorizontal();
 
@@ -101,7 +115,7 @@ public class AskByScriptEditor : Editor
         
         if (GUILayout.Button("All"))
         {
-            script.DoForAll(UIManager.Instance.orderListTransform);
+            script.DoForAll(WordManager.Instance.transform);
         }
         EditorGUILayout.EndHorizontal();
         

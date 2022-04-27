@@ -56,19 +56,13 @@ public class Debugger : Singleton<Debugger>
             switch (ScenarioManager.Instance.currentScenario)
             {
                 case Scenario.TrappedMan:
-                    MasterManager.Instance.objectActivator.ActivateObjet();
-                    SceneLoader.Instance.LoadNewScene("Call1");
-                    Debug.Log("Call1 Loaded");
+                    SceneLoader.Instance.LoadNewScene("TrappedMan");
                     break;
                 case Scenario.HomeInvasion:
-                    MasterManager.Instance.objectActivator.ActivateObjet();
-                    SceneLoader.Instance.LoadNewScene("Call2");
-                    Debug.Log("Call2 Loaded");
+                    SceneLoader.Instance.LoadNewScene("HomeInvasion");
                     break;
-                case Scenario.DomesticAbuse:
-                    MasterManager.Instance.objectActivator.ActivateObjet();
-                    SceneLoader.Instance.LoadNewScene("Call3");
-                    Debug.Log("Call3 Loaded");
+                case Scenario.RisingWater:
+                    SceneLoader.Instance.LoadNewScene("RisingWater");
                     break;
             }
 
@@ -102,7 +96,7 @@ public class Debugger : Singleton<Debugger>
                     MasterManager.Instance.isInImaginary = false;
                     SceneLoader.Instance.LoadNewScene("Office");
                     break;
-                case Scenario.DomesticAbuse:
+                case Scenario.RisingWater:
                     OrderController.Instance.isResolve = true;
                     //OrderController.Instance.orders.AddRange(ScenarioManager.Instance.o_domesticAbuse);
                     MasterManager.Instance.isInImaginary = false;
@@ -121,10 +115,10 @@ public class Debugger : Singleton<Debugger>
     public void AnswerAllOrder()
     {
         InstantiableButton[] _temp = FindObjectsOfType<InstantiableButton>();
-        foreach (var item in _temp)
+        /*foreach (var item in _temp)
         {
             item.Desactivate();
-        }
+        }*/
 
         foreach (var order in OrderController.Instance.ordersStrings)
         {

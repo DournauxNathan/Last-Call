@@ -18,7 +18,7 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
     protected override void Awake()
     {
         base.Awake();
-        interactionManager = MasterManager.Instance.xRInteractionManager;
+        interactionManager = MasterManager.Instance.references.xRInteractionManager;
     }
 
     protected override void Start()
