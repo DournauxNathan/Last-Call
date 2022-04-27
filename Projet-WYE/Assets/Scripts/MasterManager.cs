@@ -40,7 +40,7 @@ public class MasterManager : Singleton<MasterManager>
         InitializeLevel();
     }
 
-    public void FixedUpdate()
+    private void Update()
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -56,8 +56,10 @@ public class MasterManager : Singleton<MasterManager>
         {
             WordManager.Instance.isProtocolComplete = true;
         }
+    }
 
-
+    public void FixedUpdate()
+    {
         UpdateController();
 
         if (!skipTuto && !isTutoEnded && b)

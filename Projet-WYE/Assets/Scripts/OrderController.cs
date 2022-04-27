@@ -10,6 +10,10 @@ public class OrderController : Singleton<OrderController>
 {
     public int currentNumberOfCombinaison;
     public int numberOfCombinaison;
+
+    public int puzzlesSucced;
+    public int puzzleNumber;
+
     //public List<OrderFormat> orders;
     public bool isResolve = false;
 
@@ -21,12 +25,12 @@ public class OrderController : Singleton<OrderController>
 
     public List<string[]> outcomes;
 
-    public void Setup()
+    public void LateUpdate()
     {
-        //GameObject[] go = GameObject.FindGameObjectsWithTag("ObjCombi");
-
-        //ObjectActivator.Instance.SetActivetObject(go);
-        //numberOfCombinaison = ObjectActivator.Instance.indexesList.Count / 2;
+        if (GetResolve())
+        {
+            Resolve();
+        }
     }
 
     public int IncreaseValue(int _value)
@@ -36,17 +40,18 @@ public class OrderController : Singleton<OrderController>
         return currentNumberOfCombinaison;
     }
 
+    public void ResolvePuzzle() { puzzlesSucced += 1; }
+    public int GetNumberOfPuzzleSucced() { return puzzlesSucced; }
+
+
     public void Resolve()
     {
         if (currentNumberOfCombinaison == numberOfCombinaison || GetResolve())
         {
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
+            MasterManager.Instance.currentPhase = Phases.Phase_3;
 
-            if (MasterManager.Instance.currentPhase == Phases.Phase_2)
-            {
-                MasterManager.Instance.SetPhase(3);
-            }
         }
         else
         {

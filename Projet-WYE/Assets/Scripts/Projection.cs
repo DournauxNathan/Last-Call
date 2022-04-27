@@ -34,7 +34,6 @@ public class Projection : Singleton<Projection>
     public bool hasCycle = false;
 
     public bool hasProjted;
-    private bool isDisconstruc;
 
     [Header("Fade parameters")]
     [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
@@ -160,7 +159,6 @@ public class Projection : Singleton<Projection>
         else
         {
             transitionValue = 0;
-            isDisconstruc = true;
             StartCoroutine(WaitForVoid());
             CallScene();
             ToggleProjection();
@@ -186,7 +184,6 @@ public class Projection : Singleton<Projection>
             hasCycle = false;
             isTransition = false;
             transitionValue = 15;
-            isDisconstruc = false;
         }
         else
         {
@@ -200,7 +197,7 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted && !revealScene)
+        if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase != Phases.Phase_3)
         {
             hasCycle = !false;
 
