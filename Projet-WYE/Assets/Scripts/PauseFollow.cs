@@ -11,7 +11,15 @@ public class PauseFollow : MonoBehaviour
 
     private void Start()
     {
-        //cameraTransform = MasterManager.Instance
+        if (MasterManager.Instance != null)
+        {
+            cameraTransform = MasterManager.Instance.references.mainCamera;
+
+        }
+        else
+        {
+            Debug.LogError("Error no camera to follow");
+        }
     }
 
     void Update()
