@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.Animations;
+using UnityEngine.Audio;
 
 public class UIMenuManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UIMenuManager : MonoBehaviour
     [Header("Param")]
     [Range(0.1f,1f)]public float animSpeed = 0.3f;
     [Range(0.1f,1f)]public float newSize = 0.3f;
+
+    public List<AudioClip> uiSounds;
 
     [Header("Debug")]
     [HideInInspector][SerializeField] private Transform mainMenu;
@@ -32,6 +35,7 @@ public class UIMenuManager : MonoBehaviour
     private Button settingButton;
     [SerializeField]private Sprite baseOptionImage;
     [SerializeField]private Sprite selectedOptionImage;
+    [SerializeField] private AudioSource audioSource;
 
     [Header("Events")]
     [Space(10)] public UnityEvent StartGame;
@@ -49,6 +53,7 @@ public class UIMenuManager : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         //Base Size when the list is created
         baseSize = 1;
         //EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
@@ -58,6 +63,7 @@ public class UIMenuManager : MonoBehaviour
 
         StartGame.AddListener(EventCall);
         eventSystem = EventSystem.current;
+
         
     }
 
@@ -292,6 +298,7 @@ public class UIMenuManager : MonoBehaviour
 
     private void Gauche()
     {
+        WhooshGauche();
         ScaleDown(wheelList);
         Grandir(wheelList[3]);
         for (int i = 0; i < wheelList.Count; i++)
@@ -313,6 +320,7 @@ public class UIMenuManager : MonoBehaviour
 
     private void Droite()
     {
+        WhooshDroite();
         ScaleDown(wheelList);
         Grandir(wheelList[1]);
         for (int i = 0; i < wheelList.Count; i++)
@@ -360,7 +368,24 @@ public class UIMenuManager : MonoBehaviour
         }
     }
 
+    public void ButtonPressSound()
+    {
+        audioSource.PlayNewClipOnce(uiSounds[0]);
+    }
 
+    public void WhooshDroite()
+    {
+        audioSource.PlayNewClipOnce(uiSounds[1]);
+    }
+    public void WhooshGauche()
+    {
+        audioSource.PlayNewClipOnce(uiSounds[2]);
+    }
+
+    public void QuitGameSound()
+    {
+        audioSource.PlayNewClipOnce(uiSounds[3]);
+    }
 
     /*private void ChangeQualityText()
     {

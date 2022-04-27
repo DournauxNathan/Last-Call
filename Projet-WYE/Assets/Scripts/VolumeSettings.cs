@@ -14,7 +14,9 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider voicesSlider;
-    
+
+    public List<AudioClip> audioClips;
+    private AudioSource audioSource;
 
     const string MIXER_MASTER = "MasterVolume";
     const string MIXER_MUSIC = "MusicVolume";
@@ -29,6 +31,15 @@ public class VolumeSettings : MonoBehaviour
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
         voicesSlider.onValueChanged.AddListener(SetVoicesVolume);
+
+        masterSlider.onValueChanged.AddListener(VolumeSound);
+        musicSlider.onValueChanged.AddListener(VolumeSound);
+        sfxSlider.onValueChanged.AddListener(VolumeSound);
+        voicesSlider.onValueChanged.AddListener(VolumeSound);
+    }
+    private void Start()
+    {
+        audioSource = this.transform.parent.parent.parent.GetComponentInParent<AudioSource>();
     }
 
     void SetMasterVolume(float value)
@@ -47,5 +58,33 @@ public class VolumeSettings : MonoBehaviour
     {
         mixer.SetFloat(MIXER_VOICES,/*Mathf.Log10(*/value/*)*20*/);
     }
+
+    public void VolumeSound(float value)
+    {
+        var old = value;
+        if (old>value)
+        {
+            audioSource.PlayNewClipOnce(audioClips[1]);
+        }
+        else
+        {
+            audioSource.PlayNewClipOnce(audioClips[0]);
+        }
+    }
+
+    public void VolumeSound(float oldValue, float value)
+    {
+        Debug.Log("OldValue" + oldValue + "NewValue " + value);
+        if (oldValue > value)
+        {
+            audioSource.PlayNewClipOnce(audioClips[1]);
+        }
+        else
+        {
+            audioSource.PlayNewClipOnce(audioClips[0]);
+        }
+    }
+
+
 
 }
