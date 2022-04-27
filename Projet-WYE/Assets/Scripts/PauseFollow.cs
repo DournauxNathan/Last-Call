@@ -8,6 +8,12 @@ public class PauseFollow : MonoBehaviour
     public float time;
     //Set it to whatever value you think is best
     public float distanceFromCamera;
+
+    private void Start()
+    {
+        //cameraTransform = MasterManager.Instance
+    }
+
     void Update()
     {
         Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;

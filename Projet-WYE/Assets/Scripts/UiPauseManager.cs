@@ -39,6 +39,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
             current = EventSystem.current.currentSelectedGameObject;
         }
 
+        //security
         if (EventSystem.current.currentSelectedGameObject == null && isOn)
         {
             EventSystem.current.SetSelectedGameObject(current);
@@ -140,6 +141,17 @@ public class UiPauseManager : Singleton<UiPauseManager>
             }
         }
         return false;
+    }
+
+    public void DisablingMainMenu() 
+    {
+        FindObjectOfType<UIMenuManager>().enabled = false;
+    }
+
+    public void EnablingMainMenu()
+    {
+        FindObjectOfType<UIMenuManager>(true).enabled = true;
+
     }
 
 }
