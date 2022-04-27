@@ -34,9 +34,6 @@ public class MasterManager : Singleton<MasterManager>
 
     public UnityEvent startCall;
 
-    [Header("Testing Input - Go in Projection")]
-    public bool useOneInput = false;
-    public bool useTwoInput = false;
 
     private void Start()
     {
@@ -227,6 +224,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 3:
+                Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(30);
 
                 isTutoEnded = true;

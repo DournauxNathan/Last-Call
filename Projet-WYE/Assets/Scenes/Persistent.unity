@@ -9996,7 +9996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a523b9a298131a247ba5562542ebba58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 639667784}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 96
@@ -11898,7 +11898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a523b9a298131a247ba5562542ebba58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
+  m_InteractionManager: {fileID: 639667784}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 96
@@ -12859,7 +12859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase: 1
+  currentPhase: 2
   references:
     xRInteractionManager: {fileID: 639667784}
     _RRig: {fileID: 1355308589}
@@ -12878,7 +12878,7 @@ MonoBehaviour:
     eventSystem: {fileID: 2131089504}
     headsetManager: {fileID: 543341186}
   canImagine: 0
-  isInImaginary: 0
+  isInImaginary: 1
   skipTuto: 1
   isTutoEnded: 1
   startTuto: 0
@@ -12898,8 +12898,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  useOneInput: 1
-  useTwoInput: 0
 --- !u!4 &1103599257
 Transform:
   m_ObjectHideFlags: 0
@@ -26291,19 +26289,7 @@ MonoBehaviour:
   numberOfCombinaison: 4
   isResolve: 0
   combinaisons: []
-  ordersStrings:
-  - order: Take icecube in the frigde and throw them in the fan
-    influence: -1
-    isLethal: 0
-    voiceLines: []
-  - order: Wet the tea towel and apply it on your burn
-    influence: 0
-    isLethal: 0
-    voiceLines: []
-  - order: Fill the pan with water and sink your head in it
-    influence: 1
-    isLethal: 0
-    voiceLines: []
+  ordersStrings: []
   text: {fileID: 715281035}
 --- !u!4 &2001627880
 Transform:
@@ -27696,11 +27682,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: cScene
-      value: Office
+      value: Gameplay_Combination_Iteration
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: nameScene
-      value: Office
+      value: Gameplay_Combination_Iteration
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: screenFader

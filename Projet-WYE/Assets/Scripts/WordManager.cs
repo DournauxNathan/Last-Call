@@ -40,8 +40,6 @@ public class WordManager : Singleton<WordManager>
                     item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition, answer);
                 }
             }
-
-            Debug.Log("Pull Answer");
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_2 && MasterManager.Instance.isInImaginary)
@@ -51,8 +49,6 @@ public class WordManager : Singleton<WordManager>
                 //Get the keywords in the answer
                 for (int i = 0; i < question.questions.Count; i++)
                 {
-                    Debug.LogError("Pull Question");
-
                     //Find any available Canvas Word 
                     var item = FindAvailableReveal();
                     //if true, Activate Canvas Word and Set his text with the current propo
@@ -72,7 +68,7 @@ public class WordManager : Singleton<WordManager>
                 //if true, Activate Canvas Word and Set his text with the current propo
                 item.Activate(transform, stockA, currentOrder.order);
             }
-
+            
             Debug.Log("Pull Order");
         }
     }

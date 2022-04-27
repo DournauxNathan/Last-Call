@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
@@ -72,8 +73,7 @@ public class Projection : Singleton<Projection>
                     item.objects[i].SetFloat("_Dissolve", transitionValue);                    
                 }
             }
-        }
-        
+        }        
 
         if (pauseBetweenTransition && isTransition)
         {
@@ -215,7 +215,6 @@ public class Projection : Singleton<Projection>
 
             MasterManager.Instance.isInImaginary = false;
                         
-            Debug.Log("Call Office");
             MasterManager.Instance.ChangeSceneByName(3 ,"Office");
         }
     }

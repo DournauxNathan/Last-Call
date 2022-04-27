@@ -42,8 +42,11 @@ public class OrderController : Singleton<OrderController>
         {
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
-            
-            Projection.Instance.enableTransition = true;
+
+            if (MasterManager.Instance.currentPhase == Phases.Phase_2)
+            {
+                MasterManager.Instance.SetPhase(3);
+            }
         }
         else
         {
