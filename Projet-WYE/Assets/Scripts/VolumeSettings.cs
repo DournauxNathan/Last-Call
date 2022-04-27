@@ -39,7 +39,7 @@ public class VolumeSettings : MonoBehaviour
     }
     private void Start()
     {
-        audioSource = this.transform.parent.parent.parent.GetComponentInParent<AudioSource>();
+        audioSource = this.transform.parent.parent.parent.parent.GetComponentInParent<AudioSource>();
     }
 
     void SetMasterVolume(float value)
@@ -74,7 +74,6 @@ public class VolumeSettings : MonoBehaviour
 
     public void VolumeSound(float oldValue, float value)
     {
-        Debug.Log("OldValue" + oldValue + "NewValue " + value);
         if (oldValue > value)
         {
             audioSource.PlayNewClipOnce(audioClips[1]);
