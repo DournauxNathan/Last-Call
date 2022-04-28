@@ -18,6 +18,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
     [SerializeField] private bool isOn = false;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
+    [SerializeField] private bool DebugOn = false;
 
     public List<AudioClip> audioClips;
     [Header("Events")]
@@ -28,9 +29,12 @@ public class UiPauseManager : Singleton<UiPauseManager>
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        UnPause(); 
-        isOn = true; BackToMainMenu();
-        
+        UnPause();
+
+        if (DebugOn)
+        {
+            isOn = true; BackToMainMenu();
+        }
         _text.text = "";
     }
     private void SetUp()
