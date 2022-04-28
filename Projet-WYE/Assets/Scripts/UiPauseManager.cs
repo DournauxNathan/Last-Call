@@ -134,7 +134,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     public void DisplayPathText()
     {
-        _text.text = "File Saved to : " + FileHandler.GetPath("SaveLastCall.json");
+        _text.text = "File Saved to : " + FileHandler.GetPath("SaveLastCall.json"); //Hardcode 
     }
     
     private bool CheckPauseIsActive()
