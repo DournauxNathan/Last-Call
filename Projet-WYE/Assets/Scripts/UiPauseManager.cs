@@ -15,7 +15,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
     [SerializeField] private List<Transform> SubMenus;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private GameObject current;
-    [SerializeField]private bool isOn = false;
+    [SerializeField] private bool isOn = false;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
 

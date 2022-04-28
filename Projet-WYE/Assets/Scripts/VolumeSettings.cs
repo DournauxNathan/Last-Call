@@ -57,19 +57,6 @@ public class VolumeSettings : MonoBehaviour
         mixer.SetFloat(MIXER_VOICES,/*Mathf.Log10(*/value/*)*20*/);
     }
 
-    public void VolumeSound(float value)
-    {
-        var old = value;
-        if (old>value)
-        {
-            audioSource.PlayNewClipOnce(audioClips[1]);
-        }
-        else
-        {
-            audioSource.PlayNewClipOnce(audioClips[0]);
-        }
-    }
-
     public void VolumeSound(float oldValue, float value)
     {
         if (oldValue > value)
