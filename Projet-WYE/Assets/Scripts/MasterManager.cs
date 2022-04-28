@@ -86,7 +86,7 @@ public class MasterManager : Singleton<MasterManager>
             if (b)
             {
                 b = false;
-                startCall?.Invoke();
+                //startCall?.Invoke();
             }
         }
     }

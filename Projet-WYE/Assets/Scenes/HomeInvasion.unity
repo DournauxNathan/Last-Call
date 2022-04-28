@@ -1394,7 +1394,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30166
+  m_Name: pb_Mesh30142
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6059,7 +6059,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29800
+  m_Name: pb_Mesh29794
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6323,16 +6323,15 @@ GameObject:
   - component: {fileID: 730234564}
   - component: {fileID: 730234563}
   - component: {fileID: 730234562}
-  - component: {fileID: 730234561}
-  - component: {fileID: 730234560}
   - component: {fileID: 730234558}
-  - component: {fileID: 730234557}
   - component: {fileID: 730234556}
   - component: {fileID: 730234555}
   - component: {fileID: 730234554}
   - component: {fileID: 730234553}
   - component: {fileID: 730234559}
-  m_Layer: 0
+  - component: {fileID: 730234561}
+  - component: {fileID: 730234560}
+  m_Layer: 6
   m_Name: Nail
   m_TagString: Nail
   m_Icon: {fileID: 0}
@@ -6378,6 +6377,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 730234558}
         m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
         m_MethodName: ToggleOutline
@@ -6390,9 +6392,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_HoverExited:
-    m_PersistentCalls:
-      m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -6522,19 +6521,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!135 &730234557
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730234552}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.03
-  m_Center: {x: 0.00038430374, y: 0.00003167661, z: 0.07}
 --- !u!114 &730234558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6565,10 +6551,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.007805586
-  m_Height: 0.08116102
+  m_Radius: 0.03
+  m_Height: 0.06494999
   m_Direction: 2
-  m_Center: {x: 0.00038430467, y: 0.00004863739, z: 0.03311211}
+  m_Center: {x: 0.00038430467, y: 0.00004863739, z: 0.025006592}
 --- !u!114 &730234560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6713,7 +6699,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730234552}
   m_LocalRotation: {x: -0.5000007, y: -0.4999993, z: 0.4999993, w: 0.5000007}
-  m_LocalPosition: {x: -5.2, y: 0.1076, z: 3.502}
+  m_LocalPosition: {x: -5.2, y: 0.1648, z: 3.502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 39844890}
@@ -7750,8 +7736,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.0001, y: 0.07667464, z: 5.0132513}
-  m_Center: {x: -1.5000501, y: -0.037587017, z: 3.4956627}
+  m_Size: {x: 5.0001, y: 0.13484964, z: 5.0132513}
+  m_Center: {x: -1.5000501, y: -0.008499514, z: 3.4956627}
 --- !u!33 &858314352
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -10233,7 +10219,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30134
+  m_Name: pb_Mesh30120
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10549,7 +10535,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30238
+  m_Name: pb_Mesh30208
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13844,8 +13830,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.016455194, y: 0.01572758, z: 0.077296965}
-  m_Center: {x: 0.00038430374, y: 0.00003167661, z: 0.03135032}
+  m_Size: {x: 0.06, y: 0.06, z: 0.043838635}
+  m_Center: {x: 0.00038430374, y: 0.000031676143, z: 0.01462115}
 --- !u!114 &1671300241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15772,7 +15758,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30546
+  m_Name: pb_Mesh30536
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16322,6 +16308,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 1968150599}
         m_TargetAssemblyTypeName: CombinableObject, Assembly-CSharp
         m_MethodName: ToggleOutline
@@ -16334,9 +16323,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_HoverExited:
-    m_PersistentCalls:
-      m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls: []
