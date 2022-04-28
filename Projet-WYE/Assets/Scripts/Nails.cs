@@ -15,6 +15,8 @@ public class Nails : MonoBehaviour
 
         if (count == 1)
         {
+            transform.position += Vector3.down;
+
             transform.position = t1.position;
         }
         if (count == 2)

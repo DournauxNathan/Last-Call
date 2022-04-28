@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
@@ -9,11 +10,17 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
     [Header("Put Together Mechanics")]
     [SerializeField]
     private bool canAssemble;
-    [SerializeField]
-    private GameObject snapTo;
+    public GameObject snapToA;
+    public GameObject snapToB;
+
     [SerializeField] private bool tagCombi;
     [SerializeField] private string tagAssemble;
 
+    private bool doOnce = true;
+
+    public UnityEvent action;
+
+    public bool isMatching;
 
     protected override void Awake()
     {
@@ -31,36 +38,49 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
     {
         if (canAssemble)
         {
+            action?.Invoke();
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
         else if (tagCombi)
         {
+            action?.Invoke();
             return base.CanSelect(interactable) && MatchUsingTags(interactable);
         }
-        return base.CanSelect(interactable);
+
+        return base.CanSelect(null);
     }
 
     public override bool CanSelect(XRBaseInteractable interactable)
     {
         if (canAssemble)
         {
+            action?.Invoke();
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
         else if (tagCombi)
         {
+            action?.Invoke();
             return base.CanSelect(interactable) && MatchUsingTags(interactable);
         }
-        return base.CanSelect(interactable);
+
+        return base.CanSelect(null);
     }
 
-    private bool MatchUsingGameObject(XRBaseInteractable interactable)
+    public bool MatchUsingGameObject(XRBaseInteractable interactable)
     {
-        return interactable.gameObject == snapTo;
+        isMaching(interactable.gameObject == snapToA || interactable.gameObject == snapToB);
+        return interactable.gameObject == snapToA || interactable.gameObject == snapToB;
     }
 
     private bool MatchUsingTags(XRBaseInteractable interactable)
     {
+        isMaching(interactable.gameObject.tag == tagAssemble);
         return interactable.gameObject.tag == tagAssemble;
+    }
+
+    public bool isMaching(bool b)
+    {
+        return isMatching = b;
     }
 
 }
