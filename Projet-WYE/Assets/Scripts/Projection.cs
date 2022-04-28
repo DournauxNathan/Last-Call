@@ -49,9 +49,16 @@ public class Projection : Singleton<Projection>
         {
             for (int i = 0; i < item.objects.Count; i++)
             {
-                item.objects[i].SetVector("_PlayerPos", player.position);
+                if (item.objects[i] != null)
+                {
+                    item.objects[i].SetVector("_PlayerPos", player.position);
 
-                item.objects[i].SetFloat("_Dissolve", transitionValue);
+                    item.objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+                else
+                {
+                    Debug.Log(item.objects[i].name);
+                }
             }
         }
 
