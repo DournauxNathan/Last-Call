@@ -8,8 +8,8 @@ public class WordManager : Singleton<WordManager>
     public Transform getTransfrom;
     public Transform stockA, stockB;
 
-    public List<Answer> answers;
-    public List<Question> questions;
+    [HideInInspector] public List<Answer> answers;
+    [HideInInspector] public List<Question> questions;
 
     public List<WordData> canvasWithWordData;
     public List<Reveal> canvasWithQuestionData;
