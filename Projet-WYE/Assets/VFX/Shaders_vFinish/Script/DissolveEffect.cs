@@ -81,6 +81,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                     {
                         GetComponent<Renderer>().enabled = false;
                         GetComponent<CombinableObject>().enabled = false;
+                        //gameObject.SetActive(false);
                     }
                 }
 

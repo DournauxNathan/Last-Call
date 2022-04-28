@@ -16,8 +16,6 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
     [SerializeField] private bool tagCombi;
     [SerializeField] private string tagAssemble;
 
-    private bool doOnce = true;
-
     public UnityEvent action;
 
     public bool isMatching;

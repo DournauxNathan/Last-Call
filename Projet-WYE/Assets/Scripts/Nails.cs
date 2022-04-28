@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Nails : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class Nails : MonoBehaviour
     public int count;
     public Transform t1, t2;
 
-    public void DriveNail()
+    public UnityEvent done;
+
+    public void Drive()
     {
         count++;
 
@@ -23,6 +26,8 @@ public class Nails : MonoBehaviour
         {
             count = 2;
             transform.position = t2.position;
+            done?.Invoke();
         }
     }
+    
 }

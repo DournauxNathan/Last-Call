@@ -12,7 +12,15 @@ public class ThrowDetection : MonoBehaviour
         if (other.CompareTag(_tag) && useComparTag && other.GetComponent<CombinableObject>() != null)
         {
             OrderController.Instance.ResolvePuzzle();
+
+            other.TryGetComponent<CombinableObject>(out CombinableObject _combinableObject);
+            OrderController.Instance.AddOrder(_combinableObject.useWith[0].influence, _combinableObject.useWith[0].outcome, _combinableObject.useWith[0].isLethal);
+
             useComparTag = false;
+        }
+        else
+        {
+            Debug.Log("A new object has been thrown");
         }
     }
 }
