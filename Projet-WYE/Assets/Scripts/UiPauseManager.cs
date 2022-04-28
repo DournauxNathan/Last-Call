@@ -105,11 +105,14 @@ public class UiPauseManager : Singleton<UiPauseManager>
     public void DisplayTarget(GameObject target)
     {
         pauseBase.gameObject.SetActive(false);
+
         foreach (var sub in SubMenus)
         {
             sub.gameObject.SetActive(false);
         }
+
         target.SetActive(true);
+
         if (target.name == "Option")
         {
             EventSystem.current.SetSelectedGameObject(target.transform.GetChild(2).GetChild(0).GetChild(0).gameObject);
