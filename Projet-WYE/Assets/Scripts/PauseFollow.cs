@@ -11,13 +11,32 @@ public class PauseFollow : MonoBehaviour
 
     private void Start()
     {
-        //cameraTransform = MasterManager.Instance
+        if (MasterManager.Instance != null)
+        {
+            cameraTransform = MasterManager.Instance.references.mainCamera;
+        }
+        else if (cameraTransform !=null)
+        {
+            Debug.LogWarning("Camera is referenced");
+        }
+        else
+        {
+            Debug.LogError("Error no camera to follow");
+        }
     }
 
     void Update()
     {
-        Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-        transform.position = Vector3.Lerp(transform.position,resultingPosition,Time.deltaTime * time);
-        transform.rotation = cameraTransform.rotation;
+        if (cameraTransform != null)
+        {
+            Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
+            transform.position = Vector3.Lerp(transform.position, resultingPosition, Time.deltaTime * time);
+            transform.rotation = cameraTransform.rotation;
+        }
+        else
+        {
+            Debug.LogError("NO CAMERA");
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -14,7 +15,11 @@ public class UiPauseManager : Singleton<UiPauseManager>
     [SerializeField] private List<Transform> SubMenus;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private GameObject current;
-    [SerializeField]private bool isOn = false;
+    [SerializeField] private bool isOn = false;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource2;
+
+    public List<AudioClip> audioClips;
     [Header("Events")]
     public UnityEvent OnPauseEnter;
     public UnityEvent OnPauseExit;
@@ -22,8 +27,10 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     void Start()
     {
-        UnPause();
-        BackToMainMenu();
+        audioSource = GetComponent<AudioSource>();
+        UnPause(); 
+        isOn = true; BackToMainMenu();
+        
         _text.text = "";
     }
     private void SetUp()
@@ -37,6 +44,9 @@ public class UiPauseManager : Singleton<UiPauseManager>
         if (current == null  && isOn|| EventSystem.current.currentSelectedGameObject != null && current != EventSystem.current.currentSelectedGameObject && isOn)
         {
             current = EventSystem.current.currentSelectedGameObject;
+            audioSource.clip = audioClips[0];
+            audioSource.Play();
+
         }
 
         //security
@@ -44,6 +54,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
         {
             EventSystem.current.SetSelectedGameObject(current);
         }
+
     }
 
 
@@ -56,6 +67,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
             sub.gameObject.SetActive(false);
         }
         isOn = false;
+        audioSource.PlayNewClipOnce(audioClips[3]);
         OnPauseExit.Invoke();
     }
 
@@ -71,6 +83,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
             DisplayTarget(pauseBase.gameObject);
             SetUp();
             isOn = true;
+            audioSource.PlayNewClipOnce(audioClips[2]);
             OnPauseEnter.Invoke();
         }
     }
@@ -121,7 +134,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     public void DisplayPathText()
     {
-        _text.text = "File Saved to : " + FileHandler.GetPath("SaveLastCall.json");
+        _text.text = "File Saved to : " + FileHandler.GetPath("SaveLastCall.json"); //Hardcode 
     }
     
     private bool CheckPauseIsActive()
@@ -153,5 +166,31 @@ public class UiPauseManager : Singleton<UiPauseManager>
         FindObjectOfType<UIMenuManager>(true).enabled = true;
 
     }
+
+    public void ValidateSound()
+    {
+        StartCoroutine(DisableAudioOne(audioClips[1]));
+        audioSource2.PlayNewClipOnce(audioClips[1]);
+    }
+
+    public void Back()
+    {
+        StartCoroutine(DisableAudioOne(audioClips[4]));
+        audioSource2.PlayNewClipOnce(audioClips[4]);
+    }
+    public void Triche()
+    {
+        audioSource.PlayNewClipOnce(audioClips[3]);
+    }
+
+    private IEnumerator DisableAudioOne(AudioClip audioClip)
+    {
+        var time = audioClip.length;
+        audioSource.mute = true;
+        yield return new WaitForSeconds(time);
+        audioSource.mute = false;
+
+    }
+
 
 }

@@ -8,13 +8,14 @@ using UnityEngine.Audio;
 public class VolumeSettings : MonoBehaviour
 {
     [SerializeField] AudioMixer mixer;
-    [SerializeField] private List<Slider> sliders;
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private List<MySlider> sliders;
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider voicesSlider;
-    
+
+    public List<AudioClip> audioClips;
+    [SerializeField]private AudioSource audioSource;
 
     const string MIXER_MASTER = "MasterVolume";
     const string MIXER_MUSIC = "MusicVolume";
@@ -23,12 +24,20 @@ public class VolumeSettings : MonoBehaviour
 
     private void Awake()
     {
-        sliders.AddRange(new List<Slider>(){ masterSlider, musicSlider, sfxSlider, voicesSlider });
-
         masterSlider.onValueChanged.AddListener(SetMasterVolume);
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
         voicesSlider.onValueChanged.AddListener(SetVoicesVolume);
+
+        foreach (var MySlider in sliders)
+        {
+            MySlider.onValueChangedWithOldValue.AddListener(VolumeSound);
+        }
+
+    }
+    private void Start()
+    {
+        //audioSource = this.transform.parent.parent.parent.parent.GetComponentInParent<AudioSource>();
     }
 
     void SetMasterVolume(float value)
@@ -47,5 +56,19 @@ public class VolumeSettings : MonoBehaviour
     {
         mixer.SetFloat(MIXER_VOICES,/*Mathf.Log10(*/value/*)*20*/);
     }
+
+    public void VolumeSound(float oldValue, float value)
+    {
+        if (oldValue > value)
+        {
+            audioSource.PlayNewClipOnce(audioClips[1]);
+        }
+        else
+        {
+            audioSource.PlayNewClipOnce(audioClips[0]);
+        }
+    }
+
+
 
 }
