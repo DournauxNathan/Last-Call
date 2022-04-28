@@ -29,7 +29,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
     {
         audioSource = GetComponent<AudioSource>();
         UnPause(); 
-        //isOn = true; BackToMainMenu();
+        isOn = true; BackToMainMenu();
         
         _text.text = "";
     }
