@@ -15,7 +15,7 @@ public class PauseFollow : MonoBehaviour
         {
             cameraTransform = MasterManager.Instance.references.mainCamera;
         }
-        else if (cameraTransform !=null)
+        else if (cameraTransform !=null && MasterManager.Instance == null)
         {
             Debug.LogWarning("Camera is referenced");
         }
