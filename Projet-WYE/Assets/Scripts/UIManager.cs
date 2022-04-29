@@ -6,11 +6,14 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 
-[ExecuteInEditMode]
 public class UIManager : Singleton<UIManager>
 {
     [Header("Screens Canvas")]
     public CanvasGroup[] _canvasGroup;
+
+    [Header("Incoming & Outcoming call")]
+    public GameObject incomingAsset;
+    public GameObject outcomingAsset;
 
     [Header("Emergency Reports Form")]
     public Form currentForm;
@@ -24,7 +27,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] float timeBtwChars = 0.1f;
     [SerializeField] string leadingChar = "";
     [SerializeField] bool leadingCharBeforeDelay = false;
-
 
     public ParticleSystem smoke;
 
@@ -162,8 +164,14 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
     }
-
-
+    public void InComingCall(bool isActive)
+    {
+        incomingAsset.SetActive(isActive);
+    }
+    public void OutComingCall(bool isActive)
+    {
+        outcomingAsset.SetActive(isActive);
+    }
     IEnumerator TypeWriterTMP(TMP_Text _tmpProText, string _writer)
     {
         _tmpProText.text += leadingCharBeforeDelay ? leadingChar : " ";
@@ -186,7 +194,6 @@ public class UIManager : Singleton<UIManager>
             _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
         }
     }
-
 }
 
 public enum Fadetype

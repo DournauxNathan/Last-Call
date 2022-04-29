@@ -6,6 +6,7 @@ using TMPro;
 
 public enum Scenario
 {
+    None,
     TrappedMan,
     HomeInvasion,
     RisingWater
@@ -15,6 +16,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
 {
     public Scenario currentScenario;
     public List<ScenarioData> scenarios;
+    public ScenarioData currentScenarioData;
 
     public bool isScenarioLoaded = false;
     [Range(-10, 10)]
@@ -47,27 +49,48 @@ public class ScenarioManager : Singleton<ScenarioManager>
             case Scenario.TrappedMan:
                 WordManager.Instance.answers.AddRange(scenarios[0].answers);
                 WordManager.Instance.questions.AddRange(scenarios[0].questions);
-
-                UIManager.Instance.UpdateForm(FormData.name, scenarios[0].callerInformations.name);
+                currentScenarioData = scenarios[0];
             break;
 
             case Scenario.HomeInvasion:
                 WordManager.Instance.answers.AddRange(scenarios[1].answers);
                 WordManager.Instance.questions.AddRange(scenarios[2].questions);
-
-                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
-            break;
+                currentScenarioData = scenarios[1];
+                break;
 
             case Scenario.RisingWater:
                 WordManager.Instance.answers.AddRange(scenarios[2].answers);
                 WordManager.Instance.questions.AddRange(scenarios[2].questions);
-
-                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
-            break;
+                currentScenarioData = scenarios[2];
+                break;
         }
+
+        TimeSettings.Instance.Initialize();
 
         //Debug.Log("Load: " + currentScenario.ToString());
         isScenarioLoaded = true;
+    }
+
+    public void StartScenario()
+    {
+        switch (currentScenario)
+        {
+            case Scenario.TrappedMan:
+
+                UIManager.Instance.UpdateForm(FormData.name, scenarios[0].callerInformations.name);
+                break;
+
+            case Scenario.HomeInvasion:
+
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
+                break;
+
+            case Scenario.RisingWater:
+
+                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
+                break;
+        }
+
     }
 
     public void UpdateEndingsValue(int modifier)

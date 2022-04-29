@@ -11,6 +11,8 @@ public class ScenarioData : ScriptableObject
     public List<Question> questions;
 
     public Caller callerInformations;
+
+    public Settings callSettings;
 }
 
 [System.Serializable]
@@ -20,4 +22,14 @@ public struct Caller
     public string age;
 
     public string newsPapersData;
+}
+
+[System.Serializable]
+public struct Settings
+{
+    public float callDuration;
+
+    public float timeBeforeCall;
+
+    public float timeInImaginary;
 }

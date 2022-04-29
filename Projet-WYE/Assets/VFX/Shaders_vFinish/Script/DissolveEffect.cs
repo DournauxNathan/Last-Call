@@ -56,8 +56,6 @@ public class DissolveEffect : Singleton<DissolveEffect>
         {
             particles.gameObject.SetActive(true);
             particles.Play();
-
-            Debug.Log("hey");
         }
         else
         {
@@ -83,6 +81,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                     {
                         GetComponent<Renderer>().enabled = false;
                         GetComponent<CombinableObject>().enabled = false;
+                        //gameObject.SetActive(false);
                     }
                 }
 

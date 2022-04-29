@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
@@ -34,12 +33,12 @@ public class Projection : Singleton<Projection>
     public bool hasCycle = false;
 
     public bool hasProjted;
-    private bool isDisconstruc;
 
     [Header("Fade parameters")]
     [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
     [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
 
+    public bool revealScene;
 
     // Start is called before the first frame update
     void Start()
@@ -50,9 +49,16 @@ public class Projection : Singleton<Projection>
         {
             for (int i = 0; i < item.objects.Count; i++)
             {
-                item.objects[i].SetVector("_PlayerPos", player.position);
+                if (item.objects[i] != null)
+                {
+                    item.objects[i].SetVector("_PlayerPos", player.position);
 
-                item.objects[i].SetFloat("_Dissolve", transitionValue);
+                    item.objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+                else
+                {
+                    Debug.Log(item.objects[i].name);
+                }
             }
         }
 
@@ -69,18 +75,22 @@ public class Projection : Singleton<Projection>
             {
                 for (int i = 0; i < item.objects.Count; i++)
                 {
-                    item.objects[i].SetFloat("_Dissolve", transitionValue);
+                    item.objects[i].SetFloat("_Dissolve", transitionValue);                    
                 }
             }
-        }
+        }        
 
-        if (pauseBetweenTransition && isTransition && !isDisconstruc)
+        if (pauseBetweenTransition && isTransition)
         {
             Deconstruct();
         }
 
+        if (revealScene && !isTransition && enableTransition)
+        {
+            RevealScene();
+        }
 
-        if (transitionValue <= beginFadeOutAt)
+        if (transitionValue <= beginFadeOutAt && UIManager.Instance != null)
         {
             UIManager.Instance.Fade(Fadetype.Out);
 
@@ -90,7 +100,7 @@ public class Projection : Singleton<Projection>
             }
         }
 
-        if (transitionValue >= beginFadeInAt)
+        if (transitionValue >= beginFadeInAt && UIManager.Instance != null)
         {
             UIManager.Instance.Fade(Fadetype.In);
 
@@ -99,7 +109,6 @@ public class Projection : Singleton<Projection>
                 UIManager.Instance.Fade(Fadetype.In, UnitManager.Instance.physicsbuttons[i].icon);
             }
         }
-
 
         /* if (pauseBetweenTransition && isTransition && isDisconstruc)
          {
@@ -113,6 +122,17 @@ public class Projection : Singleton<Projection>
                  //DistanceDissolveTarget.Instance.SetObjectToTrack();
              }
          }*/
+    }
+
+    public void SetTransitionValue(int value)
+    {
+        foreach (var item in objectsToDissolve)
+        {
+            for (int i = 0; i < item.objects.Count; i++)
+            {
+                item.objects[i].SetFloat("_Dissolve", value);
+            }
+        }
     }
 
     public void ResetTransition()
@@ -145,10 +165,17 @@ public class Projection : Singleton<Projection>
         else
         {
             transitionValue = 0;
-            isDisconstruc = true;
             StartCoroutine(WaitForVoid());
             CallScene();
             ToggleProjection();
+        }
+    }
+
+    public void RevealScene()
+    {
+        if (transitionValue < 30)
+        {
+            transitionValue += Time.deltaTime * time;
         }
     }
 
@@ -156,7 +183,6 @@ public class Projection : Singleton<Projection>
     {
         if (transitionValue < 15)
         {
-            isTransition = true;
             transitionValue += Time.deltaTime * time;
         }
         else if (hasCycle)
@@ -164,7 +190,6 @@ public class Projection : Singleton<Projection>
             hasCycle = false;
             isTransition = false;
             transitionValue = 15;
-            isDisconstruc = false;
         }
         else
         {
@@ -174,21 +199,17 @@ public class Projection : Singleton<Projection>
             StartCoroutine(WaitForVoid());//coroutine
             CallScene();
         }
-    }
-
-
-    
-
+    }   
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted)
+        if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase != Phases.Phase_3)
         {
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
-            //Debug.Log("Call Gameplay_Combination_Iteration");
-            MasterManager.Instance.ActivateImaginary("Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+
+            MasterManager.Instance.ChangeSceneByName(2,"Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
         }
 
         if (!hasCycle && hasProjted)
@@ -197,10 +218,7 @@ public class Projection : Singleton<Projection>
 
             MasterManager.Instance.isInImaginary = false;
                         
-            MasterManager.Instance.currentPhase = Phases.Phase_3;
-
-            //Debug.Log("Call Office");
-            MasterManager.Instance.GoBackToOffice("Office");
+            MasterManager.Instance.ChangeSceneByName(3 ,"Office");
         }
     }
 
@@ -235,5 +253,4 @@ public class Projection : Singleton<Projection>
         public Location location;
         public List<Material> objects;
     }
-
 }

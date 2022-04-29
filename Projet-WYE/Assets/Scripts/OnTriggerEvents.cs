@@ -22,12 +22,15 @@ public class OnTriggerEvents : MonoBehaviour
     #region Trigger 3D Events
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
         if (other.CompareTag(_tag) && useComparTag)
         {
+            Debug.Log(other.name);
             triggerEnter?.Invoke();
         }
         else
         {
+            Debug.Log(other.name);
             triggerEnter?.Invoke();
         }
     }
