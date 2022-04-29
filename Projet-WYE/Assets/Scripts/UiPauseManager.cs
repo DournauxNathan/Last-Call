@@ -18,6 +18,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
     [SerializeField] private bool isOn = false;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource audioSource2;
+    [SerializeField] private bool DebugOn = false;
 
     public List<AudioClip> audioClips;
     [Header("Events")]
@@ -28,9 +29,12 @@ public class UiPauseManager : Singleton<UiPauseManager>
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        UnPause(); 
-        isOn = true; BackToMainMenu();
-        
+        UnPause();
+
+        if (DebugOn)
+        {
+            isOn = true; BackToMainMenu();
+        }
         _text.text = "";
     }
     private void SetUp()
@@ -101,11 +105,14 @@ public class UiPauseManager : Singleton<UiPauseManager>
     public void DisplayTarget(GameObject target)
     {
         pauseBase.gameObject.SetActive(false);
+
         foreach (var sub in SubMenus)
         {
             sub.gameObject.SetActive(false);
         }
+
         target.SetActive(true);
+
         if (target.name == "Option")
         {
             EventSystem.current.SetSelectedGameObject(target.transform.GetChild(2).GetChild(0).GetChild(0).gameObject);

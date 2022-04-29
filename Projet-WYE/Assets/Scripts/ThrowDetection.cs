@@ -20,7 +20,7 @@ public class ThrowDetection : MonoBehaviour
         }
         else
         {
-            Debug.Log("A new object has been thrown");
+            Debug.Log(other.name + " has been thrown");
         }
     }
 }
