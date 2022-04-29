@@ -149,6 +149,7 @@ public class MasterManager : Singleton<MasterManager>
 
     public void InitializeLevel()
     {
+        ScenarioManager.Instance.LoadScenario();
         UpdateController();
         SetPhase(currentPhase);
     }
@@ -213,13 +214,13 @@ public class MasterManager : Singleton<MasterManager>
 
             case 1:
                 UpdateController();
-                WordManager.Instance.PullWord();
+                //WordManager.Instance.PullWord();
                 break;
 
             case 2:
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
-                WordManager.Instance.PullWord();
+                //WordManager.Instance.PullWord();
 
                 Projection.Instance.SetTransitionValue(0);
                 Projection.Instance.enableTransition = false;

@@ -4,28 +4,45 @@ using UnityEngine;
 
 public class TriggerParticle : MonoBehaviour
 {
-    [SerializeField]private ParticleSystem particle;
-    [SerializeField] private ParticleSystem particle1;
+    [SerializeField] private List<ParticleSystem> particlesSystem;
+    [SerializeField] private bool useCountDetection;
+    [SerializeField] private int maxCount;
+    private int count;
 
-    public int i;
-
-    private void Update()
+    public void IncreaseCount(int i)
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Ball"))
+        if (useCountDetection)
         {
-            particle.Play();
-            particle1.Play();
-            i++;
+            count += i;
 
-            if (i == 3)
+            if (count >= maxCount)
             {
-                MasterManager.Instance.startTuto = true;
+                TimeSettings.Instance.Initialize();
             }
+        }
+        return;
+    }
+    public void PlayAtIndex(int i)
+    {
+        particlesSystem[i].Play();
+    }
+    public void StopAtIndex(int i)
+    {
+
+        particlesSystem[i].Play();
+    }
+    public void PlayAll()
+    {
+        foreach (ParticleSystem item in particlesSystem)
+        {
+            item.Play();
+        }
+    }   
+    public void StopAll()
+    {
+        foreach (ParticleSystem item in particlesSystem)
+        {
+            item.Stop();
         }
     }
 }
