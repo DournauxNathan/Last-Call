@@ -13,6 +13,9 @@ public class ScenarioData : ScriptableObject
     public Caller callerInformations;
 
     public Settings callSettings;
+
+    public AudioClip dialogues;
+    public float timeAfterDialogueBegins;
 }
 
 [System.Serializable]

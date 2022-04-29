@@ -20,7 +20,11 @@ public class MasterManager : Singleton<MasterManager>
 
     [Header("Refs")]
     public References references;
-    
+
+    [Header("Call")]
+    public bool isEnded; 
+
+
     [Header("Projection")]
      public bool canImagine = false;
     public bool isInImaginary;
@@ -61,6 +65,13 @@ public class MasterManager : Singleton<MasterManager>
     public void FixedUpdate()
     {
         UpdateController();
+
+        if (isEnded)
+        {
+            UIManager.Instance.InComingCall(false);
+
+            UIManager.Instance.OutComingCall(true);
+        }
 
         if (!skipTuto && !isTutoEnded && b)
         {
@@ -241,6 +252,16 @@ public class MasterManager : Singleton<MasterManager>
             case 4:
                 break;
         }
+    }
+
+    public void PlayDialogues()
+    {
+        if (!references.mainAudioSource.isPlaying)
+        {
+            references.mainAudioSource.PlayOneShot(ScenarioManager.Instance.currentScenarioData.dialogues);
+            this.CallWithDelay(WordManager.Instance.PullWord, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
+        }
+        UIManager.Instance.InComingCall(false);
     }
 }
 

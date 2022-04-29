@@ -53,8 +53,10 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     public void EquipHeadPhone()
     {
         isOnHead = true;
+        headPhone.isOnHead = isOnHead;
         headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas très propre
-        headPhone.onHead?.Invoke();
+        
+        //headPhone.onHead?.Invoke();
     }
 
 
@@ -65,20 +67,18 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            headPhone.onHead?.Invoke();
+            //headPhone.onHead?.Invoke();
         }
 
         if (!isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            //StartCoroutine(OffHead());
+            this.CallWithDelay(OffHead, 15);
         }
 
     }
 
-    public IEnumerator OffHead()
+    public void OffHead()
     {
-        yield return new WaitForSeconds(3f);
-
         MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day1");
     }
 }
