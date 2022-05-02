@@ -50,10 +50,9 @@ public class WordManager : Singleton<WordManager>
                             break;
                         case FormData.situation:
 
-                            for (int i = 0; i < AnswerManager.Instance.situations.Count; i++)
+                            for (int y = 0; y < AnswerManager.Instance.situations.Count; y++)
                             {
-
-                                if (AnswerManager.Instance.situations[i].id == item.GetAnswer().id)
+                                if (AnswerManager.Instance.situations[y].id == item.GetAnswer().id)
                                 {
                                     Situation _situation = new Situation
                                     {
