@@ -42,8 +42,6 @@ public class TimeSettings : Singleton<TimeSettings>
 
         if (UIManager.Instance != null)
             UIManager.Instance.InComingCall(true);
-        else
-            Debug.Log("There is no UiManager. Are you sure the scene Office is loaded ?");
     }
 
 

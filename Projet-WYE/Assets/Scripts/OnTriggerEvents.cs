@@ -65,12 +65,6 @@ public class OnTriggerEvents : MonoBehaviour
     {
         if (other.CompareTag(_tag) && useComparTag)
         {
-            Debug.Log(other.name);
-            triggerEnter?.Invoke();
-        }
-        else
-        {
-            Debug.Log(other.name);
             triggerEnter?.Invoke();
         }
     }
@@ -78,10 +72,6 @@ public class OnTriggerEvents : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_tag) && useComparTag)
-        {
-            triggerExit?.Invoke();
-        }
-        else
         {
             triggerExit?.Invoke();
         }
