@@ -6,5 +6,14 @@ public class AnswerManager : Singleton<AnswerManager>
 {
     public List<GameObject> age;
     public List<GameObject> adress;
-    public MyDictionary<int, GameObject> Situations;
+    public List<Situation> situations;
+
 }
+
+[System.Serializable]
+public struct Situation
+{
+    public int id;
+    public List<GameObject> canvas;
+}
+
