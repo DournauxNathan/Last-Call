@@ -13,6 +13,9 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     
     public bool equip;
 
+    public bool press;
+    [SerializeField] private OnTriggerEvents triggerEvents;
+
     private void Awake()
     {
         if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
@@ -31,8 +34,15 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         else if (MasterManager.Instance.currentPhase == Phases.Phase_1 || MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
             headPhone.GetComponent<Renderer>().enabled = true; 
+        }
+
+        if (press)
+        {
+            press = !press;
+            triggerEvents.triggerEnter?.Invoke();
 
         }
+
 
         if (equip)
         {
