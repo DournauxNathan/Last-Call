@@ -49,24 +49,13 @@ public class WordManager : Singleton<WordManager>
                             AnswerManager.Instance.adress.Add(item.gameObject);
                             break;
                         case FormData.situation:
-
                             for (int y = 0; y < AnswerManager.Instance.situations.Count; y++)
                             {
                                 if (AnswerManager.Instance.situations[y].id == item.GetAnswer().id)
                                 {
-                                    Situation _situation = new Situation
-                                    {
-                                        id = item.GetAnswer().id,
-                                        canvas = new List<GameObject>(),
-                                    };
-
-                                    _situation.canvas.Add(item.gameObject);
-
-                                    AnswerManager.Instance.situations.Add(_situation);
+                                    AnswerManager.Instance.situations[y].canvas.Add(item.gameObject);
                                 }
-
                             }
-                            
                             break;
                     }
                 }
@@ -156,8 +145,17 @@ public class WordManager : Singleton<WordManager>
                 break;
 
             case FormData.situation:
-                
-                    break;
+                for (int i = 0; i < AnswerManager.Instance.situations.Count; i++)
+                {
+                    if (id == AnswerManager.Instance.situations[i].id)
+                    {
+                        for (int y = 0; y < AnswerManager.Instance.situations[i].canvas.Count; y++)
+                        {
+                            AnswerManager.Instance.situations[i].canvas[y].SetActive(false);
+                        }
+                    }
+                }
+                break;
         }
 
     }

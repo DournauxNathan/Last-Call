@@ -74,7 +74,6 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public void StartScenario()
     {
         this.CallWithDelay(PreWriteForm, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
-        
     }
 
     public void PreWriteForm()
