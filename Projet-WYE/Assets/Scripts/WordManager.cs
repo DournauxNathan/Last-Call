@@ -49,7 +49,7 @@ public class WordManager : Singleton<WordManager>
                             AnswerManager.Instance.adress.Add(item.gameObject);
                             break;
                         case FormData.situation:
-
+                            /*
                             for (int i = 0; i < AnswerManager.Instance.situations.Count; i++)
                             {
 
@@ -66,7 +66,7 @@ public class WordManager : Singleton<WordManager>
                                     AnswerManager.Instance.situations.Add(_situation);
                                 }
 
-                            }
+                            }*/
                             
                             break;
                     }
