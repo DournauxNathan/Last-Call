@@ -21,6 +21,17 @@ public class TutoManager : MonoBehaviour
         
     }
 
+    public void Progress()
+    {
+        progresion++;
+        RefreshAdvice();
+    }
+
+    public void DisplayMore(GameObject gameObject)
+    {
+        gameObject.SetActive(true);
+    }
+
     public void ChangeTextTarget(string text)
     {
         _text.text = text;
