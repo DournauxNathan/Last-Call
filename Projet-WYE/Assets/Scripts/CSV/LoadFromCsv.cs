@@ -76,7 +76,7 @@ public class LoadFromCsv
             if (newPrefab == null)
             {
                 Debug.Log(entry[1] + " is not in scene");
-                newPrefab = new GameObject(entry[1]);
+                newPrefab = new GameObject(entry[1] + " was not founded");
             }
 
             var co = newPrefab.GetComponent<CombinableObject>();
@@ -170,6 +170,8 @@ public class LoadFromCsv
             }
 
             co.Init(entry);
+
+            co.transform.SetAsLastSibling();
         }
     }
 #endif

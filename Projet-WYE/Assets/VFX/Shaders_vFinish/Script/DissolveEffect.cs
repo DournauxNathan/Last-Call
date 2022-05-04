@@ -26,25 +26,22 @@ public class DissolveEffect : Singleton<DissolveEffect>
 #if UNITY_EDITOR
             particlePrefab = PrefabUtility.InstantiatePrefab(Resources.Load("Prefabs/VFX_Start")) as GameObject;
 #endif
+            particlePrefab.transform.position = Vector3.zero;
+            particlePrefab.transform.localEulerAngles = Vector3.zero;
+
             particlePrefab.transform.SetParent(this.transform);
 
-            particlePrefab.transform.position = Vector3.zero;
-            particlePrefab.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
             particles = particlePrefab.GetComponent<ParticleSystem>();
         }
         else
         {
             Debug.Log(this.gameObject.name + " has already a particle Prefab. \n Reset position and rotation");
-
-            particlePrefab.transform.position = Vector3.zero;
-
-            particlePrefab.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
         if (particles != null)
         {
-            particles.gameObject.SetActive(true);
+            particles.gameObject.SetActive(false);
             particles.Stop();
         }
         else
