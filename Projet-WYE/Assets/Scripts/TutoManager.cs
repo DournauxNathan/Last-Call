@@ -51,7 +51,10 @@ public class TutoManager : MonoBehaviour
         {
             adv.SetActive(false);
         }
-        advice[progresion].SetActive(true);
+        if (progresion <= advice.Count )
+        {
+            advice[progresion].SetActive(true);
+        }
     }
 
     public void SkipTuto()
