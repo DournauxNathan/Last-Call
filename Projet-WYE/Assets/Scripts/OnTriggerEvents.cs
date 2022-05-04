@@ -30,7 +30,7 @@ public class OnTriggerEvents : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<BoxCollider>().enabled = setCollision;
+        GetComponent<Collider>().enabled = setCollision;
     }
 
     /*

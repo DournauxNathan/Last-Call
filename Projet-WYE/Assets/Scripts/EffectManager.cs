@@ -5,8 +5,9 @@ using UnityEngine.Rendering;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
-public class EffectManager : Singleton<EffectManager>
-{
+
+public class EffectManager : MonoBehaviour
+{/*
     [SerializeField] private CameraFov cameraFov;
     [SerializeField] private Volume volume;
     [SerializeField] private UnityEvent unityEvent;
@@ -37,5 +38,5 @@ public class EffectManager : Singleton<EffectManager>
     public void TriggerZoom()
     {
         unityEvent.Invoke();
-    }
+    }*/
 }

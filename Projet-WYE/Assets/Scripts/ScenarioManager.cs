@@ -65,8 +65,6 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 break;
         }
 
-        TimeSettings.Instance.Initialize();
-
         //Debug.Log("Load: " + currentScenario.ToString());
         isScenarioLoaded = true;
     }

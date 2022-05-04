@@ -92,7 +92,6 @@ public class WordData : MonoBehaviour
     public void SubmitAnswer()
     {
 
-        Debug.Log(answer.type +", " + answer.id);
         WordManager.Instance.DisableAnswers(answer.type, answer.id);
 
         if (isCorrectAnswer)

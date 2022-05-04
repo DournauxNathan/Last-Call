@@ -224,6 +224,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 1:
+                TimeSettings.Instance.Initialize();
                 UpdateController();
                 //WordManager.Instance.PullWord();
                 break;
@@ -231,7 +232,7 @@ public class MasterManager : Singleton<MasterManager>
             case 2:
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
-                //WordManager.Instance.PullWord();
+                WordManager.Instance.PullWord();
 
                 Projection.Instance.SetTransitionValue(0);
                 Projection.Instance.enableTransition = false;
