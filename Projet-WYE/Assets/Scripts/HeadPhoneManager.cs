@@ -54,8 +54,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     {
         if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            isOnHead = true;
-            headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f,offset,0f); // Fonctionne /!\ pas très propre
+            equip = !equip;
         }
     }
 

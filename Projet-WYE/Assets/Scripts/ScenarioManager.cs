@@ -74,9 +74,14 @@ public class ScenarioManager : Singleton<ScenarioManager>
         this.CallWithDelay(PreWriteForm, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
     }
 
+    bool doOnce = true;
     public void PreWriteForm()
     {
-        UIManager.Instance.UpdateForm(FormData.name, currentScenarioData.callerInformations.name);
+        if (doOnce)
+        {
+            doOnce = !doOnce;
+            UIManager.Instance.UpdateForm(FormData.name, currentScenarioData.callerInformations.name);
+        }
     }
 
     public void UpdateEndingsValue(int modifier)

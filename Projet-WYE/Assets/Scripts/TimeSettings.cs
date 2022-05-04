@@ -8,11 +8,9 @@ public class TimeSettings : Singleton<TimeSettings>
 
 
     public bool isRunning;
-
     
     public void Initialize()
     {
-        Debug.Log("hey");
         timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
         StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));
     }
