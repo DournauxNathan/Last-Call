@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DissolveFX
-  m_Shader: {fileID: -6465566751694194690, guid: 02ca2d7d1931c4b4db4c6565c15a2b13, type: 3}
+  m_Name: Dissolve_Imaginaire_Lever
+  m_Shader: {fileID: -6465566751694194690, guid: 8c262c007d3e03047a0514f20558349b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -29,6 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - Texture2D_b464854f3035454bb1f13a856f0d745c:
         m_Texture: {fileID: 2800000, guid: 294a203d24f1d1b4583e27ba9b10c296, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_f9cfbaa5cf6e4c9596a10cd42a3a5195:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -59,14 +63,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_6ab69aa412914633a4b62a0f2c25332f_Texture_1:
-        m_Texture: {fileID: 2800000, guid: dd2f4f6513f6c4543bddd3b2ee7b057d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_85f3220c82ed41d485aa7d99d1942f8f_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 6c571ed7f46ffcb41bbc13fee240d34c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_92d3a9f4043a44418a545e6ce23c2c9c_Texture_1:
         m_Texture: {fileID: 2800000, guid: dd2f4f6513f6c4543bddd3b2ee7b057d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -75,7 +71,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: dd2f4f6513f6c4543bddd3b2ee7b057d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Smoothness:
+    - _Texture2DAsset_e3c757fc6aa9436dbd326c3d17f0c359_Out_0:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -102,23 +98,25 @@ Material:
     - Vector1_d8cdcf92e9b248efa0803a4086e5ba43: 26.63
     - Vector1_eee2e98a1b4345bca614f608be27d4ac: 0
     - _BakeIntensity: 0
-    - _BumpScale: 1
+    - _BumpScale: 0.5
     - _Dissolve: 0
     - _DissolveAmount: 0.455
     - _DissolveScale: 19
     - _DissolveWith: 0.02
     - _OcclusionStrength: 1
     - _OutlineWidth: 0.01
-    - _Parallax: 0.005
+    - _Parallax: 0
     - _Smoothness: 0.5
     m_Colors:
-    - Color_1ecdc688644c42f19667280ef6d3da05: {r: 1, g: 1, b: 1, a: 0}
+    - Color_1ecdc688644c42f19667280ef6d3da05: {r: 0.75471693, g: 0.07404766, b: 0.07404766, a: 0}
     - Color_2dc03b9cdaf240c1977773e9db89bd40: {r: 0, g: 0.41486025, b: 1, a: 0}
     - Color_2e7a4726a10540f29f5b5156bb76a73a: {r: 0, g: 0, b: 0, a: 0}
-    - Color_ef7fd1b9f7974456bd71d013c03db6e8: {r: 0.30331075, g: 0.5510743, b: 0.9056604, a: 0}
+    - Color_ef7fd1b9f7974456bd71d013c03db6e8: {r: 0.30331072, g: 0.5510743, b: 0.9056604, a: 0}
     - Vector3_1189d4470f7c41ac863d904e987cdbc8: {r: 0.33, g: -0.17, b: 0, a: 0}
     - Vector3_6af85fda8915465989742aa768ca82bf: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorA: {r: 0, g: 0.41599986, b: 1, a: 0}
+    - _ColorB: {r: 0.57547164, g: 0.25190452, b: 0.25190452, a: 1}
     - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _PlayerPos: {r: 0, g: 1, b: 0, a: 0}

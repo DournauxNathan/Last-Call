@@ -12808,7 +12808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase: 2
+  currentPhase: 0
   references:
     xRInteractionManager: {fileID: 639667784}
     _RRig: {fileID: 1355308589}
@@ -12828,7 +12828,7 @@ MonoBehaviour:
     headsetManager: {fileID: 1596390316}
   isEnded: 0
   canImagine: 0
-  isInImaginary: 1
+  isInImaginary: 0
   skipTuto: 1
   isTutoEnded: 1
   startTuto: 0
@@ -26335,7 +26335,23 @@ MonoBehaviour:
   puzzleNumber: 4
   isResolve: 0
   combinaisons: []
-  ordersStrings: []
+  ordersStrings:
+  - order: Take icecube in the frigde and throw them in the fan
+    influence: -1
+    isLethal: 0
+    voiceLines: []
+  - order: Could you use a stool on the sink to reach something ?
+    influence: 1
+    isLethal: 0
+    voiceLines: []
+  - order: Could you use a pan on the sink to put out the fire ?
+    influence: 0
+    isLethal: 0
+    voiceLines: []
+  - order: Could you use a stool on the sink to reach something ?
+    influence: 1
+    isLethal: 0
+    voiceLines: []
   text: {fileID: 715281035}
 --- !u!4 &2001627880
 Transform:
@@ -27288,7 +27304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[1].objects.Array.size
-      value: 15
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[0].objects.Array.data[0]
@@ -27661,19 +27677,19 @@ PrefabInstance:
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[1].objects.Array.data[15]
       value: 
-      objectReference: {fileID: 2100000, guid: b97874b9a96d74d42a4f67aa2a2490d6, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ed4e28c1f1369b499915c84c2c71fb7, type: 2}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[1].objects.Array.data[16]
       value: 
-      objectReference: {fileID: 2100000, guid: b97874b9a96d74d42a4f67aa2a2490d6, type: 2}
+      objectReference: {fileID: 2100000, guid: 5612164d633a9424ebe368c3eb7a6de3, type: 2}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[1].objects.Array.data[17]
       value: 
-      objectReference: {fileID: 2100000, guid: b97874b9a96d74d42a4f67aa2a2490d6, type: 2}
+      objectReference: {fileID: 2100000, guid: b37d9eb83f6c7cc409c24ce46998c05e, type: 2}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[1].objects.Array.data[18]
       value: 
-      objectReference: {fileID: 2100000, guid: b97874b9a96d74d42a4f67aa2a2490d6, type: 2}
+      objectReference: {fileID: 2100000, guid: 605fca2f5ed17b14eb744904bf3696e2, type: 2}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[1].objects.Array.data[19]
       value: 
