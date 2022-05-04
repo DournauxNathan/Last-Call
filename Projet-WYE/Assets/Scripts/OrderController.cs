@@ -25,6 +25,8 @@ public class OrderController : Singleton<OrderController>
 
     public List<string[]> outcomes;
 
+    private bool completeImaginary = true;
+
     public void LateUpdate()
     {
         if (GetResolve())
@@ -46,12 +48,13 @@ public class OrderController : Singleton<OrderController>
 
     public void Resolve()
     {
-        if (currentNumberOfCombinaison == numberOfCombinaison || GetResolve())
+        if (completeImaginary && (currentNumberOfCombinaison == numberOfCombinaison || GetResolve()))
         {
+            completeImaginary = !completeImaginary;
+
             MasterManager.Instance.isInImaginary = false;
             SetResolve(true);
             MasterManager.Instance.currentPhase = Phases.Phase_3;
-
         }
         else
         {

@@ -215,7 +215,7 @@ public class MasterManager : Singleton<MasterManager>
         SetupPhase(i);
     }
 
-    public void SetupPhase(int i)
+    private void SetupPhase(int i)
     {
         switch (i)
         {
@@ -224,6 +224,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 1:
+                ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 //WordManager.Instance.PullWord();
@@ -251,18 +252,26 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 4:
+                ScenarioManager.Instance.UpdateScenario(1);
+                Reset();
                 break;
         }
     }
 
+
+    public void Reset()
+    {
+        currentPhase = Phases.Phase_0;
+        ScenarioManager.Instance.currentScenarioData = null;
+    }
     public void PlayDialogues()
     {
-        if (!references.mainAudioSource.isPlaying)
+        if (!references.mainAudioSource.isPlaying && currentPhase == Phases.Phase_1)
         {
             references.mainAudioSource.PlayOneShot(ScenarioManager.Instance.currentScenarioData.dialogues);
             this.CallWithDelay(WordManager.Instance.PullWord, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
+            UIManager.Instance.InComingCall(false);
         }
-        UIManager.Instance.InComingCall(false);
     }
 }
 

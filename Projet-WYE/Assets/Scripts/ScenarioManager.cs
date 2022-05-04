@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public enum Scenario
 {
-    None,
-    TrappedMan,
-    HomeInvasion,
-    RisingWater
+    None = 0,
+    TrappedMan = 1,
+    HomeInvasion = 2,
+    RisingWater = 3
 }
 
 public class ScenarioManager : Singleton<ScenarioManager>
@@ -54,7 +55,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
 
             case Scenario.HomeInvasion:
                 WordManager.Instance.answers.AddRange(scenarios[1].answers);
-                WordManager.Instance.questions.AddRange(scenarios[2].questions);
+                WordManager.Instance.questions.AddRange(scenarios[1].questions);
                 currentScenarioData = scenarios[1];
                 break;
 
@@ -94,6 +95,31 @@ public class ScenarioManager : Singleton<ScenarioManager>
         return currentScenario;
     }
 
+    public int currentIndexScenario = 0;
+    public void UpdateScenario(int i)
+    {
+        currentIndexScenario+=i;
+        Debug.Log(currentIndexScenario);
+
+        switch (currentIndexScenario)
+        {
+            case 1:
+                currentScenario = Scenario.TrappedMan;
+                LoadScenario();
+                break;
+            case 2:
+                currentScenario = Scenario.HomeInvasion;
+                LoadScenario();
+                break;
+            case 3:
+                currentScenario = Scenario.RisingWater;
+                LoadScenario();
+                break;
+        }
+
+        Debug.Log(currentScenario);
+
+    }
 }
 
 [System.Serializable]
