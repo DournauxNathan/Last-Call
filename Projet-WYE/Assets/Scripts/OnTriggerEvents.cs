@@ -8,6 +8,9 @@ public class OnTriggerEvents : MonoBehaviour
 {
     public string _tag;
     public bool useComparTag;
+    public bool debugEvent = false;
+
+    public bool setCollision = true;
 
     [Header("Trigger Events")]
     public UnityEvent triggerEnter;
@@ -25,45 +28,56 @@ public class OnTriggerEvents : MonoBehaviour
     public UnityEvent triggerStay2D;
     public bool debugStay2D;
 
-    private void FixedUpdate()
+    private void Start()
     {
-        if (debugEnter)
-        {
-            debugEnter = !debugEnter;
-            triggerEnter?.Invoke();
-        }
-        if (debugExit)
-        {
-            debugExit = !debugExit;
-            triggerExit?.Invoke();
-        }
-        if (debugStay)
-        {
-            debugStay = !debugStay;
-            triggerStay?.Invoke();
-        }
-
-        if (debugEnter2D)
-        {
-            debugEnter2D = !debugEnter2D;
-            triggerEnter2D?.Invoke();
-        }
-        if (debugExit2D)
-        {
-            debugExit2D = !debugExit2D;
-            triggerExit2D?.Invoke();
-        }
-        if (debugStay2D)
-        {
-            debugStay2D = !debugStay2D;
-            triggerStay2D?.Invoke();
-        }
+        GetComponent<BoxCollider>().enabled = setCollision;
     }
 
+    /*
+        private void FixedUpdate()
+        {
+            if (debugEnter)
+            {
+                debugEnter = !debugEnter;
+                triggerEnter?.Invoke();
+            }
+            if (debugExit)
+            {
+                debugExit = !debugExit;
+                triggerExit?.Invoke();
+            }
+            if (debugStay)
+            {
+                debugStay = !debugStay;
+                triggerStay?.Invoke();
+            }
+
+            if (debugEnter2D)
+            {
+                debugEnter2D = !debugEnter2D;
+                triggerEnter2D?.Invoke();
+            }
+            if (debugExit2D)
+            {
+                debugExit2D = !debugExit2D;
+                triggerExit2D?.Invoke();
+            }
+            if (debugStay2D)
+            {
+                debugStay2D = !debugStay2D;
+                triggerStay2D?.Invoke();
+            }
+        }
+    */
     #region Trigger 3D Events
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(_tag) && useComparTag)
+        if (other.CompareTag(_tag) && useComparTag && debugEvent)
+        {
+            Debug.Log(other.name);
+            triggerEnter?.Invoke();
+        }
+        else if (other.CompareTag(_tag) && useComparTag)
         {
             triggerEnter?.Invoke();
         }

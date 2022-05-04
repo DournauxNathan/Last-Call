@@ -43,7 +43,6 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         }
 
-
         if (equip)
         {
             equip = !equip;
@@ -70,21 +69,19 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     }
 
 
-    public void HeadPhoneEquip()
+    public void Equip(bool value)
     {
-        isOnHead = !isOnHead;
-        headPhone.isOnHead = isOnHead;
+        headPhone.isOnHead = value;
 
-        if (isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_1)
+        if (value && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            //headPhone.onHead?.Invoke();
+            headPhone.onHead?.Invoke();
         }
 
-        if (!isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        if (!value && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
             this.CallWithDelay(OffHead, 15);
         }
-
     }
 
     public void OffHead()
