@@ -12,6 +12,10 @@ public class TutoManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (FileHandler.IsAFileExist("SaveLastCall.json"))
+        {
+           // SkipTuto(); //To Delete after testing
+        }
         RefreshAdvice();
     }
 
@@ -50,6 +54,10 @@ public class TutoManager : MonoBehaviour
         advice[progresion].SetActive(true);
     }
 
-
+    public void SkipTuto()
+    {
+        SceneLoader.Instance.LoadNewScene("Menu");
+        MasterManager.Instance.currentPhase = Phases.Phase_0;
+    }
 
 }
