@@ -11,26 +11,60 @@ public class OnTriggerEvents : MonoBehaviour
 
     [Header("Trigger Events")]
     public UnityEvent triggerEnter;
+    public bool debugEnter;
     public UnityEvent triggerExit;
+    public bool debugExit;
     public UnityEvent triggerStay;
+    public bool debugStay;
 
     [Header("2D Trigger Events")]
     public UnityEvent triggerEnter2D;
+    public bool debugEnter2D;
     public UnityEvent triggerExit2D;
+    public bool debugExit2D;
     public UnityEvent triggerStay2D;
+    public bool debugStay2D;
+
+    private void FixedUpdate()
+    {
+        if (debugEnter)
+        {
+            debugEnter = !debugEnter;
+            triggerEnter?.Invoke();
+        }
+        if (debugExit)
+        {
+            debugExit = !debugExit;
+            triggerExit?.Invoke();
+        }
+        if (debugStay)
+        {
+            debugStay = !debugStay;
+            triggerStay?.Invoke();
+        }
+
+        if (debugEnter2D)
+        {
+            debugEnter2D = !debugEnter2D;
+            triggerEnter2D?.Invoke();
+        }
+        if (debugExit2D)
+        {
+            debugExit2D = !debugExit2D;
+            triggerExit2D?.Invoke();
+        }
+        if (debugStay2D)
+        {
+            debugStay2D = !debugStay2D;
+            triggerStay2D?.Invoke();
+        }
+    }
 
     #region Trigger 3D Events
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         if (other.CompareTag(_tag) && useComparTag)
         {
-            Debug.Log(other.name);
-            triggerEnter?.Invoke();
-        }
-        else
-        {
-            Debug.Log(other.name);
             triggerEnter?.Invoke();
         }
     }
@@ -38,10 +72,6 @@ public class OnTriggerEvents : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_tag) && useComparTag)
-        {
-            triggerExit?.Invoke();
-        }
-        else
         {
             triggerExit?.Invoke();
         }

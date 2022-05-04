@@ -30,6 +30,11 @@ public class WordData : MonoBehaviour
         }
     }
 
+    public Answer GetAnswer()
+    {
+        return this.answer;
+    }
+
     public void Activate(Transform parent, Transform stock, bool isCorrect, string i, Answer _answer)
     {
         this.answer = _answer;
@@ -86,6 +91,10 @@ public class WordData : MonoBehaviour
 
     public void SubmitAnswer()
     {
+
+        Debug.Log(answer.type +", " + answer.id);
+        WordManager.Instance.DisableAnswers(answer.type, answer.id);
+
         if (isCorrectAnswer)
         {
             UIManager.Instance.UpdateForm(answer.type, text.text);

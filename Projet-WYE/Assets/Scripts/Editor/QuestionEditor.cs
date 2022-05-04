@@ -42,7 +42,7 @@ public class QuestionEditor : Editor
         EditorGUILayout.Space(10);
 
         //EditorGUILayout.LabelField(new GUIContent(""), GUI.skin.horizontalSlider);
-        EditorGUILayout.LabelField(new GUIContent("QMP_" + index), EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(new GUIContent("QMP_" + (index + 1)), EditorStyles.boldLabel);
 
         EditorGUILayout.PropertyField(_currentText, new GUIContent("Question"));
         EditorGUILayout.PropertyField(_currentAnswer, new GUIContent("Answer"));
