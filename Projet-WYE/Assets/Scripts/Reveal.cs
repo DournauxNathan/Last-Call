@@ -72,6 +72,7 @@ public class Reveal : MonoBehaviour
 
     public void SubmitAnswer()
     {
+        MasterManager.Instance.references.mainAudioSource.PlayOneShot(question.questions[atIndex].voices);
         StartCoroutine(Show());
     }
 

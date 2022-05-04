@@ -8,7 +8,6 @@ public class Answer : ScriptableObject
     public FormData type;
     public int id;
     public Keyword[] keywords;
-    public AudioClip voices;
 }
 
 [System.Serializable]
