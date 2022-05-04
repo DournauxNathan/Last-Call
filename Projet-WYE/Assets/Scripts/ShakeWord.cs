@@ -45,6 +45,8 @@ public class ShakeWord : MonoBehaviour
         _defaultColor = _text.color;
         //m_animator = GetComponent<Animator>();
         //IsSelected(); Validate();
+
+        submitWord.AddListener(SendToSaveFile);
     }
 
     private void Update()
@@ -125,5 +127,9 @@ public class ShakeWord : MonoBehaviour
         Debug.Log("COUCOU");
     }
 
+    private void SendToSaveFile()
+    {
+        SaveQuestion.Instance.AddQuestion(_text.text);
+    }
 
 }
