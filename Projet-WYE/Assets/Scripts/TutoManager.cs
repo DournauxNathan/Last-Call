@@ -14,7 +14,8 @@ public class TutoManager : MonoBehaviour
     {
         if (FileHandler.IsAFileExist("SaveLastCall.json"))
         {
-           // SkipTuto(); //To Delete after testing
+            // SkipTuto(); //To Delete after testing
+            Debug.Log("File Found");
         }
         RefreshAdvice();
     }
