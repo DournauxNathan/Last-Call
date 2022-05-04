@@ -38,7 +38,7 @@ public class EmptyCombinablleObject : CombinableObject_Data
         if (!co.dissolveEffect)
         {
             co.dissolveEffect = current.AddComponent<DissolveEffect>();
-            co.dissolveEffect.Init();
+            co.dissolveEffect.Init(false);
         }
 
         if (state == StateMobility.Dynamic)

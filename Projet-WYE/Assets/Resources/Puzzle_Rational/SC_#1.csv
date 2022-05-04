@@ -1,17 +1,18 @@
-GENERATE;PROP;ID;MOBILITÉ;COMBINAISON;UTILISÉ AVEC;INFLUENCE;UTILISÉ AVEC;INFLUENCE;UTILISÉ AVEC;INFLUENCE;UTILISÉ AVEC;INFLUENCE
-true;Pan;0;DYNAMIQUE;2;Sink;0;Stool;0;Null;0;Null;0
-true;Stool;4;STATIQUE;2;Pan;0;Rope;-1;Null;0;Null;0
-true;Shape;0;STATIQUE;1;Sink;1;Null;0;Null;0;Null;0
-true;TeaTowel;1;DYNAMIQUE;2;Sink;1;Skillet;-1;Null;0;Null;0
-true;Sink;2;STATIQUE;2;TeaTowel;1;Pan;-1;Null;0;Null;0
-true;Blender;0;DYNAMIQUE;2;Sink;-1;Fridge;-1;Null;0;Null;0
-true;Fridge;0;STATIQUE;2;Blender;-1;Fan;-1;Null;0;Null;0
-true;Fan;0;STATIQUE;1;Fridge;-1;Null;0;Null;0;Null;0
-true;Apple;4;DYNAMIQUE;2;Blender;-1;Knife;-1;Null;0;Null;0
-true;WineBottle;0;DYNAMIQUE;1;Skillet;-1;Null;0;Null;0;Null;0
-true;WaterBottle;0;DYNAMIQUE;1;Shape;0;Null;0;Null;0;Null;0
-true;Scissor;3;DYNAMIQUE;1;Rope;1;Null;0;Null;0;Null;0
-true;Rope;6;STATIQUE;2;Scissor;1;Knife;-1;Null;0;Null;0
-true;Knife;3;DYNAMIQUE;2;Apple;0;Rope;-1;Null;0;Null;0
-true;Apple;3;DYNAMIQUE;1;Button;1;Null;0;Null;0;Null;0
-false;Lever;6;STATIQUE;0;Null;1;Null;0;Null;0;Null;0
+GENERATE;PROP;ID;MOBILITÉ;COMBINAISON;UTILISÉ AVEC;INFLUENCE;RÉSULTAT;UTILISÉ AVEC;INFLUENCE;RÉSULTAT;UTILISÉ AVEC;INFLUENCE;RÉSULTAT;UTILISÉ AVEC;INFLUENCE;RÉSULTAT
+true;Pan;0;DYNAMIQUE;2;Sink;0;Could you use a pan on the sink to put out the fire ?;Stool;0;Null;Null;0;Null;Null;0;Null
+true;Stool;4;STATIQUE;2;Pan;0;Could you use a stool on the sink to reach something ?;Rope;-1;Could you use the stool and put it over the rope ?;Null;0;Null;Null;0;Null
+true;Silhouette;0;STATIQUE;1;Sink;1;Could you use the sink to put out the fire ?;Null;0;Null;Null;0;Null;Null;0;Null
+true;TeaTowel;1;DYNAMIQUE;2;Sink;1;Could you use a tea towel on the sink to put out the fire ?;Skillet;-1;Could you use a tea towel and a skillet to put wash it ?;Null;0;Null;Null;0;Null
+true;Skillet;0;DYNAMIQUE;1;TeaTowel;-1;Null;Null;0;Null;Null;0;Null;Null;0;Null
+true;Sink;2;STATIQUE;3;TeaTowel;1;Could you use the sink with a tea towel to put out the fire ?;Pan;-1;Could you use the sink with a pan to wash it ?;Sink;1;Sink;Null;0;Sink
+true;Blender;0;DYNAMIQUE;2;Sink;-1;Could you put the blender in the sink to wash it ?;Fridge;-1;Could you put the blender in the fridge to cool it ?;Null;0;Null;Null;0;Null
+true;Fridge;0;STATIQUE;2;Blender;-1;Could you use the fridge and the blender to make a smoothie ?;Fan;-1;Could you use the fridge and the fan to cool it ?;Null;0;Null;Null;0;Null
+true;Fan;0;STATIQUE;1;Fridge;-1;Could you use the fan on the blender to cool it down?;Null;0;Null;Null;0;Null;Null;0;Null
+true;Apple;4;DYNAMIQUE;2;Blender;-1;Could you put an apple in the blender to make some apple juice ?;Knife;-1;Could you use an apple with a knife to cut it ?;Null;0;Null;Null;0;Null
+true;WineBottle;0;DYNAMIQUE;1;Skillet;-1;Could you put some wine in a skillet ?;Null;0;Null;Null;0;Null;Null;0;Null
+true;WaterBottle;0;DYNAMIQUE;1;Silhouette;0;Could you open a water bottle and pour it over yourself ?;Null;0;Null;Null;0;Null;Null;0;Null
+true;Scissor;3;DYNAMIQUE;1;Rope;1;Could you use the scissors on the rope to cut it ?;Null;0;Null;Null;0;Null;Null;0;Null
+true;Rope;6;STATIQUE;3;Scissor;1;Could you use the rope and the scissors to cut it ?;Knife;-1;Null;Stool;-1;;Null;0;Null
+true;Knife;3;DYNAMIQUE;2;Apple;0;Could you use a knife and the apple to cut it ?;Rope;-1;Null;Null;0;Null;Null;0;Null
+false;Apple;3;DYNAMIQUE;1;Button;1;Could you throw an apple on the button to deactivate it ?;Null;0;Null;Null;0;Null;Null;0;Null
+false;Lever;6;STATIQUE;0;Null;1;Null;Null;0;Null;Null;0;Null;Null;0;Null

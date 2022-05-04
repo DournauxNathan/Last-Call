@@ -19,26 +19,38 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
     public Material[] dissolveMaterials;
 
-    public void Init()
+    public void Init(bool hasAlreadyParticle)
     {
+        if (!hasAlreadyParticle)
+        {
 #if UNITY_EDITOR
-        particlePrefab = PrefabUtility.InstantiatePrefab(Resources.Load("Prefabs/VFX Start")) as GameObject;
+            particlePrefab = PrefabUtility.InstantiatePrefab(Resources.Load("Prefabs/VFX_Start")) as GameObject;
 #endif
-        particlePrefab.transform.SetParent(this.transform);
+            particlePrefab.transform.SetParent(this.transform);
 
-        particles = particlePrefab.GetComponent<ParticleSystem>();
-            
+            particlePrefab.transform.position = Vector3.zero;
+            particlePrefab.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+            particles = particlePrefab.GetComponent<ParticleSystem>();
+        }
+        else
+        {
+            Debug.Log(this.gameObject.name + " has already a particle Prefab. \n Reset position and rotation");
+
+            particlePrefab.transform.position = Vector3.zero;
+
+            particlePrefab.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
 
         if (particles != null)
         {
-            particles.gameObject.SetActive(false);
+            particles.gameObject.SetActive(true);
             particles.Stop();
         }
         else
         {
             Debug.LogWarning("There is no particles, Object reference is missing in Inspector");
         }
-
     }
 
     private void FixedUpdate()

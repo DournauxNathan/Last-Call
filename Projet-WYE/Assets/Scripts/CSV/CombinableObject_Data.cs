@@ -151,9 +151,7 @@ public class CombinableObject_Data : MonoBehaviour
 
     public void LoadFromRessources()
     {
-        meshFilter.mesh = Resources.Load<Mesh>("Models/" + name);
-        meshRenderer.materials = Resources.LoadAll<Material>("Materials/" + name + "/M_" + name);
-        selectOutline = Resources.Load<Material>("Materials/Select Outline");
+        selectOutline = Resources.Load<Material>("MaterialsBase/Select_Outline");
     }
 
     public void SetOutline()
