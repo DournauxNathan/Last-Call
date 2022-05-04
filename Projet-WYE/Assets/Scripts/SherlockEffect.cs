@@ -13,7 +13,8 @@ public class SherlockEffect : Singleton<SherlockEffect>
     public OffsetLimit limit;
 
     private void Start() {
-        limit = new OffsetLimit(-0.65f, 0.65f, -0.25f, 0.25f); //TODO: Change when testing in VR
+        limit = new OffsetLimit(-1f, 1f, 0.63f, 1.35f); //TODO: Change when testing in VR    // maxY must be >1.2f Y  /!\axis is offseted
+        Debug.Log(limit.ToString()); //TODO: Remove
     }
 
 
@@ -28,13 +29,22 @@ public class SherlockEffect : Singleton<SherlockEffect>
 
     public void AddOffset(Transform _transform)
     {
-        offsets.Add(new Vector2(_transform.localPosition.x, _transform.localPosition.y));
+        offsets.Add(new Vector2(_transform.position.x, _transform.position.y));
     }
 
     //Check if the offset is in the limit
     public void CheckOffset(Transform _transform){
-        if(_transform.position.x> limit.maxX|| _transform.position.x< limit.minX|| _transform.position.y> limit.maxY|| _transform.position.y< limit.minY){
-            int index = _transform.GetSiblingIndex();
+
+        var isInLimitMaxX = _transform.position.x> limit.maxX ;
+        var isInLimitMinX = _transform.position.x < limit.minX ;
+        var isInLimitMaxY = _transform.position.y > limit.maxY ;
+        var isInLimitMinY = _transform.position.y < limit.minY ;
+
+        if(isInLimitMaxX || isInLimitMinX || isInLimitMaxY || isInLimitMinY)
+        {
+            int index = _transform.GetSiblingIndex(); 
+            Debug.Log(index +"\n"+ _transform.gameObject.name+"\n"+"minX: "+isInLimitMinX+" maxX: "+isInLimitMaxX+" minY: "+isInLimitMinY+" MaxY: "+isInLimitMaxY); //TODO: Remove
+            Debug.Log( "x: "+ _transform.position.x+" y: "+_transform.position.y);                                                                                  //TODO: Remove
             _transform.position = new Vector3(offsets[index].x, offsets[index].y, _transform.position.z);
         }
 
@@ -54,6 +64,9 @@ public class OffsetLimit
         this.maxX = maxX;
         this.minY = minY;
         this.maxY = maxY;
+    }
+    public override string ToString(){
+        return "minX: "+minX+" maxX: "+maxX+" minY: "+minY+" MaxY: "+maxY;
     }
 
 }
