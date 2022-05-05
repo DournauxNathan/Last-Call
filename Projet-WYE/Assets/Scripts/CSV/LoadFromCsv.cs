@@ -37,7 +37,7 @@ public class LoadFromCsv
     [MenuItem("Rational/Check")]
     public static void LoadCSVToPrefab()
     {
-        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" + 1).text;
+        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" + 2).text;
 
         string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
         char[] cellSeparator = new char[] { ';' };

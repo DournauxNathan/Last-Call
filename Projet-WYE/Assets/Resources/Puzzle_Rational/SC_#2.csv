@@ -1,0 +1,35 @@
+GENERATE;PROP;ID;MOBILITÉ;COMBINAISON;UTILISÉ AVEC;INFLUENCE;RÉSULTAT;UTILISÉ AVEC;INFLUENCE;RÉSULTAT;UTILISÉ AVEC;INFLUENCE;RÉSULTAT;UTILISÉ AVEC;INFLUENCE;RÉSULTAT
+true;Lamp;0;DYNAMIQUE;0;Null;1;Jetez une lampe;Null;0;Null;Null;0;Null;Null;0;Null
+true;Book;0;DYNAMIQUE;0;Null;1;Lancez un livre;Null;0;Null;Null;0;Null;Null;0;Null
+true;Candle;0;DYNAMIQUE;0;Null;1;Envoyez une bougie;Null;0;Null;Null;0;Null;Null;0;Null
+true;Bowl;0;DYNAMIQUE;0;Null;1;Envoyez un bol;Null;0;Null;Null;0;Null;Null;0;Null
+true;Frame;0;DYNAMIQUE;0;Null;1;Jetez le cadre photo;Null;0;Null;Null;0;Null;Null;0;Null
+true;Plant;0;DYNAMIQUE;0;Null;1;Jetez une plante;Null;0;Null;Null;0;Null;Null;0;Null
+false;Lightbulb;0;DYNAMIQUE;0;Null;1;Lancez une ampoule;Null;0;Null;Null;0;Null;Null;0;Null
+true;LooseSheets;0;DYNAMIQUE;0;Null;-1;Jetez une feuille de papier;Null;0;Null;Null;0;Null;Null;0;Null
+false;Nail;0;DYNAMIQUE;2;Hammer;1;Utilisez le marteau et les clous pour barricader la porte;Door;-1;Défoncez la porte avec le marteau;Null;0;Null;Null;0;Null
+true;Nail;0;DYNAMIQUE;0;Null;1;Envoyez un clou;Null;0;Null;Null;0;Null;Null;0;Null
+true;Plank;0;DYNAMIQUE;3;Door;1;Mettez une planche contre la porte;Hammer;-1;Brisez une planche avec le mateau;Hand Saw;-1;Découpez la planche avec une scie;Null;0;Null
+false;Inha;0;DYNAMIQUE;2;Board;1;Maintenez la planche avec un marteau;Nails;1;Garez la planche en place avec les clous;Null;0;Null;Null;0;Null
+false;Nails;0;DYNAMIQUE;2;Hammer;1;Utilisez le marteau et les clous pour barricader la porte;Door;-1;Défoncez la porte avec le marteau;Null;0;Null;Null;0;Null
+true;Hand Saw;0;DYNAMIQUE;1;Board;-1;Coupez une planche avec une scie;Null;0;Null;Null;0;Null;Null;0;Null
+true;Door;0;STATIQUE;2;Board;1;Bloquez la porte avec une planche;Nails;-1;Clouez la porte;Null;0;Null;Null;0;Null
+true;Inhaler;0;DYNAMIQUE;2;Inhaler Product Healthy;1;Insérez la Ventoline;Inhaler Product Danger;-1;Insérez la Ventoline;Null;0;Null;Null;0;Null
+true;Inhaler Product Healthy;0;DYNAMIQUE;1;Inhaler;1;Insérez la Ventoline;Null;0;Null;Null;0;Null;Null;0;Null
+true;Inhaler Product Danger;0;DYNAMIQUE;1;Inhaler;-1;Insérez la Ventoline;Null;0;Null;Null;0;Null;Null;0;Null
+true;DigitalClock;0;DYNAMIQUE;0;Null;Null;Null;Null;0;Null;Null;0;Null;Null;0;Null
+true;Silhouette;0;STATIQUE;3;MattressSheets;-1;Cachez vous sous les draps;Horse;-1;Montez sur le cheval à bascule;Window;-1;Sautez par la fenêtre;Null;0;Null
+true;MattressSheets;0;STATIQUE;1;Window;1;Jetez des draps à l'exterieur;Null;Null;Null;Null;0;Null;Null;0;Null
+false;Draps sales;0;STATIQUE;1;MattressSheets;1;Nouez les draps pour en faire une corde;Null;0;Null;Null;0;Null;Null;0;Null
+true;Rope;0;STATIQUE;1;Closet;1;Sécurisez la corde avec l'armoire;Null;0;Null;Null;0;Null;Null;0;Null
+true;Closet;0;STATIQUE;2;Rope;1;Sécurisez la corde avec l'armoire;Tool box;-1;Remettez la boîte à outils dans le placard;Null;0;Null;Null;0;Null
+true;Mattress;0;STATIQUE;1;Window;1;Jetez le matelas par la fenêtre;Null;0;Null;Null;0;Null;Null;0;Null
+true;Window;0;DYNAMIQUE;4;Matress;1;Lancez le matelas par la fenêtre;Silhouette;-1;Sautez par la fenêtre;Carpet;-1;Lancez le tapis dehors;Pillow;1;Jetez des oreillers à l'exterieur
+true;Door;0;STATIQUE;1;Horse;-1;Mettez le cheval devant la porte;Null;0;Null;Null;0;Null;Null;0;Null
+true;Horse;0;STATIQUE;2;Door;-1;Mettez le cheval dans le passage;Silhouette;-1;Montez sur le cheval à bascule;Null;0;Null;Null;0;Null
+true;Matress;0;STATIQUE;1;Window;1;Lancez le matelas dehors;Null;0;Null;Null;0;Null;Null;0;Null
+true;RoundCarpet;0;STATIQUE;1;Window;-1;Lancez le tapis dehors;Null;0;Null;Null;0;Null;Null;0;Null
+true;Pillow;0;DYNAMIQUE;1;Window;-1;Envoyez des cousins dehors;Null;0;Null;Null;0;Null;Null;0;Null
+true;Tool box;0;DYNAMIQUE;3;Closet;-1;Remettez la boîte à outils dans le placard;Hammer;-1;Rangez le marteau dans la boîte à outils;Hand saw;-1;Rangez la scie dans la boîte à outils;Null;0;Null
+true;Hammer;0;DYNAMIQUE;1;Tool box;-1;Rangez le marteau dans la boîte à outils;Null;0;Null;Null;0;Null;Null;0;Null
+true;Hand Saw;0;DYNAMIQUE;1;Tool box;-1;Rangez la scie dans la boîte à outils;Null;0;Null;Null;0;Null;Null;0;Null

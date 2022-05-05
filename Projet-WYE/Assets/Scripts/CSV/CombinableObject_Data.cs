@@ -126,6 +126,7 @@ public class CombinableObject_Data : MonoBehaviour
                 outcome = entry[7]
             };
 
+
             useWith[1] = new CombineWith
             {
                 objectName = entry[8],

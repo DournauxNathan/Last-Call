@@ -99,6 +99,17 @@ public class ShakeWord : MonoBehaviour
         }
     }
 
+    public void OnHoverEnter()
+    {
+        m_animator.SetBool("Bool", false);
+        _text.outlineColor = outlineColor;
+        _text.outlineWidth = outlineWidth;
+    }
+
+    public void OnHoverExit()
+    {
+
+    }
 
     public void IsSelected()
     {
