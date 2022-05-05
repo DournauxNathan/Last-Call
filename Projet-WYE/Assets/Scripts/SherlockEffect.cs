@@ -9,6 +9,7 @@ public class SherlockEffect : Singleton<SherlockEffect>
     public float distanceFromCamera;
     public float time;
     public float XLimit;
+    public float lerpPosForImaginary = 0.8f;
     public List<Vector2> offsets;
 
     public OffsetLimit limit;
@@ -39,6 +40,8 @@ public class SherlockEffect : Singleton<SherlockEffect>
         {
             //block the movement of the UI
             transform.rotation = cameraTransform.rotation; //Keep the UI in the same rotation as the camera
+            Vector3 lerpPosition = new Vector3(cameraTransform.position.x, lerpPosForImaginary, cameraTransform.position.z);
+            transform.position = Vector3.Lerp(transform.position, lerpPosition, Time.deltaTime * time);
         }
         else if(!cameraLimit.CheckCameraXLimit(cameraTransform) && MasterManager.Instance.currentPhase == Phases.Phase_2) // work only if the camera is not in the limit
         {
@@ -105,9 +108,9 @@ public class CameraRoatationLimits : SherlockEffect
 
     public bool CheckCameraXLimit(Transform _transform) //Check if the camera above the limit
     {
-        if(transform.rotation.x > xLimit)
+        if(_transform.localRotation.x < xLimit)
         {
-            Debug.Log("Camera looking up");
+            //Debug.Log("Camera looking up");
             return true;
         }
         else
