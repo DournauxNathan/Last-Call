@@ -168,6 +168,10 @@ public class LoadFromCsv
                     UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverExited, action2, false);
                 }
             }
+            if (!co.audioSource)
+            {
+                co.audioSource = newPrefab.AddComponent<AudioSource>();
+            }
 
             co.Init(entry);
 
