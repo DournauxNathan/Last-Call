@@ -36,6 +36,8 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField]private Sprite baseOptionImage;
     [SerializeField]private Sprite selectedOptionImage;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Transform sliderParent;
+    [SerializeField] private List<MySlider> sliders;
 
     [Header("Events")]
     [Space(10)] public UnityEvent StartGame;
@@ -162,6 +164,13 @@ public class UIMenuManager : MonoBehaviour
             }
             CalculFPos();
 
+            sliderParent = wheelParameters.GetChild(3).GetChild(1);
+            for (int i = 0; i < sliderParent.childCount; i++)
+            {
+                sliders.Add(sliderParent.GetChild(i).GetChild(0).GetComponent<MySlider>());
+            }
+            DisableSlider();
+
             IsThereASave("SaveLastCall.json");
 
             //qualityButton.GetComponentInChildren<Text>().text = "Graphics: " + qualityChosen;
@@ -171,6 +180,7 @@ public class UIMenuManager : MonoBehaviour
     private void OnWheelUpdate()
     {
         UpdateWheel(DirectionWheel());
+        DisableSlider();
     }
 
     private void CurrentSelected()
@@ -384,6 +394,21 @@ public class UIMenuManager : MonoBehaviour
     public void QuitGameSound()
     {
         audioSource.PlayNewClipOnce(uiSounds[3]);
+    }
+
+    private void DisableSlider(){
+        foreach (var slider in sliders)
+        {
+            slider.interactable = false;
+        }
+    }
+
+    public void EnableSlider(){
+        foreach (var slider in sliders)
+        {
+            slider.interactable = true;
+        }
+        eventSystem.SetSelectedGameObject(sliders[0].gameObject); //set the first slider as selected
     }
 
     /*private void ChangeQualityText()
