@@ -33,10 +33,10 @@ public class SherlockEffect : Singleton<SherlockEffect>
     //Check if the offset is in the limit
     public void CheckOffset(Transform _transform){
 
-        var isInLimitMaxX = _transform.position.x> limit.maxX ;
-        var isInLimitMinX = _transform.position.x < limit.minX ;
-        var isInLimitMaxY = _transform.position.y > limit.maxY ;
-        var isInLimitMinY = _transform.position.y < limit.minY ;
+        bool isInLimitMaxX = _transform.position.x> limit.maxX ;
+        bool isInLimitMinX = _transform.position.x < limit.minX ;
+        bool isInLimitMaxY = _transform.position.y > limit.maxY ;
+        bool isInLimitMinY = _transform.position.y < limit.minY ;
 
         if(isInLimitMaxX || isInLimitMinX || isInLimitMaxY || isInLimitMinY)
         {
