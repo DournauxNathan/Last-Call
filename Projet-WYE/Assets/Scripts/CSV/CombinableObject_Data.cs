@@ -180,6 +180,7 @@ public class CombineWith
     public int influence;
     public string outcome;
     public bool isLethal;
+    public AudioClip sfx;
 }
 
 public enum StateMobility
