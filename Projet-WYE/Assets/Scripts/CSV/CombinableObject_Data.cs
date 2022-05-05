@@ -151,6 +151,12 @@ public class CombinableObject_Data : MonoBehaviour
         LoadFromRessources();
         SetOutline();
         SetCollider();
+        InitAudioSource();
+    }
+
+    public void InitAudioSource()
+    {
+        audioSource.spatialBlend = 1f;
     }
 
     public void LoadFromRessources()
