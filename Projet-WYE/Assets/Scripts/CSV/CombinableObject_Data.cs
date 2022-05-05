@@ -30,6 +30,9 @@ public class CombinableObject_Data : MonoBehaviour
     private DissolveEffect m_DissolveEffect;
     public DissolveEffect dissolveEffect { get => m_DissolveEffect; set => m_DissolveEffect = value; }
 
+    private AudioSource m_AudioSource;
+    public AudioSource audioSource{ get => m_AudioSource; set => m_AudioSource = value; }
+
     [Header("Outline Properties")]
     public Outline outline;
     public Material selectOutline;
@@ -43,6 +46,7 @@ public class CombinableObject_Data : MonoBehaviour
         sphereCollider = GetComponent<SphereCollider>();
         outline = GetComponent<Outline>();
         dissolveEffect = GetComponent<DissolveEffect>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Init(string[] entry)
@@ -171,6 +175,7 @@ public class CombinableObject_Data : MonoBehaviour
             GetComponent<SphereCollider>().isTrigger = true;
         }
     }
+
 }
 
 [System.Serializable]

@@ -75,18 +75,21 @@ public class ListManager : Singleton<ListManager>
             {
                 if (combinaison.objectName == combiObj2.name && combiObj1.state == StateMobility.Static)
                 {
+                    PlaySfx(combinaison.sfx,combiObj1);
                     combiObj2.dissolveEffect.startEffect = true;
 
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj2.state == StateMobility.Static)
                 {
+                    PlaySfx(combinaison.sfx,combiObj2);
                     combiObj1.dissolveEffect.startEffect = true;
 
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj1.state != StateMobility.Static)
                 {
+                    PlaySfx(combinaison.sfx,combiObj1);
                     combiObj1.dissolveEffect.startEffect = true;
                     combiObj2.dissolveEffect.startEffect = true;
 
@@ -106,4 +109,10 @@ public class ListManager : Singleton<ListManager>
         PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
         OrderController.Instance.IncreaseValue(1);
     }
+
+    public void PlaySfx(AudioClip sfx, CombinableObject combiObj){
+        AudioSource audio = combiObj.audioSource;
+        audio.PlayNewClipOnce(sfx);
+    }
+
 }
