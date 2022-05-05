@@ -36,7 +36,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
         }
         else
         {
-            Debug.Log(this.gameObject.name + " has already a particle Prefab. \n Reset position and rotation");
+            //Debug.Log(this.gameObject.name + " has already a particle Prefab. \n Reset position and rotation");
         }
 
         if (particles != null)
@@ -46,7 +46,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
         }
         else
         {
-            Debug.LogWarning("There is no particles, Object reference is missing in Inspector");
+            Debug.Log("There is no particles in " + this.gameObject.name + ", Object reference is missing in Inspector");
         }
     }
 

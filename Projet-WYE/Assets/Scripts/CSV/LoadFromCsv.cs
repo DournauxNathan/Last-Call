@@ -34,10 +34,29 @@ public class LoadFromCsv
         }
     }
 
-    [MenuItem("Rational/Check")]
-    public static void LoadCSVToPrefab()
+    [MenuItem("Rational/Check/#1 TrappedMan")]
+    public static void Check1()
     {
-        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" + 2).text;
+        LoadCSVToPrefab("Puzzle_Rational/SC_#1");
+    }
+
+    [MenuItem("Rational/Check/#2 HomeInvasion")]
+    public static void Check2()
+    {
+        LoadCSVToPrefab("Puzzle_Rational/SC_#2");
+    }
+
+    [MenuItem("Rational/Check/#3 RisingWater")]
+    public static void Check3()
+    {
+        LoadCSVToPrefab("Puzzle_Rational/SC_#3");
+    }
+
+    public static void LoadCSVToPrefab(string _path)
+    {
+        string path = _path; 
+
+        var csvText = Resources.Load<TextAsset>(path).text;
 
         string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
         char[] cellSeparator = new char[] { ';' };
@@ -54,6 +73,7 @@ public class LoadFromCsv
         {
             CreatePrefab(item);
         }
+        Debug.LogWarning("Data was checked");
     }
     private static void CreateScriptable(string[] entry)
     {
@@ -67,15 +87,18 @@ public class LoadFromCsv
         AssetDatabase.CreateAsset(newScriptableObject, localPath);*/
     }
 
+
+
     static void CreatePrefab(string[] entry)
     {
+        List<string> missingObject = new List<string>();
         if (entry[0].Contains("true"))
         {
             GameObject newPrefab = GameObject.Find(entry[1]);
 
             if (newPrefab == null)
             {
-                Debug.Log(entry[1] + " is not in scene");
+                missingObject.Add(entry[1]);
                 newPrefab = new GameObject(entry[1] + " was not founded");
             }
 
@@ -171,6 +194,12 @@ public class LoadFromCsv
             if (!co.audioSource)
             {
                 co.audioSource = newPrefab.AddComponent<AudioSource>();
+            }
+
+
+            foreach (var item in missingObject)
+            {
+                Debug.Log(item + " is missing");
             }
 
             co.Init(entry);

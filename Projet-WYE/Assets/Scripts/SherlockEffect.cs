@@ -108,7 +108,7 @@ public class CameraRoatationLimits : SherlockEffect
 
     public bool CheckCameraXLimit(Transform _transform) //Check if the camera above the limit
     {
-        if(_transform.localRotation.x < xLimit)
+        if(_transform.localRotation.x > xLimit)
         {
             //Debug.Log("Camera looking up");
             return true;

@@ -68,7 +68,7 @@ public class CombinableObject_Data : MonoBehaviour
 
         useWith = new CombineWith[nCombinaison];
 
-        if (nCombinaison == 1)
+        if (nCombinaison <= 1)
         {
             useWith[0] = new CombineWith
             {
