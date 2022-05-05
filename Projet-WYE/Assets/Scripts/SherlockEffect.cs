@@ -33,7 +33,7 @@ public class SherlockEffect : Singleton<SherlockEffect>
     //Check if the offset is in the limit
     public void CheckOffset(Transform _transform){
 
-        bool isInLimitMaxX = _transform.position.x> limit.maxX ;
+        /*bool isInLimitMaxX = _transform.position.x> limit.maxX ;
         bool isInLimitMinX = _transform.position.x < limit.minX ;
         bool isInLimitMaxY = _transform.position.y > limit.maxY ;
         bool isInLimitMinY = _transform.position.y < limit.minY ;
@@ -44,7 +44,7 @@ public class SherlockEffect : Singleton<SherlockEffect>
             Debug.Log(index +"\n"+ _transform.gameObject.name+"\n"+"minX: "+isInLimitMinX+" maxX: "+isInLimitMaxX+" minY: "+isInLimitMinY+" MaxY: "+isInLimitMaxY); //TODO: Remove
             Debug.Log( "x: "+ _transform.position.x+" y: "+_transform.position.y);                                                                                  //TODO: Remove
             _transform.position = new Vector3(offsets[index].x, offsets[index].y, _transform.position.z);
-        }
+        }*/
 
     }
 }
