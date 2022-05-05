@@ -8,21 +8,46 @@ public class SherlockEffect : Singleton<SherlockEffect>
     public Transform calculatedTransform;
     public float distanceFromCamera;
     public float time;
+    public float XLimit;
     public List<Vector2> offsets;
 
     public OffsetLimit limit;
+    private CameraRoatationLimits cameraLimit;
 
     private void Start() {
         limit = new OffsetLimit(-1f, 1f, 0.63f, 1.35f); //TODO: Change when testing in VR    // maxY must be >1.2f Y  /!\axis is offseted
+        cameraLimit = new CameraRoatationLimits(XLimit);
         Debug.Log(limit.ToString()); //TODO: Remove
     }
     void FixedUpdate()
     {
-        Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-        transform.position = Vector3.Lerp(transform.position, resultingPosition, Time.deltaTime * time);
-        transform.rotation = cameraTransform.rotation;
+        if(cameraLimit.xLimit != XLimit) //TODO: Remove Only to find the corect value
+        {
+            cameraLimit.xLimit = XLimit;
+        }
 
-        calculatedTransform = transform;
+        
+        if(MasterManager.Instance.currentPhase != Phases.Phase_2){
+            Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
+            transform.position = Vector3.Lerp(transform.position, resultingPosition, Time.deltaTime * time);
+            transform.rotation = cameraTransform.rotation;
+
+            calculatedTransform = transform;
+
+        }
+        else if(cameraLimit.CheckCameraXLimit(cameraTransform) && MasterManager.Instance.currentPhase == Phases.Phase_2)
+        {
+            //block the movement of the UI
+            transform.rotation = cameraTransform.rotation; //Keep the UI in the same rotation as the camera
+        }
+        else if(!cameraLimit.CheckCameraXLimit(cameraTransform) && MasterManager.Instance.currentPhase == Phases.Phase_2) // work only if the camera is not in the limit
+        {
+            Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
+            transform.position = Vector3.Lerp(transform.position, resultingPosition, Time.deltaTime * time);
+            transform.rotation = cameraTransform.rotation;
+
+            calculatedTransform = transform;
+        }
     }
 
     public void AddOffset(Transform _transform)
@@ -67,4 +92,27 @@ public class OffsetLimit
         return "minX: "+minX+" maxX: "+maxX+" minY: "+minY+" MaxY: "+maxY;
     }
 
+}
+
+public class CameraRoatationLimits : SherlockEffect
+{
+    public float xLimit;
+    
+    public CameraRoatationLimits(float xLimit) //Constructor
+    {
+        this.xLimit = xLimit;
+    }
+
+    public bool CheckCameraXLimit(Transform _transform) //Check if the camera above the limit
+    {
+        if(transform.rotation.x > xLimit)
+        {
+            Debug.Log("Camera looking up");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
