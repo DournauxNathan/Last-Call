@@ -12808,7 +12808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase: 0
+  currentPhase: 2
   references:
     xRInteractionManager: {fileID: 639667784}
     _RRig: {fileID: 1355308589}
@@ -12829,7 +12829,7 @@ MonoBehaviour:
     headsetManager: {fileID: 1596390316}
   isEnded: 0
   canImagine: 0
-  isInImaginary: 0
+  isInImaginary: 1
   skipTuto: 1
   isTutoEnded: 1
   startTuto: 0
@@ -20406,8 +20406,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 2081371579}
   calculatedTransform: {fileID: 1631043434}
-  distanceFromCamera: 0.5
+  distanceFromCamera: 0.75
   time: 5
+  XLimit: 0
   offsets: []
 --- !u!4 &1631043434
 Transform:
@@ -20514,6 +20515,7 @@ MonoBehaviour:
   - {fileID: 1988457038}
   - {fileID: 1383309843}
   isProtocolComplete: 0
+  pull: 0
 --- !u!114 &1631043437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21375,11 +21377,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8295187d177d8448bfa32063e3d2866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScenario: 0
+  currentScenario: 1
   scenarios:
   - {fileID: 11400000, guid: d213199e16cd80e438d9c5995ce94175, type: 2}
   - {fileID: 11400000, guid: 6a837861dd06cef43adc582d215ec701, type: 2}
-  currentScenarioData: {fileID: 0}
+  currentScenarioData: {fileID: 11400000, guid: d213199e16cd80e438d9c5995ce94175, type: 2}
   isScenarioLoaded: 0
   endingValue: 0
   currentIndexScenario: 0
@@ -27292,7 +27294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[1].objects.Array.size
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[0].objects.Array.data[0]

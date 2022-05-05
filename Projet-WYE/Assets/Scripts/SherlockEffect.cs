@@ -25,20 +25,20 @@ public class SherlockEffect : Singleton<SherlockEffect>
         {
             cameraLimit.xLimit = XLimit;
         }
-
         
-        if(MasterManager.Instance.currentPhase != Phases.Phase_2){
+        if(MasterManager.Instance.currentPhase != Phases.Phase_2)
+        {
             Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
             transform.position = Vector3.Lerp(transform.position, resultingPosition, Time.deltaTime * time);
             transform.rotation = cameraTransform.rotation;
 
             calculatedTransform = transform;
-
         }
         else if(cameraLimit.CheckCameraXLimit(cameraTransform) && MasterManager.Instance.currentPhase == Phases.Phase_2)
         {
             //block the movement of the UI
             transform.rotation = cameraTransform.rotation; //Keep the UI in the same rotation as the camera
+            transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         }
         else if(!cameraLimit.CheckCameraXLimit(cameraTransform) && MasterManager.Instance.currentPhase == Phases.Phase_2) // work only if the camera is not in the limit
         {
@@ -105,7 +105,7 @@ public class CameraRoatationLimits : SherlockEffect
 
     public bool CheckCameraXLimit(Transform _transform) //Check if the camera above the limit
     {
-        if(transform.rotation.x > xLimit)
+        if(_transform.localRotation.x < xLimit)
         {
             Debug.Log("Camera looking up");
             return true;

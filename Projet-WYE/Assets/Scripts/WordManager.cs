@@ -16,6 +16,8 @@ public class WordManager : Singleton<WordManager>
 
     public bool isProtocolComplete;
 
+    public bool pull;
+
     FormData answerType;
     private void Update()
     {
@@ -64,6 +66,22 @@ public class WordManager : Singleton<WordManager>
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_2 && MasterManager.Instance.isInImaginary)
         {
+            if (pull)
+            {
+
+                foreach (Question question in questions)
+                {
+                    //Get the keywords in the answer
+                    for (int i = 0; i < question.questions.Count; i++)
+                    {
+                        //Find any available Canvas Word 
+                        var item = FindAvailableReveal();
+                        //if true, Activate Canvas Word and Set his text with the current propo
+                        item.Activate(transform, stockB, question, question.questions[i].question, i);
+                    }
+                }
+            }
+
             foreach (Question question in questions)
             {
                 //Get the keywords in the answer
