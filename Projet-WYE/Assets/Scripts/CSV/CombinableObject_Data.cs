@@ -156,6 +156,7 @@ public class CombinableObject_Data : MonoBehaviour
 
     public void InitAudioSource()
     {
+        audioSource.outputAudioMixerGroup = MasterManager.Instance.references.sfx;
         audioSource.spatialBlend = 1f;
     }
 

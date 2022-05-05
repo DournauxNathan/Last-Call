@@ -4,6 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 public enum Phases
 {
@@ -289,6 +290,8 @@ public class References
     public Transform player;
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
+    public AudioMixerGroup sfx;
+
 
     [Header("Puzzle Manager")]
     public ListManager _listManager;
