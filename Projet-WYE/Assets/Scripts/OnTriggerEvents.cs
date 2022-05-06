@@ -33,7 +33,7 @@ public class OnTriggerEvents : MonoBehaviour
         GetComponent<Collider>().enabled = setCollision;
     }
 
-    /*
+
         private void FixedUpdate()
         {
             if (debugEnter)
@@ -68,7 +68,7 @@ public class OnTriggerEvents : MonoBehaviour
                 triggerStay2D?.Invoke();
             }
         }
-    */
+  
     #region Trigger 3D Events
     private void OnTriggerEnter(Collider other)
     {

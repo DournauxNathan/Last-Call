@@ -67,7 +67,7 @@ public class EmptyCombinablleObject : CombinableObject_Data
                 UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
 
                 UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
-                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
+                UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverExited, action2, false);
 
             }
         }
