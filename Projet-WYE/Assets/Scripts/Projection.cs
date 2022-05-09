@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
     [Header("Refs")]
@@ -12,8 +13,8 @@ public class Projection : Singleton<Projection>
     [Space(5)]
     public bool enableTransition;
     public bool isTransition;
-    [Range(0, 30)]
-    public float transitionValue = 30f;
+    [Range(0, 50)]
+    public float transitionValue = 50f;
     [Range(0, 8)]
     public float wallTransition;
     public bool setWallWithOutline = false;

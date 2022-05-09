@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine.Animations;
@@ -11,6 +12,7 @@ public class ShakeWord : MonoBehaviour
 {
     [Header("Refs")]
     public CanvasGroup alpha;
+    public Image image;
 
     [Header("Params")]
     [Range(0f, 2f)] public float delayBeforAnim = 0f;
@@ -18,6 +20,9 @@ public class ShakeWord : MonoBehaviour
     public Color outlineColor;
     [Range(0f, 1f)] public float outlineWidth = 0.135f;
     public Color validateColor;
+
+    public Color defaultColor;
+    public Color hoverColor;
 
     public UnityEvent submitWord;
 
@@ -38,6 +43,11 @@ public class ShakeWord : MonoBehaviour
 
     private void Start()
     {
+        if (image != null)
+        {
+            defaultColor = image.color;
+        }
+
         alpha = GetComponent<CanvasGroup>();
         _time = delayBeforAnim;
         _text = GetComponentInChildren<TMP_Text>();
@@ -45,6 +55,8 @@ public class ShakeWord : MonoBehaviour
         _defaultColor = _text.color;
         //m_animator = GetComponent<Animator>();
         //IsSelected(); Validate();
+
+        submitWord.AddListener(SendToSaveFile);
     }
 
     private void Update()
@@ -97,16 +109,31 @@ public class ShakeWord : MonoBehaviour
         }
     }
 
+    public void OnHoverEnter()
+    {
+        m_animator.SetBool("Bool", false);
+        image.color = hoverColor;
+    }
+
+    public void OnHoverExit()
+    {
+        m_animator.SetBool("Bool", true);
+        image.color = defaultColor;
+    }
 
     public void IsSelected()
     {
         m_animator.SetBool("Bool", false);
+
+        image.color = outlineColor;
+
         _text.outlineColor = outlineColor;
         _text.outlineWidth = outlineWidth;
     }
 
     public void DeSelected()
     {
+        image.color = defaultColor;
         _text.outlineColor = _defaultColorOutline;
         _text.outlineWidth = 0f;
         m_animator.SetBool("Bool", true);
@@ -125,5 +152,9 @@ public class ShakeWord : MonoBehaviour
         Debug.Log("COUCOU");
     }
 
+    private void SendToSaveFile()
+    {
+        SaveQuestion.Instance.AddQuestion(_text.text);
+    }
 
 }
