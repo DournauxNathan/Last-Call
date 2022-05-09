@@ -16,6 +16,7 @@ public class ScenarioData : ScriptableObject
 
     public AudioClip dialogues;
     public float timeAfterDialogueBegins;
+    public float timerInPhase2;
 }
 
 [System.Serializable]

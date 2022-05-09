@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class CombinableObject_Data : MonoBehaviour
@@ -194,6 +195,7 @@ public class CombineWith
     public string outcome;
     public bool isLethal;
     public AudioClip sfx;
+    public UnityEvent doAction;
 }
 
 public enum StateMobility
