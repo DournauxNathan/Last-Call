@@ -13,6 +13,9 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     
     public bool equip;
 
+    public bool press;
+    [SerializeField] private OnTriggerEvents triggerEvents;
+
     private void Awake()
     {
         if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
@@ -31,8 +34,15 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         else if (MasterManager.Instance.currentPhase == Phases.Phase_1 || MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
             headPhone.GetComponent<Renderer>().enabled = true; 
+        }
+
+        if (press)
+        {
+            press = !press;
+            triggerEvents.triggerEnter?.Invoke();
 
         }
+
 
         if (equip)
         {
@@ -53,8 +63,10 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     public void EquipHeadPhone()
     {
         isOnHead = true;
+        headPhone.isOnHead = isOnHead;
         headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas très propre
-        headPhone.onHead?.Invoke();
+        
+        //headPhone.onHead?.Invoke();
     }
 
 
@@ -65,20 +77,18 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            headPhone.onHead?.Invoke();
+            //headPhone.onHead?.Invoke();
         }
 
         if (!isOnHead && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            //StartCoroutine(OffHead());
+            this.CallWithDelay(OffHead, 15);
         }
 
     }
 
-    public IEnumerator OffHead()
+    public void OffHead()
     {
-        yield return new WaitForSeconds(3f);
-
         MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day1");
     }
 }

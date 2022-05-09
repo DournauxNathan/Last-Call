@@ -12,7 +12,7 @@ public class HeadPhone : MonoBehaviour
     public bool isOnHead;
     public UnityEvent onHead;
 
-    public bool b = true;
+    private bool b = true;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class HeadPhone : MonoBehaviour
     {
         if (b && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            b = false;
+            b = !b;
 
             SetUp();
         }
@@ -41,7 +41,7 @@ public class HeadPhone : MonoBehaviour
         {
             manager = MasterManager.Instance.references.headsetManager;
             manager.GetComponent<HeadPhoneManager>();
-            manager.headPhone = GetHeadPhoneRef();
+            manager.headPhone = GetHeadPhone();
 
 
             GetComponent<Renderer>().enabled = true;
@@ -50,16 +50,7 @@ public class HeadPhone : MonoBehaviour
         }
     }
 
-    private ref HeadPhone GetHeadPhoneRef()
-    {
-        return ref headPhone; 
-    }
-
-
-    public void GetInteractor()
-    {
-
-    }
+    private ref HeadPhone GetHeadPhone()  { return ref headPhone; }
 
     public void DisableHeadset()
     {
@@ -67,5 +58,13 @@ public class HeadPhone : MonoBehaviour
         GetComponent<Renderer>().enabled = false;
         GetComponentInChildren<CapsuleCollider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    public void OnHead()
+    {
+        if (isOnHead)
+        {
+            onHead?.Invoke();
+        }
     }
 }

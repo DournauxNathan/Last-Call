@@ -16,6 +16,7 @@ public class WordManager : Singleton<WordManager>
 
     public bool isProtocolComplete;
 
+    FormData answerType;
     private void Update()
     {
         if (isProtocolComplete && MasterManager.Instance.currentPhase == Phases.Phase_1)
@@ -38,6 +39,37 @@ public class WordManager : Singleton<WordManager>
                     var item = FindAvailableWordData();
                     //if true, Activate Canvas Word and Set his text with the current propo
                     item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition, answer);
+
+                    switch (item.GetAnswer().type)
+                    {
+                        case FormData.age:
+                            AnswerManager.Instance.age.Add(item.gameObject);
+                            break;
+                        case FormData.adress:
+                            AnswerManager.Instance.adress.Add(item.gameObject);
+                            break;
+                        case FormData.situation:
+                            /*
+                            for (int i = 0; i < AnswerManager.Instance.situations.Count; i++)
+                            {
+
+                                if (AnswerManager.Instance.situations[i].id == item.GetAnswer().id)
+                                {
+                                    Situation _situation = new Situation
+                                    {
+                                        id = item.GetAnswer().id,
+                                        canvas = new List<GameObject>(),
+                                    };
+
+                                    _situation.canvas.Add(item.gameObject);
+
+                                    AnswerManager.Instance.situations.Add(_situation);
+                                }
+
+                            }*/
+                            
+                            break;
+                    }
                 }
             }
         }
@@ -62,7 +94,6 @@ public class WordManager : Singleton<WordManager>
         {
             foreach (Order currentOrder in OrderController.Instance.ordersStrings)
             {
-
                 //Find any available Canvas Word 
                 var item = FindAvailableWordData();
                 //if true, Activate Canvas Word and Set his text with the current propo
@@ -105,5 +136,30 @@ public class WordManager : Singleton<WordManager>
             }
         }
         return null;
+    }
+
+    public void DisableAnswers(FormData type, int id)
+    {
+        switch (type)
+        {
+            case FormData.age:
+                foreach (var item in AnswerManager.Instance.age)
+                {
+                    item.SetActive(false);
+                }
+                break;
+
+            case FormData.adress:
+                foreach (var item in AnswerManager.Instance.adress)
+                {
+                    item.SetActive(false);
+                }
+                break;
+
+            case FormData.situation:
+                
+                    break;
+        }
+
     }
 }

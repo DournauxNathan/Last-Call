@@ -73,24 +73,13 @@ public class ScenarioManager : Singleton<ScenarioManager>
 
     public void StartScenario()
     {
-        switch (currentScenario)
-        {
-            case Scenario.TrappedMan:
+        this.CallWithDelay(PreWriteForm, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
+        
+    }
 
-                UIManager.Instance.UpdateForm(FormData.name, scenarios[0].callerInformations.name);
-                break;
-
-            case Scenario.HomeInvasion:
-
-                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
-                break;
-
-            case Scenario.RisingWater:
-
-                UIManager.Instance.UpdateForm(FormData.age, scenarios[0].callerInformations.name);
-                break;
-        }
-
+    public void PreWriteForm()
+    {
+        UIManager.Instance.UpdateForm(FormData.name, currentScenarioData.callerInformations.name);
     }
 
     public void UpdateEndingsValue(int modifier)
