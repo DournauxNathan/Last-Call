@@ -26,11 +26,16 @@ public class  InputHandler : MonoBehaviour
         }
     }
 
+    public string GetCurrentAppart()
+    {
+        return entries[0].currentAppart;
+    }
+
     public string LoadSaveData()
     {
         entries = FileHandler.ReadFromJSON<InputEntry>(filename);
         string output = "";
-        output = /*"Scénario en cours : " + entries[0].scenarioName.ToString() +*/ 
+        output = /*"Scï¿½nario en cours : " + entries[0].scenarioName.ToString() +*/ 
         "\n Jour : ";
 
         return output;
@@ -45,11 +50,11 @@ public class  InputHandler : MonoBehaviour
         entries.Clear();
         if (SaveQuestion.Instance.AnsweredQuestions.Count !=0)
         {
-            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue,MasterManager.Instance.currentPhase ,SaveQuestion.Instance.AnsweredQuestions));
+            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue,MasterManager.Instance.currentPhase ,SaveQuestion.Instance.AnsweredQuestions,AppartManager.Instance.currentAppart));
         }
         else
         {
-            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue, MasterManager.Instance.currentPhase , _string));
+            entries.Add(new InputEntry(MasterManager.Instance.isTutoEnded, ScenarioManager.Instance.currentScenario, ScenarioManager.Instance.endingValue, MasterManager.Instance.currentPhase , _string, AppartManager.Instance.currentAppart));
         }
         
 
