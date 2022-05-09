@@ -43,7 +43,10 @@ public class ShakeWord : MonoBehaviour
 
     private void Start()
     {
-        defaultColor = image.color;
+        if (image != null)
+        {
+            defaultColor = image.color;
+        }
 
         alpha = GetComponent<CanvasGroup>();
         _time = delayBeforAnim;
