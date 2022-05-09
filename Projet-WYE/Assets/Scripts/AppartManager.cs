@@ -12,8 +12,32 @@ public class AppartManager : Singleton<AppartManager>
     {
         
     }
+    
+    public void LoadAppartOnScenarioEnd() //Load the next appart
+    {
+        Scenario scenario = ScenarioManager.Instance.currentScenario;
+        switch (scenario)
+        {
+            case Scenario.TrappedMan:
 
-    public void LoadAppartOnScenarioEnd(Scenario scenario)
+                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day-1");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day+1");}
+
+                break;
+            case Scenario.HomeInvasion:
+                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+
+                break;
+            case Scenario.RisingWater:
+                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.None,"Appartment_Day+2");}
+
+                break;
+        }
+    }
+
+    public void LoadAppartOnScenarioEnd(Scenario scenario) //Can load a specific appart
     {
         switch (scenario)
         {
@@ -66,5 +90,6 @@ public class AppartManager : Singleton<AppartManager>
     public void LoadDefaultAppart()
     {
         SceneLoader.Instance.LoadNewScene("Appartment_Day 0");
+        currentAppart = "Appartment_Day 0";
     }
 }
