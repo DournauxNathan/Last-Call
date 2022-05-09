@@ -8,6 +8,7 @@ public class OceanManager : MonoBehaviour
     public float wavesFrenquency = 1f;
     public float wavesSpeed = 4f;
     public Transform ocean;
+    public Renderer oceanRend;
 
     Material OceantMat;
     Texture2D wavesDisplacement;
@@ -19,7 +20,7 @@ public class OceanManager : MonoBehaviour
     }
     void SetVariables()
     {
-        OceantMat = ocean.GetComponent<Renderer>().sharedMaterial;
+        OceantMat = oceanRend.sharedMaterial;
         wavesDisplacement = (Texture2D)OceantMat.GetTexture("_WavesDisplacement");
     }
     public float WaterHeightAtPosition(Vector3 position)

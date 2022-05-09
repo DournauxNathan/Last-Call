@@ -33,42 +33,41 @@ public class OnTriggerEvents : MonoBehaviour
         GetComponent<Collider>().enabled = setCollision;
     }
 
-
-        private void FixedUpdate()
+    private void FixedUpdate()
+    {
+        if (debugEnter)
         {
-            if (debugEnter)
-            {
-                debugEnter = !debugEnter;
-                triggerEnter?.Invoke();
-            }
-            if (debugExit)
-            {
-                debugExit = !debugExit;
-                triggerExit?.Invoke();
-            }
-            if (debugStay)
-            {
-                debugStay = !debugStay;
-                triggerStay?.Invoke();
-            }
-
-            if (debugEnter2D)
-            {
-                debugEnter2D = !debugEnter2D;
-                triggerEnter2D?.Invoke();
-            }
-            if (debugExit2D)
-            {
-                debugExit2D = !debugExit2D;
-                triggerExit2D?.Invoke();
-            }
-            if (debugStay2D)
-            {
-                debugStay2D = !debugStay2D;
-                triggerStay2D?.Invoke();
-            }
+            debugEnter = !debugEnter;
+            this.CallEvent(triggerEnter);
         }
-  
+        if (debugExit)
+        {
+            debugExit = !debugExit;
+            this.CallEvent(triggerExit);
+        }
+        if (debugStay)
+        {
+            debugStay = !debugStay;
+            this.CallEvent(triggerStay);
+        }
+
+        if (debugEnter2D)
+        {
+            debugEnter2D = !debugEnter2D;
+            this.CallEvent(triggerEnter2D);
+        }
+        if (debugExit2D)
+        {
+            debugExit2D = !debugExit2D;
+            this.CallEvent(triggerExit2D);
+        }
+        if (debugStay2D)
+        {
+            debugStay2D = !debugStay2D;
+            this.CallEvent(triggerStay2D);
+        }
+    }
+
     #region Trigger 3D Events
     private void OnTriggerEnter(Collider other)
     {
