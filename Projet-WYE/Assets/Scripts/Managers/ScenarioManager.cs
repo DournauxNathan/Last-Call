@@ -73,6 +73,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public void StartScenario()
     {
         this.CallWithDelay(PreWriteForm, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
+
     }
 
     bool doOnce = true;
@@ -117,7 +118,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 break;
         }
 
-        Debug.Log(currentScenario);
+        //Debug.Log(currentScenario);
 
     }
 }
