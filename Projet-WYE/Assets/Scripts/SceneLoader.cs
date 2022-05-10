@@ -46,10 +46,9 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return StartCoroutine(UnloadCurrent());
         }
 
-        if (sceneName == "Appartment_Day1")
+        if (sceneName == "Appartment_Day1" )
         {
             HeadPhoneManager.Instance.headPhone.DisableHeadset();
-            //MasterManager.Instance.currentPhase = Phases.Phase_1;
         }
 
         yield return StartCoroutine(LoadNew(sceneName));

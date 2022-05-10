@@ -30,4 +30,14 @@ public class Hammer : MonoBehaviour
             OrderController.Instance.ResolvePuzzle();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Nail"))
+        {
+            Debug.Log(other.name);
+            other.GetComponent<Nails>().drive?.Invoke();
+            Debug.Log("hhhhh");
+        }
+    }
 }

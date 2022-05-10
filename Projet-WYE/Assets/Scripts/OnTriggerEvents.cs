@@ -8,6 +8,9 @@ public class OnTriggerEvents : MonoBehaviour
 {
     public string _tag;
     public bool useComparTag;
+    public bool debugEvent = false;
+
+    public bool setCollision = true;
 
     [Header("Trigger Events")]
     public UnityEvent triggerEnter;
@@ -25,53 +28,56 @@ public class OnTriggerEvents : MonoBehaviour
     public UnityEvent triggerStay2D;
     public bool debugStay2D;
 
+    private void Start()
+    {
+        GetComponent<Collider>().enabled = setCollision;
+    }
+
     private void FixedUpdate()
     {
         if (debugEnter)
         {
             debugEnter = !debugEnter;
-            triggerEnter?.Invoke();
+            this.CallEvent(triggerEnter);
         }
         if (debugExit)
         {
             debugExit = !debugExit;
-            triggerExit?.Invoke();
+            this.CallEvent(triggerExit);
         }
         if (debugStay)
         {
             debugStay = !debugStay;
-            triggerStay?.Invoke();
+            this.CallEvent(triggerStay);
         }
 
         if (debugEnter2D)
         {
             debugEnter2D = !debugEnter2D;
-            triggerEnter2D?.Invoke();
+            this.CallEvent(triggerEnter2D);
         }
         if (debugExit2D)
         {
             debugExit2D = !debugExit2D;
-            triggerExit2D?.Invoke();
+            this.CallEvent(triggerExit2D);
         }
         if (debugStay2D)
         {
             debugStay2D = !debugStay2D;
-            triggerStay2D?.Invoke();
+            this.CallEvent(triggerStay2D);
         }
     }
 
     #region Trigger 3D Events
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-        if (other.CompareTag(_tag) && useComparTag)
+        if (other.CompareTag(_tag) && useComparTag && debugEvent)
         {
             Debug.Log(other.name);
             triggerEnter?.Invoke();
         }
-        else
+        else if (other.CompareTag(_tag) && useComparTag)
         {
-            Debug.Log(other.name);
             triggerEnter?.Invoke();
         }
     }
@@ -79,10 +85,6 @@ public class OnTriggerEvents : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_tag) && useComparTag)
-        {
-            triggerExit?.Invoke();
-        }
-        else
         {
             triggerExit?.Invoke();
         }

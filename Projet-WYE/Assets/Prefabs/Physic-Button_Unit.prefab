@@ -122,6 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tag: Button
   useComparTag: 1
+  debugEvent: 0
+  setCollision: 1
   triggerEnter:
     m_PersistentCalls:
       m_Calls:
@@ -137,9 +139,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  debugEnter: 0
   triggerExit:
     m_PersistentCalls:
       m_Calls: []
+  debugExit: 0
   triggerStay:
     m_PersistentCalls:
       m_Calls:
@@ -155,15 +159,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  debugStay: 0
   triggerEnter2D:
     m_PersistentCalls:
       m_Calls: []
+  debugEnter2D: 0
   triggerExit2D:
     m_PersistentCalls:
       m_Calls: []
+  debugExit2D: 0
   triggerStay2D:
     m_PersistentCalls:
       m_Calls: []
+  debugStay2D: 0
 --- !u!1 &658650521686390045
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +184,6 @@ GameObject:
   - component: {fileID: 658650521686390018}
   - component: {fileID: 658650521686390017}
   - component: {fileID: 658650521686390016}
-  - component: {fileID: 658650521686390047}
   - component: {fileID: 658650521686390046}
   m_Layer: 10
   m_Name: ButtonTop
@@ -261,19 +268,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 1.9999996, z: 1.0000002}
   m_Center: {x: -0.0000008940697, y: -0.000015258789, z: -0.0000019967556}
---- !u!65 &658650521686390047
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658650521686390045}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1.9999998, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: -1.7763568e-15, z: -0.0000019967556}
 --- !u!54 &658650521686390046
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -355,7 +349,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b3cfb2b9473834429f6de44a67387cf, type: 2}
+  - {fileID: 2100000, guid: fa72cc8cda47e9f4f8add63b13b5b9ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -448,7 +442,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isActivate: 1
-  activateColor: {fileID: 2100000, guid: bf6d16ee9483b4f49886ee69a0a10cef, type: 2}
+  activateColor: {fileID: 2100000, guid: d91dd44e077ed6843a38770e641913df, type: 2}
   unavailableColor: {fileID: 2100000, guid: f16a9188c8af9354188c440fb12a4f42, type: 2}
   desactivateColor: {fileID: 2100000, guid: 8b87d12a573adf849b4855ff5bf69d2a, type: 2}
   useEvents: 1

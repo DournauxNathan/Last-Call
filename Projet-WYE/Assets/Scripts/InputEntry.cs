@@ -9,8 +9,10 @@ public class InputEntry
     public float endingValue;
     public string currentPhase;
     public List<string> questionAnsered;
+    public string currentAppart;
 
-    public InputEntry(bool ingame, Scenario scenario,float value,Phases phase , List<string> questions)
+
+    public InputEntry(bool ingame, Scenario scenario,float value,Phases phase , List<string> questions,string appart)
     {
         questionAnsered = new List<string>(); //Init
         inGame = ingame;
@@ -18,8 +20,7 @@ public class InputEntry
         endingValue = value;
         currentPhase = phase.ToString();
         questionAnsered.AddRange(questions);
+        currentAppart = appart;
         
     }
-    
-
 }
