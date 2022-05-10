@@ -16,6 +16,10 @@ public class ScenarioData : ScriptableObject
 
     public AudioClip dialogues;
     public float timeAfterDialogueBegins;
+    public float ageBegin;
+    public float adressBegin;
+    public float situationBegin;
+
     public float timerInPhase2;
 }
 
