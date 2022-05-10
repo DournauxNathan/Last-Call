@@ -20,18 +20,17 @@ public class AppartManager : Singleton<AppartManager>
         {
             case Scenario.TrappedMan:
 
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day-1");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day+1");}
+                InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
 
                 break;
             case Scenario.HomeInvasion:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");}
 
                 break;
             case Scenario.RisingWater:
                 if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.None,"Appartment_Day+2");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.None,"Appartment_Day+2");}
 
                 break;
         }
@@ -43,18 +42,17 @@ public class AppartManager : Singleton<AppartManager>
         {
             case Scenario.TrappedMan:
 
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day-1");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day+1");}
+                InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
 
                 break;
             case Scenario.HomeInvasion:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");}
 
                 break;
             case Scenario.RisingWater:
                 if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.None,"Appartment_Day+2");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.None,"Appartment_Day+2");}
 
                 break;
         }
