@@ -7,19 +7,18 @@ public class Water_Rising : MonoBehaviour
     public GameObject water;
     public float time;
     public float maxheight;
-    // Start is called before the first frame update
-    void Start()
+
+    public void StartRising()
     {
-        
+        StartCoroutine(Rise());
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator Rise()
     {
-        if(water.transform.position.y!=maxheight)
+        while (water.transform.position.y != maxheight)
         {
-            Debug.Log("Rising");
-            water.transform.position = new Vector3(water.transform.position.x,  Mathf.Lerp(water.transform.position.y, maxheight, time * Time.deltaTime), water.transform.position.z);
+            water.transform.position = new Vector3(water.transform.position.x, Mathf.Lerp(water.transform.position.y, maxheight, time * Time.deltaTime), water.transform.position.z);
+            yield return null;
         }
     }
 }
