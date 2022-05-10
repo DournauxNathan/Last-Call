@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-
-#if UNITY_EDITOR
 using UnityEditor;
 
 public class MyButton : Button
@@ -39,6 +37,7 @@ public class MyButton : Button
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(MyButton))]
 public class MyButtonEditor : Editor
 {

@@ -34,18 +34,29 @@ public class LoadFromCsv
         }
     }
 
-    [MenuItem("Rational/Generate")]
-    public static void LoadCSVToPrefab()
+    [MenuItem("Rational/Check/#1 TrappedMan")]
+    public static void Check1()
     {
-        Object[] files = Resources.LoadAll("Puzzle_Rational");
-        int nFiles = files.Length;
+        LoadCSVToPrefab("Puzzle_Rational/SC_#1");
+    }
 
-        for (int i = 0; i < nFiles; i++)
-        {
-            //var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1").text;
-        }
+    [MenuItem("Rational/Check/#2 HomeInvasion")]
+    public static void Check2()
+    {
+        LoadCSVToPrefab("Puzzle_Rational/SC_#2");
+    }
 
-        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#" + 1).text;
+    [MenuItem("Rational/Check/#3 RisingWater")]
+    public static void Check3()
+    {
+        LoadCSVToPrefab("Puzzle_Rational/SC_#3");
+    }
+
+    public static void LoadCSVToPrefab(string _path)
+    {
+        string path = _path; 
+
+        var csvText = Resources.Load<TextAsset>(path).text;
 
         string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
         char[] cellSeparator = new char[] { ';' };
@@ -62,7 +73,7 @@ public class LoadFromCsv
         {
             CreatePrefab(item);
         }
-
+        Debug.LogWarning("Data was checked");
     }
     private static void CreateScriptable(string[] entry)
     {
@@ -76,15 +87,19 @@ public class LoadFromCsv
         AssetDatabase.CreateAsset(newScriptableObject, localPath);*/
     }
 
+
+
     static void CreatePrefab(string[] entry)
     {
+        List<string> missingObject = new List<string>();
         if (entry[0].Contains("true"))
         {
             GameObject newPrefab = GameObject.Find(entry[1]);
 
             if (newPrefab == null)
             {
-                newPrefab = new GameObject(entry[1]);
+                missingObject.Add(entry[1]);
+                newPrefab = new GameObject(entry[1] + " was not founded");
             }
 
             var co = newPrefab.GetComponent<CombinableObject>();
@@ -97,14 +112,6 @@ public class LoadFromCsv
             }
             co.GetComponent();
 
-            if (!co.meshFilter)
-            {
-                co.meshFilter = newPrefab.AddComponent<MeshFilter>();
-            }
-            if (!co.meshRenderer)
-            {
-                co.meshRenderer = newPrefab.AddComponent<MeshRenderer>();
-            }
             if (!co.meshCollider)
             {
                 co.meshCollider = newPrefab.AddComponent<MeshCollider>();
@@ -117,15 +124,23 @@ public class LoadFromCsv
             {
                 co.outline = newPrefab.AddComponent<Outline>();
             }
-            if (!co.dissolveEffect)
+            if ((co.dissolveEffect && co.transform.childCount == 0))
+            {
+                co.dissolveEffect.Init(false);
+                Debug.Log(entry[1] +": VFX not found. Added Child VFX Particle");
+            }
+            else if (co.dissolveEffect && (co.transform.childCount >= 1))
+            {
+                co.dissolveEffect.Init(true);
+            }
+            else if (!co.dissolveEffect)
             {
                 co.dissolveEffect = newPrefab.AddComponent<DissolveEffect>();
-                co.dissolveEffect.Init();
+                co.dissolveEffect.Init(false);
             }
 
             if (entry[3].Contains("DYNAMIQUE"))
             {
-
                 XRGrabInteractableWithAutoSetup xrInteractable = newPrefab.GetComponent<XRGrabInteractableWithAutoSetup>();
 
                 if (xrInteractable == null)
@@ -171,12 +186,25 @@ public class LoadFromCsv
                 {
                     UnityAction<bool> action1 = new UnityAction<bool>(co.ToggleOutline);
                     UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action1, true);
+
                     UnityAction<bool> action2 = new UnityAction<bool>(co.ToggleOutline);
-                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverEntered, action2, false);
+                    UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverExited, action2, false);
                 }
+            }
+            if (!co.audioSource)
+            {
+                co.audioSource = newPrefab.AddComponent<AudioSource>();
+            }
+
+
+            foreach (var item in missingObject)
+            {
+                Debug.Log(item + " is missing");
             }
 
             co.Init(entry);
+
+            co.transform.SetAsLastSibling();
         }
     }
 #endif
@@ -214,77 +242,6 @@ public class LoadFromCsv
             this.column = column;
             this.element = element;*//*
         }*/
-
-    }
-
-    [MenuItem("Rational/Excel")]
-    public static void LoadCSV()
-    {
-        var csvText = Resources.Load<TextAsset>("Puzzle_Rational/SC_#1_Outcome").text;
-
-        string[] lineSeparators = new string[] { "\n", "\r", "\n\r", "\r\n" };
-        char[] cellSeparator = new char[] { ',' };
-
-        var lines = csvText.Split(lineSeparators, System.StringSplitOptions.RemoveEmptyEntries);
-        //List<Element> completeExcelFile = new List<Element>();
-
-        List<string[]> a = new List<string[]>();
-
-        string[][] sheet = new string[lines.Length][];
-
-
-        foreach (var i in lines)
-        {
-            a.Add(i.Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));//Nombre de character dans tout la ligne
-            //Debug.Log(i);
-        }
-
-        foreach (var item in a)
-        {
-            //Debug.Log(item[]); 
-        }
-
-        for (int i = 0; i < a.Count; i++)
-        {
-            //sheet[i][0] = a;
-        }
-
-        for (int i = 1; i < lines.Length; i++)
-        {
-            //sheet[i] = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);//Nombre de character dans tout la ligne
-
-            //Debug.Log(lines[i] + ", number of character: "+ lines[i].Length); /*Contenu de la ligne + le nombre de character*/
-
-            //var cell = lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries);
-
-            //Debug.Log(lines[i]); //Contenu de la ligne
-            //Debug.Log(lines[i].Length); // Le nombre de character
-
-            //Debug.Log(lines[i].Split(cellSeparator, System.StringSplitOptions.RemoveEmptyEntries));
-
-            //Objectif séparer le contenue de la ligne
-            
-            
-            
-            //Debug.Log(lines[i] + ", number of character: " + lines[i].Length);
-        }
-
-
-        /*  for (var i = 0; i < sheet.Length; i++)
-          {
-              Debug.Log(sheet[i][]); 
-              *//*for (var j = 0; j < sheet[i].Length; j++)
-              {
-                  *//*
-                  Debug.Log(sheet[0][j]);
-
-                  //completeExcelFile.Add(new Element(sheet[0][j], sheet[i][0], sheet[i][j]));
-              }*//*
-          }*/
-
-        //Debug.Log(completeExcelFile.Count);
-
-        //OrderController.Instance.outcomes = completeExcelFile;
 
     }
 
