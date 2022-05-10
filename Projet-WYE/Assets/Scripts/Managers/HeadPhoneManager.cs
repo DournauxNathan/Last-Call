@@ -85,6 +85,6 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     public void OffHead()
     {
-        MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day1");
+        AppartManager.Instance.LoadAppartOnScenarioEnd();
     }
 }

@@ -7,12 +7,7 @@ public class AppartManager : Singleton<AppartManager>
 {
         //SceneLoader.Instance.LoadNewScene("");
     public string currentAppart = "";
-
-    void Start()
-    {
         
-    }
-    
     public void LoadAppartOnScenarioEnd() //Load the next appart
     {
         Scenario scenario = ScenarioManager.Instance.currentScenario;
@@ -26,12 +21,12 @@ public class AppartManager : Singleton<AppartManager>
                 break;
             case Scenario.HomeInvasion:
                 if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
 
                 break;
             case Scenario.RisingWater:
                 if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.None,"Appartment_Day+2");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.None,"Appartment_Day+2");}
 
                 break;
         }
@@ -49,12 +44,12 @@ public class AppartManager : Singleton<AppartManager>
                 break;
             case Scenario.HomeInvasion:
                 if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
 
                 break;
             case Scenario.RisingWater:
                 if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>2){InitializeAppart(Scenario.None,"Appartment_Day+2");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.None,"Appartment_Day+2");}
 
                 break;
         }
