@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using System.Linq;
+using UnityEditor.Events;
 
 public class WordManager : Singleton<WordManager>
 {
@@ -17,6 +20,8 @@ public class WordManager : Singleton<WordManager>
 
     bool displayAdress = true;
     FormData answerType;
+
+    public List<GameObject> questionsGo;
 
     private void Update()
     {
@@ -80,6 +85,8 @@ public class WordManager : Singleton<WordManager>
                     var item = FindAvailableReveal();
                     //if true, Activate Canvas Word and Set his text with the current propo
                     item.Activate(transform, stockB, question, question.questions[i].question, i);
+
+                    questionsGo.Add(item.gameObject);
                 }
 
                 for (int i = 0; i < getTransfrom.childCount; i++)
@@ -94,6 +101,8 @@ public class WordManager : Singleton<WordManager>
                     displayAdress = !displayAdress;
                     var item = FindAvailableReveal();
                     item.Activate(transform, stockA, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
+
+                    UnityEventTools.AddVoidPersistentListener(item.GetComponent<ShakeWord>().submitWord, DisplayQuestions);
                 }
             }
         }
@@ -109,6 +118,14 @@ public class WordManager : Singleton<WordManager>
             }
             
             Debug.Log("Pull Order");
+        }
+    }
+
+    public void DisplayQuestions()
+    {
+        foreach (var item in questionsGo)
+        {
+            item.SetActive(true);
         }
     }
 

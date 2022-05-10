@@ -21,11 +21,22 @@ public class SherlockEffect : Singleton<SherlockEffect>
         limit = new OffsetLimit(-1f, 1f, 0.63f, 1.35f); //TODO: Change when testing in VR    // maxY must be >1.2f Y  /!\axis is offseted
         cameraLimit = new CameraRoatationLimits(XLimit);
     }
-    void FixedUpdate()
+    void LateUpdate()
     {
         if(cameraLimit.xLimit != XLimit) //TODO: Remove Only to find the corect value
         {
             cameraLimit.xLimit = XLimit;
+        }
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_2)
+        {
+            //distanceFromCamera = ??;
+            XLimit = 0.075f;
+        }
+        else
+        {
+            distanceFromCamera = 0.55f;
+            XLimit = 0;
         }
 
         
