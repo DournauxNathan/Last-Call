@@ -13121,7 +13121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase: 0
+  currentPhase: 1
   references:
     xRInteractionManager: {fileID: 639667784}
     _RRig: {fileID: 1355308589}
@@ -20281,22 +20281,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
+      propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1596390316}
+      objectReference: {fileID: 1696208561}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1103599256}
+    - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
+      propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 767190970}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
@@ -20304,32 +20312,52 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
+      propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Equip
+      value: StartScenario
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayDialogues
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
+      propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: set_enabled
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: HeadPhoneManager, Assembly-CSharp
+      value: ScenarioManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MasterManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
+      propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: UnityEngine.Collider, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6253474700936792094, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
+      propertyPath: triggerEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6384876573016163023, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384876573016163023, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7080141625757210132, guid: 5a3f8d48051a65943a31898133c98345, type: 3}
       propertyPath: m_RootOrder
@@ -21798,7 +21826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8295187d177d8448bfa32063e3d2866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScenario: 0
+  currentScenario: 1
   scenarios:
   - {fileID: 11400000, guid: d213199e16cd80e438d9c5995ce94175, type: 2}
   - {fileID: 11400000, guid: 6a837861dd06cef43adc582d215ec701, type: 2}
@@ -21852,6 +21880,7 @@ MonoBehaviour:
   timeBeforeCall: 0
   globalTimer: 0
   isRunning: 0
+  runAtStart: 0
 --- !u!114 &1696208565
 MonoBehaviour:
   m_ObjectHideFlags: 0
