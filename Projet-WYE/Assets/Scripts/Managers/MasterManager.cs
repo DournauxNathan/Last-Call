@@ -161,7 +161,7 @@ public class MasterManager : Singleton<MasterManager>
 
     public void InitializeLevel()
     {
-        ScenarioManager.Instance.LoadScenario();
+        //ScenarioManager.Instance.LoadScenario();
         UpdateController();
         SetPhase(currentPhase);
     }

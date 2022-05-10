@@ -28,11 +28,6 @@ public class WordData : MonoBehaviour
 
             GetComponent<ShakeWord>().isDecaying = true;
         }
-        if (SherlockEffect.Instance.offsets.Count > 0) // Check if the list is empty
-        {
-            SherlockEffect.Instance.CheckOffset(transform);
-        }
-
     }
 
     public Answer GetAnswer()
