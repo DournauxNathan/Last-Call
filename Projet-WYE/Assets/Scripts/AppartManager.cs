@@ -14,7 +14,7 @@ public class AppartManager : Singleton<AppartManager>
         switch (scenario)
         {
             case Scenario.TrappedMan:
-                InitializeAppart(Scenario.HomeInvasion, "Appartment_Day 0");
+                InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
 
                 break;
             case Scenario.HomeInvasion:
@@ -35,13 +35,12 @@ public class AppartManager : Singleton<AppartManager>
         {
             case Scenario.TrappedMan:
 
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day-1");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day+1");}
+                InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
 
                 break;
             case Scenario.HomeInvasion:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");}
 
                 break;
             case Scenario.RisingWater:
