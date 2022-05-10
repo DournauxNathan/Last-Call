@@ -272,6 +272,8 @@ public class MasterManager : Singleton<MasterManager>
             references.mainAudioSource.PlayOneShot(ScenarioManager.Instance.currentScenarioData.dialogues);
             this.CallWithDelay(WordManager.Instance.PullWord, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
             UIManager.Instance.InComingCall(false);
+
+            TimeSettings.Instance.StartGlobalTimer();
         }
     }
 }
