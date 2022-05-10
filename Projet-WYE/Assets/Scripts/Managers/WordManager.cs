@@ -16,6 +16,7 @@ public class WordManager : Singleton<WordManager>
 
     public bool isProtocolComplete;
 
+    bool displayAdress = true;
     FormData answerType;
     private void Update()
     {
@@ -85,6 +86,16 @@ public class WordManager : Singleton<WordManager>
                 {
                     getTransfrom.GetChild(i).gameObject.SetActive(false);
                 }
+
+                if (displayAdress)
+                {
+                    Debug.Log("adress");
+
+                    displayAdress = !displayAdress;
+                    var item = FindAvailableReveal();
+                    item.Activate(transform, stockA, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
+                }
+
             }
 
         }

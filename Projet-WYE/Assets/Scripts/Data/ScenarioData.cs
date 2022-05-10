@@ -28,6 +28,7 @@ public struct Caller
 {
     public string name;
     public string age;
+    public Question adress;
 
     public string newsPapersData;
 }
