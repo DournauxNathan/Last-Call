@@ -143,7 +143,7 @@ public class PhysicsButton : MonoBehaviour
             _audioSource.pitch = 1;
             _audioSource.PlayOneShot(pressedSound);
         }
-        onPressed?.Invoke();
+        InvokeEvent(onPressed);
 
         if (UIManager.Instance.currentForm.isComplete)
         {
@@ -154,6 +154,12 @@ public class PhysicsButton : MonoBehaviour
             UIManager.Instance.SetFormToComplete(false);
         }        
     }
+
+    public void InvokeEvent(UnityEvent _event)
+    {
+        _event?.Invoke();
+    }
+
     public void Released()
     {
         prevPressedState = isPressed;
@@ -162,7 +168,7 @@ public class PhysicsButton : MonoBehaviour
             _audioSource.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
             _audioSource.PlayOneShot(releasedSound);
         }
-        onReleased?.Invoke();
+        InvokeEvent(onReleased);
     }
     public void ChangeStateColor(bool state)
     {
