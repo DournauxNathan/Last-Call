@@ -100,7 +100,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public void UpdateScenario(int i)
     {
         currentIndexScenario+=i;
-        Debug.Log(currentIndexScenario);
+        //Debug.Log(currentIndexScenario);
 
         switch (currentIndexScenario)
         {

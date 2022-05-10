@@ -9,11 +9,15 @@ public class TimeSettings : Singleton<TimeSettings>
 
     public bool isRunning;
 
+    public bool runAtStart;
+
     private void Start()
     {
-        timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
-        StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));     
-
+        if (runAtStart)
+        {
+            timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
+            StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));
+        }
     }
 
     public void Initialize()

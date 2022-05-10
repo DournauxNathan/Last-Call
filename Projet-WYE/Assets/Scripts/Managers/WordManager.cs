@@ -150,6 +150,7 @@ public class WordManager : Singleton<WordManager>
 
     public void DisableAnswers(FormData type, int id)
     {
+        Debug.Log(type + ", " + id);
         switch (type)
         {
             case FormData.age:

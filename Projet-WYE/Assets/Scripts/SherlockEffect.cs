@@ -20,7 +20,6 @@ public class SherlockEffect : Singleton<SherlockEffect>
     private void Start() {
         limit = new OffsetLimit(-1f, 1f, 0.63f, 1.35f); //TODO: Change when testing in VR    // maxY must be >1.2f Y  /!\axis is offseted
         cameraLimit = new CameraRoatationLimits(XLimit);
-        Debug.Log(limit.ToString()); //TODO: Remove
     }
     void FixedUpdate()
     {
@@ -53,11 +52,6 @@ public class SherlockEffect : Singleton<SherlockEffect>
 
             calculatedTransform = transform;
         }
-    }
-
-    public void AddOffset(Transform _transform)
-    {
-        offsets.Add(new Vector2(_transform.position.x, _transform.position.y));
     }
 
     //Check if the offset is in the limit
