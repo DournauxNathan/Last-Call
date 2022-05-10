@@ -56,7 +56,7 @@ public class WordData : MonoBehaviour
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
         GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
 
-        SherlockEffect.Instance.AddOffset(transform);
+        //SherlockEffect.Instance.AddOffset(transform);
     }
 
     public void Activate(Transform parent, Transform stock,string i)

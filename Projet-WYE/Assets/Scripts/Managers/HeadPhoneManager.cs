@@ -85,6 +85,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     public void OffHead()
     {
+        MasterManager.Instance.SetPhase(4);
         AppartManager.Instance.LoadAppartOnScenarioEnd();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class AppartManager : Singleton<AppartManager>
 {
-        //SceneLoader.Instance.LoadNewScene("");
+    //SceneLoader.Instance.LoadNewScene("");
     public string currentAppart = "";
         
     public void LoadAppartOnScenarioEnd() //Load the next appart
@@ -14,20 +14,17 @@ public class AppartManager : Singleton<AppartManager>
         switch (scenario)
         {
             case Scenario.TrappedMan:
-
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day-1");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.HomeInvasion,"Appartment_Day+1");}
+                InitializeAppart(Scenario.HomeInvasion, "Appartment_Day 0");
 
                 break;
             case Scenario.HomeInvasion:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-2");}
+                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");}
+                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");}
 
                 break;
             case Scenario.RisingWater:
                 if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
                 if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.None,"Appartment_Day+2");}
-
                 break;
         }
     }

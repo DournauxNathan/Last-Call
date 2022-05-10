@@ -12,8 +12,7 @@ public class TimeSettings : Singleton<TimeSettings>
     private void Start()
     {
         timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
-        StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));
-        
+        StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));     
 
     }
 
