@@ -210,7 +210,21 @@ public class Projection : Singleton<Projection>
 
             MasterManager.Instance.isInImaginary = true;
 
-            MasterManager.Instance.ChangeSceneByName(2,"Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+            switch (ScenarioManager.Instance.currentScenario)
+            {
+                case Scenario.TrappedMan:
+
+                    MasterManager.Instance.ChangeSceneByName(2, "Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+                    break;
+                case Scenario.HomeInvasion:
+
+                    MasterManager.Instance.ChangeSceneByName(2, "HomeInvasion"); // A changer avec le scenario Manager quand plusieur senarios 
+                    break;
+                case Scenario.RisingWater:
+
+                    MasterManager.Instance.ChangeSceneByName(2, "RisingWater"); // A changer avec le scenario Manager quand plusieur senarios 
+                    break;
+            }
         }
 
         if (!hasCycle && hasProjted)

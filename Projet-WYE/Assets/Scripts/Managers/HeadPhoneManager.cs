@@ -82,7 +82,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     public void OffHead()
     {
-        MasterManager.Instance.SetPhase(4);
+        Debug.Log("hey");
         AppartManager.Instance.LoadAppartOnScenarioEnd();
     }
 }

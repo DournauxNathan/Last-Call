@@ -12,8 +12,8 @@ public class UIManager : Singleton<UIManager>
     public CanvasGroup[] _canvasGroup;
 
     [Header("Incoming & Outcoming call")]
-    public GameObject incomingAsset;
-    public GameObject outcomingAsset;
+    public Image incomingAsset;
+    public Image outcomingAsset;
 
     [Header("Emergency Reports Form")]
     public Form currentForm;
@@ -29,6 +29,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] bool leadingCharBeforeDelay = false;
 
     public ParticleSystem smoke;
+
 
     public void UpdateForm(FormData _answerType, string data)
     {
@@ -182,14 +183,18 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
     }
+
     public void InComingCall(bool isActive)
     {
-        incomingAsset.SetActive(isActive);
+        incomingAsset.enabled = isActive;
     }
+
     public void OutComingCall(bool isActive)
     {
-        outcomingAsset.SetActive(isActive);
+       
+        outcomingAsset.enabled = isActive;
     }
+
     IEnumerator TypeWriterTMP(TMP_Text _tmpProText, string _writer)
     {
         _tmpProText.text += leadingCharBeforeDelay ? leadingChar : " ";

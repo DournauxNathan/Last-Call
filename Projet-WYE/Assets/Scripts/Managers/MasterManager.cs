@@ -67,11 +67,6 @@ public class MasterManager : Singleton<MasterManager>
     {
         UpdateController();
 
-        if (isEnded)
-        {
-            UIManager.Instance.OutComingCall(true);
-        }
-
         if (!skipTuto && !isTutoEnded && b)
         {
             timerTutoBegin -= Time.deltaTime;
@@ -242,6 +237,7 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(30);
+                this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
                 isInImaginary = false;
@@ -274,6 +270,11 @@ public class MasterManager : Singleton<MasterManager>
 
             TimeSettings.Instance.StartGlobalTimer();
         }
+    }
+    public void CallEnded()
+    {
+        isEnded = true;
+        UIManager.Instance.OutComingCall(true);
     }
 }
 

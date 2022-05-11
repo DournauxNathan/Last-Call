@@ -10,10 +10,10 @@ public class AppartManager : Singleton<AppartManager>
         
     public void LoadAppartOnScenarioEnd() //Load the next appart
     {
-        Scenario scenario = ScenarioManager.Instance.currentScenario;
-        switch (scenario)
+        switch (ScenarioManager.Instance.currentScenario)
         {
             case Scenario.TrappedMan:
+                Debug.Log("init");
                 InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
 
                 break;
@@ -67,8 +67,9 @@ public class AppartManager : Singleton<AppartManager>
     {
         ChangeScenario(scenario);
         ChangeCurrentAppart(_appart);
-        SceneLoader.Instance.LoadNewScene(_appart);
+        MasterManager.Instance.ChangeSceneByName(4, _appart);
     }
+
     private void ChangeScenario(Scenario scenario)
     {
         ScenarioManager.Instance.currentScenario = scenario;

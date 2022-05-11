@@ -91,6 +91,23 @@ public class Reveal : MonoBehaviour
         StartCoroutine(Show());
     }
 
+    public void Deactivate()
+    {
+        text.text = string.Empty;
+        isActive = false;
+        transform.SetParent(pullingStock);
+    }
+
+
+    public void DisplayQuestions()
+    {
+        foreach (var item in WordManager.Instance.questionsGo)
+        {
+            item.SetActive(true);
+        }
+    }
+
+
     public IEnumerator Show()
     {
         while (true)

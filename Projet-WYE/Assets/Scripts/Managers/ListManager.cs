@@ -107,7 +107,7 @@ public class ListManager : Singleton<ListManager>
     {
         OrderController.Instance.AddCombinaison(objectA, objectB, value, _outcome, _lethality);
         PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
-        OrderController.Instance.IncreaseValue(1);
+        OrderController.Instance.ResolvePuzzle();
     }
 
     public void PlaySfx(AudioClip sfx, CombinableObject combiObj){
