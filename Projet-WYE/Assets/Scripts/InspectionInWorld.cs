@@ -23,6 +23,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     [SerializeField] private List<Animator> animators;
 
     private List<string> _queueString;
+    private Coroutine _generateTextCoroutine;
 
 
     // Start is called before the first frame update
@@ -106,28 +107,24 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     public void CreateNewText(List<string> _listText, float delay, bool hasRandom)
     {
         hascreatedText = false;
+        var _listIndex = new List<int>(new int[] { 1, 4 });
+        _queueString.Clear();
+        _queueString.AddRange(_listText);
+                
+
         switch(_listText.Count) //switch on the number of text
         {
             case 0:
                 Debug.LogError("No text to display");
                 break;
             case 2:
-                _queueString.Clear();
-                _queueString.AddRange(_listText);
-                List<int> _listIndex = new List<int>(new int[] { 1, 4 });
-                StartCoroutine(GenerateText(_queueString, delay, _listIndex, hasRandom));
+                _listIndex = new List<int>(new int[] { 1, 4 });
                 break;
             case 4:
-                _queueString.Clear();
-                _queueString.AddRange(_listText);
-                List<int> _listIndex2 = new List<int>(new int[] { 0, 2, 3, 5 });
-                StartCoroutine(GenerateText(_queueString, delay, _listIndex2, hasRandom));
+                _listIndex = new List<int>(new int[] { 0, 2, 3, 5 });
                 break;
             case 6:
-                _queueString.Clear();
-                _queueString.AddRange(_listText);
-                List<int> _listIndex3 = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
-                StartCoroutine(GenerateText(_queueString, delay, _listIndex3, hasRandom));
+                _listIndex = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
                 break;
             default:
                 Debug.Log("Error: Number of text is not correct, please check the number of text in the list");
@@ -145,28 +142,29 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
                 }
                 break;
         }
+
+        if(_generateTextCoroutine == null)
+        {
+            _generateTextCoroutine = StartCoroutine(GenerateText(_queueString, delay, _listIndex, hasRandom));
+        }
     }
 
     IEnumerator GenerateText(List<string> _listText, float delay,List<int> _listPlacePos, bool hasRandom)
     {
-        Instantiate(textPrefab, _containers);
-        int _nbchilds = _containers.childCount;
-        _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = _listText[_listText.Count-1];
-        (_containers.GetChild(_nbchilds - 1).transform as RectTransform).anchoredPosition = new Vector3(_listPlace[_listPlacePos[_listText.Count-1]].x, _listPlace[_listPlacePos[_listText.Count-1]].y, 0);
-        if(hasRandom) (_containers.GetChild(_nbchilds-1).transform as RectTransform).anchoredPosition = new Vector3(_containers.GetChild(_nbchilds-1).localPosition.x+GetRandom(), _containers.GetChild(_nbchilds-1).localPosition.y+GetRandom(), 0);
-        _listText.RemoveAt(_listText.Count - 1);
-        //animText
-        var _tanim = _containers.GetChild(_nbchilds - 1).GetComponentInChildren<Animator>();
-        _tanim.speed = Random.Range(minRand, maxRand);
-        animators.Add(_tanim);
-        if (_listText.Count != 0)
+        while (_listText.Count >0)
         {
+            Debug.Log("Iterration " + _listText.Count);
+            var i = Instantiate(textPrefab, _containers);
+            int _nbchilds = _containers.childCount;
+            _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = _listText[_listText.Count-1];
+            (_containers.GetChild(_nbchilds - 1).transform as RectTransform).anchoredPosition = new Vector3(_listPlace[_listPlacePos[_listText.Count-1]].x, _listPlace[_listPlacePos[_listText.Count-1]].y, 0);
+            if(hasRandom) (_containers.GetChild(_nbchilds-1).transform as RectTransform).anchoredPosition = new Vector3(_containers.GetChild(_nbchilds-1).localPosition.x+GetRandom(), _containers.GetChild(_nbchilds-1).localPosition.y+GetRandom(), 0);
+            _listText.RemoveAt(_listText.Count - 1);
+            //animText
+            var _tanim = _containers.GetChild(_nbchilds - 1).GetComponentInChildren<Animator>();
+            _tanim.speed = Random.Range(minRand, maxRand);
+            animators.Add(_tanim);
             yield return new WaitForSeconds(delay);
-            StartCoroutine(GenerateText(_listText, delay, _listPlacePos, hasRandom));
-        }
-        else
-        {
-            StopCoroutine("GenerateText");
         }
 
     }
@@ -188,7 +186,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     }
 
     public void StopGenerating(){
-        StopCoroutine("GenerateText");
+        StopCoroutine(_generateTextCoroutine);
     }
 
     
