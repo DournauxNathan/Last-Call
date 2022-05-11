@@ -8,6 +8,7 @@ public class InspectorData : MonoBehaviour
     private InspectionInWorld inspection;
     [Header("Data")]
     public List<string> _dataList;
+    public float delay = 0.1f;
 
     [SerializeField] private bool testBool = false;
     [SerializeField] private bool hasGenerate = false;
@@ -38,7 +39,7 @@ public class InspectorData : MonoBehaviour
     {
         if (!security)
         {
-            inspection.CreateNewText(_dataList);
+            inspection.CreateNewText(_dataList,delay);
             inspectorEffect.objectTransform = transform;
             inspectorEffect.transform.position = transform.position;
             security = true;
