@@ -41,7 +41,16 @@ public class OrderController : Singleton<OrderController>
         Resolve();
         return currentNumberOfCombinaison;
     }
-    public void ResolvePuzzle() { puzzlesSucced += 1; }
+    public void ResolvePuzzle() 
+    { 
+        puzzlesSucced += 1;
+
+        if (puzzlesSucced >= 4)
+        {
+            isResolve = true;
+        }
+
+    }
     public int GetNumberOfPuzzleSucced() { return puzzlesSucced; }
     public void Resolve()
     {

@@ -218,7 +218,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 1:
-                ScenarioManager.Instance.UpdateScenario(3);
+                ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 break;
