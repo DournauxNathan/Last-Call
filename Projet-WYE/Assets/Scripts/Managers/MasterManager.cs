@@ -161,7 +161,7 @@ public class MasterManager : Singleton<MasterManager>
 
     public void InitializeLevel()
     {
-        ScenarioManager.Instance.LoadScenario();
+        //ScenarioManager.Instance.LoadScenario();
         UpdateController();
         SetPhase(currentPhase);
     }
@@ -269,7 +269,7 @@ public class MasterManager : Singleton<MasterManager>
     {
         if (!references.mainAudioSource.isPlaying && currentPhase == Phases.Phase_1)
         {
-            references.mainAudioSource.PlayOneShot(ScenarioManager.Instance.currentScenarioData.dialogues);
+            references.mainAudioSource.PlayNewClipOnce(ScenarioManager.Instance.currentScenarioData.dialogues);
             this.CallWithDelay(WordManager.Instance.PullWord, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
             UIManager.Instance.InComingCall(false);
 

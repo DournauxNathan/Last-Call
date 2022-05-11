@@ -125,7 +125,10 @@ public class ShakeWord : MonoBehaviour
     {
         m_animator.SetBool("Bool", false);
 
-        image.color = outlineColor;
+        if (image != null)
+        {
+            image.color = outlineColor;
+        }
 
         _text.outlineColor = outlineColor;
         _text.outlineWidth = outlineWidth;

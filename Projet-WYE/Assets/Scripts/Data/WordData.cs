@@ -28,11 +28,6 @@ public class WordData : MonoBehaviour
 
             GetComponent<ShakeWord>().isDecaying = true;
         }
-        if (SherlockEffect.Instance.offsets.Count > 0) // Check if the list is empty
-        {
-            SherlockEffect.Instance.CheckOffset(transform);
-        }
-
     }
 
     public Answer GetAnswer()
@@ -55,8 +50,6 @@ public class WordData : MonoBehaviour
 
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
         GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
-
-        SherlockEffect.Instance.AddOffset(transform);
     }
 
     public void Activate(Transform parent, Transform stock,string i)

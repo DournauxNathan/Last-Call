@@ -96,7 +96,7 @@ public class PhysicsButton : MonoBehaviour
             isPressed = true;
         else
             isPressed = false;
-
+/*
         #region Press Events / Methods
         //Using Events method (multiple reference)
         if (isPressed && prevPressedState != isPressed && useEvents)
@@ -116,7 +116,7 @@ public class PhysicsButton : MonoBehaviour
         #endregion
 
         #region Release Events / Methods
-        /*
+        *//*
         //Using method in script (direct reference)
         if (!isPressed && prevPressedState != isPressed)
         {
@@ -131,21 +131,44 @@ public class PhysicsButton : MonoBehaviour
 
             if (debugMethod)
                 Debug.LogWarning("Using direct method");
-        }*/
-        #endregion
+        }*//*
+        #endregion*/
     }
     
     public void Pressed()
     {
         prevPressedState = isPressed;
-        _audioSource.pitch = 1;
-        _audioSource.PlayOneShot(pressedSound);
+        if (pressedSound != null)
+        {
+            _audioSource.pitch = 1;
+            _audioSource.PlayOneShot(pressedSound);
+        }
+        InvokeEvent(onPressed);
+
+        if (UIManager.Instance.currentForm.isComplete)
+        {
+            UIManager.Instance.SetFormToComplete(true);
+        }
+        else
+        {
+            UIManager.Instance.SetFormToComplete(false);
+        }        
     }
+
+    public void InvokeEvent(UnityEvent _event)
+    {
+        _event?.Invoke();
+    }
+
     public void Released()
     {
         prevPressedState = isPressed;
-        _audioSource.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
-        _audioSource.PlayOneShot(releasedSound);
+        if (releasedSound != null)
+        {
+            _audioSource.pitch = UnityEngine.Random.Range(1.1f, 1.2f);
+            _audioSource.PlayOneShot(releasedSound);
+        }
+        InvokeEvent(onReleased);
     }
     public void ChangeStateColor(bool state)
     {

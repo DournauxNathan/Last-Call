@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3645325987904392479
 Transform:
   m_ObjectHideFlags: 0
@@ -59,6 +59,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tag: Button
   useComparTag: 1
+  debugEvent: 0
+  setCollision: 1
   triggerEnter:
     m_PersistentCalls:
       m_Calls:
@@ -74,9 +76,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  debugEnter: 0
   triggerExit:
     m_PersistentCalls:
       m_Calls: []
+  debugExit: 0
   triggerStay:
     m_PersistentCalls:
       m_Calls:
@@ -92,15 +96,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  debugStay: 0
   triggerEnter2D:
     m_PersistentCalls:
       m_Calls: []
+  debugEnter2D: 0
   triggerExit2D:
     m_PersistentCalls:
       m_Calls: []
+  debugExit2D: 0
   triggerStay2D:
     m_PersistentCalls:
       m_Calls: []
+  debugStay2D: 0
 --- !u!1 &3645325988313480162
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b3cfb2b9473834429f6de44a67387cf, type: 2}
+  - {fileID: 2100000, guid: 121070be30c286341b5f0370fca7d7ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -219,6 +227,7 @@ MonoBehaviour:
   buttonTop: {fileID: 3645325988485529833}
   buttonLowerLimit: {fileID: 3645325988651299649}
   buttonUpperLimit: {fileID: 3645325988777326109}
+  icon: {fileID: 0}
   threshHold: 0.5
   force: 10
   CollidersToIgnore: []
@@ -362,6 +371,7 @@ GameObject:
   - component: {fileID: 3645325988485529834}
   - component: {fileID: 3645325988485529845}
   - component: {fileID: 3645325988485529844}
+  - component: {fileID: 941466208854935919}
   m_Layer: 10
   m_Name: ButtonTop
   m_TagString: Button
@@ -474,6 +484,58 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &941466208854935919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3645325988485529847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tag: Hand
+  useComparTag: 1
+  debugEvent: 0
+  setCollision: 1
+  triggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3645325988313480160}
+        m_TargetAssemblyTypeName: PhysicsButton, Assembly-CSharp
+        m_MethodName: Pressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  debugEnter: 0
+  triggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  debugExit: 0
+  triggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay: 0
+  triggerEnter2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugEnter2D: 0
+  triggerExit2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugExit2D: 0
+  triggerStay2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay2D: 0
 --- !u!1 &3645325988651299648
 GameObject:
   m_ObjectHideFlags: 0
