@@ -9,6 +9,7 @@ public class InspectorData : MonoBehaviour
     [Header("Data")]
     public List<string> _dataList;
     public float delay = 0.1f;
+    public bool hasRandom = false;
 
     [SerializeField] private bool testBool = false;
     [SerializeField] private bool hasGenerate = false;
@@ -39,7 +40,7 @@ public class InspectorData : MonoBehaviour
     {
         if (!security)
         {
-            inspection.CreateNewText(_dataList,delay);
+            inspection.CreateNewText(_dataList,delay,hasRandom);
             inspectorEffect.objectTransform = transform;
             inspectorEffect.transform.position = transform.position;
             security = true;
@@ -51,6 +52,7 @@ public class InspectorData : MonoBehaviour
         if (security)
         {
             inspection.ClearAllText();
+            inspection.StopGenerating();
             inspectorEffect.objectTransform = null;
         }
         security = false;

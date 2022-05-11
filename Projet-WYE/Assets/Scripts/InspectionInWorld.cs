@@ -103,7 +103,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         }
     }
 
-    public void CreateNewText(List<string> _listText, float delay)
+    public void CreateNewText(List<string> _listText, float delay, bool hasRandom)
     {
         hascreatedText = false;
         switch(_listText.Count) //switch on the number of text
@@ -115,19 +115,19 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
                 _queueString.Clear();
                 _queueString.AddRange(_listText);
                 List<int> _listIndex = new List<int>(new int[] { 1, 4 });
-                StartCoroutine(GenerateText(_queueString, delay, _listIndex));
+                StartCoroutine(GenerateText(_queueString, delay, _listIndex, hasRandom));
                 break;
             case 4:
                 _queueString.Clear();
                 _queueString.AddRange(_listText);
                 List<int> _listIndex2 = new List<int>(new int[] { 0, 2, 3, 5 });
-                StartCoroutine(GenerateText(_queueString, delay, _listIndex2));
+                StartCoroutine(GenerateText(_queueString, delay, _listIndex2, hasRandom));
                 break;
             case 6:
                 _queueString.Clear();
                 _queueString.AddRange(_listText);
                 List<int> _listIndex3 = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
-                StartCoroutine(GenerateText(_queueString, delay, _listIndex3));
+                StartCoroutine(GenerateText(_queueString, delay, _listIndex3, hasRandom));
                 break;
             default:
                 Debug.Log("Error: Number of text is not correct, please check the number of text in the list");
@@ -147,12 +147,13 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         }
     }
 
-    IEnumerator GenerateText(List<string> _listText, float delay,List<int> _listPlacePos)
+    IEnumerator GenerateText(List<string> _listText, float delay,List<int> _listPlacePos, bool hasRandom)
     {
         Instantiate(textPrefab, _containers);
         int _nbchilds = _containers.childCount;
         _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = _listText[_listText.Count-1];
         (_containers.GetChild(_nbchilds - 1).transform as RectTransform).anchoredPosition = new Vector3(_listPlace[_listPlacePos[_listText.Count-1]].x, _listPlace[_listPlacePos[_listText.Count-1]].y, 0);
+        if(hasRandom) (_containers.GetChild(_nbchilds-1).transform as RectTransform).anchoredPosition = new Vector3(_containers.GetChild(_nbchilds-1).localPosition.x+GetRandom(), _containers.GetChild(_nbchilds-1).localPosition.y+GetRandom(), 0);
         _listText.RemoveAt(_listText.Count - 1);
         //animText
         var _tanim = _containers.GetChild(_nbchilds - 1).GetComponentInChildren<Animator>();
@@ -161,13 +162,20 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         if (_listText.Count != 0)
         {
             yield return new WaitForSeconds(delay);
-            StartCoroutine(GenerateText(_listText, delay, _listPlacePos));
+            StartCoroutine(GenerateText(_listText, delay, _listPlacePos, hasRandom));
         }
         else
         {
             StopCoroutine("GenerateText");
         }
 
+    }
+
+    private float GetRandom()
+    {
+        float _minRand = minRand * 10f;
+        float _maxRand = maxRand * 25f;
+        return Random.Range(_minRand, _maxRand);
     }
 
     public void ClearAllText()
@@ -177,6 +185,10 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         {
             animator.SetTrigger("Disapeared");
         }
+    }
+
+    public void StopGenerating(){
+        StopCoroutine("GenerateText");
     }
 
     
