@@ -232,6 +232,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 2:
+                Projection.Instance.transitionValue = 0f;
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
                 WordManager.Instance.PullWord();

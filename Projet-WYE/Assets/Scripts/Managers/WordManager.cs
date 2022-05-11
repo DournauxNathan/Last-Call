@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Linq;
+using UnityEditor;
+#if UNITY_EDITOR
 using UnityEditor.Events;
+#endif
+using System.Linq;
 
 public class WordManager : Singleton<WordManager>
 {
@@ -102,7 +105,9 @@ public class WordManager : Singleton<WordManager>
                     var item = FindAvailableReveal();
                     item.Activate(transform, stockA, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
 
+#if UNITY_EDITOR
                     UnityEventTools.AddVoidPersistentListener(item.GetComponent<ShakeWord>().submitWord, DisplayQuestions);
+#endif
                 }
             }
         }

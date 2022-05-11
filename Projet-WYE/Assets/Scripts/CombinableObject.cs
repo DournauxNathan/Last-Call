@@ -15,6 +15,15 @@ public class CombinableObject : CombinableObject_Data
     {
         GetComponent();
         SetOutline();
+
+        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup XrGrabComponent))
+        {
+            XrGrabComponent.enabled = false;
+        }
+        else if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup XrSimpleComponent))
+        {
+            XrSimpleComponent.enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,6 +77,18 @@ public class CombinableObject : CombinableObject_Data
             outline.OutlineColor = defaultOutlineColor;
 
             ToggleOutline(b);
+        }
+    }
+
+    public void ToggleInteractor(bool value)
+    {
+        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup XrGrabComponent))
+        {
+            XrGrabComponent.enabled = value;
+        }
+        else if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup XrSimpleComponent))
+        {
+            XrSimpleComponent.enabled = value;
         }
     }
 
