@@ -61,6 +61,18 @@ public class OrderController : Singleton<OrderController>
 
     public void AddCombinaison(CombinableObject a, CombinableObject b, int _value, string _outcome, bool _lethality)
     {
+        foreach (var item in MasterManager.Instance.references.rayInteractors)
+        {
+            if (!item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered)
+            {
+                item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered = !item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered;
+            }
+            else
+            {
+                item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered = !item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered;
+            }
+        }
+
         Combinaison newCombi = new Combinaison {
             currentCombinaison = a.name+ "+ " + b.name,
             objetA = a.name,

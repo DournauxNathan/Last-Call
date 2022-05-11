@@ -218,10 +218,9 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 1:
-                ScenarioManager.Instance.UpdateScenario(1);
+                ScenarioManager.Instance.UpdateScenario(3);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
-                //WordManager.Instance.PullWord();
                 break;
 
             case 2:
@@ -248,7 +247,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 4:
-                ScenarioManager.Instance.UpdateScenario(1);
+                //ScenarioManager.Instance.UpdateScenario(1);
                 Reset();
                 break;
         }
@@ -259,6 +258,17 @@ public class MasterManager : Singleton<MasterManager>
     {
         currentPhase = Phases.Phase_0;
         ScenarioManager.Instance.currentScenarioData = null;
+        isEnded = false;
+        OrderController.Instance.ordersStrings.Clear();
+        OrderController.Instance.combinaisons.Clear();
+        OrderController.Instance.puzzlesSucced = 0;
+        OrderController.Instance.isResolve = false;
+
+        UnitManager.Instance.physicsbuttons.Clear();
+
+
+
+
     }
     public void PlayDialogues()
     {

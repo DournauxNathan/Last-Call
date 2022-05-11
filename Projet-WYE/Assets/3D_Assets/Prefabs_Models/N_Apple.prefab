@@ -12,16 +12,17 @@ GameObject:
   - component: {fileID: 8229824688750751591}
   - component: {fileID: 6184219345047690157}
   - component: {fileID: 2080445004}
-  - component: {fileID: 2080445002}
   - component: {fileID: 2080445003}
   - component: {fileID: 2080445001}
   - component: {fileID: 2080444997}
   - component: {fileID: 2080444998}
   - component: {fileID: 2080444999}
   - component: {fileID: 2080445000}
-  m_Layer: 0
+  - component: {fileID: 879360803368300526}
+  - component: {fileID: 6089275183410798035}
+  m_Layer: 6
   m_Name: N_Apple
-  m_TagString: Untagged
+  m_TagString: Apple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,20 +108,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &2080445002
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5679671120257956472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -472147775963580301, guid: 814e2ce603dbd0e4aaee23c65ad58980, type: 3}
 --- !u!135 &2080445003
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -246,6 +233,14 @@ MonoBehaviour:
   iD: 4
   state: 1
   useWith:
+  - objectName: Button
+    influence: 1
+    outcome: Jeter une pomme sur le bouton
+    isLethal: 0
+    sfx: {fileID: 0}
+    doAction:
+      m_PersistentCalls:
+        m_Calls: []
   - objectName: Blender
     influence: -1
     outcome: Faites un jus de pomme
@@ -433,6 +428,33 @@ MonoBehaviour:
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
   addOffset: 0
+--- !u!114 &879360803368300526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5679671120257956472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1a29edb3f68294a8a1a8ca37658178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderR: Test
+  offset: 0.2
+--- !u!135 &6089275183410798035
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5679671120257956472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.03233241
+  m_Center: {x: 0.00000032782557, y: 0.0003504939, z: 0.032057095}
 --- !u!1001 &274990553
 PrefabInstance:
   m_ObjectHideFlags: 0

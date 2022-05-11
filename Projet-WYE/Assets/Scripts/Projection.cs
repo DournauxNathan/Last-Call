@@ -177,6 +177,13 @@ public class Projection : Singleton<Projection>
         if (transitionValue < 30)
         {
             transitionValue += Time.deltaTime * time;
+
+            if (transitionValue >= 30)
+            {
+                revealScene = false;
+                hasProjted = false;
+                hasCycle = false; 
+            }
         }
     }
 
@@ -204,7 +211,7 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase != Phases.Phase_3)
+        if (!hasCycle && !hasProjted && !revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1))
         {
             hasCycle = !false;
 
@@ -218,11 +225,11 @@ public class Projection : Singleton<Projection>
                     break;
                 case Scenario.HomeInvasion:
 
-                    MasterManager.Instance.ChangeSceneByName(2, "HomeInvasion"); // A changer avec le scenario Manager quand plusieur senarios 
+                    MasterManager.Instance.ChangeSceneByName(2, "HomeInvasion"); 
                     break;
                 case Scenario.RisingWater:
 
-                    MasterManager.Instance.ChangeSceneByName(2, "RisingWater"); // A changer avec le scenario Manager quand plusieur senarios 
+                    MasterManager.Instance.ChangeSceneByName(2, "RisingWater");
                     break;
             }
         }

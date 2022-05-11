@@ -76,12 +76,14 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (!value && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
+            Debug.Log("Headset off");
             this.CallWithDelay(OffHead, 15);
         }
     }
 
     public void OffHead()
     {
+        Debug.Log("Loading");
         AppartManager.Instance.LoadAppartOnScenarioEnd();
     }
 }
