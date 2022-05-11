@@ -16,14 +16,7 @@ public class CombinableObject : CombinableObject_Data
         GetComponent();
         SetOutline();
 
-        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup XrGrabComponent))
-        {
-            XrGrabComponent.enabled = false;
-        }
-        else if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup XrSimpleComponent))
-        {
-            XrSimpleComponent.enabled = false;
-        }
+        //ToggleInteractor(false);
     }
 
     private void OnTriggerEnter(Collider other)

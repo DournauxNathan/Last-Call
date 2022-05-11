@@ -9,6 +9,6 @@ public class PuzzleButton : PhysicsButton
         buttonTop.GetComponent<BoxCollider>().enabled = false;
         isActivate = false;
 
-        OrderController.Instance.IncreaseValue(1);
+        OrderController.Instance.ResolvePuzzle();
     }
 }   

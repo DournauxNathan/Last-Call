@@ -69,8 +69,6 @@ public class MasterManager : Singleton<MasterManager>
 
         if (isEnded)
         {
-            UIManager.Instance.InComingCall(false);
-
             UIManager.Instance.OutComingCall(true);
         }
 
