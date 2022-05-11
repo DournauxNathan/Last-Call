@@ -70,7 +70,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
             animators.Clear();
         }
     }
-
+//dont use this
     public void CreateNewText(string _text)
     {
         hascreatedText = false;
@@ -86,7 +86,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
             animators.Add(_tanim);
         }
     }
-
+//dont use this
     public void CreateNewText(List<string> _listText)
     {
         hascreatedText = false;

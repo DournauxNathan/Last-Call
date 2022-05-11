@@ -16,10 +16,10 @@ public class InspectorData : MonoBehaviour
     public float spriteGlobalScale;
 
     [SerializeField] private bool testBool = false;
-    [SerializeField] private bool hasGenerate = false;
+    private bool hasGenerate = false;
 
-    [SerializeField] private bool security = false;
-    [SerializeField] private InspectorEffect inspectorEffect;
+    private bool security = false;
+    private InspectorEffect inspectorEffect;
     void Start()
     {
         inspection = InspectionInWorld.Instance;
