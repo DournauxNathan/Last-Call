@@ -14,17 +14,26 @@ public class AppartManager : Singleton<AppartManager>
         {
             case Scenario.TrappedMan:
                 Debug.Log("init");
-                InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
-
+                MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day 0");
+                //InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
                 break;
             case Scenario.HomeInvasion:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");}
+                if(ScenarioManager.Instance.endingValue<0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-1");
+                // InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");
+
+                if (ScenarioManager.Instance.endingValue>0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day+1");
+                //InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");
 
                 break;
             case Scenario.RisingWater:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.None,"Appartment_Day+2");}
+                if(ScenarioManager.Instance.endingValue<0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-2");
+                // InitializeAppart(Scenario.None,"Appartment_Day-2");
+                if (ScenarioManager.Instance.endingValue>0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day+2");
+                //  InitializeAppart(Scenario.None,"Appartment_Day+2");
                 break;
         }
     }
