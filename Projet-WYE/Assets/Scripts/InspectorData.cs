@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class InspectorData : MonoBehaviour
@@ -10,6 +11,9 @@ public class InspectorData : MonoBehaviour
     public List<string> _dataList;
     public float delay = 0.1f;
     public bool hasRandom = false;
+    public Sprite sprite;
+    public float spriteOffset;
+    public float spriteGlobalScale;
 
     [SerializeField] private bool testBool = false;
     [SerializeField] private bool hasGenerate = false;
@@ -38,23 +42,17 @@ public class InspectorData : MonoBehaviour
 
     public void InSelected()
     {
-        if (!security)
-        {
-            inspection.CreateNewText(_dataList,delay,hasRandom);
-            inspectorEffect.objectTransform = transform;
-            inspectorEffect.transform.position = transform.position;
-            security = true;
-        }
+        inspection.CreateNewText(_dataList,delay,hasRandom);
+        if(sprite != null) inspection.DisplaySprite(sprite,spriteOffset,spriteGlobalScale);
+        inspectorEffect.objectTransform = transform;
+        inspectorEffect.transform.position = transform.position;
     }
 
     public void DeSelected()
     {
-        if (security)
-        {
-            inspection.ClearAllText();
-            inspection.StopGenerating();
-            inspectorEffect.objectTransform = null;
-        }
-        security = false;
+        inspection.ClearAllText();
+        inspection.StopGenerating();
+        inspection.VoidSprite();
+        inspectorEffect.objectTransform = null;
     }
 }
