@@ -201,6 +201,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         _ImgContainer.enabled = true;
         _ImgContainer.rectTransform.localScale = new Vector3(_scale, _scale, _scale);
         _ImgContainer.rectTransform.localPosition = new Vector3(0, _ImgContainer.rectTransform.position.y +__offset, 0);
+        _ImgContainer.rectTransform.sizeDelta = new Vector2(_sprite.rect.width, _sprite.rect.height);
         ChangeSprite(_sprite);
     }
 
@@ -213,7 +214,4 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     {
         _ImgContainer.sprite = _sprite;
     }
-
-
-    
 }
