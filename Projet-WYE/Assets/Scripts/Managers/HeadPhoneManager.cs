@@ -18,6 +18,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     private void Awake()
     {
+
         if (MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
             headPhone.GetComponent<Rigidbody>().isKinematic = true;
@@ -48,7 +49,6 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         {
             equip = !equip;
             Equip(true); 
-            EquipHeadPhone();
         }
     }
 
@@ -60,7 +60,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
     {
         headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas très propre
 
-        headPhone.GetComponent<Rigidbody>().isKinematic = false;
+        //headPhone.GetComponent<Rigidbody>().isKinematic = false;
     }
 
 
@@ -70,6 +70,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (value && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
+            EquipHeadPhone();
             headPhone.onHead?.Invoke();
         }
 

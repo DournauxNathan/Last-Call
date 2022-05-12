@@ -30,6 +30,10 @@ public class UIManager : Singleton<UIManager>
 
     public ParticleSystem smoke;
 
+    private void Start()
+    {
+        OutComingCall(false);
+    }
 
     public void UpdateForm(FormData _answerType, string data)
     {
