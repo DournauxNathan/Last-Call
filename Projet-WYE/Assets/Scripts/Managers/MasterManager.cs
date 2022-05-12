@@ -52,6 +52,12 @@ public class MasterManager : Singleton<MasterManager>
             SceneLoader.Instance.LoadNewScene(SceneLoader.Instance.nameScene);
         }
 
+        if (Keyboard.current.f12Key.wasPressedThisFrame)
+        {
+            OrderController.Instance.ResolvePuzzle();
+        }
+
+
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Application.Quit();
@@ -266,6 +272,8 @@ public class MasterManager : Singleton<MasterManager>
 
         UnitManager.Instance.physicsbuttons.Clear();
 
+        WordManager.Instance.answers.Clear();
+        WordManager.Instance.questions.Clear();
 
 
 

@@ -54,7 +54,7 @@ public class OrderController : Singleton<OrderController>
     public int GetNumberOfPuzzleSucced() { return puzzlesSucced; }
     public void Resolve()
     {
-        if (completeImaginary && (currentNumberOfCombinaison == numberOfCombinaison || GetResolve()))
+        if (completeImaginary || GetResolve())
         {
             completeImaginary = !completeImaginary;
 
@@ -108,6 +108,8 @@ public class OrderController : Singleton<OrderController>
         };
 
         ordersStrings.Add(newOrder);
+
+        ScenarioManager.Instance.UpdateEndingsValue(newOrder.influence);
     }
     
     public bool SetResolve(bool _bool) { return isResolve = _bool; }

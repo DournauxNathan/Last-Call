@@ -18,9 +18,10 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     private void Awake()
     {
-        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            AutoEquipHeadPhone();
+            headPhone.GetComponent<Rigidbody>().isKinematic = true;
+            EquipHeadPhone();
         }
     }
 
@@ -53,15 +54,13 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     public void AutoEquipHeadPhone()
     {
-        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
-        {
-            EquipHeadPhone();
-        }
     }
 
     public void EquipHeadPhone()
     {
         headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas très propre
+
+        headPhone.GetComponent<Rigidbody>().isKinematic = false;
     }
 
 
