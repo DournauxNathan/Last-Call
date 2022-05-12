@@ -39,6 +39,7 @@ public class MasterManager : Singleton<MasterManager>
 
     public UnityEvent startCall;
 
+    public int buttonEmissive;
 
     private void Start()
     {

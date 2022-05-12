@@ -17,7 +17,7 @@ public class TutoManager : MonoBehaviour
             // SkipTuto(); //To Delete after testing
             Debug.Log("File Found");
         }
-        RefreshAdvice();
+        //RefreshAdvice();
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class TutoManager : MonoBehaviour
     public void Progress()
     {
         progresion++;
-        RefreshAdvice();
+        //RefreshAdvice();
     }
 
     public void DisplayMore(GameObject gameObject)
