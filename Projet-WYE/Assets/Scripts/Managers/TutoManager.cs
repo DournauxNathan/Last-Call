@@ -38,8 +38,7 @@ public class TutoManager : MonoBehaviour
 
     public void DisplayRayInteractor()
     {
-        MasterManager.Instance.isInImaginary = true;
-        MasterManager.Instance.text.GetComponentInParent<GameObject>().SetActive(true);
+        MasterManager.Instance.text1.gameObject.SetActive(true);
     }
 
     public void DisplayMore(GameObject gameObject)

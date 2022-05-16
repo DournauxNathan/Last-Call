@@ -43,6 +43,7 @@ public class MasterManager : Singleton<MasterManager>
     public int buttonEmissive;
     public TMP_Text text;
     public TMP_Text text1;
+    public GameObject textParent;
 
     private void Start()
     {
