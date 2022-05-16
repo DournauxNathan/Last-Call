@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using TMPro;
 
 public enum Phases
 {
@@ -40,6 +41,8 @@ public class MasterManager : Singleton<MasterManager>
     public UnityEvent startCall;
 
     public int buttonEmissive;
+    public TMP_Text text;
+    public TMP_Text text1;
 
     private void Start()
     {
@@ -290,10 +293,40 @@ public class MasterManager : Singleton<MasterManager>
             TimeSettings.Instance.StartGlobalTimer();
         }
     }
+
     public void CallEnded()
     {
         isEnded = true;
         UIManager.Instance.OutComingCall(true);
+    }
+
+    public void UpdateText(int i)
+    {
+        if (i == 1)
+        {
+            UpdateIndication(3);
+            text.text = "Attrapez-moi !";
+        }
+        else if (i == 2)
+        {
+            UpdateIndication(4);
+            text.text = "Validez-moi !";
+        }
+        else if (i == 3)
+        {
+            UpdateIndication(4);
+            text.text = "Attrapez-moi pour maginez des objets !";
+        }
+        else if (i == 3)
+        {
+            UpdateIndication(4);
+            text.text = "Validez-moi !";
+        }
+    }
+
+    public void UpdateIndication(int i)
+    {
+        buttonEmissive = i; 
     }
 }
 

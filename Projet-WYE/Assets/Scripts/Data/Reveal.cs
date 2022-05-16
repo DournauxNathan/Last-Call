@@ -15,6 +15,7 @@ public class Reveal : MonoBehaviour
     private bool isCorrectAnswer;
 
     private Question question;
+    public Question _question;
     public int atIndex;
 
     private bool isActive;
@@ -27,6 +28,15 @@ public class Reveal : MonoBehaviour
 
     public bool simulateInput;
 
+    public void Start()
+    {
+        if (_question != null)
+        {
+            question = _question;
+            UpdateText(_question.questions[0].question);
+        }
+    }
+    
     private void Update()
     {
         if (simulateInput)

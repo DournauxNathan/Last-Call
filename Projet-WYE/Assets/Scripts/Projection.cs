@@ -265,6 +265,7 @@ public class Projection : Singleton<Projection>
 
     public enum Location
     {
+        Tutoriel,
         Office,
         Imaginary
     }

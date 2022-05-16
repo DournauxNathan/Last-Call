@@ -61,12 +61,12 @@ public class ShakeWord : MonoBehaviour
 
     private void Update()
     {
-        if (m_animator.speed != animationSpeed)
+        if (m_animator != null && m_animator.speed != animationSpeed)
         {
             m_animator.speed = animationSpeed;
+            CheckAnimStart();
         }
 
-        CheckAnimStart();
         TextDecay();
     }
 

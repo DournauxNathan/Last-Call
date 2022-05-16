@@ -12,24 +12,26 @@ public class TutoManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         if (FileHandler.IsAFileExist("SaveLastCall.json"))
         {
             // SkipTuto(); //To Delete after testing
             Debug.Log("File Found");
         }
         //RefreshAdvice();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        MasterManager.Instance.UpdateText(1);
     }
 
     public void Progress()
     {
         progresion++;
         //RefreshAdvice();
+    }
+
+    public void DisplayRayInteractor()
+    {
+        MasterManager.Instance.isInImaginary = true;
+        MasterManager.Instance.text.GetComponentInParent<GameObject>().SetActive(true);
     }
 
     public void DisplayMore(GameObject gameObject)

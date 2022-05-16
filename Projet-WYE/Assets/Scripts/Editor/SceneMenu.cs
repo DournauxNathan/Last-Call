@@ -43,6 +43,13 @@ public static class SceneMenu
         EditorSceneManager.OpenScene("Assets/Scenes/Persistent.unity", OpenSceneMode.Additive);
     }
 
+    [MenuItem("Scenes/Tutoriel")]
+    public static void AddTuto()
+    {
+        OpenScene("TutoScene");
+    }
+
+
     private static void OpenScene(string sceneName)
     {
         EditorSceneManager.OpenScene("Assets/Scenes/Persistent.unity", OpenSceneMode.Single);

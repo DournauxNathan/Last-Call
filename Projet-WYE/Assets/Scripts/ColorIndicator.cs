@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorIndicator : MonoBehaviour
+public class ColorIndicator : Singleton<ColorIndicator>
 {
     private Renderer targetRenderer;
     private float timeForDecay;
@@ -24,7 +24,7 @@ public class ColorIndicator : MonoBehaviour
         timeForDecay = highlightDuration;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         Highlight();
     }
