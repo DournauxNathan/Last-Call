@@ -24,7 +24,7 @@ public class SceneLoaderEditor : Editor
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Change Scene"))
         {
-            sceneLoader.LoadNewScene("Menu");
+            sceneLoader.LoadNewScene(SceneLoader.Instance.nameScene);
             
         }
         EditorGUILayout.EndHorizontal();

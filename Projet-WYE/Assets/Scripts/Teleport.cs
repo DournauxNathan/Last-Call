@@ -10,6 +10,8 @@ public class Teleport : Singleton<Teleport>
     [SerializeField] private bool isActive;
 
     [SerializeField] private CapsuleCollider m_Collider;
+    [SerializeField] private GameObject particle;
+
 
     private void Start()
     {
@@ -23,8 +25,10 @@ public class Teleport : Singleton<Teleport>
         if (teleportAtStart)
         {
             MasterManager.Instance.references.player.transform.position = position.position;
+            particle.SetActive(false);
         }
     }
+
     private void Update()
     {
         if (MasterManager.Instance.references.player.transform.position != position.position && MasterManager.Instance.references.player.transform != null)
@@ -34,6 +38,7 @@ public class Teleport : Singleton<Teleport>
             if (GetComponentInChildren<Renderer>() != null)
             {
                 GetComponentInChildren<Renderer>().enabled = true;
+                particle.SetActive(true);
             }
         }
     }
@@ -48,6 +53,7 @@ public class Teleport : Singleton<Teleport>
         if (GetComponentInChildren<Renderer>() != null)
         {
             GetComponentInChildren<Renderer>().enabled = false;
+            particle.SetActive(false);
         }
     }
 }

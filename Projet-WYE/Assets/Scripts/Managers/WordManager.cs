@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using System.Linq;
+using UnityEditor.Events;
 
 public class WordManager : Singleton<WordManager>
 {
-    public SphereCollider spawner;
     public Transform getTransfrom;
     public Transform stockA, stockB;
 
-    [HideInInspector] public List<Answer> answers;
-    [HideInInspector] public List<Question> questions;
+    public List<Answer> answers;
+    public List<Question> questions;
 
     public List<WordData> canvasWithWordData;
     public List<Reveal> canvasWithQuestionData;
@@ -18,11 +20,14 @@ public class WordManager : Singleton<WordManager>
 
     bool displayAdress = true;
     FormData answerType;
+
+    public List<GameObject> questionsGo;
+
     private void Update()
     {
         if (isProtocolComplete && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            ProtocolComplete();
+            UIManager.Instance.SetFormToComplete(true);
         }
     }
 
@@ -80,6 +85,8 @@ public class WordManager : Singleton<WordManager>
                     var item = FindAvailableReveal();
                     //if true, Activate Canvas Word and Set his text with the current propo
                     item.Activate(transform, stockB, question, question.questions[i].question, i);
+
+                    questionsGo.Add(item.gameObject);
                 }
 
                 for (int i = 0; i < getTransfrom.childCount; i++)
@@ -94,10 +101,10 @@ public class WordManager : Singleton<WordManager>
                     displayAdress = !displayAdress;
                     var item = FindAvailableReveal();
                     item.Activate(transform, stockA, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
+
+                    UnityEventTools.AddVoidPersistentListener(item.GetComponent<ShakeWord>().submitWord, DisplayQuestions);
                 }
-
             }
-
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
@@ -114,13 +121,14 @@ public class WordManager : Singleton<WordManager>
         }
     }
 
-    public void ProtocolComplete()
+    public void DisplayQuestions()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        foreach (var item in questionsGo)
         {
-            transform.GetChild(i).GetComponent<WordData>().Deactivate();
+            item.SetActive(true);
         }
     }
+
 
     public WordData FindAvailableWordData()
     {
@@ -132,6 +140,8 @@ public class WordManager : Singleton<WordManager>
                 return item;
             }
         }
+
+        Debug.Log("there is not enougth canvas available");
         return null;
     }
 
@@ -150,20 +160,17 @@ public class WordManager : Singleton<WordManager>
 
     public void DisableAnswers(FormData type, int id)
     {
+        Debug.Log(type + ", " + id);
         switch (type)
         {
             case FormData.age:
-                foreach (var item in AnswerManager.Instance.age)
-                {
-                    item.SetActive(false);
-                }
+                AnswerManager.Instance.ageIsAnswered = true;
+                AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.age);
                 break;
 
             case FormData.adress:
-                foreach (var item in AnswerManager.Instance.adress)
-                {
-                    item.SetActive(false);
-                }
+                AnswerManager.Instance.adressIsAnswer = true;
+                AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.adress);
                 break;
 
             case FormData.situation:
@@ -173,7 +180,7 @@ public class WordManager : Singleton<WordManager>
                     {
                         for (int y = 0; y < AnswerManager.Instance.situations[i].canvas.Count; y++)
                         {
-                            AnswerManager.Instance.situations[i].canvas[y].SetActive(false);
+                            AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.situations[i].canvas);
                         }
                     }
                 }

@@ -62,14 +62,32 @@ public class UIManager : Singleton<UIManager>
             && currentForm.adressField.text != string.Empty && currentForm.situationField.text != string.Empty
             && currentForm.unitField.text != string.Empty)
         {
-            SetFormToComplete();
+            SetFormToComplete(true);
         }
     }
-    public void SetFormToComplete()
+
+    public void SetFormToComplete(bool value)
     {
-        currentForm.isComplete = true;
-        currentForm.stamp.enabled = true;
+        currentForm.isComplete = value;
+
+        if (currentForm.isComplete)
+        {
+            currentForm.stamp.enabled = true;
+
+            ScenarioManager.Instance.endingValue += 1;
+        }
+        else if (!currentForm.isComplete)
+        {
+            ScenarioManager.Instance.endingValue += -1;
+        }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            WordManager.Instance.transform.GetChild(i).GetComponent<WordData>().Deactivate();
+        }
+
     }
+
     public void Fade(Fadetype type)
     {
         switch (type)

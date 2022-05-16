@@ -9,12 +9,16 @@ public class TimeSettings : Singleton<TimeSettings>
 
     public bool isRunning;
 
+    public bool runAtStart;
+
+    bool doOnce = true;
     private void Start()
     {
-        timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
-        StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));
-        
-
+        if (runAtStart)
+        {
+            timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
+            StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));
+        }
     }
 
     public void Initialize()
@@ -54,7 +58,8 @@ public class TimeSettings : Singleton<TimeSettings>
             globalTimer += Time.deltaTime;
 
             if (globalTimer >= ScenarioManager.Instance.currentScenarioData.ageBegin
-                && globalTimer < ScenarioManager.Instance.currentScenarioData.adressBegin)
+                && globalTimer < ScenarioManager.Instance.currentScenarioData.adressBegin
+                && !AnswerManager.Instance.ageIsAnswered)
             {
                 foreach (var item in AnswerManager.Instance.age)
                 {
@@ -62,20 +67,27 @@ public class TimeSettings : Singleton<TimeSettings>
                 }
             }
             if (globalTimer >= ScenarioManager.Instance.currentScenarioData.adressBegin
-                && globalTimer < ScenarioManager.Instance.currentScenarioData.situationBegin)
+                && globalTimer < ScenarioManager.Instance.currentScenarioData.situationBegin
+                && !AnswerManager.Instance.adressIsAnswer)
             {
                 foreach (var item in AnswerManager.Instance.adress)
                 {
                     item.SetActive(true);
                 }
             }
-            if (globalTimer > ScenarioManager.Instance.currentScenarioData.situationBegin)
+            if (globalTimer > ScenarioManager.Instance.currentScenarioData.situationBegin
+                && !AnswerManager.Instance.situationIsAnswer)
             {
-                foreach (var item in AnswerManager.Instance.situations)
+                if (doOnce)
                 {
-                    for (int i = 0; i < item.canvas.Count; i++)
+                    doOnce = !doOnce;
+
+                    foreach (var item in AnswerManager.Instance.situations)
                     {
-                        item.canvas[i].SetActive(true);
+                        for (int i = 0; i < item.canvas.Count; i++)
+                        {
+                            item.canvas[i].SetActive(true);
+                        }
                     }
                 }
             }
