@@ -97,7 +97,7 @@ public class TutoManager : Singleton<TutoManager>
                 break;
 
             case 9:
-                InitTutorial.Instance.orderText.text = "Chaque combinaison, vous donne un ordre. Attrapez le et validez le";
+                InitTutorial.Instance.orderText.text = "Chaques combinaisons, vous donne un ordre. Attrapez le et validez le";
                 WordManager.Instance.pullOrders = true;
                 WordManager.Instance.PullWord();
                 break;
