@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class WineBottle : MonoBehaviour
 {
+    public Waterenmoins water;
     public GameObject particle;
     public GameObject particle1;
 
     public float rotationX = 90f;
     public float rotationZ = 90f;
 
+    public Vector3 posInitial;
+
+
     // Start is called before the first frame update
     void Start()
     {
+            particle.SetActive(true);
+            particle1.SetActive(true);
+
+            //Debug.Log("X "+xPosP+" "+xPosM);
+        
+        posInitial = particle1.transform.position;
+
         particle.SetActive(false);
         particle1.SetActive(false);
 
@@ -29,13 +40,16 @@ public class WineBottle : MonoBehaviour
 
         if (xPosP || xPosM)
         {
+            water.test = true;
             particle.SetActive(true);
             particle1.SetActive(true);
-
+            
             //Debug.Log("X "+xPosP+" "+xPosM);
         }
+
         else if (zPosP || zPosM)
         {
+            water.test = true;
             particle.SetActive(true);
             particle1.SetActive(true);
 
@@ -46,7 +60,14 @@ public class WineBottle : MonoBehaviour
             StartCoroutine(ExampleCoroutine());
 
             particle.SetActive(false);
+            particle1.transform.position = particle.transform.position;
+            water.test = false;
+        }
 
+        if (water.descente <= -0.2)
+        {
+            water.test = true;
+            particle.SetActive(false);
         }
     }
 
@@ -72,7 +93,8 @@ public class WineBottle : MonoBehaviour
     {
 
         //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
+
         particle1.SetActive(false);
 
     }
