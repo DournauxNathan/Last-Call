@@ -72,11 +72,11 @@ public class Projection : Singleton<Projection>
     {
         if (enableTransition)
         {
-            foreach (var item in objectsToDissolve)
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
-                for (int i = 0; i < item.objects.Count; i++)
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
-                    item.objects[i].SetFloat("_Dissolve", transitionValue);                    
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
                 }
             }
         }        

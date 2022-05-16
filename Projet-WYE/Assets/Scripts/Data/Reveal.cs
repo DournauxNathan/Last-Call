@@ -27,6 +27,7 @@ public class Reveal : MonoBehaviour
     private QuestionData currentQuestion => question.questions[atIndex];
 
     public bool simulateInput;
+    private bool isReveal;
 
     public void Start()
     {
@@ -129,9 +130,14 @@ public class Reveal : MonoBehaviour
                 item.SetFloat("_Dissolve", amount);
             }
 
-            if (amount > 30f)
+            if (amount > 35f)
             {
-                amount = 30f;
+                amount = 35f;
+
+                if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+                {
+                    isReveal = true;
+                }
 
                 StopAllCoroutines();
 

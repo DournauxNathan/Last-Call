@@ -43,7 +43,6 @@ public class MasterManager : Singleton<MasterManager>
     public int buttonEmissive;
     public TMP_Text text;
     public TMP_Text text1;
-    public GameObject textParent;
 
     private void Start()
     {
@@ -225,7 +224,7 @@ public class MasterManager : Singleton<MasterManager>
         switch (i)
         {
             case 0:
-              
+                Projection.Instance.SetTransitionValue(0);
                 break;
 
             case 1:
@@ -299,36 +298,6 @@ public class MasterManager : Singleton<MasterManager>
     {
         isEnded = true;
         UIManager.Instance.OutComingCall(true);
-    }
-
-    public void UpdateText(int i)
-    {
-        if (i == 1)
-        {
-            UpdateIndication(3);
-            text.text = "Attrapez-moi !";
-        }
-        else if (i == 2)
-        {
-            UpdateIndication(4);
-            text.text = "Validez-moi !";
-        }
-        else if (i == 3)
-        {
-            UpdateIndication(4);
-            text.text = "Attrapez-moi pour maginez des objets !";
-        }
-        else if (i == 3)
-        {
-            UpdateIndication(4);
-            text.text = "Validez-moi !";
-        }
-    }
-
-
-    public void UpdateIndication(int i)
-    {
-        buttonEmissive = i; 
     }
 }
 

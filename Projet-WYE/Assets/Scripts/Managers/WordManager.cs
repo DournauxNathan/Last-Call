@@ -27,6 +27,8 @@ public class WordManager : Singleton<WordManager>
 
     public List<GameObject> questionsGo;
 
+    public bool pullOrders;
+
     private void Update()
     {
         if (isProtocolComplete && MasterManager.Instance.currentPhase == Phases.Phase_1)
@@ -107,7 +109,7 @@ public class WordManager : Singleton<WordManager>
             }
         }
 
-        if (MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
+        if (pullOrders || MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
         {
             foreach (Order currentOrder in OrderController.Instance.ordersStrings)
             {

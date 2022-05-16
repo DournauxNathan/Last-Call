@@ -60,12 +60,15 @@ public class CombinableObject : CombinableObject_Data
         if (MasterManager.Instance.isInImaginary && b)
         {
             isLocked = true;
+            onLock?.Invoke();
+            Debug.Log("");
 
             outline.OutlineColor = selectOutline.color;
         }
         else if (MasterManager.Instance.isInImaginary && !b)
         {
             isLocked = false;
+            onUnlock?.Invoke();
 
             outline.OutlineColor = defaultOutlineColor;
 
