@@ -22,6 +22,14 @@ public class TutoManager : MonoBehaviour
         MasterManager.Instance.UpdateText(1);
     }
 
+    public void Update()
+    {
+        if (MasterManager.Instance.isInImaginary)
+        {
+            DisplayRayInteractor();
+        }
+    }
+
     public void Progress()
     {
         progresion++;

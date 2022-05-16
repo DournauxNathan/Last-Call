@@ -324,6 +324,7 @@ public class MasterManager : Singleton<MasterManager>
         }
     }
 
+
     public void UpdateIndication(int i)
     {
         buttonEmissive = i; 
