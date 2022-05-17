@@ -77,14 +77,14 @@ public class ListManager : Singleton<ListManager>
                 {
                     PlaySfx(combinaison.sfx,combiObj1);
                     combiObj2.dissolveEffect.startEffect = true;
-
+                    Debug.Log(combiObj1 + "," + combiObj2 + "," + combinaison.influence + "," + combinaison.outcome + "," + combinaison.isLethal);
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
+                    Debug.Log("sended");
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj2.state == StateMobility.Static)
                 {
                     PlaySfx(combinaison.sfx,combiObj2);
                     combiObj1.dissolveEffect.startEffect = true;
-
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj1.state != StateMobility.Static)

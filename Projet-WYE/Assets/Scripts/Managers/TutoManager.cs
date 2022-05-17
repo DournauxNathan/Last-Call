@@ -15,6 +15,8 @@ public class TutoManager : Singleton<TutoManager>
 
     public bool updateTutoriel;
 
+    public bool isPointDone;
+
     private void Awake()
     {
         Projection.Instance.transitionValue = 0f;
@@ -30,7 +32,7 @@ public class TutoManager : Singleton<TutoManager>
             Debug.Log("File Found");
         }
         
-        //UpdateText(1);
+        UpdateText(1);
     }
 
     private void Update()
@@ -62,7 +64,6 @@ public class TutoManager : Singleton<TutoManager>
         switch (progression)
         {
             case 1:
-                Debug.Log("1");
                 InitTutorial.Instance.grab.SetActive(true);
                 break;
             case 2:
@@ -84,12 +85,27 @@ public class TutoManager : Singleton<TutoManager>
                 break;
 
             case 6:
-                UpdateIndication(1);
-                InitTutorial.Instance.pointAndClickText.text = "Appuyer sur [A] pour selectionner l'objet";
+                if (isPointDone)
+                {
+                    Progress(8);
+                }
+                else
+                {
+                    UpdateIndication(1);
+                    InitTutorial.Instance.pointAndClickText.text = "Appuyer sur [A] pour selectionner l'objet";
+                }         
                 break;
 
             case 7:
-                InitTutorial.Instance.pointAndClickText.text = "Bravo !";
+                if (isPointDone)
+                {
+                    Progress(9);
+                }
+                else
+                {
+                    InitTutorial.Instance.pointAndClickText.text = "Bravo !"; isPointDone = true;
+                    Progress(8);
+                }
                 break;
 
             case 8:
@@ -97,8 +113,13 @@ public class TutoManager : Singleton<TutoManager>
                 break;
 
             case 9:
+                InitTutorial.Instance.order.SetActive(true);
                 InitTutorial.Instance.orderText.text = "Chaques combinaisons, vous donne un ordre. Attrapez le et validez le";
+                
+                
                 WordManager.Instance.pullOrders = true;
+                
+                
                 WordManager.Instance.PullWord();
                 break;
 

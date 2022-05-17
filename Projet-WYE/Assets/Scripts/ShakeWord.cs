@@ -26,16 +26,12 @@ public class ShakeWord : MonoBehaviour
 
     public UnityEvent submitWord;
 
-
     private bool isStarted;
 
     [Header("Debug")]
     [SerializeField] Animator m_animator;
     public bool isDecaying = false;
-    
-
-    private Color _defaultColorOutline;
-    private Color _defaultColor;
+   
 
     private float _time;
     private TMP_Text _text;
@@ -51,8 +47,6 @@ public class ShakeWord : MonoBehaviour
         alpha = GetComponent<CanvasGroup>();
         _time = delayBeforAnim;
         _text = GetComponentInChildren<TMP_Text>();
-        _defaultColorOutline = _text.outlineColor;
-        _defaultColor = _text.color;
         //m_animator = GetComponent<Animator>();
         //IsSelected(); Validate();
 
@@ -111,41 +105,44 @@ public class ShakeWord : MonoBehaviour
 
     public void OnHoverEnter()
     {
-        m_animator.SetBool("Bool", false);
         image.color = hoverColor;
+        m_animator.SetBool("Bool", false);
+        Debug.Log("is hover");
     }
 
     public void OnHoverExit()
     {
-        m_animator.SetBool("Bool", true);
         image.color = defaultColor;
+        m_animator.SetBool("Bool", true);
+        Debug.Log("not hover");
     }
 
     public void IsSelected()
     {
+        Debug.Log("is selected");
         m_animator.SetBool("Bool", false);
 
+        image.color = outlineColor;
         if (image != null)
         {
             image.color = outlineColor;
         }
 
-        _text.outlineColor = outlineColor;
-        _text.outlineWidth = outlineWidth;
     }
 
     public void DeSelected()
     {
-        image.color = defaultColor;
-        _text.outlineColor = _defaultColorOutline;
-        _text.outlineWidth = 0f;
+        Debug.Log("is deselected");
+        image.color = defaultColor;/*
+        image.outlineColor = _defaultColorOutline;
+        image.outlineWidth = 0f;*/
         m_animator.SetBool("Bool", true);
     }
 
     public void Validate()
     {
         m_animator.SetBool("Bool", false);
-        _text.color = validateColor;
+        image.color = validateColor;
         isDecaying = true;
         StartFadeOut(alpha);
     }

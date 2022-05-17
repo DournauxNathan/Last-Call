@@ -61,7 +61,6 @@ public class CombinableObject : CombinableObject_Data
         {
             isLocked = true;
             onLock?.Invoke();
-            Debug.Log("");
 
             outline.OutlineColor = selectOutline.color;
         }
@@ -86,10 +85,5 @@ public class CombinableObject : CombinableObject_Data
         {
             XrSimpleComponent.enabled = value;
         }
-    }
-
-    public void SendOutcome()
-    {
-        OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
     }
 }

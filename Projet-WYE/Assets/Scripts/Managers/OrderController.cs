@@ -108,7 +108,7 @@ public class OrderController : Singleton<OrderController>
         };
 
         ordersStrings.Add(newOrder);
-
+        Debug.Log("");
         ScenarioManager.Instance.UpdateEndingsValue(newOrder.influence);
     }
     
