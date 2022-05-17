@@ -9,7 +9,7 @@ public class WineBottle : MonoBehaviour
     public GameObject particle1;
 
     public float rotationX = 90f;
-    public float rotationZ = 90f;
+    public float rotationY = 90f;
 
     public Vector3 posInitial;
 
@@ -35,8 +35,8 @@ public class WineBottle : MonoBehaviour
         //condition to check if the bottle is being held
         bool xPosP = WrapAngle(transform.localEulerAngles.x) > rotationX && WrapAngle(transform.localEulerAngles.x) > 0;
         bool xPosM = WrapAngle(transform.localEulerAngles.x) < -rotationX && WrapAngle(transform.localEulerAngles.x) < 0;
-        bool zPosP = WrapAngle(transform.localEulerAngles.z) > rotationZ && WrapAngle(transform.localEulerAngles.z) > 0;
-        bool zPosM = WrapAngle(transform.localEulerAngles.z) < -rotationZ && WrapAngle(transform.localEulerAngles.z) < 0;
+        bool yPosP = WrapAngle(transform.localEulerAngles.y) > rotationY && WrapAngle(transform.localEulerAngles.y) > 0;
+        bool yPosM = WrapAngle(transform.localEulerAngles.y) < -rotationY && WrapAngle(transform.localEulerAngles.y) < 0;
 
         if (xPosP || xPosM)
         {
@@ -47,7 +47,7 @@ public class WineBottle : MonoBehaviour
             //Debug.Log("X "+xPosP+" "+xPosM);
         }
 
-        else if (zPosP || zPosM)
+        else if (yPosP || yPosM)
         {
             water.test = true;
             particle.SetActive(true);

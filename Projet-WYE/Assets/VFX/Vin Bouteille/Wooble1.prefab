@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9131575947171641887
+--- !u!1 &7431275648727508120
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8498872342130909349}
-  - component: {fileID: 4782212337045466880}
-  - component: {fileID: 7329928907292220362}
-  - component: {fileID: 8248542970275775032}
-  - component: {fileID: 919132148567610193}
+  - component: {fileID: 7431275648727508117}
+  - component: {fileID: 7431275648727508116}
+  - component: {fileID: 7431275648727508123}
+  - component: {fileID: 7431275648727508122}
+  - component: {fileID: 7431275648727508121}
   m_Layer: 0
-  m_Name: Wooble
+  m_Name: Wooble1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8498872342130909349
+--- !u!4 &7431275648727508117
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9131575947171641887}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 7431275648727508120}
+  m_LocalRotation: {x: -0.7089883, y: -0, z: -0, w: 0.7052203}
+  m_LocalPosition: {x: -0.117, y: 1.3, z: -1.149}
+  m_LocalScale: {x: 1, y: 1, z: 1.0938435}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4782212337045466880
+  m_LocalEulerAnglesHint: {x: -90.305, y: 0, z: 0}
+--- !u!33 &7431275648727508116
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9131575947171641887}
-  m_Mesh: {fileID: -2128599272216676504, guid: 6fce9a29133b3864d87ab5fc462da9a2, type: 3}
---- !u!23 &7329928907292220362
+  m_GameObject: {fileID: 7431275648727508120}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7431275648727508123
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9131575947171641887}
+  m_GameObject: {fileID: 7431275648727508120}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,32 +83,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8248542970275775032
+--- !u!136 &7431275648727508122
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7431275648727508120}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &7431275648727508121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9131575947171641887}
+  m_GameObject: {fileID: 7431275648727508120}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a761bf504a51a244182d819b1084a866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWobble: 0.01
-  WobbleSpeed: 0.2
-  Recovery: 0.2
---- !u!114 &919132148567610193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9131575947171641887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db48642737e0b8c4a80321001527c3f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  descente: 1
-  test: 0
+  MaxWobble: 0.03
+  WobbleSpeed: 1
+  Recovery: 1

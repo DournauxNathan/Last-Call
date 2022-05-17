@@ -5,7 +5,7 @@ using UnityEngine;
 public class Waterenmoins : MonoBehaviour
 {
     private Material Vin;
-    public float descente = 1;
+    public float descente = 0.09f;
 
     public bool test;
 
