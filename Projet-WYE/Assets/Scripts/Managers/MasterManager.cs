@@ -51,22 +51,18 @@ public class MasterManager : Singleton<MasterManager>
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            SceneLoader.Instance.LoadNewScene(SceneLoader.Instance.nameScene);
-        }
-
+        //To put into the debug menu
         if (Keyboard.current.f12Key.wasPressedThisFrame)
         {
             OrderController.Instance.ResolvePuzzle();
         }
-
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Application.Quit();
         }
 
+        //To put into the debug menu
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             WordManager.Instance.isProtocolComplete = true;
@@ -261,6 +257,7 @@ public class MasterManager : Singleton<MasterManager>
                 Reset();
                 break;
         }
+
     }
 
 
