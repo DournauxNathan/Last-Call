@@ -77,9 +77,8 @@ public class ListManager : Singleton<ListManager>
                 {
                     PlaySfx(combinaison.sfx,combiObj1);
                     combiObj2.dissolveEffect.startEffect = true;
-                    Debug.Log(combiObj1 + "," + combiObj2 + "," + combinaison.influence + "," + combinaison.outcome + "," + combinaison.isLethal);
+
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
-                    Debug.Log("sended");
                 }
                 else if (combinaison.objectName == combiObj2.name && combiObj2.state == StateMobility.Static)
                 {
@@ -106,7 +105,7 @@ public class ListManager : Singleton<ListManager>
     public void SetToOrderController(CombinableObject objectA, CombinableObject objectB, int value, string _outcome, bool _lethality)
     {
         OrderController.Instance.AddCombinaison(objectA, objectB, value, _outcome, _lethality);
-        PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
+        //PlaytestData.Instance.betaTesteurs.data.numberOfCombinaisonsMade++;
         OrderController.Instance.ResolvePuzzle();
     }
 

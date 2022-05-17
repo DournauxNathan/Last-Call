@@ -72,7 +72,7 @@ public class Projection : Singleton<Projection>
     {
         if (enableTransition)
         {
-            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
+            for (int obj = 1; obj < objectsToDissolve.Count; obj++)
             {
                 for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {

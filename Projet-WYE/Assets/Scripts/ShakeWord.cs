@@ -107,14 +107,12 @@ public class ShakeWord : MonoBehaviour
     {
         image.color = hoverColor;
         m_animator.SetBool("Bool", false);
-        Debug.Log("is hover");
     }
 
     public void OnHoverExit()
     {
         image.color = defaultColor;
         m_animator.SetBool("Bool", true);
-        Debug.Log("not hover");
     }
 
     public void IsSelected()
@@ -132,7 +130,6 @@ public class ShakeWord : MonoBehaviour
 
     public void DeSelected()
     {
-        Debug.Log("is deselected");
         image.color = defaultColor;/*
         image.outlineColor = _defaultColorOutline;
         image.outlineWidth = 0f;*/
@@ -149,7 +146,6 @@ public class ShakeWord : MonoBehaviour
 
     public void Debuggg()
     {
-        Debug.Log("COUCOU");
     }
 
     private void SendToSaveFile()

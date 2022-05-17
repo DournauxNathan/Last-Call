@@ -70,7 +70,7 @@ public class OrderController : Singleton<OrderController>
 
     public void AddCombinaison(CombinableObject a, CombinableObject b, int _value, string _outcome, bool _lethality)
     {
-        foreach (var item in MasterManager.Instance.references.rayInteractors)
+        /*foreach (var item in MasterManager.Instance.references.rayInteractors)
         {
             if (!item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered)
             {
@@ -80,7 +80,9 @@ public class OrderController : Singleton<OrderController>
             {
                 item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered = !item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered;
             }
-        }
+        }*/
+
+        Debug.Log("hey");
 
         Combinaison newCombi = new Combinaison {
             currentCombinaison = a.name+ "+ " + b.name,
@@ -90,7 +92,7 @@ public class OrderController : Singleton<OrderController>
             isLethal = _lethality
         }; 
 
-        text.text = newCombi.currentCombinaison;
+        //text.text = newCombi.currentCombinaison;
 
         combinaisons.Add(newCombi);
 

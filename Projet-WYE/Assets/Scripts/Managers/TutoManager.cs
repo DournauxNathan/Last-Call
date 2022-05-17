@@ -19,7 +19,10 @@ public class TutoManager : Singleton<TutoManager>
 
     private void Awake()
     {
-        Projection.Instance.transitionValue = 0f;
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+        {
+            Projection.Instance.transitionValue = 0f;
+        }
     }
 
     // Start is called before the first frame update
@@ -115,18 +118,14 @@ public class TutoManager : Singleton<TutoManager>
             case 9:
                 InitTutorial.Instance.order.SetActive(true);
                 InitTutorial.Instance.orderText.text = "Chaques combinaisons, vous donne un ordre. Attrapez le et validez le";
-                
-                
+
                 WordManager.Instance.pullOrders = true;
-                
-                
                 WordManager.Instance.PullWord();
+                Progress(10);
                 break;
 
             case 10:
-                InitTutorial.Instance.orderText.text = "Super ! Vous avez toutes les cartes en main pour aider au mieux ceux qui vous appelerons";
-                WordManager.Instance.pullOrders = true;
-                WordManager.Instance.PullWord();
+                InitTutorial.Instance.orderText.text = "Super ! Vous avez a présent toutes les cartes en main pour aider au mieux ceux qui vous appelerons";
                 break;
         }
     }
