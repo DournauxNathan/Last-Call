@@ -114,7 +114,7 @@ public class OrderController : Singleton<OrderController>
         ScenarioManager.Instance.UpdateEndingsValue(newOrder.influence);
     }
     
-    public bool SetResolve(bool _bool) { return isResolve = _bool; }
+    public void SetResolve(bool value) { isResolve = value; }
     
     public bool GetResolve() { return isResolve; }
 }

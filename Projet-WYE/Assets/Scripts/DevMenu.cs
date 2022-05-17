@@ -35,8 +35,8 @@ public class DevMenu : Singleton<DevMenu>
         if (Keyboard.current[Key.F5].wasPressedThisFrame && isInDevMode)
         {
             OpenF5Menu();
-            UpdatePhase();
         }
+        UpdatePhase(MasterManager.Instance.currentPhase);
     }
 
     public void OpenF5Menu()
@@ -59,9 +59,9 @@ public class DevMenu : Singleton<DevMenu>
 
     }
 
-    public void UpdatePhase()
+    public void UpdatePhase(Phases _phase)
     {
-        switch (MasterManager.Instance.currentPhase)
+        switch (_phase)
         {
             case Phases.Phase_0:
                 currentPhase.text = "Phase (current: 0)";
