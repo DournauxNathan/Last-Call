@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using TMPro;
 
 public enum Phases
 {
@@ -39,6 +40,9 @@ public class MasterManager : Singleton<MasterManager>
 
     public UnityEvent startCall;
 
+    public int buttonEmissive;
+    public TMP_Text text;
+    public TMP_Text text1;
 
     private void Start()
     {
@@ -51,6 +55,12 @@ public class MasterManager : Singleton<MasterManager>
         {
             SceneLoader.Instance.LoadNewScene(SceneLoader.Instance.nameScene);
         }
+
+        if (Keyboard.current.f12Key.wasPressedThisFrame)
+        {
+            OrderController.Instance.ResolvePuzzle();
+        }
+
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
@@ -66,13 +76,6 @@ public class MasterManager : Singleton<MasterManager>
     public void FixedUpdate()
     {
         UpdateController();
-
-        if (isEnded)
-        {
-            UIManager.Instance.InComingCall(false);
-
-            UIManager.Instance.OutComingCall(true);
-        }
 
         if (!skipTuto && !isTutoEnded && b)
         {
@@ -221,14 +224,13 @@ public class MasterManager : Singleton<MasterManager>
         switch (i)
         {
             case 0:
-              
+                Projection.Instance.SetTransitionValue(0);
                 break;
 
             case 1:
                 ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
-                //WordManager.Instance.PullWord();
                 break;
 
             case 2:
@@ -244,6 +246,7 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(30);
+                this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
                 isInImaginary = false;
@@ -254,7 +257,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 4:
-                ScenarioManager.Instance.UpdateScenario(1);
+                //ScenarioManager.Instance.UpdateScenario(1);
                 Reset();
                 break;
         }
@@ -265,6 +268,19 @@ public class MasterManager : Singleton<MasterManager>
     {
         currentPhase = Phases.Phase_0;
         ScenarioManager.Instance.currentScenarioData = null;
+        isEnded = false;
+        OrderController.Instance.ordersStrings.Clear();
+        OrderController.Instance.combinaisons.Clear();
+        OrderController.Instance.puzzlesSucced = 0;
+        OrderController.Instance.isResolve = false;
+
+        UnitManager.Instance.physicsbuttons.Clear();
+
+        WordManager.Instance.answers.Clear();
+        WordManager.Instance.questions.Clear();
+
+
+
     }
     public void PlayDialogues()
     {
@@ -276,6 +292,12 @@ public class MasterManager : Singleton<MasterManager>
 
             TimeSettings.Instance.StartGlobalTimer();
         }
+    }
+
+    public void CallEnded()
+    {
+        isEnded = true;
+        UIManager.Instance.OutComingCall(true);
     }
 }
 
