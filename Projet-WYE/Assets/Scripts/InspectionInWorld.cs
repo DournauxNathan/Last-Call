@@ -37,7 +37,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         _listString = new List<string>(); //INIT
         animators = new List<Animator>(); //INIT
         _queueString = new List<string>(); //INIT
-        _ImgContainer.enabled = false; //INIT
+        _ImgContainer.enabled = true; //INIT
         _ImageOffsetDefault = (_ImgContainer.transform as RectTransform).localPosition.y; //INIT
         //Debug.Log("_ImageOffsetDefault: " + _ImageOffsetDefault);
 
