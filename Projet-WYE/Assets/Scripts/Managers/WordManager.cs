@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Linq;
+using UnityEditor;
+#if UNITY_EDITOR
 using UnityEditor.Events;
+#endif
+using System.Linq;
 
 public class WordManager : Singleton<WordManager>
 {
     public Transform getTransfrom;
-    public Transform stockA, stockB;
+    public Transform stockA, stockB, stockEntry;
 
     public List<Answer> answers;
     public List<Question> questions;
+    public Reveal entry;
 
     public List<WordData> canvasWithWordData;
     public List<Reveal> canvasWithQuestionData;
@@ -22,6 +26,8 @@ public class WordManager : Singleton<WordManager>
     FormData answerType;
 
     public List<GameObject> questionsGo;
+
+    public bool pullOrders;
 
     private void Update()
     {
@@ -71,7 +77,6 @@ public class WordManager : Singleton<WordManager>
                     getTransfrom.GetChild(i).gameObject.SetActive(false);
                 }
             }
-
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_2 && MasterManager.Instance.isInImaginary)
@@ -96,18 +101,15 @@ public class WordManager : Singleton<WordManager>
 
                 if (displayAdress)
                 {
-                    Debug.Log("adress");
-
                     displayAdress = !displayAdress;
-                    var item = FindAvailableReveal();
-                    item.Activate(transform, stockA, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
+                    var item = Entry();
+                    item.Activate(transform, stockEntry, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
 
-                    UnityEventTools.AddVoidPersistentListener(item.GetComponent<ShakeWord>().submitWord, DisplayQuestions);
                 }
             }
         }
 
-        if (MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
+        if (pullOrders || MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
         {
             foreach (Order currentOrder in OrderController.Instance.ordersStrings)
             {
@@ -118,14 +120,6 @@ public class WordManager : Singleton<WordManager>
             }
             
             Debug.Log("Pull Order");
-        }
-    }
-
-    public void DisplayQuestions()
-    {
-        foreach (var item in questionsGo)
-        {
-            item.SetActive(true);
         }
     }
 
@@ -158,9 +152,13 @@ public class WordManager : Singleton<WordManager>
         return null;
     }
 
+    public Reveal Entry()
+    {
+        return entry;
+    }
+
     public void DisableAnswers(FormData type, int id)
     {
-        Debug.Log(type + ", " + id);
         switch (type)
         {
             case FormData.age:

@@ -72,11 +72,11 @@ public class Projection : Singleton<Projection>
     {
         if (enableTransition)
         {
-            foreach (var item in objectsToDissolve)
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
-                for (int i = 0; i < item.objects.Count; i++)
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
-                    item.objects[i].SetFloat("_Dissolve", transitionValue);                    
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
                 }
             }
         }        
@@ -177,6 +177,13 @@ public class Projection : Singleton<Projection>
         if (transitionValue < 30)
         {
             transitionValue += Time.deltaTime * time;
+
+            if (transitionValue >= 30)
+            {
+                revealScene = false;
+                hasProjted = false;
+                hasCycle = false; 
+            }
         }
     }
 
@@ -204,13 +211,27 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase != Phases.Phase_3)
+        if (!hasCycle && !hasProjted && !revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1))
         {
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
 
-            MasterManager.Instance.ChangeSceneByName(2,"Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+            switch (ScenarioManager.Instance.currentScenario)
+            {
+                case Scenario.TrappedMan:
+
+                    MasterManager.Instance.ChangeSceneByName(2, "Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+                    break;
+                case Scenario.HomeInvasion:
+
+                    MasterManager.Instance.ChangeSceneByName(2, "HomeInvasion"); 
+                    break;
+                case Scenario.RisingWater:
+
+                    MasterManager.Instance.ChangeSceneByName(2, "RisingWater");
+                    break;
+            }
         }
 
         if (!hasCycle && hasProjted)
@@ -244,6 +265,7 @@ public class Projection : Singleton<Projection>
 
     public enum Location
     {
+        Tutoriel,
         Office,
         Imaginary
     }

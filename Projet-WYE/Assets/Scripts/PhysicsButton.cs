@@ -49,6 +49,8 @@ public class PhysicsButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UnitManager.Instance.physicsbuttons.Clear();
+
         _meshRenderer = buttonTop.GetComponent<Renderer>();
         _audioSource = GetComponent<AudioSource>();
         

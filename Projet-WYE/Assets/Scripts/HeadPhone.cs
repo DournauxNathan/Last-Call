@@ -46,7 +46,6 @@ public class HeadPhone : MonoBehaviour
 
             GetComponent<Renderer>().enabled = true;
             GetComponentInChildren<CapsuleCollider>().enabled = true;
-            GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 
@@ -54,7 +53,6 @@ public class HeadPhone : MonoBehaviour
 
     public void DisableHeadset()
     {
-
         GetComponent<Renderer>().enabled = false;
         GetComponentInChildren<CapsuleCollider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;

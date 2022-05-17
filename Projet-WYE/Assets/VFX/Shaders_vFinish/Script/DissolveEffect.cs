@@ -57,6 +57,14 @@ public class DissolveEffect : Singleton<DissolveEffect>
             startEffect = !startEffect;
             StartCoroutine(Dissolve());
         }
+
+        for (int i = 0; i < dissolveMaterials.Length; i++)
+        {
+            if (dissolveMaterials[i].GetFloat("_Dissolve") > 1)
+            {
+                GetComponent<CombinableObject>().ToggleInteractor(true);
+            }
+        }
     }
 
     public IEnumerator Dissolve()
@@ -90,6 +98,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                     {
                         GetComponent<Renderer>().enabled = false;
                         GetComponent<CombinableObject>().enabled = false;
+                        GetComponent<CombinableObject>().ToggleInteractor(false);
                         //gameObject.SetActive(false);
                     }
                 }
