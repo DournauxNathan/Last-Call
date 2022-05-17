@@ -2,33 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorIndicator : MonoBehaviour
+public class ColorIndicator : Singleton<ColorIndicator>
 {
-    private Color defaultColor;
     private Renderer targetRenderer;
     private float timeForDecay;
     private bool isColorDefault = true;
-    [Header("Parameters")]
-    public GameObject target;
-    public Color highlightedColor;
+    
+    public int index;
+
+    public List<GameObject> button;
+
+    public Material defaultMaterial;
+    public Material highlightMaterial;
+
     public float highlightDuration = 0.7f;
 
     void Start()
     {
-        targetRenderer = target.GetComponent<Renderer>();
-        defaultColor = targetRenderer.material.GetColor("_BASE_COLOR");
+        defaultMaterial = GetComponent<Renderer>().material;
+
         timeForDecay = highlightDuration;
     }
 
-    private void Update() {
+    private void LateUpdate()
+    {
+        Highlight();
+    }
+
+    public void Highlight()
+    {
         timeForDecay -= Time.deltaTime * highlightDuration;
-        if (timeForDecay <= 0 && !isColorDefault) {
-            targetRenderer.material.SetColor("_BASE_COLOR", defaultColor);
+
+        if (timeForDecay <= 0 && !isColorDefault)
+        {
+            button[MasterManager.Instance.buttonEmissive].GetComponent<Renderer>().material = defaultMaterial;
+
             isColorDefault = true;
             timeForDecay = highlightDuration;
         }
-        else if (timeForDecay <= 0 && isColorDefault) {
-            targetRenderer.material.SetColor("_BASE_COLOR", highlightedColor);
+        else if (timeForDecay <= 0 && isColorDefault)
+        {
+            button[MasterManager.Instance.buttonEmissive].GetComponent<Renderer>().material = highlightMaterial;
+
             isColorDefault = false;
             timeForDecay = highlightDuration;
         }

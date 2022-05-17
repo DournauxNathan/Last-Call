@@ -10,21 +10,32 @@ public class AppartManager : Singleton<AppartManager>
         
     public void LoadAppartOnScenarioEnd() //Load the next appart
     {
-        Scenario scenario = ScenarioManager.Instance.currentScenario;
-        switch (scenario)
+        switch (ScenarioManager.Instance.currentScenario)
         {
             case Scenario.TrappedMan:
-                InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
-
+                Debug.Log("1");
+                MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day 0");
+                //InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
                 break;
             case Scenario.HomeInvasion:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");}
+                Debug.Log("2");
+                if (ScenarioManager.Instance.endingValue<0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-1");
+                // InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");
+
+                if (ScenarioManager.Instance.endingValue>0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day+1");
+                //InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");
 
                 break;
             case Scenario.RisingWater:
-                if(ScenarioManager.Instance.endingValue<0){InitializeAppart(Scenario.None,"Appartment_Day-2");}
-                if(ScenarioManager.Instance.endingValue>0){InitializeAppart(Scenario.None,"Appartment_Day+2");}
+                Debug.Log("3");
+                if (ScenarioManager.Instance.endingValue<0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-2");
+                // InitializeAppart(Scenario.None,"Appartment_Day-2");
+                if (ScenarioManager.Instance.endingValue>0)
+                    MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day+2");
+                //  InitializeAppart(Scenario.None,"Appartment_Day+2");
                 break;
         }
     }
@@ -67,8 +78,9 @@ public class AppartManager : Singleton<AppartManager>
     {
         ChangeScenario(scenario);
         ChangeCurrentAppart(_appart);
-        SceneLoader.Instance.LoadNewScene(_appart);
+        MasterManager.Instance.ChangeSceneByName(4, _appart);
     }
+
     private void ChangeScenario(Scenario scenario)
     {
         ScenarioManager.Instance.currentScenario = scenario;

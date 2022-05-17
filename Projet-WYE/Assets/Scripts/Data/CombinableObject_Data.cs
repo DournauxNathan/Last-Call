@@ -13,7 +13,8 @@ public class CombinableObject_Data : MonoBehaviour
     public int iD;
     public StateMobility state;
     private int nCombinaison;
-    public CombineWith[] useWith; 
+    public CombineWith[] useWith;
+    public UnityEvent onLock, onUnlock;
 
     [Header("Refs")]
     private MeshFilter m_MeshFilter;

@@ -15,6 +15,7 @@ public class Reveal : MonoBehaviour
     private bool isCorrectAnswer;
 
     private Question question;
+    public Question _question;
     public int atIndex;
 
     private bool isActive;
@@ -26,7 +27,17 @@ public class Reveal : MonoBehaviour
     private QuestionData currentQuestion => question.questions[atIndex];
 
     public bool simulateInput;
+    private bool isReveal;
 
+    public void Start()
+    {
+        if (_question != null)
+        {
+            question = _question;
+            UpdateText(_question.questions[0].question);
+        }
+    }
+    
     private void Update()
     {
         if (simulateInput)
@@ -91,6 +102,23 @@ public class Reveal : MonoBehaviour
         StartCoroutine(Show());
     }
 
+    public void Deactivate()
+    {
+        text.text = string.Empty;
+        isActive = false;
+        transform.SetParent(pullingStock);
+    }
+
+
+    public void DisplayQuestions()
+    {
+        foreach (var item in WordManager.Instance.questionsGo)
+        {
+            item.SetActive(true);
+        }
+    }
+
+
     public IEnumerator Show()
     {
         while (true)
@@ -102,9 +130,14 @@ public class Reveal : MonoBehaviour
                 item.SetFloat("_Dissolve", amount);
             }
 
-            if (amount > 30f)
+            if (amount > 35f)
             {
-                amount = 30f;
+                amount = 35f;
+
+                if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+                {
+                    isReveal = true;
+                }
 
                 StopAllCoroutines();
 

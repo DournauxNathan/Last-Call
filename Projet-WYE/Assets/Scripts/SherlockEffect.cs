@@ -30,12 +30,11 @@ public class SherlockEffect : Singleton<SherlockEffect>
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_2)
         {
-            //distanceFromCamera = ??;
+            distanceFromCamera = 0.55f;
             XLimit = 0.075f;
         }
         else
         {
-            distanceFromCamera = 0.55f;
             XLimit = 0;
         }
 

@@ -9,13 +9,17 @@ public class InspectorData : MonoBehaviour
     private InspectionInWorld inspection;
     [Header("Data")]
     public List<string> _dataList;
-    public Image spriteSheet;
+    public float delay = 0.1f;
+    public bool hasRandom = false;
+    public Sprite sprite;
+    public float spriteOffset;
+    public float spriteGlobalScale;
 
     [SerializeField] private bool testBool = false;
-    [SerializeField] private bool hasGenerate = false;
+    private bool hasGenerate = false;
 
-    [SerializeField] private bool security = false;
-    [SerializeField] private InspectorEffect inspectorEffect;
+    private bool security = false;
+    private InspectorEffect inspectorEffect;
     void Start()
     {
         inspection = InspectionInWorld.Instance;
@@ -38,22 +42,17 @@ public class InspectorData : MonoBehaviour
 
     public void InSelected()
     {
-        if (!security)
-        {
-            inspection.CreateNewText(_dataList);
-            inspectorEffect.objectTransform = transform;
-            inspectorEffect.transform.position = transform.position;
-            security = true;
-        }
+        inspection.CreateNewText(_dataList,delay,hasRandom);
+        if(sprite != null) inspection.DisplaySprite(sprite,spriteOffset,spriteGlobalScale);
+        inspectorEffect.objectTransform = transform;
+        inspectorEffect.transform.position = transform.position;
     }
 
     public void DeSelected()
     {
-        if (security)
-        {
-            inspection.ClearAllText();
-            inspectorEffect.objectTransform = null;
-        }
-        security = false;
+        inspection.ClearAllText();
+        inspection.StopGenerating();
+        inspection.VoidSprite();
+        inspectorEffect.objectTransform = null;
     }
 }
