@@ -286,7 +286,10 @@ public class UIMenuManager : MonoBehaviour
 
     public void Play()
     {
-        MasterManager.Instance.ChangeSceneByName(1, "Office");
+        /* Faire une condition. Si nouvelle partie, lancer la scene tuto
+         * Si déja une partie alors continuer la partie
+         */
+        MasterManager.Instance.ChangeSceneByName(0, "TutoScene");
         StartGame.Invoke();
     }
 
