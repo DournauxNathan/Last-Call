@@ -275,9 +275,6 @@ public class MasterManager : Singleton<MasterManager>
 
         WordManager.Instance.answers.Clear();
         WordManager.Instance.questions.Clear();
-
-
-
     }
     public void PlayDialogues()
     {

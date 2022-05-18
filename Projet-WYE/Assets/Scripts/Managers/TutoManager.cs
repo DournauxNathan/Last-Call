@@ -9,13 +9,18 @@ public class TutoManager : Singleton<TutoManager>
 
 
 
+    public GameObject canvas1;
     public TMP_Text grabText;
-    public GameObject canvas;
+    public GameObject canvas2;
+    public GameObject canvas3;
     public TMP_Text pointAndClickText;
 
     public bool updateTutoriel;
 
     public bool isPointDone;
+
+    public bool firstPartIsDone;
+    public bool secondPartIsDone;
 
     private void Awake()
     {
@@ -28,6 +33,9 @@ public class TutoManager : Singleton<TutoManager>
     // Start is called before the first frame update
     void Start()
     {
+        canvas2.SetActive(false);
+        canvas3.SetActive(false);
+        UpdateText(1);
 
         if (FileHandler.IsAFileExist("SaveLastCall.json"))
         {
@@ -35,7 +43,6 @@ public class TutoManager : Singleton<TutoManager>
             Debug.Log("File Found");
         }
         
-        UpdateText(1);
     }
 
     private void Update()
@@ -74,17 +81,21 @@ public class TutoManager : Singleton<TutoManager>
                 UpdateIndication(3);
                 break;
             case 3:
+                InitTutorial.Instance.grabText.color = new Color(0, 226, 255);
                 InitTutorial.Instance.grabText.text = "Bravo !";
                 Progress(4);
                 break;
 
             case 4:
-                UpdateText(3);
-                canvas.SetActive(true);
+                UpdateText(1);
+                canvas2.SetActive(true);
                 break;
 
             case 5:
+                InitTutorial.Instance.order.SetActive(true);
                 InitTutorial.Instance.pointAndClick.SetActive(true);
+                InitTutorial.Instance.orderText.text = "Le jeu propose des puzzles basé sur la combinaison d'objets";
+                InitTutorial.Instance.pointAndClickText.text = "Pointer un des objets en bleu en passant le rayon dessus";
                 break;
 
             case 6:
@@ -95,7 +106,7 @@ public class TutoManager : Singleton<TutoManager>
                 else
                 {
                     UpdateIndication(1);
-                    InitTutorial.Instance.pointAndClickText.text = "Appuyer sur [A] pour selectionner l'objet";
+                    InitTutorial.Instance.pointAndClickText.text = "Si un contour apparait vous pouvez \n appuyer sur [A] ou [X] pour le selectionner";
                 }         
                 break;
 
@@ -106,28 +117,46 @@ public class TutoManager : Singleton<TutoManager>
                 }
                 else
                 {
-                    InitTutorial.Instance.pointAndClickText.text = "Bravo !"; isPointDone = true;
+                    InitTutorial.Instance.pointAndClickcomplentaire.SetActive(true);
+                    InitTutorial.Instance.pointAndClickText.text = "Bravo !";
+                    isPointDone = true;
                     Progress(8);
                 }
                 break;
 
             case 8:
-                InitTutorial.Instance.pointAndClickText.text = "En selectionnant deux objets, vous créer une combinaison combinaisons";
+                InitTutorial.Instance.pointAndClickText.text = "En selectionnant deux objets, vous créer une combinaison";
                 break;
 
             case 9:
-                InitTutorial.Instance.order.SetActive(true);
                 InitTutorial.Instance.orderText.text = "Chaques combinaisons, vous donne un ordre. Attrapez le et validez le";
-
-                WordManager.Instance.pullOrders = true;
-                WordManager.Instance.PullWord();
+                
+                //WordManager.Instance.pullOrders = true;
+                if (isPointDone)
+                {
+                    WordManager.Instance.PullWord();
+                }
+                UpdateIndication(2);
                 Progress(10);
                 break;
 
             case 10:
-                InitTutorial.Instance.orderText.text = "Super ! Vous avez a présent toutes les cartes en main pour aider au mieux ceux qui vous appelerons";
+                InitTutorial.Instance.orderText.text = "Maintenez [B] ou [Y] pour continuer";
+                firstPartIsDone = true;
+                Projection.Instance.transitionValue = 50f;
+                break;
+
+            case 11:
+                Projection.Instance.enableTransition = true;
+                InitTutorial.Instance.orderText.text = "Vous êtes à présent dans l'imaginaire de Josh";
+                canvas3.SetActive(true);
                 break;
         }
+    }
+
+    public void IndicateButton(bool value)
+    {
+        ColorIndicator.Instance.indicateButton = value;
     }
 
     public void UpdateIndication(int i)
@@ -141,21 +170,13 @@ public class TutoManager : Singleton<TutoManager>
         {
             UpdateIndication(3);
             grabText.text = "Attrapez-moi !";
+            pointAndClickText.text = "Attrapez-moi !";
         }
         else if (i == 2)
         {
             UpdateIndication(4);
             grabText.text = "Validez-moi !";
-        }
-        else if (i == 3)
-        {
-            UpdateIndication(3);
-            pointAndClickText.text = "Attrapez-moi !";
-        }
-        else if (i == 4)
-        {
-            UpdateIndication(4);
-            pointAndClickText.text = "Validez-moi pour imaginez des objets !";
+            pointAndClickText.text = "Validez-moi !";
         }
     }
 

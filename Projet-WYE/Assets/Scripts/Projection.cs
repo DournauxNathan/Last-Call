@@ -70,7 +70,7 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        if (enableTransition)
+        if (enableTransition && !TutoManager.Instance.firstPartIsDone)
         {
             for (int obj = 1; obj < objectsToDissolve.Count; obj++)
             {
@@ -79,7 +79,17 @@ public class Projection : Singleton<Projection>
                     objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
                 }
             }
-        }        
+        }
+        else if (enableTransition && TutoManager.Instance.firstPartIsDone)
+        {
+            for (int obj = 0; obj < 2; obj++)
+            {
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                {
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+            }
+        }
 
         if (pauseBetweenTransition && isTransition)
         {
@@ -220,8 +230,7 @@ public class Projection : Singleton<Projection>
             switch (ScenarioManager.Instance.currentScenario)
             {
                 case Scenario.TrappedMan:
-
-                    MasterManager.Instance.ChangeSceneByName(2, "Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+                    MasterManager.Instance.ChangeSceneByName(2, "Gameplay_Combination_Iteration");
                     break;
                 case Scenario.HomeInvasion:
 
@@ -232,6 +241,10 @@ public class Projection : Singleton<Projection>
                     MasterManager.Instance.ChangeSceneByName(2, "RisingWater");
                     break;
             }
+        }
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+        {
+            SceneLoader.Instance.AddNewScene("TutoScene_Two");
         }
 
         if (!hasCycle && hasProjted)

@@ -32,6 +32,14 @@ public class SceneLoader : Singleton<SceneLoader>
         }
     }
 
+    public void AddNewScene(string sceneName)
+    {
+        if (!isLoading)
+        {
+            StartCoroutine(AddScene(sceneName));
+        }
+    }
+
     private IEnumerator LoadScene(string sceneName)
     {
         isLoading = true;
@@ -79,6 +87,16 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return null;
         }
 
+    }
+
+    private IEnumerator AddScene(string sceneName)
+    {
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        while (!loadOperation.isDone)
+        {
+            yield return null;
+        }
     }
 
     private void SetActiveScene(Scene scene, LoadSceneMode mode)

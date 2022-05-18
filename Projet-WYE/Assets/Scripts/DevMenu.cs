@@ -79,8 +79,6 @@ public class DevMenu : Singleton<DevMenu>
                 currentPhase.text = "Phase (current: 4)";
                 break;
         }
-
-        Debug.Log(currentPhase.text);
     }
 
     public void ChangeTesterName()

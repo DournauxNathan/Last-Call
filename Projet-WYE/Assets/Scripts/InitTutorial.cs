@@ -8,6 +8,7 @@ public class InitTutorial : Singleton<InitTutorial>
     [Header("Refs")]
     public GameObject grab;
     public GameObject pointAndClick;
+    public GameObject pointAndClickcomplentaire;
     public GameObject order;
 
     [Header("Texts")]
@@ -19,6 +20,7 @@ public class InitTutorial : Singleton<InitTutorial>
     {
         grab.SetActive(false);
         pointAndClick.SetActive(false);
+        pointAndClickcomplentaire.SetActive(false);
     }
 
     public void Progress(int i)
