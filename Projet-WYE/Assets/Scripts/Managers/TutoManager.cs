@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
+using System;
 
 public class TutoManager : Singleton<TutoManager>
 {
@@ -14,6 +16,7 @@ public class TutoManager : Singleton<TutoManager>
     public GameObject canvas2;
     public GameObject canvas3;
     public TMP_Text pointAndClickText;
+    public TMP_Text imaginary;
 
     public bool updateTutoriel;
 
@@ -134,10 +137,10 @@ public class TutoManager : Singleton<TutoManager>
                 //WordManager.Instance.pullOrders = true;
                 if (isPointDone)
                 {
+                    UpdateIndication(2);
+                    Progress(10);
                     WordManager.Instance.PullWord();
                 }
-                UpdateIndication(2);
-                Progress(10);
                 break;
 
             case 10:
@@ -148,8 +151,24 @@ public class TutoManager : Singleton<TutoManager>
 
             case 11:
                 Projection.Instance.enableTransition = true;
-                InitTutorial.Instance.orderText.text = "Vous êtes à présent dans l'imaginaire de Josh";
                 canvas3.SetActive(true);
+                break;
+            case 12:
+                canvas3.SetActive(true);
+                canvas1.SetActive(false);
+                canvas2.SetActive(false);
+                InitTutorial.Instance.pointAndClick.SetActive(false);
+                InitTutorial.Instance.grab.SetActive(false);
+                InitTutorial.Instance.pointAndClickcomplentaire.SetActive(false);
+                InitTutorial.Instance.orderText.text = "Vous êtes à présent dans l'imaginaire de Josh";
+                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Trouver un moyen de soigner l'appelant en le combinant avec un objet"),5f);
+                break;
+            case 13:
+                InitTutorial.Instance.orderText.text =  "Bravo ! Vous serez ammener à combiner différents objets pour \n trouver la meilleur solution au problème rencontrés";
+                secondPartIsDone = true;
+                break;
+            case 14:
+                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour continuer"), 8f);
                 break;
         }
     }
@@ -171,13 +190,20 @@ public class TutoManager : Singleton<TutoManager>
             UpdateIndication(3);
             grabText.text = "Attrapez-moi !";
             pointAndClickText.text = "Attrapez-moi !";
+            imaginary.text = "Attrapez-moi !";
         }
         else if (i == 2)
         {
             UpdateIndication(4);
             grabText.text = "Validez-moi !";
             pointAndClickText.text = "Validez-moi !";
+            imaginary.text = "Validez-moi !";
         }
+    }
+
+    public void UpdateString(TMP_Text text, string s)
+    {
+        text.text = s;
     }
 
 

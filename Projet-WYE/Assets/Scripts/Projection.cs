@@ -245,6 +245,7 @@ public class Projection : Singleton<Projection>
         else if (MasterManager.Instance.currentPhase == Phases.Phase_0)
         {
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
+            TutoManager.Instance.Progress(12);
         }
 
         if (!hasCycle && hasProjted)

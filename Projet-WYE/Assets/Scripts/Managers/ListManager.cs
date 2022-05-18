@@ -94,6 +94,8 @@ public class ListManager : Singleton<ListManager>
 
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
+
+                combinaison.doAction?.Invoke();
             }
         }
         else
