@@ -1042,6 +1042,17 @@ public class @XRIDefaultInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b22c7295-2921-4d55-a16f-2fa0193e85c8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""00266a92-4e1b-4edb-933c-8cf98fe3a15b"",
                     ""path"": ""<XRController>{RightHand}/primary2DAxis"",
                     ""interactions"": """",
