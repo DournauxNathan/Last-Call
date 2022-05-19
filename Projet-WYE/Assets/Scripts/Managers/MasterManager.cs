@@ -263,6 +263,10 @@ public class MasterManager : Singleton<MasterManager>
 
     public void Reset()
     {
+        isInImaginary = false;
+
+        Projection.Instance.transitionValue = 50f;
+
         currentPhase = Phases.Phase_0;
         ScenarioManager.Instance.currentScenarioData = null;
         isEnded = false;
@@ -275,9 +279,6 @@ public class MasterManager : Singleton<MasterManager>
 
         WordManager.Instance.answers.Clear();
         WordManager.Instance.questions.Clear();
-
-
-
     }
     public void PlayDialogues()
     {

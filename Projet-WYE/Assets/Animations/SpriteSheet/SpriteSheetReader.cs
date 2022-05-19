@@ -7,12 +7,15 @@ public class SpriteSheetReader : MonoBehaviour
 {
     public Image animatedImageObj;
 
-    public float speed;
+    public int speed;
     public Sprite[] animatedImages;
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        animatedImageObj.sprite = animatedImages[(int)(Time.time * speed) / animatedImages.Length];
+        for (int i = 0; i < animatedImages.Length; i++)
+        {
+            animatedImageObj.sprite = animatedImages[(int)(Time.time * speed) / animatedImages.Length];
+        }
     }
 }

@@ -8,6 +8,8 @@ public class ColorIndicator : Singleton<ColorIndicator>
     private float timeForDecay;
     private bool isColorDefault = true;
     
+    [Range(0f, 0.085f)]
+    public float range;
     public int index;
 
     public List<GameObject> button;
@@ -16,6 +18,8 @@ public class ColorIndicator : Singleton<ColorIndicator>
     public Material highlightMaterial;
 
     public float highlightDuration = 0.7f;
+
+    public bool indicateButton;
 
     void Start()
     {
@@ -27,20 +31,32 @@ public class ColorIndicator : Singleton<ColorIndicator>
     private void LateUpdate()
     {
         Highlight();
+        /*if (indicateButton)
+        {
+            Highlight();
+        }
+        else
+        {
+            foreach (var item in button)
+            {
+                item.GetComponent<Renderer>().material = defaultMaterial;
+            }
+        }*/
     }
 
     public void Highlight()
     {
         timeForDecay -= Time.deltaTime * highlightDuration;
 
-        if (timeForDecay <= 0 && !isColorDefault)
+        if (timeForDecay <= range && !isColorDefault)
         {
+            button[MasterManager.Instance.buttonEmissive - 1].GetComponent<Renderer>().material = defaultMaterial;
             button[MasterManager.Instance.buttonEmissive].GetComponent<Renderer>().material = defaultMaterial;
 
             isColorDefault = true;
             timeForDecay = highlightDuration;
         }
-        else if (timeForDecay <= 0 && isColorDefault)
+        else if (timeForDecay <= range && isColorDefault)
         {
             button[MasterManager.Instance.buttonEmissive].GetComponent<Renderer>().material = highlightMaterial;
 

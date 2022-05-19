@@ -186,6 +186,10 @@ public class CombinableObject_Data : MonoBehaviour
         }
     }
 
+    public void SendOutcome()
+    {
+        OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+    }
 }
 
 [System.Serializable]
