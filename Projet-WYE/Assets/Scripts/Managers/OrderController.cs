@@ -59,6 +59,7 @@ public class OrderController : Singleton<OrderController>
             completeImaginary = !completeImaginary;
 
             MasterManager.Instance.isInImaginary = false;
+            Projection.Instance.enableTransition = true;
             SetResolve(true);
             MasterManager.Instance.currentPhase = Phases.Phase_3;
         }
@@ -81,8 +82,6 @@ public class OrderController : Singleton<OrderController>
                 item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered = !item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered;
             }
         }*/
-
-        Debug.Log("hey");
 
         Combinaison newCombi = new Combinaison {
             currentCombinaison = a.name+ "+ " + b.name,
@@ -110,7 +109,6 @@ public class OrderController : Singleton<OrderController>
         };
 
         ordersStrings.Add(newOrder);
-        Debug.Log("");
         ScenarioManager.Instance.UpdateEndingsValue(newOrder.influence);
     }
     

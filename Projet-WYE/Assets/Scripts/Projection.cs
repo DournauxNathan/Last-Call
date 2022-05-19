@@ -236,6 +236,7 @@ public class Projection : Singleton<Projection>
     {
         if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase == Phases.Phase_1 && TutoManager.Instance.isTutoDone)
         {
+            Debug.Log("nique");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
@@ -255,20 +256,25 @@ public class Projection : Singleton<Projection>
                     break;
             }
         }
-        else if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
+        
+        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
         {
+            Debug.Log("neeeeique");
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
             TutoManager.Instance.Progress(12);
         }
-        else if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
+        
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
         {
+            Debug.Log("niaaaque");
             MasterManager.Instance.Reset();
             SceneLoader.Instance.Unload("TutoScene");
             MasterManager.Instance.ChangeSceneByName(0, "Menu");
         }
-
-        if (!hasCycle && hasProjted && MasterManager.Instance.currentPhase == Phases.Phase_2 && TutoManager.Instance.isTutoDone)
+        
+        if (!hasCycle && hasProjted)
         {
+            Debug.Log("ddd");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = false;
