@@ -80,23 +80,26 @@ public class Projection : Singleton<Projection>
                 }
             }
         }
-        else if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
+        else if (!TutoManager.Instance.isTutoDone)
         {
-            for (int obj = 0; obj < 1; obj++)
+            if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
             {
-                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                for (int obj = 0; obj < 1; obj++)
                 {
-                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                    {
+                        objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
                 }
             }
-        }
-        else if (enableTransition && TutoManager.Instance.secondPartIsDone)
-        {
-            for (int obj = 2; obj < 2; obj++)
+            else if (enableTransition && TutoManager.Instance.secondPartIsDone)
             {
-                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                for (int obj = 2; obj < 2; obj++)
                 {
-                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                    {
+                        objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
                 }
             }
         }

@@ -222,9 +222,16 @@ public class TutoManager : Singleton<TutoManager>
         this.CallTypeWriter(text, s);        
     }
 
+    public void Destroy()
+    {
+        Destroy(canvas1);
+        Destroy(canvas2);
+        Destroy(canvas3);
+    }
 
     public void Skip()
     {
+        MasterManager.Instance.Reset();
         SceneLoader.Instance.LoadNewScene("Menu");
     }
 }

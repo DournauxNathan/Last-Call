@@ -52,4 +52,8 @@ public class InitTutorial : Singleton<InitTutorial>
     {
         TutoManager.Instance.Progress(i);
     }
+    public void Skip()
+    {
+        TutoManager.Instance.Skip();
+    }
 }
