@@ -98,12 +98,8 @@ public class TutoManager : Singleton<TutoManager>
             case 5:
                 InitTutorial.Instance.order.SetActive(true);
                 InitTutorial.Instance.pointAndClick.SetActive(true);
-                if (!isPointDone)
-                {
-                    UpdateString(InitTutorial.Instance.orderText, "Le jeu propose des puzzles basé sur la combinaison d'objets");
-                    InitTutorial.Instance.pointAndClickText.text = "";
-                    InitTutorial.Instance.pointAndClickText.text = "Pointer un des objets en bleu en passant le rayon dessus";
-                }
+                InitTutorial.Instance.orderText.text = "Le jeu propose des puzzles basé sur la combinaison d'objets";
+                InitTutorial.Instance.pointAndClickText.text = "Pointer un des objets en bleu en passant le rayon dessus";
                 break;
 
             case 6:
@@ -114,11 +110,7 @@ public class TutoManager : Singleton<TutoManager>
                 else
                 {
                     UpdateIndication(1);
-                    InitTutorial.Instance.pointAndClickText.text = "";
-                    if (!isPointDone)
-                    {
-                        UpdateString(InitTutorial.Instance.pointAndClickText, "Si un contour apparait vous pouvez \n appuyer sur [A] ou [X] pour le selectionner");
-                    }
+                    InitTutorial.Instance.pointAndClickText.text = "Si un contour apparait vous pouvez \n appuyer sur [A] ou [X] pour le selectionner";
                 }         
                 break;
 
@@ -137,13 +129,11 @@ public class TutoManager : Singleton<TutoManager>
                 break;
 
             case 8:
-                InitTutorial.Instance.pointAndClickText.text = "";
-                UpdateString(InitTutorial.Instance.pointAndClickText, "En selectionnant deux objets, vous créer une combinaison");
+                InitTutorial.Instance.pointAndClickText.text = "En selectionnant deux objets, vous créer une combinaison";
                 break;
 
             case 9:
-                InitTutorial.Instance.orderText.text = "";
-                UpdateString(InitTutorial.Instance.orderText, "Chaques combinaisons, vous donne un ordre. Attrapez le et validez le");
+                InitTutorial.Instance.orderText.text = "Chaques combinaisons, vous donne un ordre. Attrapez le et validez le";
                 
                 //WordManager.Instance.pullOrders = true;
                 if (isPointDone)
@@ -184,7 +174,8 @@ public class TutoManager : Singleton<TutoManager>
                 UpdateString(InitTutorial.Instance.orderText, "Bravo ! \n Vous serez ammener à combiner différents objets pour \n trouver la meilleur solution au problème rencontrés.");
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
-                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 30f);
+                this.CallWithDelay(ResetString, 17f);
+                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 19f);
                 Progress(15);
                 break;
             case 15:
@@ -219,6 +210,11 @@ public class TutoManager : Singleton<TutoManager>
             pointAndClickText.text = "Validez-moi !";
             imaginary.text = "Validez-moi !";
         }
+    }
+
+    public void ResetString()
+    {
+        InitTutorial.Instance.orderText.text = string.Empty;
     }
 
     public void UpdateString(TMP_Text text, string s)

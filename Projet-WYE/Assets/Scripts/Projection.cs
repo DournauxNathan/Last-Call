@@ -70,9 +70,9 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        if (enableTransition && !TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
+        if (enableTransition && TutoManager.Instance.isTutoDone)
         {
-            for (int obj = 2; obj < objectsToDissolve.Count; obj++)
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
                 for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
@@ -231,7 +231,7 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted && !revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1))
+        if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase == Phases.Phase_1 && TutoManager.Instance.isTutoDone)
         {
             hasCycle = !false;
 
@@ -252,17 +252,19 @@ public class Projection : Singleton<Projection>
                     break;
             }
         }
-        else if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
+        else if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
         {
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
             TutoManager.Instance.Progress(12);
         }
-        else if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone && TutoManager.Instance.secondPartIsDone)
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
         {
+            MasterManager.Instance.Reset();
+            SceneLoader.Instance.Unload("TutoScene");
             MasterManager.Instance.ChangeSceneByName(0, "Menu");
         }
 
-        if (!hasCycle && hasProjted)
+        if (!hasCycle && hasProjted && MasterManager.Instance.currentPhase == Phases.Phase_2 && TutoManager.Instance.isTutoDone)
         {
             hasCycle = !false;
 
