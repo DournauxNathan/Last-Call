@@ -257,7 +257,7 @@ public class Projection : Singleton<Projection>
 
         }
 
-        if (!hasCycle && hasProjted && TutoManager.Instance.firstPartIsDone)
+        if (!hasCycle && hasProjted && MasterManager.Instance.currentPhase == Phases.Phase_2 && TutoManager.Instance.isTutoDone)
         {
             hasCycle = !false;
 
