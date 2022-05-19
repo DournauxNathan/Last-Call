@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class InspectorData : MonoBehaviour
 {
+    public int memoLink;
     private InspectionInWorld inspection;
     [Header("Data")]
     public List<string> _dataList;
@@ -46,6 +47,7 @@ public class InspectorData : MonoBehaviour
         if(sprite != null) inspection.DisplaySprite(sprite,spriteOffset,spriteGlobalScale);
         inspectorEffect.objectTransform = transform;
         inspectorEffect.transform.position = transform.position;
+        SpriteSheetReader.Instance.memoIndex = memoLink;
     }
 
     public void DeSelected()
