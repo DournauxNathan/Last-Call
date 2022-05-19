@@ -266,6 +266,7 @@ public class MasterManager : Singleton<MasterManager>
         isInImaginary = false;
 
         Projection.Instance.transitionValue = 50f;
+        Projection.Instance.enableTransition = false;
 
         currentPhase = Phases.Phase_0;
         ScenarioManager.Instance.currentScenarioData = null;
