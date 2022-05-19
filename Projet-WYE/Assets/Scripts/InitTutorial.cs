@@ -18,9 +18,34 @@ public class InitTutorial : Singleton<InitTutorial>
 
     private void Awake()
     {
-        grab.SetActive(false);
-        pointAndClick.SetActive(false);
-        pointAndClickcomplentaire.SetActive(false);
+        if (grab != null)
+        {
+            grab.SetActive(false);
+        }
+        if (pointAndClick != null)
+        {
+            pointAndClick.SetActive(false);
+        }
+        if (pointAndClickcomplentaire != null)
+        {
+            pointAndClickcomplentaire.SetActive(false);
+        }
+
+        if (TutoManager.Instance.firstPartIsDone)
+        {
+            if (grab != null)
+            {
+                grab.SetActive(false);
+            }
+            if (pointAndClick != null)
+            {
+                pointAndClick.SetActive(false);
+            }
+            if (pointAndClickcomplentaire != null)
+            {
+                pointAndClickcomplentaire.SetActive(false);
+            }
+        }
     }
 
     public void Progress(int i)

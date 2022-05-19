@@ -70,9 +70,9 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        if (enableTransition && !TutoManager.Instance.firstPartIsDone)
+        if (enableTransition && !TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
         {
-            for (int obj = 1; obj < objectsToDissolve.Count; obj++)
+            for (int obj = 2; obj < objectsToDissolve.Count; obj++)
             {
                 for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
@@ -80,9 +80,19 @@ public class Projection : Singleton<Projection>
                 }
             }
         }
-        else if (enableTransition && TutoManager.Instance.firstPartIsDone)
+        else if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
         {
-            for (int obj = 0; obj < 2; obj++)
+            for (int obj = 0; obj < 1; obj++)
+            {
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                {
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+            }
+        }
+        else if (enableTransition && TutoManager.Instance.secondPartIsDone)
+        {
+            for (int obj = 2; obj < 2; obj++)
             {
                 for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
@@ -242,10 +252,14 @@ public class Projection : Singleton<Projection>
                     break;
             }
         }
-        else if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
         {
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
             TutoManager.Instance.Progress(12);
+        }
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone && TutoManager.Instance.secondPartIsDone)
+        {
+            MasterManager.Instance.ChangeSceneByName(0, "Menu");
         }
 
         if (!hasCycle && hasProjted)
