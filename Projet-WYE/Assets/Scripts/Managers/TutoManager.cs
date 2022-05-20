@@ -10,7 +10,8 @@ public class TutoManager : Singleton<TutoManager>
     [SerializeField] private int progression = 0;
 
 
-
+    public GameObject tutoWordManager;
+    public bool inTuto;
     public GameObject canvas1;
     public TMP_Text grabText;
     public GameObject canvas2;
@@ -28,8 +29,9 @@ public class TutoManager : Singleton<TutoManager>
 
     private void Awake()
     {
-        if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && !isTutoDone)
         {
+
             Projection.Instance.transitionValue = 0f;
         }
     }
@@ -45,12 +47,17 @@ public class TutoManager : Singleton<TutoManager>
         {
             // SkipTuto(); //To Delete after testing
             Debug.Log("File Found");
-        }
-        
+        }        
     }
 
     private void Update()
     {
+        if (inTuto)
+        {
+            inTuto = !inTuto;
+            tutoWordManager.SetActive(inTuto);
+        }
+
         if (updateTutoriel)
         {
             updateTutoriel = false;
@@ -232,6 +239,7 @@ public class TutoManager : Singleton<TutoManager>
     public void Skip()
     {
         MasterManager.Instance.Reset();
+        SceneLoader.Instance.Unload("TutoScene");
         SceneLoader.Instance.LoadNewScene("Menu");
     }
 }
