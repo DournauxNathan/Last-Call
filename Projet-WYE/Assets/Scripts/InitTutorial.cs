@@ -16,6 +16,8 @@ public class InitTutorial : Singleton<InitTutorial>
     public TMP_Text pointAndClickText;
     public TMP_Text orderText;
 
+    public List<GameObject> objects;
+
     private void Awake()
     {
         if (grab != null)
@@ -45,6 +47,14 @@ public class InitTutorial : Singleton<InitTutorial>
             {
                 pointAndClickcomplentaire.SetActive(false);
             }
+        }
+    }
+
+    public void DisableObject()
+    {
+        foreach (var item in objects)
+        {
+            item.SetActive(false);
         }
     }
 

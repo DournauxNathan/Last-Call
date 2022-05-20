@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
@@ -48,8 +49,15 @@ public class WordData : MonoBehaviour
         
         UpdateText(i);
 
+        GetComponent<ShakeWord>().submitWord.AddListener(UnpauseAudio);
+
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
         GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
+    }
+
+    public void UnpauseAudio()
+    {
+        MasterManager.Instance.references.mainAudioSource.Play();
     }
 
     public void Activate(Transform parent, Transform stock,string i)

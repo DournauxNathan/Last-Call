@@ -9,7 +9,8 @@ public class TutoManager : Singleton<TutoManager>
 {
     [SerializeField] private int progression = 0;
 
-
+    public GameObject tutoWordManager;
+    public bool isTutorialBegin;
 
     public GameObject canvas1;
     public TMP_Text grabText;
@@ -28,8 +29,11 @@ public class TutoManager : Singleton<TutoManager>
 
     private void Awake()
     {
-        if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+        isTutorialBegin = true;
+
+        if (isTutorialBegin && MasterManager.Instance.currentPhase == Phases.Phase_0)
         {
+            tutoWordManager.SetActive(true);
             Projection.Instance.transitionValue = 0f;
         }
     }
@@ -133,20 +137,24 @@ public class TutoManager : Singleton<TutoManager>
                 break;
 
             case 9:
-                InitTutorial.Instance.orderText.text = "Chaque combinaison vous donne un ordre. Attrapez-le et validez-le";
-
+                //InitTutorial.Instance.orderText.text = "Chaque combinaison vous donne un ordre. Attrapez-le et validez-le";
                 //WordManager.Instance.pullOrders = true;
                 if (isPointDone)
                 {
                     UpdateIndication(2);
                     Progress(10);
-                    WordManager.Instance.PullWord();
+                    //WordManager.Instance.PullWord();
                 }
                 break;
 
             case 10:
-                InitTutorial.Instance.orderText.text = "";
-                UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour continuer");
+                if (isPointDone)
+                {
+                    firstPartIsDone = true;
+                    Projection.Instance.transitionValue = 50f;
+                    InitTutorial.Instance.orderText.text = "";
+                    UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour continuer");
+                }
                 firstPartIsDone = true;
                 Projection.Instance.transitionValue = 50f;
                 break;
@@ -160,26 +168,30 @@ public class TutoManager : Singleton<TutoManager>
                 InitTutorial.Instance.pointAndClick.SetActive(false);
                 InitTutorial.Instance.grab.SetActive(false);
                 InitTutorial.Instance.pointAndClickcomplentaire.SetActive(false);
-                InitTutorial.Instance.orderText.text = "";
-                UpdateString(InitTutorial.Instance.orderText, "Vous êtes à présent dans l'imaginaire de Josh");
+                //InitTutorial.Instance.orderText.text = "";
+                InitTutorial.Instance.orderText.text =  "Vous êtes à présent dans l'imaginaire de Josh";
+                this.CallWithDelay(() => Projection.Instance.enableTransition = false, 2f);                
                 break;
             case 13:
                 InitTutorial.Instance.orderText.text = "";
                 this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Trouvez un moyen de soigner l'appelant en le combinant avec un objet"), 0f);
-                Projection.Instance.enableTransition = false;
+                
                 break;
             case 14:
                 secondPartIsDone = true;
-                InitTutorial.Instance.orderText.text = "";
-                UpdateString(InitTutorial.Instance.orderText, "Bravo ! \n Vous serez ammené à combiner différents objets pour \n trouver la meilleure solution aux problèmes rencontrés.");
+                //InitTutorial.Instance.orderText.text = "";
+                InitTutorial.Instance.orderText.text =  "Bravo ! \n Vous serez ammené à combiner différents objets pour \n trouver la meilleure solution aux problèmes rencontrés.";
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
                 this.CallWithDelay(ResetString, 17f);
                 this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 19f);
+                UpdateIndication(2);
                 Progress(15);
                 break;
             case 15:
+                isTutorialBegin = false;
                 isTutoDone = true;
+                tutoWordManager.SetActive(false);
                 break;
         }
     }
@@ -231,6 +243,12 @@ public class TutoManager : Singleton<TutoManager>
 
     public void Skip()
     {
+        tutoWordManager.SetActive(false);
+        isPointDone = true;
+        isTutoDone = true;
+        secondPartIsDone = true;
+        firstPartIsDone = true;
+
         MasterManager.Instance.Reset();
         SceneLoader.Instance.Unload("TutoScene");
         SceneLoader.Instance.LoadNewScene("Menu");

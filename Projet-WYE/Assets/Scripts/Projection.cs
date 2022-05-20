@@ -70,7 +70,7 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        if (enableTransition && TutoManager.Instance.isTutoDone)
+        if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
             for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
@@ -80,7 +80,7 @@ public class Projection : Singleton<Projection>
                 }
             }
         }
-        else if (!TutoManager.Instance.isTutoDone)
+        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0)
         {
             if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
             {
@@ -175,7 +175,7 @@ public class Projection : Singleton<Projection>
 
     public void Deconstruct()
     {
-        if (transitionValue > 0)
+        if (transitionValue >= 0)
         {
             isTransition = true;
             transitionValue -= Time.deltaTime * time;
@@ -267,16 +267,18 @@ public class Projection : Singleton<Projection>
         }
 
 
-        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
+        if (enableTransition && !TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
         {
+            InitTutorial.Instance.DisableObject();
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
             TutoManager.Instance.Progress(12);
         }
 
-        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
+        if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
         {
             MasterManager.Instance.Reset();
             SceneLoader.Instance.Unload("TutoScene");
+            SceneLoader.Instance.Unload("TutoScene_Two");
             MasterManager.Instance.ChangeSceneByName(0, "Menu");
         }
 

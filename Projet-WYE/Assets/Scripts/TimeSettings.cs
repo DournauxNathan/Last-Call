@@ -65,18 +65,20 @@ public class TimeSettings : Singleton<TimeSettings>
                 {
                     item.SetActive(true);
                 }
+                this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 2f);
             }
             if (globalTimer >= ScenarioManager.Instance.currentScenarioData.adressBegin
                 && globalTimer < ScenarioManager.Instance.currentScenarioData.situationBegin
-                && !AnswerManager.Instance.adressIsAnswer)
+                && !AnswerManager.Instance.adressIsAnswer && AnswerManager.Instance.ageIsAnswered)
             {
                 foreach (var item in AnswerManager.Instance.adress)
                 {
                     item.SetActive(true);
                 }
+                this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 2f);
             }
             if (globalTimer > ScenarioManager.Instance.currentScenarioData.situationBegin
-                && !AnswerManager.Instance.situationIsAnswer)
+                && !AnswerManager.Instance.situationIsAnswer && AnswerManager.Instance.adressIsAnswer && AnswerManager.Instance.ageIsAnswered)
             {
                 if (doOnce)
                 {
@@ -89,6 +91,12 @@ public class TimeSettings : Singleton<TimeSettings>
                             item.canvas[i].SetActive(true);
                         }
                     }
+                    //this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 2f);
+                }
+
+                if (globalTimer >= 120f)
+                {
+                    StopCoroutine(IncreaseTime());
                 }
             }
 
