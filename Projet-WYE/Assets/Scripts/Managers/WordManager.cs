@@ -162,13 +162,11 @@ public class WordManager : Singleton<WordManager>
         {
             case FormData.age:
                 AnswerManager.Instance.ageIsAnswered = true;
-                MasterManager.Instance.references.mainAudioSource.Play();
                 AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.age);
                 break;
 
             case FormData.adress:
                 AnswerManager.Instance.adressIsAnswer = true;
-                MasterManager.Instance.references.mainAudioSource.Play();
                 AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.adress);
                 break;
 
@@ -185,6 +183,7 @@ public class WordManager : Singleton<WordManager>
                 }
                 break;
         }
+        
 
     }
 }

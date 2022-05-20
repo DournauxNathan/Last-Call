@@ -94,6 +94,14 @@ public class ListManager : Singleton<ListManager>
 
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
+                else if (combinaison.objectName == combiObj2.name && combiObj1.state == StateMobility.Static 
+                    && combiObj2.state == StateMobility.Static)
+                {
+                    combiObj1.dissolveEffect.startEffect = true;
+                    combiObj2.dissolveEffect.startEffect = true;
+
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
+                }
 
                 combinaison.doAction?.Invoke();
             }

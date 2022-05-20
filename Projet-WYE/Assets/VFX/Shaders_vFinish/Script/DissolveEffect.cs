@@ -50,6 +50,14 @@ public class DissolveEffect : Singleton<DissolveEffect>
         }
     }
 
+    private void Start()
+    {/*
+        TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab);
+        xrGrab.enabled = false;
+        TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple);
+        xrSimple.enabled = false;*/
+    }
+
     private void FixedUpdate()
     {
         if (startEffect)
@@ -96,9 +104,16 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 {
                     for (int i = 0; i < dissolveMaterials.Length; i++)
                     {
-                        GetComponent<Renderer>().enabled = false;
-                        GetComponent<CombinableObject>().enabled = false;
-                        GetComponent<CombinableObject>().ToggleInteractor(false);
+                        TryGetComponent<Renderer>(out Renderer rend);
+                        rend.enabled = false;
+
+                        TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab);
+                        xrGrab.enabled = false;
+
+                        TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple);
+                        xrSimple.enabled = false;
+
+                        //GetComponent<CombinableObject>().ToggleInteractor(false);
                         //gameObject.SetActive(false);
                     }
                 }
