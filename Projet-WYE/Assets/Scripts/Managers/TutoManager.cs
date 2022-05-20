@@ -146,7 +146,7 @@ public class TutoManager : Singleton<TutoManager>
 
             case 10:
                 InitTutorial.Instance.orderText.text = "";
-                UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour continuer");
+                InitTutorial.Instance.orderText.text = "Maintenez [B] ou [Y] pour continuer";
                 firstPartIsDone = true;
                 Projection.Instance.transitionValue = 50f;
                 break;
@@ -161,7 +161,7 @@ public class TutoManager : Singleton<TutoManager>
                 InitTutorial.Instance.grab.SetActive(false);
                 InitTutorial.Instance.pointAndClickcomplentaire.SetActive(false);
                 InitTutorial.Instance.orderText.text = "";
-                UpdateString(InitTutorial.Instance.orderText, "Vous êtes à présent dans l'imaginaire de Josh");
+                InitTutorial.Instance.orderText.text = "Vous êtes à présent dans l'imaginaire de Josh";
                 break;
             case 13:
                 InitTutorial.Instance.orderText.text = "";
@@ -171,7 +171,7 @@ public class TutoManager : Singleton<TutoManager>
             case 14:
                 secondPartIsDone = true;
                 InitTutorial.Instance.orderText.text = "";
-                UpdateString(InitTutorial.Instance.orderText, "Bravo ! \n Vous serez ammener à combiner différents objets pour \n trouver la meilleur solution au problème rencontrés.");
+                InitTutorial.Instance.orderText.text = "Bravo ! \n Vous serez ammener à combiner différents objets pour \n trouver la meilleur solution aux problèmes rencontrés.";
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
                 this.CallWithDelay(ResetString, 17f);
