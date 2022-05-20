@@ -77,6 +77,11 @@ public class TutoManager : Singleton<TutoManager>
         }
     }
 
+    public void IncreaseProgression()
+    {
+        updateTutoriel = true;
+    }
+
     public void UpdateTutorial()
     {
         switch (progression)
