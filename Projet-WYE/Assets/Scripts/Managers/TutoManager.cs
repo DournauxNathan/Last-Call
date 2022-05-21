@@ -158,7 +158,7 @@ public class TutoManager : Singleton<TutoManager>
                     firstPartIsDone = true;
                     Projection.Instance.transitionValue = 50f;
                     InitTutorial.Instance.orderText.text = "";
-                    UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour continuer");
+                    InitTutorial.Instance.orderText.text = "Maintenez [B] ou [Y] pour continuer";
                 }
                 firstPartIsDone = true;
                 Projection.Instance.transitionValue = 50f;
@@ -189,7 +189,7 @@ public class TutoManager : Singleton<TutoManager>
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
                 this.CallWithDelay(ResetString, 17f);
-                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 19f);
+                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 10f);
                 UpdateIndication(2);
                 Progress(15);
                 break;

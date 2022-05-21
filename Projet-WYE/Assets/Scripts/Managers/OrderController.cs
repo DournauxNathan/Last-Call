@@ -42,12 +42,15 @@ public class OrderController : Singleton<OrderController>
         return currentNumberOfCombinaison;
     }
     public void ResolvePuzzle() 
-    { 
-        puzzlesSucced += 1;
-
-        if (puzzlesSucced >= 4)
+    {
+        if (MasterManager.Instance.currentPhase != Phases.Phase_0)
         {
-            isResolve = true;
+            puzzlesSucced += 1;
+
+            if (puzzlesSucced >= 4)
+            {
+                isResolve = true;
+            }
         }
 
     }
