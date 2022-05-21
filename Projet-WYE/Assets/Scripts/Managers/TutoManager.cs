@@ -119,7 +119,7 @@ public class TutoManager : Singleton<TutoManager>
                 else
                 {
                     UpdateIndication(1);
-                    InitTutorial.Instance.pointAndClickText.text = "Si un contour apparaît vous pouvez \n appuyer sur [A] ou [X] pour le sélectionner";
+                    InitTutorial.Instance.pointAndClickText.text = "Si un contour apparaît vous pouvez \n appuyer sur la gachêtte [index] pour le sélectionner";
                 }
                 break;
 
