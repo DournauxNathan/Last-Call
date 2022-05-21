@@ -80,6 +80,16 @@ public class Projection : Singleton<Projection>
                 }
             }
         }
+        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
+            {
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                {
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+            }
+        }
         else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0)
         {
             if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
@@ -92,7 +102,7 @@ public class Projection : Singleton<Projection>
                     }
                 }
             }
-            else if (enableTransition && TutoManager.Instance.secondPartIsDone)
+            else if (enableTransition && TutoManager.Instance.secondPartIsDone && MasterManager.Instance.currentPhase == Phases.Phase_0)
             {
                 for (int obj = 2; obj < 2; obj++)
                 {
@@ -195,13 +205,15 @@ public class Projection : Singleton<Projection>
         }
     }
 
+    public void InTransition(bool value) { isTransition = value; }
+
     public void RevealScene()
     {
-        if (transitionValue < 30)
+        if (transitionValue < 50f)
         {
             transitionValue += Time.deltaTime * time;
 
-            if (transitionValue >= 30)
+            if (transitionValue >= 50f)
             {
                 revealScene = false;
                 hasProjted = false;
@@ -234,8 +246,10 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
+        Debug.Log("3 bye");
         if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase == Phases.Phase_1 && TutoManager.Instance.isTutoDone)
         {
+            Debug.Log("4 bye");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
@@ -257,8 +271,9 @@ public class Projection : Singleton<Projection>
 
         }
 
-        if (!hasCycle && hasProjted && MasterManager.Instance.currentPhase == Phases.Phase_2 && TutoManager.Instance.isTutoDone)
+        if (goBackInOffice && OrderController.Instance.isResolve && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
+            Debug.Log("3 bye");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = false;
@@ -267,15 +282,17 @@ public class Projection : Singleton<Projection>
         }
 
 
-        if (enableTransition && !TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
+        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
         {
+            Debug.Log("2 bye");
             InitTutorial.Instance.DisableObject();
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
             TutoManager.Instance.Progress(12);
         }
 
-        if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
         {
+            Debug.Log("1 bye");
             MasterManager.Instance.Reset();
             SceneLoader.Instance.Unload("TutoScene");
             SceneLoader.Instance.Unload("TutoScene_Two");

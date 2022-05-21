@@ -110,14 +110,14 @@ public class TimeSettings : Singleton<TimeSettings>
                 }
 
             }
-
-            yield return null;
-
             if (globalTimer >= 100f)
             {
                 StopCoroutine(IncreaseTime());
                 TutoManager.Instance.UpdateIndication(2);
             }
+
+            yield return null;
+
         }
     }
 
