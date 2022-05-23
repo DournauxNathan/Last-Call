@@ -11,6 +11,6 @@ public class BuildLoader : MonoBehaviour
 
     private void LoadPersistent()
     {
-        SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("TutoScene", LoadSceneMode.Additive);
     }
 }

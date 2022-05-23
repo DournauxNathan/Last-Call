@@ -51,6 +51,7 @@ public class ListManager : Singleton<ListManager>
             {
                 lockedInteractors[i].GetComponent<CombinableObject>().Lock(false);
             }
+
             lockedInteractors.Clear();
         }
     }
@@ -89,6 +90,14 @@ public class ListManager : Singleton<ListManager>
                 else if (combinaison.objectName == combiObj2.name && combiObj1.state != StateMobility.Static)
                 {
                     PlaySfx(combinaison.sfx,combiObj1);
+                    combiObj1.dissolveEffect.startEffect = true;
+                    combiObj2.dissolveEffect.startEffect = true;
+
+                    SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
+                }
+                else if (combinaison.objectName == combiObj2.name && combiObj1.state == StateMobility.Static 
+                    && combiObj2.state == StateMobility.Static)
+                {
                     combiObj1.dissolveEffect.startEffect = true;
                     combiObj2.dissolveEffect.startEffect = true;
 

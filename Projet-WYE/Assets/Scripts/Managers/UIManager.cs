@@ -32,7 +32,17 @@ public class UIManager : Singleton<UIManager>
 
     private void Start()
     {
-        OutComingCall(false);
+        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+
+            InComingCall(false);
+            OutComingCall(true);
+        }
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_1)
+        {
+            InComingCall(true);
+            OutComingCall(false);
+        }
     }
 
     public void UpdateForm(FormData _answerType, string data)

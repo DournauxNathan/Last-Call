@@ -63,6 +63,8 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         //headPhone.GetComponent<Rigidbody>().isKinematic = false;
     }
 
+    public void SetEquip(bool value) { equip = value; }
+    public void Press(bool value) { press = value; }
 
     public void Equip(bool value)
     {

@@ -17,6 +17,14 @@ public class SceneLoader : Singleton<SceneLoader>
     private void Start()
     {
         SceneManager.sceneLoaded += SetActiveScene;
+#if UNITY_EDITOR
+        this.CallWithDelay(LoadNewSceneEditorOnly, .2f);
+#endif
+    }
+
+    public void LoadNewSceneEditorOnly()
+    {
+        LoadNewScene(nameScene);
     }
 
     private void OnDestroy()
@@ -37,6 +45,7 @@ public class SceneLoader : Singleton<SceneLoader>
         if (!isLoading)
         {
             StartCoroutine(AddScene(sceneName));
+            Projection.Instance.isTransition = false;
         }
     }
 
@@ -68,7 +77,7 @@ public class SceneLoader : Singleton<SceneLoader>
         }
 
         yield return StartCoroutine(LoadNew(sceneName));
-
+        Projection.Instance.isTransition = false;
         //  yield return screenFader.StartFadeOut();
         OnLoadEnd?.Invoke();
 

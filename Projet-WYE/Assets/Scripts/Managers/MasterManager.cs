@@ -18,6 +18,7 @@ public enum Phases
 
 public class MasterManager : Singleton<MasterManager>
 {
+    public bool unpauseAdio;
     public Phases currentPhase;
 
     [Header("Refs")]
@@ -67,6 +68,13 @@ public class MasterManager : Singleton<MasterManager>
         {
             WordManager.Instance.isProtocolComplete = true;
         }
+
+        if (unpauseAdio)
+        {
+            unpauseAdio = !unpauseAdio;
+            MasterManager.Instance.references.mainAudioSource.UnPause();
+        }
+
     }
 
     public void FixedUpdate()
@@ -224,6 +232,8 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 1:
+                Projection.Instance.enableTransition = true;
+                Projection.Instance.transitionValue = 50f;
                 ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
@@ -266,6 +276,7 @@ public class MasterManager : Singleton<MasterManager>
         isInImaginary = false;
 
         Projection.Instance.transitionValue = 50f;
+        Projection.Instance.enableTransition = true;
 
         currentPhase = Phases.Phase_0;
         ScenarioManager.Instance.currentScenarioData = null;
@@ -314,7 +325,6 @@ public class References
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
     public AudioMixerGroup sfx;
-
 
     [Header("Puzzle Manager")]
     public ListManager _listManager;

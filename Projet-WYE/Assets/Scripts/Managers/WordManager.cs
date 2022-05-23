@@ -51,7 +51,6 @@ public class WordManager : Singleton<WordManager>
                     var item = FindAvailableWordData();
                     //if true, Activate Canvas Word and Set his text with the current propo
                     item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition, answer);
-
                     switch (item.GetAnswer().type)
                     {
                         case FormData.age:
@@ -184,6 +183,7 @@ public class WordManager : Singleton<WordManager>
                 }
                 break;
         }
+        
 
     }
 }

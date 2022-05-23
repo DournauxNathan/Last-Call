@@ -23,10 +23,10 @@ public class HintManager : MonoBehaviour
 
     private void Update()
     {
-        if (hints.Count != 0)
+        /*if (hints.Count != 0)
         {
             UpdateTimer();
-        }
+        }*/
     }
 
     public void SetTimer()

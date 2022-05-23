@@ -10,15 +10,12 @@ public class SherlockEffect : Singleton<SherlockEffect>
     public float time;
     public float XLimit;
     public float lerpPosForImaginary = 0.8f;
-    public List<Vector2> offsets;
 
-    public OffsetLimit limit;
     private CameraRoatationLimits cameraLimit;
 
     public bool invertLimitDebug = false;
 
     private void Start() {
-        limit = new OffsetLimit(-1f, 1f, 0.63f, 1.35f); //TODO: Change when testing in VR    // maxY must be >1.2f Y  /!\axis is offseted
         cameraLimit = new CameraRoatationLimits(XLimit);
     }
     void LateUpdate()
@@ -63,44 +60,6 @@ public class SherlockEffect : Singleton<SherlockEffect>
             calculatedTransform = transform;
         }
     }
-
-    //Check if the offset is in the limit
-    public void CheckOffset(Transform _transform){
-
-        bool isInLimitMaxX = _transform.position.x> limit.maxX ;
-        bool isInLimitMinX = _transform.position.x < limit.minX ;
-        bool isInLimitMaxY = _transform.position.y > limit.maxY ;
-        bool isInLimitMinY = _transform.position.y < limit.minY ;
-
-        if(isInLimitMaxX || isInLimitMinX || isInLimitMaxY || isInLimitMinY)
-        {
-            int index = _transform.GetSiblingIndex(); 
-            Debug.Log(index +"\n"+ _transform.gameObject.name+"\n"+"minX: "+isInLimitMinX+" maxX: "+isInLimitMaxX+" minY: "+isInLimitMinY+" MaxY: "+isInLimitMaxY); //TODO: Remove
-            Debug.Log( "x: "+ _transform.position.x+" y: "+_transform.position.y);                                                                                  //TODO: Remove
-            _transform.position = new Vector3(offsets[index].x, offsets[index].y, _transform.position.z);
-        }
-
-    }
-}
-
-//class OffsetLimit{
-public class OffsetLimit
-{
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
-
-    public OffsetLimit (float minX, float maxX, float minY, float maxY){ //Constructor
-        this.minX = minX;
-        this.maxX = maxX;
-        this.minY = minY;
-        this.maxY = maxY;
-    }
-    public override string ToString(){
-        return "minX: "+minX+" maxX: "+maxX+" minY: "+minY+" MaxY: "+maxY;
-    }
-
 }
 
 public class CameraRoatationLimits : SherlockEffect

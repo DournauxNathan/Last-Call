@@ -42,23 +42,33 @@ public class OrderController : Singleton<OrderController>
         return currentNumberOfCombinaison;
     }
     public void ResolvePuzzle() 
-    { 
-        puzzlesSucced += 1;
-
-        if (puzzlesSucced >= 4)
+    {
+        if (MasterManager.Instance.currentPhase != Phases.Phase_0)
         {
-            isResolve = true;
+            puzzlesSucced += 1;
+
+            if (puzzlesSucced >= 4)
+            {
+                isResolve = true;
+            }
         }
 
     }
     public int GetNumberOfPuzzleSucced() { return puzzlesSucced; }
+
+    public bool doOnce = true;
     public void Resolve()
     {
-        if (completeImaginary || GetResolve())
+        if (completeImaginary || GetResolve() && doOnce)
         {
+            doOnce = false;
+
             completeImaginary = !completeImaginary;
 
             MasterManager.Instance.isInImaginary = false;
+            Projection.Instance.transitionValue = 50f;
+            Projection.Instance.enableTransition = true;
+            Projection.Instance.goBackInOffice = true;
             SetResolve(true);
             MasterManager.Instance.currentPhase = Phases.Phase_3;
         }
@@ -81,8 +91,6 @@ public class OrderController : Singleton<OrderController>
                 item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered = !item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered;
             }
         }*/
-
-        Debug.Log("hey");
 
         Combinaison newCombi = new Combinaison {
             currentCombinaison = a.name+ "+ " + b.name,
@@ -110,7 +118,6 @@ public class OrderController : Singleton<OrderController>
         };
 
         ordersStrings.Add(newOrder);
-        Debug.Log("");
         ScenarioManager.Instance.UpdateEndingsValue(newOrder.influence);
     }
     
