@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpriteSheetReader : MonoBehaviour
+public class SpriteSheetReader : Singleton<SpriteSheetReader>
 {
     public Image animatedImageObj;
 

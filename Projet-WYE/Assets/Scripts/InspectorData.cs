@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class InspectorData : MonoBehaviour
 {
+    public int memoLink;
     private InspectionInWorld inspection;
     private InspectorEffect inspectorEffect;
     [Header("Data")]
@@ -60,6 +61,7 @@ public class InspectorData : MonoBehaviour
         inspection.CreateNewText(_dataList,delay,hasRandom);
         inspectorEffect.objectTransform = transform;
         inspectorEffect.transform.position = transform.position;
+        SpriteSheetReader.Instance.memoIndex = memoLink;
     }
 
     public void DeSelected()
