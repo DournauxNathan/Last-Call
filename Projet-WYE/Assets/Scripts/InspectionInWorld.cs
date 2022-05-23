@@ -130,7 +130,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
                 _listIndex = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
                 break;
             default:
-                Debug.Log("Error: Number of text is not correct, please check the number of text in the list");
+                Debug.LogError("Error: "+ _listText.Count + " texts is not correct, please check the number of text in the list");
                 break;
         }
 
