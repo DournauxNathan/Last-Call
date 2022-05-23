@@ -44,18 +44,20 @@ public class TutoManager : Singleton<TutoManager>
     // Start is called before the first frame update
     void Start()
     {
-        canvas2.SetActive(false);
-        canvas3.SetActive(false);
-        UpdateText(1);
+        if (isTutorialBegin)
+        {
+            canvas2.SetActive(false);
+            canvas3.SetActive(false);
+            UpdateText(1);
+
+        }
 
         if (FileHandler.IsAFileExist("SaveLastCall.json"))
         {
             // SkipTuto(); //To Delete after testing
             Debug.Log("File Found");
         }
-
     }
-
     private void Update()
     {
         if (updateTutoriel)
@@ -89,163 +91,166 @@ public class TutoManager : Singleton<TutoManager>
     public bool gribWasPressed, triggerWasPressed, primaryWasPressed, secondaryWasPressed;
     public void UpdateTutorial()
     {
-        switch (progression)
+        if (isTutorialBegin)
         {
-            case -5:
-                this.CallWithDelay(() => Progress(-4), 2f);                
-                break;
-            case -4:
-                if (!gribWasPressed)
-                {
-                    InitTutorial.Instance.order.SetActive(true);
+            switch (progression)
+            {
+                case -5:
+                    this.CallWithDelay(() => Progress(-4), 2f);                
+                    break;
+                case -4:
+                    if (!gribWasPressed)
+                    {
+                        InitTutorial.Instance.order.SetActive(true);
+                        UpdateIndication(3);
+                        InitTutorial.Instance.orderText.text = "Appuyez sur la gachette [majeur]";
+                    }
+                    break;
+                case -3:
+                    if (!triggerWasPressed)
+                    {
+                        UpdateIndication(4);
+                        gribWasPressed = true;
+                        InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur la gachette [index]";
+                    }
+                    break;
+                case -2:
+                    if (!primaryWasPressed)
+                    {
+                        UpdateIndication(1);
+                        triggerWasPressed = true;
+                        InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [A] ou [X]";
+                    }
+                    break;
+                case -1:
+                    if (!secondaryWasPressed)
+                    {
+                        UpdateIndication(2);
+                        primaryWasPressed = true;
+                        InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [B] ou [Y]";
+                    }
+                    break;
+                case 0:
+                    secondaryWasPressed = true;
+                    Progress(1);
+                    InitTutorial.Instance.orderText.text = "";
+                    break;
+                case 1:
+                    tutoWordManager.SetActive(true);
+                    InitTutorial.Instance.grab.SetActive(true);
                     UpdateIndication(3);
-                    InitTutorial.Instance.orderText.text = "Appuyez sur la gachette [majeur]";
-                }
-                break;
-            case -3:
-                if (!triggerWasPressed)
-                {
-                    UpdateIndication(4);
-                    gribWasPressed = true;
-                    InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur la gachette [index]";
-                }
-                break;
-            case -2:
-                if (!primaryWasPressed)
-                {
-                    UpdateIndication(1);
-                    triggerWasPressed = true;
-                    InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [A] ou [X]";
-                }
-                break;
-            case -1:
-                if (!secondaryWasPressed)
-                {
-                    UpdateIndication(2);
-                    primaryWasPressed = true;
-                    InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [B] ou [Y]";
-                }
-                break;
-            case 0:
-                secondaryWasPressed = true;
-                Progress(1);
-                InitTutorial.Instance.orderText.text = "";
-                break;
-            case 1:
-                tutoWordManager.SetActive(true);
-                InitTutorial.Instance.grab.SetActive(true);
-                UpdateIndication(3);
-                break;
-            case 2:
-                InitTutorial.Instance.grabText.text = "Relâchez la gâchette pour lâcher l'objet";
-                UpdateIndication(3);
-                break;
-            case 3:
-                InitTutorial.Instance.grabText.color = new Color(0, 226, 255);
-                InitTutorial.Instance.grabText.text = "Bravo !";
+                    break;
+                case 2:
+                    InitTutorial.Instance.grabText.text = "Relâchez la gâchette pour lâcher l'objet";
+                    UpdateIndication(3);
+                    break;
+                case 3:
+                    InitTutorial.Instance.grabText.color = new Color(0, 226, 255);
+                    InitTutorial.Instance.grabText.text = "Bravo !";
 
-                this.CallWithDelay(() => Progress(4), 12f);
-                break;
+                    this.CallWithDelay(() => Progress(4), 12f);
+                    break;
 
-            case 4:
-                UpdateText(1);
-                canvas2.SetActive(true);
-                break;
+                case 4:
+                    UpdateText(1);
+                    canvas2.SetActive(true);
+                    break;
 
-            case 5:
-                InitTutorial.Instance.order.SetActive(true);
-                InitTutorial.Instance.pointAndClick.SetActive(true);
-                InitTutorial.Instance.orderText.text = "Le jeu propose des puzzles basés sur la combinaison d'objets";
-                InitTutorial.Instance.pointAndClickText.text = "Pointez un des objets en bleu en passant le rayon dessus";
-                break;
+                case 5:
+                    InitTutorial.Instance.order.SetActive(true);
+                    InitTutorial.Instance.pointAndClick.SetActive(true);
+                    InitTutorial.Instance.orderText.text = "Le jeu propose des puzzles basés sur la combinaison d'objets";
+                    InitTutorial.Instance.pointAndClickText.text = "Pointez un des objets en bleu en passant le rayon dessus";
+                    break;
 
-            case 6:
-                if (isPointDone)
-                {
-                    Progress(8);
-                }
-                else
-                {
-                    UpdateIndication(1);
-                    InitTutorial.Instance.pointAndClickText.text = "Si un contour apparaît vous pouvez \n appuyer sur la gachêtte [index] pour le sélectionner";
-                }
-                break;
+                case 6:
+                    if (isPointDone)
+                    {
+                        Progress(8);
+                    }
+                    else
+                    {
+                        UpdateIndication(1);
+                        InitTutorial.Instance.pointAndClickText.text = "Si un contour apparaît vous pouvez \n appuyer sur la gachêtte [index] pour le sélectionner";
+                    }
+                    break;
 
-            case 7:
-                if (isPointDone)
-                {
-                    Progress(9);
-                }
-                else
-                {
-                    InitTutorial.Instance.pointAndClickcomplentaire.SetActive(true);
-                    InitTutorial.Instance.pointAndClickText.text = "Bravo !";
-                    isPointDone = true;
-                    Progress(8);
-                }
-                break;
+                case 7:
+                    if (isPointDone)
+                    {
+                        Progress(9);
+                    }
+                    else
+                    {
+                        InitTutorial.Instance.pointAndClickcomplentaire.SetActive(true);
+                        InitTutorial.Instance.pointAndClickText.text = "Bravo !";
+                        isPointDone = true;
+                        Progress(8);
+                    }
+                    break;
 
-            case 8:
-                InitTutorial.Instance.pointAndClickText.text = "En selectionnant deux objets, vous créez une combinaison";
-                break;
+                case 8:
+                    InitTutorial.Instance.pointAndClickText.text = "En selectionnant deux objets, vous créez une combinaison";
+                    break;
 
-            case 9:
-                //InitTutorial.Instance.orderText.text = "Chaque combinaison vous donne un ordre. Attrapez-le et validez-le";
-                //WordManager.Instance.pullOrders = true;
-                if (isPointDone)
-                {
-                    UpdateIndication(2);
-                    Progress(10);
-                    //WordManager.Instance.PullWord();
-                }
-                break;
+                case 9:
+                    //InitTutorial.Instance.orderText.text = "Chaque combinaison vous donne un ordre. Attrapez-le et validez-le";
+                    //WordManager.Instance.pullOrders = true;
+                    if (isPointDone)
+                    {
+                        UpdateIndication(2);
+                        Progress(10);
+                        //WordManager.Instance.PullWord();
+                    }
+                    break;
 
-            case 10:
-                if (isPointDone)
-                {
+                case 10:
+                    if (isPointDone)
+                    {
+                        firstPartIsDone = true;
+                        Projection.Instance.transitionValue = 50f;
+                        InitTutorial.Instance.orderText.text = "";
+                        InitTutorial.Instance.orderText.text = "Maintenez [B] ou [Y] pour continuer";
+                    }
                     firstPartIsDone = true;
                     Projection.Instance.transitionValue = 50f;
+                    break;
+                case 11:
+                    Projection.Instance.enableTransition = true;
+                    break;
+                case 12:
+                    canvas3.SetActive(true);
+                    canvas1.SetActive(false);
+                    canvas2.SetActive(false);
+                    InitTutorial.Instance.pointAndClick.SetActive(false);
+                    InitTutorial.Instance.grab.SetActive(false);
+                    InitTutorial.Instance.pointAndClickcomplentaire.SetActive(false);
+                    //InitTutorial.Instance.orderText.text = "";
+                    InitTutorial.Instance.orderText.text =  "Vous êtes à présent dans l'imaginaire de Josh";
+                    this.CallWithDelay(() => Projection.Instance.enableTransition = false, 2f);                
+                    break;
+                case 13:
                     InitTutorial.Instance.orderText.text = "";
-                    InitTutorial.Instance.orderText.text = "Maintenez [B] ou [Y] pour continuer";
-                }
-                firstPartIsDone = true;
-                Projection.Instance.transitionValue = 50f;
-                break;
-            case 11:
-                Projection.Instance.enableTransition = true;
-                break;
-            case 12:
-                canvas3.SetActive(true);
-                canvas1.SetActive(false);
-                canvas2.SetActive(false);
-                InitTutorial.Instance.pointAndClick.SetActive(false);
-                InitTutorial.Instance.grab.SetActive(false);
-                InitTutorial.Instance.pointAndClickcomplentaire.SetActive(false);
-                //InitTutorial.Instance.orderText.text = "";
-                InitTutorial.Instance.orderText.text =  "Vous êtes à présent dans l'imaginaire de Josh";
-                this.CallWithDelay(() => Projection.Instance.enableTransition = false, 2f);                
-                break;
-            case 13:
-                InitTutorial.Instance.orderText.text = "";
-                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Trouvez un moyen de soigner l'appelant en le combinant avec un objet"), 0f);
+                    this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Trouvez un moyen de soigner l'appelant en le combinant avec un objet"), 0f);
                 
-                break;
-            case 14:
-                secondPartIsDone = true;
-                //InitTutorial.Instance.orderText.text = "";
-                InitTutorial.Instance.orderText.text =  "Bravo ! \n Vous serez ammené à combiner différents objets pour \n trouver la meilleure solution aux problèmes rencontrés.";
-                Projection.Instance.enableTransition = true;
-                Projection.Instance.transitionValue = 50f;
-                this.CallWithDelay(ResetString, 17f);
-                this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 10f);
-                UpdateIndication(2);
-                Progress(15);
-                break;
-            case 15:
-                isTutorialBegin = false;
-                isTutoDone = true;
-                tutoWordManager.SetActive(false);
-                break;
+                    break;
+                case 14:
+                    secondPartIsDone = true;
+                    //InitTutorial.Instance.orderText.text = "";
+                    InitTutorial.Instance.orderText.text =  "Bravo ! \n Vous serez ammené à combiner différents objets pour \n trouver la meilleure solution aux problèmes rencontrés.";
+                    Projection.Instance.enableTransition = true;
+                    Projection.Instance.transitionValue = 50f;
+                    this.CallWithDelay(ResetString, 17f);
+                    this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 10f);
+                    UpdateIndication(2);
+                    Progress(15);
+                    break;
+                case 15:
+                    isTutorialBegin = false;
+                    isTutoDone = true;
+                    tutoWordManager.SetActive(false);
+                    break;
+            }
         }
     }
 

@@ -107,6 +107,7 @@ public class Reveal : MonoBehaviour
         text.text = string.Empty;
         isActive = false;
         transform.SetParent(pullingStock);
+        transform.position = Vector3.zero;
     }
 
 
