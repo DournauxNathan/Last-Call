@@ -158,7 +158,7 @@ public class TutoManager : Singleton<TutoManager>
                     firstPartIsDone = true;
                     Projection.Instance.transitionValue = 50f;
                     InitTutorial.Instance.orderText.text = "";
-                    UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour continuer");
+                    InitTutorial.Instance.orderText.text = "Maintenez [B] ou [Y] pour continuer";
                 }
                 firstPartIsDone = true;
                 Projection.Instance.transitionValue = 50f;

@@ -18,6 +18,7 @@ public enum Phases
 
 public class MasterManager : Singleton<MasterManager>
 {
+    public bool unpauseAdio;
     public Phases currentPhase;
 
     [Header("Refs")]
@@ -67,6 +68,13 @@ public class MasterManager : Singleton<MasterManager>
         {
             WordManager.Instance.isProtocolComplete = true;
         }
+
+        if (unpauseAdio)
+        {
+            unpauseAdio = !unpauseAdio;
+            MasterManager.Instance.references.mainAudioSource.UnPause();
+        }
+
     }
 
     public void FixedUpdate()
