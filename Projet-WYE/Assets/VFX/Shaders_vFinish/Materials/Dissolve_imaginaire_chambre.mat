@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2796077252427792259
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,14 +20,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PhotoFrame_001
-  m_Shader: {fileID: -6465566751694194690, guid: 8c262c007d3e03047a0514f20558349b, type: 3}
+  m_Name: Dissolve_imaginaire_chambre
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -59,6 +73,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6ab69aa412914633a4b62a0f2c25332f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: dd2f4f6513f6c4543bddd3b2ee7b057d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_85f3220c82ed41d485aa7d99d1942f8f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 6c571ed7f46ffcb41bbc13fee240d34c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_92d3a9f4043a44418a545e6ce23c2c9c_Texture_1:
         m_Texture: {fileID: 2800000, guid: dd2f4f6513f6c4543bddd3b2ee7b057d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -89,8 +111,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
+    - _BakeIntensity: 0
     - _Blend: 0
-    - _BumpScale: 1
+    - _BumpScale: 0.5
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -107,7 +130,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineWidth: 0.01
-    - _Parallax: 0.005
+    - _Parallax: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -120,23 +143,10 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorA: {r: 0, g: 0.41599986, b: 1, a: 0}
-    - _ColorB: {r: 0.57547164, g: 0.25190452, b: 0.25190452, a: 1}
+    - _ColorA: {r: 0.20679957, g: 0.41098183, b: 0.6981132, a: 0}
+    - _ColorB: {r: 1, g: 0, b: 0, a: 0}
     - _DissolveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PlayerPos: {r: -5.735, g: 0.994, b: 1.976, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayerPos: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7050263785461901691
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4
