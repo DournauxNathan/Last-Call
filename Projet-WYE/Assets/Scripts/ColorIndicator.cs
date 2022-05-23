@@ -30,7 +30,10 @@ public class ColorIndicator : Singleton<ColorIndicator>
 
     private void LateUpdate()
     {
-        Highlight();
+        if (indicateButton)
+        {
+            Highlight();
+        }
         /*if (indicateButton)
         {
             Highlight();

@@ -93,8 +93,10 @@ public class WordData : MonoBehaviour
     public void Deactivate()
     {
         text.text = string.Empty;
-        //isActive = false;
+        
+        isActive = false;
         transform.SetParent(pullingStock);
+        transform.position = Vector3.zero;
     }
 
     public void SubmitAnswer()
@@ -113,8 +115,6 @@ public class WordData : MonoBehaviour
 
             Debug.Log("Give penalty");
         }
-
-
     }
 
     public void SimulateInput(bool value)

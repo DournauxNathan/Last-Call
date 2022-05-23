@@ -141,12 +141,10 @@ public class ShakeWord : MonoBehaviour
         m_animator.SetBool("Bool", false);
         image.color = validateColor;
         isDecaying = true;
+        submitWord?.Invoke();
         StartFadeOut(alpha);
     }
 
-    public void Debuggg()
-    {
-    }
 
     private void SendToSaveFile()
     {
