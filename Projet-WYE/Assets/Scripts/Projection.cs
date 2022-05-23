@@ -246,10 +246,8 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        Debug.Log("3 bye");
-        if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase == Phases.Phase_1 && TutoManager.Instance.isTutoDone)
+        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 || TutoManager.Instance.isTutoDone))
         {
-            Debug.Log("4 bye");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
@@ -257,14 +255,15 @@ public class Projection : Singleton<Projection>
             switch (ScenarioManager.Instance.currentScenario)
             {
                 case Scenario.TrappedMan:
+                    Debug.Log("TP");
                     MasterManager.Instance.ChangeSceneByName(2, "Gameplay_Combination_Iteration");
                     break;
                 case Scenario.HomeInvasion:
-
+                    Debug.Log("HI");
                     MasterManager.Instance.ChangeSceneByName(2, "HomeInvasion"); 
                     break;
                 case Scenario.RisingWater:
-
+                    Debug.Log("RW");
                     MasterManager.Instance.ChangeSceneByName(2, "RisingWater");
                     break;
             }

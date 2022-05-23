@@ -4243,7 +4243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2850958842694615275, guid: f6ac42cbecca1864ba7bfe395823ee4d, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2850958842694615275, guid: f6ac42cbecca1864ba7bfe395823ee4d, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -23818,21 +23818,12 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2118489135}
-        m_TargetAssemblyTypeName: SoundInteraction, Assembly-CSharp
-        m_MethodName: CallSound
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 8fbd2ece3107f4c49b2f735433910920, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
+      m_Calls: []
+  m_Activated:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2118489135}
         m_TargetAssemblyTypeName: SoundInteraction, Assembly-CSharp
@@ -23846,9 +23837,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_Activated:
-    m_PersistentCalls:
-      m_Calls: []
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -26945,6 +26933,9 @@ MonoBehaviour:
   isActive: 0
   m_Collider: {fileID: 8105025319860366530}
   particle: {fileID: 0}
+  doAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8105025320855507557
 Transform:
   m_ObjectHideFlags: 0
