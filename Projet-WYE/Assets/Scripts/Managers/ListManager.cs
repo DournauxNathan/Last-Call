@@ -51,6 +51,7 @@ public class ListManager : Singleton<ListManager>
             {
                 lockedInteractors[i].GetComponent<CombinableObject>().Lock(false);
             }
+
             lockedInteractors.Clear();
         }
     }

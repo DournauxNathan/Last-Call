@@ -7,12 +7,19 @@ public class SmoothLerp : MonoBehaviour
     public Transform target;
     public Transform lookAt;
 
-    public float time;
+    public float speed = 2.0f;
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Slerp(transform.position, target.position, time);
-        //transform.LookAt(target);
+        float interpolation = speed * Time.deltaTime;
+
+        Vector3 position = transform.position;
+        position.y = Mathf.Lerp(transform.position.y, target.position.y, interpolation);
+        position.x = Mathf.Lerp(transform.position.x, target.position.x, interpolation);
+
+        transform.position = position;
+
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, interpolation);
     }
 }

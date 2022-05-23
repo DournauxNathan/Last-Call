@@ -7,7 +7,7 @@ using System;
 
 public class TutoManager : Singleton<TutoManager>
 {
-    [SerializeField] private int progression = 0;
+    [SerializeField] private int progression = -5;
 
     public GameObject tutoWordManager;
     public bool isTutorialBegin;
@@ -29,12 +29,15 @@ public class TutoManager : Singleton<TutoManager>
 
     private void Awake()
     {
-        isTutorialBegin = true;
+        if (SceneLoader.Instance.nameScene == "TutoScene")
+        {
+            isTutorialBegin = true;
+        }
 
         if (isTutorialBegin && MasterManager.Instance.currentPhase == Phases.Phase_0)
         {
-            tutoWordManager.SetActive(true);
             Projection.Instance.transitionValue = 0f;
+            this.CallWithDelay(() => Progress(-5), 8f);
         }
     }
 
@@ -82,12 +85,56 @@ public class TutoManager : Singleton<TutoManager>
         updateTutoriel = true;
     }
 
+
+    public bool gribWasPressed, triggerWasPressed, primaryWasPressed, secondaryWasPressed;
     public void UpdateTutorial()
     {
         switch (progression)
         {
+            case -5:
+                this.CallWithDelay(() => Progress(-4), 2f);                
+                break;
+            case -4:
+                if (!gribWasPressed)
+                {
+                    InitTutorial.Instance.order.SetActive(true);
+                    UpdateIndication(3);
+                    InitTutorial.Instance.orderText.text = "Appuyez sur la gachette [majeur]";
+                }
+                break;
+            case -3:
+                if (!triggerWasPressed)
+                {
+                    UpdateIndication(4);
+                    gribWasPressed = true;
+                    InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur la gachette [index]";
+                }
+                break;
+            case -2:
+                if (!primaryWasPressed)
+                {
+                    UpdateIndication(1);
+                    triggerWasPressed = true;
+                    InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [A] ou [X]";
+                }
+                break;
+            case -1:
+                if (!secondaryWasPressed)
+                {
+                    UpdateIndication(2);
+                    primaryWasPressed = true;
+                    InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [B] ou [Y]";
+                }
+                break;
+            case 0:
+                secondaryWasPressed = true;
+                Progress(1);
+                InitTutorial.Instance.orderText.text = "";
+                break;
             case 1:
+                tutoWordManager.SetActive(true);
                 InitTutorial.Instance.grab.SetActive(true);
+                UpdateIndication(3);
                 break;
             case 2:
                 InitTutorial.Instance.grabText.text = "Relâchez la gâchette pour lâcher l'objet";
@@ -96,7 +143,8 @@ public class TutoManager : Singleton<TutoManager>
             case 3:
                 InitTutorial.Instance.grabText.color = new Color(0, 226, 255);
                 InitTutorial.Instance.grabText.text = "Bravo !";
-                Progress(4);
+
+                this.CallWithDelay(() => Progress(4), 12f);
                 break;
 
             case 4:
@@ -119,7 +167,7 @@ public class TutoManager : Singleton<TutoManager>
                 else
                 {
                     UpdateIndication(1);
-                    InitTutorial.Instance.pointAndClickText.text = "Si un contour apparaît vous pouvez \n appuyer sur [A] ou [X] pour le sélectionner";
+                    InitTutorial.Instance.pointAndClickText.text = "Si un contour apparaît vous pouvez \n appuyer sur la gachêtte [index] pour le sélectionner";
                 }
                 break;
 
