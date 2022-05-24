@@ -30,7 +30,7 @@ public class CombinableObject : CombinableObject_Data
         if (other.CompareTag("Hand"))
         {
             Debug.Log(other.tag + "/n" + "Disable hand colliDer");
-            other.GetComponent<MeshCollider>().enabled = false;
+            //other.GetComponent<MeshCollider>().enabled = false;
         }
     }
 
