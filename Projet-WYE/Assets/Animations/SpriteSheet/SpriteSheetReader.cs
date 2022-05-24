@@ -17,8 +17,13 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
     public Sprite[] memo4;
     public Sprite[] memo5;
 
+    public void CallPlaySouvenirs()
+    {
+        this.CallWithDelay(PlaySouvenirs, 0.1f);
+    }
+
     // Update is called once per frame
-    void FixedUpdate()
+    void PlaySouvenirs()
     {
         switch (memoIndex)
         {
@@ -53,5 +58,10 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
                 }
                 break;
         }
+    }
+
+    public void UpdateMemoIndex(int value)
+    {
+        memoIndex = value;
     }
 }
