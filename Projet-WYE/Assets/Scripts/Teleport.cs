@@ -13,6 +13,7 @@ public class Teleport : Singleton<Teleport>
     [SerializeField] private CapsuleCollider m_Collider;
     [SerializeField] private GameObject particle;
 
+    public bool callEventAtStart;
     public UnityEvent doAction;
 
     private void Start()
@@ -24,7 +25,17 @@ public class Teleport : Singleton<Teleport>
             GetComponentInChildren<Renderer>().enabled = isActive;
         }
         
-        if (teleportAtStart)
+        if (teleportAtStart && callEventAtStart)
+        {
+            doAction?.Invoke();
+
+            MasterManager.Instance.references.player.transform.position = position.position;
+            if (particle != null)
+            {
+                particle.SetActive(false);
+            }
+        }
+        else if (teleportAtStart)
         {
             MasterManager.Instance.references.player.transform.position = position.position;
             if (particle != null)

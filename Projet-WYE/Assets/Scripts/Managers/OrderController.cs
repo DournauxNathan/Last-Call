@@ -67,10 +67,11 @@ public class OrderController : Singleton<OrderController>
 
             MasterManager.Instance.isInImaginary = false;
             Projection.Instance.transitionValue = 50f;
-            Projection.Instance.enableTransition = true;
+            //Projection.Instance.enableTransition = true;
             Projection.Instance.goBackInOffice = true;
             SetResolve(true);
-            MasterManager.Instance.currentPhase = Phases.Phase_3;
+
+            Projection.Instance.CallSequenceScene();
         }
         else
         {
