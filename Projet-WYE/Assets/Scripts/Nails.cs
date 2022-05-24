@@ -32,12 +32,18 @@ public class Nails : MonoBehaviour
             count = 2;
             socket.transform.position = t2.position;
             done?.Invoke();
+
+            GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
         }
     }
 
     public void SetSocket(bool value)
     {
         socket.enabled = value;
+    }
+
+    public void GetSocket()
+    {
     }
 
 }
