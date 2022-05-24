@@ -8,6 +8,23 @@ public class AnswerManager : Singleton<AnswerManager>
     public List<GameObject> adress;
     public List<Situation> situations;
 
+    [HideInInspector] public bool ageIsAnswered;
+    [HideInInspector] public bool adressIsAnswer;
+    [HideInInspector] public bool situationIsAnswer;
+
+    public void DisableGOIn(List<GameObject> t)
+    {
+        foreach (var item in t)
+        {
+            item.GetComponent<WordData>().Deactivate();
+        }
+        /*
+        for (int i = 0; i < t.Count; i++)
+        {
+            t[i].SetActive(false);
+            //t[i].GetComponent<WordData>().Deactivate();
+        }*/
+    }
 }
 
 [System.Serializable]

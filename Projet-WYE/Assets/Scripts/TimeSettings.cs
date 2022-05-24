@@ -9,12 +9,17 @@ public class TimeSettings : Singleton<TimeSettings>
 
     public bool isRunning;
 
+    public bool runAtStart;
+
+    bool doOnce = true;
+    bool doOnceB = true;
     private void Start()
     {
-        timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
-        StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));
-        
-
+        if (runAtStart)
+        {
+            timeBeforeCall = ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall;
+            StartCoroutine(DecreaseTime(ScenarioManager.Instance.currentScenarioData.callSettings.timeBeforeCall));
+        }
     }
 
     public void Initialize()
@@ -54,33 +59,65 @@ public class TimeSettings : Singleton<TimeSettings>
             globalTimer += Time.deltaTime;
 
             if (globalTimer >= ScenarioManager.Instance.currentScenarioData.ageBegin
-                && globalTimer < ScenarioManager.Instance.currentScenarioData.adressBegin)
+                && globalTimer < ScenarioManager.Instance.currentScenarioData.adressBegin
+                && !AnswerManager.Instance.ageIsAnswered)
             {
+                Debug.Log("Pause audio A");
+                this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 3.2f);
                 foreach (var item in AnswerManager.Instance.age)
                 {
-                    item.SetActive(true);
+                    this.CallWithDelay(() => item.SetActive(true), 3.4f);
                 }
+                MasterManager.Instance.references.mainAudioSource.UnPause();
             }
             if (globalTimer >= ScenarioManager.Instance.currentScenarioData.adressBegin
-                && globalTimer < ScenarioManager.Instance.currentScenarioData.situationBegin)
+                && globalTimer < ScenarioManager.Instance.currentScenarioData.situationBegin
+                && !AnswerManager.Instance.adressIsAnswer && AnswerManager.Instance.ageIsAnswered)
             {
-                foreach (var item in AnswerManager.Instance.adress)
+                Debug.Log("Pause audio B");
+                if (doOnceB)
                 {
-                    item.SetActive(true);
+                    this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 5.4f);
+                    doOnceB = !doOnceB;
+                    foreach (var item in AnswerManager.Instance.adress)
+                    {
+                        this.CallWithDelay(() => item.SetActive(true), 5.6f);
+                    }
+                    MasterManager.Instance.references.mainAudioSource.UnPause();
                 }
             }
-            if (globalTimer > ScenarioManager.Instance.currentScenarioData.situationBegin)
+            if (globalTimer > ScenarioManager.Instance.currentScenarioData.situationBegin
+                && !AnswerManager.Instance.situationIsAnswer && AnswerManager.Instance.adressIsAnswer && AnswerManager.Instance.ageIsAnswered)
             {
-                foreach (var item in AnswerManager.Instance.situations)
+                Debug.Log("Pause audio C");
+
+                if (doOnce)
                 {
-                    for (int i = 0; i < item.canvas.Count; i++)
+                    doOnce = !doOnce;
+
+                    foreach (var item in AnswerManager.Instance.situations)
                     {
-                        item.canvas[i].SetActive(true);
+                        this.CallWithDelay(() => {
+                            for (int i = 0; i < item.canvas.Count; i++)
+                            {
+                                item.canvas[i].SetActive(true);
+                                //MasterManager.Instance.references.mainAudioSource.UnPause();
+                            }
+                        }, 40f);
                     }
+                    MasterManager.Instance.references.mainAudioSource.UnPause();
+                    //this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 2f);
                 }
+
+            }
+            if (globalTimer >= 100f)
+            {
+                StopCoroutine(IncreaseTime());
+                TutoManager.Instance.UpdateIndication(2);
             }
 
             yield return null;
+
         }
     }
 

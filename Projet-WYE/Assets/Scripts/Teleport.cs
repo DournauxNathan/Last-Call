@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Teleport : Singleton<Teleport>
 {
@@ -10,6 +11,9 @@ public class Teleport : Singleton<Teleport>
     [SerializeField] private bool isActive;
 
     [SerializeField] private CapsuleCollider m_Collider;
+    [SerializeField] private GameObject particle;
+
+    public UnityEvent doAction;
 
     private void Start()
     {
@@ -23,8 +27,13 @@ public class Teleport : Singleton<Teleport>
         if (teleportAtStart)
         {
             MasterManager.Instance.references.player.transform.position = position.position;
+            if (particle != null)
+            {
+                particle.SetActive(false);
+            }
         }
     }
+
     private void Update()
     {
         if (MasterManager.Instance.references.player.transform.position != position.position && MasterManager.Instance.references.player.transform != null)
@@ -34,6 +43,10 @@ public class Teleport : Singleton<Teleport>
             if (GetComponentInChildren<Renderer>() != null)
             {
                 GetComponentInChildren<Renderer>().enabled = true;
+                if (particle != null)
+                {
+                    particle.SetActive(true);
+                }
             }
         }
     }
@@ -42,12 +55,18 @@ public class Teleport : Singleton<Teleport>
     {
         MasterManager.Instance.references.player.GetComponent<VignetteApplier>().FadeIn();
         MasterManager.Instance.references.player.transform.position = position.position;
-        
+
+        doAction?.Invoke();
+
         m_Collider.isTrigger = true;
 
         if (GetComponentInChildren<Renderer>() != null)
         {
             GetComponentInChildren<Renderer>().enabled = false;
+            if (particle != null)
+            {
+                particle.SetActive(false);
+            }
         }
     }
 }

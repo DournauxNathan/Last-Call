@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
@@ -28,11 +29,6 @@ public class WordData : MonoBehaviour
 
             GetComponent<ShakeWord>().isDecaying = true;
         }
-        if (SherlockEffect.Instance.offsets.Count > 0) // Check if the list is empty
-        {
-            SherlockEffect.Instance.CheckOffset(transform);
-        }
-
     }
 
     public Answer GetAnswer()
@@ -53,10 +49,15 @@ public class WordData : MonoBehaviour
         
         UpdateText(i);
 
+        //GetComponent<ShakeWord>().submitWord.AddListener(UnpauseAudio);
+
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
         GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
+    }
 
-        SherlockEffect.Instance.AddOffset(transform);
+    public void UnpauseAudio()
+    {
+        MasterManager.Instance.references.mainAudioSource.UnPause();
     }
 
     public void Activate(Transform parent, Transform stock,string i)
@@ -92,22 +93,25 @@ public class WordData : MonoBehaviour
     public void Deactivate()
     {
         text.text = string.Empty;
+        
         isActive = false;
         transform.SetParent(pullingStock);
+        transform.position = Vector3.zero;
     }
 
     public void SubmitAnswer()
     {
-
-        WordManager.Instance.DisableAnswers(answer.type, answer.id);
-
         if (isCorrectAnswer)
         {
             UIManager.Instance.UpdateForm(answer.type, text.text);
+            //UnpauseAudio();
+            WordManager.Instance.DisableAnswers(answer.type, answer.id);
         }
         else
         {
             UIManager.Instance.UpdateForm(answer.type, text.text);
+            //UnpauseAudio();
+            WordManager.Instance.DisableAnswers(answer.type, answer.id);
 
             Debug.Log("Give penalty");
         }

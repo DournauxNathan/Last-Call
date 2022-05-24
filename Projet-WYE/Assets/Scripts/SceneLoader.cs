@@ -17,6 +17,14 @@ public class SceneLoader : Singleton<SceneLoader>
     private void Start()
     {
         SceneManager.sceneLoaded += SetActiveScene;
+#if UNITY_EDITOR
+        this.CallWithDelay(LoadNewSceneEditorOnly, .2f);
+#endif
+    }
+
+    public void LoadNewSceneEditorOnly()
+    {
+        LoadNewScene(nameScene);
     }
 
     private void OnDestroy()
@@ -29,6 +37,23 @@ public class SceneLoader : Singleton<SceneLoader>
         if (!isLoading)
         {
             StartCoroutine(LoadScene(sceneName));
+        }
+    }
+
+    public void AddNewScene(string sceneName)
+    {
+        if (!isLoading)
+        {
+            StartCoroutine(AddScene(sceneName));
+            Projection.Instance.isTransition = false;
+        }
+    }
+
+    public void Unload(string sceneName)
+    {
+        if (!isLoading)
+        {
+            StartCoroutine(UnloadScene(sceneName));
         }
     }
 
@@ -52,7 +77,7 @@ public class SceneLoader : Singleton<SceneLoader>
         }
 
         yield return StartCoroutine(LoadNew(sceneName));
-
+        Projection.Instance.isTransition = false;
         //  yield return screenFader.StartFadeOut();
         OnLoadEnd?.Invoke();
 
@@ -79,6 +104,26 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return null;
         }
 
+    }
+
+    private IEnumerator AddScene(string sceneName)
+    {
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        while (!loadOperation.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    private IEnumerator UnloadScene(string sceneName)
+    {
+        AsyncOperation loadOperation = SceneManager.UnloadSceneAsync(sceneName);
+
+        while (!loadOperation.isDone)
+        {
+            yield return null;
+        }
     }
 
     private void SetActiveScene(Scene scene, LoadSceneMode mode)

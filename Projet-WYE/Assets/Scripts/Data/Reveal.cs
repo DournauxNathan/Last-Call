@@ -15,6 +15,7 @@ public class Reveal : MonoBehaviour
     private bool isCorrectAnswer;
 
     private Question question;
+    public Question _question;
     public int atIndex;
 
     private bool isActive;
@@ -26,7 +27,17 @@ public class Reveal : MonoBehaviour
     private QuestionData currentQuestion => question.questions[atIndex];
 
     public bool simulateInput;
+    private bool isReveal;
 
+    public void Start()
+    {
+        if (_question != null)
+        {
+            question = _question;
+            UpdateText(_question.questions[0].question);
+        }
+    }
+    
     private void Update()
     {
         if (simulateInput)
@@ -91,20 +102,54 @@ public class Reveal : MonoBehaviour
         StartCoroutine(Show());
     }
 
+    public void Deactivate()
+    {
+        text.text = string.Empty;
+        isActive = false;
+        transform.SetParent(pullingStock);
+        transform.position = Vector3.zero;
+    }
+
+
+    public void DisplayQuestions()
+    {
+        foreach (var item in WordManager.Instance.questionsGo)
+        {
+            item.SetActive(true);
+        }
+    }
+
+
     public IEnumerator Show()
     {
         while (true)
         {
             amount += Time.deltaTime * Projection.Instance.time;
 
-            foreach (var item in question.questions[atIndex].linkObjects)
+            if (_question == null)
             {
-                item.SetFloat("_Dissolve", amount);
+                foreach (var item in question.questions[atIndex].linkObjects)
+                {
+                    item.SetFloat("_Dissolve", amount);
+                }
+            }
+            else
+            {
+                foreach (var item in _question.questions[atIndex].linkObjects)
+                {
+                    item.SetFloat("_Dissolve", amount);
+                }
             }
 
-            if (amount > 30f)
+
+            if (amount > 50f)
             {
-                amount = 30f;
+                amount = 50f;
+
+                if (MasterManager.Instance.currentPhase == Phases.Phase_0)
+                {
+                    isReveal = true;
+                }
 
                 StopAllCoroutines();
 

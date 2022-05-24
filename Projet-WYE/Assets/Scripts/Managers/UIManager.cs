@@ -12,8 +12,8 @@ public class UIManager : Singleton<UIManager>
     public CanvasGroup[] _canvasGroup;
 
     [Header("Incoming & Outcoming call")]
-    public GameObject incomingAsset;
-    public GameObject outcomingAsset;
+    public Image incomingAsset;
+    public Image outcomingAsset;
 
     [Header("Emergency Reports Form")]
     public Form currentForm;
@@ -29,6 +29,21 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] bool leadingCharBeforeDelay = false;
 
     public ParticleSystem smoke;
+
+    private void Start()
+    {
+        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+
+            InComingCall(false);
+            OutComingCall(true);
+        }
+        else if (MasterManager.Instance.currentPhase == Phases.Phase_1)
+        {
+            InComingCall(true);
+            OutComingCall(false);
+        }
+    }
 
     public void UpdateForm(FormData _answerType, string data)
     {
@@ -62,14 +77,32 @@ public class UIManager : Singleton<UIManager>
             && currentForm.adressField.text != string.Empty && currentForm.situationField.text != string.Empty
             && currentForm.unitField.text != string.Empty)
         {
-            SetFormToComplete();
+            SetFormToComplete(true);
         }
     }
-    public void SetFormToComplete()
+
+    public void SetFormToComplete(bool value)
     {
-        currentForm.isComplete = true;
-        currentForm.stamp.enabled = true;
+        currentForm.isComplete = value;
+
+        if (currentForm.isComplete)
+        {
+            currentForm.stamp.enabled = true;
+
+            ScenarioManager.Instance.endingValue += 1;
+        }
+        else if (!currentForm.isComplete)
+        {
+            ScenarioManager.Instance.endingValue += -1;
+        }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            WordManager.Instance.transform.GetChild(i).GetComponent<WordData>().Deactivate();
+        }
+
     }
+
     public void Fade(Fadetype type)
     {
         switch (type)
@@ -164,14 +197,18 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
     }
+
     public void InComingCall(bool isActive)
     {
-        incomingAsset.SetActive(isActive);
+        incomingAsset.enabled = isActive;
     }
+
     public void OutComingCall(bool isActive)
     {
-        outcomingAsset.SetActive(isActive);
+       
+        outcomingAsset.enabled = isActive;
     }
+
     IEnumerator TypeWriterTMP(TMP_Text _tmpProText, string _writer)
     {
         _tmpProText.text += leadingCharBeforeDelay ? leadingChar : " ";

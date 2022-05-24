@@ -15,6 +15,8 @@ public class CombinableObject : CombinableObject_Data
     {
         GetComponent();
         SetOutline();
+
+        //ToggleInteractor(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,12 +60,14 @@ public class CombinableObject : CombinableObject_Data
         if (MasterManager.Instance.isInImaginary && b)
         {
             isLocked = true;
+            onLock?.Invoke();
 
             outline.OutlineColor = selectOutline.color;
         }
         else if (MasterManager.Instance.isInImaginary && !b)
         {
             isLocked = false;
+            onUnlock?.Invoke();
 
             outline.OutlineColor = defaultOutlineColor;
 
@@ -71,8 +75,15 @@ public class CombinableObject : CombinableObject_Data
         }
     }
 
-    public void SendOutcome()
+    public void ToggleInteractor(bool value)
     {
-        OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup XrGrabComponent))
+        {
+            XrGrabComponent.enabled = value;
+        }
+        else if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup XrSimpleComponent))
+        {
+            XrSimpleComponent.enabled = value;
+        }
     }
 }

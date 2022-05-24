@@ -20,8 +20,8 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public ScenarioData currentScenarioData;
 
     public bool isScenarioLoaded = false;
-    [Range(-10, 10)]
-    public float endingValue = 0f;
+    [Range(-20, 20)]
+    public int endingValue = 0;
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
@@ -88,7 +88,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
 
     public void UpdateEndingsValue(int modifier)
     {
-        endingValue += (float)modifier;
+        endingValue += modifier;
     }
 
     public Scenario GetCurrentScenario()
@@ -100,7 +100,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public void UpdateScenario(int i)
     {
         currentIndexScenario+=i;
-        Debug.Log(currentIndexScenario);
+        //Debug.Log(currentIndexScenario);
 
         switch (currentIndexScenario)
         {

@@ -18,9 +18,11 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     private void Awake()
     {
-        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
-            AutoEquipHeadPhone();
+            headPhone.GetComponent<Rigidbody>().isKinematic = true;
+            EquipHeadPhone();
         }
     }
 
@@ -46,27 +48,23 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         if (equip)
         {
             equip = !equip;
-            EquipHeadPhone();
+            Equip(true); 
         }
     }
 
     public void AutoEquipHeadPhone()
     {
-        if (!isOnHead && headPhone != null && MasterManager.Instance.currentPhase == Phases.Phase_3)
-        {
-            equip = !equip;
-        }
     }
 
     public void EquipHeadPhone()
     {
-        isOnHead = true;
-        headPhone.isOnHead = isOnHead;
         headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas très propre
-        
-        //headPhone.onHead?.Invoke();
+
+        //headPhone.GetComponent<Rigidbody>().isKinematic = false;
     }
 
+    public void SetEquip(bool value) { equip = value; }
+    public void Press(bool value) { press = value; }
 
     public void Equip(bool value)
     {
@@ -74,17 +72,20 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (value && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
+            EquipHeadPhone();
             headPhone.onHead?.Invoke();
         }
 
         if (!value && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
+            Debug.Log("Headset off");
             this.CallWithDelay(OffHead, 15);
         }
     }
 
     public void OffHead()
     {
-        MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day1");
+        Debug.Log("Loading");
+        AppartManager.Instance.LoadAppartOnScenarioEnd();
     }
 }

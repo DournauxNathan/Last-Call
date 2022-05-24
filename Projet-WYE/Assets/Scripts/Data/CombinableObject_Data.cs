@@ -13,7 +13,8 @@ public class CombinableObject_Data : MonoBehaviour
     public int iD;
     public StateMobility state;
     private int nCombinaison;
-    public CombineWith[] useWith; 
+    public CombineWith[] useWith;
+    public UnityEvent onLock, onUnlock;
 
     [Header("Refs")]
     private MeshFilter m_MeshFilter;
@@ -185,6 +186,10 @@ public class CombinableObject_Data : MonoBehaviour
         }
     }
 
+    public void SendOutcome()
+    {
+        OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+    }
 }
 
 [System.Serializable]

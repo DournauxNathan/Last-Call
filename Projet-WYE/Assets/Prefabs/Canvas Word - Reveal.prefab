@@ -175,6 +175,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TutoManager, Assembly-CSharp
+        m_MethodName: UpdateIndication
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
@@ -201,6 +213,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TutoManager, Assembly-CSharp
+        m_MethodName: UpdateIndication
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -319,17 +343,29 @@ MonoBehaviour:
   image: {fileID: 2905638359131209364}
   delayBeforAnim: 0.09
   animationSpeed: 0.1
-  outlineColor: {r: 0, g: 0, b: 0, a: 0}
+  outlineColor: {r: 0, g: 0.89716387, b: 1, a: 1}
   outlineWidth: 0.135
-  validateColor: {r: 0, g: 0, b: 0, a: 0}
+  validateColor: {r: 0, g: 0.88751316, b: 1, a: 1}
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  hoverColor: {r: 0, g: 0.8637595, b: 1, a: 1}
+  hoverColor: {r: 0.08550537, g: 1, b: 0, a: 1}
   submitWord:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8096457024151488819}
         m_TargetAssemblyTypeName: Reveal, Assembly-CSharp
         m_MethodName: SubmitAnswer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8096457024151488819}
+        m_TargetAssemblyTypeName: Reveal, Assembly-CSharp
+        m_MethodName: Deactivate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -355,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 5700561054558308680}
   amount: 0
+  _question: {fileID: 0}
   atIndex: 0
   simulateInput: 0
 --- !u!225 &1072962571

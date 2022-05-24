@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEditor;
+#if UNITY_EDITOR
+using UnityEditor.Events;
+#endif
+using System.Linq;
 
 public class WordManager : Singleton<WordManager>
 {
-    public SphereCollider spawner;
     public Transform getTransfrom;
-    public Transform stockA, stockB;
+    public Transform stockA, stockB, stockEntry;
 
-    [HideInInspector] public List<Answer> answers;
-    [HideInInspector] public List<Question> questions;
+    public List<Answer> answers;
+    public List<Question> questions;
+    public Reveal entry;
 
     public List<WordData> canvasWithWordData;
     public List<Reveal> canvasWithQuestionData;
@@ -18,11 +24,16 @@ public class WordManager : Singleton<WordManager>
 
     bool displayAdress = true;
     FormData answerType;
+
+    public List<GameObject> questionsGo;
+
+    public bool pullOrders;
+
     private void Update()
     {
         if (isProtocolComplete && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            ProtocolComplete();
+            UIManager.Instance.SetFormToComplete(true);
         }
     }
 
@@ -40,7 +51,6 @@ public class WordManager : Singleton<WordManager>
                     var item = FindAvailableWordData();
                     //if true, Activate Canvas Word and Set his text with the current propo
                     item.Activate(transform, stockA, answer.keywords[i].isCorrectAnswer, answer.keywords[i].proposition, answer);
-
                     switch (item.GetAnswer().type)
                     {
                         case FormData.age:
@@ -66,7 +76,6 @@ public class WordManager : Singleton<WordManager>
                     getTransfrom.GetChild(i).gameObject.SetActive(false);
                 }
             }
-
         }
 
         if (MasterManager.Instance.currentPhase == Phases.Phase_2 && MasterManager.Instance.isInImaginary)
@@ -80,6 +89,8 @@ public class WordManager : Singleton<WordManager>
                     var item = FindAvailableReveal();
                     //if true, Activate Canvas Word and Set his text with the current propo
                     item.Activate(transform, stockB, question, question.questions[i].question, i);
+
+                    questionsGo.Add(item.gameObject);
                 }
 
                 for (int i = 0; i < getTransfrom.childCount; i++)
@@ -89,18 +100,15 @@ public class WordManager : Singleton<WordManager>
 
                 if (displayAdress)
                 {
-                    Debug.Log("adress");
-
                     displayAdress = !displayAdress;
-                    var item = FindAvailableReveal();
-                    item.Activate(transform, stockA, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
+                    var item = Entry();
+                    item.Activate(transform, stockEntry, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
+
                 }
-
             }
-
         }
 
-        if (MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
+        if (pullOrders || MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
         {
             foreach (Order currentOrder in OrderController.Instance.ordersStrings)
             {
@@ -114,13 +122,6 @@ public class WordManager : Singleton<WordManager>
         }
     }
 
-    public void ProtocolComplete()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).GetComponent<WordData>().Deactivate();
-        }
-    }
 
     public WordData FindAvailableWordData()
     {
@@ -132,6 +133,8 @@ public class WordManager : Singleton<WordManager>
                 return item;
             }
         }
+
+        Debug.Log("there is not enougth canvas available");
         return null;
     }
 
@@ -148,22 +151,23 @@ public class WordManager : Singleton<WordManager>
         return null;
     }
 
+    public Reveal Entry()
+    {
+        return entry;
+    }
+
     public void DisableAnswers(FormData type, int id)
     {
         switch (type)
         {
             case FormData.age:
-                foreach (var item in AnswerManager.Instance.age)
-                {
-                    item.SetActive(false);
-                }
+                AnswerManager.Instance.ageIsAnswered = true;
+                AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.age);
                 break;
 
             case FormData.adress:
-                foreach (var item in AnswerManager.Instance.adress)
-                {
-                    item.SetActive(false);
-                }
+                AnswerManager.Instance.adressIsAnswer = true;
+                AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.adress);
                 break;
 
             case FormData.situation:
@@ -173,12 +177,13 @@ public class WordManager : Singleton<WordManager>
                     {
                         for (int y = 0; y < AnswerManager.Instance.situations[i].canvas.Count; y++)
                         {
-                            AnswerManager.Instance.situations[i].canvas[y].SetActive(false);
+                            AnswerManager.Instance.DisableGOIn(AnswerManager.Instance.situations[i].canvas);
                         }
                     }
                 }
                 break;
         }
+        
 
     }
 }
