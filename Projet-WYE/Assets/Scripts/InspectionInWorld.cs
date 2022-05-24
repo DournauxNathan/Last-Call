@@ -137,6 +137,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         //Debug.Log(_generateTextCoroutine);
         if(_generateTextCoroutine == null)
         {
+            SpriteSheetReader.Instance.SyncWithWord(delay * _queueString.Count);
             StartCoroutine(ResetGenerateText(_queueString,delay));
             _generateTextCoroutine = StartCoroutine(GenerateText(_queueString, delay, _listIndex, hasRandom));
         }

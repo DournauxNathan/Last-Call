@@ -8,7 +8,7 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
 {
     public Image animatedImageObj;
 
-    public int speed;
+    public float speed;
 
     public int memoIndex;
 
@@ -38,6 +38,7 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
         if(_displaySouvenir == null)
         {
             ActivateImage();
+            speed = speed / memos[memoIndex].Length;
             StartCoroutine(Cooldown(speed,memos[memoIndex]));
             _displaySouvenir = StartCoroutine(Souvenir(speed,memos[memoIndex],memoIndex));
         }
@@ -60,6 +61,10 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
         _displaySouvenir = null; Debug.Log("Cooldown for Souvenir");
     }
 
+    public void SyncWithWord(float delay){
+        speed = delay;
+    }
+
     private void ActivateImage(){
         image.enabled = true;
     }
@@ -72,4 +77,6 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
     {
         memoIndex = value;
     }
+
+    
 }
