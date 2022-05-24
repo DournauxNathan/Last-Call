@@ -32,11 +32,13 @@ public class InspectorData : MonoBehaviour
         {
             testBool = false; hasGenerate = true;
             InSelected();
+            SpriteSheetReader.Instance.CallPlaySouvenirs();
         }
         else if (testBool && hasGenerate)
         {
             testBool = false; hasGenerate = !true;
             DeSelected();
+            SpriteSheetReader.Instance.DeSelected();
         }
     }
 
