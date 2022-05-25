@@ -261,8 +261,8 @@ public class MasterManager : Singleton<MasterManager>
                 this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
-                isInImaginary = false;
-                Projection.Instance.revealScene = true;
+                //isInImaginary = false;
+                //Projection.Instance.revealScene = true;
 
                 WordManager.Instance.PullWord();
                 UIManager.Instance.UpdateUnitManager(4);
