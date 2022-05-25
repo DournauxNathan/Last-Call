@@ -8,7 +8,7 @@ using UnityEngine.Animations;
 public class InspectionInWorld : Singleton<InspectionInWorld>
 {
     [Header("Param")]
-    public Transform _containers;
+    [SerializeField]private Transform _containers;
     public Image _ImgContainer; 
     public List<string> _listString;
     [Range(0.1f, 1f)] public float minRand = 0.3001f;
@@ -37,9 +37,9 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         _listString = new List<string>(); //INIT
         animators = new List<Animator>(); //INIT
         _queueString = new List<string>(); //INIT
-        _ImgContainer.enabled = false; //INIT
+        _ImgContainer.enabled = true; //INIT
         _ImageOffsetDefault = (_ImgContainer.transform as RectTransform).localPosition.y; //INIT
-        //Debug.Log("_ImageOffsetDefault: " + _ImageOffsetDefault);
+        _containers = transform.GetChild(0); //INIT
 
     }
 
@@ -48,8 +48,8 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     {
         if (hascreatedText)
         {
-            CreateNewText(testString);
-            CreateNewText(_listString);
+            //CreateNewText(testString);
+            //CreateNewText(_listString);
 
         }
 
@@ -71,7 +71,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
         }
     }
 //dont use this
-    public void CreateNewText(string _text)
+    /*public void CreateNewText(string _text)
     {
         hascreatedText = false;
         if (_text != string.Empty)
@@ -104,14 +104,16 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
             }
 
         }
-    }
+    }*/
 
     public void CreateNewText(List<string> _listText, float delay, bool hasRandom)
     {
         hascreatedText = false;
-        var _listIndex = new List<int>(new int[] { 1, 4 });
-        _queueString.Clear();
+        var _listIndex = new List<int>(/*new int[] { 1, 4 }*/);
+        _queueString = new List<string>();
+        _queueString.Clear(); // break ?
         _queueString.AddRange(_listText);
+        //Debug.Log("_queueString: " + _queueString.Count);
                 
         switch(_listText.Count) //switch on the number of text
         {
@@ -128,19 +130,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
                 _listIndex = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
                 break;
             default:
-                Debug.Log("Error: Number of text is not correct, please check the number of text in the list");
-                foreach (var text in _listText)
-                {
-                    if (text != string.Empty)
-                    {
-                        Instantiate(textPrefab, _containers);
-                        int _nbchilds = _containers.childCount;
-                        _containers.GetChild(_nbchilds - 1).GetComponentInChildren<TMP_Text>().text = text;
-                        var _tanim = _containers.GetChild(_nbchilds - 1).GetComponentInChildren<Animator>();
-                        _tanim.speed = Random.Range(minRand, maxRand);
-                        animators.Add(_tanim);
-                    }
-                }
+                Debug.LogError("Error: "+ _listText.Count + " texts is not correct, please check the number of text in the list");
                 break;
         }
 
@@ -174,7 +164,7 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     IEnumerator ResetGenerateText(List<string> _listText, float delay){
         var _delay = delay * _listText.Count; //Debug.Log("Delay Reset: " + _delay + " | ListSize: " + _listText.Count+" | Base Delay: " + delay);
         yield return new WaitForSeconds(_delay);
-        _generateTextCoroutine = null; Debug.Log("Reset Avaliable");
+        _generateTextCoroutine = null; Debug.Log("Reset Avaliable for inspection");
     }
 
     private float GetRandom()
@@ -187,31 +177,16 @@ public class InspectionInWorld : Singleton<InspectionInWorld>
     public void ClearAllText()
     {
         clearBool = false;
-        foreach (var animator in animators)
+        if(animators.Count>0)
         {
-            animator.SetTrigger("Disapeared");
+            foreach (var animator in animators)
+            {
+                animator.SetTrigger("Disapeared");
+            }
         }
     }
 
     public void StopGenerating(){
         if(_generateTextCoroutine != null) StopCoroutine(_generateTextCoroutine);
-    }
-
-    public void DisplaySprite(Sprite _sprite, float __offset, float _scale){
-        _ImgContainer.enabled = true;
-        _ImgContainer.rectTransform.localScale = new Vector3(_scale, _scale, _scale);
-        _ImgContainer.rectTransform.localPosition = new Vector3(0, _ImgContainer.rectTransform.position.y +__offset, 0);
-        _ImgContainer.rectTransform.sizeDelta = new Vector2(_sprite.rect.width, _sprite.rect.height);
-        ChangeSprite(_sprite);
-    }
-
-    public void VoidSprite(){
-        
-        if(_ImgContainer.enabled) ChangeSprite(null); _ImgContainer.enabled = false; _ImgContainer.rectTransform.localPosition = new Vector3(0, _ImageOffsetDefault, 0); _ImgContainer.rectTransform.localScale = new Vector3(1f, 1f, 1f);
-    }
-
-    private void ChangeSprite(Sprite _sprite)
-    {
-        _ImgContainer.sprite = _sprite;
     }
 }

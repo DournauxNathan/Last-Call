@@ -14,10 +14,16 @@ public class AnswerManager : Singleton<AnswerManager>
 
     public void DisableGOIn(List<GameObject> t)
     {
+        foreach (var item in t)
+        {
+            item.GetComponent<WordData>().Deactivate();
+        }
+        /*
         for (int i = 0; i < t.Count; i++)
         {
             t[i].SetActive(false);
-        }
+            //t[i].GetComponent<WordData>().Deactivate();
+        }*/
     }
 }
 

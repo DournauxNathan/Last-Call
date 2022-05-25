@@ -107,6 +107,7 @@ public class Reveal : MonoBehaviour
         text.text = string.Empty;
         isActive = false;
         transform.SetParent(pullingStock);
+        transform.position = Vector3.zero;
     }
 
 
@@ -125,14 +126,25 @@ public class Reveal : MonoBehaviour
         {
             amount += Time.deltaTime * Projection.Instance.time;
 
-            foreach (var item in question.questions[atIndex].linkObjects)
+            if (_question == null)
             {
-                item.SetFloat("_Dissolve", amount);
+                foreach (var item in question.questions[atIndex].linkObjects)
+                {
+                    item.SetFloat("_Dissolve", amount);
+                }
+            }
+            else
+            {
+                foreach (var item in _question.questions[atIndex].linkObjects)
+                {
+                    item.SetFloat("_Dissolve", amount);
+                }
             }
 
-            if (amount > 35f)
+
+            if (amount > 50f)
             {
-                amount = 35f;
+                amount = 50f;
 
                 if (MasterManager.Instance.currentPhase == Phases.Phase_0)
                 {
