@@ -77,7 +77,7 @@ public class CombinableObject_Data : MonoBehaviour
                 objectName = entry[5],
                 influence = int.Parse(entry[6]),
                 outcome = entry[7]
-                
+            
             };
         }
         else if (nCombinaison == 2)
@@ -151,10 +151,18 @@ public class CombinableObject_Data : MonoBehaviour
             };
         }
 
+        for (var i = 0; i < useWith.Length; i++)
+        {
+            Debug.Log(useWith[i].objectName+", "+i); //to remove
+            useWith[i].doAction.AddListener(()=>{SendIdWithOutcome(i);});
+        }
+
         LoadFromRessources();
         SetOutline();
         SetCollider();
         InitAudioSource();
+
+
     }
 
     public void InitAudioSource()
@@ -194,6 +202,14 @@ public class CombinableObject_Data : MonoBehaviour
     public void PuzzleDone()
     {
         OrderController.Instance.ResolvePuzzle();
+    }
+    public void SendIdWithOutcome(int indexCombi){
+        if(SilhouetteManager.Instance !=null){
+            SilhouetteManager.Instance.Addoutcome(iD, useWith[indexCombi].outcome);
+        }
+        else{
+            Debug.LogError("SilhouetteManager is null");
+        }
     }
 }
 
