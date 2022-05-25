@@ -7,11 +7,8 @@ using System.Linq;
 public class SpriteSheetReader : Singleton<SpriteSheetReader>
 {
     public Image animatedImageObj;
-
     public float speed;
-
     public int memoIndex;
-
     public Sprite[] memo1;
     public Sprite[] memo2;
     public Sprite[] memo3;
@@ -32,6 +29,7 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
     {
         this.CallWithDelay(DisplaySouvenir, 0.1f);
     }
+    
     void DisplaySouvenir(){
         
         //Debug.Log("DisplaySouvenir: "+_displaySouvenir);
@@ -77,6 +75,4 @@ public class SpriteSheetReader : Singleton<SpriteSheetReader>
     {
         memoIndex = value;
     }
-
-    
 }
