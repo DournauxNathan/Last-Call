@@ -11,8 +11,6 @@ public class SilhouetteManager : Singleton<SilhouetteManager>
     {
         
     }
-
-
     public void AddSilhouette(SilhouetteData data)
     {
         foreach (Silhouette s in silhouettes)
