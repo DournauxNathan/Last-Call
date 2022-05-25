@@ -190,6 +190,18 @@ public class CombinableObject_Data : MonoBehaviour
     {
         OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
     }
+
+    public void SendIdWithOutcome(int indexCombi){
+        if(SilhouetteManager.Instance !=null){
+            SilhouetteManager.Instance.Addoutcome(iD, useWith[indexCombi].outcome);
+        }
+        else{
+            Debug.LogError("SilhouetteManager is null");
+        }
+    }
+
+
+
 }
 
 [System.Serializable]
