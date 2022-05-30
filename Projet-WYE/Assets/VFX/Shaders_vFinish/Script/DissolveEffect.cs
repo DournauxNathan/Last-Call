@@ -100,7 +100,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                     dissolveMaterials[i].SetFloat("_Dissolve", counter);
                 }
 
-                if (dissolveMaterials[0].GetFloat("_Dissolve") <= 5f) // changed to 0.1f from 0f
+                if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
                 {
                     for (int i = 0; i < dissolveMaterials.Length; i++)
                     {
@@ -108,10 +108,10 @@ public class DissolveEffect : Singleton<DissolveEffect>
                         rend.enabled = false;
 
                         TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab);
-                        if(xrGrab != null) xrGrab.enabled = false;
+                        xrGrab.enabled = false;
 
                         TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple);
-                        if(xrSimple != null) xrSimple.enabled = false;
+                        xrSimple.enabled = false;
 
                         //GetComponent<CombinableObject>().ToggleInteractor(false);
                         //gameObject.SetActive(false);

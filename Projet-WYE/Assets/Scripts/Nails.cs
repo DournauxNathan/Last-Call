@@ -29,15 +29,21 @@ public class Nails : MonoBehaviour
         if (count >= 2)
         {
             SetSocket(true);
-            count = 2;
+            count = 3;
             socket.transform.position = t2.position;
             done?.Invoke();
+
+            GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
         }
     }
 
     public void SetSocket(bool value)
     {
         socket.enabled = value;
+    }
+
+    public void GetSocket()
+    {
     }
 
 }

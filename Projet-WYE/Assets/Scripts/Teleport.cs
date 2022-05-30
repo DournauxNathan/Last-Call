@@ -13,30 +13,44 @@ public class Teleport : Singleton<Teleport>
     [SerializeField] private CapsuleCollider m_Collider;
     [SerializeField] private GameObject particle;
 
+    public bool callEventAtStart;
     public UnityEvent doAction;
 
     private void Start()
     {
-        position = this.transform;
-        
-        if (GetComponentInChildren<Renderer>() != null)
+        if (MasterManager.Instance != null)
         {
-            GetComponentInChildren<Renderer>().enabled = isActive;
-        }
-        
-        if (teleportAtStart)
-        {
-            MasterManager.Instance.references.player.transform.position = position.position;
-            if (particle != null)
+            position = this.transform;
+
+            if (GetComponentInChildren<Renderer>() != null)
             {
-                particle.SetActive(false);
+                GetComponentInChildren<Renderer>().enabled = isActive;
+            }
+
+            if (teleportAtStart && callEventAtStart)
+            {
+                doAction?.Invoke();
+
+                MasterManager.Instance.references.player.transform.position = position.position;
+                if (particle != null)
+                {
+                    particle.SetActive(false);
+                }
+            }
+            else if (teleportAtStart)
+            {
+                MasterManager.Instance.references.player.transform.position = position.position;
+                if (particle != null)
+                {
+                    particle.SetActive(false);
+                }
             }
         }
     }
 
     private void Update()
     {
-        if (MasterManager.Instance.references.player.transform.position != position.position && MasterManager.Instance.references.player.transform != null)
+        if (MasterManager.Instance != null && MasterManager.Instance.references.player.transform.position != position.position && MasterManager.Instance.references.player.transform != null)
         {
             m_Collider.isTrigger = false;
             

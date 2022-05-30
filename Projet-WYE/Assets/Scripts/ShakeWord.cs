@@ -95,7 +95,7 @@ public class ShakeWord : MonoBehaviour
             if (uiGroupToFade.alpha == 0)
             {
                 isDecaying = false;
-                submitWord.Invoke();
+                submitWord?.Invoke();
 
                 GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
                 GetComponent<BoxCollider>().enabled = false;
@@ -141,7 +141,7 @@ public class ShakeWord : MonoBehaviour
         m_animator.SetBool("Bool", false);
         image.color = validateColor;
         isDecaying = true;
-        submitWord?.Invoke();
+        //submitWord?.Invoke();
         StartFadeOut(alpha);
     }
 
