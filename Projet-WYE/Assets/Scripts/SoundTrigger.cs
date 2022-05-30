@@ -22,13 +22,13 @@ public class SoundTrigger : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.spatialBlend = 1f;
         audioSource.outputAudioMixerGroup = MasterManager.Instance.references.sfx;
-        DisablingAudioSource();
+        StartCoroutine(DisablingAudioSource());
     }
 
     IEnumerator DisablingAudioSource()
     {
         audioSource.enabled = false;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         audioSource.enabled = true;
     }
 
