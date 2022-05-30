@@ -6,7 +6,7 @@ public class CounterCollisionDetection : OnTriggerEvents
 {
     public int maxDetectionAllowed;
     public int setCount;
-    private int count;
+    public int count;
 
     private void Start()
     {

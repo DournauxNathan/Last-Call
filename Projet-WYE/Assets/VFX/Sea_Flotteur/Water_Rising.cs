@@ -10,7 +10,7 @@ public class Water_Rising : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Rise());
+       // StartCoroutine(Rise());
     }
 
     public void StartRising()
