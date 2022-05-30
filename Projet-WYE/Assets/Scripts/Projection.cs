@@ -297,7 +297,26 @@ public class Projection : Singleton<Projection>
             SceneLoader.Instance.Unload("TutoScene_Two");
             MasterManager.Instance.ChangeSceneByName(0, "Menu");
         }
+    }
 
+    /// <summary>
+    /// This method is for the prototype of the sequence order phase (Phase 3)
+    /// Will have to be move and re-write if needed.
+    /// </summary>
+    public void CallSequenceScene()
+    {
+        switch (ScenarioManager.Instance.currentScenario)
+        {
+            case Scenario.TrappedMan:
+                //MasterManager.Instance.AddSceneByName(3, "");
+                break;
+            case Scenario.HomeInvasion:
+                MasterManager.Instance.AddSceneByName(3, "Phase3_Prototype_Test");
+                break;
+            case Scenario.RisingWater:
+                //MasterManager.Instance.AddSceneByName(3, "");
+                break;
+        }
     }
 
     public void ToggleProjection() 

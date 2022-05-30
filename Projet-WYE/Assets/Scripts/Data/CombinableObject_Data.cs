@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Events;
 using UnityEngine.Events;
+using UnityEditor;
+using System;
 
 [System.Serializable]
 public class CombinableObject_Data : MonoBehaviour
@@ -77,7 +80,7 @@ public class CombinableObject_Data : MonoBehaviour
                 objectName = entry[5],
                 influence = int.Parse(entry[6]),
                 outcome = entry[7]
-                
+            
             };
         }
         else if (nCombinaison == 2)
@@ -151,10 +154,25 @@ public class CombinableObject_Data : MonoBehaviour
             };
         }
 
+        for (var i = 0; i < useWith.Length; i++)
+        {
+            Debug.Log(useWith.Length);
+            Debug.Log(useWith[i].objectName + ", " + i); //to remove
+            useWith[i].doAction = new UnityEvent();
+            UnityEventTools.AddIntPersistentListener(useWith[i].doAction, SendIdWithOutcome, i);
+        }
+
         LoadFromRessources();
         SetOutline();
         SetCollider();
         InitAudioSource();
+
+
+    }
+
+    public void Blablbla()
+    {
+
     }
 
     public void InitAudioSource()
@@ -189,6 +207,19 @@ public class CombinableObject_Data : MonoBehaviour
     public void SendOutcome()
     {
         OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+    }
+
+    public void PuzzleDone()
+    {
+        OrderController.Instance.ResolvePuzzle();
+    }
+    public void SendIdWithOutcome(int indexCombi){
+        if(SilhouetteManager.Instance !=null){
+            SilhouetteManager.Instance.Addoutcome(iD, useWith[indexCombi].outcome);
+        }
+        else{
+            Debug.LogError("SilhouetteManager is null");
+        }
     }
 }
 

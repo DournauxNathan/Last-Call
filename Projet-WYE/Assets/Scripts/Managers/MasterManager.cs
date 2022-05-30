@@ -9,11 +9,11 @@ using TMPro;
 
 public enum Phases
 {
-    Phase_0,
-    Phase_1,
-    Phase_2,
-    Phase_3,
-    Phase_4
+    Phase_0 = 0,
+    Phase_1 = 1,
+    Phase_2 = 2,
+    Phase_3 = 3,
+    Phase_4 = 4
 }
 
 public class MasterManager : Singleton<MasterManager>
@@ -156,6 +156,12 @@ public class MasterManager : Singleton<MasterManager>
         SetPhase(value);
     }
 
+    public void AddSceneByName(int value, string name)
+    {
+        SceneLoader.Instance.AddNewScene(name);
+        SetPhase(value);
+    }
+
     public void StartTuto()
     {
         CallManager.Instance.enableCall = true;
@@ -255,8 +261,8 @@ public class MasterManager : Singleton<MasterManager>
                 this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
-                isInImaginary = false;
-                Projection.Instance.revealScene = true;
+                //isInImaginary = false;
+                //Projection.Instance.revealScene = true;
 
                 WordManager.Instance.PullWord();
                 UIManager.Instance.UpdateUnitManager(4);
