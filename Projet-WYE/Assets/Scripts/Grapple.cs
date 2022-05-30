@@ -27,12 +27,16 @@ public class Grapple : MonoBehaviour
             hasEnter = false;
             hasExit = true;
 
-            Complete();
+            if (!isComplete)
+            {
+                Complete();
+            }
         }
     }
 
     public void Complete()
     {
+        isComplete = true;
         doAction?.Invoke();
         trapdoor.SetBool("Open", true);
 

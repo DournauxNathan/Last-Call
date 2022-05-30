@@ -24,7 +24,7 @@ public class CombinableObject : CombinableObject_Data
         if (other.CompareTag("ObjCombi"))
         {
             ListManager.Instance.CheckCompatibility(this.gameObject, other.gameObject);
-            Debug.Log(this.gameObject.name + " | " + other.name);
+            //Debug.Log(this.gameObject.name + " | " + other.name);
         }
 
         if (other.CompareTag("Hand"))

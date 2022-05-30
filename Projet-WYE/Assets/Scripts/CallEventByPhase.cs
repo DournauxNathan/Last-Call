@@ -14,7 +14,7 @@ public class CallEventByPhase : Singleton<CallEventByPhase>
 
     public void CallEvent(int i)
     {
-        Debug.Log((int)MasterManager.Instance.currentPhase);
+        //Debug.Log((int)MasterManager.Instance.currentPhase);
         switch (i)
         {
             case 0:

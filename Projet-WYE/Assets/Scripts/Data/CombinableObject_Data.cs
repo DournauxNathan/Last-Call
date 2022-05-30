@@ -156,16 +156,10 @@ public class CombinableObject_Data : MonoBehaviour
 
         for (var i = 0; i < useWith.Length; i++)
         {
-            if (useWith[i].objectName == "Null")
-            {
-                Array.Resize(ref useWith, i);
-            }
-
-
             Debug.Log(useWith.Length);
-            Debug.Log(useWith[i].objectName+", "+i); //to remove
+            Debug.Log(useWith[i].objectName + ", " + i); //to remove
             useWith[i].doAction = new UnityEvent();
-            UnityEventTools.AddIntPersistentListener(useWith[i].doAction,SendIdWithOutcome,i);
+            UnityEventTools.AddIntPersistentListener(useWith[i].doAction, SendIdWithOutcome, i);
         }
 
         LoadFromRessources();
