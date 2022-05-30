@@ -20,7 +20,7 @@ public static class SceneMenu
     public static void OpenCall1()
     {
         //EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/Gameplay_Combination_Iteration.unity");
-        OpenScene("Gameplay_Combination_Iteration");
+        OpenScene("TrappedMan");
     }
 
     [MenuItem("Scenes/Calls/#2 Home Invasion")]

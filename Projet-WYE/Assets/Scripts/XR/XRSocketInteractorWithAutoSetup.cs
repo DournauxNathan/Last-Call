@@ -81,4 +81,9 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
         return isMatching = b;
     }
 
+    public void SetSocket()
+    {
+
+    }
+
 }

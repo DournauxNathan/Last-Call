@@ -23,7 +23,7 @@ public class Hammer : MonoBehaviour
 
     public void Check()
     {
-        if (doOnce && count >= maxNailsToDrive)
+        if (doOnce)
         {
             doOnce = !doOnce;
             OrderController.Instance.AddOrder(hammer.useWith[0].influence, hammer.useWith[0].outcome, hammer.useWith[0].isLethal);

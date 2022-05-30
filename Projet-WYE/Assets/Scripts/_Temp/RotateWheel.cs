@@ -23,7 +23,7 @@ public class RotateWheel : MonoBehaviour
 
         if (rotate && coroutineAllowed && !GetComponentInParent<Padlock>().isComplete) 
         {
-            rotate = !rotate;
+            rotate = false;
             StartCoroutine("DoRotate");
         }
     }

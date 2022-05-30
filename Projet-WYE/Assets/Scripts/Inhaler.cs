@@ -25,7 +25,7 @@ public class Inhaler : MonoBehaviour
             dangerousProduct.dissolveEffect.startEffect = true;
 
             OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[0].influence, _combiObject.useWith[0].outcome, _combiObject.useWith[0].isLethal);
-            
+            OrderController.Instance.ResolvePuzzle();
         }
         else if (socket.isMatching && socket.snapToB == dangerousProduct.gameObject && doOnce)
         {
@@ -35,7 +35,7 @@ public class Inhaler : MonoBehaviour
             dangerousProduct.dissolveEffect.startEffect = true;
 
             OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[1].influence, _combiObject.useWith[1].outcome, _combiObject.useWith[1].isLethal);
-
+            OrderController.Instance.ResolvePuzzle();
         }
     }
 }
