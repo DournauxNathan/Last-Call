@@ -24,13 +24,13 @@ public class CombinableObject : CombinableObject_Data
         if (other.CompareTag("ObjCombi"))
         {
             ListManager.Instance.CheckCompatibility(this.gameObject, other.gameObject);
-            Debug.Log(this.gameObject.name + " | " + other.name);
+            //Debug.Log(this.gameObject.name + " | " + other.name);
         }
 
         if (other.CompareTag("Hand"))
         {
             Debug.Log(other.tag + "/n" + "Disable hand colliDer");
-            other.GetComponent<MeshCollider>().enabled = false;
+            //other.GetComponent<MeshCollider>().enabled = false;
         }
     }
 
@@ -39,7 +39,7 @@ public class CombinableObject : CombinableObject_Data
         if (other.CompareTag("Hand"))
         {
             Debug.Log(other.tag + "/n" + "Enable hand colliDer");
-            other.GetComponent<MeshCollider>().enabled = true;
+            //other.GetComponent<MeshCollider>().enabled = true;
         }
     }
 
