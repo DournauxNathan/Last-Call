@@ -6,9 +6,11 @@ using TMPro;
 public class SilhouetteCanvasBehavior : MonoBehaviour
 {
     private Transform _cameraTransform;
-    private Transform _defaultTransform;
+    private Vector3 _defaultTransform;
     public float timeLerping = 2f;
     [SerializeField]private SilhouetteData _silhouetteDataLink;
+    [SerializeField]private bool testBoolExit;
+    private bool isLerping = false;
     
     void Start()
     {
@@ -25,6 +27,16 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
     void Update()
     {
         if(_cameraTransform != null) transform.rotation = _cameraTransform.rotation; //same as camera
+
+        if(testBoolExit){
+            testBoolExit = false;
+            OnSelectExit();
+        }
+    
+        if(transform.position != _defaultTransform && isLerping){
+            //Debug.Log("Lerping");
+            transform.position = Vector3.Lerp(transform.position, _defaultTransform, timeLerping * Time.deltaTime);
+        }
     }
 
     
@@ -41,7 +53,7 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
                         return;
                     }
                     transform.localPosition = _s.canvasPositions[_s._silhouetteCanvasList.IndexOf(s)].FromVector2(0f);
-                    _defaultTransform = transform;
+                    _defaultTransform = transform.position;
                     _silhouetteDataLink = _s.silhouetteDataLink;
                 }
             }
@@ -54,12 +66,14 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
     public void OnSelectEnter(){
         //Stop Couroutine that destroy every items
         _silhouetteDataLink.OnHoverEnter();
+        isLerping =false   ;
     }
 
     public void OnSelectExit(){
         if(_defaultTransform != null){
-            transform.localPosition = Vector3.Lerp(transform.position,_defaultTransform.localPosition,timeLerping*Time.deltaTime);
+            //transform.localPosition = Vector3.Lerp(transform.position,_defaultTransform.localPosition,timeLerping*Time.deltaTime);
             //start couroutine to destroy every items
+            isLerping = true;
             _silhouetteDataLink.OnCancel();
         }
         else{

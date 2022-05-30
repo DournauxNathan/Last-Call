@@ -67,6 +67,7 @@ public class SilhouetteData : MonoBehaviour
         coroutine = null;
         TryGetComponent<SilhouetteCanvas>(out SilhouetteCanvas canvas);
         canvas.DestroyCanvas();
+        
     }
 
     
