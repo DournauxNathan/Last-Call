@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Events;
 using UnityEngine.Events;
+using UnityEditor;
+using System;
 
 [System.Serializable]
 public class CombinableObject_Data : MonoBehaviour
@@ -154,6 +156,12 @@ public class CombinableObject_Data : MonoBehaviour
 
         for (var i = 0; i < useWith.Length; i++)
         {
+            if (useWith[i].objectName == "Null")
+            {
+                Array.Resize(ref useWith, i);
+            }
+
+
             Debug.Log(useWith.Length);
             Debug.Log(useWith[i].objectName+", "+i); //to remove
             useWith[i].doAction = new UnityEvent();
