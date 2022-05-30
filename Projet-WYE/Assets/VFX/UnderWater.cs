@@ -17,7 +17,7 @@ public class UnderWater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y > MasterManager.Instance.references.mainCamera.position.y )
+        if (MasterManager.Instance != null && transform.position.y > MasterManager.Instance.references.mainCamera.position.y)
         {
             PostProcessActuel.SetActive(false);
             PostProcessAquatique.SetActive(true);

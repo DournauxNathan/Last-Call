@@ -8,6 +8,11 @@ public class Water_Rising : MonoBehaviour
     public float time;
     public float maxheight;
 
+    private void Start()
+    {
+       // StartCoroutine(Rise());
+    }
+
     public void StartRising()
     {
         StartCoroutine(Rise());

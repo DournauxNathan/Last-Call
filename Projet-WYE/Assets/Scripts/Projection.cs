@@ -70,16 +70,49 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        if (enableTransition)
+        if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
-            foreach (var item in objectsToDissolve)
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
-                for (int i = 0; i < item.objects.Count; i++)
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
-                    item.objects[i].SetFloat("_Dissolve", transitionValue);                    
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
                 }
             }
-        }        
+        }
+        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
+            {
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                {
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+            }
+        }
+        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0)
+        {
+            if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
+            {
+                for (int obj = 0; obj < 1; obj++)
+                {
+                    for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                    {
+                        objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
+                }
+            }
+            else if (enableTransition && TutoManager.Instance.secondPartIsDone && MasterManager.Instance.currentPhase == Phases.Phase_0)
+            {
+                for (int obj = 2; obj < 2; obj++)
+                {
+                    for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                    {
+                        objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
+                }
+            }
+        }
 
         if (pauseBetweenTransition && isTransition)
         {
@@ -152,7 +185,7 @@ public class Projection : Singleton<Projection>
 
     public void Deconstruct()
     {
-        if (transitionValue > 0)
+        if (transitionValue >= 0)
         {
             isTransition = true;
             transitionValue -= Time.deltaTime * time;
@@ -172,11 +205,20 @@ public class Projection : Singleton<Projection>
         }
     }
 
+    public void InTransition(bool value) { isTransition = value; }
+
     public void RevealScene()
     {
-        if (transitionValue < 30)
+        if (transitionValue < 50f)
         {
             transitionValue += Time.deltaTime * time;
+
+            if (transitionValue >= 50f)
+            {
+                revealScene = false;
+                hasProjted = false;
+                hasCycle = false; 
+            }
         }
     }
 
@@ -204,22 +246,76 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!hasCycle && !hasProjted && !revealScene && MasterManager.Instance.currentPhase != Phases.Phase_3)
+        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 || TutoManager.Instance.isTutoDone))
         {
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
 
-            MasterManager.Instance.ChangeSceneByName(2,"Gameplay_Combination_Iteration"); // A changer avec le scenario Manager quand plusieur senarios 
+            switch (ScenarioManager.Instance.currentScenario)
+            {
+                case Scenario.TrappedMan:
+                    Debug.Log("TP");
+                    MasterManager.Instance.ChangeSceneByName(2, "Gameplay_Combination_Iteration");
+                    break;
+                case Scenario.HomeInvasion:
+                    Debug.Log("HI");
+                    MasterManager.Instance.ChangeSceneByName(2, "HomeInvasion"); 
+                    break;
+                case Scenario.RisingWater:
+                    Debug.Log("RW");
+                    MasterManager.Instance.ChangeSceneByName(2, "RisingWater");
+                    break;
+            }
+
         }
 
-        if (!hasCycle && hasProjted)
+        if (goBackInOffice && OrderController.Instance.isResolve && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
+            Debug.Log("3 bye");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = false;
-                        
-            MasterManager.Instance.ChangeSceneByName(3 ,"Office");
+
+            MasterManager.Instance.ChangeSceneByName(3, "Office");
+        }
+
+
+        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
+        {
+            Debug.Log("2 bye");
+            InitTutorial.Instance.DisableObject();
+            SceneLoader.Instance.AddNewScene("TutoScene_Two");
+            TutoManager.Instance.Progress(12);
+        }
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
+        {
+            Debug.Log("1 bye");
+            MasterManager.Instance.Reset();
+            SceneLoader.Instance.Unload("TutoScene");
+            SceneLoader.Instance.Unload("TutoScene_Two");
+            MasterManager.Instance.ChangeSceneByName(0, "Menu");
+        }
+    }
+
+    /// <summary>
+    /// This method is for the prototype of the sequence order phase (Phase 3)
+    /// Will have to be move and re-write if needed.
+    /// </summary>
+    public void CallSequenceScene()
+    {
+        switch (ScenarioManager.Instance.currentScenario)
+        {
+            case Scenario.TrappedMan:
+                //MasterManager.Instance.AddSceneByName(3, "");
+                break;
+            case Scenario.HomeInvasion:
+                MasterManager.Instance.AddSceneByName(3, "Phase3_Prototype_Test");
+                break;
+            case Scenario.RisingWater:
+                //MasterManager.Instance.AddSceneByName(3, "");
+                break;
         }
     }
 
@@ -244,6 +340,7 @@ public class Projection : Singleton<Projection>
 
     public enum Location
     {
+        Tutoriel,
         Office,
         Imaginary
     }

@@ -41,20 +41,34 @@ public class OrderController : Singleton<OrderController>
         Resolve();
         return currentNumberOfCombinaison;
     }
+    public void ResolvePuzzle()
+    {
+        puzzlesSucced += 1;
 
-    public void ResolvePuzzle() { puzzlesSucced += 1; }
+        if (puzzlesSucced >= puzzleNumber)
+        {
+            isResolve = true;
+        }
+    }
+
     public int GetNumberOfPuzzleSucced() { return puzzlesSucced; }
 
-
+    public bool doOnce = true;
     public void Resolve()
     {
-        if (completeImaginary && (currentNumberOfCombinaison == numberOfCombinaison || GetResolve()))
+        if (completeImaginary || GetResolve() && doOnce)
         {
+            doOnce = false;
+
             completeImaginary = !completeImaginary;
 
-            MasterManager.Instance.isInImaginary = false;
+            //MasterManager.Instance.isInImaginary = false;
+            Projection.Instance.transitionValue = 50f;
+            //Projection.Instance.enableTransition = true;
+            //Projection.Instance.goBackInOffice = true;
             SetResolve(true);
-            MasterManager.Instance.currentPhase = Phases.Phase_3;
+
+            Projection.Instance.CallSequenceScene();
         }
         else
         {
@@ -64,6 +78,18 @@ public class OrderController : Singleton<OrderController>
 
     public void AddCombinaison(CombinableObject a, CombinableObject b, int _value, string _outcome, bool _lethality)
     {
+        /*foreach (var item in MasterManager.Instance.references.rayInteractors)
+        {
+            if (!item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered)
+            {
+                item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered = !item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered;
+            }
+            else
+            {
+                item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered = !item.GetComponent<XRHitInfoRayInteractor>().playHapticsOnHoverEntered;
+            }
+        }*/
+
         Combinaison newCombi = new Combinaison {
             currentCombinaison = a.name+ "+ " + b.name,
             objetA = a.name,
@@ -72,7 +98,7 @@ public class OrderController : Singleton<OrderController>
             isLethal = _lethality
         }; 
 
-        text.text = newCombi.currentCombinaison;
+        //text.text = newCombi.currentCombinaison;
 
         combinaisons.Add(newCombi);
 
@@ -90,9 +116,10 @@ public class OrderController : Singleton<OrderController>
         };
 
         ordersStrings.Add(newOrder);
+        ScenarioManager.Instance.UpdateEndingsValue(newOrder.influence);
     }
     
-    public bool SetResolve(bool _bool) { return isResolve = _bool; }
+    public void SetResolve(bool value) { isResolve = value; }
     
     public bool GetResolve() { return isResolve; }
 }

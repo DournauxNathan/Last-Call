@@ -5,18 +5,20 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using TMPro;
 
 public enum Phases
 {
-    Phase_0,
-    Phase_1,
-    Phase_2,
-    Phase_3,
-    Phase_4
+    Phase_0 = 0,
+    Phase_1 = 1,
+    Phase_2 = 2,
+    Phase_3 = 3,
+    Phase_4 = 4
 }
 
 public class MasterManager : Singleton<MasterManager>
 {
+    public bool unpauseAdio;
     public Phases currentPhase;
 
     [Header("Refs")]
@@ -39,6 +41,9 @@ public class MasterManager : Singleton<MasterManager>
 
     public UnityEvent startCall;
 
+    public int buttonEmissive;
+    public TMP_Text text;
+    public TMP_Text text1;
 
     private void Start()
     {
@@ -47,9 +52,10 @@ public class MasterManager : Singleton<MasterManager>
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        //To put into the debug menu
+        if (Keyboard.current.f12Key.wasPressedThisFrame)
         {
-            SceneLoader.Instance.LoadNewScene(SceneLoader.Instance.nameScene);
+            OrderController.Instance.ResolvePuzzle();
         }
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -57,22 +63,23 @@ public class MasterManager : Singleton<MasterManager>
             Application.Quit();
         }
 
+        //To put into the debug menu
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             WordManager.Instance.isProtocolComplete = true;
         }
+
+        if (unpauseAdio)
+        {
+            unpauseAdio = !unpauseAdio;
+            MasterManager.Instance.references.mainAudioSource.UnPause();
+        }
+
     }
 
     public void FixedUpdate()
     {
         UpdateController();
-
-        if (isEnded)
-        {
-            UIManager.Instance.InComingCall(false);
-
-            UIManager.Instance.OutComingCall(true);
-        }
 
         if (!skipTuto && !isTutoEnded && b)
         {
@@ -149,6 +156,12 @@ public class MasterManager : Singleton<MasterManager>
         SetPhase(value);
     }
 
+    public void AddSceneByName(int value, string name)
+    {
+        SceneLoader.Instance.AddNewScene(name);
+        SetPhase(value);
+    }
+
     public void StartTuto()
     {
         CallManager.Instance.enableCall = true;
@@ -221,17 +234,19 @@ public class MasterManager : Singleton<MasterManager>
         switch (i)
         {
             case 0:
-              
+                Projection.Instance.SetTransitionValue(0);
                 break;
 
             case 1:
+                Projection.Instance.enableTransition = true;
+                Projection.Instance.transitionValue = 50f;
                 ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
-                //WordManager.Instance.PullWord();
                 break;
 
             case 2:
+                Projection.Instance.transitionValue = 0f;
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
                 WordManager.Instance.PullWord();
@@ -243,27 +258,44 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(30);
+                this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
-                isInImaginary = false;
-                Projection.Instance.revealScene = true;
+                //isInImaginary = false;
+                //Projection.Instance.revealScene = true;
 
                 WordManager.Instance.PullWord();
                 UIManager.Instance.UpdateUnitManager(4);
                 break;
 
             case 4:
-                ScenarioManager.Instance.UpdateScenario(1);
+                //ScenarioManager.Instance.UpdateScenario(1);
                 Reset();
                 break;
         }
+
     }
 
 
     public void Reset()
     {
+        isInImaginary = false;
+
+        Projection.Instance.transitionValue = 50f;
+        Projection.Instance.enableTransition = true;
+
         currentPhase = Phases.Phase_0;
         ScenarioManager.Instance.currentScenarioData = null;
+        isEnded = false;
+        OrderController.Instance.ordersStrings.Clear();
+        OrderController.Instance.combinaisons.Clear();
+        OrderController.Instance.puzzlesSucced = 0;
+        OrderController.Instance.isResolve = false;
+
+        UnitManager.Instance.physicsbuttons.Clear();
+
+        WordManager.Instance.answers.Clear();
+        WordManager.Instance.questions.Clear();
     }
     public void PlayDialogues()
     {
@@ -275,6 +307,12 @@ public class MasterManager : Singleton<MasterManager>
 
             TimeSettings.Instance.StartGlobalTimer();
         }
+    }
+
+    public void CallEnded()
+    {
+        isEnded = true;
+        UIManager.Instance.OutComingCall(true);
     }
 }
 
@@ -293,7 +331,6 @@ public class References
     public Projection projectionTransition;
     public AudioSource mainAudioSource;
     public AudioMixerGroup sfx;
-
 
     [Header("Puzzle Manager")]
     public ListManager _listManager;

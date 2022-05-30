@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class Padlock : MonoBehaviour
@@ -12,6 +13,8 @@ public class Padlock : MonoBehaviour
     public int[] correctCombination, currentCombination;
     public bool isComplete;
     public List<RotateWheel> wheels;
+
+    public UnityEvent doAction;
 
     private void Start()
     {
@@ -37,11 +40,12 @@ public class Padlock : MonoBehaviour
                 break;
         }
 
-        if ((currentCombination[0] == correctCombination[0]) 
+        if (((currentCombination[0] == correctCombination[0]) 
             && (currentCombination[1] == correctCombination[1]) 
             && (currentCombination[2] == correctCombination[2])
-            && (currentCombination[3] == correctCombination[3]))
+            && (currentCombination[3] == correctCombination[3])) || isComplete)
         {
+            doAction?.Invoke();
             OrderController.Instance.AddOrder(data.useWith[0].influence, data.useWith[0].outcome, data.useWith[0].isLethal);
         }
     }

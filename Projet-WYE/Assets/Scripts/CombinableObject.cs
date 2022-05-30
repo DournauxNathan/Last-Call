@@ -15,6 +15,8 @@ public class CombinableObject : CombinableObject_Data
     {
         GetComponent();
         SetOutline();
+
+        //ToggleInteractor(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,13 +24,13 @@ public class CombinableObject : CombinableObject_Data
         if (other.CompareTag("ObjCombi"))
         {
             ListManager.Instance.CheckCompatibility(this.gameObject, other.gameObject);
-            Debug.Log(this.gameObject.name + " | " + other.name);
+            //Debug.Log(this.gameObject.name + " | " + other.name);
         }
 
         if (other.CompareTag("Hand"))
         {
             Debug.Log(other.tag + "/n" + "Disable hand colliDer");
-            other.GetComponent<MeshCollider>().enabled = false;
+            //other.GetComponent<MeshCollider>().enabled = false;
         }
     }
 
@@ -37,7 +39,7 @@ public class CombinableObject : CombinableObject_Data
         if (other.CompareTag("Hand"))
         {
             Debug.Log(other.tag + "/n" + "Enable hand colliDer");
-            other.GetComponent<MeshCollider>().enabled = true;
+            //other.GetComponent<MeshCollider>().enabled = true;
         }
     }
 
@@ -58,12 +60,14 @@ public class CombinableObject : CombinableObject_Data
         if (MasterManager.Instance.isInImaginary && b)
         {
             isLocked = true;
+            onLock?.Invoke();
 
             outline.OutlineColor = selectOutline.color;
         }
         else if (MasterManager.Instance.isInImaginary && !b)
         {
             isLocked = false;
+            onUnlock?.Invoke();
 
             outline.OutlineColor = defaultOutlineColor;
 
@@ -71,8 +75,15 @@ public class CombinableObject : CombinableObject_Data
         }
     }
 
-    public void SendOutcome()
+    public void ToggleInteractor(bool value)
     {
-        OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup XrGrabComponent))
+        {
+            XrGrabComponent.enabled = value;
+        }
+        else if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup XrSimpleComponent))
+        {
+            XrSimpleComponent.enabled = value;
+        }
     }
 }

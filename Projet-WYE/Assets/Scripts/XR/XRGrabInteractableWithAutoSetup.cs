@@ -13,7 +13,11 @@ public class XRGrabInteractableWithAutoSetup : XRGrabInteractable
     protected override void Awake()
     {
         base.Awake();
-        interactionManager = MasterManager.Instance.references.xRInteractionManager;
+
+        if (MasterManager.Instance != null)
+        {
+            interactionManager = MasterManager.Instance.references.xRInteractionManager;
+        }
     }
 
 

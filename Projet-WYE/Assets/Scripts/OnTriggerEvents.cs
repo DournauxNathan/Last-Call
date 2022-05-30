@@ -13,12 +13,12 @@ public class OnTriggerEvents : MonoBehaviour
     public bool setCollision = true;
 
     [Header("Trigger Events")]
-    public UnityEvent triggerEnter;
     public bool debugEnter;
-    public UnityEvent triggerExit;
+    public UnityEvent triggerEnter;
     public bool debugExit;
-    public UnityEvent triggerStay;
+    public UnityEvent triggerExit;
     public bool debugStay;
+    public UnityEvent triggerStay;
 
     [Header("2D Trigger Events")]
     public UnityEvent triggerEnter2D;
