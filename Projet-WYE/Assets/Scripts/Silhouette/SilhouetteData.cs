@@ -48,7 +48,7 @@ public class SilhouetteData : MonoBehaviour
 // Set in XRGrab event OnHoverEnter
     public void OnHoverEnter()
     {
-        if(coroutine != null) StopCoroutine(coroutine);
+        if(coroutine != null) StopCoroutine(coroutine); coroutine = null;
         if(transform.childCount==0 && outcomes.Count>0){ //if there is no canvas yet and there is at least one outcome
             TryGetComponent<SilhouetteCanvas>(out SilhouetteCanvas canvas);
             canvas.CreateNewCanvas(this);
@@ -67,6 +67,7 @@ public class SilhouetteData : MonoBehaviour
         coroutine = null;
         TryGetComponent<SilhouetteCanvas>(out SilhouetteCanvas canvas);
         canvas.DestroyCanvas();
+        
     }
 
     

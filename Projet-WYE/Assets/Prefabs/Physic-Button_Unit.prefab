@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6302566310619301282}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,6 +154,7 @@ MonoBehaviour:
   useComparTag: 1
   debugEvent: 0
   setCollision: 1
+  debugEnter: 0
   triggerEnter:
     m_PersistentCalls:
       m_Calls:
@@ -169,11 +170,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  debugEnter: 0
+  debugExit: 0
   triggerExit:
     m_PersistentCalls:
       m_Calls: []
-  debugExit: 0
+  debugStay: 0
   triggerStay:
     m_PersistentCalls:
       m_Calls:
@@ -189,7 +190,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  debugStay: 0
   triggerEnter2D:
     m_PersistentCalls:
       m_Calls: []
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 658650521686390016}
   - component: {fileID: 658650521686390046}
   - component: {fileID: 5441650795503841844}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ButtonTop
   m_TagString: Button
   m_Icon: {fileID: 0}
@@ -311,10 +311,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1
+  m_Constraints: 126
+  m_CollisionDetection: 3
 --- !u!114 &5441650795503841844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +331,7 @@ MonoBehaviour:
   useComparTag: 1
   debugEvent: 0
   setCollision: 1
+  debugEnter: 0
   triggerEnter:
     m_PersistentCalls:
       m_Calls:
@@ -346,15 +347,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  debugEnter: 0
+  debugExit: 0
   triggerExit:
     m_PersistentCalls:
       m_Calls: []
-  debugExit: 0
+  debugStay: 0
   triggerStay:
     m_PersistentCalls:
       m_Calls: []
-  debugStay: 0
   triggerEnter2D:
     m_PersistentCalls:
       m_Calls: []
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 658650522051186186}
   - component: {fileID: 658650522051186188}
   - component: {fileID: 658650522051186187}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Physic-Button_Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 5942221555879070685}
   - component: {fileID: 4834414987636218099}
   - component: {fileID: 2946713706794449891}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ GameObject:
   - component: {fileID: 5974820408336695062}
   - component: {fileID: 6555403652882085408}
   - component: {fileID: 4852169725201436902}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -19,7 +19,7 @@ public class InspectorData : MonoBehaviour
     [SerializeField] private bool testBool = false;
     private bool hasGenerate = false;
 
-    private bool security = false;
+    
     private InspectorEffect inspectorEffect;
     void Start()
     {
