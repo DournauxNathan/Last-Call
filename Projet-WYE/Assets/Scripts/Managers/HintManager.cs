@@ -55,10 +55,10 @@ public class HintManager : Singleton<HintManager>
             Destroy(hint.gameObject);
             return;
         }
-        hint._hintInWorldData = hintInWorld;
+        hint._hintInWorldData = hintInWorld; //reference to the hint in the world
         hint.SetText(hintInWorld.hintText);
         hint.transform.position = new Vector3(hint._hintInWorldData.attatchedTo.transform.localPosition.x, hint._hintInWorldData.attatchedTo.transform.localPosition.y + hint._hintInWorldData.offset, hint._hintInWorldData.attatchedTo.transform.localPosition.z); //Set position to the object that has the hint + offset
-        //hint._hintInWorldData.OnhintDisappear.RemoveListener(delegate { Destroy(hint.gameObject); });
+        //hint._hintInWorldData.OnhintDisappear.RemoveListener(delegate { DestroyHint(hint); });
         hint._hintInWorldData.OnhintDisappear.AddListener(() => DestroyHint(hint));
         StartCoroutine(hint._hintInWorldData.DisplayHint());
         if(hint._hintInWorldData.hintSound!=null) hint.PlaySound(hint._hintInWorldData.hintSound); //Play sound if there is one (Spatialised)
@@ -66,7 +66,7 @@ public class HintManager : Singleton<HintManager>
 
     private void DestroyHint(HintCanvasBehavior hint){
         Debug.Log("nb_Event");
-        if (hint == null){ hint._hintInWorldData.OnhintDisappear.RemoveListener(delegate { Destroy(hint.gameObject); }); return;}
+        if (hint == null){ hint._hintInWorldData.OnhintDisappear.RemoveListener( delegate { DestroyHint(hint); }); return;}
         currentHintCanvas.Remove(hint);
         Destroy(hint.gameObject);
     }
