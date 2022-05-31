@@ -11,6 +11,8 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
     [SerializeField]private SilhouetteData _silhouetteDataLink;
     [SerializeField]private bool testBoolExit;
     private bool isLerping = false;
+
+    public TMP_Text _text;
     
     void Start()
     {
