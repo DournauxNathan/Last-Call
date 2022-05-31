@@ -12,7 +12,7 @@ public class HintCanvasBehavior : MonoBehaviour
 
     void Update()
     {
-        
+        if(MasterManager.Instance !=null) transform.rotation = MasterManager.Instance.references.mainCamera.transform.rotation;
     }
 
     public void SetText(string text)
