@@ -17,6 +17,7 @@ public class SherlockEffect : Singleton<SherlockEffect>
 
     private void Start() {
         cameraTransform = MasterManager.Instance.references.mainCamera;
+        cameraLimit = new CameraRoatationLimits(XLimit);
         if(cameraTransform == null)cameraTransform = MasterManager.Instance.references.mainCamera;
     }
     void LateUpdate()

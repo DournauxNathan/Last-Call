@@ -269,15 +269,12 @@ public class Projection : Singleton<Projection>
             switch (ScenarioManager.Instance.currentScenario)
             {
                 case Scenario.TrappedMan:
-                    Debug.Log("TP");
-                    MasterManager.Instance.ChangeSceneByName(2, "Gameplay_Combination_Iteration");
+                    MasterManager.Instance.ChangeSceneByName(2, "TrappedMan");
                     break;
                 case Scenario.HomeInvasion:
-                    Debug.Log("HI");
                     MasterManager.Instance.ChangeSceneByName(2, "HomeInvasion"); 
                     break;
                 case Scenario.RisingWater:
-                    Debug.Log("RW");
                     MasterManager.Instance.ChangeSceneByName(2, "RisingWater");
                     break;
             }
