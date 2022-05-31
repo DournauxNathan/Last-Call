@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class SilhouetteManager : Singleton<SilhouetteManager>
 {
     public List<Silhouette> silhouettes = new List<Silhouette>();
     public float timeToDisappear = 4f;
+    public int minSilhouetteValidation;
+    private int currentSilhouetteValidation;
+    public bool wasLastValidation = false;
+    public UnityEvent OnSilhouetteResolve;
     void Start()
     {
         
@@ -53,6 +58,22 @@ public class SilhouetteManager : Singleton<SilhouetteManager>
         }
         Debug.LogWarning("Silhouette: " + id + " does not exist");
     }
+
+    public void CheckIfAllValidationAreDone(){
+        if(currentSilhouetteValidation >= minSilhouetteValidation && wasLastValidation == true){
+            OnSilhouetteResolve.Invoke(); Debug.Log("Silhouette resolved");
+            Projection.Instance.goBackInOffice = true;
+            Projection.Instance.enableTransition = true;
+            Projection.Instance.isTransition = true;
+        }
+    }
+    public void IncreaseCurrentSilhouetteValidation(){
+        currentSilhouetteValidation++;
+    }
+    public void LastValidation(bool value){
+        wasLastValidation = value;
+    }
+
 
 }
 
