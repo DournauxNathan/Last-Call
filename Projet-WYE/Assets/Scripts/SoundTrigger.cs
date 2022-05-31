@@ -35,7 +35,10 @@ public class SoundTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(!isPlaying && tags.Contains(other.tag)){
             isPlaying = true;
-            audioSource.PlayNewClipOnce(clip);
+            if (audioSource != null)
+            {
+                audioSource.PlayNewClipOnce(clip);
+            }
 
         }
 

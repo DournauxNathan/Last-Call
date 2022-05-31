@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class Projection : Singleton<Projection>
 {
+    public bool onEditor;
+
     [Header("Refs")]
     public Transform player;
 
@@ -70,7 +72,19 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-        if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
+#if UNITY_EDITOR
+        if (onEditor)
+        {
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
+            {
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                {
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+            }
+        }
+#endif
+        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
             for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
