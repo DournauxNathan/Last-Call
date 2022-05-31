@@ -38,5 +38,6 @@ public class SilhouetteCanvas : MonoBehaviour
         foreach(GameObject g in _silhouetteCanvasList){
             Destroy(g);
         }
+        _silhouetteCanvasList.Clear(); //clear list to be able to create new canvas
     }
 }
