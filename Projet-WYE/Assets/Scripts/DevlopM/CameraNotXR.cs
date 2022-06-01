@@ -8,4 +8,8 @@ public class CameraNotXR : MonoBehaviour
     {
         if(MasterManager.Instance != null) gameObject.SetActive(false);
     }
+
+    public void debugTest(){
+        Debug.Log("Debug Test");
+    }
 }

@@ -18,7 +18,7 @@ public class CombinableObject : CombinableObject_Data
 
         //ToggleInteractor(false);
     }
-
+/*
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ObjCombi"))
@@ -29,7 +29,7 @@ public class CombinableObject : CombinableObject_Data
 
         if (other.CompareTag("Hand"))
         {
-            Debug.Log(other.tag + "/n" + "Disable hand colliDer");
+            //Debug.Log(other.tag + "/n" + "Disable hand colliDer");
             //other.GetComponent<MeshCollider>().enabled = false;
         }
     }
@@ -41,7 +41,7 @@ public class CombinableObject : CombinableObject_Data
             Debug.Log(other.tag + "/n" + "Enable hand colliDer");
             //other.GetComponent<MeshCollider>().enabled = true;
         }
-    }
+    }*/
 
     public void ToggleOutline(bool b)
     {
