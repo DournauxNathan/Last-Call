@@ -79,7 +79,14 @@ public class Projection : Singleton<Projection>
             {
                 for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
-                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    if (objectsToDissolve[obj].objects[i].HasProperty("_Dissolve"))
+                    {
+                        objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
+                    else
+                    {
+                        Debug.Log(objectsToDissolve[obj].location + " have a missing reference at " + i);
+                    }
                 }
             }
         }
