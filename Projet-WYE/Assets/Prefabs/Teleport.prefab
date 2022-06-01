@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6176910610073269365}
   - component: {fileID: 6176910610073269364}
   - component: {fileID: 6176910610073269363}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Teleport
   m_TagString: ObjCombi
   m_Icon: {fileID: 0}
@@ -64,7 +64,8 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,6 +103,10 @@ MonoBehaviour:
   isActive: 0
   m_Collider: {fileID: 6176910610073269363}
   particle: {fileID: 6176910611211853710}
+  callEventAtStart: 0
+  doAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6176910610073269365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,10 +228,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.5000001
+  m_Height: 3.267384
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0.000000053984824, y: 0.6336915, z: -0.00000010796965}
 --- !u!1 &6176910610453759342
 GameObject:
   m_ObjectHideFlags: 0

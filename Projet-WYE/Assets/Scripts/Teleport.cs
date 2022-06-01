@@ -44,7 +44,7 @@ public class Teleport : Singleton<Teleport>
                 {
                     particle.SetActive(false);
                 }
-            }
+            }   
         }
     }
 
@@ -59,7 +59,7 @@ public class Teleport : Singleton<Teleport>
                 GetComponentInChildren<Renderer>().enabled = true;
                 if (particle != null)
                 {
-                    particle.SetActive(true);
+                    //particle.SetActive(true);
                 }
             }
         }
@@ -73,6 +73,7 @@ public class Teleport : Singleton<Teleport>
         doAction?.Invoke();
 
         m_Collider.isTrigger = true;
+        particle.SetActive(false);
 
         if (GetComponentInChildren<Renderer>() != null)
         {
