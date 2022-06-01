@@ -71,6 +71,8 @@ public class SilhouetteManager : Singleton<SilhouetteManager>
             
             Debug.Log("Silhouette resolved");
 
+            OrderController.Instance.isResolve = true;
+
             Projection.Instance.goBackInOffice = true;
             Projection.Instance.enableTransition = true;
             Projection.Instance.isTransition = true;

@@ -260,8 +260,10 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 || TutoManager.Instance.isTutoDone))
+        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 || TutoManager.Instance.isTutoDone) && !OrderController.Instance.isResolve)
         {
+            Debug.Log("Imaginary");
+
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
@@ -281,9 +283,9 @@ public class Projection : Singleton<Projection>
 
         }
 
-        if (goBackInOffice && OrderController.Instance.isResolve && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        if (goBackInOffice && OrderController.Instance.isResolve && MasterManager.Instance.currentPhase == Phases.Phase_2)
         {
-            Debug.Log("3 bye");
+            Debug.Log("Going back to Office");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = false;
@@ -294,15 +296,16 @@ public class Projection : Singleton<Projection>
 
         if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
         {
-            Debug.Log("2 bye");
+            Debug.Log("Tuto Scene 2");
             InitTutorial.Instance.DisableObject();
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
             TutoManager.Instance.Progress(12);
         }
 
-        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone && !MasterManager.Instance.isInImaginary)
         {
-            Debug.Log("1 bye");
+            Debug.Log("Menu");
+
             MasterManager.Instance.Reset();
             SceneLoader.Instance.Unload("TutoScene");
             SceneLoader.Instance.Unload("TutoScene_Two");
