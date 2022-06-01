@@ -45,8 +45,23 @@ public class HintManager : Singleton<HintManager>
         Debug.LogWarning("Hint: " + id + " does not exist");
     }
 
+    public void DisplayHint(GameObject obj){
+        foreach (HintInWorld hint in hints)
+        {
+            if (hint.attatchedTo == obj)
+            {
+                HintCanvasBehavior newHint = Instantiate(hintPrefab, obj.transform); //Set parent to the object that has the hint
+                currentHintCanvas.Add(newHint);
+                SetValues(newHint, hint);
+                return;
+            }
+        }
+        Debug.LogWarning("Hint: " + obj + " does not exist");
+    }
+
+
     private void SetValues(HintCanvasBehavior hint, HintInWorld hintInWorld){
-        if(hintInWorld.hintText == null || hintInWorld.attatchedTo == null || hintInWorld.duration == 0){
+        if(hintInWorld.hintText == null || hintInWorld.attatchedTo == null || hintInWorld.duration <= 0){
             Debug.LogError("Hint: " + hintInWorld.id + " has a problem" + "\n"+
                            "HintText: " + hintInWorld.hintText + "\n" +
                            "AttatchedTo: " + hintInWorld.attatchedTo + "\n" +
@@ -83,9 +98,7 @@ public class HintInWorld{
     public float duration;
     public UnityEvent OnhintDisplay;
     public UnityEvent OnhintDisappear;
-
     public UnityAction OnhintDisappearAction;
-
     public Coroutine coroutine;
     public IEnumerator DisplayHint(){
         //Debug.Log("Coroutine started");
@@ -95,4 +108,15 @@ public class HintInWorld{
         OnhintDisappearAction?.Invoke();
     }
     
+    public HintInWorld(GameObject obj,string _text,AudioClip _clip,float _offset,int _id,float _duration){
+        attatchedTo = obj;
+        hintText = _text;
+        hintSound = _clip;
+        offset = _offset;
+        id = _id;
+        duration = _duration;
+        OnhintDisplay = new UnityEvent();
+        OnhintDisappear = new UnityEvent();
+        OnhintDisappearAction = null;
+    }   
 }
