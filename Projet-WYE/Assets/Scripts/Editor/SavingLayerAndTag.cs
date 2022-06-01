@@ -35,7 +35,7 @@ public static class SavingLayerAndTag
             {
                 return;
             }
-            item.layer = component.myLayer;
+            item.layer = 3;
             item.tag = component.myTag;
         }
     }
