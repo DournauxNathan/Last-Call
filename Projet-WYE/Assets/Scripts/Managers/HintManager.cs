@@ -65,7 +65,7 @@ public class HintManager : Singleton<HintManager>
     }
 
     private void DestroyHint(HintCanvasBehavior hint){
-        Debug.Log("nb_Event");
+        //Debug.Log("nb_Event");
         if (hint == null){ /*hint._hintInWorldData.OnhintDisappear.RemoveListener( delegate { DestroyHint(hint); });*/ return;}
         currentHintCanvas.Remove(hint);
         Destroy(hint.gameObject);
