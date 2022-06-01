@@ -38,7 +38,8 @@ public class UIManager : Singleton<UIManager>
             InComingCall(false);
             OutComingCall(true);
         }
-        else if (MasterManager.Instance.currentPhase == Phases.Phase_1)
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
             InComingCall(true);
             OutComingCall(false);
