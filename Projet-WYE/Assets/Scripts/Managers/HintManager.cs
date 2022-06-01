@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class HintManager : Singleton<HintManager>
 {
+    public float timeBlinking;
+    public Color32 color;
     public List<HintInWorld> hints = new List<HintInWorld>();
     public List<HintCanvasBehavior> currentHintCanvas = new List<HintCanvasBehavior>();
     public HintCanvasBehavior hintPrefab;
@@ -77,11 +79,30 @@ public class HintManager : Singleton<HintManager>
         hint._hintInWorldData.OnhintDisappearAction += ()=> {DestroyHint(hint);};
         StartCoroutine(hint._hintInWorldData.DisplayHint());
         if(hint._hintInWorldData.hintSound!=null) hint.PlaySound(hint._hintInWorldData.hintSound); //Play sound if there is one (Spatialised)
+        SetOutlineBlink(hint);
     }
+
+    private void SetOutlineBlink(HintCanvasBehavior hint){
+        if(hint._hintInWorldData.attatchedTo.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer)){
+            Outline _outline = null;
+            if(!hint._hintInWorldData.attatchedTo.TryGetComponent<Outline>(out _outline)){
+                _outline = hint._hintInWorldData.attatchedTo.AddComponent<Outline>();
+            }
+            _outline.OutlineColor = color;
+            OutlineTicTac _outlineTicTac = hint._hintInWorldData.attatchedTo.AddComponent<OutlineTicTac>();
+            _outlineTicTac.delay = timeBlinking;
+            _outlineTicTac.ToggleTicTac();
+        }
+    }
+
 
     private void DestroyHint(HintCanvasBehavior hint){
         //Debug.Log("nb_Event");
         if (hint == null){ /*hint._hintInWorldData.OnhintDisappear.RemoveListener( delegate { DestroyHint(hint); });*/ return;}
+        if(hint._hintInWorldData.attatchedTo.TryGetComponent<Outline>(out Outline outline) && hint._hintInWorldData.attatchedTo.TryGetComponent<OutlineTicTac>(out OutlineTicTac outlineTicTac)){
+            Destroy(outlineTicTac);
+            outline.enabled = false;
+        }
         currentHintCanvas.Remove(hint);
         Destroy(hint.gameObject);
         hint._hintInWorldData.OnhintDisappearAction = null;
@@ -107,7 +128,7 @@ public class HintInWorld{
         OnhintDisappear.Invoke();
         OnhintDisappearAction?.Invoke();
     }
-    
+
     public HintInWorld(GameObject obj,string _text,AudioClip _clip,float _offset,int _id,float _duration){
         attatchedTo = obj;
         hintText = _text;
