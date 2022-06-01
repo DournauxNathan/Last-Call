@@ -19,8 +19,8 @@ GameObject:
   - component: {fileID: 2080444999}
   - component: {fileID: 2080445000}
   - component: {fileID: 879360803368300526}
-  - component: {fileID: 6089275183410798035}
-  m_Layer: 6
+  - component: {fileID: 1068179402}
+  m_Layer: 2
   m_Name: N_Apple
   m_TagString: Apple
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 5679671120257956472}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -1.452, y: 2.668, z: -1.101}
-  m_LocalScale: {x: 0.5530164, y: 0.55301636, z: 0.60491306}
+  m_LocalScale: {x: 0.66472584, y: 0.6647259, z: 0.72710556}
   m_Children:
   - {fileID: 5420501032071357439}
   m_Father: {fileID: 0}
@@ -317,10 +317,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_Colliders:
-  - {fileID: 6089275183410798035}
+  - {fileID: 0}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -449,8 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderR: Test
   offset: 0.2
---- !u!135 &6089275183410798035
-SphereCollider:
+--- !u!64 &1068179402
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -459,9 +459,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.03233241
-  m_Center: {x: 0.00000032782557, y: 0.0003504939, z: 0.032057095}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -472147775963580301, guid: 814e2ce603dbd0e4aaee23c65ad58980, type: 3}
 --- !u!1001 &274990553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -474,8 +475,16 @@ PrefabInstance:
       value: VFX_Start
       objectReference: {fileID: 0}
     - target: {fileID: 328250429392949064, guid: cc6778ab5610cb949a703b15493c8f7d, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 328250429392949064, guid: cc6778ab5610cb949a703b15493c8f7d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2170315167412903249, guid: cc6778ab5610cb949a703b15493c8f7d, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5420501031801087526, guid: cc6778ab5610cb949a703b15493c8f7d, type: 3}
       propertyPath: m_RootOrder
