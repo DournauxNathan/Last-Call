@@ -19,7 +19,7 @@ public class HandController : Singleton<HandController>
 
     private Vector3 acceleration;
     public int indexTab = 0;
-    private Transform xrRig = MasterManager.Instance.references._RRig.transform;
+    private bool hasACoup = false;
 
     //bool _secondaryButton = false;
 
@@ -88,10 +88,20 @@ public class HandController : Singleton<HandController>
         }
 
         if(targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis,out Vector2 vector)){
+
+            if(MasterManager.Instance.aCoup && vector.x != 0f && !hasACoup){
+                hasACoup = true;
+                Quaternion desiredRotationACoup = Quaternion.Euler(0, MasterManager.Instance.references._RRig.transform.rotation.eulerAngles.y + vector.x*100, 0);
+                MasterManager.Instance.references._RRig.transform.rotation = Quaternion.Lerp(MasterManager.Instance.references._RRig.transform.rotation, desiredRotationACoup, Time.deltaTime*10f);
+            }
+            else if(MasterManager.Instance.aCoup && hasACoup && vector.x == 0){
+                hasACoup = false;
+            }
+            if(!MasterManager.Instance.aCoup && vector.x != 0f){
+                Quaternion desiredRotation = Quaternion.Euler(0, MasterManager.Instance.references._RRig.transform.rotation.eulerAngles.y + vector.x*100, 0);
+                MasterManager.Instance.references._RRig.transform.rotation = Quaternion.Lerp(MasterManager.Instance.references._RRig.transform.rotation, desiredRotation, Time.deltaTime);
+            }
             
-            Quaternion desiredRotation = Quaternion.Euler(0, xrRig.rotation.eulerAngles.y + vector.y, 0);
-            
-            xrRig.rotation = Quaternion.Lerp(xrRig.rotation, desiredRotation, Time.deltaTime);
         }
 
 
