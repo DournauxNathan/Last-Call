@@ -72,6 +72,12 @@ public class HintManager : Singleton<HintManager>
             Destroy(hint.gameObject);
             return;
         }
+        if(hintInWorld.attatchedTo.transform.childCount>1){
+            Destroy(hint.gameObject);
+            Debug.LogWarning("Hint: " + hintInWorld.id + " is alredy attatched to a child of " + hintInWorld.attatchedTo + " and will not be displayed");
+            currentHintCanvas.Remove(hint);
+            return;
+        } 
         hint._hintInWorldData = hintInWorld; //reference to the hint in the world
         hint.SetText(hintInWorld.hintText);
         hint.transform.position = new Vector3(hint._hintInWorldData.attatchedTo.transform.localPosition.x, hint._hintInWorldData.attatchedTo.transform.localPosition.y + hint._hintInWorldData.offset, hint._hintInWorldData.attatchedTo.transform.localPosition.z); //Set position to the object that has the hint + offset
@@ -85,11 +91,14 @@ public class HintManager : Singleton<HintManager>
     private void SetOutlineBlink(HintCanvasBehavior hint){
         if(hint._hintInWorldData.attatchedTo.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer)){
             Outline _outline = null;
+            OutlineTicTac _outlineTicTac = null;
             if(!hint._hintInWorldData.attatchedTo.TryGetComponent<Outline>(out _outline)){
                 _outline = hint._hintInWorldData.attatchedTo.AddComponent<Outline>();
             }
             _outline.OutlineColor = color;
-            OutlineTicTac _outlineTicTac = hint._hintInWorldData.attatchedTo.AddComponent<OutlineTicTac>();
+            if(!hint._hintInWorldData.attatchedTo.TryGetComponent<OutlineTicTac>(out _outlineTicTac)){
+                _outlineTicTac = hint._hintInWorldData.attatchedTo.AddComponent<OutlineTicTac>();
+            }
             _outlineTicTac.delay = timeBlinking;
             _outlineTicTac.ToggleTicTac();
         }
@@ -105,6 +114,7 @@ public class HintManager : Singleton<HintManager>
         }
         currentHintCanvas.Remove(hint);
         Destroy(hint.gameObject);
+        StopCoroutine(hint._hintInWorldData.DisplayHint());
         hint._hintInWorldData.OnhintDisappearAction = null;
     }
 
