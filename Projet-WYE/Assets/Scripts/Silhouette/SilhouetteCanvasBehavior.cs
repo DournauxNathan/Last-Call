@@ -41,8 +41,6 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
         }
     }
 
-    
-
     public void CheckPositionInList(){
         SilhouetteCanvas _s  = GetComponentInParent<SilhouetteCanvas>();
         if(_s != null){
@@ -81,6 +79,13 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
         else{
             Debug.LogError("No default transform found");
         }
+    }
+
+    public void OnValide(){
+        Debug.Log("CODE TO DISABLE SILHOUETE HERE /!\\");
+        SilhouetteManager.Instance.IncreaseCurrentSilhouetteValidation();
+        SilhouetteManager.Instance.LastValidation(_silhouetteDataLink.isLastValidation);
+        SilhouetteManager.Instance.CheckIfAllValidationAreDone();
     }
 
 }

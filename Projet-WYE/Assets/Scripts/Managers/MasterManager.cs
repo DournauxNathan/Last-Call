@@ -44,6 +44,7 @@ public class MasterManager : Singleton<MasterManager>
     public int buttonEmissive;
     public TMP_Text text;
     public TMP_Text text1;
+    public bool aCoup = true;
 
     private void Start()
     {
@@ -257,7 +258,7 @@ public class MasterManager : Singleton<MasterManager>
 
             case 3:
                 Projection.Instance.enableTransition = true;
-                Projection.Instance.SetTransitionValue(30);
+                Projection.Instance.SetTransitionValue(50);
                 this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
