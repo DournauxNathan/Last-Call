@@ -30,7 +30,8 @@ public class SilhouetteManager : Singleton<SilhouetteManager>
     }
     
     // add string to list of outcomes
-    public void Addoutcome(int id,string outcome){
+    public void Addoutcome(int id,string outcome)
+    {
         foreach (Silhouette s in silhouettes)
         {
             if (s.id == id)
@@ -41,11 +42,13 @@ public class SilhouetteManager : Singleton<SilhouetteManager>
                 return;
             }
         }
+
         Debug.LogWarning("Silhouette: " + id + " does not exist");
     }
 
     // add list of string to list of outcomes
-    public void Addoutcome(int id,List<string> outcome){
+    public void Addoutcome(int id,List<string> outcome)
+    {
         foreach (Silhouette s in silhouettes)
         {
             if (s.id == id)
@@ -56,12 +59,18 @@ public class SilhouetteManager : Singleton<SilhouetteManager>
                 return;
             }
         }
+
         Debug.LogWarning("Silhouette: " + id + " does not exist");
     }
 
-    public void CheckIfAllValidationAreDone(){
-        if(currentSilhouetteValidation >= minSilhouetteValidation && wasLastValidation == true){
-            OnSilhouetteResolve.Invoke(); Debug.Log("Silhouette resolved");
+    public void CheckIfAllValidationAreDone()
+    {
+        if (currentSilhouetteValidation >= minSilhouetteValidation && wasLastValidation == true)
+        {
+            OnSilhouetteResolve?.Invoke(); 
+            
+            Debug.Log("Silhouette resolved");
+
             Projection.Instance.goBackInOffice = true;
             Projection.Instance.enableTransition = true;
             Projection.Instance.isTransition = true;
