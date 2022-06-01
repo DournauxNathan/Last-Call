@@ -66,8 +66,9 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 break;
         }
 
-        //Debug.Log("Load: " + currentScenario.ToString());
         isScenarioLoaded = true;
+        Debug.Log(currentScenario.ToString() + " has been loaded");
+        isScenarioLoaded = false;
     }
 
     public void StartScenario()
