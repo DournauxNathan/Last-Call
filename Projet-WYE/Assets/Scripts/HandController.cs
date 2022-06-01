@@ -19,6 +19,7 @@ public class HandController : Singleton<HandController>
 
     private Vector3 acceleration;
     public int indexTab = 0;
+    private Transform xrRig = MasterManager.Instance.references._RRig.transform;
 
     //bool _secondaryButton = false;
 
@@ -85,6 +86,16 @@ public class HandController : Singleton<HandController>
             acceleration = _acceleration;
             //Debug.Log(_acceleration);
         }
+
+        if(targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis,out Vector2 vector)){
+            
+            Quaternion desiredRotation = Quaternion.Euler(0, xrRig.rotation.eulerAngles.y + vector.y, 0);
+            
+            xrRig.rotation = Quaternion.Lerp(xrRig.rotation, desiredRotation, Time.deltaTime);
+        }
+
+
+
 /*
         #region Secondary Button
         if (targetDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out _secondaryButton))
