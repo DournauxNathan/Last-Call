@@ -34,7 +34,7 @@ public class Teleport : Singleton<Teleport>
                 MasterManager.Instance.references.player.transform.position = position.position;
                 if (particle != null)
                 {
-                    particle.SetActive(false);
+                    //particle.SetActive(false);
                 }
             }
             else if (teleportAtStart)
@@ -42,7 +42,7 @@ public class Teleport : Singleton<Teleport>
                 MasterManager.Instance.references.player.transform.position = position.position;
                 if (particle != null)
                 {
-                    particle.SetActive(false);
+                    //particle.SetActive(false);
                 }
             }   
         }
@@ -73,14 +73,14 @@ public class Teleport : Singleton<Teleport>
         doAction?.Invoke();
 
         m_Collider.isTrigger = true;
-        particle.SetActive(false);
+        //particle.SetActive(false);
 
         if (GetComponentInChildren<Renderer>() != null)
         {
             GetComponentInChildren<Renderer>().enabled = false;
             if (particle != null)
             {
-                particle.SetActive(false);
+                //particle.SetActive(false);
             }
         }
     }
