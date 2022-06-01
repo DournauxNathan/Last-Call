@@ -74,7 +74,7 @@ public class ShakeWord : MonoBehaviour
         else if (!isStarted && _time <= 0)
         {
             isStarted = true;
-            m_animator.SetBool("Bool", true);
+            //m_animator.SetBool("Bool", true);
         }
     }
 
@@ -106,19 +106,19 @@ public class ShakeWord : MonoBehaviour
     public void OnHoverEnter()
     {
         image.color = hoverColor;
-        m_animator.SetBool("Bool", false);
+        //m_animator.SetBool("Bool", false);
     }
 
     public void OnHoverExit()
     {
         image.color = defaultColor;
-        m_animator.SetBool("Bool", true);
+        //m_animator.SetBool("Bool", true);
     }
 
     public void IsSelected()
     {
         Debug.Log("is selected");
-        m_animator.SetBool("Bool", false);
+        //m_animator.SetBool("Bool", false);
 
         image.color = outlineColor;
         if (image != null)
@@ -133,7 +133,7 @@ public class ShakeWord : MonoBehaviour
         image.color = defaultColor;/*
         image.outlineColor = _defaultColorOutline;
         image.outlineWidth = 0f;*/
-        m_animator.SetBool("Bool", true);
+        //m_animator.SetBool("Bool", true);
     }
 
     public void Validate()

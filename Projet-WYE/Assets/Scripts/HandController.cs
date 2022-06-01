@@ -91,8 +91,8 @@ public class HandController : Singleton<HandController>
 
             if(MasterManager.Instance.aCoup && vector.x != 0f && !hasACoup){
                 hasACoup = true;
-                Quaternion desiredRotationACoup = Quaternion.Euler(0, MasterManager.Instance.references._RRig.transform.rotation.eulerAngles.y + vector.x*100, 0);
-                MasterManager.Instance.references._RRig.transform.rotation = Quaternion.Lerp(MasterManager.Instance.references._RRig.transform.rotation, desiredRotationACoup, Time.deltaTime*10f);
+                Quaternion desiredRotationACoup = Quaternion.Euler(0, MasterManager.Instance.references._RRig.transform.rotation.eulerAngles.y + vector.x*1000, 0);
+                MasterManager.Instance.references._RRig.transform.rotation = Quaternion.Lerp(MasterManager.Instance.references._RRig.transform.rotation, desiredRotationACoup, Time.deltaTime*35f);
             }
             else if(MasterManager.Instance.aCoup && hasACoup && vector.x == 0){
                 hasACoup = false;
