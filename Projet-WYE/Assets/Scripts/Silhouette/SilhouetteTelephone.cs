@@ -64,15 +64,15 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             }
         }
     }
-
+    
     private void DisplaySilhouette(int id){
         foreach (SilhouetteData s in silhouettes){
             if(s.identity.id == id){
                 s.gameObject.SetActive(true);
             }
-            currentSilhouetteValidation++;
-            StartCoroutine(CheckIfAllValidationAreDone());
         }
+        currentSilhouetteValidation++;
+        StartCoroutine(CheckIfAllValidationAreDone());
     }
 
     public void DisplayOutcomes(){
