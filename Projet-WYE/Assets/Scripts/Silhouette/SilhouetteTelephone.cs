@@ -9,6 +9,8 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
 {
     public List<Outcome> outcomes; 
     public List<SilhouetteData> silhouettes = new List<SilhouetteData>();
+    public float onTimeResolved = 10f;
+    public UnityEvent OnSilhouetteResolved;
     private SilhouetteCanvas canvas;
     [SerializeField] private bool testBool = false;
 
@@ -65,10 +67,14 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             if(s.identity.id == id){
                 s.gameObject.SetActive(true);
             }
+            if(s.identity.isLastValidation){
+                StartCoroutine(WaitForLastSilhouette());
+            }
         }
     }
 
     public void DisplayOutcomes(){
+        silhouettes[silhouettes.Count-1].identity.isLastValidation = true;
         canvas.CreateNewCanvas(outcomes);
     }
 
@@ -79,6 +85,15 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             silhouettes.Add(data);
         }
         silhouettes.Sort((x,y)=> x.identity.id.CompareTo(y.identity.id)); // sort the list of silhouettes by id
+    }
+
+    IEnumerator WaitForLastSilhouette(){
+        yield return new WaitForSeconds(onTimeResolved);
+        OnSilhouetteResolved.Invoke();
+        Projection.Instance.goBackInOffice = true;
+        Projection.Instance.enableTransition = true;
+        Projection.Instance.isTransition = true;
+
     }
 }
 
