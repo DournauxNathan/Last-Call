@@ -47,26 +47,28 @@ public class Projection : Singleton<Projection>
     void Start()
     {
         //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat");
-        
-        foreach (var item in objectsToDissolve)
+        if (!onEditor)
         {
-            for (int i = 0; i < item.objects.Count; i++)
+            foreach (var item in objectsToDissolve)
             {
-                if (item.objects[i] != null)
+                for (int i = 0; i < item.objects.Count; i++)
                 {
-                    item.objects[i].SetVector("_PlayerPos", player.position);
+                    if (item.objects[i] != null)
+                    {
+                        item.objects[i].SetVector("_PlayerPos", player.position);
 
-                    item.objects[i].SetFloat("_Dissolve", transitionValue);
-                }
-                else
-                {
-                    Debug.Log(item.objects[i].name);
+                        item.objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
+                    else
+                    {
+                        Debug.Log(item.objects[i].name);
+                    }
                 }
             }
-        }
 
-        hasProjted = false;
-        StopCoroutine(WaitForVoid());
+            hasProjted = false;
+            StopCoroutine(WaitForVoid());
+        }
     }
 
     // Update is called once per frame
