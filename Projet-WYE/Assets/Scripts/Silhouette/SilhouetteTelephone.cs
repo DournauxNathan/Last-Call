@@ -45,9 +45,7 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             }
         }
         outcomes.Add(new Outcome(outcomeText,id));
-        outcomes[outcomes.Count-1]._outcomeEvent.AddListener(delegate{ DisplaySilhouette(id);});
-        Debug.Log("Added outcome: " + outcomeText + " with id: " + id);
-        
+        outcomes[outcomes.Count-1]._outcomeEvent.AddListener(delegate{ DisplaySilhouette(id);});        
     }
 
     //debug function to display all the silhouettes
@@ -68,7 +66,12 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
                 s.gameObject.SetActive(true);
             }
             if(s.identity.isLastValidation){
-                StartCoroutine(WaitForLastSilhouette());
+                /*foreach(Outcome outcome in outcomes){
+                    if(outcome._outcomeId == s.identity.id){
+                        //Debug.Log(outcome._outcomeText);
+                    }
+                }*/
+                //StartCoroutine(WaitForLastSilhouette());
             }
         }
     }
@@ -76,6 +79,7 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
     public void DisplayOutcomes(){
         silhouettes[silhouettes.Count-1].identity.isLastValidation = true;
         canvas.CreateNewCanvas(outcomes);
+        AddLeaveCondition();
     }
 
 
@@ -87,7 +91,19 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
         silhouettes.Sort((x,y)=> x.identity.id.CompareTo(y.identity.id)); // sort the list of silhouettes by id
     }
 
+    private void AddLeaveCondition(){
+        foreach(Outcome outcome in outcomes){
+            foreach(SilhouetteData silhouette in silhouettes)
+            {
+                if(silhouette.identity.id == outcome._outcomeId && silhouette.identity.isLastValidation){
+                    outcome._outcomeEvent.AddListener(delegate{ StartCoroutine(WaitForLastSilhouette());});
+                }
+            }
+        }
+    }
+
     IEnumerator WaitForLastSilhouette(){
+        Debug.Log("WaitForLastSilhouette");
         yield return new WaitForSeconds(onTimeResolved);
         OnSilhouetteResolved.Invoke();
         Projection.Instance.goBackInOffice = true;
