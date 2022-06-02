@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class SilhouetteCanvasBehavior : MonoBehaviour
 {
     private Transform _cameraTransform;
     private Vector3 _defaultTransform;
     public float timeLerping = 2f;
-    [SerializeField]private SilhouetteData _silhouetteDataLink;
+    [SerializeField] private bool testBoolValidate;
     [SerializeField]private bool testBoolExit;
     private bool isLerping = false;
-
     public TMP_Text _text;
+    public UnityEvent OnValidateEvent;
     
     void Start()
     {
@@ -23,6 +24,7 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
         else if(_cameraTransform == null && MasterManager.Instance == null){
             Debug.LogError("No XRig found to track");
         }
+        OnValidateEvent.AddListener(DeleteSelfCavas);
     }
 
     // Update is called once per frame
@@ -30,6 +32,10 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
     {
         if(_cameraTransform != null) transform.rotation = _cameraTransform.rotation; //same as camera
 
+        if(testBoolValidate){
+            testBoolValidate = false;
+            OnValidateEvent.Invoke();
+        }
         if(testBoolExit){
             testBoolExit = false;
             OnSelectExit();
@@ -54,7 +60,6 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
                     }
                     transform.localPosition = _s.canvasPositions[_s._silhouetteCanvasList.IndexOf(s)].FromVector2(0f);
                     _defaultTransform = transform.position;
-                    _silhouetteDataLink = _s.silhouetteDataLink;
                 }
             }
         }
@@ -65,7 +70,6 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
 
     public void OnSelectEnter(){
         //Stop Couroutine that destroy every items
-        _silhouetteDataLink.OnHoverEnter();
         isLerping =false   ;
     }
 
@@ -74,7 +78,6 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
             //transform.localPosition = Vector3.Lerp(transform.position,_defaultTransform.localPosition,timeLerping*Time.deltaTime);
             //start couroutine to destroy every items
             isLerping = true;
-            _silhouetteDataLink.OnCancel();
         }
         else{
             Debug.LogError("No default transform found");
@@ -82,10 +85,14 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
     }
 
     public void OnValide(){
-        Debug.Log("CODE TO DISABLE SILHOUETE HERE /!\\");
-        SilhouetteManager.Instance.IncreaseCurrentSilhouetteValidation();
+        OnValidateEvent.Invoke();
+        /*SilhouetteManager.Instance.IncreaseCurrentSilhouetteValidation();
         SilhouetteManager.Instance.LastValidation(_silhouetteDataLink.isLastValidation);
-        SilhouetteManager.Instance.CheckIfAllValidationAreDone();
+        SilhouetteManager.Instance.CheckIfAllValidationAreDone();*/
+    }
+
+    private void DeleteSelfCavas(){
+        Destroy(this.gameObject);
     }
 
 }

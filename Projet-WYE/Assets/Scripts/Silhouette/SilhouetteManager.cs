@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class SilhouetteManager : Singleton<SilhouetteManager>
 {
-    public List<Silhouette> silhouettes = new List<Silhouette>();
+   /* public List<Silhouette> silhouettes = new List<Silhouette>();
     public float timeToDisappear = 4f;
     public int minSilhouetteValidation;
     private int currentSilhouetteValidation;
@@ -72,21 +72,21 @@ public class SilhouetteManager : Singleton<SilhouetteManager>
     }
     public void LastValidation(bool value){
         wasLastValidation = value;
-    }
+    }*/
 
 
 }
 
-[Serializable]
-public class Silhouette{
-    public string name;
-    public int id;
-    public List<string> outcomes = new List<string>();
-    public SilhouetteData silhouetteData;
+// [Serializable]
+// public class Silhouette{
+//     public string name;
+//     public int id;
+//     public List<string> outcomes = new List<string>();
+//     public SilhouetteData silhouetteData;
 
-    public Silhouette(SilhouetteData data){
-        this.name = data.name;
-        this.id = data.id;
-        this.silhouetteData = data;
-    }
-}
+//     public Silhouette(SilhouetteData data){
+//         this.name = data.name;
+//         this.id = data.id;
+//         this.silhouetteData = data;
+//     }
+// }

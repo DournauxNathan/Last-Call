@@ -215,7 +215,7 @@ public class CombinableObject_Data : MonoBehaviour
     }
     public void SendIdWithOutcome(int indexCombi){
         if(SilhouetteManager.Instance !=null){
-            SilhouetteManager.Instance.Addoutcome(iD, useWith[indexCombi].outcome);
+            SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
         }
         else{
             Debug.LogError("SilhouetteManager is null");
