@@ -49,11 +49,11 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             }
         }
         outcomes.Add(new Outcome(outcomeText,id));
-        outcomes[outcomes.Count-1]._outcomeEvent.AddListener(delegate{ DisplaySilhouette(id);});     
-        //ajoute x instance de displaySilhouette => a debugger   
+        outcomes[outcomes.Count-1]._outcomeEvent.AddListener(delegate{ DisplaySilhouette(id);});        
     }
 
     //debug function to display all the silhouettes
+    [Obsolete("Use DisplaySilhouette instead")]
     private void BroadAllCastSilhouette(){
         foreach (Outcome outcome in outcomes){
             foreach(SilhouetteData s in silhouettes){
@@ -64,7 +64,7 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             }
         }
     }
-    
+
     private void DisplaySilhouette(int id){
         foreach (SilhouetteData s in silhouettes){
             if(s.identity.id == id){
