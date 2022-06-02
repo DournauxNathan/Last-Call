@@ -214,7 +214,7 @@ public class CombinableObject_Data : MonoBehaviour
         OrderController.Instance.ResolvePuzzle();
     }
     public void SendIdWithOutcome(int indexCombi){
-        if(SilhouetteManager.Instance !=null){
+        if(SilhouetteTelephone.Instance !=null){
             SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
         }
         else{

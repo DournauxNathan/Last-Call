@@ -4,8 +4,12 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 
+[System.Obsolete("Use SilhouetteTelephone instead")]
 public class SilhouetteManager : Singleton<SilhouetteManager>
 {
+    private void Start() {
+        Debug.LogError("SilhouetteManage is obsolete use Silhouette Telephone instead");
+    }
    /* public List<Silhouette> silhouettes = new List<Silhouette>();
     public float timeToDisappear = 4f;
     public int minSilhouetteValidation;
