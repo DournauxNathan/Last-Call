@@ -12,6 +12,9 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
     public float onTimeResolved = 10f;
     public UnityEvent OnSilhouetteResolved;
     private SilhouetteCanvas canvas;
+    [SerializeField]private int currentSilhouetteValidation;
+    public int minSilhouetteValidation;
+    public bool wasLastValidation = false;
     [SerializeField] private bool testBool = false;
 
     // Start is called before the first frame update
@@ -45,7 +48,8 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             }
         }
         outcomes.Add(new Outcome(outcomeText,id));
-        outcomes[outcomes.Count-1]._outcomeEvent.AddListener(delegate{ DisplaySilhouette(id);});        
+        outcomes[outcomes.Count-1]._outcomeEvent.AddListener(delegate{ DisplaySilhouette(id);});     
+        //ajoute x instance de displaySilhouette => a debugger   
     }
 
     //debug function to display all the silhouettes
@@ -65,21 +69,15 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             if(s.identity.id == id){
                 s.gameObject.SetActive(true);
             }
-            if(s.identity.isLastValidation){
-                /*foreach(Outcome outcome in outcomes){
-                    if(outcome._outcomeId == s.identity.id){
-                        //Debug.Log(outcome._outcomeText);
-                    }
-                }*/
-                //StartCoroutine(WaitForLastSilhouette());
-            }
+            currentSilhouetteValidation++;
+            CheckIfAllValidationAreDone();
         }
     }
 
     public void DisplayOutcomes(){
         silhouettes[silhouettes.Count-1].identity.isLastValidation = true;
-        canvas.CreateNewCanvas(outcomes);
         AddLeaveCondition();
+        canvas.CreateNewCanvas(outcomes);
     }
 
 
@@ -96,10 +94,19 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             foreach(SilhouetteData silhouette in silhouettes)
             {
                 if(silhouette.identity.id == outcome._outcomeId && silhouette.identity.isLastValidation){
-                    outcome._outcomeEvent.AddListener(delegate{ StartCoroutine(WaitForLastSilhouette());});
+                    outcome._outcomeEvent.AddListener(delegate{ Resolved();});
                 }
             }
         }
+    }
+    public void CheckIfAllValidationAreDone(){
+        if(currentSilhouetteValidation >= minSilhouetteValidation && wasLastValidation == true){
+            StartCoroutine(WaitForLastSilhouette());
+        }
+    }
+
+    private void Resolved(){
+        wasLastValidation = true;
     }
 
     IEnumerator WaitForLastSilhouette(){

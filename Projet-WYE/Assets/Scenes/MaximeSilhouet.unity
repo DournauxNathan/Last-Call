@@ -377,7 +377,6 @@ MonoBehaviour:
   _silhouetteCanvasPrefab: {fileID: 1093961217860773564, guid: 12e06805233d32b4697672d8c9b246f9, type: 3}
   _silhouetteCanvasList: []
   canvasPositions: []
-  silhouetteDataLink: {fileID: 0}
 --- !u!1 &326117605
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +572,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outcomes: []
   silhouettes: []
-  testBool: 0
+  onTimeResolved: 10
+  OnSilhouetteResolved:
+    m_PersistentCalls:
+      m_Calls: []
+  currentSilhouetteValidation: 0
+  minSilhouetteValidation: 3
+  wasLastValidation: 0
+  testBool: 1
 --- !u!114 &611388103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,7 +595,6 @@ MonoBehaviour:
   _silhouetteCanvasPrefab: {fileID: 1093961217860773564, guid: 12e06805233d32b4697672d8c9b246f9, type: 3}
   _silhouetteCanvasList: []
   canvasPositions: []
-  silhouetteDataLink: {fileID: 0}
 --- !u!114 &611388104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1819,7 +1824,6 @@ MonoBehaviour:
   _silhouetteCanvasPrefab: {fileID: 1093961217860773564, guid: 12e06805233d32b4697672d8c9b246f9, type: 3}
   _silhouetteCanvasList: []
   canvasPositions: []
-  silhouetteDataLink: {fileID: 0}
 --- !u!1 &1682012834
 GameObject:
   m_ObjectHideFlags: 0
