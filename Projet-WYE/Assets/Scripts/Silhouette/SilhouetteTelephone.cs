@@ -16,6 +16,7 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
     public int minSilhouetteValidation;
     public bool wasLastValidation = false;
     [SerializeField] private bool testBool = false;
+    private Coroutine _coroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +71,7 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
                 s.gameObject.SetActive(true);
             }
             currentSilhouetteValidation++;
-            CheckIfAllValidationAreDone();
+            StartCoroutine(CheckIfAllValidationAreDone());
         }
     }
 
@@ -99,9 +100,10 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
             }
         }
     }
-    public void CheckIfAllValidationAreDone(){
-        if(currentSilhouetteValidation >= minSilhouetteValidation && wasLastValidation == true){
-            StartCoroutine(WaitForLastSilhouette());
+    IEnumerator CheckIfAllValidationAreDone(){
+        yield return new WaitForSeconds(0.3f);
+        if(currentSilhouetteValidation >= minSilhouetteValidation && wasLastValidation == true && _coroutine == null){
+            _coroutine = StartCoroutine(WaitForLastSilhouette());
         }
     }
 
