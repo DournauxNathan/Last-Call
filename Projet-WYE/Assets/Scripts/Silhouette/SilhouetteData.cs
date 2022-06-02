@@ -9,6 +9,8 @@ public class SilhouetteData : MonoBehaviour
     public List<string> outcomes;
     private SilhouetteManager silhouetteManager;
     private Coroutine coroutine;
+    private bool hasCreatedCanvas = false;
+    public bool isLastValidation = false;
     [SerializeField]private bool testBool = false;
 
     private void Start() {
@@ -48,10 +50,11 @@ public class SilhouetteData : MonoBehaviour
 // Set in XRGrab event OnHoverEnter
     public void OnHoverEnter()
     {
-        if(coroutine != null) StopCoroutine(coroutine);
-        if(transform.childCount==0 && outcomes.Count>0){ //if there is no canvas yet and there is at least one outcome
+        if(coroutine != null) StopCoroutine(coroutine); coroutine = null;
+        if(transform.childCount==0 && outcomes.Count>0 && !hasCreatedCanvas){ //if there is no canvas yet and there is at least one outcome
             TryGetComponent<SilhouetteCanvas>(out SilhouetteCanvas canvas);
             canvas.CreateNewCanvas(this);
+            hasCreatedCanvas = true;
         }
     }
 
@@ -67,6 +70,8 @@ public class SilhouetteData : MonoBehaviour
         coroutine = null;
         TryGetComponent<SilhouetteCanvas>(out SilhouetteCanvas canvas);
         canvas.DestroyCanvas();
+        hasCreatedCanvas = false;
+        
     }
 
     

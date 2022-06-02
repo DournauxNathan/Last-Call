@@ -19,12 +19,13 @@ public class UnitManager :  Singleton<UnitManager>
 
     public List<Unit> unitsSend;
 
-    private int sequence;
+    public int sequence;
 
     public void UpdateUI()
     {
         if (sequence == 1)
         {
+            Debug.Log("Oa");
             UIManager.Instance.UpdateUnitManager(1);
             
             foreach (var button in physicsbuttons)
@@ -36,6 +37,7 @@ public class UnitManager :  Singleton<UnitManager>
         }
         else if (sequence == 3)
         {
+            Debug.Log("Oa");
             UIManager.Instance.UpdateUnitManager(sequence);
 
             StartCoroutine(SequenceManager(10f));

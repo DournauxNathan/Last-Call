@@ -49,8 +49,6 @@ public class PhysicsButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnitManager.Instance.physicsbuttons.Clear();
-
         _meshRenderer = buttonTop.GetComponent<Renderer>();
         _audioSource = GetComponent<AudioSource>();
         
@@ -140,6 +138,7 @@ public class PhysicsButton : MonoBehaviour
     public void Pressed()
     {
         prevPressedState = isPressed;
+
         if (pressedSound != null)
         {
             _audioSource.pitch = 1;
@@ -154,7 +153,7 @@ public class PhysicsButton : MonoBehaviour
         else
         {
             UIManager.Instance.SetFormToComplete(false);
-        }        
+        }
     }
 
     public void InvokeEvent(UnityEvent _event)
@@ -260,6 +259,7 @@ public class PhysicsButton : MonoBehaviour
     {
         if (value == 1)
         {
+            UnitManager.Instance.NextSequence();
             UnitManager.Instance.UpdateUI();
 
             nPress = 1;

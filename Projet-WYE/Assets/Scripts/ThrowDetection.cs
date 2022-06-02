@@ -25,7 +25,7 @@ public class ThrowDetection : MonoBehaviour
         }
         else
         {
-            Debug.Log(other.name + " has been thrown");
+            //Debug.Log(other.name + " has been thrown");
         }
     }
 }

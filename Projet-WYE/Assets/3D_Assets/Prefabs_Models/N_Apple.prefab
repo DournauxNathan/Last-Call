@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 2080445000}
   - component: {fileID: 879360803368300526}
   - component: {fileID: 6089275183410798035}
-  - component: {fileID: 919114439}
   m_Layer: 6
   m_Name: N_Apple
   m_TagString: Apple
@@ -317,7 +316,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_Colliders:
+  - {fileID: 6089275183410798035}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -462,20 +462,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.03233241
   m_Center: {x: 0.00000032782557, y: 0.0003504939, z: 0.032057095}
---- !u!64 &919114439
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5679671120257956472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -472147775963580301, guid: 814e2ce603dbd0e4aaee23c65ad58980, type: 3}
 --- !u!1001 &274990553
 PrefabInstance:
   m_ObjectHideFlags: 0
