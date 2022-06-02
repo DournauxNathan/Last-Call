@@ -81,7 +81,6 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
         canvas.CreateNewCanvas(outcomes);
     }
 
-
     public void addSilhouetteData(GameObject self){
         self.TryGetComponent<SilhouetteData>(out SilhouetteData data);
         if(data.identity.id != -1){
