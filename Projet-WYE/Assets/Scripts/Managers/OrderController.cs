@@ -27,6 +27,9 @@ public class OrderController : Singleton<OrderController>
 
     private bool completeImaginary = true;
 
+
+    public AudioClip resolveSound;
+
     public void LateUpdate()
     {
         if (GetResolve())
@@ -43,6 +46,8 @@ public class OrderController : Singleton<OrderController>
     }
     public void ResolvePuzzle()
     {
+        MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(resolveSound);
+
         puzzlesSucced += 1;
 
         if (puzzlesSucced >= puzzleNumber)
@@ -67,6 +72,7 @@ public class OrderController : Singleton<OrderController>
             //Projection.Instance.enableTransition = true;
             //Projection.Instance.goBackInOffice = true;
             SetResolve(true);
+
 
             Projection.Instance.CallSequenceScene();
         }
