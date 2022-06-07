@@ -4322,7 +4322,7 @@ GameObject:
   - component: {fileID: 448416430}
   - component: {fileID: 448416429}
   m_Layer: 2
-  m_Name: Sequence Word Manager
+  m_Name: Post Imaginary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4455,7 +4455,6 @@ GameObject:
   - component: {fileID: 477320272}
   - component: {fileID: 477320271}
   - component: {fileID: 477320270}
-  - component: {fileID: 477320269}
   - component: {fileID: 477320268}
   m_Layer: 2
   m_Name: Canvas Word
@@ -4496,23 +4495,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &477320269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477320266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc6a00174e9401d4eba0249ed97df0bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: a4701436b244c45459869118eddd75c3, type: 2}
-  simulateInput: 0
-  maxAmount: 50
-  speed: 15
-  isLastPos: 0
 --- !u!114 &477320270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4537,9 +4519,9 @@ MonoBehaviour:
   submitWord:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 477320269}
-        m_TargetAssemblyTypeName: SequenceReveal, Assembly-CSharp
-        m_MethodName: SubmitAnswer
+      - m_Target: {fileID: 1103599256}
+        m_TargetAssemblyTypeName: MasterManager, Assembly-CSharp
+        m_MethodName: ConcludCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11721,7 +11703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unpauseAdio: 0
-  currentPhase: 2
+  currentPhase: 0
   references:
     xRInteractionManager: {fileID: 639667784}
     _RRig: {fileID: 1355308589}
@@ -11742,7 +11724,7 @@ MonoBehaviour:
     headsetManager: {fileID: 1596390316}
   isEnded: 0
   canImagine: 0
-  isInImaginary: 1
+  isInImaginary: 0
   skipTuto: 1
   isTutoEnded: 1
   startTuto: 0
@@ -18943,7 +18925,7 @@ MonoBehaviour:
   currentScenarioData: {fileID: 0}
   isScenarioLoaded: 0
   endingValue: 0
-  currentIndexScenario: 0
+  currentIndexScenario: 2
 --- !u!114 &1696208562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25281,11 +25263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: nameScene
-      value: 
+      value: HomeInvasion
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: screenFader
@@ -25367,7 +25349,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2031585019}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b6fcb47f95d38b46bb60b36f80efb5d, type: 3}
   m_Name: 

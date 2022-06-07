@@ -183,11 +183,12 @@ public class Projection : Singleton<Projection>
 
     public void SetTransitionValue(int value)
     {
+        transitionValue = value;
         foreach (var item in objectsToDissolve)
         {
             for (int i = 0; i < item.objects.Count; i++)
             {
-                item.objects[i].SetFloat("_Dissolve", value);
+                item.objects[i].SetFloat("_Dissolve", transitionValue);
             }
         }
     }
@@ -300,6 +301,7 @@ public class Projection : Singleton<Projection>
             MasterManager.Instance.isInImaginary = false;
 
             MasterManager.Instance.ChangeSceneByName(3, "Office");
+
         }
 
 

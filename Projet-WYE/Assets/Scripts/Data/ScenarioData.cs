@@ -21,6 +21,9 @@ public class ScenarioData : ScriptableObject
     public float situationBegin;
 
     public float timerInPhase2;
+
+    public AudioClip conclusion;
+    public int numberOfPuzzle;
 }
 
 [System.Serializable]

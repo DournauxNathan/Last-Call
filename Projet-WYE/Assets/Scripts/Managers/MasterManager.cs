@@ -263,7 +263,6 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(50);
-                this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
                 //isInImaginary = false;
@@ -312,6 +311,12 @@ public class MasterManager : Singleton<MasterManager>
 
             TimeSettings.Instance.StartGlobalTimer();
         }
+    }
+
+    public void ConcludCall()
+    {
+        references.mainAudioSource.PlayNewClipOnce(ScenarioManager.Instance.currentScenarioData.conclusion);
+        this.CallWithDelay(CallEnded, ScenarioManager.Instance.currentScenarioData.conclusion.length);
     }
 
     public void CallEnded()
