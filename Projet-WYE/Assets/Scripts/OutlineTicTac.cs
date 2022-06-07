@@ -18,6 +18,11 @@ public class OutlineTicTac : MonoBehaviour
         if(outline == null) Debug.LogError("OutlineTicTac: Outline component not found");
     }
 
+    private void OnEnable() {
+        TryGetComponent<Outline>(out outline);
+        if(outline == null) Debug.LogError("OutlineTicTac: Outline component not found");
+    }
+
     // Update is called once per frame
     void Update()
     {

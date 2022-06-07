@@ -45,6 +45,7 @@ public class MasterManager : Singleton<MasterManager>
     public TMP_Text text;
     public TMP_Text text1;
     public bool aCoup = true;
+    public XRRig xRRig;
 
     private void Start()
     {
@@ -318,6 +319,30 @@ public class MasterManager : Singleton<MasterManager>
         isEnded = true;
         UIManager.Instance.OutComingCall(true);
     }
+
+    public void ToggleAcoup(){
+        aCoup = !aCoup;
+    }
+
+    public void SetCameraYOffset(float value){
+        xRRig.cameraYOffset = value;
+    }
+    public void AddCameraYOffset(float value){
+        xRRig.cameraYOffset += value;
+    }
+    public void RemoveCameraYOffset(float value){
+        xRRig.cameraYOffset -= value;
+    }
+    public void AddCameraYOffset(TMP_Text text){
+        float value = float.Parse(text.text);
+        xRRig.cameraYOffset += value;
+    }
+    public void RemoveCameraYOffset(TMP_Text text){
+        float value = float.Parse(text.text);
+        xRRig.cameraYOffset -= value;
+    }
+
+
 }
 
 [System.Serializable]

@@ -209,8 +209,8 @@ public class CombinableObject_Data : MonoBehaviour
         OrderController.Instance.ResolvePuzzle();
     }
     public void SendIdWithOutcome(int indexCombi){
-        if(SilhouetteManager.Instance !=null){
-            SilhouetteManager.Instance.Addoutcome(iD, useWith[indexCombi].outcome);
+        if(SilhouetteTelephone.Instance !=null){
+            SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
         }
         else{
             Debug.LogError("SilhouetteManager is null");
