@@ -24,7 +24,8 @@ public class WayPointSound : Singleton<WayPointSound>
         else{
             Debug.Log("AudioSource not found"+ this.gameObject);
         }
-        Attach();
+        transform.position = waypoints[0].position;
+        //Attach();
     }
 
     void Update()
@@ -47,7 +48,7 @@ public class WayPointSound : Singleton<WayPointSound>
             _isLerping = false;
             _lerpTime = lerpTime;
             waypoints.RemoveAt(0);
-            Attach();
+            //Attach();
         }
     }
     private void Attach(){
@@ -67,7 +68,7 @@ public class WayPointSound : Singleton<WayPointSound>
         if(!_isLerping && waypoints.Count > 1){
             _lerpTime = lerpTime;
             _audioSource.PlayNewClipOnce(waypointSound);
-            Detach();
+            //Detach();
             _isLerping = true;
         }
     }
