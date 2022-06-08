@@ -22,10 +22,10 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
     void Start()
     {
         outcomes = new List<Outcome>();
-        canvas = GetComponent<SilhouetteCanvas>();
+        canvas = GetComponent<SilhouetteCanvas>();/*
         AddOutcome("test", 0);
         AddOutcome("test2", 1);
-        AddOutcome("test3", 2);
+        AddOutcome("test3", 2);*/
     }
 
     // Update is called once per frame
@@ -40,6 +40,7 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
 
     public void AddOutcome(string outcomeText, int id)
     {
+        Debug.LogWarning(outcomeText + "," + id);
         foreach (var outcome in outcomes)
         {
             if (outcome._outcomeId == id)
@@ -75,10 +76,14 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
         StartCoroutine(CheckIfAllValidationAreDone());
     }
 
-    public void DisplayOutcomes(){
-        silhouettes[silhouettes.Count-1].identity.isLastValidation = true;
-        AddLeaveCondition();
-        canvas.CreateNewCanvas(outcomes);
+    public void DisplayOutcomes()
+    {
+        if (MasterManager.Instance.currentPhase == Phases.Phase_2 && OrderController.Instance.GetResolve())
+        {
+            silhouettes[silhouettes.Count - 1].identity.isLastValidation = true;
+            AddLeaveCondition();
+            canvas.CreateNewCanvas(outcomes);
+        }
     }
 
     public void addSilhouetteData(GameObject self){
