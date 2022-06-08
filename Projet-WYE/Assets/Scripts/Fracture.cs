@@ -11,6 +11,8 @@ public class Fracture : MonoBehaviour
 
     public UnityEvent doAction;
 
+    public bool sendOutcome;
+
     public void Check()
     {
         if (count < maxDetection)

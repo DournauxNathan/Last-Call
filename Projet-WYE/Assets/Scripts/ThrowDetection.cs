@@ -19,6 +19,8 @@ public class ThrowDetection : MonoBehaviour
             other.TryGetComponent<CombinableObject>(out CombinableObject _combinableObject);
             OrderController.Instance.AddOrder(_combinableObject.useWith[0].influence, _combinableObject.useWith[0].outcome, _combinableObject.useWith[0].isLethal);
 
+            _combinableObject.useWith[0].doAction?.Invoke();
+
             useComparTag = false;
 
             doAction?.Invoke();
