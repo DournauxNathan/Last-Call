@@ -66,6 +66,8 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 break;
         }
 
+
+        OrderController.Instance.puzzleNumber = currentScenarioData.numberOfPuzzle;
         isScenarioLoaded = true;
         Debug.Log(currentScenario.ToString() + " has been loaded");
         isScenarioLoaded = false;

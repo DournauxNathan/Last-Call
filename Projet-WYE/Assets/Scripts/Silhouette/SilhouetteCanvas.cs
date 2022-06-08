@@ -9,20 +9,27 @@ public class SilhouetteCanvas : MonoBehaviour
     public SilhouetteCanvasBehavior _silhouetteCanvasPrefab;
     public List<GameObject> _silhouetteCanvasList = new List<GameObject>();
     public Vector2[] canvasPositions;
-    public SilhouetteData silhouetteDataLink;
 
     private void Start() {
         if(canvasPositions.Length ==0) canvasPositions = new Vector2[]{new Vector2(1,1),new Vector2(1,-1),new Vector2(-1,1),new Vector2(-1,-1)}; //default if not custom
     }
-    public void CreateNewCanvas(SilhouetteData data)
-    {
-        silhouetteDataLink = data;
-        foreach(string s in data.outcomes){
+    public void CreateNewCanvas(List<Outcome> outcomeList){
+        foreach(Outcome o in outcomeList){
+            SilhouetteCanvasBehavior newCanvas = Instantiate(_silhouetteCanvasPrefab, transform);
+            SetValues(newCanvas, o._outcomeText);
+            _silhouetteCanvasList.Add(newCanvas.gameObject);
+            newCanvas.CheckPositionInList();
+            newCanvas.OnValidateEvent.AddListener(delegate{o.OnValidate();});
+
+        }   
+        /*silhouetteDataLink = data;
+        foreach(string s in data.identity.outcomes){
            SilhouetteCanvasBehavior newCanvas = Instantiate(_silhouetteCanvasPrefab, transform);
            SetValues(newCanvas, s);
            _silhouetteCanvasList.Add(newCanvas.gameObject);
            newCanvas.CheckPositionInList();
-        }
+        }*/
+        
     }
 
     private void SetValues(SilhouetteCanvasBehavior canvas, string text){

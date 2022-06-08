@@ -199,5 +199,12 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     }
 
+    public void AddCameraYOffset(){
+        MasterManager.Instance.AddCameraYOffset(0.1f);
+    }
+    public void RemoveCameraYOffset()
+    {
+        MasterManager.Instance.AddCameraYOffset(-0.1f);
+    }
 
 }

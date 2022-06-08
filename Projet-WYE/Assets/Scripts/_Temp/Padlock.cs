@@ -20,6 +20,12 @@ public class Padlock : MonoBehaviour
     {
         currentCombination = new int[] { wheels[0].currentFace, wheels[1].currentFace, wheels[2].currentFace, wheels[3].currentFace };
         RotateWheel.Rotated += CheckResult;
+
+        if (isComplete)
+        {
+            doAction?.Invoke();
+            OrderController.Instance.AddOrder(data.useWith[0].influence, data.useWith[0].outcome, data.useWith[0].isLethal);
+        }
     }
 
     private void CheckResult(string wheelName, int number)

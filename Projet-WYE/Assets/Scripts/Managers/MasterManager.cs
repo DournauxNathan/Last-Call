@@ -45,6 +45,7 @@ public class MasterManager : Singleton<MasterManager>
     public TMP_Text text;
     public TMP_Text text1;
     public bool aCoup = true;
+    public XRRig xRRig;
 
     private void Start()
     {
@@ -247,7 +248,10 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 2:
-                Projection.Instance.transitionValue = 0f;
+                if (!Projection.Instance.onEditor)
+                {
+                    Projection.Instance.transitionValue = 0f;
+                }
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
                 WordManager.Instance.PullWord();
@@ -259,7 +263,6 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(50);
-                this.CallWithDelay(CallEnded, 5);
 
                 isTutoEnded = true;
                 //isInImaginary = false;
@@ -310,11 +313,41 @@ public class MasterManager : Singleton<MasterManager>
         }
     }
 
+    public void ConcludCall()
+    {
+        references.mainAudioSource.PlayNewClipOnce(ScenarioManager.Instance.currentScenarioData.conclusion);
+        this.CallWithDelay(CallEnded, ScenarioManager.Instance.currentScenarioData.conclusion.length);
+    }
+
     public void CallEnded()
     {
         isEnded = true;
         UIManager.Instance.OutComingCall(true);
     }
+
+    public void ToggleAcoup(){
+        aCoup = !aCoup;
+    }
+
+    public void SetCameraYOffset(float value){
+        xRRig.cameraYOffset = value;
+    }
+    public void AddCameraYOffset(float value){
+        xRRig.cameraYOffset += value;
+    }
+    public void RemoveCameraYOffset(float value){
+        xRRig.cameraYOffset -= value;
+    }
+    public void AddCameraYOffset(TMP_Text text){
+        float value = float.Parse(text.text);
+        xRRig.cameraYOffset += value;
+    }
+    public void RemoveCameraYOffset(TMP_Text text){
+        float value = float.Parse(text.text);
+        xRRig.cameraYOffset -= value;
+    }
+
+
 }
 
 [System.Serializable]
