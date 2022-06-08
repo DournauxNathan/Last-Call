@@ -47,6 +47,14 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
         }
     }
 
+    public void SetPosition(SphereCollider sphere){
+        Vector3 _min = sphere.bounds.min;
+        Vector3 _max = sphere.bounds.max;
+        transform.position = new Vector3(Random.Range(_min.x , _max.x) , Random.Range(_min.y , _max.y), Random.Range(_min.z , _max.z));
+        //_s.transform.position = new Vector3((_min.x + _max.x)/2, (_min.y + _max.y)/2, (_min.z + _max.z)/2);
+    }
+
+    [System.Obsolete]
     public void CheckPositionInList(){
         SilhouetteCanvas _s  = GetComponentInParent<SilhouetteCanvas>();
         if(_s != null){

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+[RequireComponent(typeof(SphereCollider))]
 public class SilhouetteCanvas : MonoBehaviour
 {
     public SilhouetteCanvasBehavior _silhouetteCanvasPrefab;
@@ -18,7 +18,8 @@ public class SilhouetteCanvas : MonoBehaviour
             SilhouetteCanvasBehavior newCanvas = Instantiate(_silhouetteCanvasPrefab, transform);
             SetValues(newCanvas, o._outcomeText);
             _silhouetteCanvasList.Add(newCanvas.gameObject);
-            newCanvas.CheckPositionInList();
+            newCanvas.SetPosition(GetComponent<SphereCollider>());
+            //newCanvas.CheckPositionInList();
             newCanvas.OnValidateEvent.AddListener(delegate{o.OnValidate();});
 
         }   
