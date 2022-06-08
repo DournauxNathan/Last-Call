@@ -170,11 +170,6 @@ public class CombinableObject_Data : MonoBehaviour
 
     }
 
-    public void Blablbla()
-    {
-
-    }
-
     public void InitAudioSource()
     {
         audioSource.outputAudioMixerGroup = MasterManager.Instance.references.sfx;
@@ -214,8 +209,11 @@ public class CombinableObject_Data : MonoBehaviour
         OrderController.Instance.ResolvePuzzle();
     }
     public void SendIdWithOutcome(int indexCombi){
-        if(SilhouetteManager.Instance !=null){
-            SilhouetteManager.Instance.Addoutcome(iD, useWith[indexCombi].outcome);
+
+        Debug.Log("Send Id with Outcome");
+
+        if(SilhouetteTelephone.Instance !=null){
+            SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
         }
         else{
             Debug.LogError("SilhouetteManager is null");
@@ -232,6 +230,7 @@ public class CombineWith
     public bool isLethal;
     public AudioClip sfx;
     public UnityEvent doAction;
+    public bool simulateCombinaison;
 }
 
 public enum StateMobility

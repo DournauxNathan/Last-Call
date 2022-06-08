@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
 
 public class Inhaler : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Inhaler : MonoBehaviour
 
     public XRSocketInteractorWithAutoSetup socket;
 
+    public UnityEvent doAction;
 
     private bool doOnce = true;
 
@@ -26,6 +28,7 @@ public class Inhaler : MonoBehaviour
 
             OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[0].influence, _combiObject.useWith[0].outcome, _combiObject.useWith[0].isLethal);
             OrderController.Instance.ResolvePuzzle();
+            doAction?.Invoke();
         }
         else if (socket.isMatching && socket.snapToB == dangerousProduct.gameObject && doOnce)
         {
@@ -36,6 +39,7 @@ public class Inhaler : MonoBehaviour
 
             OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[1].influence, _combiObject.useWith[1].outcome, _combiObject.useWith[1].isLethal);
             OrderController.Instance.ResolvePuzzle();
+            doAction?.Invoke();
         }
     }
 }

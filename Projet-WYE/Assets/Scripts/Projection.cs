@@ -47,26 +47,28 @@ public class Projection : Singleton<Projection>
     void Start()
     {
         //transitionShaders = Resources.LoadAll("Resources/Materials/M_"+ +".mat");
-        
-        foreach (var item in objectsToDissolve)
+        if (!onEditor)
         {
-            for (int i = 0; i < item.objects.Count; i++)
+            foreach (var item in objectsToDissolve)
             {
-                if (item.objects[i] != null)
+                for (int i = 0; i < item.objects.Count; i++)
                 {
-                    item.objects[i].SetVector("_PlayerPos", player.position);
+                    if (item.objects[i] != null)
+                    {
+                        item.objects[i].SetVector("_PlayerPos", player.position);
 
-                    item.objects[i].SetFloat("_Dissolve", transitionValue);
-                }
-                else
-                {
-                    Debug.Log(item.objects[i].name);
+                        item.objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
+                    else
+                    {
+                        Debug.Log(item.objects[i].name);
+                    }
                 }
             }
-        }
 
-        hasProjted = false;
-        StopCoroutine(WaitForVoid());
+            hasProjted = false;
+            StopCoroutine(WaitForVoid());
+        }
     }
 
     // Update is called once per frame
@@ -79,7 +81,14 @@ public class Projection : Singleton<Projection>
             {
                 for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
                 {
-                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    if (objectsToDissolve[obj].objects[i].HasProperty("_Dissolve"))
+                    {
+                        objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                    }
+                    else
+                    {
+                        Debug.Log(objectsToDissolve[obj].location + " have a missing reference at " + i);
+                    }
                 }
             }
         }
@@ -174,11 +183,12 @@ public class Projection : Singleton<Projection>
 
     public void SetTransitionValue(int value)
     {
+        transitionValue = value;
         foreach (var item in objectsToDissolve)
         {
             for (int i = 0; i < item.objects.Count; i++)
             {
-                item.objects[i].SetFloat("_Dissolve", value);
+                item.objects[i].SetFloat("_Dissolve", transitionValue);
             }
         }
     }
@@ -260,8 +270,10 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 || TutoManager.Instance.isTutoDone))
+        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 || TutoManager.Instance.isTutoDone) && !OrderController.Instance.isResolve)
         {
+            Debug.Log("Imaginary");
+
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = true;
@@ -281,28 +293,30 @@ public class Projection : Singleton<Projection>
 
         }
 
-        if (goBackInOffice && OrderController.Instance.isResolve && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        if (goBackInOffice && OrderController.Instance.isResolve && MasterManager.Instance.currentPhase == Phases.Phase_2)
         {
-            Debug.Log("3 bye");
+            Debug.Log("Going back to Office");
             hasCycle = !false;
 
             MasterManager.Instance.isInImaginary = false;
 
             MasterManager.Instance.ChangeSceneByName(3, "Office");
+
         }
 
 
         if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
         {
-            Debug.Log("2 bye");
+            Debug.Log("Tuto Scene 2");
             InitTutorial.Instance.DisableObject();
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
             TutoManager.Instance.Progress(12);
         }
 
-        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone && !MasterManager.Instance.isInImaginary)
         {
-            Debug.Log("1 bye");
+            Debug.Log("Menu");
+
             MasterManager.Instance.Reset();
             SceneLoader.Instance.Unload("TutoScene");
             SceneLoader.Instance.Unload("TutoScene_Two");
