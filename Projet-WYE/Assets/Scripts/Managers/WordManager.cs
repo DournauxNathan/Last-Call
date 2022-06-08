@@ -107,7 +107,15 @@ public class WordManager : Singleton<WordManager>
                 }
             }
         }
+    }
 
+    public void Deactivate()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Reveal>().Deactivate();
+            transform.GetChild(i).GetComponent<WordData>().Deactivate();
+        }
     }
 
 

@@ -50,7 +50,6 @@ public class UiPauseManager : Singleton<UiPauseManager>
             current = EventSystem.current.currentSelectedGameObject;
             audioSource.clip = audioClips[0];
             audioSource.Play();
-
         }
 
         //security
@@ -58,7 +57,6 @@ public class UiPauseManager : Singleton<UiPauseManager>
         {
             EventSystem.current.SetSelectedGameObject(current);
         }
-
     }
 
 

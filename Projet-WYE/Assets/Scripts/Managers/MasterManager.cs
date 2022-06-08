@@ -236,7 +236,8 @@ public class MasterManager : Singleton<MasterManager>
         switch (i)
         {
             case 0:
-                Projection.Instance.SetTransitionValue(0);
+                Projection.Instance.SetTransitionValue(50);
+                Projection.Instance.enableTransition = false;
                 break;
 
             case 1:
