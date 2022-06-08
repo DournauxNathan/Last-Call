@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class HintManager : Singleton<HintManager>
 {
+    public float timeBlinking;
+    public Color32 color;
     public List<HintInWorld> hints = new List<HintInWorld>();
     public List<HintCanvasBehavior> currentHintCanvas = new List<HintCanvasBehavior>();
     public HintCanvasBehavior hintPrefab;
@@ -70,6 +72,12 @@ public class HintManager : Singleton<HintManager>
             Destroy(hint.gameObject);
             return;
         }
+        if(hintInWorld.attatchedTo.transform.childCount>1){
+            Destroy(hint.gameObject);
+            Debug.LogWarning("Hint: " + hintInWorld.id + " is alredy attatched to a child of " + hintInWorld.attatchedTo + " and will not be displayed");
+            currentHintCanvas.Remove(hint);
+            return;
+        } 
         hint._hintInWorldData = hintInWorld; //reference to the hint in the world
         hint.SetText(hintInWorld.hintText);
         hint.transform.position = new Vector3(hint._hintInWorldData.attatchedTo.transform.localPosition.x, hint._hintInWorldData.attatchedTo.transform.localPosition.y + hint._hintInWorldData.offset, hint._hintInWorldData.attatchedTo.transform.localPosition.z); //Set position to the object that has the hint + offset
@@ -77,13 +85,36 @@ public class HintManager : Singleton<HintManager>
         hint._hintInWorldData.OnhintDisappearAction += ()=> {DestroyHint(hint);};
         StartCoroutine(hint._hintInWorldData.DisplayHint());
         if(hint._hintInWorldData.hintSound!=null) hint.PlaySound(hint._hintInWorldData.hintSound); //Play sound if there is one (Spatialised)
+        SetOutlineBlink(hint);
     }
+
+    private void SetOutlineBlink(HintCanvasBehavior hint){
+        if(hint._hintInWorldData.attatchedTo.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer)){
+            Outline _outline = null;
+            OutlineTicTac _outlineTicTac = null;
+            if(!hint._hintInWorldData.attatchedTo.TryGetComponent<Outline>(out _outline)){
+                _outline = hint._hintInWorldData.attatchedTo.AddComponent<Outline>();
+            }
+            _outline.OutlineColor = color;
+            if(!hint._hintInWorldData.attatchedTo.TryGetComponent<OutlineTicTac>(out _outlineTicTac)){
+                _outlineTicTac = hint._hintInWorldData.attatchedTo.AddComponent<OutlineTicTac>();
+            }
+            _outlineTicTac.delay = timeBlinking;
+            _outlineTicTac.ToggleTicTac();
+        }
+    }
+
 
     private void DestroyHint(HintCanvasBehavior hint){
         //Debug.Log("nb_Event");
         if (hint == null){ /*hint._hintInWorldData.OnhintDisappear.RemoveListener( delegate { DestroyHint(hint); });*/ return;}
+        if(hint._hintInWorldData.attatchedTo.TryGetComponent<Outline>(out Outline outline) && hint._hintInWorldData.attatchedTo.TryGetComponent<OutlineTicTac>(out OutlineTicTac outlineTicTac)){
+            Destroy(outlineTicTac);
+            outline.enabled = false;
+        }
         currentHintCanvas.Remove(hint);
         Destroy(hint.gameObject);
+        StopCoroutine(hint._hintInWorldData.DisplayHint());
         hint._hintInWorldData.OnhintDisappearAction = null;
     }
 
@@ -107,7 +138,7 @@ public class HintInWorld{
         OnhintDisappear.Invoke();
         OnhintDisappearAction?.Invoke();
     }
-    
+
     public HintInWorld(GameObject obj,string _text,AudioClip _clip,float _offset,int _id,float _duration){
         attatchedTo = obj;
         hintText = _text;
