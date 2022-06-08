@@ -53,6 +53,7 @@ public class WayPointSound : Singleton<WayPointSound>
     private void Attach(){
         if(waypoints.Count>0){
             transform.SetParent(waypoints[0]);
+            transform.position = waypoints[0].position;
         }
         else{
             Debug.Log("No waypoints found"+ this.gameObject);
