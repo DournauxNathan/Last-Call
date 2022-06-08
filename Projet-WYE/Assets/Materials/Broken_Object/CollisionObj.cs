@@ -9,10 +9,10 @@ public class CollisionObj : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
-
-        if (other.CompareTag(collisionTags[0]))
+        if (other.CompareTag("Destroyy"))
         {
+            Debug.Log(other.gameObject.name);
+            
             Instantiate(fracturedObject, transform.position, transform.rotation);
             Destroy(gameObject);
         }
