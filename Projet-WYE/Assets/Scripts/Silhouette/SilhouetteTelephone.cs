@@ -17,7 +17,7 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
     public bool wasLastValidation = false;
     [SerializeField] private bool testBool = false;
     private Coroutine _coroutine;
-    private bool _hasGenerate = false;
+    [SerializeField] private bool _hasGenerate = false;
 
     // Start is called before the first frame update
     void Start()

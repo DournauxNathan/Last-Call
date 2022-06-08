@@ -172,7 +172,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     public Scene GetCurrentScene()
     {
-        return SceneManager.GetActiveScene();
+        return SceneManager.GetSceneAt(1);
     }
 
     public void MoveGO(GameObject go)
