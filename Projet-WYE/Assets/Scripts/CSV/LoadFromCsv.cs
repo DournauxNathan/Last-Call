@@ -191,6 +191,10 @@ public class LoadFromCsv
                     UnityEventTools.AddBoolPersistentListener(xrInteractable.hoverExited, action2, false);
                 }
             }
+            if (!co.GetComponent<TagAndLayerSaver>())
+            {
+                TagAndLayerSaver tagAndLayer = newPrefab.AddComponent<TagAndLayerSaver>();
+            }
             if (!co.audioSource)
             {
                 co.audioSource = newPrefab.AddComponent<AudioSource>();

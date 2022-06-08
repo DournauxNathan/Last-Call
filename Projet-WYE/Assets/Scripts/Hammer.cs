@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hammer : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Hammer : MonoBehaviour
     public int maxNailsToDrive;
 
     private bool doOnce = true;
+
+    public UnityEvent doAction;
 
     public void Increase()
     {
@@ -28,6 +31,8 @@ public class Hammer : MonoBehaviour
             doOnce = !doOnce;
             OrderController.Instance.AddOrder(hammer.useWith[0].influence, hammer.useWith[0].outcome, hammer.useWith[0].isLethal);
             OrderController.Instance.ResolvePuzzle();
+
+            doAction?.Invoke();
         }
     }
 
