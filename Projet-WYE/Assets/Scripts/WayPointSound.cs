@@ -11,8 +11,8 @@ public class WayPointSound : Singleton<WayPointSound>
     private AudioSource _audioSource;
     private bool _isLerping;
     public float lerpTime;
-    public float lerpSpeed;
     private float _lerpTime;
+    public float lerpSpeed;
     
 
     void Start()
@@ -41,8 +41,8 @@ public class WayPointSound : Singleton<WayPointSound>
     }
 
     private void Lerping(){
-        transform.position = Vector3.Lerp(transform.position, waypoints[0].position, lerpSpeed*Time.deltaTime);
-        _lerpTime-=Time.deltaTime;
+        transform.position = Vector3.Lerp(transform.position, waypoints[1].position, lerpSpeed*Time.deltaTime);
+        _lerpTime-=Time.deltaTime * lerpSpeed;
         if(_lerpTime<=0){
             _isLerping = false;
             _lerpTime = lerpTime;
@@ -64,9 +64,10 @@ public class WayPointSound : Singleton<WayPointSound>
     }
 
     public void ChangeLocation(){
-        if(!_isLerping && waypoints.Count > 0){
-            Detach();
+        if(!_isLerping && waypoints.Count > 1){
+            _lerpTime = lerpTime;
             _audioSource.PlayNewClipOnce(waypointSound);
+            Detach();
             _isLerping = true;
         }
     }
