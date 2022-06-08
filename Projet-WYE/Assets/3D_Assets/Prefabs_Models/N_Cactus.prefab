@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3330132729561889474}
   - component: {fileID: 1844463224045385063}
   - component: {fileID: 4502525191044186541}
+  - component: {fileID: 3977262417922246199}
+  - component: {fileID: 3285018718334424803}
   m_Layer: 0
   m_Name: N_Cactus
   m_TagString: Untagged
@@ -25,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2701265592060502136}
-  m_LocalRotation: {x: 0.0006485922, y: 0.017897636, z: 0.0021252702, w: 0.9998374}
+  m_LocalRotation: {x: 0.00064898736, y: 0.017896041, z: 0.002126784, w: 0.9998374}
   m_LocalPosition: {x: 1.592, y: 1.165, z: -3.2569997}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.170285, y: 0.170285, z: 0.170285}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.07, y: 2.051, z: 0.245}
 --- !u!33 &1844463224045385063
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -84,3 +86,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3977262417922246199
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701265592060502136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6185327819714336780, guid: e58509ebb1b633641bab825242fe9ca6, type: 3}
+--- !u!54 &3285018718334424803
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701265592060502136}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

@@ -18,16 +18,19 @@ public class CounterCollisionDetection : OnTriggerEvents
     #region Trigger 3D Events
     private void OnTriggerEnter(Collider other)
     {
+        if (count >= maxDetectionAllowed)
+        {
+            triggerEnter?.Invoke();
+        }
+
         if (other.CompareTag(_tag) && useComparTag && debugEvent && count <= maxDetectionAllowed)
         {
             Debug.Log(other.name);
             IncreaseCount(setCount);
-            triggerEnter?.Invoke();
         }
         else if (other.CompareTag(_tag) && count <= maxDetectionAllowed)
         {
             IncreaseCount(setCount);
-            triggerEnter?.Invoke();
         }
     }
 
