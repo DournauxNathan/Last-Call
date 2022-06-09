@@ -14,9 +14,10 @@ public class SceneLoader : Singleton<SceneLoader>
     public string cScene;
     private bool isLoading = false;
 
-    private void Start()
+    private void Awake()
     {
         SceneManager.sceneLoaded += SetActiveScene;
+
 #if UNITY_EDITOR
         ScenarioManager.Instance.SetCurrentScenario(ScenarioManager.Instance.currentIndexScenario);
         ScenarioManager.Instance.LoadScenario();
