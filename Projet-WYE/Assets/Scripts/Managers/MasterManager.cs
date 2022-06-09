@@ -25,11 +25,13 @@ public class MasterManager : Singleton<MasterManager>
     public References references;
 
     [Header("Call")]
-    public bool isEnded; 
+    public bool isEnded;
 
+    public float offsetForCamera;
 
     [Header("Projection")]
-     public bool canImagine = false;
+    public bool envIsReveal;
+    public bool canImagine = false;
     public bool isInImaginary;
 
     [Header("Tutorial Management")]
@@ -45,7 +47,6 @@ public class MasterManager : Singleton<MasterManager>
     public TMP_Text text;
     public TMP_Text text1;
     public bool aCoup = true;
-    public XRRig xRRig;
 
     private void Start()
     {
@@ -236,7 +237,8 @@ public class MasterManager : Singleton<MasterManager>
         switch (i)
         {
             case 0:
-                Projection.Instance.SetTransitionValue(0);
+                Projection.Instance.SetTransitionValue(50);
+                Projection.Instance.enableTransition = false;
                 break;
 
             case 1:
@@ -280,6 +282,10 @@ public class MasterManager : Singleton<MasterManager>
 
     }
 
+    public void EnvironmentIsReveal()
+    {
+        envIsReveal = true;
+    }
 
     public void Reset()
     {
@@ -330,21 +336,21 @@ public class MasterManager : Singleton<MasterManager>
     }
 
     public void SetCameraYOffset(float value){
-        xRRig.cameraYOffset = value;
+        references.xRRig.cameraYOffset = value;
     }
     public void AddCameraYOffset(float value){
-        xRRig.cameraYOffset += value;
+        references.xRRig.cameraYOffset += value;
     }
     public void RemoveCameraYOffset(float value){
-        xRRig.cameraYOffset -= value;
+        references.xRRig.cameraYOffset -= value;
     }
     public void AddCameraYOffset(TMP_Text text){
         float value = float.Parse(text.text);
-        xRRig.cameraYOffset += value;
+        references.xRRig.cameraYOffset += value;
     }
     public void RemoveCameraYOffset(TMP_Text text){
         float value = float.Parse(text.text);
-        xRRig.cameraYOffset -= value;
+        references.xRRig.cameraYOffset -= value;
     }
 
 
@@ -355,6 +361,7 @@ public class References
 {
     [Header("XR")]
     public XRInteractionManager xRInteractionManager;
+    public XRRig xRRig;
     public GameObject _RRig;
     public List<GameObject> baseInteractors;
     public List<GameObject> rayInteractors;

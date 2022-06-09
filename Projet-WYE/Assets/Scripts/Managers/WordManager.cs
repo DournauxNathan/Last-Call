@@ -107,18 +107,14 @@ public class WordManager : Singleton<WordManager>
                 }
             }
         }
+    }
 
-        if (pullOrders || MasterManager.Instance.currentPhase == Phases.Phase_3 && !MasterManager.Instance.isInImaginary)
+    public void Deactivate()
+    {
+        for (int i = 0; i < transform.childCount; i++)
         {
-            foreach (Order currentOrder in OrderController.Instance.ordersStrings)
-            {
-                //Find any available Canvas Word 
-                var item = FindAvailableWordData();
-                //if true, Activate Canvas Word and Set his text with the current propo
-                item.Activate(transform, stockA, currentOrder.order);
-            }
-            
-            Debug.Log("Pull Order");
+            transform.GetChild(i).GetComponent<Reveal>().Deactivate();
+            transform.GetChild(i).GetComponent<WordData>().Deactivate();
         }
     }
 
