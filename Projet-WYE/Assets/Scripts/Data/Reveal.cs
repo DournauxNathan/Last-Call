@@ -98,7 +98,10 @@ public class Reveal : MonoBehaviour
 
     public void SubmitAnswer()
     {
-        MasterManager.Instance.references.mainAudioSource.PlayOneShot(question.questions[atIndex].voices);
+        if (_question == null)
+        {
+            MasterManager.Instance.references.mainAudioSource.PlayOneShot(question.questions[atIndex].voices);
+        }
         StartCoroutine(Show());
     }
 
@@ -126,20 +129,21 @@ public class Reveal : MonoBehaviour
         {
             amount += Time.deltaTime * Projection.Instance.time;
 
-            if (_question == null)
-            {
-                foreach (var item in question.questions[atIndex].linkObjects)
-                {
-                    item.SetFloat("_Dissolve", amount);
-                }
-            }
-            else
+            if (_question != null)
             {
                 foreach (var item in _question.questions[atIndex].linkObjects)
                 {
                     item.SetFloat("_Dissolve", amount);
                 }
             }
+            else
+            {
+                foreach (var item in question.questions[atIndex].linkObjects)
+                {
+                    item.SetFloat("_Dissolve", amount);
+                }
+            }
+
 
 
             if (amount > 50f)
