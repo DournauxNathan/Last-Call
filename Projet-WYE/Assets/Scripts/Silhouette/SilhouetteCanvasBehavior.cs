@@ -93,10 +93,8 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
         }
     }
 
-    public void OnValide()
-    {
+    public void OnValide(){
         OnValidateEvent.Invoke();
-
         /*SilhouetteManager.Instance.IncreaseCurrentSilhouetteValidation();
         SilhouetteManager.Instance.LastValidation(_silhouetteDataLink.isLastValidation);
         SilhouetteManager.Instance.CheckIfAllValidationAreDone();*/

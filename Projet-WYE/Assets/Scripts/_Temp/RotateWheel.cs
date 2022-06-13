@@ -24,7 +24,7 @@ public class RotateWheel : MonoBehaviour
         if (rotate && coroutineAllowed && !GetComponentInParent<Padlock>().isComplete) 
         {
             rotate = false;
-            StartCoroutine(DoRotate(3.65f, true));
+            StartCoroutine(DoRotate(3.65f));
         }
     }
 
@@ -35,11 +35,11 @@ public class RotateWheel : MonoBehaviour
         if (rotate && coroutineAllowed && !GetComponentInParent<Padlock>().isComplete)
         {
             rotate = false;
-            StartCoroutine(DoRotate(-3.65f, false)) ;
+            StartCoroutine(DoRotate(-3.65f));
         }   
     }
 
-    public IEnumerator DoRotate(float value,bool increase)
+    public IEnumerator DoRotate(float value)
     {
         coroutineAllowed = false;
 
@@ -51,25 +51,12 @@ public class RotateWheel : MonoBehaviour
 
         coroutineAllowed = true;
 
-        if (increase)
+        currentFace += 1;
+
+        if (currentFace > 9)
         {
-            currentFace += 1;
-
-            if (currentFace > 9)
-            {
-                currentFace = 0;
-            }
+            currentFace = 0;
         }
-        else
-        {
-            currentFace -= 1;
-
-            if (currentFace < 0)
-            {
-                currentFace = 9;
-            }
-        }
-
 
         Rotated(name, currentFace);
     }
