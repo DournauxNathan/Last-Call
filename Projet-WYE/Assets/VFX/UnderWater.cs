@@ -5,6 +5,8 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class UnderWater : MonoBehaviour
 {
+    private AudioSource m_audioSource;
+    public AudioClip underWaterSound;
     public GameObject PostProcessActuel;
     public GameObject PostProcessAquatique;
 
@@ -12,6 +14,15 @@ public class UnderWater : MonoBehaviour
     void Start()
     {
         PostProcessAquatique.SetActive(false);
+        if(TryGetComponent<AudioSource>(out AudioSource audioSource)){
+            audioSource.clip = underWaterSound;
+            m_audioSource = audioSource;
+        }
+        else{
+            AudioSource _audioSource = gameObject.AddComponent<AudioSource>();
+            _audioSource.clip = underWaterSound;
+            m_audioSource = _audioSource;
+        }
     }
 
     // Update is called once per frame
@@ -21,6 +32,7 @@ public class UnderWater : MonoBehaviour
         {
             PostProcessActuel.SetActive(false);
             PostProcessAquatique.SetActive(true);
+            m_audioSource.PlayNewClipOnce(underWaterSound);
         }
         else
         {
