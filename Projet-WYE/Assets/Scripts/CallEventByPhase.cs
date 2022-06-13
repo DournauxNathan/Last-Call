@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class CallEventByPhase : Singleton<CallEventByPhase>
 {
-    public UnityEvent onPhase0, onPhase1, onPhase2, onPhase3, onPhase4;
+    public UnityEvent onPhase0, onPhase1, onPhase2, onPhase3, onPhase4, onAllPuzzlesCompleted;
 
     private void Update()
     {
@@ -36,6 +36,11 @@ public class CallEventByPhase : Singleton<CallEventByPhase>
             case 4:
                 onPhase4?.Invoke();
                 break;
+        }
+
+        if (OrderController.Instance.GetResolve())
+        {
+            onAllPuzzlesCompleted?.Invoke();
         }
     }
 }

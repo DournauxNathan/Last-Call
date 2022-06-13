@@ -87,7 +87,7 @@ public class HandController : Singleton<HandController>
             //Debug.Log(_acceleration);
         }
 
-        if(!SceneLoader.Instance.GetCurrentScene().name.Contains("Appartment_") && targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis,out Vector2 vector)){
+        if(!SceneLoader.Instance.GetCurrentScene().name.Contains("Menu")  && !SceneLoader.Instance.GetCurrentScene().name.Contains("Appartment_") && targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis,out Vector2 vector)){
 
             if(MasterManager.Instance.aCoup && vector.x != 0f && !hasACoup){
                 hasACoup = true;
