@@ -14,7 +14,7 @@ public class SceneLoader : Singleton<SceneLoader>
     public string cScene;
     private bool isLoading = false;
 
-    private void Awake()
+    private void Start()
     {
         SceneManager.sceneLoaded += SetActiveScene;
 
