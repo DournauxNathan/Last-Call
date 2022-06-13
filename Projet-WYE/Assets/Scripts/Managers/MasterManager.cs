@@ -30,7 +30,8 @@ public class MasterManager : Singleton<MasterManager>
     public float offsetForCamera;
 
     [Header("Projection")]
-     public bool canImagine = false;
+    public bool envIsReveal;
+    public bool canImagine = false;
     public bool isInImaginary;
 
     [Header("Tutorial Management")]
@@ -251,13 +252,12 @@ public class MasterManager : Singleton<MasterManager>
             case 2:
                 if (!Projection.Instance.onEditor)
                 {
-                    Projection.Instance.transitionValue = 0f;
+                    Projection.Instance.SetTransitionValue(0);
                 }
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
                 WordManager.Instance.PullWord();
 
-                Projection.Instance.SetTransitionValue(0);
                 Projection.Instance.enableTransition = false;
                 break;
 
@@ -281,6 +281,10 @@ public class MasterManager : Singleton<MasterManager>
 
     }
 
+    public void EnvironmentIsReveal()
+    {
+        envIsReveal = true;
+    }
 
     public void Reset()
     {

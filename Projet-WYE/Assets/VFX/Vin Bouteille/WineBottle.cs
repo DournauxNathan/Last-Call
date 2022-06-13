@@ -7,6 +7,7 @@ public class WineBottle : MonoBehaviour
     public Waterenmoins water;
     public GameObject particle;
     public GameObject particle1;
+    public GameObject targetBottle;
 
     public float rotationX = 90f;
     public float rotationY = 90f;
@@ -35,8 +36,8 @@ public class WineBottle : MonoBehaviour
         //condition to check if the bottle is being held
         bool xPosP = WrapAngle(transform.localEulerAngles.x) > rotationX && WrapAngle(transform.localEulerAngles.x) > 0;
         bool xPosM = WrapAngle(transform.localEulerAngles.x) < -rotationX && WrapAngle(transform.localEulerAngles.x) < 0;
-        bool yPosP = WrapAngle(transform.localEulerAngles.y) > rotationY && WrapAngle(transform.localEulerAngles.y) > 0;
-        bool yPosM = WrapAngle(transform.localEulerAngles.y) < -rotationY && WrapAngle(transform.localEulerAngles.y) < 0;
+        bool yPosP = WrapAngle(transform.localEulerAngles.z) > rotationY && WrapAngle(transform.localEulerAngles.z) > 0;
+        bool yPosM = WrapAngle(transform.localEulerAngles.z) < -rotationY && WrapAngle(transform.localEulerAngles.z) < 0;
 
         if (xPosP || xPosM)
         {

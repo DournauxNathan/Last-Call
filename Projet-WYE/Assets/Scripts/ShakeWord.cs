@@ -94,9 +94,8 @@ public class ShakeWord : MonoBehaviour
 
             if (uiGroupToFade.alpha == 0)
             {
-                isDecaying = false;
                 submitWord?.Invoke();
-
+                isDecaying = false;
                 GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
                 GetComponent<BoxCollider>().enabled = false;
             }
