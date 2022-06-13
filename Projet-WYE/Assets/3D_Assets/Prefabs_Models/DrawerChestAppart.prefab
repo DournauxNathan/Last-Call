@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 442520315782540471}
   - component: {fileID: 3570226906778542866}
   - component: {fileID: 1616520950323566552}
+  - component: {fileID: 687895169}
   m_Layer: 0
   m_Name: DrawerChestAppart
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968262157826061837}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.65304816, y: 0.54, z: -3.8186493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -37,7 +38,7 @@ Transform:
   - {fileID: 8844941221419525695}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &3570226906778542866
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -87,6 +88,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &687895169
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968262157826061837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8416274096404684706, guid: 6475342c6a8922145a07a5a621edfe68, type: 3}
 --- !u!1 &1168319166703392116
 GameObject:
   m_ObjectHideFlags: 0

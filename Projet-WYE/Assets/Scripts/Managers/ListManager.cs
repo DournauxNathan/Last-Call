@@ -104,6 +104,11 @@ public class ListManager : Singleton<ListManager>
                     SetToOrderController(combiObj1, combiObj2, combinaison.influence, combinaison.outcome, combinaison.isLethal);
                 }
 
+
+                if (combinaison.isLastCombi)
+                {
+                    OrderController.Instance.SetResolve(true);
+                }
                 combinaison.doAction?.Invoke();
             }
         }

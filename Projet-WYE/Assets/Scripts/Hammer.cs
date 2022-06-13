@@ -14,6 +14,11 @@ public class Hammer : MonoBehaviour
 
     public UnityEvent doAction;
 
+    private void Update()
+    {
+        
+    }
+
     public void Increase()
     {
         count += 1;
@@ -40,7 +45,7 @@ public class Hammer : MonoBehaviour
     {
         if (other.CompareTag("Nail"))
         {
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
             other.GetComponent<Nails>().drive?.Invoke();
             Debug.Log("hhhhh");
         }

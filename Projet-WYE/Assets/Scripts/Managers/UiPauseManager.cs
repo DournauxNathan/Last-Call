@@ -50,7 +50,6 @@ public class UiPauseManager : Singleton<UiPauseManager>
             current = EventSystem.current.currentSelectedGameObject;
             audioSource.clip = audioClips[0];
             audioSource.Play();
-
         }
 
         //security
@@ -58,7 +57,6 @@ public class UiPauseManager : Singleton<UiPauseManager>
         {
             EventSystem.current.SetSelectedGameObject(current);
         }
-
     }
 
 
@@ -133,10 +131,10 @@ public class UiPauseManager : Singleton<UiPauseManager>
         EventSystem.current.SetSelectedGameObject(target);
     }
 
-    public void GoBackToMainAppart() {
+    public void GoBackToMainAppart()
+    {
+        MasterManager.Instance.ChangeSceneByName(0, "Menu");
         UnPause();
-        SceneLoader.Instance.LoadNewScene("Appartment");
-        
     }
 
     public void DisplayPathText()
@@ -199,12 +197,13 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     }
 
-    public void AddCameraYOffset(){
-        MasterManager.Instance.AddCameraYOffset(0.1f);
+    public void AddCameraYOffset()
+    {
+        MasterManager.Instance.AddCameraYOffset(MasterManager.Instance.offsetForCamera);
     }
     public void RemoveCameraYOffset()
     {
-        MasterManager.Instance.AddCameraYOffset(-0.1f);
+        MasterManager.Instance.AddCameraYOffset(-MasterManager.Instance.offsetForCamera);
     }
 
 }

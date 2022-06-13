@@ -17,6 +17,7 @@ public class SceneLoader : Singleton<SceneLoader>
     private void Start()
     {
         SceneManager.sceneLoaded += SetActiveScene;
+
 #if UNITY_EDITOR
         ScenarioManager.Instance.SetCurrentScenario(ScenarioManager.Instance.currentIndexScenario);
         ScenarioManager.Instance.LoadScenario();
@@ -172,7 +173,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     public Scene GetCurrentScene()
     {
-        return SceneManager.GetActiveScene();
+        return SceneManager.GetSceneAt(1);
     }
 
     public void MoveGO(GameObject go)
