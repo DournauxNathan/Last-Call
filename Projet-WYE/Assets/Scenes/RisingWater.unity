@@ -1035,6 +1035,103 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &34040339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 34040340}
+  - component: {fileID: 34040342}
+  - component: {fileID: 34040341}
+  m_Layer: 0
+  m_Name: Rotate Pos A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &34040340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34040339}
+  m_LocalRotation: {x: -0.49999985, y: -0.49999985, z: -0.50000036, w: 0.50000006}
+  m_LocalPosition: {x: -0.014, y: -0.034, z: 0.115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 43625034}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &34040341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34040339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tag: Hand
+  useComparTag: 1
+  debugEvent: 0
+  setCollision: 1
+  debugEnter: 0
+  triggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 125635171}
+        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
+        m_MethodName: RotatePos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  debugExit: 0
+  triggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay: 0
+  triggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEnter2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugEnter2D: 0
+  triggerExit2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugExit2D: 0
+  triggerStay2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay2D: 0
+--- !u!65 &34040342
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34040339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0780894, y: 0.10000002, z: 0.08}
+  m_Center: {x: -0.05104825, y: 0.00000000651269, z: 0.1}
 --- !u!1 &43625026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,14 +1554,18 @@ Transform:
   m_LocalScale: {x: 0.40515, y: 0.40515, z: 0.40515}
   m_Children:
   - {fileID: 691195891}
-  - {fileID: 1534710080}
-  - {fileID: 1265933944}
-  - {fileID: 194983316}
-  - {fileID: 238629557}
   - {fileID: 125635178}
   - {fileID: 1684544389}
   - {fileID: 1110161088}
   - {fileID: 1241993587}
+  - {fileID: 1534710080}
+  - {fileID: 1265933944}
+  - {fileID: 194983316}
+  - {fileID: 238629557}
+  - {fileID: 34040340}
+  - {fileID: 780146840}
+  - {fileID: 1091128453}
+  - {fileID: 1888386396}
   m_Father: {fileID: 0}
   m_RootOrder: 96
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
@@ -3015,8 +3116,6 @@ GameObject:
   - component: {fileID: 125635176}
   - component: {fileID: 125635175}
   - component: {fileID: 125635171}
-  - component: {fileID: 125635174}
-  - component: {fileID: 125635173}
   - component: {fileID: 125635172}
   m_Layer: 0
   m_Name: wheel_a
@@ -3053,71 +3152,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1217938834}
---- !u!65 &125635173
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125635170}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.10000002, z: 0.13}
-  m_Center: {x: 0.11, y: 0.0000000093218695, z: 0.13}
---- !u!114 &125635174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125635170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tag: Hand
-  useComparTag: 1
-  debugEvent: 0
-  setCollision: 1
-  debugEnter: 0
-  triggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 125635171}
-        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
-        m_MethodName: RotatePos
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  debugExit: 0
-  triggerExit:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay: 0
-  triggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerEnter2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugEnter2D: 0
-  triggerExit2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugExit2D: 0
-  triggerStay2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay2D: 0
 --- !u!33 &125635175
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -4055,7 +4089,7 @@ Transform:
   - {fileID: 1218832685}
   - {fileID: 1466144978}
   m_Father: {fileID: 43625034}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!1 &132422847
 GameObject:
@@ -5246,7 +5280,7 @@ GameObject:
   - component: {fileID: 194983318}
   - component: {fileID: 194983317}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Rotate Neg C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5264,7 +5298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43625034}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &194983317
 MonoBehaviour:
@@ -5288,7 +5322,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1110161081}
         m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
-        m_MethodName: RotatePos
+        m_MethodName: RotateNeg
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6281,7 +6315,7 @@ GameObject:
   - component: {fileID: 238629559}
   - component: {fileID: 238629558}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Rotate Neg D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6299,7 +6333,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43625034}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &238629558
 MonoBehaviour:
@@ -17009,6 +17043,103 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757701813}
   m_Mesh: {fileID: -4737304917624359246, guid: 047305abbc784a3489f4d36b1813ea59, type: 3}
+--- !u!1 &780146839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780146840}
+  - component: {fileID: 780146842}
+  - component: {fileID: 780146841}
+  m_Layer: 0
+  m_Name: Rotate Pos B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780146840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780146839}
+  m_LocalRotation: {x: -0.49999994, y: -0.49999985, z: -0.5000003, w: 0.5}
+  m_LocalPosition: {x: 0.11, y: -0.034, z: 0.115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 43625034}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &780146841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780146839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tag: Hand
+  useComparTag: 1
+  debugEvent: 0
+  setCollision: 1
+  debugEnter: 0
+  triggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1684544382}
+        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
+        m_MethodName: RotatePos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  debugExit: 0
+  triggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay: 0
+  triggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEnter2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugEnter2D: 0
+  triggerExit2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugExit2D: 0
+  triggerStay2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay2D: 0
+--- !u!65 &780146842
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780146839}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0780894, y: 0.10000002, z: 0.08}
+  m_Center: {x: -0.05104825, y: 0.00000000651269, z: 0.1}
 --- !u!1001 &782128735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28010,6 +28141,103 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1091128452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1091128453}
+  - component: {fileID: 1091128455}
+  - component: {fileID: 1091128454}
+  m_Layer: 0
+  m_Name: Rotate Pos C
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1091128453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091128452}
+  m_LocalRotation: {x: -0.49999994, y: -0.49999985, z: -0.5000003, w: 0.5}
+  m_LocalPosition: {x: 0.258, y: -0.034, z: 0.115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 43625034}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1091128454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091128452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tag: Hand
+  useComparTag: 1
+  debugEvent: 0
+  setCollision: 1
+  debugEnter: 0
+  triggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1110161081}
+        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
+        m_MethodName: RotatePos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  debugExit: 0
+  triggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay: 0
+  triggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEnter2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugEnter2D: 0
+  triggerExit2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugExit2D: 0
+  triggerStay2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay2D: 0
+--- !u!65 &1091128455
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091128452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0780894, y: 0.10000002, z: 0.08}
+  m_Center: {x: -0.05104825, y: 0.00000000651269, z: 0.1}
 --- !u!1001 &1102863939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28288,8 +28516,6 @@ GameObject:
   - component: {fileID: 1110161086}
   - component: {fileID: 1110161085}
   - component: {fileID: 1110161081}
-  - component: {fileID: 1110161084}
-  - component: {fileID: 1110161083}
   - component: {fileID: 1110161082}
   m_Layer: 0
   m_Name: wheel_c
@@ -28326,71 +28552,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1591227111}
---- !u!65 &1110161083
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110161080}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.10000002, z: 0.13}
-  m_Center: {x: 0.11, y: 0.000000026077032, z: 0.13}
---- !u!114 &1110161084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110161080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tag: Hand
-  useComparTag: 1
-  debugEvent: 0
-  setCollision: 1
-  debugEnter: 0
-  triggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1110161081}
-        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
-        m_MethodName: RotatePos
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  debugExit: 0
-  triggerExit:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay: 0
-  triggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerEnter2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugEnter2D: 0
-  triggerExit2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugExit2D: 0
-  triggerStay2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay2D: 0
 --- !u!33 &1110161085
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -29328,7 +29489,7 @@ Transform:
   - {fileID: 932957433}
   - {fileID: 952570159}
   m_Father: {fileID: 43625034}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!1 &1111680551
 GameObject:
@@ -31811,8 +31972,6 @@ GameObject:
   - component: {fileID: 1241993585}
   - component: {fileID: 1241993584}
   - component: {fileID: 1241993580}
-  - component: {fileID: 1241993583}
-  - component: {fileID: 1241993582}
   - component: {fileID: 1241993581}
   m_Layer: 0
   m_Name: wheel_d
@@ -31849,71 +32008,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 568494617}
---- !u!65 &1241993582
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241993579}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.10000002, z: 0.13}
-  m_Center: {x: 0.11, y: 0.000000022351742, z: 0.13}
---- !u!114 &1241993583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241993579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tag: Hand
-  useComparTag: 1
-  debugEvent: 0
-  setCollision: 1
-  debugEnter: 0
-  triggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1241993580}
-        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
-        m_MethodName: RotatePos
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  debugExit: 0
-  triggerExit:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay: 0
-  triggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerEnter2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugEnter2D: 0
-  triggerExit2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugExit2D: 0
-  triggerStay2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay2D: 0
 --- !u!33 &1241993584
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -32851,7 +32945,7 @@ Transform:
   - {fileID: 1175863931}
   - {fileID: 1492346575}
   m_Father: {fileID: 43625034}
-  m_RootOrder: 8
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!43 &1245625053
 Mesh:
@@ -33293,7 +33387,7 @@ GameObject:
   - component: {fileID: 1265933946}
   - component: {fileID: 1265933945}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Rotate Neg B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33311,7 +33405,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43625034}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1265933945
 MonoBehaviour:
@@ -39542,7 +39636,7 @@ GameObject:
   - component: {fileID: 1534710081}
   - component: {fileID: 1534710082}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Rotate Neg A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39560,7 +39654,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43625034}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1534710081
 BoxCollider:
@@ -46469,8 +46563,6 @@ GameObject:
   - component: {fileID: 1684544387}
   - component: {fileID: 1684544386}
   - component: {fileID: 1684544382}
-  - component: {fileID: 1684544385}
-  - component: {fileID: 1684544384}
   - component: {fileID: 1684544383}
   m_Layer: 0
   m_Name: wheel_b
@@ -46507,71 +46599,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1687035306}
---- !u!65 &1684544384
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684544381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.10000002, z: 0.13}
-  m_Center: {x: 0.11, y: 0.000000007450581, z: 0.13}
---- !u!114 &1684544385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684544381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tag: Hand
-  useComparTag: 1
-  debugEvent: 0
-  setCollision: 1
-  debugEnter: 0
-  triggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1684544382}
-        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
-        m_MethodName: RotatePos
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  debugExit: 0
-  triggerExit:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay: 0
-  triggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerEnter2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugEnter2D: 0
-  triggerExit2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugExit2D: 0
-  triggerStay2D:
-    m_PersistentCalls:
-      m_Calls: []
-  debugStay2D: 0
 --- !u!33 &1684544386
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -47509,7 +47536,7 @@ Transform:
   - {fileID: 1390748165}
   - {fileID: 1704347258}
   m_Father: {fileID: 43625034}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!1 &1686423392
 GameObject:
@@ -51698,6 +51725,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc64d0578bd017141964c46d68790ab9, type: 3}
+--- !u!1 &1888386395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888386396}
+  - component: {fileID: 1888386398}
+  - component: {fileID: 1888386397}
+  m_Layer: 0
+  m_Name: Rotate PosD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1888386396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888386395}
+  m_LocalRotation: {x: -0.49999994, y: -0.49999985, z: -0.5000003, w: 0.5}
+  m_LocalPosition: {x: 0.38789982, y: -0.033799995, z: 0.115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 43625034}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1888386397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888386395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6613adde81be40f4bb41f8c0e5393d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tag: Hand
+  useComparTag: 1
+  debugEvent: 0
+  setCollision: 1
+  debugEnter: 0
+  triggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1241993580}
+        m_TargetAssemblyTypeName: RotateWheel, Assembly-CSharp
+        m_MethodName: RotatePos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  debugExit: 0
+  triggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay: 0
+  triggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEnter2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugEnter2D: 0
+  triggerExit2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugExit2D: 0
+  triggerStay2D:
+    m_PersistentCalls:
+      m_Calls: []
+  debugStay2D: 0
+--- !u!65 &1888386398
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888386395}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0780894, y: 0.10000002, z: 0.08}
+  m_Center: {x: -0.05104825, y: 0.00000000651269, z: 0.1}
 --- !u!1001 &1890509528
 PrefabInstance:
   m_ObjectHideFlags: 0
