@@ -10,7 +10,7 @@ public class Grapple : MonoBehaviour
     private bool hasEnter;
     private bool hasExit;
 
-    public bool isComplete;
+    public bool isComplete, wasComplete;
     public UnityEvent doAction;
 
     public string outcome;
@@ -37,9 +37,16 @@ public class Grapple : MonoBehaviour
     public void Complete()
     {
         isComplete = true;
-        doAction?.Invoke();
-        trapdoor.SetBool("Open", true);
 
-        OrderController.Instance.AddOrder(1, outcome, false);
+        if (isComplete && !wasComplete)
+        {
+            wasComplete = true;
+            doAction?.Invoke();
+            trapdoor.SetBool("Open", true);
+
+            OrderController.Instance.AddOrder(1, outcome, false);
+
+            OrderController.Instance.ResolvePuzzle();
+        }
     }
 }

@@ -7,11 +7,13 @@ public class SilhouetteData : MonoBehaviour
     public bool isActive = false;
 
     public Silhouette identity = new Silhouette();
+
     private void Start() 
     {
         if (identity.id != -1)
         {
-            gameObject.SetActive(!identity.SendPresence(gameObject));
+            //gameObject.SetActive(!identity.SendPresence(gameObject));
+            this.gameObject.SetActive(false);
             TryGetComponent<SilhouetteCanvas>(out SilhouetteCanvas canvas);
             if(canvas != null) Destroy(canvas);
         }
@@ -21,6 +23,7 @@ public class SilhouetteData : MonoBehaviour
     {
         if (isActive)
         {
+            identity.outcomeLink._outcomeEvent?.Invoke();
             WayPointSound.Instance.ChangeLocation();
         }
         else

@@ -202,6 +202,7 @@ public class CombinableObject_Data : MonoBehaviour
     public void SendOutcome()
     {
         OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+        OrderController.Instance.ResolvePuzzle();
     }
 
     public void PuzzleDone()
@@ -214,6 +215,7 @@ public class CombinableObject_Data : MonoBehaviour
 
         if(SilhouetteTelephone.Instance !=null){
             SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
+            OrderController.Instance.ResolvePuzzle();
         }
         else{
             Debug.LogError("SilhouetteManager is null");

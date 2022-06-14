@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class CallEventByPhase : Singleton<CallEventByPhase>
 {
-    public UnityEvent onPhase0, onPhase1, onPhase2, onPhase3, onPhase4;
+    public UnityEvent onPhase0, onPhase1, onPhase2, onPhase3, onPhase4, onResolve;
 
     private void Update()
     {
@@ -14,6 +14,12 @@ public class CallEventByPhase : Singleton<CallEventByPhase>
 
     public void CallEvent(int i)
     {
+        if (OrderController.Instance.GetResolve())
+        {
+            onResolve?.Invoke();
+        }
+
+
         //Debug.Log((int)MasterManager.Instance.currentPhase);
         switch (i)
         {

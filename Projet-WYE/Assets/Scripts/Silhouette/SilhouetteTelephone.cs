@@ -18,6 +18,8 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
     [SerializeField] private bool testBool = false;
     private Coroutine _coroutine;
     [SerializeField] private bool _hasGenerate = false;
+    
+    public List<Transform> tpAt;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,11 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
                 }
             }
         }
+    }
+
+    public void TeleportTo(Transform _transfrom)
+    {
+        this.transform.position = _transfrom.position;
     }
 
     private void DisplaySilhouette(int id){

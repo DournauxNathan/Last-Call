@@ -9,26 +9,43 @@ public class Fracture : MonoBehaviour
     public int maxDetection;
     public int count;
 
-    public UnityEvent doAction;
+    public UnityEvent noOutcome,doAction;
 
     public bool sendOutcome;
 
+
+    public bool isComplete, wasComplete;
+    public bool doCheck = true;
+    
     public void Check()
     {
-        if (count < maxDetection)
+        if (count < maxDetection && !isComplete)
         {
             count++;
 
             if (count == maxDetection)
             {
-                SendOutcome();
+                noOutcome?.Invoke();
+
+                if (doCheck)
+                {
+                    isComplete = true;
+                    SendOutcome();
+                }
             }
         }
     }
 
     public void SendOutcome()
     {
-        doAction?.Invoke();
-        OrderController.Instance.AddOrder(1, outcome, false);
+        if (isComplete && !wasComplete)
+        {
+            isComplete = false;
+            wasComplete = true;
+
+            doAction?.Invoke();
+            //OrderController.Instance.AddOrder(1, outcome, false);
+        }
+
     }
 }
