@@ -39,6 +39,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136546}
+  - component: {fileID: 757994827493801119}
+  - component: {fileID: 425374361648452556}
   m_Layer: 0
   m_Name: hands:b_r_index1
   m_TagString: Hand
@@ -61,6 +63,36 @@ Transform:
   m_Father: {fileID: 5686134208185136550}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &757994827493801119
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &425374361648452556
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362818}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362820
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,10 +116,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5686134208185362820}
-  m_LocalRotation: {x: 0.56189185, y: -0.03958033, z: 0.76829755, w: -0.30402282}
-  m_LocalPosition: {x: -0.073359996, y: 0.01578, z: -0.01952}
+  m_LocalRotation: {x: -0.3125748, y: 0.76965183, z: 0.018750938, w: 0.5564005}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7537148826137749086}
   m_Father: {fileID: 5686134208185136550}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,6 +200,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136554}
+  - component: {fileID: 4487923944249584877}
+  - component: {fileID: 7527854306946080994}
   m_Layer: 0
   m_Name: hands:b_r_middle1
   m_TagString: Hand
@@ -189,6 +224,36 @@ Transform:
   m_Father: {fileID: 5686134208185136550}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4487923944249584877
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &7527854306946080994
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362826}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362828
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +263,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136556}
+  - component: {fileID: 5944088961934331414}
+  - component: {fileID: 8736477282116654624}
   m_Layer: 0
   m_Name: hands:b_r_index2
   m_TagString: Hand
@@ -220,6 +287,36 @@ Transform:
   m_Father: {fileID: 5686134208185136546}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5944088961934331414
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &8736477282116654624
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362828}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362830
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,6 +326,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136558}
+  - component: {fileID: 7616016873008713604}
+  - component: {fileID: 6683727449200651447}
+  - component: {fileID: 6977092782474178574}
   m_Layer: 0
   m_Name: hands:b_r_index3
   m_TagString: Hand
@@ -251,6 +351,50 @@ Transform:
   m_Father: {fileID: 5686134208185136556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7616016873008713604
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!136 &6683727449200651447
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &6977092782474178574
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362830}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362832
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +434,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136562}
+  - component: {fileID: 9185211887036249360}
+  - component: {fileID: 1609370295066761054}
   m_Layer: 0
   m_Name: hands:b_r_pinky0
   m_TagString: Hand
@@ -312,6 +458,36 @@ Transform:
   m_Father: {fileID: 5686134208185136550}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &9185211887036249360
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362834}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &1609370295066761054
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362834}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362836
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +497,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136564}
+  - component: {fileID: 5590574459349089416}
+  - component: {fileID: 7071358401067323274}
   m_Layer: 0
   m_Name: hands:b_r_middle2
   m_TagString: Hand
@@ -343,6 +521,36 @@ Transform:
   m_Father: {fileID: 5686134208185136554}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5590574459349089416
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &7071358401067323274
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362836}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362838
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +560,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136566}
+  - component: {fileID: 4581211750663403723}
+  - component: {fileID: 3258667024969696337}
   m_Layer: 0
   m_Name: hands:b_r_middle3
   m_TagString: Hand
@@ -374,6 +584,36 @@ Transform:
   m_Father: {fileID: 5686134208185136564}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4581211750663403723
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362838}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &3258667024969696337
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362838}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362840
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +623,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136568}
+  - component: {fileID: 7104051725989548}
+  - component: {fileID: 4716157206388014997}
   m_Layer: 0
   m_Name: hands:b_r_pinky3
   m_TagString: Hand
@@ -405,6 +647,36 @@ Transform:
   m_Father: {fileID: 5686134208185136574}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7104051725989548
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &4716157206388014997
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362840}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362842
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +716,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136572}
+  - component: {fileID: 7139010064617128477}
+  - component: {fileID: 5240752588347529852}
   m_Layer: 0
   m_Name: hands:b_r_pinky1
   m_TagString: Hand
@@ -466,6 +740,36 @@ Transform:
   m_Father: {fileID: 5686134208185136562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7139010064617128477
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362844}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &5240752588347529852
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362844}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362846
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +779,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136574}
+  - component: {fileID: 6438299245901546499}
+  - component: {fileID: 6613857184787982289}
   m_Layer: 0
   m_Name: hands:b_r_pinky2
   m_TagString: Hand
@@ -497,6 +803,36 @@ Transform:
   m_Father: {fileID: 5686134208185136572}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6438299245901546499
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &6613857184787982289
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362846}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362912
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +842,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136512}
+  - component: {fileID: 5659421770018379525}
+  - component: {fileID: 3221671502550924324}
   m_Layer: 0
   m_Name: hands:b_r_ring3
   m_TagString: Hand
@@ -528,6 +866,36 @@ Transform:
   m_Father: {fileID: 5686134208185136518}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5659421770018379525
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &3221671502550924324
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362912}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362914
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +935,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136516}
+  - component: {fileID: 9017558114778865263}
+  - component: {fileID: 9069308316111375065}
   m_Layer: 0
   m_Name: hands:b_r_ring1
   m_TagString: Hand
@@ -589,6 +959,36 @@ Transform:
   m_Father: {fileID: 5686134208185136550}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &9017558114778865263
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &9069308316111375065
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362916}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362918
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,6 +998,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136518}
+  - component: {fileID: 5038915626280648599}
+  - component: {fileID: 7224933105055764011}
   m_Layer: 0
   m_Name: hands:b_r_ring2
   m_TagString: Hand
@@ -620,6 +1022,36 @@ Transform:
   m_Father: {fileID: 5686134208185136516}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5038915626280648599
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362918}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &7224933105055764011
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362918}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362920
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +1061,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136520}
+  - component: {fileID: 8025890904436656872}
+  - component: {fileID: 4927749414967845757}
   m_Layer: 0
   m_Name: hands:b_r_thumb3
   m_TagString: Hand
@@ -651,6 +1085,36 @@ Transform:
   m_Father: {fileID: 5686134208185136526}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8025890904436656872
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &4927749414967845757
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362920}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362922
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,6 +1154,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136524}
+  - component: {fileID: 5174913906327240813}
+  - component: {fileID: 5834501012371189152}
   m_Layer: 0
   m_Name: hands:b_r_thumb1
   m_TagString: Hand
@@ -712,6 +1178,36 @@ Transform:
   m_Father: {fileID: 5686134208185136550}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5174913906327240813
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &5834501012371189152
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362924}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362926
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,6 +1217,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136526}
+  - component: {fileID: 3871699218957026976}
+  - component: {fileID: 2150354394853810863}
   m_Layer: 0
   m_Name: hands:b_r_thumb2
   m_TagString: Hand
@@ -743,6 +1241,36 @@ Transform:
   m_Father: {fileID: 5686134208185136524}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &3871699218957026976
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.05687711
+  m_Direction: 0
+  m_Center: {x: 0.0022874628, y: -0.00000000449101, z: 7.360643e-10}
+--- !u!54 &2150354394853810863
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686134208185362926}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5686134208185362928
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,8 +1440,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686134208185136532}
-  - component: {fileID: 4484763130473347411}
-  - component: {fileID: 4608198434575339296}
   m_Layer: 0
   m_Name: hands:hands_geom
   m_TagString: Hand
@@ -936,36 +1462,6 @@ Transform:
   m_Father: {fileID: 5686134208185136530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &4484763130473347411
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686134208185362932}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: d0c255d07fd68f14b94e55d388e7e6bb, type: 3}
---- !u!54 &4608198434575339296
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686134208185362932}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5686134208185362934
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,3 +1493,64 @@ Transform:
   m_Father: {fileID: 5686134208185136530}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6064302205354022433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7537148826137749086}
+  - component: {fileID: 1179373225380833799}
+  - component: {fileID: 8564911420769656047}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7537148826137749086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064302205354022433}
+  m_LocalRotation: {x: -0.5146542, y: -0.03404592, z: -0.7507138, w: 0.41279626}
+  m_LocalPosition: {x: -0.0134, y: 0.0122, z: -0.0672}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5686134208185136548}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 13.848, y: -72.387, z: 33.274}
+--- !u!65 &1179373225380833799
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064302205354022433}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.091702916, y: 0.060682304, z: 0.019574821}
+  m_Center: {x: 0.0041485685, y: -0.0016473263, z: 0.04021269}
+--- !u!54 &8564911420769656047
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064302205354022433}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

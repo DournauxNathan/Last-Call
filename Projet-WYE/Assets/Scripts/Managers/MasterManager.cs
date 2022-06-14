@@ -252,13 +252,12 @@ public class MasterManager : Singleton<MasterManager>
             case 2:
                 if (!Projection.Instance.onEditor)
                 {
-                    Projection.Instance.transitionValue = 0f;
+                    Projection.Instance.SetTransitionValue(0);
                 }
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
                 WordManager.Instance.PullWord();
 
-                Projection.Instance.SetTransitionValue(0);
                 Projection.Instance.enableTransition = false;
                 break;
 

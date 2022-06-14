@@ -17,6 +17,7 @@ public class SceneLoader : Singleton<SceneLoader>
     private void Start()
     {
         SceneManager.sceneLoaded += SetActiveScene;
+
 #if UNITY_EDITOR
         ScenarioManager.Instance.SetCurrentScenario(ScenarioManager.Instance.currentIndexScenario);
         ScenarioManager.Instance.LoadScenario();
