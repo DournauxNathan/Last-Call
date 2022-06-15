@@ -24,7 +24,6 @@ public class SilhouetteData : MonoBehaviour
         if (isActive)
         {
             identity.outcomeLink._outcomeEvent?.Invoke();
-            WayPointSound.Instance.ChangeLocation();
         }
         else
         {
