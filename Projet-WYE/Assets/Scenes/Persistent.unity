@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 4ce47862f11f5a442b8913733b198665
+  m_OcclusionCullingData: {fileID: 36300000, guid: 0b549c8a97fc79b48843c34f669d9cca, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -7002,6 +7002,9 @@ MonoBehaviour:
   onPhase4:
     m_PersistentCalls:
       m_Calls: []
+  onResolve:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &634979746
 GameObject:
   m_ObjectHideFlags: 0
@@ -10470,7 +10473,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 639667784}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 40
+    m_Bits: 4294967295
   m_AttachTransform: {fileID: 0}
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
@@ -11645,7 +11648,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 639667784}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 40
+    m_Bits: 4294967295
   m_AttachTransform: {fileID: 0}
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
@@ -12205,6 +12208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167076505a8e25e4ba51a80575e5fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasSeenIntro: 0
+  displayIntro: 0
   unpauseAdio: 0
   currentPhase: 0
   references:
@@ -17716,7 +17721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headPhone: {fileID: 1596390300}
   isOnHead: 0
-  socket: {fileID: 0}
+  socket: {fileID: 253319444}
   offset: 0.1
   equip: 1
   press: 0
@@ -26199,7 +26204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: nameScene
-      value: LogoVideo
+      value: RisingWater
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: screenFader
