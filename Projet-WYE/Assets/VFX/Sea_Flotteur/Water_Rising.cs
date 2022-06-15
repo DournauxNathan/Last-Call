@@ -15,7 +15,7 @@ public class Water_Rising : MonoBehaviour
 
     public void StopRising()
     {
-        StopCoroutine(Rise());
+        StopAllCoroutines();
     }
 
     public IEnumerator Rise()

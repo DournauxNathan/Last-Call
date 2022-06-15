@@ -116,7 +116,7 @@ public class ShakeWord : MonoBehaviour
 
     public void IsSelected()
     {
-        Debug.Log("is selected");
+        //Debug.Log("is selected");
         //m_animator.SetBool("Bool", false);
 
         image.color = outlineColor;
