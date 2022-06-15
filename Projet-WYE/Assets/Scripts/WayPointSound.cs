@@ -28,7 +28,7 @@ public class WayPointSound : Singleton<WayPointSound>
         //Attach();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if(testBool)
         {
@@ -41,15 +41,23 @@ public class WayPointSound : Singleton<WayPointSound>
         }
     }
 
-    private void Lerping(){
-        transform.position = Vector3.Lerp(transform.position, waypoints[1].position, lerpSpeed*Time.deltaTime);
-        _lerpTime-=Time.deltaTime * lerpSpeed;
-        if(_lerpTime<=0){
+    private void Lerping()
+    {
+        transform.position = Vector3.Lerp(transform.position, waypoints[1].position, lerpSpeed * Time.deltaTime);
+        //_lerpTime-=Time.deltaTime * lerpSpeed;
+
+        float dist = Vector3.Distance(waypoints[1].position, transform.position);
+
+        if (dist < 0.15f)
+        {
             _isLerping = false;
             _lerpTime = lerpTime;
             waypoints.RemoveAt(0);
-            //Attach();
         }
+/*
+        if(_lerpTime<=0){
+            //Attach();
+        }*/
     }
     private void Attach(){
         if(waypoints.Count>0){

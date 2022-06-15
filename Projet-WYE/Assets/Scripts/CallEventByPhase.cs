@@ -6,16 +6,19 @@ using UnityEngine.Events;
 public class CallEventByPhase : Singleton<CallEventByPhase>
 {
     public UnityEvent onPhase0, onPhase1, onPhase2, onPhase3, onPhase4, onResolve;
+    private bool doOnce = true;
 
     private void Update()
     {
+
         CallEvent((int)MasterManager.Instance.currentPhase);
     }
 
     public void CallEvent(int i)
     {
-        if (OrderController.Instance.GetResolve())
+        if (OrderController.Instance.GetResolve() && doOnce)
         {
+            doOnce = false;
             onResolve?.Invoke();
         }
 
@@ -43,5 +46,6 @@ public class CallEventByPhase : Singleton<CallEventByPhase>
                 onPhase4?.Invoke();
                 break;
         }
+
     }
 }
