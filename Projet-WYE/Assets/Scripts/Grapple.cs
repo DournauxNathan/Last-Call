@@ -29,6 +29,7 @@ public class Grapple : MonoBehaviour
 
             if (!isComplete)
             {
+                isComplete = true;
                 Complete();
             }
         }
@@ -36,17 +37,15 @@ public class Grapple : MonoBehaviour
 
     public void Complete()
     {
-        isComplete = true;
-
         if (isComplete && !wasComplete)
         {
+            isComplete = false;
             wasComplete = true;
+
             doAction?.Invoke();
             trapdoor.SetBool("Open", true);
 
             OrderController.Instance.AddOrder(1, outcome, false);
-
-            OrderController.Instance.ResolvePuzzle();
         }
     }
 }

@@ -211,7 +211,7 @@ public class CombinableObject_Data : MonoBehaviour
     }
     public void SendIdWithOutcome(int indexCombi){
 
-        Debug.Log("Send Id with Outcome");
+        //Debug.Log("Send Id with Outcome");
 
         if(SilhouetteTelephone.Instance !=null){
             SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);

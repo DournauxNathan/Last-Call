@@ -13,6 +13,11 @@ public class Water_Rising : MonoBehaviour
         StartCoroutine(Rise());
     }
 
+    public void StopRising()
+    {
+        StopCoroutine(Rise());
+    }
+
     public IEnumerator Rise()
     {
         while (water.transform.position.y != maxheight)
