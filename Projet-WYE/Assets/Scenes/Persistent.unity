@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 4ce47862f11f5a442b8913733b198665
-  m_OcclusionCullingData: {fileID: 36300000, guid: 0b549c8a97fc79b48843c34f669d9cca, type: 2}
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000002, guid: 788e1aaf239dbd7459faa86f6f0d834e, type: 2}
+  m_LightingDataAsset: {fileID: 112000004, guid: 788e1aaf239dbd7459faa86f6f0d834e, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: cf42007dcc660c546884720c5bdb2ce5, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -708,14 +708,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5827247510379209543, guid: cbf15e9db22627546a372455368d1597, type: 3}
-      propertyPath: cameraTransform
-      value: 
-      objectReference: {fileID: 1973597107}
-    - target: {fileID: 5827247510379209548, guid: cbf15e9db22627546a372455368d1597, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 1973597108}
     - target: {fileID: 5827247510379209549, guid: cbf15e9db22627546a372455368d1597, type: 3}
       propertyPath: m_Name
       value: PauseCanvas V3
@@ -1935,7 +1927,6 @@ GameObject:
   m_Component:
   - component: {fileID: 138692673}
   - component: {fileID: 138692672}
-  - component: {fileID: 138692674}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -1977,23 +1968,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &138692674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 138692671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 390bc2bdf19348a40874d7307aa70d1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intensity: 0.75
-  duration: 0.5
-  volume: {fileID: 644935558}
-  blink: 0
-  fadeout: 0
 --- !u!1 &143094717
 GameObject:
   m_ObjectHideFlags: 0
@@ -7028,9 +7002,6 @@ MonoBehaviour:
   onPhase4:
     m_PersistentCalls:
       m_Calls: []
-  onResolve:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &634979746
 GameObject:
   m_ObjectHideFlags: 0
@@ -8274,7 +8245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741452803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 449846320}
@@ -8366,7 +8337,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -10499,7 +10470,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 639667784}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 40
   m_AttachTransform: {fileID: 0}
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
@@ -10623,7 +10594,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 12
+    m_Bits: 44
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_KeepSelectedTargetValid: 1
@@ -11674,7 +11645,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 639667784}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 40
   m_AttachTransform: {fileID: 0}
   m_StartingSelectedInteractable: {fileID: 0}
   m_HoverEntered:
@@ -11798,7 +11769,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 12
+    m_Bits: 44
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_KeepSelectedTargetValid: 1
@@ -16777,7 +16748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501873991}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.375, y: 15, z: 3.9070003}
+  m_LocalPosition: {x: 1.375, y: 1.25, z: 3.9070003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1973597107}
@@ -17745,7 +17716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headPhone: {fileID: 1596390300}
   isOnHead: 0
-  socket: {fileID: 253319444}
+  socket: {fileID: 0}
   offset: 0.1
   equip: 1
   press: 0
@@ -21747,8 +21718,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879240946}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.581, y: 1, z: -1.293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1973597107}
@@ -22809,7 +22780,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   m_VolumeTrigger: {fileID: 0}
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
@@ -23773,14 +23744,14 @@ PrefabInstance:
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 138692673}
+      objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: hasCycle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: onEditor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: m_Enabled
@@ -26228,7 +26199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: nameScene
-      value: Menu
+      value: LogoVideo
       objectReference: {fileID: 0}
     - target: {fileID: 8815310895980823927, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: screenFader

@@ -18,6 +18,8 @@ public enum Phases
 
 public class MasterManager : Singleton<MasterManager>
 {
+    public bool hasSeenIntro = false;
+    public bool displayIntro = false;
     public bool unpauseAdio;
     public Phases currentPhase;
 

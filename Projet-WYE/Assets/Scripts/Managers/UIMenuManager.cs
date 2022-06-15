@@ -286,8 +286,14 @@ public class UIMenuManager : MonoBehaviour
 
     public void Play()
     {
+        if(!MasterManager.Instance.hasSeenIntro && !MasterManager.Instance.displayIntro && ScenarioManager.Instance.currentScenario == Scenario.None){
+            MasterManager.Instance.displayIntro = true;
+            SceneLoader.Instance.LoadNewScene("LogoVideo");
+        }
+        else{
         MasterManager.Instance.ChangeSceneByName(1, "Office");
         StartGame.Invoke();
+        }
     }
 
     public void Quit()
