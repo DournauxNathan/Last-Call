@@ -125,8 +125,10 @@ public class TimeSettings : Singleton<TimeSettings>
     {
         timeBeforeCall = value;
 
-        if (UIManager.Instance != null)
+        if (SceneLoader.Instance.GetCurrentScene().name == "Office" && MasterManager.Instance.currentPhase == Phases.Phase_1)
+        {
             UIManager.Instance.InComingCall(true);
+        }
     }
 
 
