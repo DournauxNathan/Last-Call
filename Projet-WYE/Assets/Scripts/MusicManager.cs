@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class MusicManager : Singleton<MusicManager>
 {
     [SerializeField] private AudioSource _audioSource;
     public List<MusicByPhase> musicByPhase = new List<MusicByPhase>();
 
     // Start is called before the first frame update
-    void CheckMusic()
+    public void CheckMusic()
     {
         foreach(MusicByPhase mbp in musicByPhase)
         {

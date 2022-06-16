@@ -246,7 +246,7 @@ public class MasterManager : Singleton<MasterManager>
             case 1:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
-               // ScenarioManager.Instance.UpdateScenario(1);
+               //ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 break;
@@ -281,6 +281,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
         }
 
+        MusicManager.Instance.CheckMusic();
     }
 
     public void EnvironmentIsReveal()
