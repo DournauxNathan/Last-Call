@@ -17,34 +17,58 @@ public class RotateWheel : MonoBehaviour
         coroutineAllowed = true;
     }
 
-    public void Rotate()
+    public void RotatePos()
     {
         rotate = true;
 
         if (rotate && coroutineAllowed && !GetComponentInParent<Padlock>().isComplete) 
         {
             rotate = false;
-            StartCoroutine("DoRotate");
+            StartCoroutine(DoRotate(3.65f, true));
         }
     }
 
-    public IEnumerator DoRotate()
+    public void RotateNeg()
+    {
+        rotate = true;
+
+        if (rotate && coroutineAllowed && !GetComponentInParent<Padlock>().isComplete)
+        {
+            rotate = false;
+            StartCoroutine(DoRotate(-3.65f, false));
+        }   
+    }
+
+    public IEnumerator DoRotate(float value, bool increase)
     {
         coroutineAllowed = false;
 
         for (int i = 0; i <= 9; i++)
         {
-            transform.Rotate(0f, 3.65f , 0f, Space.Self);
+            transform.Rotate(0f, value, 0f, Space.Self);
             yield return new WaitForSeconds(0.01f);
         }
 
         coroutineAllowed = true;
 
-        currentFace += 1;
 
-        if (currentFace > 9)
+        if (increase)
         {
-            currentFace = 0;
+            currentFace += 1;
+
+            if (currentFace > 9)
+            {
+                currentFace = 0;
+            }
+        }
+        else
+        {
+            currentFace -= 1;
+
+            if (currentFace < 0)
+            {
+                currentFace = 9;
+            }
         }
 
         Rotated(name, currentFace);

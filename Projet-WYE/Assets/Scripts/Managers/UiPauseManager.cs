@@ -43,7 +43,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
         _text.text = "";
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (current == null  && isOn|| EventSystem.current.currentSelectedGameObject != null && current != EventSystem.current.currentSelectedGameObject && isOn)
         {
@@ -70,7 +70,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
         }
         isOn = false;
         audioSource.PlayNewClipOnce(audioClips[3]);
-        OnPauseExit.Invoke();
+        OnPauseExit?.Invoke();
     }
 
     public void PauseDisplay()
@@ -86,7 +86,8 @@ public class UiPauseManager : Singleton<UiPauseManager>
             SetUp();
             isOn = true;
             audioSource.PlayNewClipOnce(audioClips[2]);
-            OnPauseEnter.Invoke();
+            OnPauseEnter?.Invoke();
+
         }
     }
 
