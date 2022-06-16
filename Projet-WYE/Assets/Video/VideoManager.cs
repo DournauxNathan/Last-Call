@@ -13,7 +13,7 @@ public class VideoManager : MonoBehaviour
     private void Start() {
         if(!MasterManager.Instance.hasSeenIntro && MasterManager.Instance.displayIntro){
             videoPlayer.clip = introCinematic;
-            sceneToLoad = "TrappedMan";
+            sceneToLoad = "Office";
             MasterManager.Instance.hasSeenIntro = true;
             StartCoroutine(WaitForVideoEnd());
         }
@@ -28,7 +28,16 @@ public class VideoManager : MonoBehaviour
     IEnumerator WaitForVideoEnd(){
         float _delay = ToSingle(videoPlayer.clip.length);
         yield return new WaitForSeconds(_delay);
-        SceneLoader.Instance.LoadNewScene(sceneToLoad);
+        Projection.Instance.SetTransitionValue(0);
+
+        if (sceneToLoad == "Office")
+        {
+            MasterManager.Instance.ChangeSceneByName(1, "Office");
+        }
+        else
+        {
+            SceneLoader.Instance.LoadNewScene(sceneToLoad);
+        }
     }
     
     private static float ToSingle(double value){

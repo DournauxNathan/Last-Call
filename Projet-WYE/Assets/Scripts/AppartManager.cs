@@ -99,8 +99,8 @@ public class AppartManager : Singleton<AppartManager>
 
     public void LoadDefaultAppart()
     {
-        SceneLoader.Instance.LoadNewScene("Appartment_Day 0");
-        currentAppart = "Appartment_Day 0";
+        SceneLoader.Instance.LoadNewScene("Appartment_Day_0");
+        currentAppart = "Appartment_Day_0";
     }
 
     private void FindMonologue(Scenario scenario,int value)

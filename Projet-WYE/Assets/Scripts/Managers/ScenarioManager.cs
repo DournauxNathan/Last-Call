@@ -22,6 +22,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
     public bool isScenarioLoaded = false;
     [Range(-20, 20)]
     public int endingValue = 0;
+    public bool skipCurrentScenario;
 
     public void SetCurrentScenario(int index/*Scenario nextScenario*/)
     {
@@ -47,27 +48,31 @@ public class ScenarioManager : Singleton<ScenarioManager>
     {
         switch (currentScenario)
         {
+            case Scenario.None:
+                break;
             case Scenario.TrappedMan:
                 WordManager.Instance.answers.AddRange(scenarios[0].answers);
                 WordManager.Instance.questions.AddRange(scenarios[0].questions);
                 currentScenarioData = scenarios[0];
-            break;
+                OrderController.Instance.puzzleNumber = currentScenarioData.numberOfPuzzle;
+                break;
 
             case Scenario.HomeInvasion:
                 WordManager.Instance.answers.AddRange(scenarios[1].answers);
                 WordManager.Instance.questions.AddRange(scenarios[1].questions);
                 currentScenarioData = scenarios[1];
+                OrderController.Instance.puzzleNumber = currentScenarioData.numberOfPuzzle;
                 break;
 
             case Scenario.RisingWater:
                 WordManager.Instance.answers.AddRange(scenarios[2].answers);
                 WordManager.Instance.questions.AddRange(scenarios[2].questions);
                 currentScenarioData = scenarios[2];
+                OrderController.Instance.puzzleNumber = currentScenarioData.numberOfPuzzle;
                 break;
         }
 
 
-        OrderController.Instance.puzzleNumber = currentScenarioData.numberOfPuzzle;
         isScenarioLoaded = true;
         //Debug.Log(currentScenario.ToString() + " has been loaded");
         isScenarioLoaded = false;
@@ -104,6 +109,11 @@ public class ScenarioManager : Singleton<ScenarioManager>
     {
         currentIndexScenario+=i;
         //Debug.Log(currentIndexScenario);
+        
+        if (skipCurrentScenario)
+        {
+            currentIndexScenario++;
+        }
 
         switch (currentIndexScenario)
         {

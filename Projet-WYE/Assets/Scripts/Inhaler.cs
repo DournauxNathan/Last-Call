@@ -19,10 +19,10 @@ public class Inhaler : MonoBehaviour
 
     public void Check()
     {
-
-        if (socket.isMatching && socket.snapToA == healthProduct.gameObject && isComplete && !wasComplete)
+        if (socket.isMatching && socket.snapToA == healthProduct.gameObject)
         {
             isComplete = true;
+
             if (isComplete && !wasComplete)
             {
                 isComplete = false;
@@ -37,7 +37,7 @@ public class Inhaler : MonoBehaviour
                 doAction?.Invoke();
             }
         }
-        else if (socket.isMatching && socket.snapToB == dangerousProduct.gameObject && isComplete && !wasComplete)
+        else if (socket.isMatching && socket.snapToB == dangerousProduct.gameObject)
         {
             isComplete = true;
 
