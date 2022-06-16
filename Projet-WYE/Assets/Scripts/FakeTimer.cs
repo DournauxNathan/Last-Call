@@ -11,6 +11,7 @@ public class FakeTimer : MonoBehaviour
     public float offset;
     public float speed;
     private int minutes;
+    public int minBeforNewMusic;
     [SerializeField]private bool _isActive = false;
 
     
@@ -56,6 +57,7 @@ public class FakeTimer : MonoBehaviour
         yield return new WaitForSeconds(4f);
         FadeOut();
         _isActive = false;
+        CheckTiming(minutes);
         }
     }
 
@@ -64,5 +66,11 @@ public class FakeTimer : MonoBehaviour
     }
     private void FadeOut(){
         _text.CrossFadeAlpha(0, 1, false);
+    }
+
+    private void CheckTiming(int current){
+        if( current >= minBeforNewMusic){
+            throw new System.NotImplementedException();
+        }
     }
 }
