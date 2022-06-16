@@ -43,14 +43,13 @@ public class UiPauseManager : Singleton<UiPauseManager>
         _text.text = "";
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (current == null  && isOn|| EventSystem.current.currentSelectedGameObject != null && current != EventSystem.current.currentSelectedGameObject && isOn)
         {
             current = EventSystem.current.currentSelectedGameObject;
             audioSource.clip = audioClips[0];
             audioSource.Play();
-
         }
 
         //security
@@ -58,7 +57,6 @@ public class UiPauseManager : Singleton<UiPauseManager>
         {
             EventSystem.current.SetSelectedGameObject(current);
         }
-
     }
 
 
@@ -72,7 +70,7 @@ public class UiPauseManager : Singleton<UiPauseManager>
         }
         isOn = false;
         audioSource.PlayNewClipOnce(audioClips[3]);
-        OnPauseExit.Invoke();
+        OnPauseExit?.Invoke();
     }
 
     public void PauseDisplay()
@@ -88,7 +86,8 @@ public class UiPauseManager : Singleton<UiPauseManager>
             SetUp();
             isOn = true;
             audioSource.PlayNewClipOnce(audioClips[2]);
-            OnPauseEnter.Invoke();
+            OnPauseEnter?.Invoke();
+
         }
     }
 
@@ -133,10 +132,10 @@ public class UiPauseManager : Singleton<UiPauseManager>
         EventSystem.current.SetSelectedGameObject(target);
     }
 
-    public void GoBackToMainAppart() {
+    public void GoBackToMainAppart()
+    {
+        MasterManager.Instance.ChangeSceneByName(0, "Menu");
         UnPause();
-        SceneLoader.Instance.LoadNewScene("Appartment");
-        
     }
 
     public void DisplayPathText()
@@ -199,12 +198,13 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     }
 
-    public void AddCameraYOffset(){
-        MasterManager.Instance.AddCameraYOffset(0.1f);
+    public void AddCameraYOffset()
+    {
+        MasterManager.Instance.AddCameraYOffset(MasterManager.Instance.offsetForCamera);
     }
     public void RemoveCameraYOffset()
     {
-        MasterManager.Instance.AddCameraYOffset(-0.1f);
+        MasterManager.Instance.AddCameraYOffset(-MasterManager.Instance.offsetForCamera);
     }
 
 }

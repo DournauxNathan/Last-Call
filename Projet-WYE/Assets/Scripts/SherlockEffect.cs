@@ -23,12 +23,12 @@ public class SherlockEffect : Singleton<SherlockEffect>
     void LateUpdate()
     {
         //Have no reference
-        /*
+        
         if(cameraLimit.xLimit != XLimit) //TODO: Remove Only to find the corect value
         {
             cameraLimit.xLimit = XLimit;
-        }*/
-
+        }
+/*
         if (MasterManager.Instance.currentPhase == Phases.Phase_2)
         {
             distanceFromCamera = 0.55f;
@@ -37,7 +37,7 @@ public class SherlockEffect : Singleton<SherlockEffect>
         else
         {
             XLimit = 0;
-        }
+        }*/
 
         
         if(MasterManager.Instance.currentPhase != Phases.Phase_2){

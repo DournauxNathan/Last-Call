@@ -18,6 +18,8 @@ public enum Phases
 
 public class MasterManager : Singleton<MasterManager>
 {
+    public bool hasSeenIntro = false;
+    public bool displayIntro = false;
     public bool unpauseAdio;
     public Phases currentPhase;
 
@@ -25,11 +27,13 @@ public class MasterManager : Singleton<MasterManager>
     public References references;
 
     [Header("Call")]
-    public bool isEnded; 
+    public bool isEnded;
 
+    public float offsetForCamera;
 
     [Header("Projection")]
-     public bool canImagine = false;
+    public bool envIsReveal;
+    public bool canImagine = false;
     public bool isInImaginary;
 
     [Header("Tutorial Management")]
@@ -45,7 +49,6 @@ public class MasterManager : Singleton<MasterManager>
     public TMP_Text text;
     public TMP_Text text1;
     public bool aCoup = true;
-    public XRRig xRRig;
 
     private void Start()
     {
@@ -236,13 +239,14 @@ public class MasterManager : Singleton<MasterManager>
         switch (i)
         {
             case 0:
-                Projection.Instance.SetTransitionValue(0);
+                Projection.Instance.SetTransitionValue(50);
+                Projection.Instance.enableTransition = false;
                 break;
 
             case 1:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
-                ScenarioManager.Instance.UpdateScenario(1);
+               //ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 break;
@@ -250,13 +254,12 @@ public class MasterManager : Singleton<MasterManager>
             case 2:
                 if (!Projection.Instance.onEditor)
                 {
-                    Projection.Instance.transitionValue = 0f;
+                    Projection.Instance.SetTransitionValue(0);
                 }
                 MasterManager.Instance.isInImaginary = true;
                 UpdateController();
                 WordManager.Instance.PullWord();
 
-                Projection.Instance.SetTransitionValue(0);
                 Projection.Instance.enableTransition = false;
                 break;
 
@@ -278,8 +281,13 @@ public class MasterManager : Singleton<MasterManager>
                 break;
         }
 
+        MusicManager.Instance.CheckMusic();
     }
 
+    public void EnvironmentIsReveal()
+    {
+        envIsReveal = true;
+    }
 
     public void Reset()
     {
@@ -330,21 +338,21 @@ public class MasterManager : Singleton<MasterManager>
     }
 
     public void SetCameraYOffset(float value){
-        xRRig.cameraYOffset = value;
+        references.xRRig.cameraYOffset = value;
     }
     public void AddCameraYOffset(float value){
-        xRRig.cameraYOffset += value;
+        references.xRRig.cameraYOffset += value;
     }
     public void RemoveCameraYOffset(float value){
-        xRRig.cameraYOffset -= value;
+        references.xRRig.cameraYOffset -= value;
     }
     public void AddCameraYOffset(TMP_Text text){
         float value = float.Parse(text.text);
-        xRRig.cameraYOffset += value;
+        references.xRRig.cameraYOffset += value;
     }
     public void RemoveCameraYOffset(TMP_Text text){
         float value = float.Parse(text.text);
-        xRRig.cameraYOffset -= value;
+        references.xRRig.cameraYOffset -= value;
     }
 
 
@@ -355,6 +363,7 @@ public class References
 {
     [Header("XR")]
     public XRInteractionManager xRInteractionManager;
+    public XRRig xRRig;
     public GameObject _RRig;
     public List<GameObject> baseInteractors;
     public List<GameObject> rayInteractors;

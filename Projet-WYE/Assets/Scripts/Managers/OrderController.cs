@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -29,6 +30,8 @@ public class OrderController : Singleton<OrderController>
 
 
     public AudioClip resolveSound;
+
+    public UnityEvent doAtEnd;
 
     public void LateUpdate()
     {
@@ -73,6 +76,7 @@ public class OrderController : Singleton<OrderController>
             Projection.Instance.goBackInOffice = true;
             SetResolve(true);
 
+            doAtEnd?.Invoke();
 
             //Projection.Instance.CallSequenceScene();
         }

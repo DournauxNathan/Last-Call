@@ -202,6 +202,7 @@ public class CombinableObject_Data : MonoBehaviour
     public void SendOutcome()
     {
         OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+        OrderController.Instance.ResolvePuzzle();
     }
 
     public void PuzzleDone()
@@ -210,10 +211,11 @@ public class CombinableObject_Data : MonoBehaviour
     }
     public void SendIdWithOutcome(int indexCombi){
 
-        Debug.Log("Send Id with Outcome");
+        //Debug.Log("Send Id with Outcome");
 
         if(SilhouetteTelephone.Instance !=null){
             SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
+            OrderController.Instance.ResolvePuzzle();
         }
         else{
             Debug.LogError("SilhouetteManager is null");
@@ -230,7 +232,7 @@ public class CombineWith
     public bool isLethal;
     public AudioClip sfx;
     public UnityEvent doAction;
-    public bool simulateCombinaison;
+    public bool isLastCombi;
 }
 
 public enum StateMobility

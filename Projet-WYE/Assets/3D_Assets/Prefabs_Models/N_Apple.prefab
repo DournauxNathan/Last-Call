@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 2080445000}
   - component: {fileID: 879360803368300526}
   - component: {fileID: 1068179402}
+  - component: {fileID: 6928924761275091842}
   m_Layer: 2
   m_Name: N_Apple
   m_TagString: Apple
@@ -241,6 +242,7 @@ MonoBehaviour:
     doAction:
       m_PersistentCalls:
         m_Calls: []
+    simulateCombinaison: 0
   - objectName: Blender
     influence: -1
     outcome: Faites un jus de pomme
@@ -249,6 +251,7 @@ MonoBehaviour:
     doAction:
       m_PersistentCalls:
         m_Calls: []
+    simulateCombinaison: 0
   - objectName: Knife
     influence: -1
     outcome: "D\xE9coupez une pomme au couteau"
@@ -257,6 +260,7 @@ MonoBehaviour:
     doAction:
       m_PersistentCalls:
         m_Calls: []
+    simulateCombinaison: 0
   onLock:
     m_PersistentCalls:
       m_Calls: []
@@ -463,6 +467,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -472147775963580301, guid: 814e2ce603dbd0e4aaee23c65ad58980, type: 3}
+--- !u!114 &6928924761275091842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5679671120257956472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346abbb9204e5a240b6d225e6daaf61c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Fabric
+  - Plastic
+  - Wood
+  clip: {fileID: 8300000, guid: 9deb18b9df606ad4c8701c015545d76a, type: 3}
 --- !u!1001 &274990553
 PrefabInstance:
   m_ObjectHideFlags: 0

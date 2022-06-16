@@ -11,7 +11,7 @@ public class Padlock : MonoBehaviour
 
     [Header("Propeties")]
     public int[] correctCombination, currentCombination;
-    public bool isComplete;
+    public bool isComplete, wasCompleted;
     public List<RotateWheel> wheels;
 
     public UnityEvent doAction;
@@ -51,8 +51,16 @@ public class Padlock : MonoBehaviour
             && (currentCombination[2] == correctCombination[2])
             && (currentCombination[3] == correctCombination[3])) || isComplete)
         {
-            doAction?.Invoke();
-            OrderController.Instance.AddOrder(data.useWith[0].influence, data.useWith[0].outcome, data.useWith[0].isLethal);
+            isComplete = true;
+
+            if (isComplete && !wasCompleted)
+            {
+                isComplete = false;
+                wasCompleted = true;
+
+                doAction?.Invoke();
+                OrderController.Instance.AddOrder(data.useWith[0].influence, data.useWith[0].outcome, data.useWith[0].isLethal);
+            }
         }
     }
 

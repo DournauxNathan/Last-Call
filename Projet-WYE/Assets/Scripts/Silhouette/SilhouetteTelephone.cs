@@ -17,6 +17,9 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
     public bool wasLastValidation = false;
     [SerializeField] private bool testBool = false;
     private Coroutine _coroutine;
+    [SerializeField] private bool _hasGenerate = false;
+    
+    public List<Transform> tpAt;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +69,11 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
         }
     }
 
+    public void TeleportTo(Transform _transfrom)
+    {
+        this.transform.position = _transfrom.position;
+    }
+
     private void DisplaySilhouette(int id){
         foreach (SilhouetteData s in silhouettes){
             if(s.identity.id == id){
@@ -78,8 +86,9 @@ public class SilhouetteTelephone : Singleton<SilhouetteTelephone>
 
     public void DisplayOutcomes()
     {
-        if (MasterManager.Instance.currentPhase == Phases.Phase_2 && OrderController.Instance.GetResolve())
+        if (MasterManager.Instance.currentPhase == Phases.Phase_2 && OrderController.Instance.GetResolve() && !_hasGenerate)
         {
+            _hasGenerate = true;
             silhouettes[silhouettes.Count - 1].identity.isLastValidation = true;
             AddLeaveCondition();
             canvas.CreateNewCanvas(outcomes);
