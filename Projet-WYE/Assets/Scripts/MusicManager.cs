@@ -15,6 +15,7 @@ public class MusicManager : Singleton<MusicManager>
             if(mbp.phase == MasterManager.Instance.currentPhase)
             {
                 _audioSource.clip = mbp.music;
+                _audioSource.Play();
                 return;
             }
         }
@@ -23,6 +24,7 @@ public class MusicManager : Singleton<MusicManager>
     public void ChangeMusicbyPhase(int i)
     {
         _audioSource.clip = musicByPhase[i].music;
+        _audioSource.Play();
     }
 }
 [System.Serializable]
