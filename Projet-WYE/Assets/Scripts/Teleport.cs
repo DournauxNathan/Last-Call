@@ -67,7 +67,7 @@ public class Teleport : Singleton<Teleport>
 
     public void TeleportTo()
     {
-        MasterManager.Instance.references.player.GetComponent<VignetteApplier>().FadeIn();
+        //MasterManager.Instance.references.player.GetComponent<VignetteApplier>().FadeIn();
         MasterManager.Instance.references.player.transform.position = position.position;
 
         doAction?.Invoke();

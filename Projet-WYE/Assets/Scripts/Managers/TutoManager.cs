@@ -55,7 +55,7 @@ public class TutoManager : Singleton<TutoManager>
         if (FileHandler.IsAFileExist("SaveLastCall.json"))
         {
             // SkipTuto(); //To Delete after testing
-            Debug.Log("File Found");
+            //Debug.Log("File Found");
         }
     }
     private void Update()

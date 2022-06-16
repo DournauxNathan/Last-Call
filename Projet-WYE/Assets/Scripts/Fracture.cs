@@ -44,7 +44,7 @@ public class Fracture : MonoBehaviour
             wasComplete = true;
 
             doAction?.Invoke();
-            //OrderController.Instance.AddOrder(1, outcome, false);
+            OrderController.Instance.AddOrder(1, outcome, false);
         }
 
     }

@@ -9,6 +9,7 @@ public class Initializer : MonoBehaviour
 
 
     public List<GameObject> objs;
+    public List<GameObject> objsToDeactivate;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,14 @@ public class Initializer : MonoBehaviour
         foreach (GameObject gameObject in objs)
         {
             gameObject.SetActive(value);
+        }
+    }
+
+    public void DeactivateObjsIn()
+    {
+        foreach (GameObject gameObject in objsToDeactivate)
+        {
+            gameObject.SetActive(true);
         }
     }
 }

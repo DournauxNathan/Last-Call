@@ -18,6 +18,8 @@ public enum Phases
 
 public class MasterManager : Singleton<MasterManager>
 {
+    public bool hasSeenIntro = false;
+    public bool displayIntro = false;
     public bool unpauseAdio;
     public Phases currentPhase;
 
@@ -244,7 +246,7 @@ public class MasterManager : Singleton<MasterManager>
             case 1:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
-                ScenarioManager.Instance.UpdateScenario(1);
+               // ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 break;
