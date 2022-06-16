@@ -11,6 +11,6 @@ public class BuildLoader : MonoBehaviour
 
     private void LoadPersistent()
     {
-        SceneManager.LoadSceneAsync("TutoScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("LogoVideo", LoadSceneMode.Additive);
     }
 }

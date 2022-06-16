@@ -95,7 +95,7 @@ public class Projection : Singleton<Projection>
             }
         }
 #endif
-        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
+        if (!onEditor && enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
             for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {

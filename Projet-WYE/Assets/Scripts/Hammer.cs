@@ -10,7 +10,7 @@ public class Hammer : MonoBehaviour
     public int count;
     public int maxNailsToDrive;
 
-    private bool doOnce = true;
+    private bool isComplete, wasComplete;
 
     public UnityEvent doAction;
 
@@ -25,17 +25,20 @@ public class Hammer : MonoBehaviour
 
         if (count >= maxNailsToDrive)
         {
+            isComplete = true;
             Check();
         }
     }
 
     public void Check()
     {
-        if (doOnce)
+        if (isComplete && !wasComplete)
         {
-            doOnce = !doOnce;
+            isComplete = false;
+            wasComplete = true;
+
             OrderController.Instance.AddOrder(hammer.useWith[0].influence, hammer.useWith[0].outcome, hammer.useWith[0].isLethal);
-            OrderController.Instance.ResolvePuzzle();
+            //OrderController.Instance.ResolvePuzzle();
 
             doAction?.Invoke();
         }
