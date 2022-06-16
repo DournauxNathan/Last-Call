@@ -9,7 +9,7 @@ public class CollisionObj : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Destroyy"))
+        if (other.CompareTag(collisionTags[0]) || other.CompareTag(collisionTags[1]))
         {
             Debug.Log(other.gameObject.name);
             
