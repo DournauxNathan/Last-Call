@@ -6,6 +6,7 @@ public class MusicManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
     public List<MusicByPhase> musicByPhase = new List<MusicByPhase>();
+
     // Start is called before the first frame update
     void CheckMusic()
     {
@@ -17,6 +18,11 @@ public class MusicManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void ChangeMusicbyPhase(int i)
+    {
+        _audioSource.clip = musicByPhase[i].music;
     }
 }
 [System.Serializable]
