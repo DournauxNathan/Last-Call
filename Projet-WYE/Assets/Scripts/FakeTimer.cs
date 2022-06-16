@@ -11,7 +11,7 @@ public class FakeTimer : MonoBehaviour
     public float offset;
     public float speed;
     private int minutes;
-    private bool _isActive = false;
+    [SerializeField]private bool _isActive = false;
 
     
     void Start()
@@ -29,7 +29,7 @@ public class FakeTimer : MonoBehaviour
     {
         if(_isActive){
             transform.rotation = _transformCamera.rotation;
-            transform.position = Vector3.Lerp(transform.position, _transformCamera.position, Time.deltaTime * speed);
+            transform.position = Vector3.Lerp(transform.position, CalculedPosition(), Time.deltaTime * speed);
         }
     }
 
