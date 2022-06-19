@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 8413285005475157315}
   - component: {fileID: 5777168007152396467}
   - component: {fileID: 3749085463401301905}
+  - component: {fileID: 773232302353731534}
   m_Layer: 0
   m_Name: PastaPacket1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &7244834946415095340
 Transform:
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8052720164889179286}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.7690648, y: 0.789, z: -0.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &5991205234375352713
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -102,7 +103,7 @@ MonoBehaviour:
   UnderWaterAngularDrag: 1
   AirDrag: 0
   AirAngularDrag: 0.05
-  FloatingPower: 15
+  FloatingPower: 40
 --- !u!54 &3749085463401301905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,3 +120,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &773232302353731534
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8052720164889179286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3807266383688972214, guid: ae0322485e5849b42bd4cee9746bc05e, type: 3}

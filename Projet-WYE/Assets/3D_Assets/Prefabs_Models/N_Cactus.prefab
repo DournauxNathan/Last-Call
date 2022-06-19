@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3330132729561889474}
   - component: {fileID: 1844463224045385063}
   - component: {fileID: 4502525191044186541}
+  - component: {fileID: 689650141971651886}
   - component: {fileID: 3977262417922246199}
   - component: {fileID: 3285018718334424803}
   m_Layer: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2701265592060502136}
   m_LocalRotation: {x: 0.00064898736, y: 0.017896041, z: 0.002126784, w: 0.9998374}
   m_LocalPosition: {x: 1.592, y: 1.165, z: -3.2569997}
-  m_LocalScale: {x: 0.170285, y: 0.170285, z: 0.170285}
+  m_LocalScale: {x: 0.158625, y: 0.158625, z: 0.158625}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,6 +87,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &689650141971651886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701265592060502136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5d7cec179baf04d8b3610a05d4957c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Floaters:
+  - {fileID: 3330132729561889474}
+  UnderWaterDrag: 3
+  UnderWaterAngularDrag: 1
+  AirDrag: 0
+  AirAngularDrag: 0.05
+  FloatingPower: 15
 --- !u!64 &3977262417922246199
 MeshCollider:
   m_ObjectHideFlags: 0
