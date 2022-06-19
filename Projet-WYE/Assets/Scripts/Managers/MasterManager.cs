@@ -246,7 +246,7 @@ public class MasterManager : Singleton<MasterManager>
             case 1:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
-                ScenarioManager.Instance.UpdateScenario(1);
+                ScenarioManager.Instance.UpdateScenario();
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 break;
@@ -266,7 +266,9 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(50);
-
+                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                HeadPhoneManager.Instance.equip = true;
+                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = false;
                 isTutoEnded = true;
                 //isInImaginary = false;
                 //Projection.Instance.revealScene = true;

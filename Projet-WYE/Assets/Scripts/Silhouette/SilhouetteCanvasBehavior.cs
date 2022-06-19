@@ -95,9 +95,10 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
 
     public void OnValide(){
         OnValidateEvent.Invoke();
-        /*SilhouetteManager.Instance.IncreaseCurrentSilhouetteValidation();
-        SilhouetteManager.Instance.LastValidation(_silhouetteDataLink.isLastValidation);
-        SilhouetteManager.Instance.CheckIfAllValidationAreDone();*/
+
+        //SilhouetteTelephone.Instance.IncreaseCurrentSilhouetteValidation();
+        //SilhouetteTelephone.Instance.LastValidation(_silhouetteDataLink.isLastValidation);
+        //SilhouetteTelephone.Instance.CheckIfAllValidationAreDone();
     }
 
     private void DeleteSelfCavas(){
