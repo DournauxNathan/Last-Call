@@ -11,13 +11,19 @@ public class VideoManager : MonoBehaviour
     public string sceneToLoad;
     
     private void Start() {
-        if(!MasterManager.Instance.hasSeenIntro && MasterManager.Instance.displayIntro){
+        if(!MasterManager.Instance.hasSeenIntro && MasterManager.Instance.displayIntro)
+        {
             videoPlayer.clip = introCinematic;
             sceneToLoad = "Office";
             MasterManager.Instance.hasSeenIntro = true;
             StartCoroutine(WaitForVideoEnd());
         }
-        else{
+        else if (MasterManager.Instance.isTutoEnded)
+        {
+            StartCoroutine(WaitForVideoEnd());
+        }
+        else
+        {
             videoPlayer.clip = videoClip;
             sceneToLoad = "TutoScene";
 
@@ -33,6 +39,10 @@ public class VideoManager : MonoBehaviour
         if (sceneToLoad == "Office")
         {
             MasterManager.Instance.ChangeSceneByName(1, "Office");
+        }
+        else if (MasterManager.Instance.isTutoEnded)
+        {
+            MasterManager.Instance.ChangeSceneByName(0, "Menu");
         }
         else
         {
