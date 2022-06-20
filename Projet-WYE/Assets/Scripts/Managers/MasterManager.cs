@@ -38,6 +38,7 @@ public class MasterManager : Singleton<MasterManager>
 
     [Header("Tutorial Management")]
     public bool skipTuto;
+    public bool skipIntro;
     public bool isTutoEnded;
     public bool startTuto;
     public float timerTutoBegin = 30f;
@@ -261,6 +262,8 @@ public class MasterManager : Singleton<MasterManager>
                 WordManager.Instance.PullWord();
 
                 Projection.Instance.enableTransition = false;
+                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                HeadPhoneManager.Instance.equip = true;
                 break;
 
             case 3:
@@ -268,7 +271,6 @@ public class MasterManager : Singleton<MasterManager>
                 Projection.Instance.SetTransitionValue(50);
                 HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;
                 HeadPhoneManager.Instance.equip = true;
-                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = false;
                 isTutoEnded = true;
                 //isInImaginary = false;
                 //Projection.Instance.revealScene = true;

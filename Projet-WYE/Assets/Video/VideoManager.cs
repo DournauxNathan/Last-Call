@@ -18,7 +18,7 @@ public class VideoManager : MonoBehaviour
             MasterManager.Instance.hasSeenIntro = true;
             StartCoroutine(WaitForVideoEnd());
         }
-        else if (MasterManager.Instance.isTutoEnded)
+        else if (MasterManager.Instance.skipIntro)
         {
             StartCoroutine(WaitForVideoEnd());
         }
