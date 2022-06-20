@@ -248,7 +248,7 @@ public class MasterManager : Singleton<MasterManager>
 
             case 1:
                 Projection.Instance.enableTransition = true;
-                Projection.Instance.transitionValue = 50f;
+                Projection.Instance.SetTransitionValue(50);
                 ScenarioManager.Instance.UpdateScenario();
                 TimeSettings.Instance.Initialize();
                 UpdateController();

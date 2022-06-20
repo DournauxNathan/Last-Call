@@ -59,6 +59,8 @@ public class VideoManager : MonoBehaviour
     private void DisableTracking(){
         GameObject _player = sherlockEffect.gameObject;
         Destroy(sherlockEffect);
-        _player.transform.position = new Vector3(0, 1, 100); 
+        _player.transform.position = new Vector3(0, 1, 109);
+
+        _player.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
     }
 }

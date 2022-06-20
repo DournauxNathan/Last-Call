@@ -67,6 +67,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
                _renderer.enabled = false;
                 break;
             case Phases.Phase_3:
+                _renderer.enabled = true;
                 headPhone.GetComponent<Rigidbody>().isKinematic = true;
                 EquipHeadPhone();
                 break;
