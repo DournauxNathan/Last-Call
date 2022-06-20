@@ -51,7 +51,7 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
         Vector3 _min = sphere.bounds.min;
         Vector3 _max = sphere.bounds.max;
         transform.position = new Vector3(Random.Range(_min.x , _max.x) , Random.Range(_min.y , _max.y), Random.Range(_min.z , _max.z));
-        _defaultTransform = transform.position;
+        _defaultTransform = transform.localPosition;
         //_s.transform.position = new Vector3((_min.x + _max.x)/2, (_min.y + _max.y)/2, (_min.z + _max.z)/2);
     }
 
@@ -95,9 +95,10 @@ public class SilhouetteCanvasBehavior : MonoBehaviour
 
     public void OnValide(){
         OnValidateEvent.Invoke();
-        /*SilhouetteManager.Instance.IncreaseCurrentSilhouetteValidation();
-        SilhouetteManager.Instance.LastValidation(_silhouetteDataLink.isLastValidation);
-        SilhouetteManager.Instance.CheckIfAllValidationAreDone();*/
+
+        //SilhouetteTelephone.Instance.IncreaseCurrentSilhouetteValidation();
+        //SilhouetteTelephone.Instance.LastValidation(_silhouetteDataLink.isLastValidation);
+        //SilhouetteTelephone.Instance.CheckIfAllValidationAreDone();
     }
 
     private void DeleteSelfCavas(){

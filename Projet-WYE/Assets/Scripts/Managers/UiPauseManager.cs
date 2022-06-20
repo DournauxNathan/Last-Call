@@ -169,8 +169,11 @@ public class UiPauseManager : Singleton<UiPauseManager>
 
     public void EnablingMainMenu()
     {
-        FindObjectOfType<UIMenuManager>(true).enabled = true;
-
+        var myObject = FindObjectOfType<UIMenuManager>(true);
+        if(myObject!=null)
+        {
+            Debug.Log(myObject);
+        }
     }
 
     public void ValidateSound()

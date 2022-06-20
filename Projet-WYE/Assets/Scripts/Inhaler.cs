@@ -15,31 +15,45 @@ public class Inhaler : MonoBehaviour
 
     public UnityEvent doAction;
 
-    private bool doOnce = true;
+    private bool isComplete, wasComplete;
 
     public void Check()
     {
-        if (socket.isMatching && socket.snapToA == healthProduct.gameObject && doOnce)
+        if (socket.isMatching && socket.snapToA == healthProduct.gameObject)
         {
-            doOnce = !doOnce;
-            _combiObject.dissolveEffect.startEffect = true;
-            healthProduct.dissolveEffect.startEffect = true;
-            dangerousProduct.dissolveEffect.startEffect = true;
+            isComplete = true;
 
-            OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[0].influence, _combiObject.useWith[0].outcome, _combiObject.useWith[0].isLethal);
-            OrderController.Instance.ResolvePuzzle();
-            doAction?.Invoke();
+            if (isComplete && !wasComplete)
+            {
+                isComplete = false;
+                wasComplete = true;
+
+                _combiObject.dissolveEffect.startEffect = true;
+                healthProduct.dissolveEffect.startEffect = true;
+                dangerousProduct.dissolveEffect.startEffect = true;
+
+                OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[0].influence, _combiObject.useWith[0].outcome, _combiObject.useWith[0].isLethal);
+                //OrderController.Instance.ResolvePuzzle();
+                doAction?.Invoke();
+            }
         }
-        else if (socket.isMatching && socket.snapToB == dangerousProduct.gameObject && doOnce)
+        else if (socket.isMatching && socket.snapToB == dangerousProduct.gameObject)
         {
-            doOnce = !doOnce;
-            _combiObject.dissolveEffect.startEffect = true;
-            healthProduct.dissolveEffect.startEffect = true;
-            dangerousProduct.dissolveEffect.startEffect = true;
+            isComplete = true;
 
-            OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[1].influence, _combiObject.useWith[1].outcome, _combiObject.useWith[1].isLethal);
-            OrderController.Instance.ResolvePuzzle();
-            doAction?.Invoke();
+            if (isComplete && !wasComplete)
+            {
+                isComplete = false;
+                wasComplete = true;
+
+                _combiObject.dissolveEffect.startEffect = true;
+                healthProduct.dissolveEffect.startEffect = true;
+                dangerousProduct.dissolveEffect.startEffect = true;
+
+                OrderController.Instance.AddCombinaison(_combiObject, healthProduct, _combiObject.useWith[1].influence, _combiObject.useWith[1].outcome, _combiObject.useWith[1].isLethal);
+                //OrderController.Instance.ResolvePuzzle();
+                doAction?.Invoke();
+            }
         }
     }
 }
