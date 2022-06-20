@@ -9,10 +9,12 @@ public class VideoManager : MonoBehaviour
     public VideoClip videoClip;
     [SerializeField] private VideoPlayer videoPlayer;
     public string sceneToLoad;
+    [SerializeField] private SherlockEffect sherlockEffect;
     
     private void Start() {
         if(!MasterManager.Instance.hasSeenIntro && MasterManager.Instance.displayIntro)
         {
+            DisableTracking();
             videoPlayer.clip = introCinematic;
             sceneToLoad = "Office";
             MasterManager.Instance.hasSeenIntro = true;
@@ -52,5 +54,11 @@ public class VideoManager : MonoBehaviour
     
     private static float ToSingle(double value){
         return (float)value;
+    }
+
+    private void DisableTracking(){
+        GameObject _player = sherlockEffect.gameObject;
+        Destroy(sherlockEffect);
+        _player.transform.position = new Vector3(0, 1, 100); 
     }
 }

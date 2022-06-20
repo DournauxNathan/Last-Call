@@ -15,28 +15,33 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     public bool press;
     [SerializeField] private OnTriggerEvents triggerEvents;
+    [SerializeField] private Renderer _renderer;
 
     private void Awake()
     {
-
-        if (MasterManager.Instance.currentPhase == Phases.Phase_3)
-        {
-            headPhone.GetComponent<Rigidbody>().isKinematic = true;
-            EquipHeadPhone();
-        }
+        MasterManager.OnPhaseChange += OnPhaseChange;
+        _renderer = GetComponent<Renderer>();
+        // if (MasterManager.Instance.currentPhase == Phases.Phase_3)
+        // {
+        //     headPhone.GetComponent<Rigidbody>().isKinematic = true;
+        //     EquipHeadPhone();
+        // }
+    }
+    private void OnDestroy() {
+        MasterManager.OnPhaseChange -= OnPhaseChange; //Unsubscribe from event
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (MasterManager.Instance.currentPhase == Phases.Phase_2 || MasterManager.Instance.isInImaginary)
-        {
-            headPhone.GetComponent<Renderer>().enabled = false;
-        }
-        else if (MasterManager.Instance.currentPhase == Phases.Phase_1 || MasterManager.Instance.currentPhase == Phases.Phase_3)
-        {
-            headPhone.GetComponent<Renderer>().enabled = true; 
-        }
+        // if (MasterManager.Instance.currentPhase == Phases.Phase_2 || MasterManager.Instance.isInImaginary)
+        // {
+        //     headPhone.GetComponent<Renderer>().enabled = false;
+        // }
+        // else if (MasterManager.Instance.currentPhase == Phases.Phase_1 || MasterManager.Instance.currentPhase == Phases.Phase_3)
+        // {
+        //     headPhone.GetComponent<Renderer>().enabled = true; 
+        // }
 
         if (press)
         {
@@ -52,13 +57,28 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         }
     }
 
-    public void AutoEquipHeadPhone()
-    {
+    private void OnPhaseChange(Phases phase){
+        switch (phase)
+        {
+            case Phases.Phase_1:
+                _renderer.enabled = true;
+                break;
+            case Phases.Phase_2:
+               _renderer.enabled = false;
+                break;
+            case Phases.Phase_3:
+                headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                EquipHeadPhone();
+                break;
+            default:
+                Debug.LogWarning("Phase not found : "+ phase.ToString() +"\n"+this.gameObject);
+                break;
+        }
     }
 
     public void EquipHeadPhone()
     {
-        headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas très propre
+        headPhone.gameObject.transform.position = socket.transform.position + new Vector3(0f, offset, 0f); // Fonctionne /!\ pas trï¿½s propre
 
         //headPhone.GetComponent<Rigidbody>().isKinematic = false;
     }
