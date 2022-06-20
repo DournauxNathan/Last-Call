@@ -19,11 +19,11 @@ public class ListManager : Singleton<ListManager>
         {
             hoveredInteractors[0].GetComponentInParent<Teleport>().TeleportTo();
         }
-        else if (hoveredInteractors.Count != 0 && !lockedInteractors.Contains(hoveredInteractors[0]))
+        else if (hoveredInteractors.Count != 0 && !lockedInteractors.Contains(hoveredInteractors[0]) && hoveredInteractors[0].GetComponent<CombinableObject>())
         {
             Select();
         }
-        else if (hoveredInteractors.Count != 0 && lockedInteractors.Contains(hoveredInteractors[0]))
+        else if (hoveredInteractors.Count != 0 && lockedInteractors.Contains(hoveredInteractors[0]) && hoveredInteractors[0].GetComponent<CombinableObject>())
         {
             UnSelect();
         }

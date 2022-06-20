@@ -10,20 +10,30 @@ public class ThrowDetection : MonoBehaviour
 
     public UnityEvent doAction;
 
+    public bool isComplete, wasComplete;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(_tag) && useComparTag && other.GetComponent<CombinableObject>() != null)
         {
-            OrderController.Instance.ResolvePuzzle();
+            isComplete = true;
 
-            other.TryGetComponent<CombinableObject>(out CombinableObject _combinableObject);
-            OrderController.Instance.AddOrder(_combinableObject.useWith[0].influence, _combinableObject.useWith[0].outcome, _combinableObject.useWith[0].isLethal);
+            if (isComplete && !wasComplete)
+            {
+                isComplete = true;
+                wasComplete = true;
 
-            _combinableObject.useWith[0].doAction?.Invoke();
+                //OrderController.Instance.ResolvePuzzle();
 
-            useComparTag = false;
+                other.TryGetComponent<CombinableObject>(out CombinableObject _combinableObject);
+                OrderController.Instance.AddOrder(_combinableObject.useWith[0].influence, _combinableObject.useWith[0].outcome, _combinableObject.useWith[0].isLethal);
 
-            doAction?.Invoke();
+                _combinableObject.useWith[0].doAction?.Invoke();
+
+                useComparTag = false;
+
+                doAction?.Invoke();
+            }
         }
         else
         {

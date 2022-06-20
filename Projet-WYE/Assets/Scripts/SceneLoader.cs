@@ -103,6 +103,8 @@ public class SceneLoader : Singleton<SceneLoader>
         OnLoadEnd?.Invoke();
 
         isLoading = false;
+
+        Debug.Log(sceneName);
     }
 
     private IEnumerator UnloadCurrent()

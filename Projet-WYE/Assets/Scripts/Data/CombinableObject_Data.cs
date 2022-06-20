@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Events;
 using UnityEngine.Events;
+#if UNITY_EDITOR
+using UnityEditor.Events;
+#endif
 using UnityEditor;
 using System;
 
@@ -159,7 +161,9 @@ public class CombinableObject_Data : MonoBehaviour
             Debug.Log(useWith.Length);
             Debug.Log(useWith[i].objectName + ", " + i); //to remove
             useWith[i].doAction = new UnityEvent();
+#if UNITY_EDITOR
             UnityEventTools.AddIntPersistentListener(useWith[i].doAction, SendIdWithOutcome, i);
+#endif
         }
 
         LoadFromRessources();

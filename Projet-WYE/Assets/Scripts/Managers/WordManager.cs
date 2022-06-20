@@ -103,7 +103,7 @@ public class WordManager : Singleton<WordManager>
                     displayAdress = !displayAdress;
                     var item = Entry();
                     item.Activate(transform, stockEntry, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
-
+                    //item.gameObject.SetActive(true);
                 }
             }
         }

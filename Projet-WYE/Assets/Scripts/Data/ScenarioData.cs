@@ -23,6 +23,8 @@ public class ScenarioData : ScriptableObject
     public float timerInPhase2;
 
     public AudioClip conclusion;
+
+    public List<AudioClip> monologue;
     public int numberOfPuzzle;
 }
 

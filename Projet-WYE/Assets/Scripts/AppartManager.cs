@@ -8,7 +8,6 @@ public class AppartManager : Singleton<AppartManager>
     //SceneLoader.Instance.LoadNewScene("");
     public string currentAppart = "";
     public float delayMonologue;
-    public List<MonologueAppart> monologues = new List<MonologueAppart>();
         
     public void LoadAppartOnScenarioEnd() //Load the next appart
     {
@@ -16,20 +15,17 @@ public class AppartManager : Singleton<AppartManager>
         {
             case Scenario.TrappedMan:
                 Debug.Log("1");
-                MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day 0");
-                FindMonologue(Scenario.TrappedMan,0);
+                MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day_0");
                 //InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
                 break;
             case Scenario.HomeInvasion:
                 Debug.Log("2");
                 if (ScenarioManager.Instance.endingValue<0)
                     MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-1");
-                    FindMonologue(Scenario.HomeInvasion,-1);
                 // InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");
 
                 if (ScenarioManager.Instance.endingValue>0)
                     MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day+1");
-                    FindMonologue(Scenario.HomeInvasion,1);
                 //InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");
 
                 break;
@@ -37,14 +33,13 @@ public class AppartManager : Singleton<AppartManager>
                 Debug.Log("3");
                 if (ScenarioManager.Instance.endingValue<0)
                     MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-2");
-                    FindMonologue(Scenario.RisingWater,-1);
                 // InitializeAppart(Scenario.None,"Appartment_Day-2");
                 if (ScenarioManager.Instance.endingValue>0)
                     MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day+2");
-                    FindMonologue(Scenario.RisingWater,1);
                 //  InitializeAppart(Scenario.None,"Appartment_Day+2");
                 break;
         }
+        FindMonologue();
     }
 
     public void LoadAppartOnScenarioEnd(Scenario scenario) //Can load a specific appart
@@ -99,21 +94,13 @@ public class AppartManager : Singleton<AppartManager>
 
     public void LoadDefaultAppart()
     {
-        SceneLoader.Instance.LoadNewScene("Appartment_Day 0");
-        currentAppart = "Appartment_Day 0";
+        SceneLoader.Instance.LoadNewScene("Appartment_Day_0");
+        currentAppart = "Appartment_Day_0";
     }
 
-    private void FindMonologue(Scenario scenario,int value)
+    private void FindMonologue()
     {
-        foreach (MonologueAppart monologue in monologues)
-        {
-            if (monologue.scenario == scenario && monologue.value == value)
-            {
-                Debug.Log("Monologue found");
-                StartCoroutine(PlayMonologue(monologue.monologueClip));
-                break;
-            }
-        }
+        StartCoroutine(PlayMonologue(ScenarioManager.Instance.currentScenarioData.monologue[0]));
     }
 
     IEnumerator PlayMonologue(AudioClip clip){
