@@ -27,37 +27,37 @@ public class TutoManager : Singleton<TutoManager>
     public bool secondPartIsDone;
     public bool isTutoDone;
 
-    private void Awake()
+    // Start is called before the first frame update
+    public void Init()
     {
-        if (SceneLoader.Instance.nameScene == "TutoScene")
+        if (MasterManager.Instance.isTutoEnded)
         {
+            isTutorialBegin = false;
+            Skip();
+            SceneLoader.Instance.LoadNewScene("Menu");
+            Debug.Log("Go to menu");
+        }
+        else
+        {            
             isTutorialBegin = true;
         }
 
-        if (isTutorialBegin && MasterManager.Instance.currentPhase == Phases.Phase_0)
-        {
-            Projection.Instance.transitionValue = 0f;
-            this.CallWithDelay(() => Progress(-5), 8f);
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         if (isTutorialBegin)
         {
+
+            this.CallWithDelay(() => Progress(-5), 8f);
             canvas2.SetActive(false);
             canvas3.SetActive(false);
             UpdateText(1);
-
         }
 
         if (FileHandler.IsAFileExist("SaveLastCall.json"))
         {
             // SkipTuto(); //To Delete after testing
-            Debug.Log("File Found");
+            //Debug.Log("File Found");
         }
     }
+
     private void Update()
     {
         if (updateTutoriel)
@@ -96,7 +96,7 @@ public class TutoManager : Singleton<TutoManager>
             switch (progression)
             {
                 case -5:
-                    this.CallWithDelay(() => Progress(-4), 2f);                
+                    this.CallWithDelay(() => Progress(-4), 2f); InitTutorial.Instance.order.SetActive(true);
                     break;
                 case -4:
                     if (!gribWasPressed)
@@ -301,6 +301,8 @@ public class TutoManager : Singleton<TutoManager>
 
     public void Skip()
     {
+        MasterManager.Instance.ChangeSceneByName(0, "Menu");
+
         tutoWordManager.SetActive(false);
         isPointDone = true;
         isTutoDone = true;
@@ -309,6 +311,5 @@ public class TutoManager : Singleton<TutoManager>
 
         MasterManager.Instance.Reset();
         SceneLoader.Instance.Unload("TutoScene");
-        SceneLoader.Instance.LoadNewScene("Menu");
     }
 }

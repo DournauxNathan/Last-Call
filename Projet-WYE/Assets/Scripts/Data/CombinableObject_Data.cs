@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Events;
 using UnityEngine.Events;
+#if UNITY_EDITOR
+using UnityEditor.Events;
+#endif
 using UnityEditor;
 using System;
 
@@ -159,7 +161,9 @@ public class CombinableObject_Data : MonoBehaviour
             Debug.Log(useWith.Length);
             Debug.Log(useWith[i].objectName + ", " + i); //to remove
             useWith[i].doAction = new UnityEvent();
+#if UNITY_EDITOR
             UnityEventTools.AddIntPersistentListener(useWith[i].doAction, SendIdWithOutcome, i);
+#endif
         }
 
         LoadFromRessources();
@@ -202,6 +206,7 @@ public class CombinableObject_Data : MonoBehaviour
     public void SendOutcome()
     {
         OrderController.Instance.AddOrder(useWith[0].influence, useWith[0].outcome, useWith[0].isLethal);
+        OrderController.Instance.ResolvePuzzle();
     }
 
     public void PuzzleDone()
@@ -210,10 +215,11 @@ public class CombinableObject_Data : MonoBehaviour
     }
     public void SendIdWithOutcome(int indexCombi){
 
-        Debug.Log("Send Id with Outcome");
+        //Debug.Log("Send Id with Outcome");
 
         if(SilhouetteTelephone.Instance !=null){
             SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
+            OrderController.Instance.ResolvePuzzle();
         }
         else{
             Debug.LogError("SilhouetteManager is null");

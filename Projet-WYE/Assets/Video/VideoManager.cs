@@ -5,16 +5,49 @@ using UnityEngine.Video;
 
 public class VideoManager : MonoBehaviour
 {
+    public VideoClip introCinematic;
     public VideoClip videoClip;
+    [SerializeField] private VideoPlayer videoPlayer;
+    public string sceneToLoad;
     
     private void Start() {
-        StartCoroutine(WaitForVideoEnd());
+        if(!MasterManager.Instance.hasSeenIntro && MasterManager.Instance.displayIntro)
+        {
+            videoPlayer.clip = introCinematic;
+            sceneToLoad = "Office";
+            MasterManager.Instance.hasSeenIntro = true;
+            StartCoroutine(WaitForVideoEnd());
+        }
+        else if (MasterManager.Instance.skipIntro)
+        {
+            StartCoroutine(WaitForVideoEnd());
+        }
+        else
+        {
+            videoPlayer.clip = videoClip;
+            sceneToLoad = "TutoScene";
+
+            StartCoroutine(WaitForVideoEnd());
+        }
     }
 
     IEnumerator WaitForVideoEnd(){
-        float _delay = ToSingle(videoClip.length);
+        float _delay = ToSingle(videoPlayer.clip.length);
         yield return new WaitForSeconds(_delay);
-        SceneLoader.Instance.LoadNewScene("TutoScene");
+        Projection.Instance.SetTransitionValue(0);
+
+        if (sceneToLoad == "Office")
+        {
+            MasterManager.Instance.ChangeSceneByName(1, "Office");
+        }
+        else if (MasterManager.Instance.isTutoEnded)
+        {
+            MasterManager.Instance.ChangeSceneByName(0, "Menu");
+        }
+        else
+        {
+            SceneLoader.Instance.LoadNewScene(sceneToLoad);
+        }
     }
     
     private static float ToSingle(double value){

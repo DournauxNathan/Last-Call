@@ -18,6 +18,8 @@ public enum Phases
 
 public class MasterManager : Singleton<MasterManager>
 {
+    public bool hasSeenIntro = false;
+    public bool displayIntro = false;
     public bool unpauseAdio;
     public Phases currentPhase;
 
@@ -36,6 +38,7 @@ public class MasterManager : Singleton<MasterManager>
 
     [Header("Tutorial Management")]
     public bool skipTuto;
+    public bool skipIntro;
     public bool isTutoEnded;
     public bool startTuto;
     public float timerTutoBegin = 30f;
@@ -244,7 +247,7 @@ public class MasterManager : Singleton<MasterManager>
             case 1:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.transitionValue = 50f;
-                ScenarioManager.Instance.UpdateScenario(1);
+                ScenarioManager.Instance.UpdateScenario();
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 break;
@@ -259,12 +262,15 @@ public class MasterManager : Singleton<MasterManager>
                 WordManager.Instance.PullWord();
 
                 Projection.Instance.enableTransition = false;
+                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                HeadPhoneManager.Instance.equip = true;
                 break;
 
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(50);
-
+                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                HeadPhoneManager.Instance.equip = true;
                 isTutoEnded = true;
                 //isInImaginary = false;
                 //Projection.Instance.revealScene = true;
@@ -279,6 +285,7 @@ public class MasterManager : Singleton<MasterManager>
                 break;
         }
 
+        MusicManager.Instance.CheckMusic();
     }
 
     public void EnvironmentIsReveal()

@@ -25,7 +25,7 @@ public class CounterCollisionDetection : OnTriggerEvents
 
         if (other.CompareTag(_tag) && useComparTag && debugEvent && count <= maxDetectionAllowed)
         {
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
             IncreaseCount(setCount);
         }
         else if (other.CompareTag(_tag) && count <= maxDetectionAllowed)
@@ -38,7 +38,7 @@ public class CounterCollisionDetection : OnTriggerEvents
     {
         if (other.CompareTag(_tag) && useComparTag && debugEvent && count <= maxDetectionAllowed)
         {
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
             IncreaseCount(setCount);
             triggerExit?.Invoke();
         }
@@ -48,7 +48,7 @@ public class CounterCollisionDetection : OnTriggerEvents
     {
         if (other.CompareTag(_tag) && useComparTag && debugEvent && count <= maxDetectionAllowed)
         {
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
             IncreaseCount(setCount);
             triggerStay?.Invoke();
         }

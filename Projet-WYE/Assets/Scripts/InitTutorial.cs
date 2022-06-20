@@ -17,23 +17,14 @@ public class InitTutorial : Singleton<InitTutorial>
     public TMP_Text orderText;
 
     public List<GameObject> objects;
-
-    private void Awake()
+    private void Start()
     {
-        if (grab != null)
+        if (MasterManager.Instance.isTutoEnded)
         {
-            grab.SetActive(false);
+            TutoManager.Instance.Init();
+            Debug.Log("Skip tuto");
         }
-        if (pointAndClick != null)
-        {
-            pointAndClick.SetActive(false);
-        }
-        if (pointAndClickcomplentaire != null)
-        {
-            pointAndClickcomplentaire.SetActive(false);
-        }
-
-        if (TutoManager.Instance.firstPartIsDone)
+        else
         {
             if (grab != null)
             {
@@ -47,7 +38,28 @@ public class InitTutorial : Singleton<InitTutorial>
             {
                 pointAndClickcomplentaire.SetActive(false);
             }
+
+            if (TutoManager.Instance.firstPartIsDone)
+            {
+                if (grab != null)
+                {
+                    grab.SetActive(false);
+                }
+                if (pointAndClick != null)
+                {
+                    pointAndClick.SetActive(false);
+                }
+                if (pointAndClickcomplentaire != null)
+                {
+                    pointAndClickcomplentaire.SetActive(false);
+                }
+            }
         }
+    }
+
+    private void Awake()
+    {
+
     }
 
     public void DisableObject()
@@ -62,6 +74,7 @@ public class InitTutorial : Singleton<InitTutorial>
     {
         TutoManager.Instance.Progress(i);
     }
+
     public void Skip()
     {
         TutoManager.Instance.Skip();
