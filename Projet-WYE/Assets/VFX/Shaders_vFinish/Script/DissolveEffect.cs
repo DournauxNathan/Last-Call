@@ -83,6 +83,19 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
     public IEnumerator Dissolve()
     {
+        TryGetComponent<Renderer>(out Renderer rend);
+        rend.enabled = false;
+
+        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
+        {
+            xrGrab.enabled = true;
+        }
+
+        if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple))
+        {
+            xrSimple.enabled = true;
+        }
+
         if (particles != null)
         {
             particles.gameObject.SetActive(true);
@@ -105,7 +118,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 {
                     dissolveMaterials[i].SetFloat("_Dissolve", counter);
                 }
-
+/*
                 if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
                 {
                     for (int i = 0; i < dissolveMaterials.Length; i++)
@@ -122,7 +135,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                         //GetComponent<CombinableObject>().ToggleInteractor(false);
                         //gameObject.SetActive(false);
                     }
-                }
+                }*/
 
                 yield return new WaitForSeconds(refreshRate);
             }
