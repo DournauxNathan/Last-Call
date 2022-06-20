@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.EventSystems;
 
 public class VideoManager : MonoBehaviour
 {
@@ -30,6 +31,14 @@ public class VideoManager : MonoBehaviour
             sceneToLoad = "TutoScene";
 
             StartCoroutine(WaitForVideoEnd());
+        }
+    }
+
+    private void Update() {
+        if(videoPlayer.clip == introCinematic && Input.anyKey){
+            videoPlayer.Stop();
+            StopAllCoroutines();
+            MasterManager.Instance.ChangeSceneByName(1, "Office");
         }
     }
 
