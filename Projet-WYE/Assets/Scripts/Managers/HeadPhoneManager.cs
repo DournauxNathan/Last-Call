@@ -71,7 +71,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
                 EquipHeadPhone();
                 break;
             default:
-                Debug.LogError("Phase not found : "+ phase.ToString() +"\n"+this.gameObject);
+                Debug.LogWarning("Phase not found : "+ phase.ToString() +"\n"+this.gameObject);
                 break;
         }
     }
