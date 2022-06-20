@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 1
-  m_Shader: {fileID: -6465566751694194690, guid: 9058758688c3c904bb2ee0ce81ea5eb3, type: 3}
+  m_Name: Wall&Floor_env_dissolve 11
+  m_Shader: {fileID: -6465566751694194690, guid: 2bf5ed9831b60b34fa20ed22bc8aeb5f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,11 +33,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 7ed8cc3af99b33646b4cbe1263efe45e, type: 3}
+        m_Texture: {fileID: 2800000, guid: a679897d65b61f64eab259ff43288f19, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: abf0ac235fa580b4c945c297413e8d3c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7b7c5600d21f09a4da359a23c36c6997, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -61,19 +61,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: d8a04ce6484f80a43850485e76caaa36, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 9820c48a77179a14ea8120288ffd2492, type: 3}
+        m_Texture: {fileID: 2800000, guid: fd5b2234ef867db46a7214e127f15559, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 32352483fabb08748891f8dbfd91bf93, type: 3}
+        m_Texture: {fileID: 2800000, guid: 40faed870ef44c240bd88c0d9a1ddbae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SmoothnessMap:
-        m_Texture: {fileID: 2800000, guid: 666cdecdf331c3744a978ed84f951ecb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56bf4a7787620044db6b9923e192772d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -104,13 +104,17 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve: 50
+    - _DissolveScale: 25
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _MetallicFactor: 0
     - _OcclusionStrength: 1
+    - _OutlineWidth: 0.03
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -125,6 +129,8 @@ Material:
     - Color_60a84345f2214ca0898d4a1f231e089b: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 0.8490566, g: 0.492613, b: 0.492613, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PlayerPos: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
