@@ -61,10 +61,10 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         switch (phase)
         {
             case Phases.Phase_1:
-                headPhone.GetComponent<Renderer>().enabled = true;
+                _renderer.enabled = true;
                 break;
             case Phases.Phase_2:
-                headPhone.GetComponent<Renderer>().enabled = false;
+               _renderer.enabled = false;
                 break;
             case Phases.Phase_3:
                 headPhone.GetComponent<Rigidbody>().isKinematic = true;
