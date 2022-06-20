@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using TMPro;
+using System;
 
 public enum Phases
 {
@@ -50,6 +51,8 @@ public class MasterManager : Singleton<MasterManager>
     public TMP_Text text;
     public TMP_Text text1;
     public bool aCoup = true;
+
+    public static event Action<Phases> OnPhaseChange;
 
     private void Start()
     {
@@ -231,7 +234,6 @@ public class MasterManager : Singleton<MasterManager>
                 currentPhase = Phases.Phase_4;
                 break;
         }
-
         SetupPhase(i);
     }
 
@@ -246,7 +248,7 @@ public class MasterManager : Singleton<MasterManager>
 
             case 1:
                 Projection.Instance.enableTransition = true;
-                Projection.Instance.transitionValue = 50f;
+                Projection.Instance.SetTransitionValue(50);
                 ScenarioManager.Instance.UpdateScenario();
                 TimeSettings.Instance.Initialize();
                 UpdateController();
@@ -286,6 +288,7 @@ public class MasterManager : Singleton<MasterManager>
         }
 
         MusicManager.Instance.CheckMusic();
+        OnPhaseChange?.Invoke(currentPhase);
     }
 
     public void EnvironmentIsReveal()

@@ -9,10 +9,12 @@ public class VideoManager : MonoBehaviour
     public VideoClip videoClip;
     [SerializeField] private VideoPlayer videoPlayer;
     public string sceneToLoad;
+    [SerializeField] private SherlockEffect sherlockEffect;
     
     private void Start() {
         if(!MasterManager.Instance.hasSeenIntro && MasterManager.Instance.displayIntro)
         {
+            DisableTracking();
             videoPlayer.clip = introCinematic;
             sceneToLoad = "Office";
             MasterManager.Instance.hasSeenIntro = true;
@@ -32,7 +34,7 @@ public class VideoManager : MonoBehaviour
     }
 
     IEnumerator WaitForVideoEnd(){
-        float _delay = ToSingle(videoPlayer.clip.length);
+        float _delay = ToSingle(videoPlayer.clip.length); Debug.Log(_delay);
         yield return new WaitForSeconds(_delay);
         Projection.Instance.SetTransitionValue(0);
 
@@ -52,5 +54,13 @@ public class VideoManager : MonoBehaviour
     
     private static float ToSingle(double value){
         return (float)value;
+    }
+
+    private void DisableTracking(){
+        GameObject _player = sherlockEffect.gameObject;
+        Destroy(sherlockEffect);
+        _player.transform.position = new Vector3(0, 1, 109);
+
+        _player.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
     }
 }
