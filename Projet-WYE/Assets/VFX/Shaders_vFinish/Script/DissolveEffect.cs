@@ -51,11 +51,11 @@ public class DissolveEffect : Singleton<DissolveEffect>
     }
 
     private void Start()
-    {/*
+    {
         TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab);
         xrGrab.enabled = false;
         TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple);
-        xrSimple.enabled = false;*/
+        xrSimple.enabled = false;
     }
 
     private void FixedUpdate()
