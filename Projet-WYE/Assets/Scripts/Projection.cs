@@ -95,7 +95,7 @@ public class Projection : Singleton<Projection>
             }
         }
 #endif
-        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
+        if (!onEditor && enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
             for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
@@ -272,7 +272,26 @@ public class Projection : Singleton<Projection>
 
     public void CallScene()
     {
-        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 || TutoManager.Instance.isTutoDone) && !OrderController.Instance.isResolve)
+        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
+        {
+            Debug.Log("Tuto Scene 2");
+            InitTutorial.Instance.DisableObject();
+            SceneLoader.Instance.AddNewScene("TutoScene_Two");
+            SetTransitionValue(0);
+            TutoManager.Instance.Progress(12);
+        }
+
+        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone && TutoManager.Instance.secondPartIsDone)
+        {
+            Debug.Log("Menu");
+
+            MasterManager.Instance.Reset();
+            SceneLoader.Instance.Unload("TutoScene");
+            SceneLoader.Instance.Unload("TutoScene_Two");
+            MasterManager.Instance.ChangeSceneByName(0, "Menu");
+        }
+
+        if (!revealScene && (MasterManager.Instance.currentPhase == Phases.Phase_1 && !OrderController.Instance.isResolve))
         {
             Debug.Log("Imaginary");
 
@@ -303,27 +322,8 @@ public class Projection : Singleton<Projection>
             MasterManager.Instance.isInImaginary = false;
 
             MasterManager.Instance.ChangeSceneByName(3, "Office");
-
         }
 
-
-        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
-        {
-            Debug.Log("Tuto Scene 2");
-            InitTutorial.Instance.DisableObject();
-            SceneLoader.Instance.AddNewScene("TutoScene_Two");
-            TutoManager.Instance.Progress(12);
-        }
-
-        if (MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.isTutoDone && !MasterManager.Instance.isInImaginary)
-        {
-            Debug.Log("Menu");
-
-            MasterManager.Instance.Reset();
-            SceneLoader.Instance.Unload("TutoScene");
-            SceneLoader.Instance.Unload("TutoScene_Two");
-            MasterManager.Instance.ChangeSceneByName(0, "Menu");
-        }
     }
 
     /// <summary>
