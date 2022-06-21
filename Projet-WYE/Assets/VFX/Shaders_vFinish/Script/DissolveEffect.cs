@@ -74,6 +74,9 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
         for (int i = 0; i < dissolveMaterials.Length; i++)
         {
+            Debug.Log("heeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+            Debug.Log(dissolveMaterials[i].GetFloat("_Dissolve") > 1);
+
             if (dissolveMaterials[i].GetFloat("_Dissolve") > 1)
             {
                 GetComponent<CombinableObject>().ToggleInteractor(true); 
@@ -86,7 +89,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
     {
         if (TryGetComponent<Renderer>(out Renderer rend))
         {
-            rend.enabled = false;
+            rend.enabled = true;
         }
 
         if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
@@ -127,13 +130,26 @@ public class DissolveEffect : Singleton<DissolveEffect>
                     dissolveMaterials[i].SetFloat("_Dissolve", counter);
                 }
 
-                /*if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
+                if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
                 {
                     for (int i = 0; i < dissolveMaterials.Length; i++)
                     {
-                        
+                        if (TryGetComponent<Renderer>(out Renderer rend))
+                        {
+                            rend.enabled = false;
+                        }
+
+                        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
+                        {
+                            xrGrab.enabled = false;
+                        }
+
+                        if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple))
+                        {
+                            xrSimple.enabled = false;
+                        }
                     }
-                }*/
+                }
 
                 yield return new WaitForSeconds(refreshRate);
             }
