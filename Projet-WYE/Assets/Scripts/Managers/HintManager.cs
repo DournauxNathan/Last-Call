@@ -172,6 +172,7 @@ public class HintManager : Singleton<HintManager>
                 precombi = OrderController.Instance.puzzlesSucced;
             }
         }
+        Debug.Log("Hints are finished");
     }
 }
 [Serializable]
