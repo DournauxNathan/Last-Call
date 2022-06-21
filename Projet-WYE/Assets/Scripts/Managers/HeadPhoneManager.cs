@@ -68,7 +68,8 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
                 break;
             case Phases.Phase_3:
                 _renderer.enabled = true;
-                headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                _renderer.material.SetFloat("_Dissolve", 50f);
+                headPhone.GetComponent<Rigidbody>().isKinematic = false;
                 EquipHeadPhone();
                 break;
             default:

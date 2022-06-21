@@ -271,8 +271,6 @@ public class MasterManager : Singleton<MasterManager>
             case 3:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(50);
-                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;
-                HeadPhoneManager.Instance.equip = true;
                 isTutoEnded = true;
                 //isInImaginary = false;
                 //Projection.Instance.revealScene = true;
