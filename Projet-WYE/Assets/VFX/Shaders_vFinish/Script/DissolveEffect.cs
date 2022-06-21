@@ -48,7 +48,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
         }
     }
 
-    private void Start()
+    /*private void Start()
     {
         if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
         {
@@ -59,8 +59,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
         {
             xrSimple.enabled = false;
         }        
-    }
-    public bool doOnce;
+    }*/
 
     private void FixedUpdate()
     {

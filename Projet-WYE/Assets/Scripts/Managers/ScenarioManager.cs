@@ -105,9 +105,10 @@ public class ScenarioManager : Singleton<ScenarioManager>
     }
 
     public int currentIndexScenario = 0;
-    public void UpdateScenario()
+    public void UpdateScenario(int i)
     {
         //Debug.Log(currentIndexScenario);
+        currentIndexScenario++;
 
         if (!skipCurrentScenario)
         {
