@@ -76,15 +76,18 @@ public class DissolveEffect : Singleton<DissolveEffect>
         {
             if (dissolveMaterials[i].GetFloat("_Dissolve") > 1)
             {
-                GetComponent<CombinableObject>().ToggleInteractor(true);
+                GetComponent<CombinableObject>().ToggleInteractor(true); 
+                Reveal();
             }
         }
     }
 
-    public IEnumerator Dissolve()
+    public void Reveal()
     {
-        TryGetComponent<Renderer>(out Renderer rend);
-        rend.enabled = false;
+        if (TryGetComponent<Renderer>(out Renderer rend))
+        {
+            rend.enabled = false;
+        }
 
         if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
         {
@@ -95,6 +98,11 @@ public class DissolveEffect : Singleton<DissolveEffect>
         {
             xrSimple.enabled = true;
         }
+    }
+
+
+    public IEnumerator Dissolve()
+    {       
 
         if (particles != null)
         {
@@ -118,22 +126,12 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 {
                     dissolveMaterials[i].SetFloat("_Dissolve", counter);
                 }
-/*
-                if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
+
+                /*if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
                 {
                     for (int i = 0; i < dissolveMaterials.Length; i++)
                     {
-                        TryGetComponent<Renderer>(out Renderer rend);
-                        rend.enabled = false;
-
-                        TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab);
-                        xrGrab.enabled = false;
-
-                        TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple);
-                        xrSimple.enabled = false;
-
-                        //GetComponent<CombinableObject>().ToggleInteractor(false);
-                        //gameObject.SetActive(false);
+                        
                     }
                 }*/
 
