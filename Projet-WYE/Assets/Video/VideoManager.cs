@@ -40,6 +40,11 @@ public class VideoManager : MonoBehaviour
             StopAllCoroutines();
             MasterManager.Instance.ChangeSceneByName(1, "Office");
         }
+        if(videoPlayer.clip == videoClip && Input.GetKeyDown(KeyCode.Space)){
+            videoPlayer.Stop();
+            StopAllCoroutines();
+            MasterManager.Instance.ChangeSceneByName(0, "Menu");
+        }
     }
 
     IEnumerator WaitForVideoEnd(){
