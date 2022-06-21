@@ -277,6 +277,7 @@ public class MasterManager : Singleton<MasterManager>
 
                 WordManager.Instance.PullWord();
                 UIManager.Instance.UpdateUnitManager(4);
+                HeadPhoneManager.Instance.OnPhaseChange(i);
                 break;
 
             case 4:
@@ -286,7 +287,6 @@ public class MasterManager : Singleton<MasterManager>
         }
 
         MusicManager.Instance.CheckMusic();
-        OnPhaseChange?.Invoke(currentPhase);
     }
 
     public void EnvironmentIsReveal()

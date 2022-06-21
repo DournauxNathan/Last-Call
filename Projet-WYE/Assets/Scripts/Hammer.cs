@@ -50,7 +50,6 @@ public class Hammer : MonoBehaviour
         {
             //Debug.Log(other.name);
             other.GetComponent<Nails>().drive?.Invoke();
-            Debug.Log("hhhhh");
         }
     }
 }
