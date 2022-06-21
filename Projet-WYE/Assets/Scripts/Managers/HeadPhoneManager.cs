@@ -48,18 +48,23 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (equip)
         {
-            equip = !equip;
-            Equip(true); 
+            equip = !equip; 
+            Equip(true);
         }
+        OnPhaseChange((int)MasterManager.Instance.currentPhase);
     }
 
-    public void OnPhaseChange(int phase){
-        Debug.Log("hey");
-
+    public void OnPhaseChange(int phase)
+    {
         switch (phase)
         {
+            case 0:
+                _renderer.enabled = true;
+                headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                break;
             case 1:
                 _renderer.enabled = true;
+                headPhone.GetComponent<Rigidbody>().isKinematic = false;
                 break;
             case 2:
                _renderer.enabled = false;
@@ -71,6 +76,8 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
                 EquipHeadPhone();
                 break;
         }
+
+        Debug.Log(phase);
     }
 
     public void EquipHeadPhone()
