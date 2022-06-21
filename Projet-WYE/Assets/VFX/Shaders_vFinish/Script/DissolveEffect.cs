@@ -17,8 +17,6 @@ public class DissolveEffect : Singleton<DissolveEffect>
     public float delay = 0.02f;
     public bool startEffect = false;
 
-    public Material[] dissolveMaterials;
-
     public void Init(bool hasAlreadyParticle)
     {
         if (!hasAlreadyParticle)
@@ -51,32 +49,54 @@ public class DissolveEffect : Singleton<DissolveEffect>
     }
 
     private void Start()
-    {/*
-        TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab);
-        xrGrab.enabled = false;
-        TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple);
-        xrSimple.enabled = false;*/
+    {
+        /*if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
+        {
+            xrGrab.enabled = false;
+        }
+
+        if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple))
+        {
+            xrSimple.enabled = false;
+        }*/
+        
     }
+    public bool doOnce;
 
     private void FixedUpdate()
     {
-        if (startEffect)
+        if (MasterManager.Instance.currentPhase == Phases.Phase_2)
         {
-            startEffect = !startEffect;
-            StartCoroutine(Dissolve());
-        }
-
-        for (int i = 0; i < dissolveMaterials.Length; i++)
-        {
-            if (dissolveMaterials[i].GetFloat("_Dissolve") > 1)
+            if (startEffect)
             {
-                GetComponent<CombinableObject>().ToggleInteractor(true);
+                startEffect = !startEffect;
+                StartCoroutine(Dissolve());
             }
+/*
+            if (GetComponent<Renderer>().material.GetFloat("_Dissolve") > 1 && doOnce)
+            {
+                doOnce = !doOnce;
+                    
+                Debug.Log("heeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+
+                GetComponent<CombinableObject>().ToggleInteractor(true);
+
+                Reveal();
+            }*/
+        }
+    }
+
+    public void Reveal()
+    {
+        if (TryGetComponent<Renderer>(out Renderer rend))
+        {
+            rend.enabled = true;
         }
     }
 
     public IEnumerator Dissolve()
-    {
+    {       
+
         if (particles != null)
         {
             particles.gameObject.SetActive(true);
@@ -89,32 +109,35 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
         float counter = 50;
 
-        if (dissolveMaterials.Length > 0)
+        if (GetComponent<Renderer>().materials.Length > 0)
         {
-            while (dissolveMaterials[0].GetFloat("_Dissolve") > 1)
+            while (GetComponent<Renderer>().materials[0].GetFloat("_Dissolve") > 1)
             {
                 counter -= Time.deltaTime * dissolveRate;
 
-                for (int i = 0; i < dissolveMaterials.Length; i++)
+                for (int i = 0; i < GetComponent<Renderer>().materials.Length; i++)
                 {
-                    dissolveMaterials[i].SetFloat("_Dissolve", counter);
+                    GetComponent<Renderer>().materials[i].SetFloat("_Dissolve", counter);
                 }
 
-                if (dissolveMaterials[0].GetFloat("_Dissolve") <= 0)
+                if (GetComponent<Renderer>().materials[0].GetFloat("_Dissolve") <= 0)
                 {
-                    for (int i = 0; i < dissolveMaterials.Length; i++)
+                    for (int i = 0; i < GetComponent<Renderer>().materials.Length; i++)
                     {
-                        TryGetComponent<Renderer>(out Renderer rend);
-                        rend.enabled = false;
+                        if (TryGetComponent<Renderer>(out Renderer rend))
+                        {
+                            rend.enabled = false;
+                        }
 
-                        TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab);
-                        xrGrab.enabled = false;
+                        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
+                        {
+                            xrGrab.enabled = false;
+                        }
 
-                        TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple);
-                        xrSimple.enabled = false;
-
-                        //GetComponent<CombinableObject>().ToggleInteractor(false);
-                        //gameObject.SetActive(false);
+                        if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple))
+                        {
+                            xrSimple.enabled = false;
+                        }
                     }
                 }
 

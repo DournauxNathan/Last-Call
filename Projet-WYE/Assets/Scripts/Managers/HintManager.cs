@@ -14,10 +14,13 @@ public class HintManager : Singleton<HintManager>
     public List<HintInWorld> hints = new List<HintInWorld>();
     public List<HintCanvasBehavior> currentHintCanvas = new List<HintCanvasBehavior>();
     public HintCanvasBehavior hintPrefab;
+    public float timeBetweenHints = 120f;
     [SerializeField]private bool testBool = false;
+    private int precombi;
 
     private void Start() {
         //DisplayHint(0); DEBUG ONLY
+        StartCoroutine(HintsIfTooMuchTime());
     }
 
     private void Update() {
@@ -32,7 +35,7 @@ public class HintManager : Singleton<HintManager>
     public void DisplayHint(int id){
         foreach (HintInWorld hint in hints)
         {
-            if (hint.id == id)
+            if (hint.id == id && CheckIfObjectIsdiabled(hint.attatchedTo))
             {
                 if(hint.attatchedTo == null){
                     Debug.LogError("Hint: " + hint + " with id: " + hint.id + " is not attatched to anything");
@@ -46,6 +49,28 @@ public class HintManager : Singleton<HintManager>
         }
         Debug.LogWarning("Hint: " + id + " does not exist");
     }
+    public void DisplayHint(int id, out bool isDisplayed){
+        foreach (HintInWorld hint in hints)
+        {
+            if (hint.id == id && CheckIfObjectIsdiabled(hint.attatchedTo))
+            {
+                if(hint.attatchedTo == null){
+                    Debug.LogError("Hint: " + hint + " with id: " + hint.id + " is not attatched to anything");
+                    isDisplayed = false;
+                    return; 
+                }
+                HintCanvasBehavior newHint = Instantiate(hintPrefab, hint.attatchedTo.transform); //Set parent to the object that has the hint
+                currentHintCanvas.Add(newHint);
+                SetValues(newHint, hint);
+                isDisplayed = true;
+                return; 
+            }
+        }
+        Debug.LogWarning("Hint: " + id + " does not exist");
+        isDisplayed = false; 
+    }
+
+
 
     public void DisplayHint(GameObject obj){
         foreach (HintInWorld hint in hints)
@@ -114,10 +139,42 @@ public class HintManager : Singleton<HintManager>
         }
         currentHintCanvas.Remove(hint);
         Destroy(hint.gameObject);
+        hints.Remove(hint._hintInWorldData);
         StopCoroutine(hint._hintInWorldData.DisplayHint());
         hint._hintInWorldData.OnhintDisappearAction = null;
     }
 
+    private bool CheckIfObjectIsdiabled(GameObject obj){
+        if(obj.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer)){
+            return meshRenderer.enabled;
+        }
+        else{
+        Debug.LogWarning("Object: " + obj + " does not have a MeshRenderer");
+        return false;
+        }
+    }
+
+    IEnumerator HintsIfTooMuchTime(){
+        precombi = OrderController.Instance.puzzlesSucced; // Save the current to chek if you need to display a new int
+        bool hasDisplay = true;
+        while(hints.Count > 0){
+            yield return new WaitForSeconds(timeBetweenHints);
+            if(precombi == OrderController.Instance.puzzlesSucced){
+                DisplayHint(0,out hasDisplay);
+                if(!hasDisplay){
+                    while(hints.Count>0 && !hasDisplay){
+                        hints.RemoveAt(0);
+                        DisplayHint(0,out hasDisplay);
+                    }
+                }
+                precombi = OrderController.Instance.puzzlesSucced;
+            }
+            else{
+                precombi = OrderController.Instance.puzzlesSucced;
+            }
+        }
+        Debug.Log("Hints are finished");
+    }
 }
 [Serializable]
 public class HintInWorld{

@@ -29,6 +29,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] bool leadingCharBeforeDelay = false;
 
     public ParticleSystem smoke;
+    [SerializeField] private TMP_Text hintText;
 
     private void Start()
     {
@@ -37,6 +38,7 @@ public class UIManager : Singleton<UIManager>
             //InComingCall(true);
             OutComingCall(false);
         }
+        hintText.text = ""; //Clear hint text
     }
 
     public void UpdateForm(FormData _answerType, string data)
@@ -78,6 +80,7 @@ public class UIManager : Singleton<UIManager>
     public void SetFormToComplete(bool value)
     {
         currentForm.isComplete = value;
+        hintText.text = "Appuyez sur Y pour imaginer la situation";
 
         if (currentForm.isComplete)
         {

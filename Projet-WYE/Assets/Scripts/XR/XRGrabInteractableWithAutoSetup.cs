@@ -9,6 +9,7 @@ public class XRGrabInteractableWithAutoSetup : XRGrabInteractable
     private Quaternion initialAttachLocalRot;
 
     public bool addOffset = false;
+    [SerializeField] private bool isGrabbed = false;
 
     protected override void Awake()
     {
@@ -20,6 +21,11 @@ public class XRGrabInteractableWithAutoSetup : XRGrabInteractable
         }
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        isGrabbed = false;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +42,21 @@ public class XRGrabInteractableWithAutoSetup : XRGrabInteractable
             initialAttachLocalPos = attachTransform.localPosition;
             initialAttachLocalRot = attachTransform.transform.localRotation;
         }
+    }
+
+    protected override void Grab()
+    {
+        if (!isGrabbed)
+        {
+            isGrabbed = true;
+            base.Grab();
+        }
+    }
+
+    protected override void Detach()
+    {
+        base.Detach();
+        isGrabbed = false;
     }
 
     [System.Obsolete]
