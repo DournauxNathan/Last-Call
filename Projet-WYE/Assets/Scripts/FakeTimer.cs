@@ -17,7 +17,9 @@ public class FakeTimer : MonoBehaviour
     
     void Start()
     {
-        if(MasterManager.Instance != null){
+        minBeforNewMusic = (int)ScenarioManager.Instance.currentScenarioData.timerInPhase2;
+
+        if (MasterManager.Instance != null){
             _transformCamera = MasterManager.Instance.references.mainCamera;
         }
         else{
@@ -70,7 +72,7 @@ public class FakeTimer : MonoBehaviour
 
     private void CheckTiming(int current){
         if( current >= minBeforNewMusic){
-            throw new System.NotImplementedException();
+            MusicManager.Instance.ChangeMusicbyPhase(1);
         }
     }
 }
