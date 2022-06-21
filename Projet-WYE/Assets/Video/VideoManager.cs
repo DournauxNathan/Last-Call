@@ -43,7 +43,7 @@ public class VideoManager : MonoBehaviour
     }
 
     IEnumerator WaitForVideoEnd(){
-        float _delay = ToSingle(videoPlayer.clip.length); Debug.Log(_delay);
+        float _delay = ToSingle(videoPlayer.clip.length);// Debug.Log(_delay);
         yield return new WaitForSeconds(_delay);
         Projection.Instance.SetTransitionValue(0);
 
