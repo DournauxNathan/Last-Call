@@ -25,7 +25,7 @@ public class FakeTimer : MonoBehaviour
         else{
             Debug.LogError("MasterManager is null"+this.gameObject);
         }
-        StartCoroutine(StartTimer()); Debug.Log("StartTimer");
+        StartCoroutine(StartTimer()); //Debug.Log("StartTimer");
     }
 
     void Update()

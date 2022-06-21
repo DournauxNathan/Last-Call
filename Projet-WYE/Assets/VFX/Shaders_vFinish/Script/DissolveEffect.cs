@@ -72,7 +72,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 startEffect = !startEffect;
                 StartCoroutine(Dissolve());
             }
-
+/*
             if (GetComponent<Renderer>().material.GetFloat("_Dissolve") > 1 && doOnce)
             {
                 doOnce = !doOnce;
@@ -82,7 +82,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 GetComponent<CombinableObject>().ToggleInteractor(true);
 
                 Reveal();
-            }
+            }*/
         }
     }
 
