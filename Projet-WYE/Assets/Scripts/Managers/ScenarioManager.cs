@@ -109,12 +109,12 @@ public class ScenarioManager : Singleton<ScenarioManager>
     {
         //Debug.Log(currentIndexScenario);
         currentIndexScenario++;
-
+/*
         if (!skipCurrentScenario)
         {
-            skipCurrentScenario = !skipCurrentScenario;
+            skipCurrentScenario = true;
             currentIndexScenario++;
-        }
+        }*/
 
         switch (currentIndexScenario)
         {

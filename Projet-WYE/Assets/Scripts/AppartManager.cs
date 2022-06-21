@@ -19,8 +19,9 @@ public class AppartManager : Singleton<AppartManager>
                 //InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
                 break;
             case Scenario.HomeInvasion:
-                Debug.Log("2");
-                if (ScenarioManager.Instance.endingValue<0)
+                
+
+                if (ScenarioManager.Instance.endingValue < 0)
                     MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-1");
                 // InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");
 

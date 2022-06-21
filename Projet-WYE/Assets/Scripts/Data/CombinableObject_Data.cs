@@ -224,6 +224,21 @@ public class CombinableObject_Data : MonoBehaviour
         else{
             Debug.LogError("SilhouetteManager is null");
         }
+
+        if (useWith[indexCombi].influence == 1)
+        {
+            ScenarioManager.Instance.endingValue++;
+
+        }
+        else if (useWith[indexCombi].influence == -1)
+        {
+            ScenarioManager.Instance.endingValue--;
+
+        }
+        else if (useWith[indexCombi].influence == 0)
+        {
+            return;
+        }
     }
 }
 
