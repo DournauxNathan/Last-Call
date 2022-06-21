@@ -139,6 +139,7 @@ public class HintManager : Singleton<HintManager>
         }
         currentHintCanvas.Remove(hint);
         Destroy(hint.gameObject);
+        hints.Remove(hint._hintInWorldData);
         StopCoroutine(hint._hintInWorldData.DisplayHint());
         hint._hintInWorldData.OnhintDisappearAction = null;
     }

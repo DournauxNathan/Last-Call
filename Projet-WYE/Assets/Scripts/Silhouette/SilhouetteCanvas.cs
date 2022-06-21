@@ -33,6 +33,13 @@ public class SilhouetteCanvas : MonoBehaviour
         
     }
 
+    public void OnTP(){
+        foreach(GameObject canvas in _silhouetteCanvasList)
+        {
+            canvas.GetComponent<SilhouetteCanvasBehavior>().UpdateDefaultTransform(GetComponent<SphereCollider>());
+        }
+    }
+
     private void SetValues(SilhouetteCanvasBehavior canvas, string text){
         /*canvas.transform.SetParent(this.transform); // useless ?
         canvas.transform.localScale = Vector3.one;
