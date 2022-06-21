@@ -35,7 +35,7 @@ public class VideoManager : MonoBehaviour
     }
 
     private void Update() {
-        if(videoPlayer.clip == introCinematic && Input.anyKeyDown){
+        if(videoPlayer.clip == introCinematic && Input.GetKeyDown(KeyCode.Space)){
             videoPlayer.Stop();
             StopAllCoroutines();
             MasterManager.Instance.ChangeSceneByName(1, "Office");
