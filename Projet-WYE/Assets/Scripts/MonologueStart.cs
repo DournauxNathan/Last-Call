@@ -10,26 +10,35 @@ public class MonologueStart : MonoBehaviour
     IEnumerator Start()
     {
         _audiosource = GetComponent<AudioSource>();
+
         yield return new WaitForSeconds(1f);
-        if(ScenarioManager.Instance.currentScenario != Scenario.None){
+
+        if(ScenarioManager.Instance.currentScenario != Scenario.None)
+        {
             _audiosource.PlayNewClipOnce(ChoseMonologue());
         }
-        else{
+        else
+        {
             Debug.LogError("no scenario loaded"+this.gameObject);
         }
     }
 
-    private AudioClip ChoseMonologue(){
-        if(ScenarioManager.Instance.endingValue == 0){
+    private AudioClip ChoseMonologue()
+    {
+        if(ScenarioManager.Instance.endingValue == 0)
+        {
             return ScenarioManager.Instance.currentScenarioData.monologue[0];
         }
-        else if(ScenarioManager.Instance.endingValue < 0){
+        else if(ScenarioManager.Instance.endingValue < 0)
+        {
             return ScenarioManager.Instance.currentScenarioData.monologue[1];
         }
-        else if(ScenarioManager.Instance.endingValue > 0){
+        else if(ScenarioManager.Instance.endingValue > 0)
+        {
             return ScenarioManager.Instance.currentScenarioData.monologue[2];
         }
-        else{
+        else
+        {
             Debug.LogError("Erreror value is not supported"+ this.gameObject);
             return null;
         }

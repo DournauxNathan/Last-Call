@@ -39,7 +39,6 @@ public class AppartManager : Singleton<AppartManager>
                 //  InitializeAppart(Scenario.None,"Appartment_Day+2");
                 break;
         }
-        FindMonologue();
     }
 
     public void LoadAppartOnScenarioEnd(Scenario scenario) //Can load a specific appart
