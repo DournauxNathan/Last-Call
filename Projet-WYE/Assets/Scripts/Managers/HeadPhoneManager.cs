@@ -54,6 +54,8 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         OnPhaseChange((int)MasterManager.Instance.currentPhase);
     }
 
+    public bool doOnce;
+
     public void OnPhaseChange(int phase)
     {
         switch (phase)
@@ -73,11 +75,17 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
                 _renderer.enabled = true;
                 _renderer.sharedMaterial.SetFloat("_Dissolve", 50f);
                 headPhone.GetComponent<Rigidbody>().isKinematic = false;
-                EquipHeadPhone();
+
+                doOnce = true;
+                if (doOnce)
+                {
+                    doOnce = false;
+                    EquipHeadPhone();
+                }
                 break;
         }
 
-        Debug.Log(phase);
+        //Debug.Log(phase);
     }
 
     public void EquipHeadPhone()

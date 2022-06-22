@@ -6476,7 +6476,15 @@ PrefabInstance:
     - target: {fileID: 8096457024151488819, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
       propertyPath: _question
       value: 
-      objectReference: {fileID: 11400000, guid: d0a114bc8d7d3d94c80b8efd8472a750, type: 2}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096457024151488819, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
+      propertyPath: isEntryQMP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096457024151488819, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
+      propertyPath: isEntryQMPLoaded
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
 --- !u!224 &578340027 stripped
@@ -17808,6 +17816,7 @@ MonoBehaviour:
   press: 0
   triggerEvents: {fileID: 39881801}
   _renderer: {fileID: 0}
+  doOnce: 0
 --- !u!1001 &1602190275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29958,6 +29967,7 @@ MonoBehaviour:
   amount: 0
   _question: {fileID: 11400000, guid: ed3245e1c3f9ac444b5e1fecce00a213, type: 2}
   atIndex: 0
+  isEntryQMPLoaded: 0
   simulateInput: 0
 --- !u!114 &8096457024676734233
 MonoBehaviour:
@@ -29975,6 +29985,7 @@ MonoBehaviour:
   amount: 0
   _question: {fileID: 11400000, guid: 27b7b93d3424f4444b94fc54389fbe63, type: 2}
   atIndex: 0
+  isEntryQMPLoaded: 0
   simulateInput: 0
 --- !u!114 &8096457024972844778
 MonoBehaviour:
@@ -29992,6 +30003,7 @@ MonoBehaviour:
   amount: 0
   _question: {fileID: 11400000, guid: fbb5739a1de90344a8ad11f67c15e86a, type: 2}
   atIndex: 0
+  isEntryQMPLoaded: 0
   simulateInput: 0
 --- !u!224 &8187855733302458752
 RectTransform:

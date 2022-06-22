@@ -13,19 +13,18 @@ public class AppartManager : Singleton<AppartManager>
     {
         switch (ScenarioManager.Instance.currentScenario)
         {
-            case Scenario.TrappedMan:
+            /*case Scenario.TrappedMan:
                 Debug.Log("1");
                 MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day_0");
                 //InitializeAppart(Scenario.HomeInvasion,"Appartment_Day 0");
-                break;
-            case Scenario.HomeInvasion:
-                
+                break;*/
+            case Scenario.HomeInvasion:                
 
                 if (ScenarioManager.Instance.endingValue < 0)
                     MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day-1");
                 // InitializeAppart(Scenario.RisingWater,"Appartment_Day-1");
 
-                if (ScenarioManager.Instance.endingValue>0)
+                if (ScenarioManager.Instance.endingValue >= 0)
                     MasterManager.Instance.ChangeSceneByName(4, "Appartment_Day+1");
                 //InitializeAppart(Scenario.RisingWater,"Appartment_Day+1");
 

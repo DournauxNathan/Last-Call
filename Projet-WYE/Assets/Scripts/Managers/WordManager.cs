@@ -98,9 +98,11 @@ public class WordManager : Singleton<WordManager>
                     getTransfrom.GetChild(i).gameObject.SetActive(false);
                 }
 
+                displayAdress = true;
+
                 if (displayAdress)
                 {
-                    displayAdress = !displayAdress;
+                    displayAdress = false;
                     var item = Entry();
                     item.Activate(transform, stockEntry, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
                     //item.gameObject.SetActive(true);

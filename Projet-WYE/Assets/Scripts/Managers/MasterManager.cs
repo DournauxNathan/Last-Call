@@ -313,6 +313,9 @@ public class MasterManager : Singleton<MasterManager>
 
         WordManager.Instance.answers.Clear();
         WordManager.Instance.questions.Clear();
+
+        envIsReveal = false;
+
     }
     public void PlayDialogues()
     {

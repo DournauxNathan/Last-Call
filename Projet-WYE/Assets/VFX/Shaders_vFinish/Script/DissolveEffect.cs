@@ -71,7 +71,7 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 StartCoroutine(Dissolve());
             }
 
-            if (GetComponent<Renderer>().sharedMaterial.GetFloat("_Dissolve") > .1f)
+            if (GetComponent<Renderer>() != null && GetComponent<Renderer>().sharedMaterial.GetFloat("_Dissolve") > .1f)
             {
                 GetComponent<CombinableObject>().ToggleInteractor(true);
 

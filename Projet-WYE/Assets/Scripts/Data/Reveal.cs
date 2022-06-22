@@ -24,22 +24,32 @@ public class Reveal : MonoBehaviour
     private float x, y, z;
     Vector3 pos;
 
+    public bool isEntryQMPLoaded;
+
     private QuestionData currentQuestion => question.questions[atIndex];
 
     public bool simulateInput;
     private bool isReveal;
 
-    public void Start()
+    public void InitEntry()
     {
-        if (_question != null)
+        if (!MasterManager.Instance.envIsReveal)
         {
-            question = _question;
+            _question = ScenarioManager.Instance.currentScenarioData.callerInformations.adress;
             UpdateText(_question.questions[0].question);
+
+            Debug.Log(_question);
         }
     }
     
     private void Update()
     {
+        if (ScenarioManager.Instance.currentScenario != Scenario.None)
+        {
+            InitEntry();
+        }
+
+
         if (simulateInput)
         {
             simulateInput = !simulateInput;
@@ -110,7 +120,10 @@ public class Reveal : MonoBehaviour
         text.text = string.Empty;
         isActive = false;
         transform.SetParent(pullingStock);
-        transform.position = Vector3.zero;
+
+        GetComponent<RectTransform>().transform.position = Vector3.zero;
+
+        GetComponent<CanvasGroup>().alpha = 1;
     }
 
 
