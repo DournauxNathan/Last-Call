@@ -33,7 +33,7 @@ public class Reveal : MonoBehaviour
 
     public void InitEntry()
     {
-        if (!MasterManager.Instance.envIsReveal)
+        if (!MasterManager.Instance.envIsReveal && isEntryQMPLoaded)
         {
             _question = ScenarioManager.Instance.currentScenarioData.callerInformations.adress;
             UpdateText(_question.questions[0].question);

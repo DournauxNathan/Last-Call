@@ -105,7 +105,8 @@ public class Projection : Singleton<Projection>
                 }
             }
         }
-        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_3)
+
+        if (OrderController.Instance.GetResolve() && MasterManager.Instance.currentPhase == Phases.Phase_2)
         {
             for (int obj = 0; obj < objectsToDissolve.Count; obj++)
             {
@@ -115,7 +116,19 @@ public class Projection : Singleton<Projection>
                 }
             }
         }
-        else if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0)
+
+        if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_3)
+        {
+            for (int obj = 0; obj < objectsToDissolve.Count; obj++)
+            {
+                for (int i = 0; i < objectsToDissolve[obj].objects.Count; i++)
+                {
+                    objectsToDissolve[obj].objects[i].SetFloat("_Dissolve", transitionValue);
+                }
+            }
+        }
+        
+        if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0)
         {
             if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
             {

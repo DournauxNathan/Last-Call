@@ -14,10 +14,12 @@ public class Water_Rising : MonoBehaviour
         StartCoroutine(Rise());
     }
 
-    private void Update() {
-        if(MasterManager.Instance.envIsReveal && !hasStarted){
+    private void Update() 
+    {
+        if(MasterManager.Instance.envIsReveal && !hasStarted)
+        {
             hasStarted = true;
-            StartRising();
+            water.SetActive(true);
         }
     }
 

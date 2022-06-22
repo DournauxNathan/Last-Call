@@ -20,6 +20,11 @@ public class BuoyancyObject : MonoBehaviour
     {
         Rb = this.GetComponent<Rigidbody>();
         oceanManager = FindObjectOfType<OceanManager>();
+
+        if (Floaters[0] == null)
+        {
+            Floaters[0] = this.transform;
+        }
     }
 
     // Update is called once per frame
