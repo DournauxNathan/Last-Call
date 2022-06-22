@@ -73,7 +73,6 @@ public class OnTriggerEvents : MonoBehaviour
     {
         if (other.CompareTag(_tag) && useComparTag && debugEvent)
         {
-            Debug.Log(other.name);
             triggerEnter?.Invoke();
         }
         else if (other.CompareTag(_tag) && useComparTag)

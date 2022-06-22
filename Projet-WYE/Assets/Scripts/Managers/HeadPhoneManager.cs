@@ -19,16 +19,12 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
     private void Awake()
     {
-        MasterManager.OnPhaseChange += OnPhaseChange;
         _renderer = GetComponent<Renderer>();
         // if (MasterManager.Instance.currentPhase == Phases.Phase_3)
         // {
         //     headPhone.GetComponent<Rigidbody>().isKinematic = true;
         //     EquipHeadPhone();
         // }
-    }
-    private void OnDestroy() {
-        MasterManager.OnPhaseChange -= OnPhaseChange; //Unsubscribe from event
     }
 
     // Update is called once per frame
@@ -52,30 +48,36 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (equip)
         {
-            equip = !equip;
-            Equip(true); 
+            equip = !equip; 
+            Equip(true);
         }
+        OnPhaseChange((int)MasterManager.Instance.currentPhase);
     }
 
-    private void OnPhaseChange(Phases phase){
+    public void OnPhaseChange(int phase)
+    {
         switch (phase)
         {
-            case Phases.Phase_1:
+            case 0:
                 _renderer.enabled = true;
+                headPhone.GetComponent<Rigidbody>().isKinematic = true;
                 break;
-            case Phases.Phase_2:
+            case 1:
+                _renderer.enabled = true;
+                headPhone.GetComponent<Rigidbody>().isKinematic = false;
+                break;
+            case 2:
                _renderer.enabled = false;
                 break;
-            case Phases.Phase_3:
+            case 3:
                 _renderer.enabled = true;
-                _renderer.material.SetFloat("_Dissolve", 50f);
+                _renderer.sharedMaterial.SetFloat("_Dissolve", 50f);
                 headPhone.GetComponent<Rigidbody>().isKinematic = false;
                 EquipHeadPhone();
                 break;
-            default:
-                Debug.LogWarning("Phase not found : "+ phase.ToString() +"\n"+this.gameObject);
-                break;
         }
+
+        Debug.Log(phase);
     }
 
     public void EquipHeadPhone()

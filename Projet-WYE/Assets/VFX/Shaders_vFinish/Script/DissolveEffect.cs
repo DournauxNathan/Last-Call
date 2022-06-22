@@ -48,9 +48,9 @@ public class DissolveEffect : Singleton<DissolveEffect>
         }
     }
 
-    private void Start()
+    /*private void Start()
     {
-        /*if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
+        if (TryGetComponent<XRGrabInteractableWithAutoSetup>(out XRGrabInteractableWithAutoSetup xrGrab))
         {
             xrGrab.enabled = false;
         }
@@ -58,10 +58,8 @@ public class DissolveEffect : Singleton<DissolveEffect>
         if (TryGetComponent<XRSimpleInteractableWithAutoSetup>(out XRSimpleInteractableWithAutoSetup xrSimple))
         {
             xrSimple.enabled = false;
-        }*/
-        
-    }
-    public bool doOnce;
+        }        
+    }*/
 
     private void FixedUpdate()
     {
@@ -72,17 +70,13 @@ public class DissolveEffect : Singleton<DissolveEffect>
                 startEffect = !startEffect;
                 StartCoroutine(Dissolve());
             }
-/*
-            if (GetComponent<Renderer>().material.GetFloat("_Dissolve") > 1 && doOnce)
-            {
-                doOnce = !doOnce;
-                    
-                Debug.Log("heeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 
+            if (GetComponent<Renderer>().sharedMaterial.GetFloat("_Dissolve") > .1f)
+            {
                 GetComponent<CombinableObject>().ToggleInteractor(true);
 
                 Reveal();
-            }*/
+            }
         }
     }
 
@@ -109,20 +103,20 @@ public class DissolveEffect : Singleton<DissolveEffect>
 
         float counter = 50;
 
-        if (GetComponent<Renderer>().materials.Length > 0)
+        if (GetComponent<Renderer>().sharedMaterials.Length > 0)
         {
-            while (GetComponent<Renderer>().materials[0].GetFloat("_Dissolve") > 1)
+            while (GetComponent<Renderer>().sharedMaterial.GetFloat("_Dissolve") > 1)
             {
                 counter -= Time.deltaTime * dissolveRate;
 
-                for (int i = 0; i < GetComponent<Renderer>().materials.Length; i++)
+                for (int i = 0; i < GetComponent<Renderer>().sharedMaterials.Length; i++)
                 {
-                    GetComponent<Renderer>().materials[i].SetFloat("_Dissolve", counter);
+                    GetComponent<Renderer>().sharedMaterial.SetFloat("_Dissolve", counter);
                 }
 
-                if (GetComponent<Renderer>().materials[0].GetFloat("_Dissolve") <= 0)
+                if (GetComponent<Renderer>().sharedMaterial.GetFloat("_Dissolve") <= 0)
                 {
-                    for (int i = 0; i < GetComponent<Renderer>().materials.Length; i++)
+                    for (int i = 0; i < GetComponent<Renderer>().sharedMaterials.Length; i++)
                     {
                         if (TryGetComponent<Renderer>(out Renderer rend))
                         {

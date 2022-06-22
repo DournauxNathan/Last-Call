@@ -249,7 +249,7 @@ public class MasterManager : Singleton<MasterManager>
             case 1:
                 Projection.Instance.enableTransition = true;
                 Projection.Instance.SetTransitionValue(50);
-                ScenarioManager.Instance.UpdateScenario();
+                ScenarioManager.Instance.UpdateScenario(1);
                 TimeSettings.Instance.Initialize();
                 UpdateController();
                 break;
@@ -277,6 +277,7 @@ public class MasterManager : Singleton<MasterManager>
 
                 WordManager.Instance.PullWord();
                 UIManager.Instance.UpdateUnitManager(4);
+                HeadPhoneManager.Instance.OnPhaseChange(i);
                 break;
 
             case 4:
@@ -286,7 +287,6 @@ public class MasterManager : Singleton<MasterManager>
         }
 
         MusicManager.Instance.CheckMusic();
-        OnPhaseChange?.Invoke(currentPhase);
     }
 
     public void EnvironmentIsReveal()
