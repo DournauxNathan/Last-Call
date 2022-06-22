@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4788802106384659195}
   - component: {fileID: 4579049104216784091}
   - component: {fileID: 2428210632866065289}
+  - component: {fileID: 7847225389669889885}
   - component: {fileID: 8954615513564483766}
   m_Layer: 0
   m_Name: N_WineBottle
@@ -129,6 +130,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.09162808, y: 0.36320308, z: 0.09162813}
   m_Center: {x: 0.000000011549538, y: 0.05660153, z: 0.000000012115717}
+--- !u!114 &7847225389669889885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187390998034012490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5d7cec179baf04d8b3610a05d4957c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Floaters:
+  - {fileID: 0}
+  UnderWaterDrag: 3
+  UnderWaterAngularDrag: 1
+  AirDrag: 0
+  AirAngularDrag: 0.05
+  FloatingPower: 15
 --- !u!54 &8954615513564483766
 Rigidbody:
   m_ObjectHideFlags: 0

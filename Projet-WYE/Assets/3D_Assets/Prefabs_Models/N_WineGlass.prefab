@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2447897618760256572}
   - component: {fileID: 1609885681431462809}
   - component: {fileID: 3581348199776204627}
+  - component: {fileID: 1570929864632742665}
   - component: {fileID: 4285987066706947217}
   - component: {fileID: 6318084964408681436}
   - component: {fileID: 1524846721}
@@ -95,6 +96,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1570929864632742665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076940713079510662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d913b3763bdf1b34d91914cad3f46f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fracturedObject: {fileID: 0}
+  collisionTags: []
 --- !u!54 &4285987066706947217
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -218,6 +233,7 @@ MonoBehaviour:
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
   addOffset: 0
+  isGrabbed: 0
 --- !u!65 &1524846721
 BoxCollider:
   m_ObjectHideFlags: 0
