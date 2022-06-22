@@ -121,9 +121,11 @@ public class Reveal : MonoBehaviour
         isActive = false;
         transform.SetParent(pullingStock);
 
-        GetComponent<RectTransform>().transform.position = Vector3.zero;
-
+        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
+        GetComponent<BoxCollider>().enabled = true;
         GetComponent<CanvasGroup>().alpha = 1;
+
+        this.transform.position = Vector3.zero; 
     }
 
 
