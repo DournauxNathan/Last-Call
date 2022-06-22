@@ -7,10 +7,18 @@ public class Water_Rising : MonoBehaviour
     public GameObject water;
     public float time;
     public float maxheight;
+    private bool hasStarted;
 
     public void StartRising()
     {
         StartCoroutine(Rise());
+    }
+
+    private void Update() {
+        if(MasterManager.Instance.envIsReveal && !hasStarted){
+            hasStarted = true;
+            StartRising();
+        }
     }
 
     public void StopRising()
