@@ -80,7 +80,6 @@ public class UIManager : Singleton<UIManager>
     public void SetFormToComplete(bool value)
     {
         currentForm.isComplete = value;
-        hintText.text = "Appuyez sur Y pour imaginer la situation";
 
         if (currentForm.isComplete)
         {
@@ -98,6 +97,7 @@ public class UIManager : Singleton<UIManager>
             WordManager.Instance.transform.GetChild(i).GetComponent<WordData>().Deactivate();
         }
 
+        hintText.text = "Appuyez sur Y pour imaginer la situation";
     }
 
     public void Fade(Fadetype type)
