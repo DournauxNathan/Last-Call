@@ -79,4 +79,9 @@ public class InitTutorial : Singleton<InitTutorial>
     {
         TutoManager.Instance.Skip();
     }
+
+    public void ActiveGO(GameObject go)
+    {
+        go.SetActive(true);
+    }
 }

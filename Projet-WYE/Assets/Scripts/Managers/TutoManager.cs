@@ -137,12 +137,11 @@ public class TutoManager : Singleton<TutoManager>
                     {
                         UpdateIndication(2);
                         InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [B] ou [Y]";
-
+                        MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
                         secondaryWasPressed = true;
                     }
                     break;
                 case 0:
-                    MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
                     Progress(1);
                     InitTutorial.Instance.orderText.text = "";
                     break;
@@ -249,17 +248,32 @@ public class TutoManager : Singleton<TutoManager>
                 
                     break;
                 case 14:
-                    secondPartIsDone = true;
-                    //InitTutorial.Instance.orderText.text = "";
                     InitTutorial.Instance.orderText.text =  "Bravo ! \n Vous serez ammené à combiner différents objets pour \n trouver la meilleure solution aux problèmes rencontrés.";
+                    this.CallWithDelay(() => Progress(15), 5f);
+                    break;
+                case 15:
+                    InitTutorial.Instance.orderText.text = "Une fois l'ensemble de combinaisons effectués une nouvelle silouhette apparait \n Essayer de la pointer.";
+                    break;
+                case 16:
+                    InitTutorial.Instance.orderText.text = "Elle affiche une suggestion \n Attrapez le et validez le.";
+                    break;
+                case 17:
+                    InitTutorial.Instance.orderText.text = "Ces suggestions vous permet de validez l'ensemble de vos choix. Pensez à bien retenir l'ordre de vos décisions.";
+                    break;
+                case 18:
+                    break;
+                case 19:
+                    secondPartIsDone = true;
+
                     Projection.Instance.enableTransition = true;
                     Projection.Instance.transitionValue = 50f;
                     this.CallWithDelay(ResetString, 17f);
                     this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 10f);
                     UpdateIndication(2);
-                    Progress(15);
+
+                    Progress(20);
                     break;
-                case 15:
+                case 20:
                     isTutorialBegin = false;
                     isTutoDone = true;
                     tutoWordManager.SetActive(false);
