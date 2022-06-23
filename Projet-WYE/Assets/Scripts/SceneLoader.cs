@@ -104,7 +104,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         isLoading = false;
 
-        Debug.Log(sceneName);
+        //Debug.Log(sceneName);
     }
 
     private IEnumerator UnloadCurrent()

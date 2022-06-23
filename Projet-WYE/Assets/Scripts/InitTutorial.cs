@@ -17,7 +17,7 @@ public class InitTutorial : Singleton<InitTutorial>
     public TMP_Text orderText;
 
     public List<GameObject> objects;
-    private void Start()
+    private void Awake()
     {
         if (MasterManager.Instance.isTutoEnded)
         {
@@ -26,6 +26,11 @@ public class InitTutorial : Singleton<InitTutorial>
         }
         else
         {
+            HandController.Instance.showController = true;
+            HandController.Instance.showController = true;
+
+            TutoManager.Instance.Init();
+
             if (grab != null)
             {
                 grab.SetActive(false);
@@ -55,11 +60,6 @@ public class InitTutorial : Singleton<InitTutorial>
                 }
             }
         }
-    }
-
-    private void Awake()
-    {
-
     }
 
     public void DisableObject()

@@ -27,6 +27,10 @@ public class TutoManager : Singleton<TutoManager>
     public bool secondPartIsDone;
     public bool isTutoDone;
 
+    public UnityEvent revealEnv;
+    public UnityEvent actionSucced;
+
+
     // Start is called before the first frame update
     public void Init()
     {
@@ -45,7 +49,7 @@ public class TutoManager : Singleton<TutoManager>
         if (isTutorialBegin)
         {
 
-            this.CallWithDelay(() => Progress(-5), 8f);
+            this.CallWithDelay(() => Progress(-5), 2f);
             canvas2.SetActive(false);
             canvas3.SetActive(false);
             UpdateText(1);
@@ -96,47 +100,55 @@ public class TutoManager : Singleton<TutoManager>
             switch (progression)
             {
                 case -5:
-                    this.CallWithDelay(() => Progress(-4), 2f); InitTutorial.Instance.order.SetActive(true);
+                    Progress(-4);
+                    InitTutorial.Instance.order.SetActive(true);
                     break;
                 case -4:
                     if (!gribWasPressed)
                     {
                         InitTutorial.Instance.order.SetActive(true);
                         UpdateIndication(3);
-                        InitTutorial.Instance.orderText.text = "Appuyez sur la gachette [majeur]";
+                        InitTutorial.Instance.orderText.text = "Regardez vos mains et appuyez sur la gachette [majeur]";
+
+                        gribWasPressed = true;
+
                     }
                     break;
                 case -3:
                     if (!triggerWasPressed)
                     {
                         UpdateIndication(4);
-                        gribWasPressed = true;
                         InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur la gachette [index]";
+
+                        triggerWasPressed = true;
                     }
                     break;
                 case -2:
                     if (!primaryWasPressed)
                     {
                         UpdateIndication(1);
-                        triggerWasPressed = true;
                         InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [A] ou [X]";
+
+                        primaryWasPressed = true;
                     }
                     break;
                 case -1:
                     if (!secondaryWasPressed)
                     {
                         UpdateIndication(2);
-                        primaryWasPressed = true;
                         InitTutorial.Instance.orderText.text = "Bravo ! \n Appuyez sur [B] ou [Y]";
+
+                        secondaryWasPressed = true;
                     }
                     break;
                 case 0:
-                    secondaryWasPressed = true;
+                    MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
                     Progress(1);
                     InitTutorial.Instance.orderText.text = "";
                     break;
                 case 1:
                     tutoWordManager.SetActive(true);
+                    revealEnv?.Invoke();
                     InitTutorial.Instance.grab.SetActive(true);
                     UpdateIndication(3);
                     break;
@@ -148,7 +160,8 @@ public class TutoManager : Singleton<TutoManager>
                     InitTutorial.Instance.grabText.color = new Color(0, 226, 255);
                     InitTutorial.Instance.grabText.text = "Bravo !";
 
-                    this.CallWithDelay(() => Progress(4), 12f);
+                    MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
+                    this.CallWithDelay(() => Progress(4), 2f);
                     break;
 
                 case 4:
@@ -184,6 +197,7 @@ public class TutoManager : Singleton<TutoManager>
                     {
                         InitTutorial.Instance.pointAndClickcomplentaire.SetActive(true);
                         InitTutorial.Instance.pointAndClickText.text = "Bravo !";
+                        MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
                         isPointDone = true;
                         Progress(8);
                     }

@@ -54,33 +54,38 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         OnPhaseChange((int)MasterManager.Instance.currentPhase);
     }
 
-    public bool doOnce;
+    public bool doOnce = true;
 
     public void OnPhaseChange(int phase)
     {
         switch (phase)
         {
             case 0:
-                _renderer.enabled = true;
+                _renderer.enabled = false;
                 headPhone.GetComponent<Rigidbody>().isKinematic = true;
+                headPhone.GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
                 break;
             case 1:
+                doOnce = true;
                 _renderer.enabled = true;
                 headPhone.GetComponent<Rigidbody>().isKinematic = false;
+                headPhone.GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
                 break;
             case 2:
                _renderer.enabled = false;
                 break;
             case 3:
-                _renderer.enabled = true;
-                _renderer.sharedMaterial.SetFloat("_Dissolve", 50f);
-                headPhone.GetComponent<Rigidbody>().isKinematic = false;
 
-                doOnce = true;
                 if (doOnce)
                 {
-                    doOnce = false;
                     EquipHeadPhone();
+
+                    _renderer.enabled = true;
+                    headPhone.GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
+                    _renderer.sharedMaterial.SetFloat("_Dissolve", 50f);
+                    headPhone.GetComponent<Rigidbody>().isKinematic = false;
+
+                    doOnce = false;
                 }
                 break;
         }
