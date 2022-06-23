@@ -130,7 +130,7 @@ public class Projection : Singleton<Projection>
         
         if (enableTransition && MasterManager.Instance.currentPhase == Phases.Phase_0)
         {
-            if (enableTransition && TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
+            if (TutoManager.Instance.firstPartIsDone && !TutoManager.Instance.secondPartIsDone)
             {
                 for (int obj = 0; obj < 1; obj++)
                 {
@@ -140,7 +140,8 @@ public class Projection : Singleton<Projection>
                     }
                 }
             }
-            else if (enableTransition && TutoManager.Instance.secondPartIsDone && MasterManager.Instance.currentPhase == Phases.Phase_0)
+
+            if (TutoManager.Instance.firstPartIsDone  &&TutoManager.Instance.secondPartIsDone)
             {
                 for (int obj = 2; obj < 2; obj++)
                 {

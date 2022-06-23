@@ -10,7 +10,7 @@ public class TutoManager : Singleton<TutoManager>
     [SerializeField] private int progression = -5;
 
     public GameObject tutoWordManager;
-    public bool isTutorialBegin;
+    public bool isTutorialBegin, hasBegin;
 
     public GameObject canvas1;
     public TMP_Text grabText;
@@ -46,9 +46,9 @@ public class TutoManager : Singleton<TutoManager>
             isTutorialBegin = true;
         }
 
-        if (isTutorialBegin)
+        if (isTutorialBegin && !hasBegin)
         {
-
+            hasBegin = true;
             this.CallWithDelay(() => Progress(-5), 2f);
             canvas2.SetActive(false);
             canvas3.SetActive(false);
@@ -92,7 +92,7 @@ public class TutoManager : Singleton<TutoManager>
     }
 
 
-    public bool gribWasPressed, triggerWasPressed, primaryWasPressed, secondaryWasPressed;
+    public bool gribWasPressed, triggerWasPressed, primaryWasPressed, secondaryWasPressed, hasAlreadyGrab, hasAlreadyCombine;
     public void UpdateTutorial()
     {
         if (isTutorialBegin)
@@ -100,6 +100,7 @@ public class TutoManager : Singleton<TutoManager>
             switch (progression)
             {
                 case -5:
+
                     Progress(-4);
                     InitTutorial.Instance.order.SetActive(true);
                     break;
@@ -152,15 +153,27 @@ public class TutoManager : Singleton<TutoManager>
                     UpdateIndication(3);
                     break;
                 case 2:
-                    InitTutorial.Instance.grabText.text = "Relâchez la gâchette pour lâcher l'objet";
-                    UpdateIndication(3);
+                    if (!hasAlreadyGrab)
+                    {
+                        InitTutorial.Instance.grabText.text = "Relâchez la gâchette pour lâcher l'objet";
+                        UpdateIndication(3);
+                    }
                     break;
                 case 3:
-                    InitTutorial.Instance.grabText.color = new Color(0, 226, 255);
-                    InitTutorial.Instance.grabText.text = "Bravo !";
+                    if (!hasAlreadyGrab)
+                    {
 
-                    MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
-                    this.CallWithDelay(() => Progress(4), 2f);
+                        InitTutorial.Instance.grabText.color = new Color(0, 226, 255);
+                        InitTutorial.Instance.grabText.text = "Bravo !";
+
+                        MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
+                        this.CallWithDelay(() => Progress(4), 2f);
+                        hasAlreadyGrab = true;
+                    }
+                    else
+                    {
+                        UpdateIndication(4);
+                    }
                     break;
 
                 case 4:
@@ -194,11 +207,16 @@ public class TutoManager : Singleton<TutoManager>
                     }
                     else
                     {
-                        InitTutorial.Instance.pointAndClickcomplentaire.SetActive(true);
-                        InitTutorial.Instance.pointAndClickText.text = "Bravo !";
-                        MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
-                        isPointDone = true;
-                        Progress(8);
+                        if (!hasAlreadyCombine)
+                        {
+                            InitTutorial.Instance.pointAndClickcomplentaire.SetActive(true);
+                            InitTutorial.Instance.pointAndClickText.text = "Bravo !";
+                            MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(OrderController.Instance.resolveSound);
+                            isPointDone = true;
+                            Progress(8);
+
+                            hasAlreadyCombine = true;
+                        }
                     }
                     break;
 
