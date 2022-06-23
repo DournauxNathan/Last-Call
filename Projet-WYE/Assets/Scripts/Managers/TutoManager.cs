@@ -266,19 +266,23 @@ public class TutoManager : Singleton<TutoManager>
                 
                     break;
                 case 14:
-                    InitTutorial.Instance.orderText.text =  "Bravo ! \n Vous serez ammené à combiner différents objets pour \n trouver la meilleure solution aux problèmes rencontrés.";
-                    this.CallWithDelay(() => Progress(15), 5f);
+                    InitTutorial.Instance.orderText.text = "Bravo ! \n Vous serez ammené à combiner ou à interargir avec différents objets pour \n trouver la meilleure solution aux problèmes rencontrés.";
+                    this.CallWithDelay(() => Progress(15), 12f);
                     break;
                 case 15:
                     InitTutorial.Instance.orderText.text = "Une fois l'ensemble de combinaisons effectués une nouvelle silouhette apparait \n Essayer de la pointer.";
+
                     break;
                 case 16:
-                    InitTutorial.Instance.orderText.text = "Elle affiche une suggestion \n Attrapez le et validez le.";
+                    InitTutorial.Instance.orderText.text = "Elle affiche une suggestion \n Attrapez la et validez la.";
                     break;
                 case 17:
-                    InitTutorial.Instance.orderText.text = "Ces suggestions vous permet de validez l'ensemble de vos choix. Pensez à bien retenir l'ordre de vos décisions.";
+                    InitTutorial.Instance.orderText.text = "Ces suggestions vous permet de validez l'ensemble de vos choix en affichant une silouhette. \n Regardez derrière vous.";
+                    this.CallWithDelay(() => Progress(19), 5f);
                     break;
                 case 18:
+                    InitTutorial.Instance.orderText.text = "Pensez à bien retenir l'ordre de vos décisions.";
+                    this.CallWithDelay(() => Progress(19), 5f);
                     break;
                 case 19:
                     secondPartIsDone = true;
@@ -286,7 +290,7 @@ public class TutoManager : Singleton<TutoManager>
                     Projection.Instance.enableTransition = true;
                     Projection.Instance.transitionValue = 50f;
                     this.CallWithDelay(ResetString, 17f);
-                    this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Maintenez [B] ou [Y] pour quitter le tutoriel"), 10f);
+                    InitTutorial.Instance.orderText.text =  "Le tutoriel est désormais terminé. \n Maintenez [B] ou [Y] pour quitter le tutoriel";
                     UpdateIndication(2);
 
                     Progress(20);
@@ -295,6 +299,7 @@ public class TutoManager : Singleton<TutoManager>
                     isTutorialBegin = false;
                     isTutoDone = true;
                     tutoWordManager.SetActive(false);
+
                     break;
             }
         }

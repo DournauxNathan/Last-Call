@@ -86,6 +86,10 @@ public class Reveal : MonoBehaviour
 
         UpdateText(i);
 
+        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<CanvasGroup>().alpha = 1;
+
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
@@ -125,7 +129,7 @@ public class Reveal : MonoBehaviour
         GetComponent<BoxCollider>().enabled = true;
         GetComponent<CanvasGroup>().alpha = 1;
 
-        this.transform.position = Vector3.zero; 
+        //GetComponent<RectTransform>().localPosition = Vector3.zero; 
     }
 
 

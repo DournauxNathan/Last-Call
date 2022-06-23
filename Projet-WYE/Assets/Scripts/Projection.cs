@@ -74,7 +74,18 @@ public class Projection : Singleton<Projection>
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
+        foreach (var item in objectsToDissolve)
+        {
+            for (int i = 0; i < item.objects.Count; i++)
+            {
+                if (item.objects[i] != null)
+                {
+                    item.objects[i].SetVector("_PlayerPos", player.position);
+                }
+            }
+        }
+    
+ #if UNITY_EDITOR
         if (onEditor)
         {
             for (int obj = 0; obj < objectsToDissolve.Count; obj++)
@@ -282,15 +293,20 @@ public class Projection : Singleton<Projection>
             StartCoroutine(WaitForVoid());//coroutine
             CallScene();
         }
-    }   
+    }
+
+    public bool hasAlreadyLoaded;
 
     public void CallScene()
     {
-        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone)
+        if (!TutoManager.Instance.isTutoDone && MasterManager.Instance.currentPhase == Phases.Phase_0 && TutoManager.Instance.firstPartIsDone && !hasAlreadyLoaded)
         {
             Debug.Log("Tuto Scene 2");
+
             InitTutorial.Instance.DisableObject();
             SceneLoader.Instance.AddNewScene("TutoScene_Two");
+
+            hasAlreadyLoaded = true;
             SetTransitionValue(0);
             TutoManager.Instance.Progress(12);
         }

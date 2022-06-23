@@ -12752,6 +12752,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073542443}
   m_CullTransparentMesh: 1
+--- !u!1 &1089547464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089547466}
+  - component: {fileID: 1089547465}
+  m_Layer: 0
+  m_Name: Respawn
+  m_TagString: Test
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1089547465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089547464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.028246, y: 3.2651844, z: 10.041649}
+  m_Center: {x: 1.7436819, y: -1.582592, z: 2.8796644}
+--- !u!4 &1089547466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089547464}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: -0.25139868, y: -2.5019999, z: 0.8995993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103599255
 GameObject:
   m_ObjectHideFlags: 0
@@ -12814,7 +12858,7 @@ MonoBehaviour:
   isInImaginary: 0
   skipTuto: 1
   skipIntro: 0
-  isTutoEnded: 0
+  isTutoEnded: 1
   startTuto: 0
   timerTutoBegin: 240
   startCall:
@@ -12853,6 +12897,7 @@ MonoBehaviour:
   progression: 0
   tutoWordManager: {fileID: 1680025821}
   isTutorialBegin: 0
+  hasBegin: 0
   canvas1: {fileID: 6558831186256582520}
   grabText: {fileID: 5700561056171648354}
   canvas2: {fileID: 6558831185764129931}
@@ -12887,6 +12932,7 @@ MonoBehaviour:
   primaryWasPressed: 0
   secondaryWasPressed: 0
   hasAlreadyGrab: 0
+  hasAlreadyCombine: 0
 --- !u!114 &1103599259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25325,7 +25371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[3].objects.Array.size
-      value: 272
+      value: 273
       objectReference: {fileID: 0}
     - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: objectsToDissolve.Array.data[0].objects.Array.data[0]
@@ -27147,6 +27193,10 @@ PrefabInstance:
       propertyPath: objectsToDissolve.Array.data[3].objects.Array.data[271]
       value: 
       objectReference: {fileID: 2100000, guid: 5100bf5e12ebdbe4d82d99d31673f5f6, type: 2}
+    - target: {fileID: 5782854229075447701, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
+      propertyPath: objectsToDissolve.Array.data[3].objects.Array.data[272]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfa5b03409b2efe44923688d5e660e49, type: 2}
     - target: {fileID: 6283995595483804127, guid: 879edc9a199f0c14a8e0d27e295da47b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
