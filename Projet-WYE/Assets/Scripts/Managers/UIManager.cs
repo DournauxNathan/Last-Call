@@ -75,6 +75,12 @@ public class UIManager : Singleton<UIManager>
         {
             SetFormToComplete(true);
         }
+        else if(currentForm.nameField.text != string.Empty && currentForm.ageField.text != string.Empty
+            && currentForm.adressField.text != string.Empty && currentForm.situationField.text != string.Empty
+            && currentForm.unitField.text == string.Empty)
+        {
+            SetFormToComplete(false);
+        }
     }
 
     public void SetFormToComplete(bool value)
@@ -92,12 +98,12 @@ public class UIManager : Singleton<UIManager>
             ScenarioManager.Instance.endingValue += -1;
         }
 
+        hintText.text = "Appuyez sur B ou Y pour imaginer la situation";
+
         for (int i = 0; i < transform.childCount; i++)
         {
             WordManager.Instance.transform.GetChild(i).GetComponent<WordData>().Deactivate();
         }
-
-        hintText.text = "Appuyez sur Y pour imaginer la situation";
     }
 
     public void Fade(Fadetype type)
