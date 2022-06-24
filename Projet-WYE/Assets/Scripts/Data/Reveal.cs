@@ -44,14 +44,18 @@ public class Reveal : MonoBehaviour
             Debug.Log(_question);
         }
     }
-    
+
+    private void Start()
+    {
+        _collider.enabled = false;
+    }
+
     private void Update()
     {
         if (ScenarioManager.Instance.currentScenario != Scenario.None)
         {
             InitEntry();
         }
-
 
         if (simulateInput)
         {
@@ -74,6 +78,7 @@ public class Reveal : MonoBehaviour
 
         UpdateText(i);
 
+        _collider.enabled = true;
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
@@ -89,6 +94,7 @@ public class Reveal : MonoBehaviour
 
         UpdateText(i);
 
+        _collider.enabled = true;
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
@@ -128,6 +134,7 @@ public class Reveal : MonoBehaviour
                   
         xrGrab.enabled = false;
         _collider.enabled = false;
+
         GetComponent<CanvasGroup>().alpha = 1;
     }
 

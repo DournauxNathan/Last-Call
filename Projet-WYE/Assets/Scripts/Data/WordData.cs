@@ -8,6 +8,8 @@ using TMPro;
 public class WordData : MonoBehaviour
 {
     public TMP_Text text;
+    public XRGrabInteractableWithAutoSetup xrGrab;
+    public BoxCollider _collider;
 
     private Transform parentTransform;
     private Transform pullingStock;
@@ -20,6 +22,11 @@ public class WordData : MonoBehaviour
     private float x, y, z;
     Vector3 pos;
     public bool simulateInput;
+
+    private void Start()
+    {
+        _collider.enabled = false;
+    }
 
     private void Update()
     {
@@ -49,6 +56,7 @@ public class WordData : MonoBehaviour
         
         UpdateText(i);
 
+        _collider.enabled = true;
         //GetComponent<ShakeWord>().submitWord.AddListener(UnpauseAudio);
 
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
@@ -70,6 +78,7 @@ public class WordData : MonoBehaviour
 
         UpdateText(i);
 
+        _collider.enabled = true;
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
@@ -96,7 +105,13 @@ public class WordData : MonoBehaviour
         
         isActive = false;
         transform.SetParent(pullingStock);
-        transform.position = Vector3.zero;
+
+        GetComponent<RectTransform>().localPosition = new Vector3(0, -170f, 0);
+
+        xrGrab.enabled = false;
+        _collider.enabled = false;
+
+        GetComponent<CanvasGroup>().alpha = 1;
     }
 
     public void SubmitAnswer()
@@ -104,13 +119,13 @@ public class WordData : MonoBehaviour
         if (isCorrectAnswer)
         {
             UIManager.Instance.UpdateForm(answer.type, text.text);
-            //UnpauseAudio();
+            UnpauseAudio();
             WordManager.Instance.DisableAnswers(answer.type, answer.id);
         }
         else
         {
             UIManager.Instance.UpdateForm(answer.type, text.text);
-            //UnpauseAudio();
+            UnpauseAudio();
             WordManager.Instance.DisableAnswers(answer.type, answer.id);
 
             Debug.Log("Give penalty");
