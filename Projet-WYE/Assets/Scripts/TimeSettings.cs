@@ -52,29 +52,35 @@ public class TimeSettings : Singleton<TimeSettings>
         StartCoroutine(IncreaseTime());
     }
 
+    public bool unPause;
+
     public IEnumerator IncreaseTime()
     {
         while (globalTimer >= 0)
         {
-            globalTimer += Time.deltaTime;
+            if (MasterManager.Instance.references.mainAudioSource.isPlaying || unPause)
+            {
+                globalTimer += Time.deltaTime;
+            }
 
             if (globalTimer >= ScenarioManager.Instance.currentScenarioData.ageBegin
                 && globalTimer < ScenarioManager.Instance.currentScenarioData.adressBegin
                 && !AnswerManager.Instance.ageIsAnswered)
             {
-                Debug.Log("Pause audio A");
+                //Debug.Log("Pause audio A");
                 this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 3.2f);
                 foreach (var item in AnswerManager.Instance.age)
                 {
                     this.CallWithDelay(() => item.SetActive(true), 3.4f);
                 }
                 MasterManager.Instance.references.mainAudioSource.UnPause();
+                unPause = true;
             }
             if (globalTimer >= ScenarioManager.Instance.currentScenarioData.adressBegin
                 && globalTimer < ScenarioManager.Instance.currentScenarioData.situationBegin
                 && !AnswerManager.Instance.adressIsAnswer && AnswerManager.Instance.ageIsAnswered)
             {
-                Debug.Log("Pause audio B");
+                //Debug.Log("Pause audio B");
                 if (doOnceB)
                 {
                     this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 5.4f);
@@ -83,13 +89,13 @@ public class TimeSettings : Singleton<TimeSettings>
                     {
                         this.CallWithDelay(() => item.SetActive(true), 5.6f);
                     }
-                    MasterManager.Instance.references.mainAudioSource.UnPause();
+                    MasterManager.Instance.references.mainAudioSource.UnPause(); unPause = true;
                 }
             }
             if (globalTimer > ScenarioManager.Instance.currentScenarioData.situationBegin
                 && !AnswerManager.Instance.situationIsAnswer && AnswerManager.Instance.adressIsAnswer && AnswerManager.Instance.ageIsAnswered)
             {
-                Debug.Log("Pause audio C");
+                //Debug.Log("Pause audio C");
 
                 if (doOnce)
                 {
@@ -105,7 +111,7 @@ public class TimeSettings : Singleton<TimeSettings>
                             }
                         }, 40f);
                     }
-                    MasterManager.Instance.references.mainAudioSource.UnPause();
+                    MasterManager.Instance.references.mainAudioSource.UnPause(); unPause = true;
                     //this.CallWithDelay(() => MasterManager.Instance.references.mainAudioSource.Pause(), 2f);
                 }
 
