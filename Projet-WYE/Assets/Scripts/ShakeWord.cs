@@ -96,8 +96,6 @@ public class ShakeWord : MonoBehaviour
             {
                 submitWord?.Invoke();
                 isDecaying = false;
-                GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
-                GetComponent<BoxCollider>().enabled = false;
             }
         }
     }

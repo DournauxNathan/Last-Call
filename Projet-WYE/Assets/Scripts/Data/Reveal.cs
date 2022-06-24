@@ -71,6 +71,10 @@ public class Reveal : MonoBehaviour
 
         UpdateText(i);
 
+
+        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
+        GetComponent<BoxCollider>().enabled = true;
+
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
@@ -85,10 +89,6 @@ public class Reveal : MonoBehaviour
         isActive = true;
 
         UpdateText(i);
-
-        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
-        GetComponent<BoxCollider>().enabled = true;
-        GetComponent<CanvasGroup>().alpha = 1;
 
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
@@ -125,8 +125,10 @@ public class Reveal : MonoBehaviour
         isActive = false;
         transform.SetParent(pullingStock);
 
-        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
-        GetComponent<BoxCollider>().enabled = true;
+
+        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+
         GetComponent<CanvasGroup>().alpha = 1;
 
         //GetComponent<RectTransform>().localPosition = Vector3.zero; 
