@@ -7,6 +7,9 @@ using TMPro;
 public class Reveal : MonoBehaviour
 {
     public TMP_Text text;
+    public XRGrabInteractableWithAutoSetup xrGrab;
+    public BoxCollider _collider;
+
 
     public float amount = 0;
 
@@ -71,10 +74,6 @@ public class Reveal : MonoBehaviour
 
         UpdateText(i);
 
-
-        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = true;
-        GetComponent<BoxCollider>().enabled = true;
-
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
@@ -125,13 +124,11 @@ public class Reveal : MonoBehaviour
         isActive = false;
         transform.SetParent(pullingStock);
 
-
-        GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
-
+        GetComponent<RectTransform>().localPosition = new Vector3(0, -170f, 0);
+                  
+        xrGrab.enabled = false;
+        _collider.enabled = false;
         GetComponent<CanvasGroup>().alpha = 1;
-
-        //GetComponent<RectTransform>().localPosition = Vector3.zero; 
     }
 
 

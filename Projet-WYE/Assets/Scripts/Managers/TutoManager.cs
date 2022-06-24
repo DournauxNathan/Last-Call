@@ -39,7 +39,6 @@ public class TutoManager : Singleton<TutoManager>
             isTutorialBegin = false;
             Skip();
             SceneLoader.Instance.LoadNewScene("Menu");
-            Debug.Log("Go to menu");
         }
         else
         {            
@@ -262,7 +261,7 @@ public class TutoManager : Singleton<TutoManager>
                     break;
                 case 13:
                     InitTutorial.Instance.orderText.text = "";
-                    this.CallWithDelay(() => UpdateString(InitTutorial.Instance.orderText, "Trouvez un moyen de soigner l'appelant en le combinant avec un objet"), 0f);
+                    this.CallWithDelay(() => InitTutorial.Instance.orderText.text = "Trouvez un moyen de soigner l'appelant en le combinant avec un objet", 0f);
                 
                     break;
                 case 14:
