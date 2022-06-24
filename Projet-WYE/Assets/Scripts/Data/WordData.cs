@@ -56,17 +56,16 @@ public class WordData : MonoBehaviour
         
         UpdateText(i);
 
+        xrGrab.enabled = true;
         _collider.enabled = true;
         //GetComponent<ShakeWord>().submitWord.AddListener(UnpauseAudio);
 
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
-        GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
     }
 
     public void UnpauseAudio()
     {
         MasterManager.Instance.references.mainAudioSource.UnPause();
-        TimeSettings.Instance.unPause = false;
     }
 
     public void Activate(Transform parent, Transform stock,string i)
@@ -79,6 +78,7 @@ public class WordData : MonoBehaviour
 
         UpdateText(i);
 
+        xrGrab.enabled = true;
         _collider.enabled = true;
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
