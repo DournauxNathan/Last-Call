@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PhysicsButton : MonoBehaviour
 {
     [Header("References")]
-    public Rigidbody buttonTopRigid;
+    //spublic Rigidbody buttonTopRigid;
     public Transform buttonTop;
     public Transform buttonLowerLimit;
     public Transform buttonUpperLimit;
@@ -81,7 +81,7 @@ public class PhysicsButton : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {/*
         buttonTop.transform.localPosition = new Vector3(0, buttonTop.transform.localPosition.y, 0);
         buttonTop.transform.localEulerAngles = new Vector3(0, 0, 0);
         if (buttonTop.localPosition.y >= 0)
@@ -96,7 +96,7 @@ public class PhysicsButton : MonoBehaviour
             isPressed = true;
         else
             isPressed = false;
-/*
+
         #region Press Events / Methods
         //Using Events method (multiple reference)
         if (isPressed && prevPressedState != isPressed && useEvents)
@@ -137,6 +137,8 @@ public class PhysicsButton : MonoBehaviour
     
     public void Pressed()
     {
+        Debug.LogWarning("has been Pressed");
+
         prevPressedState = isPressed;
 
         if (pressedSound != null)
@@ -144,7 +146,8 @@ public class PhysicsButton : MonoBehaviour
             _audioSource.pitch = 1;
             _audioSource.PlayOneShot(pressedSound);
         }
-        InvokeEvent(onPressed);
+
+        onPressed?.Invoke();
 
         if (UIManager.Instance.currentForm.isComplete)
         {
