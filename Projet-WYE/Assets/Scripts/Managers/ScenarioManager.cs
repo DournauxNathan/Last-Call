@@ -46,7 +46,10 @@ public class ScenarioManager : Singleton<ScenarioManager>
 
     public void LoadScenario()
     {
-        HandController.Instance.showController = false;
+        if (HandController.Instance != null)
+        {
+            HandController.Instance.showController = false;
+        }
 
         switch (currentScenario)
         {

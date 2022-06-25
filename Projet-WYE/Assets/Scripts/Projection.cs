@@ -174,7 +174,7 @@ public class Projection : Singleton<Projection>
             RevealScene();
         }
 
-        if (enableTransition && transitionValue <= beginFadeOutAt && MasterManager.Instance.currentPhase == Phases.Phase_1)
+        if (enableTransition && transitionValue <= beginFadeOutAt && MasterManager.Instance.currentPhase == Phases.Phase_1 && SceneLoader.Instance.GetCurrentScene().name == "Office")
         {
             UIManager.Instance.Fade(Fadetype.Out);
 
@@ -184,7 +184,7 @@ public class Projection : Singleton<Projection>
             }
         }
 
-        if (enableTransition && transitionValue >= beginFadeInAt && MasterManager.Instance.currentPhase == Phases.Phase_1)
+        if (enableTransition && transitionValue >= beginFadeInAt && MasterManager.Instance.currentPhase == Phases.Phase_1 && SceneLoader.Instance.GetCurrentScene().name == "Office")
         {
             UIManager.Instance.Fade(Fadetype.In);
 

@@ -8,9 +8,9 @@ public class AnswerManager : Singleton<AnswerManager>
     public List<GameObject> adress;
     public List<Situation> situations;
 
-    [HideInInspector] public bool ageIsAnswered;
-    [HideInInspector] public bool adressIsAnswer;
-    [HideInInspector] public bool situationIsAnswer;
+    public bool ageIsAnswered;
+    public bool adressIsAnswer;
+    public bool situationIsAnswer;
 
     public void DisableGOIn(List<GameObject> t)
     {

@@ -65,6 +65,9 @@ public class WordData : MonoBehaviour
 
     public void UnpauseAudio()
     {
+        TimeSettings.Instance.isAudioPause = false;
+        TimeSettings.Instance.StartGlobalTimer();
+
         MasterManager.Instance.references.mainAudioSource.UnPause();
     }
 

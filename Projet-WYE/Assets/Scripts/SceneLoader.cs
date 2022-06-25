@@ -87,7 +87,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         //Debug.Log(currentScene.name != string.Empty && currentScene.name != "Persistent");
 
-        if (currentScene.name != "Null" && currentScene.name != "Persistent")
+        if (SceneManager.sceneCount >= 2)
         {            
             yield return StartCoroutine(UnloadCurrent());
         }
@@ -175,7 +175,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     public Scene GetCurrentScene()
     {
-        return SceneManager.GetSceneAt(1);
+         return SceneManager.GetSceneAt(1);
     }
 
     public void MoveGO(GameObject go)

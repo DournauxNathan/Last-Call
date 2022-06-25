@@ -33,15 +33,13 @@ public class Reveal : MonoBehaviour
 
     public bool simulateInput;
     private bool isReveal;
-
+    bool doOnce;
     public void InitEntry()
     {
         if (!MasterManager.Instance.envIsReveal && isEntryQMPLoaded)
         {
             _question = ScenarioManager.Instance.currentScenarioData.callerInformations.adress;
             UpdateText(_question.questions[0].question);
-
-            Debug.Log(_question);
         }
     }
 
@@ -79,6 +77,7 @@ public class Reveal : MonoBehaviour
         UpdateText(i);
 
         _collider.enabled = true;
+        xrGrab.enabled = true;
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
@@ -95,6 +94,7 @@ public class Reveal : MonoBehaviour
         UpdateText(i);
 
         _collider.enabled = true;
+        xrGrab.enabled = true;
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
