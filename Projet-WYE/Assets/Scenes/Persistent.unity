@@ -12955,7 +12955,7 @@ MonoBehaviour:
   isInImaginary: 0
   skipTuto: 1
   skipIntro: 0
-  isTutoEnded: 0
+  isTutoEnded: 1
   startTuto: 0
   timerTutoBegin: 240
   startCall:
@@ -20108,6 +20108,8 @@ MonoBehaviour:
   globalTimer: 0
   isRunning: 0
   runAtStart: 0
+  timerBegin: 0
+  isAudioPause: 0
 --- !u!114 &1696208565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30972,37 +30974,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 1568778086}
     m_Modifications:
     - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
       propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 741452807}
-    - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: PlayOneShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.AudioSource, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 8300000, guid: 10b7a9bf570e64f4599cdd2042d6b90e, type: 3}
-    - target: {fileID: 6558831186788318032, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: submitWord.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.AudioClip, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6558831186788318034, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
       propertyPath: m_Name
       value: Canvas Word - Reveal
@@ -31091,10 +31065,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6558831186788318043, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6558831186788318046, guid: c34bbd7f51d54934c9b8216b9f8088b2, type: 3}
       propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -31118,11 +31088,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 5700561056221740097}
+  img: {fileID: 0}
   xrGrab: {fileID: 0}
   _collider: {fileID: 0}
   amount: 0
   _question: {fileID: 11400000, guid: ed3245e1c3f9ac444b5e1fecce00a213, type: 2}
   atIndex: 0
+  displayAtPuzzle: 0
   isEntryQMPLoaded: 0
   simulateInput: 0
 --- !u!114 &8096457024676734233
@@ -31138,11 +31110,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 5700561056171648354}
+  img: {fileID: 0}
   xrGrab: {fileID: 0}
   _collider: {fileID: 0}
   amount: 0
   _question: {fileID: 11400000, guid: 27b7b93d3424f4444b94fc54389fbe63, type: 2}
   atIndex: 0
+  displayAtPuzzle: 0
   isEntryQMPLoaded: 0
   simulateInput: 0
 --- !u!114 &8096457024972844778
@@ -31158,11 +31132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 5700561055711964817}
+  img: {fileID: 0}
   xrGrab: {fileID: 0}
   _collider: {fileID: 0}
   amount: 0
   _question: {fileID: 11400000, guid: fbb5739a1de90344a8ad11f67c15e86a, type: 2}
   atIndex: 0
+  displayAtPuzzle: 0
   isEntryQMPLoaded: 0
   simulateInput: 0
 --- !u!224 &8187855733302458752

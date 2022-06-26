@@ -7,6 +7,7 @@ using TMPro;
 public class Reveal : MonoBehaviour
 {
     public TMP_Text text;
+    public Image img;
     public XRGrabInteractableWithAutoSetup xrGrab;
     public BoxCollider _collider;
 
@@ -21,6 +22,8 @@ public class Reveal : MonoBehaviour
     public Question _question;
     public int atIndex;
 
+    public int displayAtPuzzle;
+
     private bool isActive;
     public bool IsActive => isActive;
 
@@ -33,7 +36,7 @@ public class Reveal : MonoBehaviour
 
     public bool simulateInput;
     private bool isReveal;
-    bool doOnce;
+    bool doOnce = true;
     public void InitEntry()
     {
         if (!MasterManager.Instance.envIsReveal && isEntryQMPLoaded)
@@ -43,13 +46,42 @@ public class Reveal : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (isActive)
+        {
+            if (displayAtPuzzle == OrderController.Instance.puzzlesSucced)
+            {
+                img.enabled = true;
+                _collider.enabled = true;
+                xrGrab.enabled = true;
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        img.enabled = false;
+        _collider.enabled = false;
+        xrGrab.enabled = false;
+    }
+
     private void Start()
     {
         _collider.enabled = false;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
+        if (displayAtPuzzle == OrderController.Instance.puzzlesSucced)
+        {
+            img.enabled = true;
+            _collider.enabled = true;
+            xrGrab.enabled = true;
+
+            doOnce = false;
+        }
+
         if (ScenarioManager.Instance.currentScenario != Scenario.None)
         {
             InitEntry();
@@ -63,7 +95,7 @@ public class Reveal : MonoBehaviour
         }
     }
 
-    public void Activate(Transform parent, Transform stock, Question _question, string i, int _index)
+    public void Activate(Transform parent, Transform stock, Question _question, string i, int _index, int puzzleNeeded)
     {
         this.parentTransform = parent;
         transform.SetParent(parent);
@@ -73,6 +105,7 @@ public class Reveal : MonoBehaviour
 
         this.pullingStock = stock;
         isActive = true;
+        this.displayAtPuzzle = puzzleNeeded;
 
         UpdateText(i);
 
@@ -81,7 +114,7 @@ public class Reveal : MonoBehaviour
         GetComponent<RectTransform>().localPosition = GetRandomPosition();
     }
 
-    public void Activate(Transform parent, Transform stock, Question _question, string i)
+    public void Activate(Transform parent, Transform stock, Question _question, string i, int puzzleNeeded)
     {
         this.parentTransform = parent;
         transform.SetParent(parent);
@@ -90,6 +123,7 @@ public class Reveal : MonoBehaviour
 
         this.pullingStock = stock;
         isActive = true;
+        this.displayAtPuzzle = puzzleNeeded;
 
         UpdateText(i);
 

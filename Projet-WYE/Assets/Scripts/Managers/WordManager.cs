@@ -88,7 +88,7 @@ public class WordManager : Singleton<WordManager>
                     //Find any available Canvas Word 
                     var item = FindAvailableReveal();
                     //if true, Activate Canvas Word and Set his text with the current propo
-                    item.Activate(transform, stockB, question, question.questions[i].question, i);
+                    item.Activate(transform, stockB, question, question.questions[i].question, i, question.questions[i].displayAt);
 
                     questionsGo.Add(item.gameObject);
                 }
@@ -104,7 +104,7 @@ public class WordManager : Singleton<WordManager>
                 {
                     displayAdress = false;
                     var item = Entry();
-                    item.Activate(transform, stockEntry, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question);
+                    item.Activate(transform, stockEntry, ScenarioManager.Instance.currentScenarioData.callerInformations.adress, ScenarioManager.Instance.currentScenarioData.callerInformations.adress.questions[0].question, question.questions[0].displayAt);
                     //item.gameObject.SetActive(true);
                 }
             }

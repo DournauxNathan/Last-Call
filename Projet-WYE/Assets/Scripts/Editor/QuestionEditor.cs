@@ -34,6 +34,7 @@ public class QuestionEditor : Editor
     public void DisplayArrayElement(int index)
     {
         var _currentQuestion = sp_question.GetArrayElementAtIndex(index);
+        var _currentDisplayAt = sp_question.GetArrayElementAtIndex(index).FindPropertyRelative("displayAt");
         var _currentText = sp_question.GetArrayElementAtIndex(index).FindPropertyRelative("question");
         var _currentAnswer = sp_question.GetArrayElementAtIndex(index).FindPropertyRelative("answer");
         var _currentVoice = sp_question.GetArrayElementAtIndex(index).FindPropertyRelative("voices");
@@ -46,6 +47,8 @@ public class QuestionEditor : Editor
 
         EditorGUILayout.PropertyField(_currentText, new GUIContent("Question"));
         EditorGUILayout.PropertyField(_currentAnswer, new GUIContent("Answer"));
+        EditorGUILayout.PropertyField(_currentDisplayAt, new GUIContent("DisplayAt"));
+
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.PropertyField(_currentVoice, new GUIContent(""));
         EditorGUILayout.EndHorizontal();

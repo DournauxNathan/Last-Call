@@ -11,6 +11,7 @@ public class Question : ScriptableObject
 [System.Serializable]
 public class QuestionData
 {
+    public int displayAt;
     public string question;
     public string answer;
     public AudioClip voices;
