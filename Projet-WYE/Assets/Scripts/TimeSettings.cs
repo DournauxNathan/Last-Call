@@ -59,7 +59,8 @@ public class TimeSettings : Singleton<TimeSettings>
     public IEnumerator IncreaseTime()
     {
         timerBegin = true;
-        while (globalTimer >= 0 && !isAudioPause)
+
+        while (timerBegin && globalTimer >= 0 && !isAudioPause)
         {
             globalTimer += Time.deltaTime;
 
@@ -130,15 +131,20 @@ public class TimeSettings : Singleton<TimeSettings>
         {
             StopCoroutine(IncreaseTime());
 
+
             timerBegin = false;
 
+            globalTimer = 0;
+
             TutoManager.Instance.UpdateIndication(2);
+
+            StopAllCoroutines();
         }
     }
 
     public void SetTime(float value)
     {
-        timeBeforeCall = value;
+        isRunning = false;
 
         if (SceneLoader.Instance.GetCurrentScene().name == "Office" && MasterManager.Instance.currentPhase == Phases.Phase_1)
         {

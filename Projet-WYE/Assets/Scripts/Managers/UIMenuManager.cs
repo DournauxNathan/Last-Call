@@ -294,6 +294,8 @@ public class UIMenuManager : MonoBehaviour
         MasterManager.Instance.ChangeSceneByName(1, "Office");
         StartGame.Invoke();
         }
+
+        TimeSettings.Instance.Initialize();
     }
 
     public void Quit()

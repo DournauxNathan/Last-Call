@@ -188,6 +188,15 @@ public class MasterManager : Singleton<MasterManager>
         SetPhase(currentPhase);
     }
 
+
+    public void Restart()
+    {
+        Reset();
+        SceneLoader.Instance.Unload("Persistent");
+        SceneLoader.Instance.Unload(SceneLoader.Instance.GetCurrentScene().name);
+        //SceneLoader.Instance.LoadNewScene("Persistent");
+    }
+
     public void SetPhase(Phases phase)
     {
         switch (currentPhase)
@@ -242,6 +251,8 @@ public class MasterManager : Singleton<MasterManager>
         switch (i)
         {
             case 0:
+                HeadPhoneManager.Instance.TakeOff();
+
                 Projection.Instance.SetTransitionValue(50);
                 Projection.Instance.enableTransition = false;
                 break;
@@ -264,8 +275,7 @@ public class MasterManager : Singleton<MasterManager>
                 WordManager.Instance.PullWord();
 
                 Projection.Instance.enableTransition = false;
-                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;
-                HeadPhoneManager.Instance.equip = true;
+                HeadPhoneManager.Instance.headPhone.GetComponent<Rigidbody>().isKinematic = true;                
                 break;
 
             case 3:
@@ -281,6 +291,8 @@ public class MasterManager : Singleton<MasterManager>
                 break;
 
             case 4:
+                HeadPhoneManager.Instance.TakeOff();
+
                 //ScenarioManager.Instance.UpdateScenario(1);
                 Reset();
                 break;
@@ -323,9 +335,14 @@ public class MasterManager : Singleton<MasterManager>
         {
             references.mainAudioSource.PlayNewClipOnce(ScenarioManager.Instance.currentScenarioData.dialogues);
             this.CallWithDelay(WordManager.Instance.PullWord, ScenarioManager.Instance.currentScenarioData.timeAfterDialogueBegins);
-            UIManager.Instance.InComingCall(false);
 
             TimeSettings.Instance.StartGlobalTimer();
+            if(UIManager.Instance != null)
+            {
+                UIManager.Instance.InComingCall(false);
+            }
+
+            
         }
     }
 

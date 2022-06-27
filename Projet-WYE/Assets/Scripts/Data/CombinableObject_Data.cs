@@ -217,8 +217,10 @@ public class CombinableObject_Data : MonoBehaviour
 
         //Debug.Log("Send Id with Outcome");
 
-        if(SilhouetteTelephone.Instance !=null){
+        if(SilhouetteTelephone.Instance !=null)
+        {
             SilhouetteTelephone.Instance.AddOutcome(useWith[indexCombi].outcome,iD);
+
             OrderController.Instance.ResolvePuzzle();
         }
         else{

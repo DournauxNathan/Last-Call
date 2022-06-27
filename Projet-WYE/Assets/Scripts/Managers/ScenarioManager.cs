@@ -54,13 +54,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
         switch (currentScenario)
         {
             case Scenario.None:
-                break;/*
-            case Scenario.TrappedMan:
-                WordManager.Instance.answers.AddRange(scenarios[0].answers);
-                WordManager.Instance.questions.AddRange(scenarios[0].questions);
-                currentScenarioData = scenarios[0];
-                OrderController.Instance.puzzleNumber = currentScenarioData.numberOfPuzzle;
-                break;*/
+                break;
 
             case Scenario.HomeInvasion:
                 WordManager.Instance.answers.AddRange(scenarios[0].answers);
@@ -138,6 +132,7 @@ public class ScenarioManager : Singleton<ScenarioManager>
                 break;*/
         }
 
+        TimeSettings.Instance.Initialize();
         //Debug.Log(currentScenario);
 
     }

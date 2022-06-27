@@ -15,7 +15,7 @@ public class MonologueStart : MonoBehaviour
 
         if(ScenarioManager.Instance.currentScenario != Scenario.None)
         {
-            _audiosource.PlayNewClipOnce(ChoseMonologue());
+            //_audiosource.PlayNewClipOnce(ChoseMonologue());
         }
         else
         {
@@ -25,8 +25,10 @@ public class MonologueStart : MonoBehaviour
 
     private AudioClip ChoseMonologue()
     {
-        if(ScenarioManager.Instance.endingValue == 0)
+        if (ScenarioManager.Instance.endingValue == 0)
         {
+            Debug.Log(ScenarioManager.Instance.currentScenarioData.monologue[0].name);
+
             return ScenarioManager.Instance.currentScenarioData.monologue[0];
         }
         else if(ScenarioManager.Instance.endingValue < 0)

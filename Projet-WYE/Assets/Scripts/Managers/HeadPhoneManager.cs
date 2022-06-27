@@ -61,7 +61,9 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         switch (phase)
         {
             case 0:
+                isOnHead = false;
                 _renderer.enabled = false;
+                socket.doOnce = true;
                 headPhone.GetComponent<Rigidbody>().isKinematic = true;
                 headPhone.GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
                 break;
@@ -100,7 +102,15 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
         //headPhone.GetComponent<Rigidbody>().isKinematic = false;
     }
 
+    public void TakeOff()
+    {
+        isOnHead = false;
+        socket.enabled = false;
+        this.CallWithDelay(() => socket.enabled = true, 3f);
+    }
+
     public void SetEquip(bool value) { equip = value; }
+
     public void Press(bool value) { press = value; }
 
     public void Equip(bool value)
@@ -115,6 +125,7 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
 
         if (!value && MasterManager.Instance.currentPhase == Phases.Phase_3)
         {
+            isOnHead = false;
             Debug.Log("Headset off");
             this.CallWithDelay(OffHead, 8);
         }

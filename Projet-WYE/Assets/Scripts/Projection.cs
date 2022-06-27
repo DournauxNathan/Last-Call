@@ -38,8 +38,8 @@ public class Projection : Singleton<Projection>
     public bool hasProjted;
 
     [Header("Fade parameters")]
-    [SerializeField, Tooltip("Hide UI at this value")] private float beginFadeOutAt;
-    [SerializeField, Tooltip("Show UI at this value")] private float beginFadeInAt;
+    [SerializeField, Tooltip("Hide UI at this value")] public float beginFadeOutAt;
+    [SerializeField, Tooltip("Show UI at this value")] public float beginFadeInAt;
 
     public bool revealScene;
 
@@ -174,26 +174,6 @@ public class Projection : Singleton<Projection>
             RevealScene();
         }
 
-        if (enableTransition && transitionValue <= beginFadeOutAt && MasterManager.Instance.currentPhase == Phases.Phase_1 && SceneLoader.Instance.GetCurrentScene().name == "Office")
-        {
-            UIManager.Instance.Fade(Fadetype.Out);
-
-            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
-            {
-                UIManager.Instance.Fade(Fadetype.Out, UnitManager.Instance.physicsbuttons[i].icon);
-            }
-        }
-
-        if (enableTransition && transitionValue >= beginFadeInAt && MasterManager.Instance.currentPhase == Phases.Phase_1 && SceneLoader.Instance.GetCurrentScene().name == "Office")
-        {
-            UIManager.Instance.Fade(Fadetype.In);
-
-            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
-            {
-                UIManager.Instance.Fade(Fadetype.In, UnitManager.Instance.physicsbuttons[i].icon);
-            }
-        }
-
         /* if (pauseBetweenTransition && isTransition && isDisconstruc)
          {
              Construct();
@@ -236,7 +216,7 @@ public class Projection : Singleton<Projection>
 
     public void Deconstruct()
     {
-        if (transitionValue >= 0)
+        if (transitionValue > 0)
         {
             isTransition = true;
             transitionValue -= Time.deltaTime * time;
@@ -247,12 +227,16 @@ public class Projection : Singleton<Projection>
             isTransition = false;
             transitionValue = 0;
         }
-        else
+        else 
         {
-            transitionValue = 0;
-            StartCoroutine(WaitForVoid());
-            CallScene();
-            ToggleProjection();
+            if (transitionValue <= 0)
+            {
+                transitionValue = 0;
+
+                StartCoroutine(WaitForVoid());
+                CallScene();
+                ToggleProjection();
+            }
         }
     }
 

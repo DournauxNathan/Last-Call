@@ -20,20 +20,39 @@ public class SceneLoader : Singleton<SceneLoader>
 
 #if UNITY_EDITOR
         ScenarioManager.Instance.SetCurrentScenario(ScenarioManager.Instance.currentIndexScenario);
-        ScenarioManager.Instance.LoadScenario();
         this.CallWithDelay(LoadNewSceneEditorOnly, .2f);
 #endif
     }
 
+    public void LoadByDevMenu(string _name)
+    {
+        MasterManager.Instance.Reset();
+
+        _name = nameScene;
+
+        ScenarioManager.Instance.SetCurrentScenario(ScenarioManager.Instance.currentIndexScenario);
+        this.CallWithDelay(LoadNewSceneEditorOnly, .2f);
+    }
+
     public void LoadNewSceneEditorOnly()
     {
-        if (nameScene== "TrappedMan" || nameScene == "HomeInvasion" || nameScene == "RisingWater")
+        if (nameScene == "HomeInvasion" || nameScene == "RisingWater")
         {
-            MasterManager.Instance.currentPhase = Phases.Phase_2;
-            MasterManager.Instance.isInImaginary = true;
+            if (nameScene == "HomeInvasion")
+            {
+                ScenarioManager.Instance.currentScenario = Scenario.HomeInvasion;
+            }
+            if (nameScene == "RisingWater")
+            {
+                ScenarioManager.Instance.currentScenario = Scenario.HomeInvasion;
+            }
+
+            ScenarioManager.Instance.LoadScenario();
+            MasterManager.Instance.SetPhase(2);
         }
         else if (nameScene == "Office")
         {
+            ScenarioManager.Instance.LoadScenario();
             MasterManager.Instance.currentPhase = Phases.Phase_1;
             MasterManager.Instance.isInImaginary = false;
         }

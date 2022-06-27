@@ -6,8 +6,10 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [Header("Screens Canvas")]
     public CanvasGroup[] _canvasGroup;
 
@@ -31,14 +33,46 @@ public class UIManager : Singleton<UIManager>
     public ParticleSystem smoke;
     [SerializeField] private TMP_Text hintText;
 
+
     private void Start()
     {
+
+        Instance = this;
+        
         if (MasterManager.Instance.currentPhase == Phases.Phase_1)
         {
             //InComingCall(true);
             OutComingCall(false);
         }
         hintText.text = ""; //Clear hint text
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
+    private void LateUpdate()
+    {
+        if (Projection.Instance.enableTransition && Projection.Instance.transitionValue <= Projection.Instance.beginFadeOutAt && MasterManager.Instance.currentPhase == Phases.Phase_1 && SceneLoader.Instance.GetCurrentScene().name == "Office")
+        {
+            Fade(Fadetype.Out);
+
+            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
+            {
+                Fade(Fadetype.Out, UnitManager.Instance.physicsbuttons[i].icon);
+            }
+        }
+
+        if (Projection.Instance.enableTransition && Projection.Instance.transitionValue >= Projection.Instance.beginFadeInAt && MasterManager.Instance.currentPhase == Phases.Phase_1 && SceneLoader.Instance.GetCurrentScene().name == "Office")
+        {
+            Fade(Fadetype.In);
+
+            for (int i = 0; i < UnitManager.Instance.physicsbuttons.Count; i++)
+            {
+                Fade(Fadetype.In, UnitManager.Instance.physicsbuttons[i].icon);
+            }
+        }
     }
 
     public void UpdateForm(FormData _answerType, string data)
