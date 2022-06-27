@@ -7,7 +7,7 @@ using TMPro;
 public class Reveal : MonoBehaviour
 {
     public TMP_Text text;
-    public Image img;
+    public GameObject img;
     public XRGrabInteractableWithAutoSetup xrGrab;
     public BoxCollider _collider;
 
@@ -52,7 +52,7 @@ public class Reveal : MonoBehaviour
         {
             if (displayAtPuzzle == OrderController.Instance.puzzlesSucced)
             {
-                img.enabled = true;
+                img.SetActive(true);
                 _collider.enabled = true;
                 xrGrab.enabled = true;
             }
@@ -61,7 +61,7 @@ public class Reveal : MonoBehaviour
 
     private void OnDisable()
     {
-        img.enabled = false;
+        img.SetActive(false);
         _collider.enabled = false;
         xrGrab.enabled = false;
     }
@@ -75,7 +75,7 @@ public class Reveal : MonoBehaviour
     {
         if (displayAtPuzzle == OrderController.Instance.puzzlesSucced)
         {
-            img.enabled = true;
+            img.SetActive(true);
             _collider.enabled = true;
             xrGrab.enabled = true;
 

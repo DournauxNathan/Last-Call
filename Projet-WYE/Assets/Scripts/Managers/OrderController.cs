@@ -49,9 +49,10 @@ public class OrderController : Singleton<OrderController>
     }
     public void ResolvePuzzle()
     {
-        MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(resolveSound);
 
         puzzlesSucced += 1;
+
+        MasterManager.Instance.references.mainAudioSource.PlayNewClipOnce(resolveSound);
 
         if (puzzlesSucced >= puzzleNumber)
         {
