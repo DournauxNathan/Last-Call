@@ -31,28 +31,16 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
         base.Start();
     }
 
-    public bool doOnce = true;
-
     public override bool CanHover(XRBaseInteractable interactable)
     {
         if (canAssemble)
         {
-            if (doOnce)
-            {
-                doOnce = false;
-
-                action?.Invoke();
-            }
+            action?.Invoke();
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
         else if (tagCombi)
         {
-            if (doOnce)
-            {
-                doOnce = false;
-
-                action?.Invoke();
-            }
+            action?.Invoke();
             return base.CanSelect(interactable) && MatchUsingTags(interactable);
         }
 
@@ -63,12 +51,7 @@ public class XRSocketInteractorWithAutoSetup : XRSocketInteractor
     {
         if (canAssemble)
         {
-            if (doOnce)
-            {
-                doOnce = false;
-
-                action?.Invoke();
-            }
+            action?.Invoke();
             return base.CanSelect(interactable) && MatchUsingGameObject(interactable);
         }
         else if (tagCombi)

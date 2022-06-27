@@ -7,6 +7,11 @@ public class CollisionObj : MonoBehaviour
     [SerializeField] private GameObject fracturedObject;
     public List<string> collisionTags;
 
+    private void Start()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(collisionTags[0]) || other.CompareTag(collisionTags[1]))

@@ -63,7 +63,6 @@ public class HeadPhoneManager : Singleton<HeadPhoneManager>
             case 0:
                 isOnHead = false;
                 _renderer.enabled = false;
-                socket.doOnce = true;
                 headPhone.GetComponent<Rigidbody>().isKinematic = true;
                 headPhone.GetComponent<XRGrabInteractableWithAutoSetup>().enabled = false;
                 break;

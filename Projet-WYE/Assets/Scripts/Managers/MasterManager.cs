@@ -62,7 +62,7 @@ public class MasterManager : Singleton<MasterManager>
     private void Update()
     {
         //To put into the debug menu
-        if (Keyboard.current.f12Key.wasPressedThisFrame)
+        if (Keyboard.current.numpadPlusKey.wasPressedThisFrame)
         {
             OrderController.Instance.ResolvePuzzle();
         }
@@ -71,6 +71,7 @@ public class MasterManager : Singleton<MasterManager>
         {
             Application.Quit();
         }
+
 
         //To put into the debug menu
         if (Keyboard.current.enterKey.wasPressedThisFrame)
@@ -83,6 +84,8 @@ public class MasterManager : Singleton<MasterManager>
             unpauseAdio = !unpauseAdio;
             MasterManager.Instance.references.mainAudioSource.UnPause();
         }
+
+
 
     }
 
