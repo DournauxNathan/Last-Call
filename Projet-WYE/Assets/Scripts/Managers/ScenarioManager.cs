@@ -8,8 +8,8 @@ using System;
 public enum Scenario
 {
     None = 0,
-    HomeInvasion = 1,
-    RisingWater = 2,
+    HomeInvasion = 2,
+    RisingWater = 1,
     TrappedMan = 5
 }
 
@@ -118,12 +118,12 @@ public class ScenarioManager : Singleton<ScenarioManager>
         switch (currentIndexScenario)
         {
             case 1:
-                currentScenario = Scenario.HomeInvasion;
+                currentScenario = Scenario.RisingWater;
                 //currentScenario = Scenario.TrappedMan;
                 LoadScenario();
                 break;
             case 2:
-                currentScenario = Scenario.RisingWater;
+                currentScenario = Scenario.HomeInvasion;
                 LoadScenario();
                 break;/*
             case 3:
