@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
             ScenarioManager.Instance.endingValue += -1;
         }
 
-        hintText.text = "Appuyez sur B ou Y pour imaginer la situation";
+        hintText.text = "Maintenez sur B ou Y pour imaginer la situation";
 
         for (int i = 0; i < transform.childCount; i++)
         {
