@@ -183,7 +183,7 @@ public class TutoManager : Singleton<TutoManager>
                 case 5:
                     InitTutorial.Instance.order.SetActive(true);
                     InitTutorial.Instance.pointAndClick.SetActive(true);
-                    InitTutorial.Instance.orderText.text = "Le jeu propose des puzzles basés sur la combinaison d'objets";
+                    InitTutorial.Instance.orderText.text = "Le jeu propose des puzzles basés sur la combinaison et l'utilisation d'objets";
                     InitTutorial.Instance.pointAndClickText.text = "Pointez un des objets en bleu en passant le rayon dessus";
                     break;
 

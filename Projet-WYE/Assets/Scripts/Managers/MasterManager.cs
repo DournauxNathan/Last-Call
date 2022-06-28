@@ -61,17 +61,11 @@ public class MasterManager : Singleton<MasterManager>
 
     private void Update()
     {
-        //To put into the debug menu
-        if (Keyboard.current.numpadPlusKey.wasPressedThisFrame)
-        {
-            OrderController.Instance.ResolvePuzzle();
-        }
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Application.Quit();
         }
-
 
         //To put into the debug menu
         if (Keyboard.current.enterKey.wasPressedThisFrame)
@@ -86,6 +80,73 @@ public class MasterManager : Singleton<MasterManager>
         }
 
 
+        //To put into the debug menu
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            currentPhase = Phases.Phase_2;
+        }
+        //To put into the debug menu
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            currentPhase = Phases.Phase_1;
+        } //To put into the debug menu
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            currentPhase = Phases.Phase_3;
+        }
+
+
+
+        //To put into the debug menu
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
+        {
+            ScenarioManager.Instance.UpdateScenario(1);
+        }
+        //To put into the debug menu
+        if (Keyboard.current.f2Key.wasPressedThisFrame)
+        {
+            ScenarioManager.Instance.UpdateScenario(2);
+        }
+
+        //To put into the debug menu
+        if (Keyboard.current.f6Key.wasPressedThisFrame)
+        {
+            SceneLoader.Instance.LoadByDevMenu("Office");
+        }
+        //To put into the debug menu
+        if (Keyboard.current.f7Key.wasPressedThisFrame)
+        {
+            SceneLoader.Instance.LoadByDevMenu("HomeInvasion");
+        }
+        //To put into the debug menu
+        if (Keyboard.current.f8Key.wasPressedThisFrame)
+        {
+            SceneLoader.Instance.LoadByDevMenu("RisingWater");
+        }
+
+
+        //To put into the debug menu
+        if (Keyboard.current.numpadPlusKey.wasPressedThisFrame)
+        {
+            OrderController.Instance.ResolvePuzzle();
+        }
+
+
+        //To put into the debug menu
+        if (Keyboard.current.f10Key.wasPressedThisFrame)
+        {
+            TutoManager.Instance.Skip();
+        }
+        //To put into the debug menu
+        if (Keyboard.current.f11Key.wasPressedThisFrame)
+        {
+            Reset();
+        }
+        //To put into the debug menu
+        if (Keyboard.current.f12Key.wasPressedThisFrame)
+        {
+            Restart();
+        }
 
     }
 
