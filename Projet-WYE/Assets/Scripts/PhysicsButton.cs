@@ -55,7 +55,7 @@ public class PhysicsButton : MonoBehaviour
         UnitManager.Instance.physicsbuttons.Add(this);
 
         ChangeStateColor(isActivate);
-
+/*
         Collider localCollider = GetComponent<Collider>();
         if (localCollider != null)
         {
@@ -76,7 +76,7 @@ public class PhysicsButton : MonoBehaviour
             transform.eulerAngles = savedAngle;
         }
         else
-            upperLowerDiff = buttonUpperLimit.position.y - buttonLowerLimit.position.y;
+            upperLowerDiff = buttonUpperLimit.position.y - buttonLowerLimit.position.y;*/
     }
 
     // Update is called once per frame

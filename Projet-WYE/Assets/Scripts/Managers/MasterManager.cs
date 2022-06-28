@@ -352,7 +352,7 @@ public class MasterManager : Singleton<MasterManager>
     public void ConcludCall()
     {
         references.mainAudioSource.PlayNewClipOnce(ScenarioManager.Instance.currentScenarioData.conclusion);
-        this.CallWithDelay(CallEnded, ScenarioManager.Instance.currentScenarioData.conclusion.length);
+        this.CallWithDelay(CallEnded, 13f);
     }
 
     public void CallEnded()
